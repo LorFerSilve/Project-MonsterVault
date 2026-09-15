@@ -1,0 +1,28 @@
+# OS / editor artifacts
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+
+# Logs / temporary files
+*.log
+*.tmp
+*.swp
+
+# Generated build output
+build/
+dist/
+sourcemap.json
+
+# Package/dependency output
+node_modules/
+Packages/
+DevPackages/
+
+# Tool caches
+.luau-lsp/
+
+# Environment/local-only files
+.env
+.env.*
+!.env.example
