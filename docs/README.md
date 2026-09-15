@@ -1,6 +1,6 @@
 # Project MonsterVault Documentation
 
-> **Project phase:** Pre-implementation specification — GDS-1 next  
+> **Project phase:** Pre-implementation specification — GDS-2 next  
 > **Implementation status:** Blocked by design and architecture gates
 
 This directory is the authoritative documentation space for Project MonsterVault.
@@ -28,15 +28,25 @@ Historical documents never override current authoritative specifications.
 
 ## Current Gate
 
-**GDS-0 is formally complete.** Its structure audit and closure report both record PASS.
+Completed:
+
+- **GDS-0 — Governance, Structure, and Concept Baseline: PASS**
+- **GDS-1 — Product Vision, Audience, and Success Criteria: PASS**
+
+GDS-1 closure evidence:
+
+- [`game_design/01_game_overview.md`](game_design/01_game_overview.md);
+- [`game_design/product/`](game_design/product/);
+- [`game_design/GDS1_CROSS_VALIDATION.md`](game_design/GDS1_CROSS_VALIDATION.md);
+- [`game_design/GDS1_CLOSURE_REPORT.md`](game_design/GDS1_CLOSURE_REPORT.md).
 
 The active dependency is:
 
-> **GDS-1 — Product Vision, Audience, and Success Criteria**
+> **GDS-2 — Global Game Rules and Session Model**
 
 No gameplay implementation should begin until:
 
-- GDS-1 through GDS-16 have completed their owning design work;
+- GDS-2 through GDS-16 have completed their owning design work;
 - GDS-17 records a formal cross-system `Design Complete` PASS;
 - the complete Technical Architecture reaches `Architecture Complete`;
 - architecture integration validation passes;

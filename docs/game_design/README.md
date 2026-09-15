@@ -1,6 +1,6 @@
 # MonsterVault Game Design Specification
 
-> **Status:** GDS-0 Complete / GDS-1 Active  
+> **Status:** GDS-0 and GDS-1 Complete / GDS-2 Next  
 > **Authority:** Player-facing gameplay behavior
 
 This directory contains the authoritative Game Design Specification (GDS) for MonsterVault.
@@ -9,14 +9,14 @@ The purpose of the GDS is to define what the game does before implementation dec
 
 ## Current Gate
 
-**GDS-0 — Governance, Structure, and Concept Baseline: COMPLETE — PASS.**
+Completed:
 
-Closure evidence:
+- **GDS-0 — Governance, Structure, and Concept Baseline: COMPLETE — PASS**
+- **GDS-1 — Product Vision, Audience, and Success Criteria: COMPLETE — PASS**
 
-- [`STRUCTURE_AUDIT.md`](STRUCTURE_AUDIT.md) — top-level domain and authority coverage PASS;
-- [`GDS0_CLOSURE_REPORT.md`](GDS0_CLOSURE_REPORT.md) — formal governance closure PASS.
+The active dependency is now:
 
-The active dependency is now **GDS-1 — Product Vision, Audience, and Success Criteria**.
+> **GDS-2 — Global Game Rules and Session Model**
 
 Technical Architecture and gameplay implementation remain blocked.
 
@@ -30,9 +30,29 @@ Technical Architecture and gameplay implementation remain blocked.
 - [`STRUCTURE_AUDIT.md`](STRUCTURE_AUDIT.md) validates that all currently known top-level design concerns have an authoritative home.
 - [`GDS0_CLOSURE_REPORT.md`](GDS0_CLOSURE_REPORT.md) records formal GDS-0 closure.
 
-## Core Specifications
+## GDS-1 Product Baseline
 
-- [`01_game_overview.md`](01_game_overview.md) — current product vision and high-level loop; owned by GDS-1.
+- [`01_game_overview.md`](01_game_overview.md) — Design Complete high-level product identity and core experience structure.
+- [`product/`](product/) — authoritative audience, platform, positioning, session, success-gate, scope, and commercial product specifications.
+- [`GDS1_CROSS_VALIDATION.md`](GDS1_CROSS_VALIDATION.md) — cross-phase authority and contradiction audit; PASS.
+- [`GDS1_CLOSURE_REPORT.md`](GDS1_CLOSURE_REPORT.md) — formal GDS-1 closure; PASS.
+
+The resulting high-level product contract includes:
+
+- a social creature-collection/progression adventure identity;
+- primary target audience around ages 9–15 with older collection/optimization players as a secondary audience;
+- mobile-first interaction constraints with cross-platform gameplay parity;
+- communication-independent core progression;
+- active acquisition, visible vault progression, rarity/variant hunting, and server-level social moments;
+- socially competitive but non-loss-dominant play;
+- fast time-to-fun and flexible session lengths;
+- weeks-to-months collection/progression aspirations;
+- trading as desirable but non-launch-critical;
+- moderate non-coercive monetization;
+- retention-first product success gates.
+
+## Remaining Core Specifications
+
 - `global_rules/` — session model, player-state rules, failure/recovery, multiplayer invariants.
 - `player/` — movement, interaction, onboarding, inventory-facing behavior.
 - `creatures/` — creature identity, acquisition, ownership, collection and behavior.
