@@ -2,78 +2,102 @@
 
 > A data-driven multiplayer creature-collection and progression game built on Roblox.
 
-## Overview
-
-Monster Vault is a multiplayer Roblox game centered around capturing creatures, discovering rare mutations, expanding a personal vault/laboratory, unlocking new regions, and interacting with other players through cooperative events, competition, and eventually trading.
-
-The project is designed around a simple, immediately understandable core loop with long-term collection, progression, social play, and live-content extensibility.
-
-## Core Gameplay Loop
-
-1. Explore the world.
-2. Find and capture creatures.
-3. Return creatures to your vault.
-4. Generate resources and improve your equipment.
-5. Unlock new regions and higher-value creatures.
-6. Discover rare mutations and variants.
-7. Participate in server-wide events.
-8. Trade, compete, and expand your collection.
-
-## Core Pillars
-
-- Creature collection
-- Rarity and mutations
-- Visible player progression
-- Exploration and biome progression
-- Social competition and cooperation
-- Server-wide events
-- Persistent progression
-- Trading and player economy
-- Data-driven live content
-
-## Technical Direction
-
-The game will use a server-authoritative architecture. Security-sensitive systems such as currency, inventory, creature ownership, captures, progression, purchases, and trading must be validated and executed on the server.
-
-Source code is organized into three primary domains:
-
-```text
-src/
-├── client/
-├── server/
-└── shared/
-```
-
-The project is intended to evolve toward a modular service architecture with systems such as `CreatureService`, `CaptureService`, `EconomyService`, `MutationService`, `DataService`, `EventService`, and `TradingService`.
-
-## Documentation
-
-Project design and engineering decisions live under [`docs/`](docs/):
-
-- [`GAME_DESIGN.md`](docs/GAME_DESIGN.md)
-- [`TECHNICAL_ARCHITECTURE.md`](docs/TECHNICAL_ARCHITECTURE.md)
-- [`ROADMAP.md`](docs/ROADMAP.md)
-- [`ECONOMY_DESIGN.md`](docs/ECONOMY_DESIGN.md)
-- [`MONETIZATION.md`](docs/MONETIZATION.md)
-
 ## Project Status
 
-**Pre-production / foundation.**
+**Pre-implementation specification — GDS-0 / GDS-1.**
 
-The immediate objective is to define and validate a small vertical slice before investing in large-scale content production.
+MonsterVault is intentionally **not in gameplay implementation yet**. The project follows a specification-first workflow modeled after Project StarForge:
 
-### Initial Vertical Slice
+```text
+Game Design Specification (GDS)
+  -> cross-system design audit
+  -> Technical Architecture (TA)
+  -> architecture integration audit
+  -> implementation roadmap + contract locking
+  -> gameplay implementation
+```
 
-- 1 playable map/biome
-- 1 player vault/base
-- 10 creatures
-- 4 rarity tiers
-- 3 mutation types
-- Capture mechanic
-- Passive resource generation
-- Basic upgrades
-- 1 server-wide rare event
-- Persistent save system
+No gameplay system should be implemented merely because an idea appears promising. Player-facing behavior is first specified and cross-validated; only then is the technical contract designed and locked.
+
+## Current Product Direction
+
+The working product direction is a multiplayer Roblox creature-collection/progression game centered on:
+
+- exploring and discovering creatures;
+- an active capture/secure/return loop;
+- persistent creature collection and ownership;
+- rarity, mutations and collectible status;
+- a personal vault/laboratory;
+- progression and biome unlocks;
+- social competition and cooperation;
+- server-wide dynamic events;
+- eventual secure trading;
+- sustainable monetization that does not invalidate earned progression;
+- data-driven live-content expansion.
+
+These are **design hypotheses and current baseline decisions**, not final implementation contracts. The authoritative GDS will refine, constrain or reject individual mechanics before development begins.
+
+## Documentation Authority
+
+Start at [`docs/README.md`](docs/README.md).
+
+### Game Design Specification
+
+[`docs/game_design/`](docs/game_design/) owns intended player-facing behavior.
+
+Key documents:
+
+- [`00_design_authority.md`](docs/game_design/00_design_authority.md) — governance, status model and definition of Design Complete;
+- [`01_game_overview.md`](docs/game_design/01_game_overview.md) — current product vision and open product questions;
+- [`GDS_ROADMAP.md`](docs/game_design/GDS_ROADMAP.md) — dependency-driven GDS-0 through GDS-17 sequence;
+- [`DESIGN_DECISIONS.md`](docs/game_design/DESIGN_DECISIONS.md) — strategic design decisions and rationale;
+- [`GLOSSARY.md`](docs/game_design/GLOSSARY.md) — canonical shared gameplay terminology;
+- [`SPECIFICATION_TEMPLATE.md`](docs/game_design/SPECIFICATION_TEMPLATE.md) — required structure for subsystem specifications.
+
+The current GDS domains cover global rules, player interaction/onboarding, creatures, capture, rarity/mutations, vault/base, economy/progression, world/biomes, social play, server events/live operations, trading, monetization, presentation/accessibility, Roblox platform safety, retention/discovery/analytics and final cross-system auditing.
+
+### Technical Architecture
+
+[`docs/technical_architecture/`](docs/technical_architecture/) is currently **blocked by GDS completion**.
+
+Its roadmap is defined in [`TA_ROADMAP.md`](docs/technical_architecture/TA_ROADMAP.md). Technical Architecture will translate the approved GDS into concrete Roblox/Luau contracts for tooling, modules, networking, persistence, identity, runtime lifecycle, economy, trading, monetization, UI, live operations, performance, testing and CI.
+
+### Implementation
+
+[`docs/implementation/`](docs/implementation/) is intentionally **BLOCKED**.
+
+Gameplay implementation opens only after:
+
+1. GDS-17 records a formal Design Complete PASS;
+2. the Technical Architecture is completed;
+3. TA-16 records a formal architecture-integration PASS;
+4. TA-17 locks the implementation roadmap, exact vertical slice, toolchain, dependency graph, validation requirements and change-control rules.
+
+### Historical Baseline
+
+The original repository-level concept documents are preserved under [`docs/history/initial_foundation/`](docs/history/initial_foundation/).
+
+They remain useful design input, but do not override the current authoritative GDS/TA structure.
+
+## Working Core Loop
+
+The current high-level hypothesis is:
+
+```text
+Explore
+  -> discover creature
+  -> attempt capture
+  -> secure / transport / return
+  -> add to collection or vault
+  -> gain progression value
+  -> upgrade capacity / equipment / access
+  -> reach rarer content
+  -> discover mutations and high-status variants
+  -> participate in social/server events
+  -> repeat
+```
+
+The exact capture rules, ownership-transfer point, competition model, passive production, economy, rarity distribution, trading rules, monetization and even the final vertical-slice scope remain subject to their owning GDS phases.
 
 ## Repository Structure
 
@@ -82,6 +106,23 @@ Project-MonsterVault/
 ├── README.md
 ├── .gitignore
 ├── docs/
+│   ├── README.md
+│   ├── game_design/
+│   │   ├── 00_design_authority.md
+│   │   ├── 01_game_overview.md
+│   │   ├── GDS_ROADMAP.md
+│   │   ├── DESIGN_DECISIONS.md
+│   │   ├── GLOSSARY.md
+│   │   ├── SPECIFICATION_TEMPLATE.md
+│   │   ├── <design domains>/
+│   │   └── audit/
+│   ├── technical_architecture/
+│   │   ├── 00_architecture_authority.md
+│   │   ├── TA_ROADMAP.md
+│   │   ├── ARCHITECTURE_DECISIONS.md
+│   │   └── audit/
+│   ├── implementation/
+│   └── history/
 ├── src/
 │   ├── client/
 │   ├── server/
@@ -91,14 +132,13 @@ Project-MonsterVault/
 └── scripts/
 ```
 
-## Development Principles
+The source/test/tooling directories are reserved for later implementation. Their existence does **not** mean the implementation gate is open.
 
-- Keep gameplay systems server-authoritative where trust matters.
-- Prefer data-driven content over hard-coded creatures, mutations, and regions.
-- Keep the first playable slice small and measurable.
-- Build systems for maintainability rather than one-off content hacks.
-- Separate client presentation from server-owned game state.
-- Treat persistence, remote validation, and economy integrity as security-critical.
+## Current Next Step
+
+Complete **GDS-0**, then work through **GDS-1 — Product Vision, Audience, and Success Criteria** before specifying lower-level gameplay systems.
+
+The first implementation vertical slice will be selected and locked only after the complete design and architecture dependency chain makes its requirements clear.
 
 ## License
 
