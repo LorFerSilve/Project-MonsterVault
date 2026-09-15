@@ -1,6 +1,6 @@
 # Design Decisions
 
-> **Status:** Active
+> **Status:** Active  
 > **Authority:** Strategic game-design decisions and rationale
 
 This log records accepted design decisions that materially constrain MonsterVault's direction. It is not a substitute for subsystem specifications: the owning specification remains authoritative for detailed behavior.
@@ -68,3 +68,49 @@ The loop supports simple onboarding, visible progression, collection status, liv
 ### Important Note
 
 This is the **baseline direction**, not a final implementation contract. GDS-1 through GDS-17 must still validate, refine, constrain or reject individual mechanics.
+
+---
+
+## DD-003 — Close GDS-0 Governance Baseline
+
+**Date:** 2026-09-15  
+**Status:** Accepted
+
+### Context
+
+The specification-first documentation hierarchy has been established and audited for top-level ownership coverage. GDS-0 requires a stable governance baseline before detailed product and subsystem design begins.
+
+### Decision
+
+GDS-0 is formally closed as `Complete — PASS`.
+
+The following governance contracts are now baseline authority:
+
+- one authoritative home per gameplay rule;
+- explicit `Draft`, `Under Review`, `Design Complete`, and `Implementation Locked` statuses;
+- objective Design Complete criteria;
+- mandatory explicit open questions during Draft status;
+- historical concept material is non-authoritative;
+- GDS completion precedes Technical Architecture completion;
+- Technical Architecture completion and contract locking precede gameplay implementation;
+- material governance changes require explicit decision logging and relevant re-audit.
+
+### Rationale
+
+Detailed design work needs stable rules for ownership, maturity, precedence and handoff. Without closing this baseline, later phases could reinterpret the process while using it, weakening the value of formal design completion.
+
+### Evidence
+
+- `STRUCTURE_AUDIT.md` — PASS;
+- `GDS0_CLOSURE_REPORT.md` — PASS.
+
+### Affected Specifications
+
+- `00_design_authority.md`;
+- `GDS_ROADMAP.md`;
+- all current and future GDS specifications;
+- downstream Technical Architecture and implementation gates.
+
+### Consequence
+
+The active dependency advances to **GDS-1 — Product Vision, Audience, and Success Criteria**. This decision does not authorize Technical Architecture or gameplay implementation.
