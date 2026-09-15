@@ -1,19 +1,38 @@
 # Game Design Specification Roadmap
 
-> **Status:** Active
+> **Status:** Active  
 > **Authority:** Dependency-driven game-design sequencing
 
 This roadmap defines the order in which MonsterVault's authoritative Game Design Specification is developed. Later phases may depend on earlier rules, so phases are completed in dependency order rather than by convenience.
 
 ## GDS-0 — Governance, Structure, and Concept Baseline
 
-**Status:** In Progress
+**Status:** Complete — PASS
 
-Establishes design authority, terminology, decision logging, specification templates, historical baseline preservation, documentation hierarchy, and the formal implementation gate.
+Established and formally validated:
+
+- project-wide design authority and precedence;
+- `Draft -> Under Review -> Design Complete -> Implementation Locked` maturity model;
+- objective Design Complete criteria;
+- one-authoritative-home-per-rule discipline;
+- canonical glossary and subsystem template;
+- strategic design-decision logging;
+- dependency-driven GDS hierarchy;
+- historical baseline preservation and de-authoritization;
+- explicit GDS -> TA -> implementation gates;
+- top-level domain ownership for all currently known design concerns;
+- final GDS-17 cross-system audit authority.
+
+Closure evidence:
+
+- [`STRUCTURE_AUDIT.md`](STRUCTURE_AUDIT.md) — PASS;
+- [`GDS0_CLOSURE_REPORT.md`](GDS0_CLOSURE_REPORT.md) — PASS.
+
+GDS-0 completion does not imply gameplay Design Complete and does not authorize Technical Architecture or implementation.
 
 ## GDS-1 — Product Vision, Audience, and Success Criteria
 
-**Status:** Draft
+**Status:** NEXT — Draft
 
 Defines the player fantasy, target audience, market position, intended session shape, differentiators, product pillars, scope boundaries, commercial goals, and measurable success hypotheses.
 
@@ -126,15 +145,17 @@ Performs the formal pre-architecture audit:
 - unresolved-question sweep;
 - final `Design Complete` promotion report.
 
-## Design Completion Gate
+## Current Project Gate
+
+GDS-0 is formally complete. The active dependency is **GDS-1**.
 
 Technical Architecture must not begin until GDS-17 records a formal PASS with no implementation-critical open design questions.
 
 The intended sequence is:
 
 ```text
-GDS-0 governance
-  -> GDS-1..16 subsystem design
+GDS-0 governance — COMPLETE
+  -> GDS-1..16 subsystem design — GDS-1 NEXT
   -> GDS-17 cross-system audit
   -> DESIGN COMPLETE
   -> Technical Architecture
