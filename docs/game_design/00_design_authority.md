@@ -1,7 +1,7 @@
 # Design Authority
 
-> **Status:** Active
-> **Authority:** Project-wide game-design governance
+> **Status:** Active — GDS-0 governance baseline closed  
+> **Authority:** Project-wide game-design governance  
 > **Applies to:** All documentation under `docs/game_design/`
 
 ## 1. Purpose
@@ -123,7 +123,26 @@ When an established rule changes:
 
 Specifications must state explicit non-goals when ambiguity could create scope growth. MonsterVault does not inherit features merely because another Roblox collection game contains them.
 
-## 14. Final Principle
+## 14. GDS-0 Governance Baseline Change Rule
+
+GDS-0 is formally closed by `GDS0_CLOSURE_REPORT.md` and `STRUCTURE_AUDIT.md`.
+
+The governance documents remain living authority, but a material change to any of the following requires an explicit entry in `DESIGN_DECISIONS.md` and a rerun of the relevant structure/authority audit:
+
+- authority precedence;
+- status meanings;
+- `Design Complete` criteria;
+- one-authoritative-home-per-rule semantics;
+- historical-document authority;
+- design-to-architecture gating;
+- architecture-to-implementation gating;
+- top-level domain ownership.
+
+Editorial clarification and glossary growth do not reopen GDS-0 when they preserve these contracts.
+
+A newly accepted major mechanic may require a new authoritative domain. That domain must be assigned before the mechanic can become `Design Complete`.
+
+## 15. Final Principle
 
 For every approved subsystem, a developer should be able to answer:
 

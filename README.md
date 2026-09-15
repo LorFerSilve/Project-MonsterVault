@@ -4,7 +4,7 @@
 
 ## Project Status
 
-**Pre-implementation specification — GDS-0 / GDS-1.**
+**Pre-implementation specification — GDS-0 complete / GDS-1 next.**
 
 MonsterVault is intentionally **not in gameplay implementation yet**. The project follows a specification-first workflow modeled after Project StarForge:
 
@@ -18,6 +18,17 @@ Game Design Specification (GDS)
 ```
 
 No gameplay system should be implemented merely because an idea appears promising. Player-facing behavior is first specified and cross-validated; only then is the technical contract designed and locked.
+
+### Current gate state
+
+- **GDS-0 — Governance, Structure, and Concept Baseline: COMPLETE — PASS**
+- **GDS-1 — Product Vision, Audience, and Success Criteria: NEXT**
+- GDS-2 through GDS-16: Draft / dependency-ordered
+- GDS-17: blocked until subsystem design is complete
+- Technical Architecture: blocked by GDS-17
+- Gameplay implementation: blocked by GDS and TA gates
+
+GDS-0 closure evidence is recorded in [`STRUCTURE_AUDIT.md`](docs/game_design/STRUCTURE_AUDIT.md) and [`GDS0_CLOSURE_REPORT.md`](docs/game_design/GDS0_CLOSURE_REPORT.md).
 
 ## Current Product Direction
 
@@ -52,7 +63,9 @@ Key documents:
 - [`GDS_ROADMAP.md`](docs/game_design/GDS_ROADMAP.md) — dependency-driven GDS-0 through GDS-17 sequence;
 - [`DESIGN_DECISIONS.md`](docs/game_design/DESIGN_DECISIONS.md) — strategic design decisions and rationale;
 - [`GLOSSARY.md`](docs/game_design/GLOSSARY.md) — canonical shared gameplay terminology;
-- [`SPECIFICATION_TEMPLATE.md`](docs/game_design/SPECIFICATION_TEMPLATE.md) — required structure for subsystem specifications.
+- [`SPECIFICATION_TEMPLATE.md`](docs/game_design/SPECIFICATION_TEMPLATE.md) — required structure for subsystem specifications;
+- [`STRUCTURE_AUDIT.md`](docs/game_design/STRUCTURE_AUDIT.md) — GDS-0 domain/authority completeness audit;
+- [`GDS0_CLOSURE_REPORT.md`](docs/game_design/GDS0_CLOSURE_REPORT.md) — formal GDS-0 closure evidence.
 
 The current GDS domains cover global rules, player interaction/onboarding, creatures, capture, rarity/mutations, vault/base, economy/progression, world/biomes, social play, server events/live operations, trading, monetization, presentation/accessibility, Roblox platform safety, retention/discovery/analytics and final cross-system auditing.
 
@@ -114,6 +127,8 @@ Project-MonsterVault/
 │   │   ├── DESIGN_DECISIONS.md
 │   │   ├── GLOSSARY.md
 │   │   ├── SPECIFICATION_TEMPLATE.md
+│   │   ├── STRUCTURE_AUDIT.md
+│   │   ├── GDS0_CLOSURE_REPORT.md
 │   │   ├── <design domains>/
 │   │   └── audit/
 │   ├── technical_architecture/
@@ -136,7 +151,7 @@ The source/test/tooling directories are reserved for later implementation. Their
 
 ## Current Next Step
 
-Complete **GDS-0**, then work through **GDS-1 — Product Vision, Audience, and Success Criteria** before specifying lower-level gameplay systems.
+Proceed with **GDS-1 — Product Vision, Audience, and Success Criteria**.
 
 The first implementation vertical slice will be selected and locked only after the complete design and architecture dependency chain makes its requirements clear.
 

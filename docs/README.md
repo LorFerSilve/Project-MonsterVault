@@ -1,6 +1,6 @@
 # Project MonsterVault Documentation
 
-> **Project phase:** Pre-implementation specification
+> **Project phase:** Pre-implementation specification — GDS-1 next  
 > **Implementation status:** Blocked by design and architecture gates
 
 This directory is the authoritative documentation space for Project MonsterVault.
@@ -28,14 +28,18 @@ Historical documents never override current authoritative specifications.
 
 ## Current Gate
 
-The project is currently in **GDS specification mode**.
+**GDS-0 is formally complete.** Its structure audit and closure report both record PASS.
+
+The active dependency is:
+
+> **GDS-1 — Product Vision, Audience, and Success Criteria**
 
 No gameplay implementation should begin until:
 
-- the complete GDS roadmap has reached `Design Complete`;
-- cross-system GDS validation has passed;
-- the complete Technical Architecture has reached `Architecture Complete`;
-- architecture integration validation has passed;
-- the final implementation roadmap and contract-locking phase has explicitly opened implementation.
+- GDS-1 through GDS-16 have completed their owning design work;
+- GDS-17 records a formal cross-system `Design Complete` PASS;
+- the complete Technical Architecture reaches `Architecture Complete`;
+- architecture integration validation passes;
+- the final implementation roadmap and contract-locking phase explicitly opens implementation.
 
 Scaffolding required only to inspect or document external tooling is not gameplay implementation, but even tooling choices should not be locked prematurely when they depend on unresolved architecture decisions.
