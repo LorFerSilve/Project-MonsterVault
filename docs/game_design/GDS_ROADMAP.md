@@ -28,17 +28,43 @@ Closure evidence:
 - [`STRUCTURE_AUDIT.md`](STRUCTURE_AUDIT.md) — PASS;
 - [`GDS0_CLOSURE_REPORT.md`](GDS0_CLOSURE_REPORT.md) — PASS.
 
-GDS-0 completion does not imply gameplay Design Complete and does not authorize Technical Architecture or implementation.
-
 ## GDS-1 — Product Vision, Audience, and Success Criteria
 
-**Status:** NEXT — Draft
+**Status:** Complete — PASS
 
-Defines the player fantasy, target audience, market position, intended session shape, differentiators, product pillars, scope boundaries, commercial goals, and measurable success hypotheses.
+Established and formally validated:
+
+- social creature-collection/progression adventure identity;
+- product promise: `Find it. Catch it. Bring it home. Make your vault legendary.`;
+- primary audience approximately ages 9–15, with older collection/optimization players as a secondary audience;
+- mobile-first interaction constraint with cross-platform gameplay parity;
+- communication-independent core progression;
+- colorful/energetic/playful tone;
+- active acquisition and visible-vault differentiation;
+- socially competitive but non-loss-dominant product position;
+- no baseline requirement for unrestricted theft of secured collections or direct-combat PvP;
+- 10–25 minute normal-session target with meaningful short and extended sessions;
+- fast time-to-fun targets for first action, capture and progression;
+- weeks-to-months long-term collection/progression horizon;
+- trading desirable but non-launch-critical;
+- moderate, non-coercive monetization direction;
+- live-content-capable product model;
+- absolute first-session validation targets plus benchmark-relative public product gates;
+- explicit pivot and production-scale criteria;
+- high-level non-goals and small-team scope constraints.
+
+Closure evidence:
+
+- [`01_game_overview.md`](01_game_overview.md) — Design Complete;
+- [`product/`](product/) — authoritative GDS-1 product specifications;
+- [`GDS1_CROSS_VALIDATION.md`](GDS1_CROSS_VALIDATION.md) — PASS;
+- [`GDS1_CLOSURE_REPORT.md`](GDS1_CLOSURE_REPORT.md) — PASS.
+
+GDS-1 completion constrains later design but does not authorize Technical Architecture or implementation.
 
 ## GDS-2 — Global Game Rules and Session Model
 
-**Status:** Draft
+**Status:** NEXT — Draft
 
 Defines universal rules: multiplayer/session assumptions, spawning, joining/leaving, death or failure philosophy, resets, progression permanence, offline behavior, cross-server expectations, fairness principles, and global state terminology.
 
@@ -124,11 +150,11 @@ Defines player-facing consequences of Roblox platform constraints, age-appropria
 
 **Status:** Draft
 
-Defines intended first-session funnel, session goals, return loops, daily/weekly content philosophy, social invitation loops, discovery-oriented thumbnail/title promises, analytics hypotheses, experimentable tuneables, and rules that prevent metrics optimization from degrading the core experience.
+Defines intended first-session funnel, session goals, return loops, daily/weekly engagement philosophy, social invitation loops, discovery promises, analytics hypotheses, experimentable parameters and guardrails that prevent metric optimization from overriding player experience or fairness.
 
 ## GDS-17 — Cross-System Consistency and Design-Complete Audit
 
-**Status:** Blocked by GDS-1 through GDS-16
+**Status:** Blocked by GDS-2 through GDS-16
 
 Performs the formal pre-architecture audit:
 
@@ -147,7 +173,7 @@ Performs the formal pre-architecture audit:
 
 ## Current Project Gate
 
-GDS-0 is formally complete. The active dependency is **GDS-1**.
+GDS-0 and GDS-1 are formally complete. The active dependency is **GDS-2 — Global Game Rules and Session Model**.
 
 Technical Architecture must not begin until GDS-17 records a formal PASS with no implementation-critical open design questions.
 
@@ -155,7 +181,8 @@ The intended sequence is:
 
 ```text
 GDS-0 governance — COMPLETE
-  -> GDS-1..16 subsystem design — GDS-1 NEXT
+  -> GDS-1 product vision — COMPLETE
+  -> GDS-2..16 subsystem design — GDS-2 NEXT
   -> GDS-17 cross-system audit
   -> DESIGN COMPLETE
   -> Technical Architecture
