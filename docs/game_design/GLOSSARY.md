@@ -17,16 +17,58 @@ A content-authored creature archetype. Species identity is distinct from an indi
 A specific individual creature entity with stable identity. Once secured, a Creature Instance is persistent player-owned collection value and must remain distinguishable from other instances of the same Species.
 
 ### World Creature
-A creature/encounter representation that is not yet part of any player's Secured Collection. Exact encounter and capture semantics remain GDS-5 authority.
+A creature/encounter representation that is not yet part of any player's Secured Collection. GDS-5 defines when it is a valid Capture Opportunity and how it can progress toward securisation.
+
+### Capture Opportunity
+A World Creature that is currently valid for at least one player to pursue through the ordinary GDS-5 acquisition loop.
+
+### Capture Eligibility
+The current player-specific rule result indicating whether that player may begin a capture engagement against a particular Capture Opportunity.
+
+### Engagement Claim
+A short-lived, non-persistent, exclusive right for one player to perform the current ordinary capture attempt against a creature. It prevents contradictory simultaneous single-winner attempts but is not ownership.
+
+### Capture Attempt
+A bounded active interaction in which the valid claimant performs the capture mechanic and resolves to Success, Failure, Cancel, or Invalidation.
+
+### Capture Challenge
+The player-facing action structure inside a Capture Attempt. It must remain compatible with GDS-3 cross-device/accessibility constraints; exact visual implementation and numeric tuning remain downstream.
+
+### Capture Success
+The successful result of a Capture Attempt. Under GDS-5, Capture Success creates a Provisional Capture but does not yet create Persistent Player State.
+
+### Capture Failure
+A non-successful Capture Attempt result. It creates no secured ownership and may release the opportunity immediately or after a short explicit recovery/cooldown state.
 
 ### Acquisition-In-Progress
-A transient creature-related opportunity for which acquisition/capture has begun but **Secured Ownership Finalization** has not yet occurred. It is not yet persistent player-owned collection value.
+A transient creature-related opportunity for which acquisition/capture has begun but **Secured Ownership Finalization** has not yet occurred. Engagement Claim, Capture Attempt, Provisional Capture, and Transport Custody are all unsecured acquisition states.
+
+### Provisional Capture
+The state after Capture Success in which one player has exclusive temporary custody of the specific creature for transport/extraction. It is not yet a Secured Creature.
+
+### Transport Custody
+The temporary exclusive association between a player and their Provisional Capture while it is being brought to an eligible Secure Point. Baseline GDS-5 allows one ordinary active Transport Custody per player.
+
+### Transport Grace
+A short bounded same-server interruption window during which an unexpectedly disconnected player may recover an existing Provisional Capture without creating a second copy or turning it into cross-server ownership.
+
+### Secure Point
+A world-defined valid destination or interaction capable of completing ordinary extraction/security for a valid Provisional Capture. Exact placement and world fiction belong to GDS-7/GDS-9.
+
+### Extraction Completion
+The validated completion of the required return/secure step at an eligible Secure Point while Transport Custody remains valid.
 
 ### Secured Ownership Finalization
-The GDS-5-owned transition event that changes one eligible creature from non-secured/transient acquisition state into a specific player's persistent ownership. GDS-5 owns the trigger conditions/timing; GDS-4 owns the persistent ownership consequences after finalization.
+The GDS-5-owned irreversible transition event that changes one eligible creature from unsecured/provisional acquisition state into a specific player's persistent ownership. In the baseline ordinary loop it occurs at validated Extraction Completion. A narrowly scoped system-originated shutdown protection path may emit the same exact-once finalization for an already valid Provisional Capture.
+
+### Opportunity Release
+The transition ending an Engagement Claim or failed/abandoned acquisition state and returning the creature to ordinary availability if its encounter lifetime remains valid.
+
+### Onboarding-Protected Opportunity
+A first-session Capture Opportunity whose availability cannot be permanently consumed or monopolized by unrelated players before the onboarding player completes the required first capture milestone.
 
 ### Capture
-The gameplay process through which a World Creature may become owned by a player. Exact ownership-transfer timing is owned by GDS-5.
+The gameplay process through which a World Creature may become owned by a player. GDS-5 defines the ordinary sequence from eligibility through Extraction Completion and Secured Ownership Finalization.
 
 ### Secured Creature
 A Creature Instance for which Secured Ownership Finalization has completed and whose ownership is part of Persistent Player State.
