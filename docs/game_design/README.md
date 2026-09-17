@@ -1,6 +1,6 @@
 # MonsterVault Game Design Specification
 
-> **Status:** GDS-0 through GDS-6 Complete / GDS-7 Next  
+> **Status:** GDS-0 through GDS-7 Complete / GDS-8 Next  
 > **Authority:** Player-facing gameplay behavior
 
 This directory contains the authoritative Game Design Specification (GDS) for MonsterVault.
@@ -18,10 +18,11 @@ Completed:
 - **GDS-4 — Creatures, Collection, and Ownership: COMPLETE — PASS**
 - **GDS-5 — Capture, Contesting, Transport, and Extraction: COMPLETE — PASS**
 - **GDS-6 — Rarity, Mutations, Traits, and Variant Value: COMPLETE — PASS**
+- **GDS-7 — Vault/Base, Passive Production, Capacity, and Upgrades: COMPLETE — PASS**
 
 The active dependency is now:
 
-> **GDS-7 — Vault/Base, Passive Production, Capacity, and Upgrades**
+> **GDS-8 — Economy, Progression, Unlocks, and Pacing**
 
 Technical Architecture and gameplay implementation remain blocked.
 
@@ -29,7 +30,7 @@ Technical Architecture and gameplay implementation remain blocked.
 
 - [`00_design_authority.md`](00_design_authority.md) — authority, statuses, completion/change-control rules and gates.
 - [`GDS_ROADMAP.md`](GDS_ROADMAP.md) — dependency-driven design sequence.
-- [`DESIGN_DECISIONS.md`](DESIGN_DECISIONS.md) — accepted strategic decisions/rationale.
+- [`DESIGN_DECISIONS.md`](DESIGN_DECISIONS.md) — project-wide accepted strategic decisions/rationale.
 - [`GLOSSARY.md`](GLOSSARY.md) — canonical gameplay terminology.
 - [`SPECIFICATION_TEMPLATE.md`](SPECIFICATION_TEMPLATE.md) — subsystem specification structure.
 - [`STRUCTURE_AUDIT.md`](STRUCTURE_AUDIT.md) — top-level authority coverage audit.
@@ -58,44 +59,48 @@ Defines player-specific Capture Eligibility, bounded ordinary Engagement Claims,
 
 ### GDS-6 — Rarity, mutations, traits, variant value
 
-Authoritative specification:
+Defines five Species Rarity tiers, stable pre-commit Mutation/Trait identity, zero-to-two compatible Mutations, Compound Variants, context-aware Mutation Frequency, Variant Signature/Discovery, Protected Variants, prospective-only probability modifiers, Availability separation, and stable owned-instance identity.
 
-- [`rarity_mutations/06_rarity_mutations_traits_and_variant_value.md`](rarity_mutations/06_rarity_mutations_traits_and_variant_value.md) — Design Complete.
-- [`GDS6_SCENARIO_VALIDATION.md`](GDS6_SCENARIO_VALIDATION.md) — 70 compound rarity/variant scenarios; PASS.
-- [`GDS6_CROSS_VALIDATION.md`](GDS6_CROSS_VALIDATION.md) — product/lifecycle/ownership/capture/authority validation; PASS.
-- [`GDS6_CLOSURE_REPORT.md`](GDS6_CLOSURE_REPORT.md) — formal closure; PASS.
+### GDS-7 — Vault/Base, passive production, capacity, upgrades
 
-GDS-6 establishes:
+Authoritative specification and closure evidence:
 
-- five Species Rarity tiers: `Common -> Uncommon -> Rare -> Epic -> Legendary`;
-- separation of Species Rarity, Mutation, Trait, Availability, gameplay power, and economic/market price;
-- Variant Identity Finalization no later than an individually actionable Capture Opportunity;
-- no rerolling of the same surviving Creature Instance through claim/capture/transport/reconnect/finalization retries;
-- zero-to-two baseline Mutations with two compatible Mutations forming a Compound Variant;
-- context-aware Mutation Frequency Bands: `Frequent -> Uncommon -> Rare -> Extreme`;
-- Mutation compatibility and non-color-only critical readability requirements;
-- Traits as persistent bounded-optimization characteristics distinct from Mutations;
-- Variant Signature as `Species + canonical Mutation set`;
-- historical Mutation Discovery and Variant Discovery after legitimate securisation;
-- automatic Creature Lock for Protected Variants including Legendary, Extreme-Mutated, Compound-Mutated, and explicitly protected event/legacy instances;
-- prospective-only probability modifiers;
-- prohibition on hidden individualized odds based on spending, purchase reluctance, inferred willingness to pay, or loss chasing;
-- Availability Tags `Core`, `Rotating`, `Event-Limited`, and `Legacy` separate from rarity;
-- stable owned-instance variant identity across ordinary balance/content changes;
-- rarity/value labels that do not guarantee raw power, currency price, or future trading price.
+- [`vault/07_vault_base_passive_production_capacity_and_upgrades.md`](vault/07_vault_base_passive_production_capacity_and_upgrades.md) — Design Complete;
+- [`GDS7_SCENARIO_VALIDATION.md`](GDS7_SCENARIO_VALIDATION.md) — 80 compound Vault/capacity/production scenarios; PASS;
+- [`GDS7_CROSS_VALIDATION.md`](GDS7_CROSS_VALIDATION.md) — GDS-1 through GDS-6 and authority audit; PASS;
+- [`GDS7_DECISION_INDEX.md`](GDS7_DECISION_INDEX.md) — phase-local strategic decisions;
+- [`GDS7_CLOSURE_REPORT.md`](GDS7_CLOSURE_REPORT.md) — formal closure; PASS.
+
+GDS-7 establishes:
+
+- a persistent one-owner personal Vault/laboratory context;
+- logical **Collection Capacity** separate from Display Slot and Production Slot counts;
+- GDS-4 `Overflow-Held` as the single baseline capacity-safety state;
+- deterministic non-destructive **Capacity Reconciliation** and exact-instance **Resolve Overflow**;
+- display placement that references the same owned Creature Instance without cloning it;
+- persistent one-slot/one-instance **Production Assignments**;
+- no ordinary production from Overflow-Held creatures;
+- **Production Profiles** that may use Species and explicitly bounded Traits but do not automatically scale from rarity, Mutation, Compound status, provenance, or Availability;
+- elapsed-time **Passive Production** into a bounded persistent **Production Buffer**;
+- bounded **Offline Production Window** semantics without offline live-world/event participation or server-hop reset;
+- exact-once **Production Claims** and exact-once/atomic **Vault Upgrades**;
+- safe temporary-capacity expiry through reconciliation rather than deletion or forced purchase;
+- GDS-5 finalization before any Vault role/assignment begins;
+- baseline read-only visitors with no persistent management authority or discovery credit;
+- persistence/recovery/anti-replay rules across reset, disconnect, server change, retries, and shutdown;
+- a viable non-premium path to functional core Vault capacity/use.
 
 ## Remaining Core Specifications
 
-- `vault/` — vault/base, passive production, placement, capacity and upgrades. **GDS-7 NEXT.**
-- `economy_progression/` — currencies, capture tools/costs, sources/sinks, unlocks, pacing and progression.
-- `world/` — biomes, exploration, creature spawning/lifetime, hazards, Secure Point placement and traversal.
-- `social/` — cooperation, competition, collision/body-blocking, optional interception/PvP boundaries and social status.
-- `events_liveops/` — events, rotating content, event-specific shared/multi-award capture and seasonal/live rules.
-- `trading/` — secured-instance trading, scarcity/value integrity and anti-abuse design.
-- `monetization/` — monetization surfaces/fairness constraints.
-- `presentation/` — UI/UX, capture/rarity/event feedback, visual/audio language, accessibility and onboarding presentation.
+- `economy_progression/` — currencies, production-resource economics, capture tools/costs, sources/sinks, unlocks, pacing and progression. **GDS-8 NEXT.**
+- `world/` — biomes, exploration, creature spawning/lifetime, hazards, Secure Point/Vault access placement and traversal.
+- `social/` — cooperation, competition, collision/body-blocking, optional interception/PvP boundaries and expanded visitor/social permissions.
+- `events_liveops/` — events, rotating content, event-specific shared/multi-award capture, production modifiers and seasonal/live rules.
+- `trading/` — secured-instance trading, Production Assignment reconciliation, scarcity/value integrity and anti-abuse design.
+- `monetization/` — monetization surfaces/fairness constraints including any capacity/convenience/production products.
+- `presentation/` — UI/UX, Vault/capacity/production/capture/rarity/event feedback, visual/audio language, accessibility and onboarding presentation.
 - `platform_safety/` — Roblox platform constraints, social safety and age-appropriate interaction design.
-- `retention_analytics/` — retention loops, acquisition/variant funnels, session goals, metrics hypotheses and experiment boundaries.
+- `retention_analytics/` — retention loops, acquisition/Vault/variant funnels, session goals, metrics hypotheses and experiment boundaries.
 - `audit/` — final GDS-17 cross-system consistency/maturity audits.
 
 ## Rule
