@@ -4,7 +4,7 @@
 
 ## Project Status
 
-**Pre-implementation specification — GDS-0 through GDS-3 complete / GDS-4 next.**
+**Pre-implementation specification — GDS-0 through GDS-4 complete / GDS-5 next.**
 
 MonsterVault is intentionally **not in gameplay implementation yet**. The project follows a specification-first workflow modeled after Project StarForge:
 
@@ -25,13 +25,14 @@ No gameplay system should be implemented merely because an idea appears promisin
 - **GDS-1 — Product Vision, Audience, and Success Criteria: COMPLETE — PASS**
 - **GDS-2 — Global Game Rules and Session Model: COMPLETE — PASS**
 - **GDS-3 — Player Character, Interaction, and Onboarding: COMPLETE — PASS**
-- **GDS-4 — Creatures, Collection, and Ownership: NEXT**
-- GDS-5 through GDS-16: Draft / dependency-ordered
+- **GDS-4 — Creatures, Collection, and Ownership: COMPLETE — PASS**
+- **GDS-5 — Capture, Contesting, Transport, and Extraction: NEXT**
+- GDS-6 through GDS-16: Draft / dependency-ordered
 - GDS-17: blocked until subsystem design is complete
 - Technical Architecture: blocked by GDS-17
 - Gameplay implementation: blocked by GDS and TA gates
 
-GDS-3 closure evidence is recorded in [`GDS3_SCENARIO_VALIDATION.md`](docs/game_design/GDS3_SCENARIO_VALIDATION.md), [`GDS3_CROSS_VALIDATION.md`](docs/game_design/GDS3_CROSS_VALIDATION.md), and [`GDS3_CLOSURE_REPORT.md`](docs/game_design/GDS3_CLOSURE_REPORT.md).
+GDS-4 closure evidence is recorded in [`GDS4_SCENARIO_VALIDATION.md`](docs/game_design/GDS4_SCENARIO_VALIDATION.md), [`GDS4_CROSS_VALIDATION.md`](docs/game_design/GDS4_CROSS_VALIDATION.md), and [`GDS4_CLOSURE_REPORT.md`](docs/game_design/GDS4_CLOSURE_REPORT.md).
 
 ## Product Contract
 
@@ -68,37 +69,47 @@ GDS-2 locks the project-wide session/persistence baseline:
 - irreversible gameplay is blocked until trusted persistent state is ready;
 - inability to establish trusted state enters **Protected Load Failure** instead of unsafe blank-profile play;
 - finalized persistent outcomes apply once across retries/reconnects;
-- ordinary disconnect is neutral for secured persistent value;
 - failure/reset invokes Recovery rather than a global persistent wipe;
 - late joining an already-running server is normal;
 - offline progression is optional rather than assumed;
 - persistent timers/global windows do not implicitly restart on server transition;
 - lifecycle semantics are consistent across supported device classes.
 
-The authoritative global-rules specification is [`02_global_game_rules_and_session_model.md`](docs/game_design/global_rules/02_global_game_rules_and_session_model.md).
-
 ## Player Interaction and Onboarding Contract
 
-GDS-3 now locks the project-wide player-control/onboarding baseline:
+GDS-3 locks the player-control/onboarding baseline:
 
-- baseline exploration is third-person and character-centric;
-- ordinary locomotion uses familiar continuous movement plus conventional jump;
-- basic movement has no universal stamina tax;
-- touch, keyboard/mouse, and controller expose equivalent core capabilities;
-- contextual world interactions use one **Primary Interact** semantic;
-- active tools/mechanics use a cross-device **Primary Action** semantic where applicable;
-- only one visible **Active Context** is immediately actionable at a time;
-- context is revalidated on activation and modal input cannot spill into accidental world actions;
-- first-session onboarding is gameplay-first and progressive, aligned to GDS-1 time-to-fun targets;
-- **Onboarding Milestones** persist/resume across normal disconnect/server changes;
-- the **Guidance Layer** may be skipped/replayed without fabricating progression or duplicating rewards;
-- a valid first learning path must remain available despite normal multiplayer/server variation;
-- **Safe Arrival** bridges Persistence Ready into direct ordinary play;
-- reset/failure/stuck states use **Recovery** to a valid Recovery Anchor;
-- Recovery does not automatically secure transient value or act as a universal extraction shortcut;
-- progression-critical interaction cannot depend solely on color, audio, precision aim, rapid tapping, free-form chat, or drag-and-drop-only input.
+- third-person character-centric exploration;
+- familiar continuous movement and jump without a universal stamina tax;
+- equivalent baseline capability on touch, keyboard/mouse, and controller;
+- universal **Primary Interact** plus downstream-tool **Primary Action** semantics;
+- one deterministic visible **Active Context** at a time;
+- gameplay-first onboarding with persistent **Onboarding Milestones**;
+- **Safe Arrival** after trusted persistence readiness;
+- reset/failure/stuck **Recovery** that does not automatically extract transient value;
+- semantic accessibility constraints before final presentation work.
 
-The authoritative GDS-3 specification is [`03_player_character_interaction_and_onboarding.md`](docs/game_design/player/03_player_character_interaction_and_onboarding.md).
+## Creature Collection and Ownership Contract
+
+GDS-4 now locks the persistent collectible model:
+
+- **Species** is an authored archetype; player ownership concerns specific **Creature Instances**;
+- every **Secured Creature** has stable persistent individual identity;
+- one secured instance has one ordinary owner at a time;
+- GDS-5 owns the exact **Secured Ownership Finalization** trigger; GDS-4 owns the persistent consequences after it;
+- a player's **Collection Registry** tracks specific secured instances rather than only species counts;
+- duplicates are valid distinct owned creatures and are not automatically merged/deleted;
+- moving creatures among Active, Stored, display, or vault roles does not change ownership;
+- full or reduced capacity cannot silently delete secured creatures;
+- when ownership finalizes without ordinary eligible capacity, the creature is safely **Overflow-Held** with restricted use until capacity is resolved;
+- voluntary permanent **Release** requires explicit intent;
+- **Creature Lock** protects against voluntary destructive/future transfer actions;
+- ordinary session lifecycle, death, capacity changes, or another player's proximity do not cause involuntary loss of secured creatures;
+- **Species Discovery** persists historically even if the last current instance is later released;
+- provenance/history can remain attached to individual instances;
+- future trading must operate through explicit ownership-transfer authority rather than informal dropping/lending.
+
+The authoritative GDS-4 specification is [`04_creatures_collection_and_ownership.md`](docs/game_design/creatures/04_creatures_collection_and_ownership.md).
 
 ## Working Core Loop
 
@@ -108,13 +119,13 @@ Choose or notice a desirable goal
   -> discover a creature/opportunity
   -> attempt capture
   -> secure / return acquired value
-  -> add to collection / vault progression
+  -> add specific Creature Instance to persistent collection
   -> improve capability / capacity / access / status
   -> pursue rarer content / events / regions
   -> repeat
 ```
 
-The exact creature ownership model, capture rules, ownership-transfer point, economy, rarity probabilities, transport rules, social contesting, event structure, trading design, and monetization products remain subject to their owning later GDS phases.
+The exact capture state machine, ownership-finalization trigger, rarity probabilities, vault production, economy, world spawning, social contesting, events, trading, and monetization remain subject to their owning later GDS phases.
 
 ## Documentation Authority
 
@@ -124,25 +135,26 @@ Start at [`docs/README.md`](docs/README.md).
 
 [`docs/game_design/`](docs/game_design/) owns intended player-facing behavior.
 
-Key documents:
+Key documents include:
 
-- [`00_design_authority.md`](docs/game_design/00_design_authority.md) — governance, status model and definition of Design Complete;
-- [`01_game_overview.md`](docs/game_design/01_game_overview.md) — Design Complete high-level product overview;
-- [`product/`](docs/game_design/product/) — GDS-1 audience, positioning, session, scope and success specifications;
-- [`global_rules/`](docs/game_design/global_rules/) — GDS-2 global session/lifecycle rules;
-- [`player/`](docs/game_design/player/) — GDS-3 player interaction/onboarding rules;
-- [`GDS_ROADMAP.md`](docs/game_design/GDS_ROADMAP.md) — dependency-driven GDS-0 through GDS-17 sequence;
-- [`DESIGN_DECISIONS.md`](docs/game_design/DESIGN_DECISIONS.md) — strategic design decisions and rationale;
-- [`GLOSSARY.md`](docs/game_design/GLOSSARY.md) — canonical shared gameplay terminology;
-- [`GDS3_SCENARIO_VALIDATION.md`](docs/game_design/GDS3_SCENARIO_VALIDATION.md) — compound interaction/onboarding validation;
-- [`GDS3_CROSS_VALIDATION.md`](docs/game_design/GDS3_CROSS_VALIDATION.md) — formal GDS-3 cross-validation;
-- [`GDS3_CLOSURE_REPORT.md`](docs/game_design/GDS3_CLOSURE_REPORT.md) — formal GDS-3 closure evidence.
+- [`00_design_authority.md`](docs/game_design/00_design_authority.md) — governance and Design Complete criteria;
+- [`01_game_overview.md`](docs/game_design/01_game_overview.md) — product overview;
+- [`product/`](docs/game_design/product/) — GDS-1 product contract;
+- [`global_rules/`](docs/game_design/global_rules/) — GDS-2 lifecycle/session contract;
+- [`player/`](docs/game_design/player/) — GDS-3 player interaction/onboarding contract;
+- [`creatures/`](docs/game_design/creatures/) — GDS-4 creature/collection/ownership contract;
+- [`GDS_ROADMAP.md`](docs/game_design/GDS_ROADMAP.md) — dependency-driven phase sequence;
+- [`DESIGN_DECISIONS.md`](docs/game_design/DESIGN_DECISIONS.md) — strategic design decisions;
+- [`GLOSSARY.md`](docs/game_design/GLOSSARY.md) — canonical gameplay terminology;
+- [`GDS4_SCENARIO_VALIDATION.md`](docs/game_design/GDS4_SCENARIO_VALIDATION.md) — compound GDS-4 validation;
+- [`GDS4_CROSS_VALIDATION.md`](docs/game_design/GDS4_CROSS_VALIDATION.md) — authority/consistency audit;
+- [`GDS4_CLOSURE_REPORT.md`](docs/game_design/GDS4_CLOSURE_REPORT.md) — formal GDS-4 closure evidence.
 
 ### Technical Architecture
 
-[`docs/technical_architecture/`](docs/technical_architecture/) is currently **blocked by GDS completion**.
+[`docs/technical_architecture/`](docs/technical_architecture/) remains **blocked by GDS completion**.
 
-Technical Architecture will eventually translate the approved GDS into concrete Roblox/Luau contracts for tooling, modules, networking, persistence, identity, runtime lifecycle, player controls, creature/capture systems, economy, trading, monetization, UI, live operations, performance, testing and CI.
+Technical Architecture will later translate approved GDS behavior into concrete Roblox/Luau contracts for identity, persistence, networking, runtime lifecycle, player controls, creature/capture systems, economy, trading, UI, live operations, performance, testing and CI.
 
 ### Implementation
 
@@ -164,11 +176,12 @@ Project-MonsterVault/
 │   │   ├── product/
 │   │   ├── global_rules/
 │   │   ├── player/
+│   │   ├── creatures/
 │   │   ├── GDS_ROADMAP.md
 │   │   ├── DESIGN_DECISIONS.md
-│   │   ├── GDS3_SCENARIO_VALIDATION.md
-│   │   ├── GDS3_CROSS_VALIDATION.md
-│   │   ├── GDS3_CLOSURE_REPORT.md
+│   │   ├── GDS4_SCENARIO_VALIDATION.md
+│   │   ├── GDS4_CROSS_VALIDATION.md
+│   │   ├── GDS4_CLOSURE_REPORT.md
 │   │   ├── <remaining design domains>/
 │   │   └── audit/
 │   ├── technical_architecture/
@@ -184,7 +197,7 @@ The source/test/tooling directories are reserved for later implementation. Their
 
 ## Current Next Step
 
-Proceed with **GDS-4 — Creatures, Collection, and Ownership**.
+Proceed with **GDS-5 — Capture, Contesting, Transport, and Extraction**.
 
 The first implementation vertical slice will be selected and locked only after the complete design and architecture dependency chain makes its requirements clear.
 
