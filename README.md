@@ -4,7 +4,7 @@
 
 ## Project Status
 
-**Pre-implementation specification — GDS-0 through GDS-2 complete / GDS-3 next.**
+**Pre-implementation specification — GDS-0 through GDS-3 complete / GDS-4 next.**
 
 MonsterVault is intentionally **not in gameplay implementation yet**. The project follows a specification-first workflow modeled after Project StarForge:
 
@@ -24,13 +24,14 @@ No gameplay system should be implemented merely because an idea appears promisin
 - **GDS-0 — Governance, Structure, and Concept Baseline: COMPLETE — PASS**
 - **GDS-1 — Product Vision, Audience, and Success Criteria: COMPLETE — PASS**
 - **GDS-2 — Global Game Rules and Session Model: COMPLETE — PASS**
-- **GDS-3 — Player Character, Interaction, and Onboarding: NEXT**
-- GDS-4 through GDS-16: Draft / dependency-ordered
+- **GDS-3 — Player Character, Interaction, and Onboarding: COMPLETE — PASS**
+- **GDS-4 — Creatures, Collection, and Ownership: NEXT**
+- GDS-5 through GDS-16: Draft / dependency-ordered
 - GDS-17: blocked until subsystem design is complete
 - Technical Architecture: blocked by GDS-17
 - Gameplay implementation: blocked by GDS and TA gates
 
-GDS-2 closure evidence is recorded in [`GDS2_SCENARIO_VALIDATION.md`](docs/game_design/GDS2_SCENARIO_VALIDATION.md), [`GDS2_CROSS_VALIDATION.md`](docs/game_design/GDS2_CROSS_VALIDATION.md), and [`GDS2_CLOSURE_REPORT.md`](docs/game_design/GDS2_CLOSURE_REPORT.md).
+GDS-3 closure evidence is recorded in [`GDS3_SCENARIO_VALIDATION.md`](docs/game_design/GDS3_SCENARIO_VALIDATION.md), [`GDS3_CROSS_VALIDATION.md`](docs/game_design/GDS3_CROSS_VALIDATION.md), and [`GDS3_CLOSURE_REPORT.md`](docs/game_design/GDS3_CLOSURE_REPORT.md).
 
 ## Product Contract
 
@@ -60,26 +61,44 @@ The high-level product contract includes:
 
 ## Global Lifecycle Contract
 
-GDS-2 now locks the project-wide session/persistence baseline:
+GDS-2 locks the project-wide session/persistence baseline:
 
 - Roblox server sessions are temporary runtime contexts, not the owner of long-term player progression;
 - finalized persistent progress survives ordinary avatar failure, reset, disconnect, reconnect, server changes, device changes, and server shutdown;
-- players do not need a special clean logout/save action to protect finalized persistent progress;
 - irreversible gameplay is blocked until trusted persistent state is ready;
 - inability to establish trusted state enters **Protected Load Failure** instead of unsafe blank-profile play;
 - finalized persistent outcomes apply once across retries/reconnects;
 - ordinary disconnect is neutral for secured persistent value;
-- transient activities must define their own deterministic interruption behavior in their owning GDS phase;
 - failure/reset invokes Recovery rather than a global persistent wipe;
 - late joining an already-running server is normal;
-- AFK/presence alone creates no global reward entitlement;
-- offline players hold no live-world claims by default;
 - offline progression is optional rather than assumed;
-- there is no baseline requirement for one continuously synchronized MMO-scale cross-server world;
-- persistent timers and global calendar windows do not implicitly restart on server transition;
+- persistent timers/global windows do not implicitly restart on server transition;
 - lifecycle semantics are consistent across supported device classes.
 
 The authoritative global-rules specification is [`02_global_game_rules_and_session_model.md`](docs/game_design/global_rules/02_global_game_rules_and_session_model.md).
+
+## Player Interaction and Onboarding Contract
+
+GDS-3 now locks the project-wide player-control/onboarding baseline:
+
+- baseline exploration is third-person and character-centric;
+- ordinary locomotion uses familiar continuous movement plus conventional jump;
+- basic movement has no universal stamina tax;
+- touch, keyboard/mouse, and controller expose equivalent core capabilities;
+- contextual world interactions use one **Primary Interact** semantic;
+- active tools/mechanics use a cross-device **Primary Action** semantic where applicable;
+- only one visible **Active Context** is immediately actionable at a time;
+- context is revalidated on activation and modal input cannot spill into accidental world actions;
+- first-session onboarding is gameplay-first and progressive, aligned to GDS-1 time-to-fun targets;
+- **Onboarding Milestones** persist/resume across normal disconnect/server changes;
+- the **Guidance Layer** may be skipped/replayed without fabricating progression or duplicating rewards;
+- a valid first learning path must remain available despite normal multiplayer/server variation;
+- **Safe Arrival** bridges Persistence Ready into direct ordinary play;
+- reset/failure/stuck states use **Recovery** to a valid Recovery Anchor;
+- Recovery does not automatically secure transient value or act as a universal extraction shortcut;
+- progression-critical interaction cannot depend solely on color, audio, precision aim, rapid tapping, free-form chat, or drag-and-drop-only input.
+
+The authoritative GDS-3 specification is [`03_player_character_interaction_and_onboarding.md`](docs/game_design/player/03_player_character_interaction_and_onboarding.md).
 
 ## Working Core Loop
 
@@ -95,7 +114,7 @@ Choose or notice a desirable goal
   -> repeat
 ```
 
-The exact capture rules, ownership-transfer point, economy, rarity probabilities, transport rules, social contesting, event structure, trading design, and monetization products remain subject to their owning GDS phases.
+The exact creature ownership model, capture rules, ownership-transfer point, economy, rarity probabilities, transport rules, social contesting, event structure, trading design, and monetization products remain subject to their owning later GDS phases.
 
 ## Documentation Authority
 
@@ -111,18 +130,19 @@ Key documents:
 - [`01_game_overview.md`](docs/game_design/01_game_overview.md) — Design Complete high-level product overview;
 - [`product/`](docs/game_design/product/) — GDS-1 audience, positioning, session, scope and success specifications;
 - [`global_rules/`](docs/game_design/global_rules/) — GDS-2 global session/lifecycle rules;
+- [`player/`](docs/game_design/player/) — GDS-3 player interaction/onboarding rules;
 - [`GDS_ROADMAP.md`](docs/game_design/GDS_ROADMAP.md) — dependency-driven GDS-0 through GDS-17 sequence;
 - [`DESIGN_DECISIONS.md`](docs/game_design/DESIGN_DECISIONS.md) — strategic design decisions and rationale;
 - [`GLOSSARY.md`](docs/game_design/GLOSSARY.md) — canonical shared gameplay terminology;
-- [`GDS2_SCENARIO_VALIDATION.md`](docs/game_design/GDS2_SCENARIO_VALIDATION.md) — compound lifecycle validation;
-- [`GDS2_CROSS_VALIDATION.md`](docs/game_design/GDS2_CROSS_VALIDATION.md) — formal GDS-2 cross-validation;
-- [`GDS2_CLOSURE_REPORT.md`](docs/game_design/GDS2_CLOSURE_REPORT.md) — formal GDS-2 closure evidence.
+- [`GDS3_SCENARIO_VALIDATION.md`](docs/game_design/GDS3_SCENARIO_VALIDATION.md) — compound interaction/onboarding validation;
+- [`GDS3_CROSS_VALIDATION.md`](docs/game_design/GDS3_CROSS_VALIDATION.md) — formal GDS-3 cross-validation;
+- [`GDS3_CLOSURE_REPORT.md`](docs/game_design/GDS3_CLOSURE_REPORT.md) — formal GDS-3 closure evidence.
 
 ### Technical Architecture
 
 [`docs/technical_architecture/`](docs/technical_architecture/) is currently **blocked by GDS completion**.
 
-Technical Architecture will eventually translate the approved GDS into concrete Roblox/Luau contracts for tooling, modules, networking, persistence, identity, runtime lifecycle, economy, trading, monetization, UI, live operations, performance, testing and CI.
+Technical Architecture will eventually translate the approved GDS into concrete Roblox/Luau contracts for tooling, modules, networking, persistence, identity, runtime lifecycle, player controls, creature/capture systems, economy, trading, monetization, UI, live operations, performance, testing and CI.
 
 ### Implementation
 
@@ -143,11 +163,12 @@ Project-MonsterVault/
 │   │   ├── 01_game_overview.md
 │   │   ├── product/
 │   │   ├── global_rules/
+│   │   ├── player/
 │   │   ├── GDS_ROADMAP.md
 │   │   ├── DESIGN_DECISIONS.md
-│   │   ├── GDS2_SCENARIO_VALIDATION.md
-│   │   ├── GDS2_CROSS_VALIDATION.md
-│   │   ├── GDS2_CLOSURE_REPORT.md
+│   │   ├── GDS3_SCENARIO_VALIDATION.md
+│   │   ├── GDS3_CROSS_VALIDATION.md
+│   │   ├── GDS3_CLOSURE_REPORT.md
 │   │   ├── <remaining design domains>/
 │   │   └── audit/
 │   ├── technical_architecture/
@@ -163,7 +184,7 @@ The source/test/tooling directories are reserved for later implementation. Their
 
 ## Current Next Step
 
-Proceed with **GDS-3 — Player Character, Interaction, and Onboarding**.
+Proceed with **GDS-4 — Creatures, Collection, and Ownership**.
 
 The first implementation vertical slice will be selected and locked only after the complete design and architecture dependency chain makes its requirements clear.
 

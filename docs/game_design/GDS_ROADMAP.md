@@ -101,17 +101,47 @@ GDS-2 creates explicit downstream contracts but does not authorize Technical Arc
 
 ## GDS-3 — Player Character, Interaction, and Onboarding
 
-**Status:** NEXT — Draft
+**Status:** Complete — PASS
 
-Defines movement, camera expectations, interaction model, first-session onboarding, tools/equipment-facing rules, basic inventory-facing behavior, accessibility implications, and interruption/recovery rules.
+Established and formally validated:
 
-GDS-3 must consume the GDS-2 readiness/recovery contract and define how players concretely enter safe meaningful play after persistence readiness, spawn, reset, and Recovery.
+- third-person character-centric baseline exploration camera;
+- familiar continuous directional locomotion plus conventional jump;
+- no universal stamina tax on ordinary movement;
+- no universal precision-platforming requirement for core progression;
+- semantic touch/keyboard/gamepad control parity;
+- universal **Primary Interact** contextual action;
+- universal downstream-tool **Primary Action** semantic;
+- exactly one visible **Active Context** with deterministic priority and activation-time revalidation;
+- explicit modal input focus and protection against input spillover;
+- basic equipment/inventory-facing access constraints;
+- gameplay-first `show -> do -> confirm` onboarding;
+- onboarding sequencing aligned to GDS-1 time-to-fun targets;
+- persistent/resumable **Onboarding Milestones**;
+- skippable/replayable **Guidance Layer** separated from real progression;
+- onboarding-path availability despite normal multiplayer/server variation;
+- **Safe Arrival** after GDS-2 Persistence Ready;
+- concrete reset/failure/stuck **Recovery** behavior using valid Recovery Anchors;
+- Recovery that cannot automatically secure transient value or become a universal extraction shortcut;
+- non-color-only, non-audio-only, non-pixel-precision interaction constraints;
+- 40 compound interaction/onboarding scenarios validated.
+
+Closure evidence:
+
+- [`player/03_player_character_interaction_and_onboarding.md`](player/03_player_character_interaction_and_onboarding.md) — Design Complete;
+- [`GDS3_SCENARIO_VALIDATION.md`](GDS3_SCENARIO_VALIDATION.md) — PASS;
+- [`GDS3_CROSS_VALIDATION.md`](GDS3_CROSS_VALIDATION.md) — PASS;
+- [`GDS3_CLOSURE_REPORT.md`](GDS3_CLOSURE_REPORT.md) — PASS.
+
+GDS-3 creates input/onboarding contracts for downstream systems but does not authorize Technical Architecture or implementation.
 
 ## GDS-4 — Creatures, Collection, and Ownership
 
-**Status:** Draft
+**Status:** NEXT — Draft
 
 Defines creature identity, species/content taxonomy, encounter ownership, collection semantics, active vs stored creatures, duplicates, capacity, display/status value, loss rules, and collection completion behavior.
+
+GDS-4 must consume GDS-2 persistence/finalization semantics and GDS-3 interaction/onboarding contracts while defining the exact player-facing creature/collection ownership model.
 
 ## GDS-5 — Capture, Contesting, Transport, and Extraction
 
@@ -187,7 +217,7 @@ Defines intended first-session funnel, session goals, return loops, daily/weekly
 
 ## GDS-17 — Cross-System Consistency and Design-Complete Audit
 
-**Status:** Blocked by GDS-3 through GDS-16
+**Status:** Blocked by GDS-4 through GDS-16
 
 Performs the formal pre-architecture audit:
 
@@ -206,7 +236,7 @@ Performs the formal pre-architecture audit:
 
 ## Current Project Gate
 
-GDS-0, GDS-1, and GDS-2 are formally complete. The active dependency is **GDS-3 — Player Character, Interaction, and Onboarding**.
+GDS-0 through GDS-3 are formally complete. The active dependency is **GDS-4 — Creatures, Collection, and Ownership**.
 
 Technical Architecture must not begin until GDS-17 records a formal PASS with no implementation-critical open design questions.
 
@@ -216,7 +246,8 @@ The intended sequence is:
 GDS-0 governance — COMPLETE
   -> GDS-1 product vision — COMPLETE
   -> GDS-2 global rules/session model — COMPLETE
-  -> GDS-3..16 subsystem design — GDS-3 NEXT
+  -> GDS-3 player/interaction/onboarding — COMPLETE
+  -> GDS-4..16 subsystem design — GDS-4 NEXT
   -> GDS-17 cross-system audit
   -> DESIGN COMPLETE
   -> Technical Architecture
