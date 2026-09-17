@@ -102,14 +102,50 @@ A persistent player-controlled protection flag that prevents voluntary destructi
 ### Species Discovery
 A persistent collection fact indicating that the player has legitimately secured at least one Creature Instance of a Species. Releasing the last currently owned instance does not erase historical Species Discovery.
 
-### Vault
-The player's persistent personal base/laboratory space used for creature storage, display, production and progression functions. Final detailed scope remains under GDS-7.
+### Species Rarity
+The GDS-6 authored scarcity/status classification of a Species. Baseline ordered tiers are **Common, Uncommon, Rare, Epic, Legendary**. Species Rarity is distinct from Mutation, Trait, Availability, gameplay power, currency value, and future market price.
 
 ### Mutation
-A variant property that changes a creature's presentation and/or value according to the rarity/mutation specification. Mutation does not imply a specific statistical benefit unless explicitly defined.
+A persistent GDS-6 instance-level variant property with a meaningful collectible/presentation identity. A Mutation may support a bounded downstream gameplay hook but does not automatically imply superior stats or power.
 
-### Rarity
-A classification expressing designed scarcity and collection value. Exact tiers and probability semantics remain under GDS-6.
+### Mutation Frequency Band
+The context-aware scarcity class of a Mutation within an eligible generation context: **Frequent, Uncommon, Rare, Extreme**. The band does not encode one universal exact percentage.
+
+### Standard Variant
+A Creature Instance with zero Mutations.
+
+### Single-Mutated Variant
+A Creature Instance with exactly one Mutation.
+
+### Compound-Mutated Variant
+A Creature Instance with exactly two compatible Mutations. GDS-6 baseline permits at most two simultaneous Mutations.
+
+### Trait
+A persistent instance-level characteristic distinct from Mutation. Traits may support bounded situational optimization under downstream systems but are not a second Species Rarity ladder and do not override ownership/finalization.
+
+### Variant Identity Finalization
+The GDS-6 boundary at which an instance's Mutation/Trait identity is fixed. It occurs no later than that specific creature becoming an individually actionable Capture Opportunity and cannot be rerolled through claim, capture, transport, reconnect, or finalization retries.
+
+### Variant Signature
+The canonical baseline visual-variant identity formed by **Species + canonical Mutation set**. Mutation order does not create separate signatures. Traits and Provenance remain instance metadata but are not part of baseline Variant Signature completion.
+
+### Mutation Discovery
+A persistent historical player fact recorded after legitimate Secured Ownership Finalization of at least one creature carrying a specific Mutation.
+
+### Variant Discovery
+A persistent historical player fact recorded after legitimate Secured Ownership Finalization of a specific Variant Signature.
+
+### Protected Variant
+A high-value GDS-6 category that auto-applies GDS-4 Creature Lock on first securisation. It includes Legendary Species, Extreme-Mutated instances, Compound-Mutated instances, and explicitly protected event/legacy content.
+
+### Availability Tag
+A GDS-6 non-rarity label describing how creature/variant content is currently obtainable: **Core, Rotating, Event-Limited, Legacy**. Availability does not replace or extend the Species Rarity ladder.
+
+### Variant Value
+The multi-dimensional collectible/status significance of one Creature Instance, informed by Species Rarity, Mutation scarcity/count, Traits, Provenance, Availability, event/history context, and later market demand. Variant Value is not a guaranteed currency or trading price.
+
+### Vault
+The player's persistent personal base/laboratory space used for creature storage, display, production and progression functions. Final detailed scope remains under GDS-7.
 
 ### Biome
 A world region with its own creature pool, environment, progression requirements and encounter characteristics.
