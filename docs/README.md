@@ -1,6 +1,6 @@
 # Project MonsterVault Documentation
 
-> **Project phase:** Pre-implementation specification — GDS-9 next  
+> **Project phase:** Pre-implementation specification — GDS-10 next  
 > **Implementation status:** Blocked by design and architecture gates
 
 This directory is the authoritative documentation space for Project MonsterVault.
@@ -35,22 +35,23 @@ Completed:
 - **GDS-6 — Rarity, Mutations, Traits, and Variant Value: PASS**
 - **GDS-7 — Vault/Base, Passive Production, Capacity, and Upgrades: PASS**
 - **GDS-8 — Economy, Progression, Unlocks, and Pacing: PASS**
+- **GDS-9 — World, Biomes, Exploration, Spawning, and Hazards: PASS**
 
 Latest closure evidence:
 
-- [`game_design/economy_progression/08_economy_progression_unlocks_and_pacing.md`](game_design/economy_progression/08_economy_progression_unlocks_and_pacing.md);
-- [`game_design/GDS8_SCENARIO_VALIDATION.md`](game_design/GDS8_SCENARIO_VALIDATION.md);
-- [`game_design/GDS8_CROSS_VALIDATION.md`](game_design/GDS8_CROSS_VALIDATION.md);
-- [`game_design/GDS8_DECISION_INDEX.md`](game_design/GDS8_DECISION_INDEX.md);
-- [`game_design/GDS8_CLOSURE_REPORT.md`](game_design/GDS8_CLOSURE_REPORT.md).
+- [`game_design/world/09_world_biomes_exploration_spawning_and_hazards.md`](game_design/world/09_world_biomes_exploration_spawning_and_hazards.md);
+- [`game_design/GDS9_SCENARIO_VALIDATION.md`](game_design/GDS9_SCENARIO_VALIDATION.md);
+- [`game_design/GDS9_CROSS_VALIDATION.md`](game_design/GDS9_CROSS_VALIDATION.md);
+- [`game_design/GDS9_DECISION_INDEX.md`](game_design/GDS9_DECISION_INDEX.md);
+- [`game_design/GDS9_CLOSURE_REPORT.md`](game_design/GDS9_CLOSURE_REPORT.md).
 
 The active dependency is:
 
-> **GDS-9 — World, Biomes, Exploration, Spawning, and Hazards**
+> **GDS-10 — Social Play, Cooperation, Competition, and PvP Boundaries**
 
 No gameplay implementation should begin until:
 
-- GDS-9 through GDS-16 complete their owning design work;
+- GDS-10 through GDS-16 complete their owning design work;
 - GDS-17 records a formal cross-system `Design Complete` PASS;
 - the complete Technical Architecture reaches `Architecture Complete`;
 - architecture integration validation passes;
