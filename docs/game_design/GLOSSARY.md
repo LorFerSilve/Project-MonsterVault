@@ -83,6 +83,39 @@ The GDS-2 state entered when trusted Persistent Player State cannot be establish
 ### Global Window
 A calendar-based availability period intended to have the same temporal boundary across servers. Joining or changing servers does not restart it. Exact live-event use belongs to GDS-11.
 
+### Player Character
+The controllable in-world avatar through which the player moves, explores and performs world interactions during Active Presence. The Player Character is temporary runtime presence and is not identical to Persistent Player State.
+
+### Primary Interact
+The universal GDS-3 semantic action used to activate the currently selected contextual world interaction. The concrete effect belongs to the owning subsystem.
+
+### Primary Action
+The GDS-3 semantic action used by the currently active gameplay tool or downstream mechanic. It must remain available across supported Input Modes; GDS-3 does not define the mechanic-specific effect.
+
+### Context Candidate
+A nearby or currently targeted world interaction that is valid enough to be considered for Primary Interact.
+
+### Active Context
+The single Context Candidate currently selected and visibly presented as the target of Primary Interact.
+
+### Interaction Prompt
+The player-facing indication that an Active Context exists, including a concise action label and current-device control/glyph.
+
+### Safe Arrival
+The short GDS-3 entry/recovery state after GDS-2 Persistence Ready used to establish a valid Player Character, camera, orientation, and direct control before ordinary exposed play.
+
+### Onboarding Milestone
+A persistent player-specific record that a required introductory learning/progression step has been demonstrated or completed. Reconnect/replay must not duplicate finalized milestone rewards.
+
+### Guidance Layer
+Non-essential instructional prompts, highlights, arrows, hints, or reminders that teach the player without themselves granting gameplay progress or Finalized Outcomes.
+
+### Recovery Anchor
+A world-defined valid location to which GDS-2/GDS-3 Recovery may return a Player Character. Exact placement and world semantics are owned by GDS-9.
+
+### Input Mode
+The currently dominant control family: touch, keyboard/mouse, or gamepad. Changing Input Mode changes prompts/control presentation, not baseline gameplay capability or progression state.
+
 ### Server Authority
 A technical principle, not a gameplay rule: security-sensitive state is ultimately validated by the server. Detailed technical contracts belong to Technical Architecture.
 
