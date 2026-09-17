@@ -36,7 +36,7 @@ A scenario passes only if:
 | 12 | Capture Success occurs while another player is nearby | Contesting ends; observer cannot hijack custody | PASS |
 | 13 | Capture Success client visual repeats | Still one provisional semantic instance | PASS |
 | 14 | Player already transports another creature | New ordinary capture initiation is blocked | PASS |
-| 15 | Provisional carrier reaches Secure Point | Extraction may complete after revalidation | PASS |
+| 15 | Provisional carrier reaches Secure Point | Extraction completes after authoritative revalidation when all conditions remain valid | PASS |
 | 16 | Player reaches Secure Point without provisional creature | No creature is created/finalized | PASS |
 | 17 | Secure interaction delivered twice | One Secured Ownership Finalization only | PASS |
 | 18 | Finalization succeeds then client disconnects immediately | Creature remains GDS-4 Secured Creature | PASS |
@@ -46,10 +46,10 @@ A scenario passes only if:
 | 22 | Player resets during Capture Attempt | Attempt interrupted; no automatic success | PASS |
 | 23 | Player resets during transport | Recovery does not extract; provisional custody ends | PASS |
 | 24 | Player intentionally leaves during transport | No secured ownership; provisional state ends | PASS |
-| 25 | Client disconnects during transport then reconnects within grace | Same provisional custody may resume once | PASS |
+| 25 | Client disconnects during transport then reconnects within grace | Same provisional custody resumes once in the same server session | PASS |
 | 26 | Client reconnects after grace expires | No provisional ownership resumes | PASS |
 | 27 | Player joins different server while provisional state existed elsewhere | Provisional creature does not become cross-server owned state | PASS |
-| 28 | Server-originated shutdown occurs with valid provisional custody | Protected Shutdown Finalization may secure once | PASS |
+| 28 | Orderly server-originated shutdown occurs with valid provisional custody | Protected Shutdown Finalization secures the same provisional creature exactly once while authoritative custody state is available | PASS |
 | 29 | Player simulates disconnect hoping for shutdown protection | Ordinary disconnect path does not invoke shutdown exception | PASS |
 | 30 | Shutdown occurs after normal extraction already finalized | No duplicate creature/finalization | PASS |
 | 31 | Capacity is full before attempt begins | Ordinary initiation blocked with clear capacity reason | PASS |
@@ -92,7 +92,7 @@ All ordinary scenarios maintain a single unambiguous path from unsecured opportu
 The ordinary social competition occurs before successful provisional capture. Active attempts and transport custody cannot be casually overwritten by later proximity/input.
 
 ### Lifecycle consistency
-Reset/Recovery and voluntary leave never count as extraction. Unexpected disconnect receives only bounded same-session grace. System-originated shutdown has a narrowly scoped protection exception.
+Reset/Recovery and voluntary leave never count as extraction. Unexpected disconnect deterministically enters bounded same-session Transport Grace. An orderly authoritative server-originated shutdown finalizes valid provisional custody exactly once when the state remains verifiable; abrupt unverifiable process failure cannot promise that exception.
 
 ### Capacity safety
 Known full capacity blocks normal capture initiation, while late capacity races cannot destroy a completed acquisition because GDS-4 Overflow-Held absorbs the integrity case.
