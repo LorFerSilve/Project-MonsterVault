@@ -48,8 +48,8 @@ GDS-7 requires authoritative resolution of:
 | Compound Vault/capacity/production/lifecycle cases | `GDS7_SCENARIO_VALIDATION.md` | PASS — 80 / 80 |
 | GDS-1 through GDS-6 compatibility | `GDS7_CROSS_VALIDATION.md` | PASS |
 | Downstream authority boundaries | `GDS7_CROSS_VALIDATION.md` | PASS |
-| Canonical terminology | `GLOSSARY.md` | PASS after GDS-7 normalization |
-| Strategic rationale | `DESIGN_DECISIONS.md` | PASS after GDS-7 decision logging |
+| Canonical terminology | `GLOSSARY.md` | PASS |
+| Strategic rationale | `GDS7_DECISION_INDEX.md` | PASS |
 
 ## 4. Locked GDS-7 Decisions
 
