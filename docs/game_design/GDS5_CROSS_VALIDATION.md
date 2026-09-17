@@ -56,12 +56,7 @@ The loop supports short meaningful sessions and forbids arbitrary idle waiting a
 ### Time-to-fun
 **PASS.**
 
-The onboarding contract supports:
-
-- first real attempt around 60 seconds;
-- first secured creature around 3 minutes;
-- a short return/extraction route;
-- no open-server race as the only tutorial path.
+The onboarding contract supports first real attempt around 60 seconds, first secured creature around 3 minutes, a short return/extraction route, and no open-server race as the only tutorial path.
 
 ### Mobile-first audience
 **PASS.**
@@ -88,7 +83,7 @@ Engagement Claim, Capture Attempt, Provisional Capture, and Transport Custody ar
 ### Ordinary disconnect neutrality
 **PASS.**
 
-Already secured creatures are unaffected. Unsecured transport follows GDS-5's explicit bounded-grace rule, satisfying GDS-2's requirement that transient interruption be owned downstream.
+Already secured creatures are unaffected. An unexpected disconnect during valid transport deterministically enters bounded same-server Transport Grace; expiry ends provisional state without converting it to ownership. This satisfies GDS-2's requirement that transient interruption be explicitly owned downstream.
 
 ### Recovery
 **PASS.**
@@ -98,9 +93,9 @@ Reset/avatar failure invokes Recovery but is never Extraction Completion. This p
 ### Server shutdown
 **PASS.**
 
-GDS-5 explicitly owns the transient edge case: a valid post-success Provisional Capture may receive Protected Shutdown Finalization only on authoritative server-originated termination.
+GDS-5 explicitly owns the transient edge case. During an orderly authoritative server-originated shutdown, an already valid Provisional Capture is finalized exactly once when the server still has verifiable custody state. Abrupt process/platform failure that prevents state verification/execution cannot promise that exception because the creature remained unfinalized transient state.
 
-The exception is exact-once and cannot be invoked by ordinary disconnect/reset/leave.
+The controlled-shutdown exception cannot be invoked by ordinary disconnect, reset, Recovery, or voluntary leave.
 
 ### Cross-server behavior
 **PASS.**
@@ -254,19 +249,7 @@ GDS-5 identifies useful funnel measurements and experiment guardrails without de
 
 **PASS.**
 
-GDS-5 intentionally does not prescribe:
-
-- Roblox service/API choices;
-- client/server module boundaries;
-- network event structure;
-- datastore schema;
-- transaction/locking implementation;
-- GUID generation;
-- disconnect detection implementation;
-- server-shutdown hooks;
-- anti-cheat algorithms;
-- replication ownership;
-- exact retry/idempotency mechanism.
+GDS-5 intentionally does not prescribe Roblox service/API choices, client/server module boundaries, network event structure, datastore schema, transaction/locking implementation, GUID generation, disconnect detection implementation, shutdown hooks, anti-cheat algorithms, replication ownership, or exact retry/idempotency mechanisms.
 
 It specifies player-facing semantics that TA must later implement.
 
@@ -292,20 +275,7 @@ GDS-5 locks only the semantic acquisition contract necessary for later phases to
 
 There are **zero GDS-5-blocking open questions**.
 
-Remaining unresolved details are intentionally downstream-owned, including:
-
-- numeric capture success rates;
-- rarity-specific modifiers;
-- exact capture challenge visuals/timings;
-- capture-tool catalog/economy;
-- spawn density/lifetimes;
-- hazard behavior;
-- Secure Point world placement;
-- collision/body-block policy;
-- optional PvP/interception modes;
-- event-specific multi-award overrides;
-- final UI/audio/accessibility presentation;
-- technical exact-once/shutdown/grace implementation.
+Remaining unresolved details are intentionally downstream-owned, including numeric capture success rates, rarity-specific modifiers, exact capture challenge visuals/timings, capture-tool catalog/economy, spawn density/lifetimes, hazard behavior, Secure Point world placement, collision/body-block policy, optional PvP/interception modes, event-specific multi-award overrides, final UI/audio/accessibility presentation, and technical exact-once/shutdown/grace implementation.
 
 ## 11. Verdict
 
