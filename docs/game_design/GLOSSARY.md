@@ -53,7 +53,7 @@ The temporary exclusive association between a player and their Provisional Captu
 A short bounded same-server interruption window during which an unexpectedly disconnected player may recover an existing Provisional Capture without creating a second copy or turning it into cross-server ownership.
 
 ### Secure Point
-A world-defined valid destination or interaction capable of completing ordinary extraction/security for a valid Provisional Capture. GDS-7 defines post-finalization Vault integration; exact placement/world topology belongs to GDS-9.
+A GDS-9 world-defined valid destination or interaction capable of completing ordinary extraction/security for a valid Provisional Capture. GDS-5 owns validated Extraction Completion and Secured Ownership Finalization; GDS-7 owns post-finalization Vault integration.
 
 ### Extraction Completion
 The validated completion of the required return/secure step at an eligible Secure Point while Transport Custody remains valid.
@@ -148,7 +148,7 @@ The multi-dimensional collectible/status significance of one Creature Instance, 
 The player's persistent personal base/laboratory context used to manage secured creatures, display collection value, assign creatures to bounded production, claim accrued output, and perform Vault progression actions. Baseline authority is owned by GDS-7.
 
 ### Vault Access Point
-A player-facing world or menu-access interaction that enters the player's Vault context. Exact world placement belongs to GDS-9. Access does not itself change creature ownership.
+A GDS-9 world-defined interaction that enters the player's Vault context after trusted persistent state is available. A field Vault Access Point may manage already Secured Creatures but does not itself secure a Provisional Capture unless it is separately an eligible Secure Point and GDS-5 Extraction Completion succeeds.
 
 ### Collection Capacity
 The maximum number of Secured Creature Instances that may occupy ordinary usable collection states rather than `Overflow-Held`. Collection Capacity is a logical use/storage limit and is separate from Display Slot and Production Slot counts.
@@ -217,7 +217,7 @@ An exact-once player-initiated transaction that spends Energy and grants one def
 The player's persistent ordinary capture-equipment progression capability. It may influence explicitly authorized challenge assistance or encounter requirements but does not override GDS-5 claim, ownership-finalization, capacity, or single-winner rules.
 
 ### Access Unlock
-A persistent exact-once progression effect granting access to a defined content, region, or capability gate. Exact world topology belongs to GDS-9.
+A persistent exact-once progression effect granting access to a defined content, region, or capability gate. GDS-9 owns baseline world-region topology and concrete region gating.
 
 ### Economy Band
 A tuning segment representing a comparable stage of player progression for reward, cost, and pacing evaluation. It need not be exposed as a player-facing rank.
@@ -225,8 +225,56 @@ A tuning segment representing a comparable stage of player progression for rewar
 ### Catch-Up Adjustment
 A visible deterministic adjustment that reduces obsolete progression friction for eligible players without hidden spending-based personalization or fabricated discovery/active-completion history.
 
+### Home Hub
+The baseline safe GDS-9 world region containing the primary Vault Access Point, central Secure Point, Recovery Anchor, region-travel access and onboarding-safe route into the Starter Biome.
+
 ### Biome
-A world region with its own creature pool, environment, progression requirements and encounter characteristics.
+A GDS-9 world region with an authored environment, Habitats, creature eligibility, progression role, routes and encounter characteristics. A Biome may require a persistent Access Unlock, but entering it does not itself grant completion or discovery history.
+
+### Region Mastery
+A persistent GDS-9 Progression Milestone proving meaningful active engagement with one Biome. Baseline Mastery combines Route Survey through Landmark Discovery, a threshold of distinct Core-Species Regional Collection, and at least one Field Objective; it cannot require extreme rare RNG or passive Energy alone.
+
+### Landmark
+An authored meaningful world location used for orientation, Route Survey or progression. A Landmark is stable world content rather than a randomly spawned opportunity.
+
+### Landmark Discovery
+The persistent exact-once record that the player legitimately reached an eligible Landmark. Re-entering the same Landmark does not recreate first-discovery progression or rewards.
+
+### Field Objective
+A bounded active GDS-9 task tied to exploration, traversal, world interaction or legitimate collection activity rather than raw presence time. Eligible objectives may grant bounded exact-once Energy rewards.
+
+### Safe Outpost
+A protected entry/utility area in a field Biome. Baseline field Safe Outposts provide a Secure Point and Recovery Anchor and may expose a permitted Vault Access Point; major environmental hazards do not overlap their immediate protected arrival area.
+
+### Safe Route
+A viable baseline non-premium path through an unlocked Biome using ordinary GDS-3 locomotion. Optional shortcuts/deep routes may require progression utility, but core region participation cannot depend on a paid traversal product.
+
+### Travel Node
+A GDS-9 world travel access point unlocked through legitimate region/outpost discovery. Ordinary travel between eligible nodes is quality-of-life and is unavailable while the player has Acquisition-In-Progress.
+
+### Habitat
+A sub-region inside a Biome with its own authored creature eligibility, terrain identity and encounter characteristics. Habitats may differ by Species pool, weights, density, traversal shape, hazard exposure and ordinary World Cycle eligibility.
+
+### Deep Habitat
+An optional or progression-relevant interior Habitat with a distinct creature/density/hazard profile. It remains part of its parent Biome and cannot bypass the parent region's Access Unlock.
+
+### Spawn Context
+The authored GDS-9 eligibility context used when generating a genuinely new World Creature. It may include Biome, Habitat, ordinary World Cycle phase, static zone tags and authorized Availability; it affects future instances only and cannot reroll a surviving Creature Instance.
+
+### Encounter Population Budget
+The bounded authored population limit controlling how many relevant public World Creature opportunities may exist in an area/session context. It may scale within defined limits for server population/performance but is never unbounded.
+
+### Encounter Lifetime
+The bounded idle lifetime of an ordinary unclaimed World Creature before it may expire and release population capacity. Idle lifetime expiry does not override a valid Engagement Claim, Capture Attempt, Provisional Capture or Transport Custody.
+
+### Rare Encounter Stability Window
+The minimum authored idle-opportunity period given to a publicly actionable Protected Variant so that an ordinary player has a meaningful chance to notice and pursue it before ordinary expiry.
+
+### World Cycle
+A deterministic repeating ordinary world-context phase sequence, such as Day/Dusk/Night, that may affect future Spawn Context eligibility. It is not a GDS-11 Server Event, does not reroll existing instances and must not intentionally reset as a private favorable phase through server hopping.
+
+### Hazard
+An authored environmental condition that creates traversal/capture risk without becoming direct player-versus-player combat. Hazards may cause temporary avatar failure/Recovery but cannot destroy or reroll finalized secured ownership, Energy, Access Unlocks, historical discovery or Vault progression.
 
 ### Server Event
 A time-bounded multiplayer encounter or world-state change presented to multiple players within a server.
@@ -300,7 +348,7 @@ A persistent player-specific record that a required introductory learning/progre
 Non-essential instructional prompts, highlights, arrows, hints, or reminders that teach the player without themselves granting gameplay progress or Finalized Outcomes.
 
 ### Recovery Anchor
-A world-defined valid location to which GDS-2/GDS-3 Recovery may return a Player Character. Exact placement and world semantics are owned by GDS-9.
+A GDS-9 world-defined safe location to which GDS-2/GDS-3 Recovery may return a Player Character. An anchor must be currently valid/unlocked and never counts as Extraction Completion by itself.
 
 ### Input Mode
 The currently dominant control family: touch, keyboard/mouse, or gamepad. Changing Input Mode changes prompts/control presentation, not baseline gameplay capability or progression state.

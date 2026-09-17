@@ -4,7 +4,7 @@
 
 ## Project Status
 
-**Pre-implementation specification — GDS-0 through GDS-8 complete / GDS-9 next.**
+**Pre-implementation specification — GDS-0 through GDS-9 complete / GDS-10 next.**
 
 MonsterVault is intentionally **not in gameplay implementation yet**. The project follows a specification-first workflow:
 
@@ -30,13 +30,14 @@ No gameplay system should be implemented merely because an idea appears promisin
 - **GDS-6 — Rarity, Mutations, Traits, and Variant Value: COMPLETE — PASS**
 - **GDS-7 — Vault/Base, Passive Production, Capacity, and Upgrades: COMPLETE — PASS**
 - **GDS-8 — Economy, Progression, Unlocks, and Pacing: COMPLETE — PASS**
-- **GDS-9 — World, Biomes, Exploration, Spawning, and Hazards: NEXT**
-- GDS-10 through GDS-16: Draft / dependency-ordered
+- **GDS-9 — World, Biomes, Exploration, Spawning, and Hazards: COMPLETE — PASS**
+- **GDS-10 — Social Play, Cooperation, Competition, and PvP Boundaries: NEXT**
+- GDS-11 through GDS-16: Draft / dependency-ordered
 - GDS-17: blocked until subsystem design is complete
 - Technical Architecture: blocked by GDS-17
 - Gameplay implementation: blocked by GDS and TA gates
 
-GDS-8 closure evidence is recorded in [`GDS8_SCENARIO_VALIDATION.md`](docs/game_design/GDS8_SCENARIO_VALIDATION.md), [`GDS8_CROSS_VALIDATION.md`](docs/game_design/GDS8_CROSS_VALIDATION.md), [`GDS8_DECISION_INDEX.md`](docs/game_design/GDS8_DECISION_INDEX.md), and [`GDS8_CLOSURE_REPORT.md`](docs/game_design/GDS8_CLOSURE_REPORT.md).
+GDS-9 closure evidence is recorded in [`GDS9_SCENARIO_VALIDATION.md`](docs/game_design/GDS9_SCENARIO_VALIDATION.md), [`GDS9_CROSS_VALIDATION.md`](docs/game_design/GDS9_CROSS_VALIDATION.md), [`GDS9_DECISION_INDEX.md`](docs/game_design/GDS9_DECISION_INDEX.md), and [`GDS9_CLOSURE_REPORT.md`](docs/game_design/GDS9_CLOSURE_REPORT.md).
 
 ## Product Contract
 
@@ -187,26 +188,50 @@ GDS-8 turns Vault output into a controlled progression economy without allowing 
 
 The authoritative GDS-8 specification is [`08_economy_progression_unlocks_and_pacing.md`](docs/game_design/economy_progression/08_economy_progression_unlocks_and_pacing.md).
 
+## World, Biomes, Exploration, Spawning, and Hazards Contract
+
+GDS-9 turns the capture/collection/progression contracts into a concrete explorable world while preserving scarcity, lifecycle and ownership integrity:
+
+- launch topology is **Home Hub -> Starter Biome -> two parallel Mid Biomes -> Advanced Biome**;
+- Starter access is free; each Mid branch requires Starter **Region Mastery** plus its own persistent Energy Access Unlock; Advanced requires both Mid Masteries plus an Energy Access Unlock;
+- Region Mastery combines Landmark-based Route Survey, a distinct Core-Species collection threshold and an active Field Objective;
+- mandatory progression cannot require Legendary, Extreme Mutation, Compound Variant, Event-Limited content, one specific low-probability spawn or a paid product;
+- Home Hub and field **Safe Outposts** provide predictable Secure Point / Recovery infrastructure;
+- every unlocked Biome has a baseline non-premium **Safe Route**;
+- discovered travel nodes provide quality-of-life, but fast travel is disabled throughout **Acquisition-In-Progress** so capture/transport cannot be bypassed;
+- Biomes contain materially distinct **Habitats** with authored **Spawn Contexts**;
+- encounter populations are bounded and ordinary active search targets roughly **20–45 seconds** to a viable ordinary opportunity on normal routes;
+- rarity labels do not hard-code universal spawn percentages; Species/Mutation/Trait generation remains prospective and a surviving instance never rerolls from claim cycling, retries, time-phase changes or spending state;
+- hidden Energy/Robux/spending-propensity-based spawn odds are prohibited;
+- encounter lifetimes may refresh idle populations but cannot arbitrarily despawn a valid active claim/capture/transport;
+- publicly actionable Protected Variants receive a meaningful **Rare Encounter Stability Window** and recognizable collectible identity;
+- a deterministic ordinary **World Cycle** may influence future spawn eligibility but is not a GDS-11 Server Event and cannot be privately restarted through server hopping;
+- environmental **Hazards** may cause temporary Recovery but cannot delete/reroll secured creatures, deduct arbitrary Energy or revoke persistent progress;
+- public encounters are session-scoped, while Access Unlocks, Landmark Discoveries, Region Mastery and finalized objective rewards are persistent;
+- future Biomes/Species/spawn balancing extend the world prospectively without revoking historical access/mastery or rewriting owned Creature identity/provenance.
+
+The authoritative GDS-9 specification is [`09_world_biomes_exploration_spawning_and_hazards.md`](docs/game_design/world/09_world_biomes_exploration_spawning_and_hazards.md).
+
 ## Working Core Loop
 
 ```text
 Choose or notice a desirable goal
-  -> explore
-  -> discover a Capture Opportunity
+  -> choose an unlocked region / route / habitat
+  -> explore and discover a Capture Opportunity
   -> recognize Species / possible variant desirability
   -> validly engage and resolve Capture Attempt
-  -> transport the same Provisional Capture
-  -> complete extraction at a Secure Point
+  -> transport the same Provisional Capture through the world
+  -> complete extraction at an eligible Secure Point
   -> secure the same Creature Instance
   -> store / display / deliberately assign eligible creatures in the Vault
   -> accrue and claim bounded Energy production
   -> spend Energy on deliberate Vault / capture / access progression
-  -> satisfy active Progression Milestones for major gates
-  -> pursue rarer creatures, variants, regions, events and long-term goals
+  -> satisfy active Progression Milestones / Region Mastery for major gates
+  -> unlock broader world choices and pursue rarer creatures, variants, events and long-term goals
   -> repeat
 ```
 
-Concrete world topology/spawning/hazards now belong to GDS-9. Social systems, events, trading, monetization, final presentation, analytics, platform constraints, and technical implementation remain subject to their owning later phases.
+Social cooperation/competition/PvP boundaries now belong to GDS-10. Events, trading, monetization, final presentation, analytics, platform constraints, and technical implementation remain subject to their owning later phases.
 
 ## Documentation Authority
 
@@ -230,16 +255,17 @@ Key documents include:
 - [`rarity_mutations/`](docs/game_design/rarity_mutations/) — GDS-6 rarity/variant contract;
 - [`vault/`](docs/game_design/vault/) — GDS-7 Vault/capacity/production contract;
 - [`economy_progression/`](docs/game_design/economy_progression/) — GDS-8 economy/progression contract;
-- [`GDS8_SCENARIO_VALIDATION.md`](docs/game_design/GDS8_SCENARIO_VALIDATION.md) — 90 compound GDS-8 scenarios;
-- [`GDS8_CROSS_VALIDATION.md`](docs/game_design/GDS8_CROSS_VALIDATION.md) — authority/consistency audit;
-- [`GDS8_DECISION_INDEX.md`](docs/game_design/GDS8_DECISION_INDEX.md) — phase-local strategic decisions;
-- [`GDS8_CLOSURE_REPORT.md`](docs/game_design/GDS8_CLOSURE_REPORT.md) — formal GDS-8 closure evidence.
+- [`world/`](docs/game_design/world/) — GDS-9 world/exploration/spawning/hazard contract;
+- [`GDS9_SCENARIO_VALIDATION.md`](docs/game_design/GDS9_SCENARIO_VALIDATION.md) — 100 compound GDS-9 scenarios;
+- [`GDS9_CROSS_VALIDATION.md`](docs/game_design/GDS9_CROSS_VALIDATION.md) — authority/consistency audit;
+- [`GDS9_DECISION_INDEX.md`](docs/game_design/GDS9_DECISION_INDEX.md) — phase-local strategic decisions;
+- [`GDS9_CLOSURE_REPORT.md`](docs/game_design/GDS9_CLOSURE_REPORT.md) — formal GDS-9 closure evidence.
 
 ### Technical Architecture
 
 [`docs/technical_architecture/`](docs/technical_architecture/) remains **blocked by GDS completion**.
 
-Technical Architecture will later translate approved GDS behavior into concrete Roblox/Luau contracts for identity, persistence, networking, runtime lifecycle, controls, creature/capture/variant/Vault/economy systems, trading, UI, live operations, performance, testing and CI.
+Technical Architecture will later translate approved GDS behavior into concrete Roblox/Luau contracts for identity, persistence, networking, runtime lifecycle, controls, creature/capture/variant/Vault/economy/world systems, trading, UI, live operations, performance, testing and CI.
 
 ### Implementation
 
@@ -264,12 +290,13 @@ Project-MonsterVault/
 │   │   ├── rarity_mutations/
 │   │   ├── vault/
 │   │   ├── economy_progression/
+│   │   ├── world/
 │   │   ├── GDS_ROADMAP.md
 │   │   ├── GLOSSARY.md
-│   │   ├── GDS8_SCENARIO_VALIDATION.md
-│   │   ├── GDS8_CROSS_VALIDATION.md
-│   │   ├── GDS8_DECISION_INDEX.md
-│   │   ├── GDS8_CLOSURE_REPORT.md
+│   │   ├── GDS9_SCENARIO_VALIDATION.md
+│   │   ├── GDS9_CROSS_VALIDATION.md
+│   │   ├── GDS9_DECISION_INDEX.md
+│   │   ├── GDS9_CLOSURE_REPORT.md
 │   │   └── <remaining design domains>/
 │   ├── technical_architecture/
 │   ├── implementation/
@@ -284,7 +311,7 @@ The source/test/tooling directories are reserved for later implementation. Their
 
 ## Current Next Step
 
-Proceed with **GDS-9 — World, Biomes, Exploration, Spawning, and Hazards**.
+Proceed with **GDS-10 — Social Play, Cooperation, Competition, and PvP Boundaries**.
 
 The first implementation vertical slice will be selected and locked only after the complete design and architecture dependency chain makes its requirements clear.
 
