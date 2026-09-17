@@ -137,17 +137,45 @@ GDS-3 creates input/onboarding contracts for downstream systems but does not aut
 
 ## GDS-4 — Creatures, Collection, and Ownership
 
-**Status:** NEXT — Draft
+**Status:** Complete — PASS
 
-Defines creature identity, species/content taxonomy, encounter ownership, collection semantics, active vs stored creatures, duplicates, capacity, display/status value, loss rules, and collection completion behavior.
+Established and formally validated:
 
-GDS-4 must consume GDS-2 persistence/finalization semantics and GDS-3 interaction/onboarding contracts while defining the exact player-facing creature/collection ownership model.
+- Species as authored archetypes distinct from owned Creature Instances;
+- stable persistent identity for every Secured Creature;
+- one ordinary owner per secured instance;
+- **Acquisition-In-Progress** versus **Secured Creature** semantic boundary;
+- GDS-5-owned **Secured Ownership Finalization** trigger with GDS-4-owned post-finalization consequences;
+- persistent logical **Collection Registry**;
+- Active, Stored, Overflow-Held, and Released collection-facing states;
+- valid distinct duplicate instances without automatic conversion/deletion;
+- non-destructive full-capacity and capacity-reduction behavior;
+- **Overflow-Held** safety state when ownership finalizes without ordinary eligible capacity;
+- onboarding-compatible initial usable collection capacity;
+- explicit voluntary **Release** semantics;
+- persistent player-controlled **Creature Lock** protection;
+- no baseline involuntary loss of Secured Creatures through ordinary lifecycle/other players/capacity changes;
+- persistent **Species Discovery** and discovery-based baseline Species completion;
+- stable collectible **Provenance** semantics;
+- explicit-authority requirement for future ownership transfer;
+- 50 compound creature/ownership/capacity scenarios validated.
+
+Closure evidence:
+
+- [`creatures/04_creatures_collection_and_ownership.md`](creatures/04_creatures_collection_and_ownership.md) — Design Complete;
+- [`GDS4_SCENARIO_VALIDATION.md`](GDS4_SCENARIO_VALIDATION.md) — PASS;
+- [`GDS4_CROSS_VALIDATION.md`](GDS4_CROSS_VALIDATION.md) — PASS;
+- [`GDS4_CLOSURE_REPORT.md`](GDS4_CLOSURE_REPORT.md) — PASS.
+
+GDS-4 establishes the persistent collectible contract consumed by capture, rarity, vault, economy, live-content, and future trading phases. It does not authorize Technical Architecture or implementation.
 
 ## GDS-5 — Capture, Contesting, Transport, and Extraction
 
-**Status:** Draft
+**Status:** NEXT — Draft
 
 Defines the primary active gameplay loop: discovering a creature, attempting capture, capture difficulty, failure, contesting, transport/return, interception boundaries, disconnect behavior, ownership transfer point, anti-frustration rules, and multiplayer race conditions from the player's perspective.
+
+GDS-5 must consume GDS-4's stable instance, one-owner, capacity, and Secured Ownership Finalization interface contracts while defining the exact pre-secure acquisition state machine and finalization trigger.
 
 ## GDS-6 — Rarity, Mutations, Traits, and Variant Value
 
@@ -217,7 +245,7 @@ Defines intended first-session funnel, session goals, return loops, daily/weekly
 
 ## GDS-17 — Cross-System Consistency and Design-Complete Audit
 
-**Status:** Blocked by GDS-4 through GDS-16
+**Status:** Blocked by GDS-5 through GDS-16
 
 Performs the formal pre-architecture audit:
 
@@ -236,7 +264,7 @@ Performs the formal pre-architecture audit:
 
 ## Current Project Gate
 
-GDS-0 through GDS-3 are formally complete. The active dependency is **GDS-4 — Creatures, Collection, and Ownership**.
+GDS-0 through GDS-4 are formally complete. The active dependency is **GDS-5 — Capture, Contesting, Transport, and Extraction**.
 
 Technical Architecture must not begin until GDS-17 records a formal PASS with no implementation-critical open design questions.
 
@@ -247,7 +275,8 @@ GDS-0 governance — COMPLETE
   -> GDS-1 product vision — COMPLETE
   -> GDS-2 global rules/session model — COMPLETE
   -> GDS-3 player/interaction/onboarding — COMPLETE
-  -> GDS-4..16 subsystem design — GDS-4 NEXT
+  -> GDS-4 creatures/collection/ownership — COMPLETE
+  -> GDS-5..16 subsystem design — GDS-5 NEXT
   -> GDS-17 cross-system audit
   -> DESIGN COMPLETE
   -> Technical Architecture

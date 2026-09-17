@@ -1,6 +1,6 @@
 # MonsterVault Game Design Specification
 
-> **Status:** GDS-0 through GDS-3 Complete / GDS-4 Next  
+> **Status:** GDS-0 through GDS-4 Complete / GDS-5 Next  
 > **Authority:** Player-facing gameplay behavior
 
 This directory contains the authoritative Game Design Specification (GDS) for MonsterVault.
@@ -15,10 +15,11 @@ Completed:
 - **GDS-1 — Product Vision, Audience, and Success Criteria: COMPLETE — PASS**
 - **GDS-2 — Global Game Rules and Session Model: COMPLETE — PASS**
 - **GDS-3 — Player Character, Interaction, and Onboarding: COMPLETE — PASS**
+- **GDS-4 — Creatures, Collection, and Ownership: COMPLETE — PASS**
 
 The active dependency is now:
 
-> **GDS-4 — Creatures, Collection, and Ownership**
+> **GDS-5 — Capture, Contesting, Transport, and Extraction**
 
 Technical Architecture and gameplay implementation remain blocked.
 
@@ -32,51 +33,61 @@ Technical Architecture and gameplay implementation remain blocked.
 - [`STRUCTURE_AUDIT.md`](STRUCTURE_AUDIT.md) validates that all currently known top-level design concerns have an authoritative home.
 - [`GDS0_CLOSURE_REPORT.md`](GDS0_CLOSURE_REPORT.md) records formal GDS-0 closure.
 
-## GDS-1 Product Baseline
+## Completed Design Baselines
 
-- [`01_game_overview.md`](01_game_overview.md) — Design Complete high-level product identity and core experience structure.
-- [`product/`](product/) — authoritative audience, platform, positioning, session, success-gate, scope, and commercial product specifications.
-- [`GDS1_CROSS_VALIDATION.md`](GDS1_CROSS_VALIDATION.md) — cross-phase authority and contradiction audit; PASS.
-- [`GDS1_CLOSURE_REPORT.md`](GDS1_CLOSURE_REPORT.md) — formal GDS-1 closure; PASS.
+### GDS-1 — Product
 
-The resulting product contract includes active creature collection, persistent visible vault progression, socially competitive but non-loss-dominant play, mobile-first cross-platform accessibility, flexible session lengths, trading as non-launch-critical, moderate non-coercive monetization, and retention-first product gates.
+- [`01_game_overview.md`](01_game_overview.md) — Design Complete product identity/core experience.
+- [`product/`](product/) — audience, platform, positioning, session, success-gate, scope, and commercial specifications.
+- [`GDS1_CROSS_VALIDATION.md`](GDS1_CROSS_VALIDATION.md) — PASS.
+- [`GDS1_CLOSURE_REPORT.md`](GDS1_CLOSURE_REPORT.md) — PASS.
 
-## GDS-2 Global Lifecycle Baseline
+GDS-1 establishes active creature collection, persistent visible vault progression, socially competitive but non-loss-dominant play, mobile-first cross-platform accessibility, flexible session lengths, trading as non-launch-critical, moderate non-coercive monetization, and retention-first product gates.
 
-- [`global_rules/02_global_game_rules_and_session_model.md`](global_rules/02_global_game_rules_and_session_model.md) — authoritative global lifecycle/session specification; Design Complete.
+### GDS-2 — Global lifecycle
+
+- [`global_rules/02_global_game_rules_and_session_model.md`](global_rules/02_global_game_rules_and_session_model.md) — Design Complete.
 - [`GDS2_SCENARIO_VALIDATION.md`](GDS2_SCENARIO_VALIDATION.md) — 30 compound lifecycle scenarios; PASS.
-- [`GDS2_CROSS_VALIDATION.md`](GDS2_CROSS_VALIDATION.md) — product, authority, and contradiction audit; PASS.
-- [`GDS2_CLOSURE_REPORT.md`](GDS2_CLOSURE_REPORT.md) — formal GDS-2 closure; PASS.
+- [`GDS2_CROSS_VALIDATION.md`](GDS2_CROSS_VALIDATION.md) — PASS.
+- [`GDS2_CLOSURE_REPORT.md`](GDS2_CLOSURE_REPORT.md) — PASS.
 
 GDS-2 establishes disposable Server Sessions with session-independent persistent progression, protected persistent-state readiness, Recovery instead of global wipes, finalized-outcome single-application semantics, explicit transient interruption ownership, late-join support, and coherent offline/cross-server timing boundaries.
 
-## GDS-3 Player Interaction and Onboarding Baseline
+### GDS-3 — Player interaction/onboarding
 
-- [`player/03_player_character_interaction_and_onboarding.md`](player/03_player_character_interaction_and_onboarding.md) — authoritative player-control/onboarding specification; Design Complete.
+- [`player/03_player_character_interaction_and_onboarding.md`](player/03_player_character_interaction_and_onboarding.md) — Design Complete.
 - [`GDS3_SCENARIO_VALIDATION.md`](GDS3_SCENARIO_VALIDATION.md) — 40 compound interaction/onboarding scenarios; PASS.
-- [`GDS3_CROSS_VALIDATION.md`](GDS3_CROSS_VALIDATION.md) — product/lifecycle/authority validation; PASS.
-- [`GDS3_CLOSURE_REPORT.md`](GDS3_CLOSURE_REPORT.md) — formal GDS-3 closure; PASS.
+- [`GDS3_CROSS_VALIDATION.md`](GDS3_CROSS_VALIDATION.md) — PASS.
+- [`GDS3_CLOSURE_REPORT.md`](GDS3_CLOSURE_REPORT.md) — PASS.
 
-GDS-3 establishes:
+GDS-3 establishes third-person familiar locomotion, cross-device interaction parity, Primary Interact/Primary Action semantics, deterministic Active Context selection, gameplay-first persistent onboarding, Safe Arrival/Recovery behavior, modal-input safety, and interaction-level accessibility constraints.
 
-- third-person familiar baseline exploration;
-- continuous movement/jump without a universal stamina tax;
-- touch, keyboard/mouse, and controller capability parity;
-- universal **Primary Interact** and downstream-tool **Primary Action** semantics;
-- one deterministic **Active Context** at a time;
-- modal input-focus/input-spillover protection;
-- gameplay-first onboarding aligned to GDS-1 time-to-fun targets;
-- persistent/resumable **Onboarding Milestones**;
-- skippable/replayable **Guidance Layer** separated from real progression;
-- onboarding availability despite ordinary multiplayer/server variation;
-- **Safe Arrival** after Persistence Ready;
-- concrete **Recovery** behavior using valid Recovery Anchors without automatic extraction;
-- interaction-level accessibility invariants before final GDS-14 presentation work.
+### GDS-4 — Creatures, collection, ownership
+
+- [`creatures/04_creatures_collection_and_ownership.md`](creatures/04_creatures_collection_and_ownership.md) — Design Complete.
+- [`GDS4_SCENARIO_VALIDATION.md`](GDS4_SCENARIO_VALIDATION.md) — 50 compound ownership/capacity/lifecycle scenarios; PASS.
+- [`GDS4_CROSS_VALIDATION.md`](GDS4_CROSS_VALIDATION.md) — PASS.
+- [`GDS4_CLOSURE_REPORT.md`](GDS4_CLOSURE_REPORT.md) — PASS.
+
+GDS-4 establishes:
+
+- Species versus individual Creature Instance identity;
+- stable persistent identity and one-owner semantics for Secured Creatures;
+- GDS-5-owned **Secured Ownership Finalization** as the boundary into persistent collection ownership;
+- a logical persistent **Collection Registry**;
+- Active, Stored, Overflow-Held, and Released collection-facing states;
+- valid distinct duplicate instances;
+- non-destructive full-capacity and capacity-reduction behavior;
+- **Overflow-Held** as a restricted safety state rather than infinite normal storage;
+- explicit voluntary Release plus persistent **Creature Lock** protection;
+- no baseline involuntary loss of Secured Creatures;
+- persistent Species Discovery and discovery-based baseline Species completion;
+- stable provenance/history hooks;
+- explicit later authority for player-to-player ownership transfer.
 
 ## Remaining Core Specifications
 
-- `creatures/` — creature identity, acquisition, ownership, collection and behavior. **GDS-4 NEXT.**
-- `capture/` — capture loop, contesting, transport, success/failure and anti-frustration rules.
+- `capture/` — capture loop, contesting, transport, extraction, ownership-finalization trigger, success/failure and anti-frustration rules. **GDS-5 NEXT.**
 - `rarity_mutations/` — rarity, mutations, variants, combinatorics and collection value.
 - `vault/` — player vault/base, passive production, capacity and upgrades.
 - `economy_progression/` — currencies, sources/sinks, unlocks, pacing and progression.
