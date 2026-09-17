@@ -208,29 +208,58 @@ GDS-5 establishes the active acquisition and exact ownership-boundary contract c
 
 ## GDS-6 — Rarity, Mutations, Traits, and Variant Value
 
-**Status:** NEXT — Draft
+**Status:** Complete — PASS
 
-Defines rarity tiers, mutation generation, compound mutations, visual readability, gameplay/economic impact, uniqueness, duplicate handling, discovery presentation, probability transparency, capture-difficulty interaction, and balancing boundaries.
+Established and formally validated:
 
-GDS-6 must attach rarity/variant properties to stable GDS-4 Creature Instances and preserve those properties across GDS-5 Provisional Capture, Transport Custody, and Secured Ownership Finalization.
+- five ordered Species Rarity tiers: **Common, Uncommon, Rare, Epic, Legendary**;
+- explicit separation of Species Rarity, Mutation, Trait, Availability Tag, gameplay power, currency value, and future market price;
+- Variant Identity Finalization no later than an individually actionable Capture Opportunity;
+- stable same-instance Mutation/Trait identity through claim release/reclaim, Capture Failure/retry, Provisional Capture, Transport Custody, reconnect, Extraction Completion, and duplicate finalization delivery;
+- baseline zero-to-two Mutation count;
+- **Standard**, **Single-Mutated**, and **Compound-Mutated** Variant classes;
+- authored Mutation compatibility and order-independent canonical Mutation sets;
+- context-aware Mutation Frequency Bands: **Frequent, Uncommon, Rare, Extreme**;
+- meaningful mutation readability with non-color-only critical identification;
+- Traits as stable instance characteristics supporting bounded situational optimization rather than universal supremacy;
+- **Variant Signature = Species + canonical Mutation set**;
+- historical **Mutation Discovery** and **Variant Discovery** on legitimate securisation;
+- automatic Creature Lock for **Protected Variants** including Legendary, Extreme-Mutated, Compound-Mutated, and explicitly protected event/legacy instances;
+- prospective-only probability modifiers;
+- prohibition on hidden individualized odds based on spending, purchase reluctance, inferred willingness to pay, or loss-chasing behavior;
+- Availability Tags **Core, Rotating, Event-Limited, Legacy** separate from rarity;
+- stable owned-instance identity across ordinary balance/content changes;
+- rarity/variant value that does not guarantee raw power or economic/market price;
+- 70 compound rarity/variant/probability/lifecycle scenarios validated.
+
+Closure evidence:
+
+- [`rarity_mutations/06_rarity_mutations_traits_and_variant_value.md`](rarity_mutations/06_rarity_mutations_traits_and_variant_value.md) — Design Complete;
+- [`GDS6_SCENARIO_VALIDATION.md`](GDS6_SCENARIO_VALIDATION.md) — 70 / 70 PASS;
+- [`GDS6_CROSS_VALIDATION.md`](GDS6_CROSS_VALIDATION.md) — PASS;
+- [`GDS6_CLOSURE_REPORT.md`](GDS6_CLOSURE_REPORT.md) — PASS.
+
+GDS-6 establishes the collectible scarcity/value-integrity contract consumed by vault, economy, world, events, trading, monetization, presentation, analytics, safety, and Technical Architecture phases. It does not authorize Technical Architecture or implementation.
 
 ## GDS-7 — Vault/Base, Passive Production, Capacity, and Upgrades
 
-**Status:** Draft
+**Status:** NEXT — Draft
 
 Defines the personal vault/laboratory, creature placement, passive production, storage/capacity, base upgrades, offline production, presentation/status display, visitor interaction, Secure Point integration, and progression dependencies.
+
+GDS-7 must preserve GDS-4 instance ownership/capacity safety, GDS-5 post-extraction finalization, and GDS-6 stable Mutation/Trait/Variant identity while defining how creatures can be stored, displayed, assigned, and used for bounded production.
 
 ## GDS-8 — Economy, Progression, Unlocks, and Pacing
 
 **Status:** Draft
 
-Defines currencies, resource sources/sinks, capture-tool/cost progression, upgrade economy, biome unlocks, equipment progression, pacing bands, catch-up behavior, prestige/reset position if any, economy inflation controls at the design level, and long-term goals.
+Defines currencies, resource sources/sinks, capture-tool/cost progression, upgrade economy, biome unlocks, equipment progression, rarity/trait economic inputs, pacing bands, catch-up behavior, prestige/reset position if any, economy inflation controls at the design level, and long-term goals.
 
 ## GDS-9 — World, Biomes, Exploration, Spawning, and Hazards
 
 **Status:** Draft
 
-Defines world structure, biome progression, traversal, creature spawn logic from the player perspective, encounter lifetime, hazards, special zones, rare encounters, Secure Point placement, exploration rewards, density/readability, and content scalability.
+Defines world structure, biome progression, traversal, creature spawn logic from the player perspective, Species Rarity/Mutation generation contexts, encounter lifetime, hazards, special zones, rare encounters, Secure Point placement, exploration rewards, density/readability, and content scalability.
 
 ## GDS-10 — Social Play, Cooperation, Competition, and PvP Boundaries
 
@@ -242,41 +271,41 @@ Defines parties/friends, intentional co-play, shared objectives, social status/f
 
 **Status:** Draft
 
-Defines server-wide events, rifts/rare spawns, announcements, participation rules, reward allocation, event-specific shared/multi-award capture overrides, cadence, server hopping implications, rotating/seasonal content, and live-ops extensibility.
+Defines server-wide events, rifts/rare spawns, announcements, participation rules, reward allocation, event-specific shared/multi-award capture overrides, variant probability modifiers, Availability Tags/event windows, event protection/provenance, cadence, server hopping implications, rotating/seasonal content, and live-ops extensibility.
 
 ## GDS-12 — Trading and Player Economy
 
 **Status:** Draft
 
-Defines trade eligibility, offer/accept flow, secured-instance transfer semantics, value/scarcity philosophy, trade restrictions, cooldowns, rollback expectations from the player perspective, alternate-account abuse boundaries, and safe trading UX.
+Defines trade eligibility, offer/accept flow, secured-instance transfer semantics, preservation of Mutation/Trait/Variant/provenance identity, value/scarcity philosophy, trade restrictions, cooldowns, rollback expectations from the player perspective, alternate-account abuse boundaries, and safe trading UX.
 
 ## GDS-13 — Monetization and Commercial Fairness
 
 **Status:** Draft
 
-Defines monetization philosophy, game passes/developer products/subscriptions if used, cosmetics, capacity/convenience, server-wide boosts, starter offers, purchase presentation, non-pay-to-win boundaries, spending pressure limits, and interactions with progression/trading.
+Defines monetization philosophy, game passes/developer products/subscriptions if used, cosmetics, capacity/convenience, server-wide boosts, starter offers, purchase presentation, non-pay-to-win boundaries, spending pressure limits, probability/variant monetization constraints, and interactions with progression/trading.
 
 ## GDS-14 — Presentation, UI/UX, Feedback, and Accessibility
 
 **Status:** Draft
 
-Defines information hierarchy, HUD, menus, collection presentation, rarity feedback, event feedback, capture feedback, mobile/controller/keyboard expectations, audio/visual language, reduced-motion/readability needs, onboarding presentation, and accessibility requirements.
+Defines information hierarchy, HUD, menus, collection presentation, rarity/mutation/trait/availability feedback, event feedback, capture feedback, mobile/controller/keyboard expectations, audio/visual language, reduced-motion/readability needs, onboarding presentation, and accessibility requirements.
 
 ## GDS-15 — Roblox Platform, Social Safety, and Moderation Constraints
 
 **Status:** Draft
 
-Defines player-facing consequences of Roblox platform constraints, age-appropriate social mechanics, naming/text exposure, reporting/blocking expectations where relevant, UGC/content boundaries, and design constraints required for safe multiplayer interactions.
+Defines player-facing consequences of Roblox platform constraints, age-appropriate social mechanics, naming/text exposure, reporting/blocking expectations where relevant, UGC/content boundaries, randomized/paid probability constraints where applicable, and design constraints required for safe multiplayer interactions.
 
 ## GDS-16 — Retention, Discovery, Analytics, and Experimentation Boundaries
 
 **Status:** Draft
 
-Defines intended first-session funnel, session goals, return loops, daily/weekly engagement philosophy, social invitation loops, discovery promises, analytics hypotheses, experimentable parameters and guardrails that prevent metric optimization from overriding player experience or fairness.
+Defines intended first-session funnel, session goals, return loops, daily/weekly engagement philosophy, social invitation loops, discovery/variant-hunting promises, analytics hypotheses, scarcity experiment governance, experimentable parameters and guardrails that prevent metric optimization from overriding player experience, fairness, or value integrity.
 
 ## GDS-17 — Cross-System Consistency and Design-Complete Audit
 
-**Status:** Blocked by GDS-6 through GDS-16
+**Status:** Blocked by GDS-7 through GDS-16
 
 Performs the formal pre-architecture audit:
 
@@ -286,6 +315,7 @@ Performs the formal pre-architecture audit:
 - economy/progression/monetization audit;
 - persistence/disconnect/recovery scenario audit;
 - multiplayer abuse/griefing audit;
+- rarity/variant/value-integrity audit;
 - trading/value-integrity audit;
 - presentation/accessibility audit;
 - Roblox platform/safety audit;
@@ -295,7 +325,7 @@ Performs the formal pre-architecture audit:
 
 ## Current Project Gate
 
-GDS-0 through GDS-5 are formally complete. The active dependency is **GDS-6 — Rarity, Mutations, Traits, and Variant Value**.
+GDS-0 through GDS-6 are formally complete. The active dependency is **GDS-7 — Vault/Base, Passive Production, Capacity, and Upgrades**.
 
 Technical Architecture must not begin until GDS-17 records a formal PASS with no implementation-critical open design questions.
 
@@ -308,7 +338,8 @@ GDS-0 governance — COMPLETE
   -> GDS-3 player/interaction/onboarding — COMPLETE
   -> GDS-4 creatures/collection/ownership — COMPLETE
   -> GDS-5 capture/contesting/transport/extraction — COMPLETE
-  -> GDS-6..16 subsystem design — GDS-6 NEXT
+  -> GDS-6 rarity/mutations/traits/value — COMPLETE
+  -> GDS-7..16 subsystem design — GDS-7 NEXT
   -> GDS-17 cross-system audit
   -> DESIGN COMPLETE
   -> Technical Architecture
