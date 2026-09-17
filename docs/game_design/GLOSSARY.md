@@ -190,7 +190,7 @@ The non-destructive GDS-7 process used when effective Collection Capacity become
 The owner action that selects one eligible Overflow-Held Creature and returns that exact instance to ordinary `Stored` use when free Collection Capacity is available.
 
 ### Visitor
-A non-owner player temporarily allowed to view or interact with explicitly public/read-only elements of another player's Vault. Baseline visitors receive no persistent management authority and observation alone grants no Species/Mutation/Variant Discovery.
+A non-owner player allowed under the owner's GDS-10 Visitor Access Policy to enter a read-only view of another player's Vault. Visitors receive no management, ownership, economy or production authority, and observation alone grants no Species/Mutation/Variant Discovery.
 
 ### Energy
 The canonical GDS-8 baseline non-premium soft progression currency. Energy is persistent, fungible, non-negative whole-unit player-facing value used for approved progression sinks. It is separate from premium currency and is not baseline player-to-player transferable.
@@ -275,6 +275,42 @@ A deterministic repeating ordinary world-context phase sequence, such as Day/Dus
 
 ### Hazard
 An authored environmental condition that creates traversal/capture risk without becoming direct player-versus-player combat. Hazards may cause temporary avatar failure/Recovery but cannot destroy or reroll finalized secured ownership, Energy, Access Unlocks, historical discovery or Vault progression.
+
+### Party
+An explicit consent-based temporary GDS-10 group of up to four players used for coordination and eligible cooperative gameplay. Party membership grants no ownership, wallet, Vault, capture, access or progression authority over another member.
+
+### Party Leader
+The Party member with transient grouping authority to invite eligible players, remove members and disband the Party. Leadership does not extend to another member's creatures, Energy, Vault, claims, custody or progression.
+
+### Party Invite
+A temporary request to join a Party. Joining requires explicit acceptance; ignoring, declining or expiry carries no gameplay penalty.
+
+### Party Seat
+One occupied membership slot in a Party. The baseline Party has a maximum of four simultaneous Party Seats.
+
+### Social Ping
+A bounded predefined GDS-10 coordination signal, such as a location, creature sighting, objective, return route or hazard warning. A Ping does not create claim, discovery, progression or hidden information authority.
+
+### Shared Objective
+An objective explicitly authored to allow more than one player to participate toward personal completion. Party membership alone does not complete a Shared Objective.
+
+### Eligible Contribution
+A meaningful objective-specific action performed by one player that qualifies that player for personal Shared Objective credit or a Collaboration Reward. Raw proximity, spectating and AFK Party presence are insufficient.
+
+### Collaboration Reward
+A bounded exact-once personal GDS-10 reward for an eligible Shared Objective participant. It is game-originated Economy value, not a transfer from another player's Energy Wallet.
+
+### Friendly Challenge
+An explicit opt-in, non-destructive session competition between consenting players. Baseline Friendly Challenges use no creature/Energy staking, direct-combat damage or involuntary persistent loss.
+
+### Showcase
+A read-only social presentation of legitimately owned or earned collection/progression state. Viewing a Showcase does not grant discovery, ownership or economy authority.
+
+### Visitor Access Policy
+The Vault owner's player-controlled GDS-10 rule determining the eligible audience for read-only visits, subject to later GDS-15 platform/safety constraints.
+
+### Party Rejoin Grace
+A short same-server reservation window after an unexpected disconnect during which a former Party member may recover their Party Seat. Absence during grace creates no objective/reward contribution.
 
 ### Server Event
 A time-bounded multiplayer encounter or world-state change presented to multiple players within a server.
