@@ -1,6 +1,6 @@
 # MonsterVault Game Design Specification
 
-> **Status:** GDS-0 through GDS-7 Complete / GDS-8 Next  
+> **Status:** GDS-0 through GDS-8 Complete / GDS-9 Next  
 > **Authority:** Player-facing gameplay behavior
 
 This directory contains the authoritative Game Design Specification (GDS) for MonsterVault.
@@ -19,10 +19,11 @@ Completed:
 - **GDS-5 — Capture, Contesting, Transport, and Extraction: COMPLETE — PASS**
 - **GDS-6 — Rarity, Mutations, Traits, and Variant Value: COMPLETE — PASS**
 - **GDS-7 — Vault/Base, Passive Production, Capacity, and Upgrades: COMPLETE — PASS**
+- **GDS-8 — Economy, Progression, Unlocks, and Pacing: COMPLETE — PASS**
 
 The active dependency is now:
 
-> **GDS-8 — Economy, Progression, Unlocks, and Pacing**
+> **GDS-9 — World, Biomes, Exploration, Spawning, and Hazards**
 
 Technical Architecture and gameplay implementation remain blocked.
 
@@ -63,44 +64,46 @@ Defines five Species Rarity tiers, stable pre-commit Mutation/Trait identity, ze
 
 ### GDS-7 — Vault/Base, passive production, capacity, upgrades
 
+Defines persistent personal Vault authority, Collection Capacity/Overflow-Held reconciliation, exact-instance display/Production Assignments, bounded Passive/Offline Production, Production Buffer/Claim, exact-once Vault Upgrades, read-only visitors, safe capacity expiry, and rarity-not-automatic-production-power.
+
+### GDS-8 — Economy, progression, unlocks, pacing
+
 Authoritative specification and closure evidence:
 
-- [`vault/07_vault_base_passive_production_capacity_and_upgrades.md`](vault/07_vault_base_passive_production_capacity_and_upgrades.md) — Design Complete;
-- [`GDS7_SCENARIO_VALIDATION.md`](GDS7_SCENARIO_VALIDATION.md) — 80 compound Vault/capacity/production scenarios; PASS;
-- [`GDS7_CROSS_VALIDATION.md`](GDS7_CROSS_VALIDATION.md) — GDS-1 through GDS-6 and authority audit; PASS;
-- [`GDS7_DECISION_INDEX.md`](GDS7_DECISION_INDEX.md) — phase-local strategic decisions;
-- [`GDS7_CLOSURE_REPORT.md`](GDS7_CLOSURE_REPORT.md) — formal closure; PASS.
+- [`economy_progression/08_economy_progression_unlocks_and_pacing.md`](economy_progression/08_economy_progression_unlocks_and_pacing.md) — Design Complete;
+- [`GDS8_SCENARIO_VALIDATION.md`](GDS8_SCENARIO_VALIDATION.md) — 90 compound economy/progression scenarios; PASS;
+- [`GDS8_CROSS_VALIDATION.md`](GDS8_CROSS_VALIDATION.md) — GDS-1 through GDS-7 and authority audit; PASS;
+- [`GDS8_DECISION_INDEX.md`](GDS8_DECISION_INDEX.md) — phase-local strategic decisions;
+- [`GDS8_CLOSURE_REPORT.md`](GDS8_CLOSURE_REPORT.md) — formal closure; PASS.
 
-GDS-7 establishes:
+GDS-8 establishes:
 
-- a persistent one-owner personal Vault/laboratory context;
-- logical **Collection Capacity** separate from Display Slot and Production Slot counts;
-- GDS-4 `Overflow-Held` as the single baseline capacity-safety state;
-- deterministic non-destructive **Capacity Reconciliation** and exact-instance **Resolve Overflow**;
-- display placement that references the same owned Creature Instance without cloning it;
-- persistent one-slot/one-instance **Production Assignments**;
-- no ordinary production from Overflow-Held creatures;
-- **Production Profiles** that may use Species and explicitly bounded Traits but do not automatically scale from rarity, Mutation, Compound status, provenance, or Availability;
-- elapsed-time **Passive Production** into a bounded persistent **Production Buffer**;
-- bounded **Offline Production Window** semantics without offline live-world/event participation or server-hop reset;
-- exact-once **Production Claims** and exact-once/atomic **Vault Upgrades**;
-- safe temporary-capacity expiry through reconciliation rather than deletion or forced purchase;
-- GDS-5 finalization before any Vault role/assignment begins;
-- baseline read-only visitors with no persistent management authority or discovery credit;
-- persistence/recovery/anti-replay rules across reset, disconnect, server change, retries, and shutdown;
-- a viable non-premium path to functional core Vault capacity/use.
+- **Energy** as the single baseline non-premium soft progression currency;
+- persistent non-negative Energy Wallet semantics and no baseline direct player-to-player transfer;
+- Production Claim plus bounded meaningful active reward source categories;
+- no baseline Energy from Creature Release or ordinary repeated capture;
+- Vault Upgrades, durable Capture Capability, Access Unlocks, and approved utility/presentation as core sinks;
+- no universal ordinary per-attempt capture Energy tax, ownership maintenance tax, debt, or arbitrary currency wipe;
+- Species Production Profiles and bounded situational Trait production effects;
+- no automatic rarity/Mutation/Compound/provenance production multipliers;
+- non-spendable active **Progression Milestones** and combined Energy/Milestone Progression Gates;
+- exact-once/atomic persistent Progression Purchases with insufficient-funds and price-race safety;
+- opening/foundation/growth/long-term pacing bands and tuneable active/passive income mix;
+- production-compounding and inflation-control guardrails;
+- deterministic catch-up without fabricated history or hidden spending personalization;
+- completed progression that remains completed through ordinary rebalancing;
+- no baseline prestige/rebirth wipe of permanent collection/progression.
 
 ## Remaining Core Specifications
 
-- `economy_progression/` — currencies, production-resource economics, capture tools/costs, sources/sinks, unlocks, pacing and progression. **GDS-8 NEXT.**
-- `world/` — biomes, exploration, creature spawning/lifetime, hazards, Secure Point/Vault access placement and traversal.
-- `social/` — cooperation, competition, collision/body-blocking, optional interception/PvP boundaries and expanded visitor/social permissions.
-- `events_liveops/` — events, rotating content, event-specific shared/multi-award capture, production modifiers and seasonal/live rules.
-- `trading/` — secured-instance trading, Production Assignment reconciliation, scarcity/value integrity and anti-abuse design.
-- `monetization/` — monetization surfaces/fairness constraints including any capacity/convenience/production products.
-- `presentation/` — UI/UX, Vault/capacity/production/capture/rarity/event feedback, visual/audio language, accessibility and onboarding presentation.
-- `platform_safety/` — Roblox platform constraints, social safety and age-appropriate interaction design.
-- `retention_analytics/` — retention loops, acquisition/Vault/variant funnels, session goals, metrics hypotheses and experiment boundaries.
+- `world/` — world structure, biomes, exploration, creature spawning/lifetime, hazards, concrete Access Unlock topology, Secure Point/Vault Access/Recovery Anchor placement and world Energy/Milestone rewards. **GDS-9 NEXT.**
+- `social/` — cooperation, competition, collision/body-blocking, optional interception/PvP boundaries, expanded visitor/social permissions and social reward integrity.
+- `events_liveops/` — events, rotating content, event-specific shared/multi-award capture, variant/production/economy modifiers and seasonal/live rules.
+- `trading/` — secured-instance trading, Production Assignment reconciliation, scarcity/value integrity, anti-abuse design and explicit Energy-transfer decision.
+- `monetization/` — monetization surfaces/fairness constraints including any Energy/capacity/convenience/production products.
+- `presentation/` — UI/UX, Energy/gate/transaction/Vault/capture/rarity/event feedback, visual/audio language, accessibility and onboarding presentation.
+- `platform_safety/` — Roblox platform constraints, commercial/randomized constraints, social safety and age-appropriate interaction design.
+- `retention_analytics/` — retention loops, acquisition/Vault/variant/economy funnels, session goals, catch-up/reward cadence, metrics hypotheses and experiment boundaries.
 - `audit/` — final GDS-17 cross-system consistency/maturity audits.
 
 ## Rule
