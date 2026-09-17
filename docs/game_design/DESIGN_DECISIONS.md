@@ -451,3 +451,183 @@ Material changes to persistence permanence, Protected Load Failure, disconnect n
 ### Consequence
 
 The active dependency advances to **GDS-3 — Player Character, Interaction, and Onboarding**. Technical Architecture and gameplay implementation remain blocked.
+
+---
+
+## DD-016 — Familiar Third-Person Baseline with Cross-Device Capability Parity
+
+**Date:** 2026-09-17  
+**Status:** Accepted
+
+### Context
+
+MonsterVault needs immediate comprehension for a broad 9–15 primary audience while preserving mobile-first constraints and full controller/desktop participation.
+
+### Decision
+
+Baseline exploration uses a third-person character-centric camera, familiar continuous directional movement, and conventional jump. Ordinary locomotion is not taxed by a universal stamina resource and the core loop does not universally depend on precision platforming.
+
+Touch, keyboard/mouse, and gamepad expose equivalent baseline gameplay capabilities. Device-specific convenience may differ, but core progression cannot be device-exclusive.
+
+### Rationale
+
+This minimizes onboarding cost and preserves GDS-1's mobile-first, cross-platform, low-friction product contract.
+
+### Alternatives Rejected
+
+- first-person-only core exploration;
+- click-to-move as the primary universal locomotion model;
+- stamina-gating ordinary traversal;
+- desktop-only precision controls for core progression.
+
+### Affected Specifications
+
+GDS-3, GDS-5, GDS-9, GDS-14, Technical Architecture.
+
+---
+
+## DD-017 — Universal Contextual Interaction Grammar
+
+**Date:** 2026-09-17  
+**Status:** Accepted
+
+### Context
+
+Creature capture, vault use, world objects, events, social systems and future mechanics will create many interactable entities. Independent button vocabularies would increase cognitive load and become especially poor on touch/controller.
+
+### Decision
+
+MonsterVault uses one universal **Primary Interact** semantic for contextual world interactions and one **Primary Action** semantic for the active tool/mechanic where applicable.
+
+Exactly one **Active Context** is immediately actionable at a time. The visible target is revalidated on activation. Prompts communicate an action verb/outcome plus current-device input. Modal input focus prevents the same press from closing UI and accidentally activating an exposed consequential world action.
+
+### Rationale
+
+A small stable interaction vocabulary scales to future systems while remaining teachable and cross-device compatible.
+
+### Alternatives Rejected
+
+- unique mandatory keys for each interactable class;
+- ambiguous multi-target activation from one prompt;
+- precision-cursor selection as the universal interaction requirement.
+
+### Affected Specifications
+
+GDS-3 through GDS-14, Technical Architecture.
+
+---
+
+## DD-018 — Gameplay-First Onboarding with Persistent Knowledge Milestones
+
+**Date:** 2026-09-17  
+**Status:** Accepted
+
+### Context
+
+GDS-1 requires meaningful action within seconds and the core capture/progression promise within the opening minutes. A front-loaded tutorial would directly undermine that target.
+
+### Decision
+
+First-session onboarding follows a progressive `show -> do -> confirm` structure embedded in real gameplay: gain control, notice one desirable goal, move/interact, enter the first real capture mechanic, secure a first result, see visible vault/collection impact, and encounter a first progression choice.
+
+Completed **Onboarding Milestones** persist across ordinary disconnect/server changes. Non-essential **Guidance Layer** presentation may be skipped or replayed, but skipping guidance never fabricates real progression or rewards.
+
+A new player must have access to a valid first learning path even in an already-running/crowded server.
+
+### Rationale
+
+This protects time-to-fun, avoids repeated tutorial friction, and prevents disconnect/replay from becoming a reward duplication path.
+
+### Alternatives Rejected
+
+- long mandatory tutorial instance before core gameplay;
+- full tutorial restart on every disconnect;
+- granting tutorial rewards merely for skipping instructional prompts.
+
+### Affected Specifications
+
+GDS-3, GDS-4, GDS-5, GDS-7, GDS-8, GDS-9, GDS-10, GDS-14, GDS-16.
+
+---
+
+## DD-019 — Safe Arrival and Recovery Are Control-Restoration States, Not Extraction Mechanics
+
+**Date:** 2026-09-17  
+**Status:** Accepted
+
+### Context
+
+GDS-2 defines Persistence Ready and Recovery semantically but leaves concrete player entry/re-entry behavior to GDS-3. Reset/stuck recovery also creates exploit risk if it transports unfinalized value safely.
+
+### Decision
+
+After Persistence Ready, **Safe Arrival** establishes the Player Character, camera, orientation and direct control before ordinary exposure.
+
+Failure/reset/stuck conditions use **Recovery** to a valid **Recovery Anchor**, restoring ordinary camera/control while preserving finalized persistent progression. Recovery does not inherently secure transient value, waive finalized costs, or function as a generally superior fast-travel/extraction path.
+
+### Rationale
+
+Players need reliable recovery without converting lifecycle tooling into an economy/capture exploit.
+
+### Affected Specifications
+
+GDS-2, GDS-3, GDS-5, GDS-9, GDS-10, Technical Architecture.
+
+---
+
+## DD-020 — Interaction Accessibility Is a Semantic Requirement
+
+**Date:** 2026-09-17  
+**Status:** Accepted
+
+### Context
+
+Deferring every accessibility question to visual polish would allow downstream mechanics to hard-code inaccessible interaction assumptions before GDS-14.
+
+### Decision
+
+GDS-3 locks semantic accessibility constraints before presentation design:
+
+- no progression-critical action depends solely on color or audio;
+- core interaction does not require pixel-precision aim, high-frequency repeated tapping, free-form chat, or drag-and-drop as the only path;
+- touch/controller have discrete practical controls for required actions;
+- camera guidance yields to meaningful player input;
+- modal/controller interaction remains possible for required onboarding flows.
+
+GDS-14 retains authority over final HUD, settings, remapping, typography, reduced-motion behavior, visual/audio language, and the complete accessibility feature set.
+
+### Rationale
+
+Accessibility-critical semantic constraints must exist before downstream mechanics are considered Design Complete.
+
+### Affected Specifications
+
+GDS-3, GDS-5, GDS-12, GDS-13, GDS-14, Technical Architecture.
+
+---
+
+## DD-021 — Close GDS-3 Player Interaction and Onboarding Baseline
+
+**Date:** 2026-09-17  
+**Status:** Accepted
+
+### Context
+
+The GDS-3 player specification now resolves movement, camera, semantic controls, contextual interaction, onboarding, Safe Arrival/Recovery, input focus, basic equipment/inventory-facing behavior and interaction-accessibility requirements and has passed scenario/cross-system validation.
+
+### Decision
+
+GDS-3 is formally closed as `Complete — PASS`.
+
+Material changes to third-person baseline exploration, baseline locomotion philosophy, Primary Interact/Primary Action semantics, single Active Context behavior, cross-device capability parity, gameplay-first onboarding, persistent onboarding milestones, Guidance Layer/progression separation, first-path availability, Safe Arrival, Recovery semantics, or interaction-level accessibility invariants require GDS-3 change control and revalidation.
+
+### Evidence
+
+- `player/03_player_character_interaction_and_onboarding.md` — Design Complete;
+- `GDS3_SCENARIO_VALIDATION.md` — PASS;
+- `GDS3_CROSS_VALIDATION.md` — PASS;
+- `GDS3_CLOSURE_REPORT.md` — PASS.
+
+### Consequence
+
+The active dependency advances to **GDS-4 — Creatures, Collection, and Ownership**. Technical Architecture and gameplay implementation remain blocked.
