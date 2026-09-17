@@ -366,7 +366,7 @@ Mobile networks, client crashes, Roblox server restarts, and voluntary short ses
 
 ### Decision
 
-Ordinary disconnect, avatar failure, reset, and server shutdown do not themselves erase finalized secured persistent value. Failure invokes Recovery rather than a global progression wipe. Unfinalized transient activities must define their own deterministic interruption behavior in their owning subsystem.
+Ordinary disconnect, avatar failure, reset, and server shutdown do not themselves erase finalized secured persistent value. Failure invokes Recovery rather than a global persistent wipe. Unfinalized transient activities must define their own deterministic interruption behavior in their owning subsystem.
 
 Reset/reconnect must not become a superior strategy for duplicating rewards, avoiding finalized costs, or rerolling finalized outcomes.
 
@@ -795,3 +795,190 @@ Material changes to instance-level ownership, one-owner semantics, secured persi
 ### Consequence
 
 The active dependency advances to **GDS-5 — Capture, Contesting, Transport, and Extraction**. Technical Architecture and gameplay implementation remain blocked.
+
+---
+
+## DD-028 — Ordinary Capture Uses a Bounded Exclusive Engagement Claim
+
+**Date:** 2026-09-17  
+**Status:** Accepted
+
+### Context
+
+Visible shared creatures create natural multiplayer races, but allowing several players to run contradictory single-winner capture attempts simultaneously would waste resources, create ownership ambiguity, and reward network races instead of understandable gameplay.
+
+### Decision
+
+A normal single-award Capture Opportunity supports at most one active ordinary **Engagement Claim**. The valid claimant receives temporary exclusive attempt authority; later players cannot overwrite that claim merely through proximity/input.
+
+Engagement Claims are transient, bounded, and not ownership. They end on success, failure/cancel where defined, invalidation, excessive separation/inactivity, or other explicit release condition. Repeated start/cancel behavior cannot reserve a public creature indefinitely.
+
+### Rationale
+
+This retains visible social racing while giving an active attempt deterministic semantics and preventing contradictory spending/winners.
+
+### Alternatives Rejected
+
+- fully simultaneous independent attempts against one ordinary finite creature;
+- permanent first-touch reservation;
+- proximity-based claim stealing during an accepted attempt.
+
+### Affected Specifications
+
+GDS-5, GDS-8, GDS-9, GDS-10, GDS-11, GDS-14, Technical Architecture.
+
+---
+
+## DD-029 — Capture Success Is Provisional; Extraction Finalizes Ownership
+
+**Date:** 2026-09-17  
+**Status:** Accepted
+
+### Context
+
+The product promise explicitly includes both `Catch it` and `Bring it home`. If Capture Success immediately created persistent ownership, transport would lose its ownership significance; if ownership remained ambiguous indefinitely, players could not trust their collection.
+
+### Decision
+
+**Capture Success creates a Provisional Capture**, not a GDS-4 Secured Creature. The same specific creature instance enters temporary **Transport Custody**.
+
+The baseline ordinary ownership boundary is validated **Extraction Completion at an eligible Secure Point**. That event emits `Secured Ownership Finalization(player, creature)` exactly once; from that moment the creature is Persistent Player State under GDS-4.
+
+### Rationale
+
+This makes `Bring it home` mechanically meaningful while preserving a crisp, auditable boundary between transient acquisition and permanent ownership.
+
+### Alternatives Rejected
+
+- persistent ownership immediately on capture success;
+- ownership only after an arbitrary post-capture timer;
+- ambiguous ownership based on visual following/proximity.
+
+### Affected Specifications
+
+GDS-2, GDS-4, GDS-5, GDS-7, GDS-9, GDS-10, GDS-14, Technical Architecture.
+
+---
+
+## DD-030 — Baseline Transport Is Single-Custody and Not Directly Stealable
+
+**Date:** 2026-09-17  
+**Status:** Accepted
+
+### Context
+
+Transport should create a readable return cadence and social visibility without making the product loss-dominant or forcing direct-combat PvP.
+
+### Decision
+
+A player may ordinarily hold **one active Provisional Capture / Transport Custody at a time**. They must resolve that transport before beginning another normal capture.
+
+Once Capture Success creates valid Transport Custody, unrelated players cannot directly steal or transfer that custody merely through proximity, interaction, or baseline PvP. Future optional interception/risk modes require explicit GDS-10/GDS-11 design and change control.
+
+### Rationale
+
+Single-custody keeps the capture-return loop legible and prevents hoarding, while no ordinary direct theft preserves GDS-1's non-loss-dominant positioning.
+
+### Alternatives Rejected
+
+- unlimited provisional transport inventory;
+- ordinary proximity-based stealing from carriers;
+- mandatory combat defense of every captured creature.
+
+### Affected Specifications
+
+GDS-5, GDS-8, GDS-9, GDS-10, GDS-11, GDS-14.
+
+---
+
+## DD-031 — Acquisition Interruption Has Explicit State-Specific Semantics
+
+**Date:** 2026-09-17  
+**Status:** Accepted
+
+### Context
+
+GDS-2 requires transient systems to define disconnect/reset/shutdown behavior. Capture is especially sensitive because players can be between success and persistent ownership.
+
+### Decision
+
+Reset/avatar failure/Recovery never counts as extraction and ends ordinary Transport Custody through the interruption path. Voluntary server leave forfeits unfinalized transport.
+
+Unexpected client disconnect during valid transport may receive a bounded same-server **Transport Grace**; it does not create cross-server ownership. If grace expires, the provisional state ends without securisation.
+
+A narrowly scoped authoritative **Protected Shutdown Finalization** may secure an already valid Provisional Capture when the server itself is being terminated. This exception cannot be invoked by ordinary leave/reset/disconnect and remains exact-once.
+
+### Rationale
+
+The model prevents reset/rejoin exploits while giving uncontrollable server termination a player-trust protection path.
+
+### Alternatives Rejected
+
+- treating reset as automatic extraction;
+- persisting every provisional capture across arbitrary server hops;
+- always deleting valid post-capture custody on server shutdown;
+- auto-securing on every disconnect.
+
+### Affected Specifications
+
+GDS-2, GDS-3, GDS-5, GDS-9, Technical Architecture.
+
+---
+
+## DD-032 — Capacity Safety and Onboarding Protection Constrain Capture Eligibility
+
+**Date:** 2026-09-17  
+**Status:** Accepted
+
+### Context
+
+GDS-4 guarantees that capacity pressure cannot delete already-secured creatures, but allowing players knowingly at full capacity to capture indefinitely would turn Overflow-Held into free unlimited storage. GDS-3 also requires a first capture path that other players cannot permanently deny.
+
+### Decision
+
+Known full ordinary capacity or unresolved Overflow-Held state blocks new ordinary capture initiation. If capacity becomes unavailable only after a valid attempt began, Extraction Completion still finalizes safely and GDS-4 may use Overflow-Held.
+
+The first required capture uses an **Onboarding-Protected Opportunity**: personal, reserved, replenishing, or functionally equivalent protection so unrelated players cannot permanently consume the learner's only path. Protection does not fabricate success; the player still completes a real Capture Attempt and extraction.
+
+### Rationale
+
+This preserves both capacity integrity and first-session reliability without weakening the core loop.
+
+### Alternatives Rejected
+
+- unlimited capture into overflow;
+- deleting the acquired creature when capacity races occur;
+- requiring new players to win an open-server race for their only tutorial creature;
+- auto-granting the first creature for skipping guidance.
+
+### Affected Specifications
+
+GDS-3, GDS-4, GDS-5, GDS-7, GDS-8, GDS-9, GDS-13, GDS-14.
+
+---
+
+## DD-033 — Close GDS-5 Capture, Contesting, Transport, and Extraction Baseline
+
+**Date:** 2026-09-17  
+**Status:** Accepted
+
+### Context
+
+GDS-5 now resolves ordinary capture eligibility, claim fairness, capture attempts, provisional custody, transport, extraction, lifecycle interruption, capacity interaction, onboarding protection, and the exact persistent ownership boundary and has passed scenario/cross-system validation.
+
+### Decision
+
+GDS-5 is formally closed as `Complete — PASS`.
+
+Material changes to Engagement Claim exclusivity, contesting-before-Provisional-Capture, Capture Success being provisional, single active Transport Custody, ordinary custody no-theft, Recovery/leave/disconnect/shutdown semantics, Extraction Completion as the ownership-finalization boundary, capacity/Overflow capture gating, onboarding protection, or exact-once single-winner finalization require GDS-5 change control and revalidation.
+
+### Evidence
+
+- `capture/05_capture_contesting_transport_and_extraction.md` — Design Complete;
+- `GDS5_SCENARIO_VALIDATION.md` — 60 / 60 PASS;
+- `GDS5_CROSS_VALIDATION.md` — PASS;
+- `GDS5_CLOSURE_REPORT.md` — PASS.
+
+### Consequence
+
+The active dependency advances to **GDS-6 — Rarity, Mutations, Traits, and Variant Value**. Technical Architecture and gameplay implementation remain blocked.
