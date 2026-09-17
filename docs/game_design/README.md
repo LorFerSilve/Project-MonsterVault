@@ -1,6 +1,6 @@
 # MonsterVault Game Design Specification
 
-> **Status:** GDS-0 through GDS-2 Complete / GDS-3 Next  
+> **Status:** GDS-0 through GDS-3 Complete / GDS-4 Next  
 > **Authority:** Player-facing gameplay behavior
 
 This directory contains the authoritative Game Design Specification (GDS) for MonsterVault.
@@ -14,10 +14,11 @@ Completed:
 - **GDS-0 — Governance, Structure, and Concept Baseline: COMPLETE — PASS**
 - **GDS-1 — Product Vision, Audience, and Success Criteria: COMPLETE — PASS**
 - **GDS-2 — Global Game Rules and Session Model: COMPLETE — PASS**
+- **GDS-3 — Player Character, Interaction, and Onboarding: COMPLETE — PASS**
 
 The active dependency is now:
 
-> **GDS-3 — Player Character, Interaction, and Onboarding**
+> **GDS-4 — Creatures, Collection, and Ownership**
 
 Technical Architecture and gameplay implementation remain blocked.
 
@@ -47,26 +48,34 @@ The resulting product contract includes active creature collection, persistent v
 - [`GDS2_CROSS_VALIDATION.md`](GDS2_CROSS_VALIDATION.md) — product, authority, and contradiction audit; PASS.
 - [`GDS2_CLOSURE_REPORT.md`](GDS2_CLOSURE_REPORT.md) — formal GDS-2 closure; PASS.
 
-GDS-2 establishes:
+GDS-2 establishes disposable Server Sessions with session-independent persistent progression, protected persistent-state readiness, Recovery instead of global wipes, finalized-outcome single-application semantics, explicit transient interruption ownership, late-join support, and coherent offline/cross-server timing boundaries.
 
-- disposable Server Sessions with session-independent persistent progression;
-- protected persistent-state readiness before irreversible play;
-- **Protected Load Failure** instead of unsafe blank-profile fallback;
-- ordinary disconnect/reset/shutdown as interruption rather than default persistent punishment;
-- Recovery without a global progression wipe;
-- finalized persistent outcomes that apply once across retries/reconnects;
-- explicit downstream ownership for interruption of transient activities;
-- late joining as a normal state;
-- no baseline AFK reward entitlement or offline live-world claims;
-- optional rather than assumed offline progression;
-- no baseline continuously synchronized MMO-scale cross-server world;
-- persistent-timer and Global Window continuity across servers;
-- cross-platform lifecycle parity.
+## GDS-3 Player Interaction and Onboarding Baseline
+
+- [`player/03_player_character_interaction_and_onboarding.md`](player/03_player_character_interaction_and_onboarding.md) — authoritative player-control/onboarding specification; Design Complete.
+- [`GDS3_SCENARIO_VALIDATION.md`](GDS3_SCENARIO_VALIDATION.md) — 40 compound interaction/onboarding scenarios; PASS.
+- [`GDS3_CROSS_VALIDATION.md`](GDS3_CROSS_VALIDATION.md) — product/lifecycle/authority validation; PASS.
+- [`GDS3_CLOSURE_REPORT.md`](GDS3_CLOSURE_REPORT.md) — formal GDS-3 closure; PASS.
+
+GDS-3 establishes:
+
+- third-person familiar baseline exploration;
+- continuous movement/jump without a universal stamina tax;
+- touch, keyboard/mouse, and controller capability parity;
+- universal **Primary Interact** and downstream-tool **Primary Action** semantics;
+- one deterministic **Active Context** at a time;
+- modal input-focus/input-spillover protection;
+- gameplay-first onboarding aligned to GDS-1 time-to-fun targets;
+- persistent/resumable **Onboarding Milestones**;
+- skippable/replayable **Guidance Layer** separated from real progression;
+- onboarding availability despite ordinary multiplayer/server variation;
+- **Safe Arrival** after Persistence Ready;
+- concrete **Recovery** behavior using valid Recovery Anchors without automatic extraction;
+- interaction-level accessibility invariants before final GDS-14 presentation work.
 
 ## Remaining Core Specifications
 
-- `player/` — movement, interaction, onboarding, recovery presentation, inventory-facing behavior. **GDS-3 NEXT.**
-- `creatures/` — creature identity, acquisition, ownership, collection and behavior.
+- `creatures/` — creature identity, acquisition, ownership, collection and behavior. **GDS-4 NEXT.**
 - `capture/` — capture loop, contesting, transport, success/failure and anti-frustration rules.
 - `rarity_mutations/` — rarity, mutations, variants, combinatorics and collection value.
 - `vault/` — player vault/base, passive production, capacity and upgrades.
