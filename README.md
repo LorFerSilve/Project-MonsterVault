@@ -4,7 +4,7 @@
 
 ## Project Status
 
-**Pre-implementation specification — GDS-0 through GDS-9 complete / GDS-10 next.**
+**Pre-implementation specification — GDS-0 through GDS-10 complete / GDS-11 next.**
 
 MonsterVault is intentionally **not in gameplay implementation yet**. The project follows a specification-first workflow:
 
@@ -31,13 +31,14 @@ No gameplay system should be implemented merely because an idea appears promisin
 - **GDS-7 — Vault/Base, Passive Production, Capacity, and Upgrades: COMPLETE — PASS**
 - **GDS-8 — Economy, Progression, Unlocks, and Pacing: COMPLETE — PASS**
 - **GDS-9 — World, Biomes, Exploration, Spawning, and Hazards: COMPLETE — PASS**
-- **GDS-10 — Social Play, Cooperation, Competition, and PvP Boundaries: NEXT**
-- GDS-11 through GDS-16: Draft / dependency-ordered
+- **GDS-10 — Social Play, Cooperation, Competition, and PvP Boundaries: COMPLETE — PASS**
+- **GDS-11 — Server Events, Dynamic Encounters, and Live Content: NEXT**
+- GDS-12 through GDS-16: Draft / dependency-ordered
 - GDS-17: blocked until subsystem design is complete
 - Technical Architecture: blocked by GDS-17
 - Gameplay implementation: blocked by GDS and TA gates
 
-GDS-9 closure evidence is recorded in [`GDS9_SCENARIO_VALIDATION.md`](docs/game_design/GDS9_SCENARIO_VALIDATION.md), [`GDS9_CROSS_VALIDATION.md`](docs/game_design/GDS9_CROSS_VALIDATION.md), [`GDS9_DECISION_INDEX.md`](docs/game_design/GDS9_DECISION_INDEX.md), and [`GDS9_CLOSURE_REPORT.md`](docs/game_design/GDS9_CLOSURE_REPORT.md).
+GDS-10 closure evidence is recorded in [`GDS10_SCENARIO_VALIDATION.md`](docs/game_design/GDS10_SCENARIO_VALIDATION.md), [`GDS10_CROSS_VALIDATION.md`](docs/game_design/GDS10_CROSS_VALIDATION.md), [`GDS10_DECISION_INDEX.md`](docs/game_design/GDS10_DECISION_INDEX.md), and [`GDS10_CLOSURE_REPORT.md`](docs/game_design/GDS10_CLOSURE_REPORT.md).
 
 ## Product Contract
 
@@ -212,6 +213,28 @@ GDS-9 turns the capture/collection/progression contracts into a concrete explora
 
 The authoritative GDS-9 specification is [`09_world_biomes_exploration_spawning_and_hazards.md`](docs/game_design/world/09_world_biomes_exploration_spawning_and_hazards.md).
 
+## Social Play, Cooperation, Competition, and PvP Contract
+
+GDS-10 adds intentional multiplayer cooperation and social competition without turning ordinary collection into destructive PvP:
+
+- baseline **Parties** are explicit consent-based groups of up to four players;
+- Party/friend status grants no shared ownership, Energy Wallet, Vault authority, access, claim, custody or progression;
+- structured rate-limited **Social Pings** provide baseline coordination without requiring unrestricted chat or voice;
+- personal Landmark Discovery, Regional Collection, Region Mastery and Access Unlock requirements remain personal;
+- explicitly authored **Shared Objectives** may credit several players, but each player must provide meaningful **Eligible Contribution**;
+- eligible participants may receive bounded exact-once personal **Collaboration Rewards**; there is no Party wallet or direct Energy transfer;
+- ordinary creature acquisition remains **one valid Engagement Claim -> one Transport Custody -> one ordinary owner**;
+- teammates cannot hand off custody, extract for the carrier, duplicate a creature or gain discovery from observation;
+- public competition is valid before a claim, while **Friendly Challenges** are explicit opt-in and non-destructive;
+- baseline challenges use no creature/Energy wagering and are not a repeatable Energy-farming loop;
+- ordinary play has no direct-combat PvP, transport interception, secured-creature theft or player-caused Energy loss;
+- player collision is semantically non-obstructive so players cannot body-block Safe Routes, Secure Points, Recovery Anchors or intended interactions;
+- Vault socialization remains owner-controlled and read-only through Visitor Access Policy / Showcase semantics;
+- Party size, friend count, visitors and social activity do not modify hidden rarity/Mutation/spawn odds or Passive Production;
+- Party/invite/Ping/challenge state is transient while legitimate finalized personal rewards/progression remain exact-once persistent outcomes.
+
+The authoritative GDS-10 specification is [\`10_social_play_cooperation_competition_and_pvp_boundaries.md\`](docs/game_design/social/10_social_play_cooperation_competition_and_pvp_boundaries.md).
+
 ## Working Core Loop
 
 ```text
@@ -231,7 +254,7 @@ Choose or notice a desirable goal
   -> repeat
 ```
 
-Social cooperation/competition/PvP boundaries now belong to GDS-10. Events, trading, monetization, final presentation, analytics, platform constraints, and technical implementation remain subject to their owning later phases.
+Server events, dynamic encounters and live content now belong to GDS-11. Trading, monetization, final presentation, analytics, platform constraints, and technical implementation remain subject to their owning later phases.
 
 ## Documentation Authority
 
@@ -256,16 +279,17 @@ Key documents include:
 - [`vault/`](docs/game_design/vault/) — GDS-7 Vault/capacity/production contract;
 - [`economy_progression/`](docs/game_design/economy_progression/) — GDS-8 economy/progression contract;
 - [`world/`](docs/game_design/world/) — GDS-9 world/exploration/spawning/hazard contract;
-- [`GDS9_SCENARIO_VALIDATION.md`](docs/game_design/GDS9_SCENARIO_VALIDATION.md) — 100 compound GDS-9 scenarios;
-- [`GDS9_CROSS_VALIDATION.md`](docs/game_design/GDS9_CROSS_VALIDATION.md) — authority/consistency audit;
-- [`GDS9_DECISION_INDEX.md`](docs/game_design/GDS9_DECISION_INDEX.md) — phase-local strategic decisions;
-- [`GDS9_CLOSURE_REPORT.md`](docs/game_design/GDS9_CLOSURE_REPORT.md) — formal GDS-9 closure evidence.
+- [`social/`](docs/game_design/social/) — GDS-10 social/cooperation/competition/PvP-boundary contract;
+- [`GDS10_SCENARIO_VALIDATION.md`](docs/game_design/GDS10_SCENARIO_VALIDATION.md) — 110 compound GDS-10 scenarios;
+- [`GDS10_CROSS_VALIDATION.md`](docs/game_design/GDS10_CROSS_VALIDATION.md) — authority/consistency audit;
+- [`GDS10_DECISION_INDEX.md`](docs/game_design/GDS10_DECISION_INDEX.md) — phase-local strategic decisions;
+- [`GDS10_CLOSURE_REPORT.md`](docs/game_design/GDS10_CLOSURE_REPORT.md) — formal GDS-10 closure evidence.
 
 ### Technical Architecture
 
 [`docs/technical_architecture/`](docs/technical_architecture/) remains **blocked by GDS completion**.
 
-Technical Architecture will later translate approved GDS behavior into concrete Roblox/Luau contracts for identity, persistence, networking, runtime lifecycle, controls, creature/capture/variant/Vault/economy/world systems, trading, UI, live operations, performance, testing and CI.
+Technical Architecture will later translate approved GDS behavior into concrete Roblox/Luau contracts for identity, persistence, networking, runtime lifecycle, controls, creature/capture/variant/Vault/economy/world/social systems, trading, UI, live operations, performance, testing and CI.
 
 ### Implementation
 
@@ -291,12 +315,13 @@ Project-MonsterVault/
 │   │   ├── vault/
 │   │   ├── economy_progression/
 │   │   ├── world/
+│   │   ├── social/
 │   │   ├── GDS_ROADMAP.md
 │   │   ├── GLOSSARY.md
-│   │   ├── GDS9_SCENARIO_VALIDATION.md
-│   │   ├── GDS9_CROSS_VALIDATION.md
-│   │   ├── GDS9_DECISION_INDEX.md
-│   │   ├── GDS9_CLOSURE_REPORT.md
+│   │   ├── GDS10_SCENARIO_VALIDATION.md
+│   │   ├── GDS10_CROSS_VALIDATION.md
+│   │   ├── GDS10_DECISION_INDEX.md
+│   │   ├── GDS10_CLOSURE_REPORT.md
 │   │   └── <remaining design domains>/
 │   ├── technical_architecture/
 │   ├── implementation/
@@ -311,7 +336,7 @@ The source/test/tooling directories are reserved for later implementation. Their
 
 ## Current Next Step
 
-Proceed with **GDS-10 — Social Play, Cooperation, Competition, and PvP Boundaries**.
+Proceed with **GDS-11 — Server Events, Dynamic Encounters, and Live Content**.
 
 The first implementation vertical slice will be selected and locked only after the complete design and architecture dependency chain makes its requirements clear.
 
