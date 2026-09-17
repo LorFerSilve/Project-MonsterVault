@@ -64,8 +64,11 @@ GDS-5 closes the following player-facing decisions:
 - ordinary Transport Custody cannot be directly stolen by other-player proximity or ordinary baseline PvP;
 - reset/avatar failure/Recovery does not count as extraction and ends ordinary transport custody through the interruption path;
 - voluntary server leave forfeits unfinalized transport;
-- unexpected client disconnect may receive bounded same-server **Transport Grace** but does not create cross-server ownership;
-- a narrowly scoped authoritative **Protected Shutdown Finalization** may secure an already valid Provisional Capture during system/server-originated shutdown;
+- unexpected client disconnect with valid Transport Custody deterministically enters bounded same-server **Transport Grace**; reconnect within grace resumes the same provisional custody, while grace expiry ends it without secured ownership;
+- Transport Grace never converts an unfinalized provisional creature into cross-server ownership;
+- during an orderly authoritative system/server-originated shutdown, a valid Provisional Capture is protected by exact-once **Protected Shutdown Finalization** when authoritative custody state remains available;
+- abrupt process/platform failure that prevents shutdown execution/state verification cannot promise that protection because the creature remains unfinalized transient state;
+- voluntary leave, reset, Recovery, and ordinary client disconnect cannot invoke Protected Shutdown Finalization;
 - a **Secure Point** is the ordinary world-facing destination that can complete extraction;
 - the exact ordinary ownership boundary is **validated Extraction Completion at an eligible Secure Point**;
 - Extraction Completion emits `Secured Ownership Finalization(player, creature)` exactly once;
@@ -78,36 +81,11 @@ GDS-5 closes the following player-facing decisions:
 
 ## 5. Scenario Validation Result
 
-`GDS5_SCENARIO_VALIDATION.md` evaluates 60 compound scenarios covering:
-
-- simultaneous engagement;
-- active-claim overwrite attempts;
-- idle/abandoned claims;
-- accepted versus invalid attempts;
-- failure/retry/expiry;
-- Capture Success and provisional identity;
-- single-custody transport;
-- Secure Point finalization;
-- duplicate delivery/idempotency;
-- reset/Recovery;
-- disconnect grace;
-- voluntary leave;
-- cross-server transitions;
-- server-originated shutdown protection;
-- capacity-full and capacity-race behavior;
-- Overflow-Held abuse prevention;
-- onboarding protection;
-- touch/controller/desktop parity;
-- modal input spillover;
-- crowded multiplayer spaces;
-- world hazard interruption;
-- party/friend assumptions;
-- event multi-award authority;
-- stale/desynchronized presentation.
+`GDS5_SCENARIO_VALIDATION.md` evaluates 60 compound scenarios covering simultaneous engagement, active-claim overwrite attempts, idle/abandoned claims, accepted versus invalid attempts, failure/retry/expiry, Capture Success and provisional identity, single-custody transport, Secure Point finalization, duplicate delivery/idempotency, reset/Recovery, deterministic disconnect grace, voluntary leave, cross-server transitions, controlled server-originated shutdown protection, capacity-full and capacity-race behavior, Overflow-Held abuse prevention, onboarding protection, cross-device parity, modal input spillover, crowded multiplayer spaces, world hazard interruption, party/friend assumptions, event multi-award authority, and stale/desynchronized presentation.
 
 All tested scenarios are coherent under the GDS-5 contract.
 
-**Result:** PASS.
+**Result:** PASS — 60 / 60.
 
 ## 6. Cross-System Validation Result
 
@@ -138,7 +116,7 @@ GDS-5 creates explicit dependencies:
 - GDS-13 cannot require payment to complete a valid baseline extraction or protect a race-condition finalization;
 - GDS-14 must make available/claimed/attempt/provisional/transport/secure/finalized states clearly legible across supported devices;
 - GDS-16 must instrument the acquisition funnel without experiments that covertly shift the ownership boundary;
-- Technical Architecture must implement authoritative claims, validation, bounded grace, shutdown protection, exact-once finalization, and anti-duplication without weakening GDS-5 semantics.
+- Technical Architecture must implement authoritative claims, validation, deterministic bounded grace, controlled-shutdown protection, exact-once finalization, and anti-duplication without weakening GDS-5 semantics.
 
 These are downstream obligations, not GDS-5 open questions.
 
@@ -158,8 +136,8 @@ Material changes to the following require reopening GDS-5 through explicit decis
 - one active ordinary Transport Custody per player;
 - ordinary Transport Custody not being directly stealable;
 - reset/Recovery not counting as extraction;
-- bounded same-session Transport Grace;
-- Protected Shutdown Finalization exception;
+- deterministic bounded same-session Transport Grace;
+- controlled authoritative Protected Shutdown Finalization semantics;
 - Extraction Completion as the normal Secured Ownership Finalization boundary;
 - exact-once single-winner ordinary finalization;
 - known-full-capacity initiation block and race-safe Overflow-Held finalization;
@@ -173,7 +151,7 @@ Numeric tuning and final visual presentation do not reopen GDS-5 while these sem
 
 **GDS-5 PASS — COMPLETE.**
 
-MonsterVault now has a complete ordinary acquisition contract spanning discovery eligibility, multiplayer claim fairness, capture challenge semantics, provisional custody, transport, extraction, interruption handling, capacity safety, onboarding protection, and the exact persistent ownership boundary.
+MonsterVault now has a complete ordinary acquisition contract spanning discovery eligibility, multiplayer claim fairness, capture challenge semantics, provisional custody, transport, extraction, deterministic interruption handling, capacity safety, onboarding protection, and the exact persistent ownership boundary.
 
 The active dependency advances to:
 
