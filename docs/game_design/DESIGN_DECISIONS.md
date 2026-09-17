@@ -366,7 +366,7 @@ Mobile networks, client crashes, Roblox server restarts, and voluntary short ses
 
 ### Decision
 
-Ordinary disconnect, avatar failure, reset, and server shutdown do not themselves erase finalized secured persistent value. Failure invokes Recovery rather than a global persistent wipe. Unfinalized transient activities must define their own deterministic interruption behavior in their owning subsystem.
+Ordinary disconnect, avatar failure, reset, and server shutdown do not themselves erase finalized secured persistent value. Failure invokes Recovery rather than a global progression wipe. Unfinalized transient activities must define their own deterministic interruption behavior in their owning subsystem.
 
 Reset/reconnect must not become a superior strategy for duplicating rewards, avoiding finalized costs, or rerolling finalized outcomes.
 
@@ -982,3 +982,195 @@ Material changes to Engagement Claim exclusivity, contesting-before-Provisional-
 ### Consequence
 
 The active dependency advances to **GDS-6 — Rarity, Mutations, Traits, and Variant Value**. Technical Architecture and gameplay implementation remain blocked.
+
+---
+
+## DD-034 — Rarity, Variant, Trait, Availability, Power, and Price Are Separate Axes
+
+**Date:** 2026-09-17  
+**Status:** Accepted
+
+### Context
+
+MonsterVault needs rarity hunting and social status without turning every collectible property into one misleading power/value score.
+
+### Decision
+
+Species Rarity uses five ordered baseline tiers: **Common, Uncommon, Rare, Epic, Legendary**. Species Rarity is separate from Mutation, Trait, Availability Tag, downstream gameplay power, currency value, and future trading price.
+
+Mutation Frequency uses its own context-aware `Frequent -> Uncommon -> Rare -> Extreme` bands. Availability uses `Core`, `Rotating`, `Event-Limited`, and `Legacy` rather than adding pseudo-rarity tiers.
+
+### Rationale
+
+Separating the axes keeps collection desire legible, avoids automatic pay-to-win implications, and lets later economy/trading systems discover value without redefining collectible identity.
+
+### Alternatives Rejected
+
+- one universal rarity/power/value score;
+- treating Event-Limited as a higher rarity tier;
+- guaranteeing market price from rarity labels.
+
+### Affected Specifications
+
+GDS-6 through GDS-16, Technical Architecture.
+
+---
+
+## DD-035 — Variant Identity Finalizes Before Actionable Capture and Cannot Be Retry-Rerolled
+
+**Date:** 2026-09-17  
+**Status:** Accepted
+
+### Context
+
+If mutation/trait identity were rolled after a player commits, players could reroll outcomes through claim cycling, capture failure, disconnect, transport, or message retries, undermining scarcity integrity.
+
+### Decision
+
+A Creature Instance's Mutation/Trait identity becomes fixed no later than that instance becoming an individually actionable **Capture Opportunity**.
+
+The same surviving instance cannot reroll through claim release/reclaim, Capture Failure/retry, Capture Success, Provisional Capture, Transport Custody, reconnect, Extraction Completion, or duplicate finalization delivery. A genuinely new Creature Instance may independently generate a new identity.
+
+Baseline instances carry zero, one, or at most two compatible Mutations; two form a Compound Variant.
+
+### Rationale
+
+This turns variants into stable properties of creatures rather than exploitable reward rolls and preserves GDS-4/GDS-5 instance continuity.
+
+### Alternatives Rejected
+
+- rolling mutation only after successful capture;
+- rerolling on every Capture Attempt;
+- rerolling at Secure Point;
+- unlimited mutation stacking.
+
+### Affected Specifications
+
+GDS-4, GDS-5, GDS-6, GDS-9, GDS-11, Technical Architecture.
+
+---
+
+## DD-036 — Variant Discovery Is Historical and High-Value Variants Auto-Protect
+
+**Date:** 2026-09-17  
+**Status:** Accepted
+
+### Context
+
+Variant hunting needs durable completion credit and stronger protection against accidental loss without exploding completion into every possible Trait permutation.
+
+### Decision
+
+A **Variant Signature** is `Species + canonical Mutation set`; mutation order does not create separate signatures and Traits are excluded from baseline visual-variant completion.
+
+Legitimate Secured Ownership Finalization records Mutation Discovery and Variant Discovery historically. Later release/trade does not erase that credit.
+
+A newly secured instance automatically receives GDS-4 Creature Lock when it is a **Protected Variant**: Legendary Species, Extreme Mutation, Compound Variant, or explicitly protected event/legacy content.
+
+### Rationale
+
+The model supports long-term collection goals and protects high-value creatures while keeping completion finite and understandable.
+
+### Alternatives Rejected
+
+- requiring every Trait permutation for completion;
+- granting discovery from previews/inspection only;
+- leaving extreme/compound variants unlocked by default.
+
+### Affected Specifications
+
+GDS-4, GDS-6, GDS-11, GDS-12, GDS-14, GDS-16.
+
+---
+
+## DD-037 — Probability Modifiers Are Prospective and Hidden Spending-Based Odds Are Prohibited
+
+**Date:** 2026-09-17  
+**Status:** Accepted
+
+### Context
+
+Live events, progression, experimentation, or future monetization may want probability modifiers. Without strict boundaries, these could reroll committed encounters or personalize scarcity manipulatively.
+
+### Decision
+
+Probability modifiers affect only future, not-yet-finalized Creature Instances. They never reroll an already actionable/committed instance.
+
+MonsterVault may not secretly personalize rarity/mutation odds from a player's spending history, purchase reluctance, inferred willingness to pay, or loss-chasing behavior.
+
+Any future paid randomized/probability mechanic requires explicit GDS-13 and GDS-15 review plus clear odds/fairness integration; GDS-6 authorizes no such product by itself.
+
+### Rationale
+
+Scarcity must remain auditable and trustworthy rather than becoming invisible individualized monetization pressure.
+
+### Alternatives Rejected
+
+- post-engagement paid rerolls of the same finite creature;
+- hidden “whale odds”;
+- covert loss-chasing odds;
+- paid provenance fabrication.
+
+### Affected Specifications
+
+GDS-6, GDS-9, GDS-11, GDS-13, GDS-15, GDS-16, Technical Architecture.
+
+---
+
+## DD-038 — Owned Variant Identity Is Stable Across Live Balancing
+
+**Date:** 2026-09-17  
+**Status:** Accepted
+
+### Context
+
+A live collection game must rebalance generation rates and downstream effects without making existing collections feel mutable or deceptive.
+
+### Decision
+
+Owned instances retain Species, Mutations, Traits, Variant Signature, and provenance through ordinary content/balance updates. Future generation rates and downstream mechanical effects may change prospectively under their owning phases.
+
+Species Rarity reclassification is exceptional and requires explicit consistent content change control. Moving content to Legacy changes availability, not historical variant identity.
+
+### Rationale
+
+This preserves collectible trust while retaining normal live-service balancing flexibility.
+
+### Alternatives Rejected
+
+- rerolling owned variants after balance updates;
+- per-player rarity reclassification;
+- silently deleting now-invalid historical compound variants;
+- using Legacy status to rewrite historical rarity.
+
+### Affected Specifications
+
+GDS-6, GDS-7, GDS-8, GDS-11, GDS-12, GDS-14, Technical Architecture.
+
+---
+
+## DD-039 — Close GDS-6 Rarity, Mutations, Traits, and Variant Value Baseline
+
+**Date:** 2026-09-17  
+**Status:** Accepted
+
+### Context
+
+GDS-6 now resolves rarity taxonomy, stable variant generation, Mutation/Compound semantics, Trait boundaries, discovery, high-value protection, probability fairness, availability, balancing, and downstream value-integrity obligations and has passed scenario/cross-system validation.
+
+### Decision
+
+GDS-6 is formally closed as `Complete — PASS`.
+
+Material changes to the five-tier Species Rarity ladder, variant identity timing/stability, maximum-two Mutation baseline, Mutation Frequency semantics, Variant Signature/discovery rules, Protected Variant auto-lock, prospective-only modifiers, no hidden individualized spending-based odds, Availability separation, or owned-identity stability require GDS-6 change control and revalidation.
+
+### Evidence
+
+- `rarity_mutations/06_rarity_mutations_traits_and_variant_value.md` — Design Complete;
+- `GDS6_SCENARIO_VALIDATION.md` — 70 / 70 PASS;
+- `GDS6_CROSS_VALIDATION.md` — PASS;
+- `GDS6_CLOSURE_REPORT.md` — PASS.
+
+### Consequence
+
+The active dependency advances to **GDS-7 — Vault/Base, Passive Production, Capacity, and Upgrades**. Technical Architecture and gameplay implementation remain blocked.

@@ -4,7 +4,7 @@
 
 ## Project Status
 
-**Pre-implementation specification — GDS-0 through GDS-5 complete / GDS-6 next.**
+**Pre-implementation specification — GDS-0 through GDS-6 complete / GDS-7 next.**
 
 MonsterVault is intentionally **not in gameplay implementation yet**. The project follows a specification-first workflow modeled after Project StarForge:
 
@@ -27,13 +27,14 @@ No gameplay system should be implemented merely because an idea appears promisin
 - **GDS-3 — Player Character, Interaction, and Onboarding: COMPLETE — PASS**
 - **GDS-4 — Creatures, Collection, and Ownership: COMPLETE — PASS**
 - **GDS-5 — Capture, Contesting, Transport, and Extraction: COMPLETE — PASS**
-- **GDS-6 — Rarity, Mutations, Traits, and Variant Value: NEXT**
-- GDS-7 through GDS-16: Draft / dependency-ordered
+- **GDS-6 — Rarity, Mutations, Traits, and Variant Value: COMPLETE — PASS**
+- **GDS-7 — Vault/Base, Passive Production, Capacity, and Upgrades: NEXT**
+- GDS-8 through GDS-16: Draft / dependency-ordered
 - GDS-17: blocked until subsystem design is complete
 - Technical Architecture: blocked by GDS-17
 - Gameplay implementation: blocked by GDS and TA gates
 
-GDS-5 closure evidence is recorded in [`GDS5_SCENARIO_VALIDATION.md`](docs/game_design/GDS5_SCENARIO_VALIDATION.md), [`GDS5_CROSS_VALIDATION.md`](docs/game_design/GDS5_CROSS_VALIDATION.md), and [`GDS5_CLOSURE_REPORT.md`](docs/game_design/GDS5_CLOSURE_REPORT.md).
+GDS-6 closure evidence is recorded in [`GDS6_SCENARIO_VALIDATION.md`](docs/game_design/GDS6_SCENARIO_VALIDATION.md), [`GDS6_CROSS_VALIDATION.md`](docs/game_design/GDS6_CROSS_VALIDATION.md), and [`GDS6_CLOSURE_REPORT.md`](docs/game_design/GDS6_CLOSURE_REPORT.md).
 
 ## Product Contract
 
@@ -149,23 +150,47 @@ The resulting contract includes:
 
 The authoritative GDS-5 specification is [`05_capture_contesting_transport_and_extraction.md`](docs/game_design/capture/05_capture_contesting_transport_and_extraction.md).
 
+## Rarity, Mutations, Traits, and Variant Value Contract
+
+GDS-6 locks the collectible scarcity/value layer:
+
+- Species Rarity uses five ordered baseline tiers: **Common, Uncommon, Rare, Epic, Legendary**;
+- Species Rarity is not automatically power, price, Mutation state, Trait state, or Availability;
+- a creature's Mutation/Trait identity is finalized no later than that specific instance becoming an actionable Capture Opportunity;
+- the same surviving instance cannot reroll through claim cycling, Capture Failure/retry, transport, reconnect, extraction, or duplicate finalization delivery;
+- baseline instances carry zero, one, or at most two compatible Mutations;
+- zero = **Standard Variant**, one = **Single-Mutated Variant**, two = **Compound-Mutated Variant**;
+- Mutation Frequency uses context-aware `Frequent`, `Uncommon`, `Rare`, and `Extreme` bands;
+- Variant Signature is `Species + canonical Mutation set`; mutation order does not create fake uniqueness;
+- Traits are stable instance characteristics that may support bounded situational optimization but are not a second rarity ladder;
+- Mutation Discovery and Variant Discovery are recorded only after legitimate securisation and remain historical;
+- **Protected Variants** auto-apply Creature Lock on first securisation when Legendary, Extreme-Mutated, Compound-Mutated, or explicitly event/legacy protected;
+- probability modifiers affect only future not-yet-finalized instances;
+- hidden individualized odds based on spending, purchase reluctance, willingness-to-pay inference, or loss chasing are prohibited;
+- Availability Tags `Core`, `Rotating`, `Event-Limited`, and `Legacy` remain separate from rarity;
+- ordinary balance/content changes do not silently reroll owned Species/Mutation/Trait/provenance identity;
+- rarity/variant labels do not guarantee a currency or future trading price.
+
+The authoritative GDS-6 specification is [`06_rarity_mutations_traits_and_variant_value.md`](docs/game_design/rarity_mutations/06_rarity_mutations_traits_and_variant_value.md).
+
 ## Working Core Loop
 
 ```text
 Choose or notice a desirable goal
   -> explore
   -> discover a Capture Opportunity
+  -> recognize Species / possible variant desirability
   -> validly engage / establish an Engagement Claim
   -> resolve a Capture Attempt
-  -> transport the Provisional Capture
+  -> transport the same Provisional Capture
   -> complete extraction at a Secure Point
-  -> add the same Creature Instance to persistent collection
-  -> improve capability / capacity / access / status
-  -> pursue rarer content / events / regions
+  -> secure the same Creature Instance with stable variant identity
+  -> improve collection / vault / capability / access / status
+  -> pursue rarer Species / Mutations / Compound Variants / events / regions
   -> repeat
 ```
 
-The exact rarity tiers/mutations, capture modifiers, vault production, economy, world spawning/hazards, optional social interception/PvP, event-specific capture overrides, trading, monetization, presentation, and technical implementation remain subject to their owning later phases.
+Vault production, capacity/upgrades, economy values, world spawning/hazards, social systems, events, trading, monetization, final presentation, analytics, and technical implementation remain subject to their owning later phases.
 
 ## Documentation Authority
 
@@ -184,18 +209,19 @@ Key documents include:
 - [`player/`](docs/game_design/player/) — GDS-3 player interaction/onboarding contract;
 - [`creatures/`](docs/game_design/creatures/) — GDS-4 creature/collection/ownership contract;
 - [`capture/`](docs/game_design/capture/) — GDS-5 acquisition/contesting/transport/extraction contract;
+- [`rarity_mutations/`](docs/game_design/rarity_mutations/) — GDS-6 rarity/mutation/trait/value contract;
 - [`GDS_ROADMAP.md`](docs/game_design/GDS_ROADMAP.md) — dependency-driven phase sequence;
 - [`DESIGN_DECISIONS.md`](docs/game_design/DESIGN_DECISIONS.md) — strategic design decisions;
 - [`GLOSSARY.md`](docs/game_design/GLOSSARY.md) — canonical gameplay terminology;
-- [`GDS5_SCENARIO_VALIDATION.md`](docs/game_design/GDS5_SCENARIO_VALIDATION.md) — compound GDS-5 validation;
-- [`GDS5_CROSS_VALIDATION.md`](docs/game_design/GDS5_CROSS_VALIDATION.md) — authority/consistency audit;
-- [`GDS5_CLOSURE_REPORT.md`](docs/game_design/GDS5_CLOSURE_REPORT.md) — formal GDS-5 closure evidence.
+- [`GDS6_SCENARIO_VALIDATION.md`](docs/game_design/GDS6_SCENARIO_VALIDATION.md) — compound GDS-6 validation;
+- [`GDS6_CROSS_VALIDATION.md`](docs/game_design/GDS6_CROSS_VALIDATION.md) — authority/consistency audit;
+- [`GDS6_CLOSURE_REPORT.md`](docs/game_design/GDS6_CLOSURE_REPORT.md) — formal GDS-6 closure evidence.
 
 ### Technical Architecture
 
 [`docs/technical_architecture/`](docs/technical_architecture/) remains **blocked by GDS completion**.
 
-Technical Architecture will later translate approved GDS behavior into concrete Roblox/Luau contracts for identity, persistence, networking, runtime lifecycle, player controls, capture/creature systems, economy, trading, UI, live operations, performance, testing and CI.
+Technical Architecture will later translate approved GDS behavior into concrete Roblox/Luau contracts for identity, persistence, networking, runtime lifecycle, controls, creature/capture/variant systems, economy, trading, UI, live operations, performance, testing and CI.
 
 ### Implementation
 
@@ -219,11 +245,12 @@ Project-MonsterVault/
 │   │   ├── player/
 │   │   ├── creatures/
 │   │   ├── capture/
+│   │   ├── rarity_mutations/
 │   │   ├── GDS_ROADMAP.md
 │   │   ├── DESIGN_DECISIONS.md
-│   │   ├── GDS5_SCENARIO_VALIDATION.md
-│   │   ├── GDS5_CROSS_VALIDATION.md
-│   │   ├── GDS5_CLOSURE_REPORT.md
+│   │   ├── GDS6_SCENARIO_VALIDATION.md
+│   │   ├── GDS6_CROSS_VALIDATION.md
+│   │   ├── GDS6_CLOSURE_REPORT.md
 │   │   ├── <remaining design domains>/
 │   │   └── audit/
 │   ├── technical_architecture/
@@ -239,7 +266,7 @@ The source/test/tooling directories are reserved for later implementation. Their
 
 ## Current Next Step
 
-Proceed with **GDS-6 — Rarity, Mutations, Traits, and Variant Value**.
+Proceed with **GDS-7 — Vault/Base, Passive Production, Capacity, and Upgrades**.
 
 The first implementation vertical slice will be selected and locked only after the complete design and architecture dependency chain makes its requirements clear.
 
