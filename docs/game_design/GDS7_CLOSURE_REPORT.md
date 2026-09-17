@@ -45,7 +45,7 @@ GDS-7 requires authoritative resolution of:
 | GDS-1 through GDS-6 compatibility | `GDS7_CROSS_VALIDATION.md` | PASS |
 | Downstream authority boundaries | `GDS7_CROSS_VALIDATION.md` | PASS |
 | Canonical terminology | `GLOSSARY.md` | PASS |
-| Strategic rationale | `DESIGN_DECISIONS.md` | PASS |
+| Strategic rationale | `GDS7_DESIGN_DECISIONS.md` | PASS |
 
 ## 4. Locked GDS-7 Decisions
 
