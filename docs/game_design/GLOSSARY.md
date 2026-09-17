@@ -11,18 +11,54 @@ This glossary owns shared terms used across MonsterVault design specifications. 
 A collectible game entity that may be encountered, captured and owned by a player according to the authoritative creature and capture specifications.
 
 ### Species
-A content-defined creature archetype. Species identity is distinct from an individual owned creature instance.
+A content-authored creature archetype. Species identity is distinct from an individual Creature Instance and is not itself player-owned.
 
 ### Creature Instance
-A specific owned or world-present creature with its own persistent identity and applicable generated properties such as mutations or traits.
+A specific individual creature entity with stable identity. Once secured, a Creature Instance is persistent player-owned collection value and must remain distinguishable from other instances of the same Species.
+
+### World Creature
+A creature/encounter representation that is not yet part of any player's Secured Collection. Exact encounter and capture semantics remain GDS-5 authority.
+
+### Acquisition-In-Progress
+A transient creature-related opportunity for which acquisition/capture has begun but **Secured Ownership Finalization** has not yet occurred. It is not yet persistent player-owned collection value.
+
+### Secured Ownership Finalization
+The GDS-5-owned transition event that changes one eligible creature from non-secured/transient acquisition state into a specific player's persistent ownership. GDS-5 owns the trigger conditions/timing; GDS-4 owns the persistent ownership consequences after finalization.
 
 ### Capture
-The gameplay process through which a world creature may become owned by a player. Exact ownership-transfer timing is owned by the capture specification.
+The gameplay process through which a World Creature may become owned by a player. Exact ownership-transfer timing is owned by GDS-5.
 
 ### Secured Creature
-A creature instance that has crossed the future GDS-5/GDS-4-defined boundary into the player's protected persistent collection state.
+A Creature Instance for which Secured Ownership Finalization has completed and whose ownership is part of Persistent Player State.
 
-GDS-1 establishes only the product-level consequence: **unrestricted theft of a secured persistent creature is not part of MonsterVault's baseline product identity**. The exact event that makes a creature secured, and any explicitly bounded exceptions/risk modes, remain owned by GDS-4/GDS-5/GDS-10.
+The baseline product does not permit unrestricted theft or ordinary involuntary loss of a Secured Creature. Any later bounded exception must receive explicit authority and remain consistent with GDS-1/GDS-4 change control.
+
+### Collection Registry
+The player's authoritative logical set of currently owned Secured Creature Instances, including stable identity and relevant collection-facing metadata. This is a gameplay semantic, not a prescribed persistence implementation.
+
+### Active Creature
+A Secured Creature currently assigned to a later gameplay-active role. `Active` changes use/placement, not ownership.
+
+### Stored Creature
+A Secured Creature retained in ordinary collection/vault storage and not currently assigned to an active role.
+
+### Overflow-Held Creature
+A Secured Creature retained safely when ordinary eligible placement/storage capacity is unavailable. It remains player-owned Persistent Player State but has restricted ordinary use until capacity is resolved.
+
+### Released Creature
+A former Secured Creature whose player intentionally completed an irreversible voluntary removal action. Release ends current ordinary ownership and is not caused by session lifecycle, Recovery, or capacity overflow.
+
+### Duplicate
+Two or more distinct Secured Creature Instances of the same Species. Duplicates remain individually identifiable and may later differ through provenance, mutations, traits, or other instance metadata.
+
+### Provenance
+Persistent collection-facing information describing a Creature Instance's origin/acquisition history where applicable. Provenance is historical metadata and does not itself define current ownership.
+
+### Creature Lock
+A persistent player-controlled protection flag that prevents voluntary destructive or later ownership-transfer actions until explicitly removed.
+
+### Species Discovery
+A persistent collection fact indicating that the player has legitimately secured at least one Creature Instance of a Species. Releasing the last currently owned instance does not erase historical Species Discovery.
 
 ### Vault
 The player's persistent personal base/laboratory space used for creature storage, display, production and progression functions. Final detailed scope remains under GDS-7.
@@ -31,7 +67,7 @@ The player's persistent personal base/laboratory space used for creature storage
 A variant property that changes a creature's presentation and/or value according to the rarity/mutation specification. Mutation does not imply a specific statistical benefit unless explicitly defined.
 
 ### Rarity
-A classification expressing designed scarcity and collection value. Exact tiers and probability semantics remain under design.
+A classification expressing designed scarcity and collection value. Exact tiers and probability semantics remain under GDS-6.
 
 ### Biome
 A world region with its own creature pool, environment, progression requirements and encounter characteristics.
