@@ -228,26 +228,42 @@ GDS-8 establishes the economy/progression contract consumed by world, social, ev
 
 ## GDS-9 — World, Biomes, Exploration, Spawning, and Hazards
 
-**Status:** NEXT — Draft
+**Status:** Complete — PASS
 
-Defines:
+Established and formally validated:
 
-- world/biome structure and progression topology;
-- traversal and exploration loops;
-- concrete GDS-8 Access Unlock placement and active Progression Milestones;
-- creature spawn pools, contexts, densities and encounter lifetimes;
-- Species Rarity / Mutation-generation contexts without violating GDS-6 pre-commit identity;
-- hazards and special zones;
-- Secure Point, Vault Access Point and Recovery Anchor placement;
-- world/exploration Energy rewards under GDS-8 source rules;
-- rare encounter visibility/readability;
-- server-local world lifecycle and content-scalability expectations.
+- compact `Home Hub -> Starter -> two parallel Mid Biomes -> Advanced` launch topology;
+- free Starter access plus persistent GDS-8 Access Unlocks for Mid/Advanced progression;
+- active **Region Mastery** combining Route Survey, distinct Core-Species collection and Field Objective completion;
+- no mandatory Legendary/Extreme/Compound/Event-Limited/specific low-probability/paid progression gate;
+- persistent exact-once Landmark Discovery and bounded active world Energy rewards;
+- Home Hub / Safe Outpost rules for Secure Points, Vault Access Points and Recovery Anchors;
+- baseline non-premium Safe Routes and discovery-based travel nodes;
+- fast travel blocked during all Acquisition-In-Progress states;
+- materially distinct Habitats and authored Spawn Context semantics;
+- bounded Encounter Population Budgets and ordinary opportunity-density targets;
+- prospective encounter generation with stable GDS-6 Variant Identity and no hidden spending-based spawn odds;
+- bounded Encounter Lifetimes that do not override active GDS-5 acquisition state;
+- non-trivial Rare Encounter Stability and readability for Protected Variants;
+- deterministic ordinary World Cycle context without private server-hop reset semantics;
+- hazards that create temporary traversal/Recovery risk but cannot destroy finalized player value;
+- session-scoped public encounters versus persistent Access/Landmark/Mastery/reward progress;
+- additive content expansion preserving historical access, mastery, ownership and provenance;
+- 100 compound world/spawn/lifecycle scenarios validated.
 
-GDS-9 must preserve GDS-5 capture/finalization, GDS-6 rarity/variant integrity, GDS-7 Vault/access boundaries, and GDS-8 economy/progression gate semantics.
+Closure evidence:
+
+- [`world/09_world_biomes_exploration_spawning_and_hazards.md`](world/09_world_biomes_exploration_spawning_and_hazards.md) — Design Complete;
+- [`GDS9_SCENARIO_VALIDATION.md`](GDS9_SCENARIO_VALIDATION.md) — 100 / 100 PASS;
+- [`GDS9_CROSS_VALIDATION.md`](GDS9_CROSS_VALIDATION.md) — PASS;
+- [`GDS9_DECISION_INDEX.md`](GDS9_DECISION_INDEX.md) — accepted phase-local decisions;
+- [`GDS9_CLOSURE_REPORT.md`](GDS9_CLOSURE_REPORT.md) — PASS.
+
+GDS-9 establishes the world/exploration contract consumed by social play, events, trading, monetization, presentation, safety, analytics, and Technical Architecture. It does not authorize Technical Architecture or implementation.
 
 ## GDS-10 — Social Play, Cooperation, Competition, and PvP Boundaries
 
-**Status:** Draft
+**Status:** NEXT — Draft
 
 Defines parties/friends, intentional co-play, shared objectives, social status/flexing, expanded Vault visitor permissions if any, player competition, collision/body-blocking rules, optional interception/PvP boundaries, protection windows, grief prevention, collaboration rewards, alt-account concerns, and multiplayer fairness.
 
@@ -289,7 +305,7 @@ Defines first-session funnel, session goals, return loops, daily/weekly engageme
 
 ## GDS-17 — Cross-System Consistency and Design-Complete Audit
 
-**Status:** Blocked by GDS-9 through GDS-16
+**Status:** Blocked by GDS-10 through GDS-16
 
 Performs the formal pre-architecture audit:
 
@@ -310,9 +326,9 @@ Performs the formal pre-architecture audit:
 
 ## Current Project Gate
 
-GDS-0 through GDS-8 are formally complete. The active dependency is:
+GDS-0 through GDS-9 are formally complete. The active dependency is:
 
-> **GDS-9 — World, Biomes, Exploration, Spawning, and Hazards**
+> **GDS-10 — Social Play, Cooperation, Competition, and PvP Boundaries**
 
 Technical Architecture must not begin until GDS-17 records a formal PASS with no implementation-critical open design questions.
 
@@ -328,8 +344,9 @@ GDS-0 governance — COMPLETE
   -> GDS-6 rarity/mutations/traits/value — COMPLETE
   -> GDS-7 vault/base/passive production/capacity/upgrades — COMPLETE
   -> GDS-8 economy/progression/unlocks/pacing — COMPLETE
-  -> GDS-9 world/biomes/exploration/spawning/hazards — NEXT
-  -> GDS-10..16 remaining subsystem design
+  -> GDS-9 world/biomes/exploration/spawning/hazards — COMPLETE
+  -> GDS-10 social/cooperation/competition/PvP boundaries — NEXT
+  -> GDS-11..16 remaining subsystem design
   -> GDS-17 cross-system audit
   -> DESIGN COMPLETE
   -> Technical Architecture
