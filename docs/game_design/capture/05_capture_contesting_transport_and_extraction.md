@@ -91,10 +91,10 @@ A world-defined valid destination or interaction that can complete ordinary extr
 The validated completion of the required return/secure step at an eligible Secure Point while Transport Custody is valid.
 
 ### Secured Ownership Finalization
-The irreversible GDS-5 output emitted when a valid Provisional Capture successfully completes Extraction Completion, or a narrowly defined system-shutdown protection exception applies. This output changes the creature into a GDS-4 Secured Creature owned by that player.
+The irreversible GDS-5 output emitted when a valid Provisional Capture successfully completes Extraction Completion, or when the controlled server-shutdown protection rule applies. This output changes the creature into a GDS-4 Secured Creature owned by that player.
 
 ### Transport Grace
-A short bounded server-local interruption window during which a disconnected player may recover an existing Provisional Capture without creating a second copy or transferring it to another player. Exact duration is a tuneable parameter, not a permanent ownership right.
+A short bounded server-local interruption state entered after unexpected client disconnect while valid Transport Custody exists. A same-session reconnect can resume the same provisional custody; grace expiry ends the provisional state without ownership. Exact duration is tuneable.
 
 ### Opportunity Release
 The transition that ends an Engagement Claim or failed/abandoned acquisition state and makes the creature available again if its world/encounter lifetime remains valid.
@@ -103,8 +103,6 @@ The transition that ends an Engagement Claim or failed/abandoned acquisition sta
 A first-session Capture Opportunity whose availability cannot be permanently consumed or monopolized by unrelated players before the onboarding player completes the required first capture milestone.
 
 ## 5. Acquisition State Model
-
-The baseline ordinary flow is:
 
 ```text
 World Creature / Capture Opportunity
@@ -225,18 +223,20 @@ If the Player Character enters Recovery while carrying a Provisional Capture, or
 ### CA-29 — Ordinary voluntary leave forfeits unfinalized transport
 If a player intentionally leaves the server while holding a Provisional Capture, no Secured Ownership Finalization occurs. The provisional state ends according to Opportunity Release/encounter cleanup semantics.
 
-### CA-30 — Unexpected client disconnect receives bounded Transport Grace
-If the player unexpectedly disconnects while valid Transport Custody exists, the server may preserve that custody for a short bounded **Transport Grace** so a same-session reconnect can resume without duplicating or auto-securing the creature.
+### CA-30 — Unexpected client disconnect enters bounded Transport Grace
+If the player unexpectedly disconnects while valid Transport Custody exists, that custody enters a short bounded **Transport Grace**. A same-session reconnect during grace resumes the same provisional custody without duplicating or auto-securing the creature.
 
 If grace expires, the Provisional Capture ends without secured ownership and resolves through Opportunity Release or encounter cleanup.
 
 ### CA-31 — Transport Grace is not cross-server ownership
 A player joining a different ordinary server does not carry an unfinalized provisional creature with them. A Provisional Capture is not Persistent Player State.
 
-### CA-32 — Server-originated shutdown after Capture Success receives a protection exception
-If a server is being terminated by a system/server-originated shutdown while a valid Provisional Capture exists, the game may perform a **Protected Shutdown Finalization** for that provisional creature, provided the system can authoritatively verify the valid custody and has not already finalized it.
+### CA-32 — Controlled server-originated shutdown protects valid provisional custody
+If an orderly system/server-originated shutdown begins while a valid Provisional Capture exists and authoritative custody state is still available, the game performs **Protected Shutdown Finalization** for that provisional creature exactly once.
 
-This exception emits the same single Secured Ownership Finalization as ordinary extraction. It does not apply to voluntary leave, player reset, client disconnect, or player-triggered Recovery.
+An abrupt process/platform failure that prevents the server from executing or verifying shutdown state cannot be promised this exception; it remains an unfinalized transient interruption under GDS-2/GDS-5.
+
+Protected Shutdown Finalization emits the same single Secured Ownership Finalization as ordinary extraction. It does not apply to voluntary leave, player reset, client disconnect, or player-triggered Recovery.
 
 ### CA-33 — Protected Shutdown Finalization cannot duplicate ordinary extraction
 If Extraction Completion already finalized the creature, shutdown handling must observe that result and cannot grant a second instance.
@@ -451,8 +451,6 @@ An eligible Secure Point must:
 
 The baseline ordinary ownership boundary is **Extraction Completion**.
 
-The semantic sequence is:
-
 ```text
 valid Transport Custody
   + eligible Secure Point
@@ -481,14 +479,12 @@ This race-protection rule does not allow a player knowingly over capacity to beg
 | World/available | no ownership; world rules continue | no ownership | no ownership | session-local opportunity ends |
 | Engagement Claim | claim ends / opportunity release or encounter rule | claim ends after short technical tolerance at most; no ownership | claim ends; no ownership | no ownership |
 | Capture Attempt | interrupted; no success unless result already finalized | interrupted; no success unless result already finalized | interrupted; no ownership | no ownership unless Capture Success had already created valid Provisional Capture |
-| Provisional Capture / Transport Custody | custody ends; no extraction through Recovery | bounded Transport Grace; expiry ends provisional state | custody ends; no ownership | Protected Shutdown Finalization may secure once if valid custody is authoritatively confirmed |
+| Provisional Capture / Transport Custody | custody ends; no extraction through Recovery | enters bounded Transport Grace; expiry ends provisional state | custody ends; no ownership | orderly shutdown: Protected Shutdown Finalization exactly once when valid custody is authoritatively available; abrupt unverifiable crash: no guaranteed finalization |
 | Extraction Completion finalized | already GDS-4 secured; persists | persists | persists | persists |
 
-The matrix describes player-facing semantics. Exact tolerance windows and shutdown-detection mechanisms belong to Technical Architecture.
+The matrix describes player-facing semantics. Exact tolerance durations and shutdown-detection/execution mechanisms belong to Technical Architecture.
 
 ## 13. Anti-Frustration Requirements
-
-The capture loop must protect against frustration that does not create meaningful mastery or social tension:
 
 - do not accept an attempt when capacity/eligibility already makes success impossible;
 - do not let two players unknowingly spend resources on the same ordinary single-award claim;
@@ -526,13 +522,11 @@ Repeated activation at a Secure Point cannot finalize the same provisional creat
 Client-side animation/model state cannot decide capture success or ownership.
 
 ### 14.8 Shutdown spoofing
-Protected Shutdown Finalization is limited to an authoritative system/server-originated termination path. A player action that resembles leaving/reset/disconnect cannot invoke it.
+Protected Shutdown Finalization is limited to an authoritative controlled system/server-originated shutdown path. A player action that resembles leaving/reset/disconnect cannot invoke it.
 
 ## 15. Multiplayer Semantics
 
 ### Ordinary creature
-
-A normal single-award world creature follows:
 
 1. many players may notice/pursue it;
 2. one valid ordinary Engagement Claim becomes active;
@@ -567,8 +561,6 @@ The protection may be personal, reserved, rapidly replenishing, or functionally 
 
 ## 17. Accessibility and Cross-Device Requirements
 
-Capture-critical semantics must satisfy:
-
 - no color-only distinction between available, claimed, provisional, and secured states;
 - no audio-only timing instruction;
 - touch targets practical for mobile-first use;
@@ -579,7 +571,7 @@ Capture-critical semantics must satisfy:
 
 ## 18. Analytics and Tuneable Parameters
 
-GDS-16 may later instrument outcomes such as:
+GDS-16 may later instrument:
 
 - opportunity noticed-to-engaged conversion;
 - eligibility-rejection reasons;
@@ -641,7 +633,7 @@ Must clearly distinguish eligibility, active claim, attempt, provisional transpo
 Must measure the acquisition funnel without experiments that covertly move the ownership boundary or turn tutorial protection into a monetization gate.
 
 ### Technical Architecture
-Must implement authoritative claims, attempt validation, provisional custody, disconnect grace, shutdown exception, exact-once finalization, capacity revalidation, and anti-duplication without weakening these player-facing semantics.
+Must implement authoritative claims, attempt validation, provisional custody, disconnect grace, controlled-shutdown finalization, exact-once ownership finalization, capacity revalidation, and anti-duplication without weakening these player-facing semantics.
 
 ## 20. Open Questions
 
@@ -660,8 +652,8 @@ Material changes to any of the following require reopening GDS-5 and relevant re
 - ordinary Transport Custody not being directly stealable;
 - Extraction Completion as the ordinary Secured Ownership Finalization boundary;
 - reset/Recovery not counting as extraction;
-- bounded same-session Transport Grace for unexpected disconnect;
-- system-originated shutdown protection exception;
+- deterministic bounded same-session Transport Grace for unexpected disconnect;
+- controlled server-originated shutdown protection exception;
 - full-capacity initiation block plus race-safe Overflow-Held finalization;
 - Onboarding-Protected Opportunity requirement;
 - cross-device/accessibility capture contract;
