@@ -172,13 +172,13 @@ The authored production characteristics used by GDS-7/GDS-8 to determine how an 
 Accrual generated over elapsed time from valid persistent Production Assignments without requiring repeated player input.
 
 ### Production Buffer
-The persistent bounded accumulator holding unclaimed Passive Production output before it is claimed into the owning GDS-8 resource/progression system. When the applicable buffer is full, further passive accrual pauses.
+The persistent bounded accumulator holding unclaimed Passive Production output before it is claimed into the GDS-8 Energy Wallet. When the applicable buffer is full, further passive accrual pauses.
 
 ### Offline Production Window
 The maximum elapsed-time interval after Active Presence ends for which valid Production Assignments may continue generating Passive Production before the offline cap stops additional accrual.
 
 ### Production Claim
-The player action that transfers currently eligible Production Buffer value into the owning downstream resource/progression state as one exact-once Finalized Outcome.
+The player action that transfers currently eligible Production Buffer Energy into the Energy Wallet as one exact-once Finalized Outcome.
 
 ### Vault Upgrade
 A persistent progression change that increases or changes an explicitly defined Vault capability such as Collection Capacity, Production Slot count, Production Buffer capacity, Offline Production Window, Display capacity, or approved Vault utility.
@@ -192,20 +192,50 @@ The owner action that selects one eligible Overflow-Held Creature and returns th
 ### Visitor
 A non-owner player temporarily allowed to view or interact with explicitly public/read-only elements of another player's Vault. Baseline visitors receive no persistent management authority and observation alone grants no Species/Mutation/Variant Discovery.
 
+### Energy
+The canonical GDS-8 baseline non-premium soft progression currency. Energy is persistent, fungible, non-negative whole-unit player-facing value used for approved progression sinks. It is separate from premium currency and is not baseline player-to-player transferable.
+
+### Energy Wallet
+The player's persistent authoritative Energy balance. The wallet cannot finalize below zero and must use implementation-safe bounds without silently destroying claimable value.
+
+### Economy Source
+An authorized event that creates Energy from outside the player's existing Energy Wallet, such as a Production Claim, approved active objective/milestone reward, downstream event reward, onboarding reward, or exceptional remediation.
+
+### Economy Sink
+An authorized event that permanently removes Energy in exchange for a defined progression, access, utility, or approved presentation outcome.
+
+### Progression Milestone
+A persistent non-currency record proving completion of meaningful active gameplay or collection progression. It may gate later progression but is not a spendable resource and cannot be fabricated by passive Energy alone.
+
+### Progression Gate
+A defined requirement set that must be satisfied before a progression action becomes available. It may combine prior unlocks, Progression Milestones, collection/Vault state, and an Energy cost.
+
+### Progression Purchase
+An exact-once player-initiated transaction that spends Energy and grants one defined persistent progression effect. Cost and effect are atomic from the player's perspective.
+
+### Capture Capability
+The player's persistent ordinary capture-equipment progression capability. It may influence explicitly authorized challenge assistance or encounter requirements but does not override GDS-5 claim, ownership-finalization, capacity, or single-winner rules.
+
+### Access Unlock
+A persistent exact-once progression effect granting access to a defined content, region, or capability gate. Exact world topology belongs to GDS-9.
+
+### Economy Band
+A tuning segment representing a comparable stage of player progression for reward, cost, and pacing evaluation. It need not be exposed as a player-facing rank.
+
+### Catch-Up Adjustment
+A visible deterministic adjustment that reduces obsolete progression friction for eligible players without hidden spending-based personalization or fabricated discovery/active-completion history.
+
 ### Biome
 A world region with its own creature pool, environment, progression requirements and encounter characteristics.
 
 ### Server Event
 A time-bounded multiplayer encounter or world-state change presented to multiple players within a server.
 
-### Energy
-The current working name for a primary non-premium progression resource. This name and its exact role remain provisional until GDS-8.
-
 ### Trading
 An explicit player-to-player ownership transfer mechanism governed by the trading specification. Trading is strategically desirable but is not a launch-critical product requirement and is not considered guaranteed until GDS-12 reaches Design Complete.
 
 ### Offline Progression
-Any progression accrued while the player is not actively present in the experience. GDS-7 explicitly authorizes **bounded Vault Passive Production** from finalized Production Assignments, limited by the Offline Production Window and Production Buffer cap. Other offline progression remains unauthorized unless an owning later specification defines it. GDS-8 owns exact resource/rate/economic effects.
+Any progression accrued while the player is not actively present in the experience. GDS-7 explicitly authorizes **bounded Vault Passive Production** from finalized Production Assignments, limited by the Offline Production Window and Production Buffer cap. GDS-8 defines the resulting Energy/economic effects. Other offline progression remains unauthorized unless an owning later specification defines it.
 
 ### Core Product Loop
 The recurring high-level structure through which players pursue a desirable target, explore/discover, attempt capture, secure/return acquired value, improve their collection/Vault/progression, and pursue a new higher-value goal. Detailed mechanics remain distributed across their owning GDS phases.

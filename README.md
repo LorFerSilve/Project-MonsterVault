@@ -4,7 +4,7 @@
 
 ## Project Status
 
-**Pre-implementation specification — GDS-0 through GDS-7 complete / GDS-8 next.**
+**Pre-implementation specification — GDS-0 through GDS-8 complete / GDS-9 next.**
 
 MonsterVault is intentionally **not in gameplay implementation yet**. The project follows a specification-first workflow:
 
@@ -29,13 +29,14 @@ No gameplay system should be implemented merely because an idea appears promisin
 - **GDS-5 — Capture, Contesting, Transport, and Extraction: COMPLETE — PASS**
 - **GDS-6 — Rarity, Mutations, Traits, and Variant Value: COMPLETE — PASS**
 - **GDS-7 — Vault/Base, Passive Production, Capacity, and Upgrades: COMPLETE — PASS**
-- **GDS-8 — Economy, Progression, Unlocks, and Pacing: NEXT**
-- GDS-9 through GDS-16: Draft / dependency-ordered
+- **GDS-8 — Economy, Progression, Unlocks, and Pacing: COMPLETE — PASS**
+- **GDS-9 — World, Biomes, Exploration, Spawning, and Hazards: NEXT**
+- GDS-10 through GDS-16: Draft / dependency-ordered
 - GDS-17: blocked until subsystem design is complete
 - Technical Architecture: blocked by GDS-17
 - Gameplay implementation: blocked by GDS and TA gates
 
-GDS-7 closure evidence is recorded in [`GDS7_SCENARIO_VALIDATION.md`](docs/game_design/GDS7_SCENARIO_VALIDATION.md), [`GDS7_CROSS_VALIDATION.md`](docs/game_design/GDS7_CROSS_VALIDATION.md), [`GDS7_DECISION_INDEX.md`](docs/game_design/GDS7_DECISION_INDEX.md), and [`GDS7_CLOSURE_REPORT.md`](docs/game_design/GDS7_CLOSURE_REPORT.md).
+GDS-8 closure evidence is recorded in [`GDS8_SCENARIO_VALIDATION.md`](docs/game_design/GDS8_SCENARIO_VALIDATION.md), [`GDS8_CROSS_VALIDATION.md`](docs/game_design/GDS8_CROSS_VALIDATION.md), [`GDS8_DECISION_INDEX.md`](docs/game_design/GDS8_DECISION_INDEX.md), and [`GDS8_CLOSURE_REPORT.md`](docs/game_design/GDS8_CLOSURE_REPORT.md).
 
 ## Product Contract
 
@@ -156,16 +157,35 @@ GDS-7 turns the secured collection into a persistent home/progression surface wh
 - offline production creates no live-world/event participation and cannot reset through server hopping or replay the same elapsed interval;
 - **Production Claims** are exact-once/idempotent and uncertain failures preserve buffered value;
 - **Vault Upgrades** are exact-once persistent outcomes with atomic player-facing cost/effect semantics;
-- upgrade categories include Collection Capacity, Production Slots, Production Buffer, Offline Production Window, Display Capacity, and approved utility/presentation capabilities;
 - temporary capacity expiry is safe through reconciliation rather than deletion or forced purchase;
-- GDS-5 Secured Ownership Finalization happens before any Vault assignment/use;
 - baseline visitors are read-only and cannot mutate owner state or gain discovery merely by viewing;
-- reset/disconnect/server transitions/shutdown do not wipe finalized Vault state;
 - Protected Load Failure blocks irreversible Vault management;
-- hidden spending-based production personalization is prohibited;
 - core Vault use retains a viable non-premium progression path.
 
 The authoritative GDS-7 specification is [`07_vault_base_passive_production_capacity_and_upgrades.md`](docs/game_design/vault/07_vault_base_passive_production_capacity_and_upgrades.md).
+
+## Economy, Progression, Unlocks, and Pacing Contract
+
+GDS-8 turns Vault output into a controlled progression economy without allowing passive waiting or monetization pressure to replace the active collection game:
+
+- **Energy** is the single baseline persistent non-premium soft currency;
+- Energy is non-negative, player-facing whole-unit value and is not baseline player-to-player transferable;
+- GDS-7 **Production Claim** is the recurring passive Energy source, while active gameplay may grant bounded objective/milestone rewards;
+- ordinary Release and repeated capture do not automatically mint Energy;
+- Energy sinks include Vault Upgrades, durable **Capture Capability**, Access Unlocks, approved exploration/utility upgrades, and later optional presentation sinks;
+- no mandatory Energy maintenance tax, debt, or universal per-capture Energy fee exists;
+- Species may have authored Production Profiles and bounded Traits may affect production, but Species Rarity, Mutation prestige, Compound status, Availability, and Provenance are not automatic income multipliers;
+- major progression may require persistent active **Progression Milestones** in addition to Energy, preventing offline production from completing the whole progression ladder;
+- persistent progression purchases are exact-once and atomic: finalized cost and effect remain coherent through retries/reconnects;
+- reference pacing keeps the first meaningful progression choice in the opening minutes and preserves parallel goals through later bands;
+- passive Vault production should remain economically meaningful without making active play irrelevant; the initial tuning target is approximately 50–70% passive versus 30–50% active recurring Energy income;
+- catch-up may visibly compress obsolete Energy friction but cannot fabricate discovery/event/world history;
+- arbitrary seasonal/currency wipes are prohibited;
+- baseline progression has **no prestige/rebirth reset** that wipes Energy, Vault upgrades, access, discoveries, or Secured Creatures;
+- hidden spending-propensity-based prices/rewards are prohibited;
+- paid Energy or paid progression acceleration remains unauthorized until GDS-13 evaluates it.
+
+The authoritative GDS-8 specification is [`08_economy_progression_unlocks_and_pacing.md`](docs/game_design/economy_progression/08_economy_progression_unlocks_and_pacing.md).
 
 ## Working Core Loop
 
@@ -179,13 +199,14 @@ Choose or notice a desirable goal
   -> complete extraction at a Secure Point
   -> secure the same Creature Instance
   -> store / display / deliberately assign eligible creatures in the Vault
-  -> accrue and claim bounded production value
-  -> expand Vault capacity / production flexibility through progression
-  -> pursue rarer creatures, variants, events, regions and long-term goals
+  -> accrue and claim bounded Energy production
+  -> spend Energy on deliberate Vault / capture / access progression
+  -> satisfy active Progression Milestones for major gates
+  -> pursue rarer creatures, variants, regions, events and long-term goals
   -> repeat
 ```
 
-Exact currencies/rates/costs and pacing now belong to GDS-8. World topology, social systems, events, trading, monetization, final presentation, analytics, platform constraints, and technical implementation remain subject to their owning later phases.
+Concrete world topology/spawning/hazards now belong to GDS-9. Social systems, events, trading, monetization, final presentation, analytics, platform constraints, and technical implementation remain subject to their owning later phases.
 
 ## Documentation Authority
 
@@ -203,15 +224,16 @@ Key documents include:
 - [`GLOSSARY.md`](docs/game_design/GLOSSARY.md) — canonical gameplay terminology;
 - [`product/`](docs/game_design/product/) — GDS-1 product contract;
 - [`global_rules/`](docs/game_design/global_rules/) — GDS-2 lifecycle/session contract;
-- [`player/`](docs/game_design/player/) — GDS-3 player interaction/onboarding contract;
+- [`player/`](docs/game_design/player/) — GDS-3 interaction/onboarding contract;
 - [`creatures/`](docs/game_design/creatures/) — GDS-4 ownership contract;
 - [`capture/`](docs/game_design/capture/) — GDS-5 acquisition contract;
 - [`rarity_mutations/`](docs/game_design/rarity_mutations/) — GDS-6 rarity/variant contract;
 - [`vault/`](docs/game_design/vault/) — GDS-7 Vault/capacity/production contract;
-- [`GDS7_SCENARIO_VALIDATION.md`](docs/game_design/GDS7_SCENARIO_VALIDATION.md) — 80 compound GDS-7 scenarios;
-- [`GDS7_CROSS_VALIDATION.md`](docs/game_design/GDS7_CROSS_VALIDATION.md) — authority/consistency audit;
-- [`GDS7_DECISION_INDEX.md`](docs/game_design/GDS7_DECISION_INDEX.md) — phase-local strategic decisions;
-- [`GDS7_CLOSURE_REPORT.md`](docs/game_design/GDS7_CLOSURE_REPORT.md) — formal GDS-7 closure evidence.
+- [`economy_progression/`](docs/game_design/economy_progression/) — GDS-8 economy/progression contract;
+- [`GDS8_SCENARIO_VALIDATION.md`](docs/game_design/GDS8_SCENARIO_VALIDATION.md) — 90 compound GDS-8 scenarios;
+- [`GDS8_CROSS_VALIDATION.md`](docs/game_design/GDS8_CROSS_VALIDATION.md) — authority/consistency audit;
+- [`GDS8_DECISION_INDEX.md`](docs/game_design/GDS8_DECISION_INDEX.md) — phase-local strategic decisions;
+- [`GDS8_CLOSURE_REPORT.md`](docs/game_design/GDS8_CLOSURE_REPORT.md) — formal GDS-8 closure evidence.
 
 ### Technical Architecture
 
@@ -241,12 +263,13 @@ Project-MonsterVault/
 │   │   ├── capture/
 │   │   ├── rarity_mutations/
 │   │   ├── vault/
+│   │   ├── economy_progression/
 │   │   ├── GDS_ROADMAP.md
 │   │   ├── GLOSSARY.md
-│   │   ├── GDS7_SCENARIO_VALIDATION.md
-│   │   ├── GDS7_CROSS_VALIDATION.md
-│   │   ├── GDS7_DECISION_INDEX.md
-│   │   ├── GDS7_CLOSURE_REPORT.md
+│   │   ├── GDS8_SCENARIO_VALIDATION.md
+│   │   ├── GDS8_CROSS_VALIDATION.md
+│   │   ├── GDS8_DECISION_INDEX.md
+│   │   ├── GDS8_CLOSURE_REPORT.md
 │   │   └── <remaining design domains>/
 │   ├── technical_architecture/
 │   ├── implementation/
@@ -261,7 +284,7 @@ The source/test/tooling directories are reserved for later implementation. Their
 
 ## Current Next Step
 
-Proceed with **GDS-8 — Economy, Progression, Unlocks, and Pacing**.
+Proceed with **GDS-9 — World, Biomes, Exploration, Spawning, and Hazards**.
 
 The first implementation vertical slice will be selected and locked only after the complete design and architecture dependency chain makes its requirements clear.
 
