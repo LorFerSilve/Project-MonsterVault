@@ -4,9 +4,9 @@
 
 ## Project Status
 
-**Pre-implementation specification — GDS-0 through GDS-6 complete / GDS-7 next.**
+**Pre-implementation specification — GDS-0 through GDS-7 complete / GDS-8 next.**
 
-MonsterVault is intentionally **not in gameplay implementation yet**. The project follows a specification-first workflow modeled after Project StarForge:
+MonsterVault is intentionally **not in gameplay implementation yet**. The project follows a specification-first workflow:
 
 ```text
 Game Design Specification (GDS)
@@ -28,13 +28,14 @@ No gameplay system should be implemented merely because an idea appears promisin
 - **GDS-4 — Creatures, Collection, and Ownership: COMPLETE — PASS**
 - **GDS-5 — Capture, Contesting, Transport, and Extraction: COMPLETE — PASS**
 - **GDS-6 — Rarity, Mutations, Traits, and Variant Value: COMPLETE — PASS**
-- **GDS-7 — Vault/Base, Passive Production, Capacity, and Upgrades: NEXT**
-- GDS-8 through GDS-16: Draft / dependency-ordered
+- **GDS-7 — Vault/Base, Passive Production, Capacity, and Upgrades: COMPLETE — PASS**
+- **GDS-8 — Economy, Progression, Unlocks, and Pacing: NEXT**
+- GDS-9 through GDS-16: Draft / dependency-ordered
 - GDS-17: blocked until subsystem design is complete
 - Technical Architecture: blocked by GDS-17
 - Gameplay implementation: blocked by GDS and TA gates
 
-GDS-6 closure evidence is recorded in [`GDS6_SCENARIO_VALIDATION.md`](docs/game_design/GDS6_SCENARIO_VALIDATION.md), [`GDS6_CROSS_VALIDATION.md`](docs/game_design/GDS6_CROSS_VALIDATION.md), and [`GDS6_CLOSURE_REPORT.md`](docs/game_design/GDS6_CLOSURE_REPORT.md).
+GDS-7 closure evidence is recorded in [`GDS7_SCENARIO_VALIDATION.md`](docs/game_design/GDS7_SCENARIO_VALIDATION.md), [`GDS7_CROSS_VALIDATION.md`](docs/game_design/GDS7_CROSS_VALIDATION.md), [`GDS7_DECISION_INDEX.md`](docs/game_design/GDS7_DECISION_INDEX.md), and [`GDS7_CLOSURE_REPORT.md`](docs/game_design/GDS7_CLOSURE_REPORT.md).
 
 ## Product Contract
 
@@ -48,14 +49,13 @@ The high-level product contract includes:
 - mobile-first interaction constraints with cross-platform gameplay parity;
 - core progression that does not depend on unrestricted chat or voice;
 - active exploration/capture instead of primarily menu/idle acquisition;
-- persistent visible collection/vault progression;
+- persistent visible collection/Vault progression;
 - rarity and mutation/variant hunting;
 - server-level social opportunities;
 - socially competitive but **non-loss-dominant** play;
 - no baseline requirement for unrestricted theft of secured persistent creatures;
 - no direct-combat PvP requirement;
 - normal sessions around **10–25 minutes**, while short 3–5 minute sessions remain meaningful;
-- aggressive time-to-fun targets in the first minutes;
 - weeks-to-months long-term collection/progression aspirations;
 - trading as desirable but not launch-critical;
 - moderate, non-coercive monetization;
@@ -72,46 +72,37 @@ GDS-2 locks the project-wide session/persistence baseline:
 - inability to establish trusted state enters **Protected Load Failure** instead of unsafe blank-profile play;
 - finalized persistent outcomes apply once across retries/reconnects;
 - failure/reset invokes Recovery rather than a global persistent wipe;
-- late joining an already-running server is normal;
-- offline progression is optional rather than assumed;
+- offline progression is optional unless explicitly authorized downstream;
 - persistent timers/global windows do not implicitly restart on server transition;
 - lifecycle semantics are consistent across supported device classes.
 
 ## Player Interaction and Onboarding Contract
 
-GDS-3 locks the player-control/onboarding baseline:
+GDS-3 locks:
 
 - third-person character-centric exploration;
-- familiar continuous movement and jump without a universal stamina tax;
+- familiar movement/jump without a universal stamina tax;
 - equivalent baseline capability on touch, keyboard/mouse, and controller;
-- universal **Primary Interact** plus downstream-tool **Primary Action** semantics;
-- one deterministic visible **Active Context** at a time;
+- universal **Primary Interact** and downstream **Primary Action** semantics;
+- one deterministic visible **Active Context**;
 - gameplay-first onboarding with persistent **Onboarding Milestones**;
 - **Safe Arrival** after trusted persistence readiness;
-- reset/failure/stuck **Recovery** that does not automatically extract transient value;
+- reset/failure/stuck **Recovery** that does not automatically secure transient value;
 - semantic accessibility constraints before final presentation work.
 
 ## Creature Collection and Ownership Contract
 
-GDS-4 locks the persistent collectible model:
+GDS-4 locks:
 
-- **Species** is an authored archetype; player ownership concerns specific **Creature Instances**;
-- every **Secured Creature** has stable persistent individual identity;
-- one secured instance has one ordinary owner at a time;
-- GDS-5 owns the exact **Secured Ownership Finalization** trigger; GDS-4 owns the persistent consequences after it;
-- a player's **Collection Registry** tracks specific secured instances rather than only species counts;
-- duplicates are valid distinct owned creatures and are not automatically merged/deleted;
-- moving creatures among Active, Stored, display, or vault roles does not change ownership;
-- full or reduced capacity cannot silently delete secured creatures;
-- when ownership finalizes without ordinary eligible capacity, the creature is safely **Overflow-Held** with restricted use until capacity is resolved;
-- voluntary permanent **Release** requires explicit intent;
-- **Creature Lock** protects against voluntary destructive/future transfer actions;
-- ordinary session lifecycle, death, capacity changes, or another player's proximity do not cause involuntary loss of secured creatures;
-- **Species Discovery** persists historically even if the last current instance is later released;
-- provenance/history can remain attached to individual instances;
-- future trading must operate through explicit ownership-transfer authority rather than informal dropping/lending.
-
-The authoritative GDS-4 specification is [`04_creatures_collection_and_ownership.md`](docs/game_design/creatures/04_creatures_collection_and_ownership.md).
+- **Species** as authored archetype versus individually persistent **Creature Instances**;
+- one ordinary owner per Secured Creature;
+- stable Collection Registry identity and duplicate preservation;
+- Active, Stored, Overflow-Held, and Released collection-facing states;
+- non-destructive capacity safety through **Overflow-Held**;
+- explicit voluntary Release;
+- persistent **Creature Lock** protection;
+- historical **Species Discovery** and provenance;
+- explicit authority for any future ownership transfer.
 
 ## Capture, Contesting, Transport, and Extraction Contract
 
@@ -128,50 +119,53 @@ Capture Opportunity
   -> GDS-4 Secured Creature
 ```
 
-The resulting contract includes:
-
-- Capture Eligibility is player-specific and revalidated on initiation;
-- a normal single-award creature has at most one bounded active **Engagement Claim**;
-- ordinary contesting is the race to validly engage before another active claim exists;
-- active claims cannot be overwritten by later proximity/input and cannot be held indefinitely through inactivity/cycling;
-- Capture Challenges preserve touch/keyboard/controller capability parity and avoid precision-only/button-mash requirements;
-- **Capture Success creates a Provisional Capture, not persistent ownership**;
-- the same specific Creature Instance is preserved through transport and finalization;
-- ordinary baseline transport permits one active **Transport Custody** per player;
-- normal Transport Custody cannot be directly stolen merely through proximity or baseline PvP;
-- reset/Recovery and voluntary server leave do not count as extraction;
-- unexpected disconnect with valid custody enters bounded same-server **Transport Grace**; reconnect within grace resumes the same provisional custody and grace expiry ends it without ownership;
-- an orderly authoritative server-originated shutdown performs exact-once **Protected Shutdown Finalization** for valid provisional custody while authoritative state remains available; abrupt unverifiable process failure cannot promise that exception;
-- validated **Extraction Completion at an eligible Secure Point** is the ordinary `Secured Ownership Finalization` boundary;
-- one finite ordinary creature finalizes for one player exactly once;
-- known full capacity/unresolved overflow blocks new ordinary capture initiation;
-- a late capacity race cannot delete a completed acquisition because GDS-4 Overflow-Held absorbs the integrity case;
-- the first required capture uses an **Onboarding-Protected Opportunity** so unrelated players cannot deny the learning path.
-
-The authoritative GDS-5 specification is [`05_capture_contesting_transport_and_extraction.md`](docs/game_design/capture/05_capture_contesting_transport_and_extraction.md).
+The resulting contract includes bounded claim fairness, one ordinary Transport Custody, no ordinary custody theft, deterministic reset/leave/disconnect/shutdown behavior, exact-once single-winner finalization, known-full/unresolved-overflow capture gating, late capacity-race safety, and onboarding-protected first acquisition.
 
 ## Rarity, Mutations, Traits, and Variant Value Contract
 
 GDS-6 locks the collectible scarcity/value layer:
 
-- Species Rarity uses five ordered baseline tiers: **Common, Uncommon, Rare, Epic, Legendary**;
-- Species Rarity is not automatically power, price, Mutation state, Trait state, or Availability;
-- a creature's Mutation/Trait identity is finalized no later than that specific instance becoming an actionable Capture Opportunity;
-- the same surviving instance cannot reroll through claim cycling, Capture Failure/retry, transport, reconnect, extraction, or duplicate finalization delivery;
+- Species Rarity tiers: **Common, Uncommon, Rare, Epic, Legendary**;
+- rarity, Mutation, Trait, Availability, gameplay power, currency value, and market price are separate axes;
+- Mutation/Trait identity is finalized no later than an actionable Capture Opportunity and cannot reroll through retries/reconnect/finalization;
 - baseline instances carry zero, one, or at most two compatible Mutations;
-- zero = **Standard Variant**, one = **Single-Mutated Variant**, two = **Compound-Mutated Variant**;
-- Mutation Frequency uses context-aware `Frequent`, `Uncommon`, `Rare`, and `Extreme` bands;
-- Variant Signature is `Species + canonical Mutation set`; mutation order does not create fake uniqueness;
-- Traits are stable instance characteristics that may support bounded situational optimization but are not a second rarity ladder;
-- Mutation Discovery and Variant Discovery are recorded only after legitimate securisation and remain historical;
-- **Protected Variants** auto-apply Creature Lock on first securisation when Legendary, Extreme-Mutated, Compound-Mutated, or explicitly event/legacy protected;
-- probability modifiers affect only future not-yet-finalized instances;
-- hidden individualized odds based on spending, purchase reluctance, willingness-to-pay inference, or loss chasing are prohibited;
-- Availability Tags `Core`, `Rotating`, `Event-Limited`, and `Legacy` remain separate from rarity;
-- ordinary balance/content changes do not silently reroll owned Species/Mutation/Trait/provenance identity;
-- rarity/variant labels do not guarantee a currency or future trading price.
+- Mutation Frequency uses `Frequent`, `Uncommon`, `Rare`, and `Extreme` bands;
+- Variant Signature is `Species + canonical Mutation set`;
+- Mutation/Variant Discovery is historical after legitimate securisation;
+- Protected Variants auto-apply Creature Lock when required;
+- probability modifiers are prospective only;
+- hidden individualized spending/loss-chasing odds are prohibited;
+- owned instance identity remains stable across ordinary balancing/content changes.
 
-The authoritative GDS-6 specification is [`06_rarity_mutations_traits_and_variant_value.md`](docs/game_design/rarity_mutations/06_rarity_mutations_traits_and_variant_value.md).
+## Vault/Base, Passive Production, Capacity, and Upgrades Contract
+
+GDS-7 turns the secured collection into a persistent home/progression surface while preserving GDS-4 through GDS-6 integrity:
+
+- one player owns one baseline persistent personal **Vault** context;
+- **Collection Capacity** limits ordinary usable collection state and is separate from **Display Slots** and **Production Slots**;
+- capacity pressure never deletes, sells, merges, Releases, or silently converts a Secured Creature;
+- GDS-4 **Overflow-Held** remains the single baseline capacity-safety state;
+- free capacity supports exact-instance **Resolve Overflow**;
+- effective capacity reductions use deterministic non-destructive **Capacity Reconciliation**;
+- display references the same Creature Instance and cannot create duplicate owned copies;
+- **Production Assignment** is persistent, one-slot/one-instance, and Overflow-Held creatures cannot produce;
+- Species may have authored **Production Profiles** and Traits may have explicit bounded situational effects, but Species Rarity, Mutation frequency, Compound status, provenance, and Availability are not automatic production multipliers;
+- valid assignments generate elapsed-time **Passive Production** into a bounded persistent **Production Buffer**;
+- buffer saturation pauses further accrual;
+- bounded offline production is explicitly allowed only up to the **Offline Production Window** or buffer cap;
+- offline production creates no live-world/event participation and cannot reset through server hopping or replay the same elapsed interval;
+- **Production Claims** are exact-once/idempotent and uncertain failures preserve buffered value;
+- **Vault Upgrades** are exact-once persistent outcomes with atomic player-facing cost/effect semantics;
+- upgrade categories include Collection Capacity, Production Slots, Production Buffer, Offline Production Window, Display Capacity, and approved utility/presentation capabilities;
+- temporary capacity expiry is safe through reconciliation rather than deletion or forced purchase;
+- GDS-5 Secured Ownership Finalization happens before any Vault assignment/use;
+- baseline visitors are read-only and cannot mutate owner state or gain discovery merely by viewing;
+- reset/disconnect/server transitions/shutdown do not wipe finalized Vault state;
+- Protected Load Failure blocks irreversible Vault management;
+- hidden spending-based production personalization is prohibited;
+- core Vault use retains a viable non-premium progression path.
+
+The authoritative GDS-7 specification is [`07_vault_base_passive_production_capacity_and_upgrades.md`](docs/game_design/vault/07_vault_base_passive_production_capacity_and_upgrades.md).
 
 ## Working Core Loop
 
@@ -180,17 +174,18 @@ Choose or notice a desirable goal
   -> explore
   -> discover a Capture Opportunity
   -> recognize Species / possible variant desirability
-  -> validly engage / establish an Engagement Claim
-  -> resolve a Capture Attempt
+  -> validly engage and resolve Capture Attempt
   -> transport the same Provisional Capture
   -> complete extraction at a Secure Point
-  -> secure the same Creature Instance with stable variant identity
-  -> improve collection / vault / capability / access / status
-  -> pursue rarer Species / Mutations / Compound Variants / events / regions
+  -> secure the same Creature Instance
+  -> store / display / deliberately assign eligible creatures in the Vault
+  -> accrue and claim bounded production value
+  -> expand Vault capacity / production flexibility through progression
+  -> pursue rarer creatures, variants, events, regions and long-term goals
   -> repeat
 ```
 
-Vault production, capacity/upgrades, economy values, world spawning/hazards, social systems, events, trading, monetization, final presentation, analytics, and technical implementation remain subject to their owning later phases.
+Exact currencies/rates/costs and pacing now belong to GDS-8. World topology, social systems, events, trading, monetization, final presentation, analytics, platform constraints, and technical implementation remain subject to their owning later phases.
 
 ## Documentation Authority
 
@@ -203,25 +198,26 @@ Start at [`docs/README.md`](docs/README.md).
 Key documents include:
 
 - [`00_design_authority.md`](docs/game_design/00_design_authority.md) — governance and Design Complete criteria;
-- [`01_game_overview.md`](docs/game_design/01_game_overview.md) — product overview;
+- [`GDS_ROADMAP.md`](docs/game_design/GDS_ROADMAP.md) — dependency-driven phase sequence;
+- [`DESIGN_DECISIONS.md`](docs/game_design/DESIGN_DECISIONS.md) — project-wide strategic decisions;
+- [`GLOSSARY.md`](docs/game_design/GLOSSARY.md) — canonical gameplay terminology;
 - [`product/`](docs/game_design/product/) — GDS-1 product contract;
 - [`global_rules/`](docs/game_design/global_rules/) — GDS-2 lifecycle/session contract;
 - [`player/`](docs/game_design/player/) — GDS-3 player interaction/onboarding contract;
-- [`creatures/`](docs/game_design/creatures/) — GDS-4 creature/collection/ownership contract;
-- [`capture/`](docs/game_design/capture/) — GDS-5 acquisition/contesting/transport/extraction contract;
-- [`rarity_mutations/`](docs/game_design/rarity_mutations/) — GDS-6 rarity/mutation/trait/value contract;
-- [`GDS_ROADMAP.md`](docs/game_design/GDS_ROADMAP.md) — dependency-driven phase sequence;
-- [`DESIGN_DECISIONS.md`](docs/game_design/DESIGN_DECISIONS.md) — strategic design decisions;
-- [`GLOSSARY.md`](docs/game_design/GLOSSARY.md) — canonical gameplay terminology;
-- [`GDS6_SCENARIO_VALIDATION.md`](docs/game_design/GDS6_SCENARIO_VALIDATION.md) — compound GDS-6 validation;
-- [`GDS6_CROSS_VALIDATION.md`](docs/game_design/GDS6_CROSS_VALIDATION.md) — authority/consistency audit;
-- [`GDS6_CLOSURE_REPORT.md`](docs/game_design/GDS6_CLOSURE_REPORT.md) — formal GDS-6 closure evidence.
+- [`creatures/`](docs/game_design/creatures/) — GDS-4 ownership contract;
+- [`capture/`](docs/game_design/capture/) — GDS-5 acquisition contract;
+- [`rarity_mutations/`](docs/game_design/rarity_mutations/) — GDS-6 rarity/variant contract;
+- [`vault/`](docs/game_design/vault/) — GDS-7 Vault/capacity/production contract;
+- [`GDS7_SCENARIO_VALIDATION.md`](docs/game_design/GDS7_SCENARIO_VALIDATION.md) — 80 compound GDS-7 scenarios;
+- [`GDS7_CROSS_VALIDATION.md`](docs/game_design/GDS7_CROSS_VALIDATION.md) — authority/consistency audit;
+- [`GDS7_DECISION_INDEX.md`](docs/game_design/GDS7_DECISION_INDEX.md) — phase-local strategic decisions;
+- [`GDS7_CLOSURE_REPORT.md`](docs/game_design/GDS7_CLOSURE_REPORT.md) — formal GDS-7 closure evidence.
 
 ### Technical Architecture
 
 [`docs/technical_architecture/`](docs/technical_architecture/) remains **blocked by GDS completion**.
 
-Technical Architecture will later translate approved GDS behavior into concrete Roblox/Luau contracts for identity, persistence, networking, runtime lifecycle, controls, creature/capture/variant systems, economy, trading, UI, live operations, performance, testing and CI.
+Technical Architecture will later translate approved GDS behavior into concrete Roblox/Luau contracts for identity, persistence, networking, runtime lifecycle, controls, creature/capture/variant/Vault/economy systems, trading, UI, live operations, performance, testing and CI.
 
 ### Implementation
 
@@ -234,25 +230,24 @@ Gameplay implementation opens only after the complete GDS and Technical Architec
 ```text
 Project-MonsterVault/
 ├── README.md
-├── .gitignore
 ├── docs/
 │   ├── README.md
 │   ├── game_design/
 │   │   ├── 00_design_authority.md
-│   │   ├── 01_game_overview.md
 │   │   ├── product/
 │   │   ├── global_rules/
 │   │   ├── player/
 │   │   ├── creatures/
 │   │   ├── capture/
 │   │   ├── rarity_mutations/
+│   │   ├── vault/
 │   │   ├── GDS_ROADMAP.md
-│   │   ├── DESIGN_DECISIONS.md
-│   │   ├── GDS6_SCENARIO_VALIDATION.md
-│   │   ├── GDS6_CROSS_VALIDATION.md
-│   │   ├── GDS6_CLOSURE_REPORT.md
-│   │   ├── <remaining design domains>/
-│   │   └── audit/
+│   │   ├── GLOSSARY.md
+│   │   ├── GDS7_SCENARIO_VALIDATION.md
+│   │   ├── GDS7_CROSS_VALIDATION.md
+│   │   ├── GDS7_DECISION_INDEX.md
+│   │   ├── GDS7_CLOSURE_REPORT.md
+│   │   └── <remaining design domains>/
 │   ├── technical_architecture/
 │   ├── implementation/
 │   └── history/
@@ -266,10 +261,10 @@ The source/test/tooling directories are reserved for later implementation. Their
 
 ## Current Next Step
 
-Proceed with **GDS-7 — Vault/Base, Passive Production, Capacity, and Upgrades**.
+Proceed with **GDS-8 — Economy, Progression, Unlocks, and Pacing**.
 
 The first implementation vertical slice will be selected and locked only after the complete design and architecture dependency chain makes its requirements clear.
 
 ## License
 
-No open-source license is currently granted. This repository is private and all rights are reserved unless explicitly stated otherwise.
+No open-source license is currently granted. All rights are reserved unless explicitly stated otherwise.

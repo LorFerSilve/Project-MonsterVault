@@ -3,7 +3,7 @@
 > **Status:** Draft / Active  
 > **Authority:** Canonical gameplay terminology
 
-This glossary owns shared terms used across MonsterVault design specifications. Terms are intentionally conservative during the early design phase; subsystem documents may propose additions, but shared terms must be normalized here before `Design Complete`.
+This glossary owns shared terms used across MonsterVault design specifications. Terms are intentionally conservative during the design phase; subsystem documents may propose additions, but shared terms must be normalized here before `Design Complete`.
 
 ## Current Canonical Terms
 
@@ -53,7 +53,7 @@ The temporary exclusive association between a player and their Provisional Captu
 A short bounded same-server interruption window during which an unexpectedly disconnected player may recover an existing Provisional Capture without creating a second copy or turning it into cross-server ownership.
 
 ### Secure Point
-A world-defined valid destination or interaction capable of completing ordinary extraction/security for a valid Provisional Capture. Exact placement and world fiction belong to GDS-7/GDS-9.
+A world-defined valid destination or interaction capable of completing ordinary extraction/security for a valid Provisional Capture. GDS-7 defines post-finalization Vault integration; exact placement/world topology belongs to GDS-9.
 
 ### Extraction Completion
 The validated completion of the required return/secure step at an eligible Secure Point while Transport Custody remains valid.
@@ -79,19 +79,19 @@ The baseline product does not permit unrestricted theft or ordinary involuntary 
 The player's authoritative logical set of currently owned Secured Creature Instances, including stable identity and relevant collection-facing metadata. This is a gameplay semantic, not a prescribed persistence implementation.
 
 ### Active Creature
-A Secured Creature currently assigned to a later gameplay-active role. `Active` changes use/placement, not ownership.
+A Secured Creature currently assigned to a gameplay-active role. `Active` changes use/placement, not ownership.
 
 ### Stored Creature
-A Secured Creature retained in ordinary collection/vault storage and not currently assigned to an active role.
+A Secured Creature retained in ordinary collection/Vault storage and not currently assigned to an active role.
 
 ### Overflow-Held Creature
-A Secured Creature retained safely when ordinary eligible placement/storage capacity is unavailable. It remains player-owned Persistent Player State but has restricted ordinary use until capacity is resolved.
+A Secured Creature retained safely when ordinary eligible collection capacity is unavailable. It remains player-owned Persistent Player State but has restricted ordinary use until capacity is resolved.
 
 ### Released Creature
 A former Secured Creature whose player intentionally completed an irreversible voluntary removal action. Release ends current ordinary ownership and is not caused by session lifecycle, Recovery, or capacity overflow.
 
 ### Duplicate
-Two or more distinct Secured Creature Instances of the same Species. Duplicates remain individually identifiable and may later differ through provenance, mutations, traits, or other instance metadata.
+Two or more distinct Secured Creature Instances of the same Species. Duplicates remain individually identifiable and may differ through provenance, mutations, traits, or other instance metadata.
 
 ### Provenance
 Persistent collection-facing information describing a Creature Instance's origin/acquisition history where applicable. Provenance is historical metadata and does not itself define current ownership.
@@ -145,7 +145,52 @@ A GDS-6 non-rarity label describing how creature/variant content is currently ob
 The multi-dimensional collectible/status significance of one Creature Instance, informed by Species Rarity, Mutation scarcity/count, Traits, Provenance, Availability, event/history context, and later market demand. Variant Value is not a guaranteed currency or trading price.
 
 ### Vault
-The player's persistent personal base/laboratory space used for creature storage, display, production and progression functions. Final detailed scope remains under GDS-7.
+The player's persistent personal base/laboratory context used to manage secured creatures, display collection value, assign creatures to bounded production, claim accrued output, and perform Vault progression actions. Baseline authority is owned by GDS-7.
+
+### Vault Access Point
+A player-facing world or menu-access interaction that enters the player's Vault context. Exact world placement belongs to GDS-9. Access does not itself change creature ownership.
+
+### Collection Capacity
+The maximum number of Secured Creature Instances that may occupy ordinary usable collection states rather than `Overflow-Held`. Collection Capacity is a logical use/storage limit and is separate from Display Slot and Production Slot counts.
+
+### Storage Eligibility
+Whether a Secured Creature can currently occupy an ordinary non-overflow collection state. Eligibility requires available Collection Capacity and compliance with any explicit restriction on ordinary use.
+
+### Display Slot
+A Vault presentation location that may show one eligible Secured Creature. Display capacity is separate from Collection Capacity and does not create additional owned copies.
+
+### Production Slot
+A Vault assignment location that may accept one eligible Secured Creature for passive production. Production Slot count is separate from Collection Capacity and Display Slot count.
+
+### Production Assignment
+The persistent association of one eligible Secured Creature Instance with one Production Slot. A creature can have at most one Production Assignment at a time and cannot simultaneously occupy another mutually exclusive active gameplay role.
+
+### Production Profile
+The authored production characteristics used by GDS-7/GDS-8 to determine how an eligible assigned creature contributes output. A Production Profile may depend on Species and explicitly authorized bounded Trait effects; Species Rarity or Mutation presence does not automatically multiply production.
+
+### Passive Production
+Accrual generated over elapsed time from valid persistent Production Assignments without requiring repeated player input.
+
+### Production Buffer
+The persistent bounded accumulator holding unclaimed Passive Production output before it is claimed into the owning GDS-8 resource/progression system. When the applicable buffer is full, further passive accrual pauses.
+
+### Offline Production Window
+The maximum elapsed-time interval after Active Presence ends for which valid Production Assignments may continue generating Passive Production before the offline cap stops additional accrual.
+
+### Production Claim
+The player action that transfers currently eligible Production Buffer value into the owning downstream resource/progression state as one exact-once Finalized Outcome.
+
+### Vault Upgrade
+A persistent progression change that increases or changes an explicitly defined Vault capability such as Collection Capacity, Production Slot count, Production Buffer capacity, Offline Production Window, Display capacity, or approved Vault utility.
+
+### Capacity Reconciliation
+The non-destructive GDS-7 process used when effective Collection Capacity becomes lower than the number of ordinarily placed/usable secured creatures. Ownership remains intact; required assignments are ended safely and excess instances become Overflow-Held rather than deleted.
+
+### Resolve Overflow
+The owner action that selects one eligible Overflow-Held Creature and returns that exact instance to ordinary `Stored` use when free Collection Capacity is available.
+
+### Visitor
+A non-owner player temporarily allowed to view or interact with explicitly public/read-only elements of another player's Vault. Baseline visitors receive no persistent management authority and observation alone grants no Species/Mutation/Variant Discovery.
 
 ### Biome
 A world region with its own creature pool, environment, progression requirements and encounter characteristics.
@@ -160,10 +205,10 @@ The current working name for a primary non-premium progression resource. This na
 An explicit player-to-player ownership transfer mechanism governed by the trading specification. Trading is strategically desirable but is not a launch-critical product requirement and is not considered guaranteed until GDS-12 reaches Design Complete.
 
 ### Offline Progression
-Any progression accrued while the player is not actively present in the experience. GDS-2 establishes that offline progression is **not guaranteed by default**; if later accepted, its exact availability, caps, elapsed-time semantics, and anti-abuse rules are owned by GDS-7/GDS-8.
+Any progression accrued while the player is not actively present in the experience. GDS-7 explicitly authorizes **bounded Vault Passive Production** from finalized Production Assignments, limited by the Offline Production Window and Production Buffer cap. Other offline progression remains unauthorized unless an owning later specification defines it. GDS-8 owns exact resource/rate/economic effects.
 
 ### Core Product Loop
-The recurring high-level structure through which players pursue a desirable target, explore/discover, attempt capture, secure/return acquired value, improve their collection/vault/progression, and pursue a new higher-value goal. Detailed mechanics remain distributed across their owning GDS phases.
+The recurring high-level structure through which players pursue a desirable target, explore/discover, attempt capture, secure/return acquired value, improve their collection/Vault/progression, and pursue a new higher-value goal. Detailed mechanics remain distributed across their owning GDS phases.
 
 ### Product Promise
 The GDS-1 high-level statement describing the intended player fantasy and market promise:
