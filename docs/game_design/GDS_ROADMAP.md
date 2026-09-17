@@ -171,53 +171,84 @@ GDS-4 establishes the persistent collectible contract consumed by capture, rarit
 
 ## GDS-5 — Capture, Contesting, Transport, and Extraction
 
-**Status:** NEXT — Draft
+**Status:** Complete — PASS
 
-Defines the primary active gameplay loop: discovering a creature, attempting capture, capture difficulty, failure, contesting, transport/return, interception boundaries, disconnect behavior, ownership transfer point, anti-frustration rules, and multiplayer race conditions from the player's perspective.
+Established and formally validated:
 
-GDS-5 must consume GDS-4's stable instance, one-owner, capacity, and Secured Ownership Finalization interface contracts while defining the exact pre-secure acquisition state machine and finalization trigger.
+- player-specific Capture Eligibility and explicit valid initiation;
+- one bounded exclusive ordinary **Engagement Claim** per single-award creature;
+- ordinary social contesting as the race to validly engage before another active claim exists;
+- claim release on success/failure/cancel/invalidation/inactivity instead of indefinite reservation;
+- GDS-3-compatible cross-device Capture Challenge constraints;
+- explicit Success / Failure / Cancel / Invalidation semantics;
+- **Capture Success -> Provisional Capture** rather than immediate persistent ownership;
+- stable same-instance identity through provisional transport and finalization;
+- one baseline active **Transport Custody** per player;
+- no ordinary direct theft of valid Transport Custody;
+- reset/Recovery and voluntary leave do not count as extraction;
+- bounded same-server **Transport Grace** for unexpected client disconnect;
+- narrowly scoped exact-once **Protected Shutdown Finalization** for authoritative server-originated shutdown;
+- explicit **Secure Point** semantics;
+- validated **Extraction Completion** as the ordinary `Secured Ownership Finalization` boundary;
+- exact-once single-winner finalization for normal finite creatures;
+- known-full-capacity and unresolved-overflow initiation blocks;
+- race-safe finalization into GDS-4 Overflow-Held when capacity changes after a valid attempt begins;
+- **Onboarding-Protected Opportunity** so unrelated players cannot permanently deny the first required capture;
+- anti-grief, anti-monopoly, anti-reset, anti-hop, and anti-duplication constraints;
+- 60 compound acquisition/contesting/transport/lifecycle scenarios validated.
+
+Closure evidence:
+
+- [`capture/05_capture_contesting_transport_and_extraction.md`](capture/05_capture_contesting_transport_and_extraction.md) — Design Complete;
+- [`GDS5_SCENARIO_VALIDATION.md`](GDS5_SCENARIO_VALIDATION.md) — 60 / 60 PASS;
+- [`GDS5_CROSS_VALIDATION.md`](GDS5_CROSS_VALIDATION.md) — PASS;
+- [`GDS5_CLOSURE_REPORT.md`](GDS5_CLOSURE_REPORT.md) — PASS.
+
+GDS-5 establishes the active acquisition and exact ownership-boundary contract consumed by rarity, vault, economy, world, social, event, presentation, analytics, and Technical Architecture phases. It does not authorize Technical Architecture or implementation.
 
 ## GDS-6 — Rarity, Mutations, Traits, and Variant Value
 
-**Status:** Draft
+**Status:** NEXT — Draft
 
-Defines rarity tiers, mutation generation, compound mutations, visual readability, gameplay/economic impact, uniqueness, duplicate handling, discovery presentation, probability transparency, and balancing boundaries.
+Defines rarity tiers, mutation generation, compound mutations, visual readability, gameplay/economic impact, uniqueness, duplicate handling, discovery presentation, probability transparency, capture-difficulty interaction, and balancing boundaries.
+
+GDS-6 must attach rarity/variant properties to stable GDS-4 Creature Instances and preserve those properties across GDS-5 Provisional Capture, Transport Custody, and Secured Ownership Finalization.
 
 ## GDS-7 — Vault/Base, Passive Production, Capacity, and Upgrades
 
 **Status:** Draft
 
-Defines the personal vault/laboratory, creature placement, passive production, storage/capacity, base upgrades, offline production, presentation/status display, visitor interaction, and progression dependencies.
+Defines the personal vault/laboratory, creature placement, passive production, storage/capacity, base upgrades, offline production, presentation/status display, visitor interaction, Secure Point integration, and progression dependencies.
 
 ## GDS-8 — Economy, Progression, Unlocks, and Pacing
 
 **Status:** Draft
 
-Defines currencies, resource sources/sinks, upgrade economy, biome unlocks, equipment progression, pacing bands, catch-up behavior, prestige/reset position if any, economy inflation controls at the design level, and long-term goals.
+Defines currencies, resource sources/sinks, capture-tool/cost progression, upgrade economy, biome unlocks, equipment progression, pacing bands, catch-up behavior, prestige/reset position if any, economy inflation controls at the design level, and long-term goals.
 
 ## GDS-9 — World, Biomes, Exploration, Spawning, and Hazards
 
 **Status:** Draft
 
-Defines world structure, biome progression, traversal, creature spawn logic from the player perspective, hazards, special zones, rare encounters, exploration rewards, density/readability, and content scalability.
+Defines world structure, biome progression, traversal, creature spawn logic from the player perspective, encounter lifetime, hazards, special zones, rare encounters, Secure Point placement, exploration rewards, density/readability, and content scalability.
 
 ## GDS-10 — Social Play, Cooperation, Competition, and PvP Boundaries
 
 **Status:** Draft
 
-Defines parties/friends, intentional co-play, shared objectives, social status/flexing, player competition, interception or stealing rules, protection windows, grief prevention, collaboration rewards, and multiplayer fairness.
+Defines parties/friends, intentional co-play, shared objectives, social status/flexing, player competition, collision/body-blocking rules, optional interception/PvP boundaries, protection windows, grief prevention, collaboration rewards, and multiplayer fairness.
 
 ## GDS-11 — Server Events, Dynamic Encounters, and Live Content
 
 **Status:** Draft
 
-Defines server-wide events, rifts/rare spawns, announcements, participation rules, reward allocation, event cadence, server hopping implications, rotating/seasonal content, and live-ops extensibility.
+Defines server-wide events, rifts/rare spawns, announcements, participation rules, reward allocation, event-specific shared/multi-award capture overrides, cadence, server hopping implications, rotating/seasonal content, and live-ops extensibility.
 
 ## GDS-12 — Trading and Player Economy
 
 **Status:** Draft
 
-Defines trade eligibility, offer/accept flow, item/creature transfer semantics, value/scarcity philosophy, trade restrictions, cooldowns, rollback expectations from the player perspective, alternate-account abuse boundaries, and safe trading UX.
+Defines trade eligibility, offer/accept flow, secured-instance transfer semantics, value/scarcity philosophy, trade restrictions, cooldowns, rollback expectations from the player perspective, alternate-account abuse boundaries, and safe trading UX.
 
 ## GDS-13 — Monetization and Commercial Fairness
 
@@ -245,7 +276,7 @@ Defines intended first-session funnel, session goals, return loops, daily/weekly
 
 ## GDS-17 — Cross-System Consistency and Design-Complete Audit
 
-**Status:** Blocked by GDS-5 through GDS-16
+**Status:** Blocked by GDS-6 through GDS-16
 
 Performs the formal pre-architecture audit:
 
@@ -264,7 +295,7 @@ Performs the formal pre-architecture audit:
 
 ## Current Project Gate
 
-GDS-0 through GDS-4 are formally complete. The active dependency is **GDS-5 — Capture, Contesting, Transport, and Extraction**.
+GDS-0 through GDS-5 are formally complete. The active dependency is **GDS-6 — Rarity, Mutations, Traits, and Variant Value**.
 
 Technical Architecture must not begin until GDS-17 records a formal PASS with no implementation-critical open design questions.
 
@@ -276,7 +307,8 @@ GDS-0 governance — COMPLETE
   -> GDS-2 global rules/session model — COMPLETE
   -> GDS-3 player/interaction/onboarding — COMPLETE
   -> GDS-4 creatures/collection/ownership — COMPLETE
-  -> GDS-5..16 subsystem design — GDS-5 NEXT
+  -> GDS-5 capture/contesting/transport/extraction — COMPLETE
+  -> GDS-6..16 subsystem design — GDS-6 NEXT
   -> GDS-17 cross-system audit
   -> DESIGN COMPLETE
   -> Technical Architecture
