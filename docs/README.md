@@ -1,6 +1,6 @@
 # Project MonsterVault Documentation
 
-> **Project phase:** Pre-implementation specification — GDS-6 next  
+> **Project phase:** Pre-implementation specification — GDS-7 next  
 > **Implementation status:** Blocked by design and architecture gates
 
 This directory is the authoritative documentation space for Project MonsterVault.
@@ -32,21 +32,22 @@ Completed:
 - **GDS-3 — Player Character, Interaction, and Onboarding: PASS**
 - **GDS-4 — Creatures, Collection, and Ownership: PASS**
 - **GDS-5 — Capture, Contesting, Transport, and Extraction: PASS**
+- **GDS-6 — Rarity, Mutations, Traits, and Variant Value: PASS**
 
 Latest closure evidence:
 
-- [`game_design/capture/05_capture_contesting_transport_and_extraction.md`](game_design/capture/05_capture_contesting_transport_and_extraction.md);
-- [`game_design/GDS5_SCENARIO_VALIDATION.md`](game_design/GDS5_SCENARIO_VALIDATION.md);
-- [`game_design/GDS5_CROSS_VALIDATION.md`](game_design/GDS5_CROSS_VALIDATION.md);
-- [`game_design/GDS5_CLOSURE_REPORT.md`](game_design/GDS5_CLOSURE_REPORT.md).
+- [`game_design/rarity_mutations/06_rarity_mutations_traits_and_variant_value.md`](game_design/rarity_mutations/06_rarity_mutations_traits_and_variant_value.md);
+- [`game_design/GDS6_SCENARIO_VALIDATION.md`](game_design/GDS6_SCENARIO_VALIDATION.md);
+- [`game_design/GDS6_CROSS_VALIDATION.md`](game_design/GDS6_CROSS_VALIDATION.md);
+- [`game_design/GDS6_CLOSURE_REPORT.md`](game_design/GDS6_CLOSURE_REPORT.md).
 
 The active dependency is:
 
-> **GDS-6 — Rarity, Mutations, Traits, and Variant Value**
+> **GDS-7 — Vault/Base, Passive Production, Capacity, and Upgrades**
 
 No gameplay implementation should begin until:
 
-- GDS-6 through GDS-16 complete their owning design work;
+- GDS-7 through GDS-16 complete their owning design work;
 - GDS-17 records a formal cross-system `Design Complete` PASS;
 - the complete Technical Architecture reaches `Architecture Complete`;
 - architecture integration validation passes;
