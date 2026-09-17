@@ -1,6 +1,6 @@
 # Project MonsterVault Documentation
 
-> **Project phase:** Pre-implementation specification — GDS-4 next  
+> **Project phase:** Pre-implementation specification — GDS-5 next  
 > **Implementation status:** Blocked by design and architecture gates
 
 This directory is the authoritative documentation space for Project MonsterVault.
@@ -34,35 +34,22 @@ Completed:
 - **GDS-1 — Product Vision, Audience, and Success Criteria: PASS**
 - **GDS-2 — Global Game Rules and Session Model: PASS**
 - **GDS-3 — Player Character, Interaction, and Onboarding: PASS**
+- **GDS-4 — Creatures, Collection, and Ownership: PASS**
 
-GDS-1 closure evidence:
+Latest closure evidence:
 
-- [`game_design/01_game_overview.md`](game_design/01_game_overview.md);
-- [`game_design/product/`](game_design/product/);
-- [`game_design/GDS1_CROSS_VALIDATION.md`](game_design/GDS1_CROSS_VALIDATION.md);
-- [`game_design/GDS1_CLOSURE_REPORT.md`](game_design/GDS1_CLOSURE_REPORT.md).
-
-GDS-2 closure evidence:
-
-- [`game_design/global_rules/02_global_game_rules_and_session_model.md`](game_design/global_rules/02_global_game_rules_and_session_model.md);
-- [`game_design/GDS2_SCENARIO_VALIDATION.md`](game_design/GDS2_SCENARIO_VALIDATION.md);
-- [`game_design/GDS2_CROSS_VALIDATION.md`](game_design/GDS2_CROSS_VALIDATION.md);
-- [`game_design/GDS2_CLOSURE_REPORT.md`](game_design/GDS2_CLOSURE_REPORT.md).
-
-GDS-3 closure evidence:
-
-- [`game_design/player/03_player_character_interaction_and_onboarding.md`](game_design/player/03_player_character_interaction_and_onboarding.md);
-- [`game_design/GDS3_SCENARIO_VALIDATION.md`](game_design/GDS3_SCENARIO_VALIDATION.md);
-- [`game_design/GDS3_CROSS_VALIDATION.md`](game_design/GDS3_CROSS_VALIDATION.md);
-- [`game_design/GDS3_CLOSURE_REPORT.md`](game_design/GDS3_CLOSURE_REPORT.md).
+- [`game_design/creatures/04_creatures_collection_and_ownership.md`](game_design/creatures/04_creatures_collection_and_ownership.md);
+- [`game_design/GDS4_SCENARIO_VALIDATION.md`](game_design/GDS4_SCENARIO_VALIDATION.md);
+- [`game_design/GDS4_CROSS_VALIDATION.md`](game_design/GDS4_CROSS_VALIDATION.md);
+- [`game_design/GDS4_CLOSURE_REPORT.md`](game_design/GDS4_CLOSURE_REPORT.md).
 
 The active dependency is:
 
-> **GDS-4 — Creatures, Collection, and Ownership**
+> **GDS-5 — Capture, Contesting, Transport, and Extraction**
 
 No gameplay implementation should begin until:
 
-- GDS-4 through GDS-16 have completed their owning design work;
+- GDS-5 through GDS-16 have completed their owning design work;
 - GDS-17 records a formal cross-system `Design Complete` PASS;
 - the complete Technical Architecture reaches `Architecture Complete`;
 - architecture integration validation passes;
