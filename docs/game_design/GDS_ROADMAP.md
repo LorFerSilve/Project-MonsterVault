@@ -64,15 +64,48 @@ GDS-1 completion constrains later design but does not authorize Technical Archit
 
 ## GDS-2 — Global Game Rules and Session Model
 
-**Status:** NEXT — Draft
+**Status:** Complete — PASS
 
-Defines universal rules: multiplayer/session assumptions, spawning, joining/leaving, death or failure philosophy, resets, progression permanence, offline behavior, cross-server expectations, fairness principles, and global state terminology.
+Established and formally validated:
+
+- Server Sessions as disposable runtime contexts rather than owners of long-term player progression;
+- join/readiness, late-join, leave, disconnect, reconnect, server-transition and shutdown semantics;
+- protected readiness before irreversible gameplay;
+- **Protected Load Failure** instead of blank/untrusted fallback progression;
+- Session-Scoped State versus Persistent Player State;
+- persistence permanence across ordinary avatar/session/device lifecycle;
+- Finalized Outcome single-application semantics across retries/reconnects;
+- coherent finite-opportunity finalization requirements;
+- Recovery instead of a default persistent wipe on avatar failure/reset;
+- ordinary disconnect neutrality for secured persistent value;
+- mandatory explicit interruption behavior for downstream transient activities;
+- no baseline periodic/death/server progression wipe;
+- no default AFK/presence reward entitlement;
+- no baseline offline live-world claims;
+- offline progression as optional downstream design rather than an assumed global mechanic;
+- no baseline continuously synchronized MMO-scale cross-server world;
+- persistent-timer elapsed-time declaration and cross-server continuity;
+- Global Window continuity across servers;
+- cross-platform lifecycle parity;
+- abuse constraints for reset/rejoin/server hopping;
+- 30 compound lifecycle scenarios validated.
+
+Closure evidence:
+
+- [`global_rules/02_global_game_rules_and_session_model.md`](global_rules/02_global_game_rules_and_session_model.md) — Design Complete;
+- [`GDS2_SCENARIO_VALIDATION.md`](GDS2_SCENARIO_VALIDATION.md) — PASS;
+- [`GDS2_CROSS_VALIDATION.md`](GDS2_CROSS_VALIDATION.md) — PASS;
+- [`GDS2_CLOSURE_REPORT.md`](GDS2_CLOSURE_REPORT.md) — PASS.
+
+GDS-2 creates explicit downstream contracts but does not authorize Technical Architecture or implementation.
 
 ## GDS-3 — Player Character, Interaction, and Onboarding
 
-**Status:** Draft
+**Status:** NEXT — Draft
 
 Defines movement, camera expectations, interaction model, first-session onboarding, tools/equipment-facing rules, basic inventory-facing behavior, accessibility implications, and interruption/recovery rules.
+
+GDS-3 must consume the GDS-2 readiness/recovery contract and define how players concretely enter safe meaningful play after persistence readiness, spawn, reset, and Recovery.
 
 ## GDS-4 — Creatures, Collection, and Ownership
 
@@ -154,7 +187,7 @@ Defines intended first-session funnel, session goals, return loops, daily/weekly
 
 ## GDS-17 — Cross-System Consistency and Design-Complete Audit
 
-**Status:** Blocked by GDS-2 through GDS-16
+**Status:** Blocked by GDS-3 through GDS-16
 
 Performs the formal pre-architecture audit:
 
@@ -173,7 +206,7 @@ Performs the formal pre-architecture audit:
 
 ## Current Project Gate
 
-GDS-0 and GDS-1 are formally complete. The active dependency is **GDS-2 — Global Game Rules and Session Model**.
+GDS-0, GDS-1, and GDS-2 are formally complete. The active dependency is **GDS-3 — Player Character, Interaction, and Onboarding**.
 
 Technical Architecture must not begin until GDS-17 records a formal PASS with no implementation-critical open design questions.
 
@@ -182,7 +215,8 @@ The intended sequence is:
 ```text
 GDS-0 governance — COMPLETE
   -> GDS-1 product vision — COMPLETE
-  -> GDS-2..16 subsystem design — GDS-2 NEXT
+  -> GDS-2 global rules/session model — COMPLETE
+  -> GDS-3..16 subsystem design — GDS-3 NEXT
   -> GDS-17 cross-system audit
   -> DESIGN COMPLETE
   -> Technical Architecture
