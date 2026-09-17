@@ -294,3 +294,160 @@ Material changes to target audience, product fantasy/category, competitive-loss 
 ### Consequence
 
 The active dependency advances to **GDS-2 — Global Game Rules and Session Model**. Technical Architecture and gameplay implementation remain blocked.
+
+---
+
+## DD-010 — Server Sessions Are Disposable; Persistent Progress Is Session-Independent
+
+**Date:** 2026-09-17  
+**Status:** Accepted
+
+### Context
+
+MonsterVault needs server-local world opportunities while the player's collection and progression must remain trustworthy across ordinary Roblox server churn.
+
+### Decision
+
+A Server Session is a temporary runtime context, not the owner of long-term player progression. Finalized Persistent Player State survives ordinary avatar failure, reset, disconnect, reconnect, server change, device change, and server shutdown.
+
+### Rationale
+
+This preserves collection trust and supports flexible session lengths without requiring an MMO-scale shared world.
+
+### Alternatives Rejected
+
+- tying long-term progression to one server lifetime;
+- treating every server join as a fresh progression instance;
+- requiring a special clean logout/save ritual.
+
+### Affected Specifications
+
+GDS-2 and all persistent downstream systems.
+
+---
+
+## DD-011 — Protected Persistence Readiness Before Irreversible Play
+
+**Date:** 2026-09-17  
+**Status:** Accepted
+
+### Context
+
+Entering play with missing/untrusted persistent state risks blank-profile overwrite, contradictory ownership, purchase loss, and severe player-trust failures.
+
+### Decision
+
+Irreversible gameplay is blocked until trusted persistent state is ready. If trusted state cannot be established, the player enters **Protected Load Failure** with retry/reconnect/leave paths. A fabricated blank fallback profile must not silently become authoritative.
+
+### Rationale
+
+Temporary inability to enter irreversible play is preferable to corrupting or overwriting established persistent progress.
+
+### Alternatives Rejected
+
+- letting the player progress on an empty temporary profile and merging later by default;
+- treating persistence failure as a new-player state;
+- relying on clean disconnect to repair uncertain state.
+
+### Affected Specifications
+
+GDS-2, GDS-3, GDS-12, GDS-13, and Technical Architecture.
+
+---
+
+## DD-012 — Disconnect/Reset Are Interruptions, Not Default Persistent Punishments
+
+**Date:** 2026-09-17  
+**Status:** Accepted
+
+### Context
+
+Mobile networks, client crashes, Roblox server restarts, and voluntary short sessions are normal conditions. Making these lifecycle events globally punitive would conflict with GDS-1's persistent collection and healthy session-end contract.
+
+### Decision
+
+Ordinary disconnect, avatar failure, reset, and server shutdown do not themselves erase finalized secured persistent value. Failure invokes Recovery rather than a global progression wipe. Unfinalized transient activities must define their own deterministic interruption behavior in their owning subsystem.
+
+Reset/reconnect must not become a superior strategy for duplicating rewards, avoiding finalized costs, or rerolling finalized outcomes.
+
+### Rationale
+
+The rule protects player trust without removing all risk from future transient gameplay mechanics.
+
+### Affected Specifications
+
+GDS-2 through GDS-13 where interruption can occur.
+
+---
+
+## DD-013 — No Baseline Offline Live-World Presence or Mandatory Offline Progression
+
+**Date:** 2026-09-17  
+**Status:** Accepted
+
+### Context
+
+The product may later benefit from bounded vault/offline progression, but simulating offline players as continuously present in live servers would complicate fairness, claims, and architecture unnecessarily.
+
+### Decision
+
+Offline players hold no live-world creature/event/contest claims by default. Offline progression is not guaranteed by GDS-2. If GDS-7/GDS-8 later introduce it, it must derive from persistent state plus explicit elapsed-time semantics and bounded rules.
+
+### Rationale
+
+This leaves room for commercially/retentively useful offline systems without making live-world simulation a baseline requirement.
+
+### Affected Specifications
+
+GDS-7, GDS-8, GDS-11, GDS-16, Technical Architecture.
+
+---
+
+## DD-014 — Cross-Server Time and Outcome Continuity
+
+**Date:** 2026-09-17  
+**Status:** Accepted
+
+### Context
+
+Server transitions create abuse risk when they reset timers, repeat one-time rewards, or restart calendar windows.
+
+### Decision
+
+Finalized persistent outcomes are single-application across retries/reconnects. Persistent timed effects must explicitly declare elapsed-time semantics and do not implicitly restart on server change. Global calendar windows do not restart per server. MonsterVault does not assume a single continuously shared cross-server world.
+
+### Rationale
+
+This preserves fairness/value integrity while allowing session-local world variation and small-team feasibility.
+
+### Affected Specifications
+
+GDS-2, GDS-7/GDS-8, GDS-9, GDS-11, GDS-12, GDS-13, Technical Architecture.
+
+---
+
+## DD-015 — Close GDS-2 Global Lifecycle Baseline
+
+**Date:** 2026-09-17  
+**Status:** Accepted
+
+### Context
+
+The GDS-2 global rules specification now resolves the complete universal session/lifecycle contract and has passed compound-scenario and cross-system validation.
+
+### Decision
+
+GDS-2 is formally closed as `Complete — PASS`.
+
+Material changes to persistence permanence, Protected Load Failure, disconnect neutrality, Recovery-versus-wipe philosophy, cross-server timer/global-window semantics, baseline offline live-world claims, or session/persistence ownership require GDS-2 change control and revalidation.
+
+### Evidence
+
+- `global_rules/02_global_game_rules_and_session_model.md` — Design Complete;
+- `GDS2_SCENARIO_VALIDATION.md` — PASS;
+- `GDS2_CROSS_VALIDATION.md` — PASS;
+- `GDS2_CLOSURE_REPORT.md` — PASS.
+
+### Consequence
+
+The active dependency advances to **GDS-3 — Player Character, Interaction, and Onboarding**. Technical Architecture and gameplay implementation remain blocked.

@@ -46,7 +46,7 @@ The current working name for a primary non-premium progression resource. This na
 An explicit player-to-player ownership transfer mechanism governed by the trading specification. Trading is strategically desirable but is not a launch-critical product requirement and is not considered guaranteed until GDS-12 reaches Design Complete.
 
 ### Offline Progression
-Any progression accrued while the player is not actively present in the experience. Exact availability, caps and anti-abuse rules remain under design.
+Any progression accrued while the player is not actively present in the experience. GDS-2 establishes that offline progression is **not guaranteed by default**; if later accepted, its exact availability, caps, elapsed-time semantics, and anti-abuse rules are owned by GDS-7/GDS-8.
 
 ### Core Product Loop
 The recurring high-level structure through which players pursue a desirable target, explore/discover, attempt capture, secure/return acquired value, improve their collection/vault/progression, and pursue a new higher-value goal. Detailed mechanics remain distributed across their owning GDS phases.
@@ -55,6 +55,33 @@ The recurring high-level structure through which players pursue a desirable targ
 The GDS-1 high-level statement describing the intended player fantasy and market promise:
 
 > **Find it. Catch it. Bring it home. Make your vault legendary.**
+
+### Server Session
+A single running Roblox game-server instance and its session-scoped world state. A Server Session is temporary and is not the authoritative lifetime of Persistent Player State.
+
+### Active Presence
+The period in which a player is connected, trusted persistent state is ready for safe use, and irreversible gameplay actions are permitted.
+
+### Session-Scoped State
+State intentionally bounded to a Server Session or session-local opportunity. It may disappear when that session ends unless an owning specification explicitly finalizes an outcome into Persistent Player State.
+
+### Persistent Player State
+Player-owned progression intended to survive ordinary avatar failure, reset, disconnect, reconnect, server change, device change, and future play sessions.
+
+### Finalized Outcome
+A gameplay result that its owning specification considers complete rather than provisional. A finalized persistent outcome must not be duplicated or silently reversed merely because of retry, reconnect, or server transition.
+
+### Transient Opportunity
+A world/session opportunity that has not yet produced a Finalized Outcome. Its interruption behavior is owned by the subsystem that created it.
+
+### Recovery
+A temporary non-punitive lifecycle state that returns the player to valid active play after avatar failure, reset, invalid position, or comparable interruption. Recovery does not imply a global persistent progression wipe.
+
+### Protected Load Failure
+The GDS-2 state entered when trusted Persistent Player State cannot be established. Irreversible gameplay is blocked; the player may retry, reconnect, or leave. A blank fallback profile must not silently replace trusted progression.
+
+### Global Window
+A calendar-based availability period intended to have the same temporal boundary across servers. Joining or changing servers does not restart it. Exact live-event use belongs to GDS-11.
 
 ### Server Authority
 A technical principle, not a gameplay rule: security-sensitive state is ultimately validated by the server. Detailed technical contracts belong to Technical Architecture.

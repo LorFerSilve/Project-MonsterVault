@@ -1,6 +1,6 @@
 # MonsterVault Game Design Specification
 
-> **Status:** GDS-0 and GDS-1 Complete / GDS-2 Next  
+> **Status:** GDS-0 through GDS-2 Complete / GDS-3 Next  
 > **Authority:** Player-facing gameplay behavior
 
 This directory contains the authoritative Game Design Specification (GDS) for MonsterVault.
@@ -13,10 +13,11 @@ Completed:
 
 - **GDS-0 — Governance, Structure, and Concept Baseline: COMPLETE — PASS**
 - **GDS-1 — Product Vision, Audience, and Success Criteria: COMPLETE — PASS**
+- **GDS-2 — Global Game Rules and Session Model: COMPLETE — PASS**
 
 The active dependency is now:
 
-> **GDS-2 — Global Game Rules and Session Model**
+> **GDS-3 — Player Character, Interaction, and Onboarding**
 
 Technical Architecture and gameplay implementation remain blocked.
 
@@ -37,24 +38,34 @@ Technical Architecture and gameplay implementation remain blocked.
 - [`GDS1_CROSS_VALIDATION.md`](GDS1_CROSS_VALIDATION.md) — cross-phase authority and contradiction audit; PASS.
 - [`GDS1_CLOSURE_REPORT.md`](GDS1_CLOSURE_REPORT.md) — formal GDS-1 closure; PASS.
 
-The resulting high-level product contract includes:
+The resulting product contract includes active creature collection, persistent visible vault progression, socially competitive but non-loss-dominant play, mobile-first cross-platform accessibility, flexible session lengths, trading as non-launch-critical, moderate non-coercive monetization, and retention-first product gates.
 
-- a social creature-collection/progression adventure identity;
-- primary target audience around ages 9–15 with older collection/optimization players as a secondary audience;
-- mobile-first interaction constraints with cross-platform gameplay parity;
-- communication-independent core progression;
-- active acquisition, visible vault progression, rarity/variant hunting, and server-level social moments;
-- socially competitive but non-loss-dominant play;
-- fast time-to-fun and flexible session lengths;
-- weeks-to-months collection/progression aspirations;
-- trading as desirable but non-launch-critical;
-- moderate non-coercive monetization;
-- retention-first product success gates.
+## GDS-2 Global Lifecycle Baseline
+
+- [`global_rules/02_global_game_rules_and_session_model.md`](global_rules/02_global_game_rules_and_session_model.md) — authoritative global lifecycle/session specification; Design Complete.
+- [`GDS2_SCENARIO_VALIDATION.md`](GDS2_SCENARIO_VALIDATION.md) — 30 compound lifecycle scenarios; PASS.
+- [`GDS2_CROSS_VALIDATION.md`](GDS2_CROSS_VALIDATION.md) — product, authority, and contradiction audit; PASS.
+- [`GDS2_CLOSURE_REPORT.md`](GDS2_CLOSURE_REPORT.md) — formal GDS-2 closure; PASS.
+
+GDS-2 establishes:
+
+- disposable Server Sessions with session-independent persistent progression;
+- protected persistent-state readiness before irreversible play;
+- **Protected Load Failure** instead of unsafe blank-profile fallback;
+- ordinary disconnect/reset/shutdown as interruption rather than default persistent punishment;
+- Recovery without a global progression wipe;
+- finalized persistent outcomes that apply once across retries/reconnects;
+- explicit downstream ownership for interruption of transient activities;
+- late joining as a normal state;
+- no baseline AFK reward entitlement or offline live-world claims;
+- optional rather than assumed offline progression;
+- no baseline continuously synchronized MMO-scale cross-server world;
+- persistent-timer and Global Window continuity across servers;
+- cross-platform lifecycle parity.
 
 ## Remaining Core Specifications
 
-- `global_rules/` — session model, player-state rules, failure/recovery, multiplayer invariants.
-- `player/` — movement, interaction, onboarding, inventory-facing behavior.
+- `player/` — movement, interaction, onboarding, recovery presentation, inventory-facing behavior. **GDS-3 NEXT.**
 - `creatures/` — creature identity, acquisition, ownership, collection and behavior.
 - `capture/` — capture loop, contesting, transport, success/failure and anti-frustration rules.
 - `rarity_mutations/` — rarity, mutations, variants, combinatorics and collection value.
