@@ -139,8 +139,8 @@ The resulting contract includes:
 - ordinary baseline transport permits one active **Transport Custody** per player;
 - normal Transport Custody cannot be directly stolen merely through proximity or baseline PvP;
 - reset/Recovery and voluntary server leave do not count as extraction;
-- unexpected disconnect may receive bounded same-server **Transport Grace**;
-- a narrow authoritative **Protected Shutdown Finalization** may protect a valid Provisional Capture during server-originated shutdown;
+- unexpected disconnect with valid custody enters bounded same-server **Transport Grace**; reconnect within grace resumes the same provisional custody and grace expiry ends it without ownership;
+- an orderly authoritative server-originated shutdown performs exact-once **Protected Shutdown Finalization** for valid provisional custody while authoritative state remains available; abrupt unverifiable process failure cannot promise that exception;
 - validated **Extraction Completion at an eligible Secure Point** is the ordinary `Secured Ownership Finalization` boundary;
 - one finite ordinary creature finalizes for one player exactly once;
 - known full capacity/unresolved overflow blocks new ordinary capture initiation;
