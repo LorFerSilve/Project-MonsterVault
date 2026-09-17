@@ -144,8 +144,53 @@ A GDS-6 non-rarity label describing how creature/variant content is currently ob
 ### Variant Value
 The multi-dimensional collectible/status significance of one Creature Instance, informed by Species Rarity, Mutation scarcity/count, Traits, Provenance, Availability, event/history context, and later market demand. Variant Value is not a guaranteed currency or trading price.
 
-### Vault
-The player's persistent personal base/laboratory space used for creature storage, display, production and progression functions. Final detailed scope remains under GDS-7.
+### Personal Vault
+The player's GDS-7 persistent personal base/laboratory context used for secured-creature placement, display, production assignments, pending output, capacity, and durable Vault Upgrades. Its durable state is independent of any one Server Session or rendered room instance.
+
+### Vault Intake
+The GDS-7 post-finalization placement step that makes a newly Secured Creature available to normal collection/vault roles. Vault Intake does not create ownership; GDS-5 Secured Ownership Finalization already did so.
+
+### Vault-Eligible Creature
+A Secured Creature that is not Released, not in a conflicting future transfer state, and not Overflow-Held for unavailable ordinary capacity.
+
+### Production Assignment
+The explicit GDS-7 association of one Vault-Eligible Creature with one eligible Production Slot. Owning/displaying a creature alone does not create passive production.
+
+### Production Slot
+A finite vault role allowing one assigned eligible Creature Instance to generate passive output under current authorized production parameters.
+
+### Production Checkpoint
+The semantic finalization of accrued production up to a boundary before assignment, ownership, capacity, upgrade, event-modifier, or other production parameters change.
+
+### Pending Vault Output
+Persistent value validly produced through GDS-7 passive production but not yet transferred into the downstream GDS-8 spendable resource state.
+
+### Output Buffer
+The finite GDS-7 capacity limiting Pending Vault Output. When full, further ordinary production for that output stops prospectively rather than accumulating hidden backfill debt.
+
+### Offline Accrual Horizon
+The finite maximum elapsed-time interval for which ordinary GDS-7 passive production may accrue while the player is not actively present. Exact duration is tuneable; exceeding it does not create delayed future payout.
+
+### Display Placement
+A non-owning GDS-7 presentation association exposing a Secured Creature for owner/visitor inspection. Display does not itself create production, ownership, discovery, or transfer rights.
+
+### Vault Capacity
+The normal secured-creature placement capacity available to the player's collection/vault under GDS-7. Capacity limits ordinary use/placement, not ownership trust.
+
+### Production Slot Capacity
+The maximum number of simultaneous valid Production Assignments supported by the current vault configuration.
+
+### Output Buffer Capacity
+The maximum Pending Vault Output supported by the relevant GDS-7 buffer/resource semantics.
+
+### Display Capacity
+The number or extent of persistent Display Placements supported by the current vault configuration. Display Capacity is non-economic by baseline.
+
+### Vault Upgrade
+A persistent finalized GDS-7 improvement to an owned vault capability, such as Vault Capacity, Production Slot Capacity, Output Buffer Capacity, Display Capacity, or another explicitly authorized facility capability.
+
+### Over-Capacity State
+A safe restricted state in which owned secured creatures exceed currently valid ordinary capacity. Ownership remains intact while new ordinary acquisition/assignment may be constrained until the player resolves the state through a valid non-destructive or explicit voluntary path.
 
 ### Biome
 A world region with its own creature pool, environment, progression requirements and encounter characteristics.
@@ -160,7 +205,7 @@ The current working name for a primary non-premium progression resource. This na
 An explicit player-to-player ownership transfer mechanism governed by the trading specification. Trading is strategically desirable but is not a launch-critical product requirement and is not considered guaranteed until GDS-12 reaches Design Complete.
 
 ### Offline Progression
-Any progression accrued while the player is not actively present in the experience. GDS-2 establishes that offline progression is **not guaranteed by default**; if later accepted, its exact availability, caps, elapsed-time semantics, and anti-abuse rules are owned by GDS-7/GDS-8.
+Progression accrued while the player is not actively present. GDS-7 now authorizes bounded vault passive production from valid persisted Production Assignments using elapsed wall-clock time, subject to both finite Output Buffer capacity and a finite Offline Accrual Horizon. Other forms of offline progression remain ungranted unless later specifications explicitly authorize them.
 
 ### Core Product Loop
 The recurring high-level structure through which players pursue a desirable target, explore/discover, attempt capture, secure/return acquired value, improve their collection/vault/progression, and pursue a new higher-value goal. Detailed mechanics remain distributed across their owning GDS phases.
