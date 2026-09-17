@@ -631,3 +631,167 @@ Material changes to third-person baseline exploration, baseline locomotion philo
 ### Consequence
 
 The active dependency advances to **GDS-4 — Creatures, Collection, and Ownership**. Technical Architecture and gameplay implementation remain blocked.
+
+---
+
+## DD-022 — Secured Creatures Are Stable Individual Instances
+
+**Date:** 2026-09-17  
+**Status:** Accepted
+
+### Context
+
+MonsterVault's differentiation depends on players caring about which specific creatures they own. Representing collection ownership only as Species counts would weaken provenance, variants, trading, display, locking, and long-term attachment.
+
+### Decision
+
+Species is an authored archetype, while ownership concerns specific **Creature Instances**. Every **Secured Creature** preserves stable individual identity across ordinary avatar/session/device lifecycle and collection-placement changes.
+
+Duplicates of the same Species are valid distinct instances and are not automatically merged, converted, or deleted.
+
+### Rationale
+
+Instance-level identity makes the collection genuinely collectible and provides a coherent foundation for later mutations, provenance, display, trading, and value integrity.
+
+### Alternatives Rejected
+
+- storing player ownership only as Species quantities;
+- silently replacing individual instances after reconnect;
+- automatic duplicate conversion at acquisition.
+
+### Affected Specifications
+
+GDS-4, GDS-5, GDS-6, GDS-7, GDS-11, GDS-12, Technical Architecture.
+
+---
+
+## DD-023 — Capacity Pressure Must Never Silently Destroy Secured Ownership
+
+**Date:** 2026-09-17  
+**Status:** Accepted
+
+### Context
+
+Collection/storage capacity is commercially and progression-relevant, but capacity changes create severe trust risks if already-owned creatures can disappear when slots are full or entitlements change.
+
+### Decision
+
+Full, reduced, or expired ordinary capacity does not silently delete a Secured Creature. If **Secured Ownership Finalization** occurs when ordinary eligible placement capacity is unavailable, the creature becomes **Overflow-Held**: persistent and safely owned, but restricted from normal active/storage functions until capacity is resolved.
+
+Overflow is a safety state, not intended unlimited storage. A non-payment resolution path must always exist.
+
+### Rationale
+
+This preserves ownership trust while keeping capacity meaningful and monetizable within later fairness constraints.
+
+### Alternatives Rejected
+
+- deleting the newest secured creature when full;
+- deleting excess creatures when paid capacity expires;
+- making payment the only way to recover a valid over-capacity collection;
+- treating overflow as unrestricted permanent free storage.
+
+### Affected Specifications
+
+GDS-4, GDS-5, GDS-7, GDS-8, GDS-13, Technical Architecture.
+
+---
+
+## DD-024 — Voluntary Release Is Explicit and Protected by Creature Lock
+
+**Date:** 2026-09-17  
+**Status:** Accepted
+
+### Context
+
+Finite collection capacity may eventually require players to remove or transfer creatures, but accidental permanent loss would directly undermine collection attachment.
+
+### Decision
+
+Permanent voluntary removal uses an explicit **Release** action targeting a specific Creature Instance and requiring clear confirmation. **Creature Lock** is a persistent player-controlled protection flag that blocks voluntary destructive and future ownership-transfer actions until explicitly removed.
+
+Ordinary session lifecycle, capacity overflow, movement, UI dismissal, or Recovery cannot trigger Release.
+
+### Rationale
+
+This creates a deliberate capacity-management path while protecting valuable collection assets against accidental input and future bulk/trade mistakes.
+
+### Affected Specifications
+
+GDS-4, GDS-6, GDS-8, GDS-12, GDS-14, Technical Architecture.
+
+---
+
+## DD-025 — Species Discovery Is Historical; Provenance Belongs to the Instance
+
+**Date:** 2026-09-17  
+**Status:** Accepted
+
+### Context
+
+Collection completion needs stable long-term meaning even if players later release or trade creatures, while individual creatures need persistent history that can support status and future value discovery.
+
+### Decision
+
+Legitimately securing a Species records persistent **Species Discovery**. Releasing the last currently owned instance does not erase that historical discovery. Baseline Species completion is discovery-based unless a later specialized objective explicitly states simultaneous-ownership requirements.
+
+Where recorded, **Provenance** remains instance history distinct from current ownership and is not rewritten by routine storage, server changes, or future ownership transfer.
+
+### Rationale
+
+Players retain credit for genuine discovery while individual instances can carry meaningful collectible history over time.
+
+### Affected Specifications
+
+GDS-4, GDS-6, GDS-8, GDS-11, GDS-12, GDS-14, GDS-16.
+
+---
+
+## DD-026 — Ownership Transfer Requires Explicit Transaction Authority
+
+**Date:** 2026-09-17  
+**Status:** Accepted
+
+### Context
+
+Stable collectible value is incompatible with ambiguous informal ownership transfer. Dropping, lending, gifting, shared ownership, or visual proximity could otherwise create contradictory claims or duplication pressure.
+
+### Decision
+
+A Secured Creature has one ordinary owner at a time. Player-to-player transfer does not exist implicitly through dropping, lending, display access, or world interaction. Any future transfer must be defined by GDS-12 or another explicit authority and must preserve stable instance identity, one-owner semantics, Creature Lock, provenance, and Finalized Outcome integrity.
+
+### Rationale
+
+This keeps the collection model safe before trading is proven and creates a clear contract for later atomic transfer design.
+
+### Affected Specifications
+
+GDS-4, GDS-10, GDS-12, Technical Architecture.
+
+---
+
+## DD-027 — Close GDS-4 Creature Collection and Ownership Baseline
+
+**Date:** 2026-09-17  
+**Status:** Accepted
+
+### Context
+
+The GDS-4 specification now resolves Creature Instance identity, ownership, collection states, duplicates, capacity/overflow, voluntary loss protection, discovery/completion, provenance, and future-transfer prerequisites and has passed scenario/cross-system validation.
+
+### Decision
+
+GDS-4 is formally closed as `Complete — PASS`.
+
+Material changes to instance-level ownership, one-owner semantics, secured persistence, duplicate preservation, Overflow-Held safety, voluntary Release, Creature Lock, baseline no-involuntary-loss rules, Species Discovery persistence, provenance continuity, or explicit transfer authority require GDS-4 change control and revalidation.
+
+### Evidence
+
+- `creatures/04_creatures_collection_and_ownership.md` — Design Complete;
+- `GDS4_SCENARIO_VALIDATION.md` — PASS;
+- `GDS4_CROSS_VALIDATION.md` — PASS;
+- `GDS4_CLOSURE_REPORT.md` — PASS.
+
+### Consequence
+
+The active dependency advances to **GDS-5 — Capture, Contesting, Transport, and Extraction**. Technical Architecture and gameplay implementation remain blocked.
