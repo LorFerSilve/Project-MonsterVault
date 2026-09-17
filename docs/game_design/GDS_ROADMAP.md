@@ -263,13 +263,43 @@ GDS-9 establishes the world/exploration contract consumed by social play, events
 
 ## GDS-10 — Social Play, Cooperation, Competition, and PvP Boundaries
 
-**Status:** NEXT — Draft
+**Status:** Complete — PASS
 
-Defines parties/friends, intentional co-play, shared objectives, social status/flexing, expanded Vault visitor permissions if any, player competition, collision/body-blocking rules, optional interception/PvP boundaries, protection windows, grief prevention, collaboration rewards, alt-account concerns, and multiplayer fairness.
+Established and formally validated:
+
+- explicit consent-based Parties with a baseline maximum of four players;
+- one Party per player and narrow deterministic Party Leader authority;
+- friendship/proximity that grants no implicit gameplay authority;
+- structured rate-limited Social Pings that do not create claims/discovery/progression;
+- personal Landmark/Region Mastery/access semantics during Party play;
+- explicitly authored Shared Objectives with personal Eligible Contribution requirements;
+- bounded exact-once personal Collaboration Rewards with no Party wallet or direct Energy transfer;
+- no grouping/AFK/visitor reward minting;
+- ordinary capture remaining one claim / one custody / one winner;
+- no Party custody handoff, teammate extraction or observer discovery;
+- public pre-claim competition plus explicit non-destructive Friendly Challenges;
+- no baseline wagering/staking or repeatable challenge Energy farm;
+- no baseline direct-combat PvP, transport interception, creature theft or player-caused Energy loss;
+- non-obstructive player collision/body-blocking semantics;
+- kick-at-finish, invite/ping spam, claim-cycling and alt-account guardrails;
+- owner-controlled read-only Vault Visitor Access Policy and truthful Showcases;
+- core social coordination that does not depend on unrestricted chat or voice;
+- transient Party/challenge state versus persistent exact-once personal outcomes;
+- 110 compound social/multiplayer/lifecycle scenarios validated.
+
+Closure evidence:
+
+- [social/10_social_play_cooperation_competition_and_pvp_boundaries.md](social/10_social_play_cooperation_competition_and_pvp_boundaries.md) — Design Complete;
+- [GDS10_SCENARIO_VALIDATION.md](GDS10_SCENARIO_VALIDATION.md) — 110 / 110 PASS;
+- [GDS10_CROSS_VALIDATION.md](GDS10_CROSS_VALIDATION.md) — PASS;
+- [GDS10_DECISION_INDEX.md](GDS10_DECISION_INDEX.md) — accepted phase-local decisions;
+- [GDS10_CLOSURE_REPORT.md](GDS10_CLOSURE_REPORT.md) — PASS.
+
+GDS-10 establishes the social/cooperation/competition contract consumed by events, trading, monetization, presentation, platform safety, retention/analytics and Technical Architecture. It does not authorize Technical Architecture or implementation.
 
 ## GDS-11 — Server Events, Dynamic Encounters, and Live Content
 
-**Status:** Draft
+**Status:** NEXT — Draft
 
 Defines server-wide events, rifts/rare spawns, announcements, participation rules, reward allocation, event-specific shared/multi-award capture overrides, variant probability modifiers, production/economy modifiers if any, Availability/event windows, provenance/protection, cadence, server-hopping implications, rotating/seasonal content, and live-ops extensibility.
 
@@ -305,7 +335,7 @@ Defines first-session funnel, session goals, return loops, daily/weekly engageme
 
 ## GDS-17 — Cross-System Consistency and Design-Complete Audit
 
-**Status:** Blocked by GDS-10 through GDS-16
+**Status:** Blocked by GDS-11 through GDS-16
 
 Performs the formal pre-architecture audit:
 
@@ -326,9 +356,9 @@ Performs the formal pre-architecture audit:
 
 ## Current Project Gate
 
-GDS-0 through GDS-9 are formally complete. The active dependency is:
+GDS-0 through GDS-10 are formally complete. The active dependency is:
 
-> **GDS-10 — Social Play, Cooperation, Competition, and PvP Boundaries**
+> **GDS-11 — Server Events, Dynamic Encounters, and Live Content**
 
 Technical Architecture must not begin until GDS-17 records a formal PASS with no implementation-critical open design questions.
 
@@ -345,8 +375,9 @@ GDS-0 governance — COMPLETE
   -> GDS-7 vault/base/passive production/capacity/upgrades — COMPLETE
   -> GDS-8 economy/progression/unlocks/pacing — COMPLETE
   -> GDS-9 world/biomes/exploration/spawning/hazards — COMPLETE
-  -> GDS-10 social/cooperation/competition/PvP boundaries — NEXT
-  -> GDS-11..16 remaining subsystem design
+  -> GDS-10 social/cooperation/competition/PvP boundaries — COMPLETE
+  -> GDS-11 server events/dynamic encounters/live content — NEXT
+  -> GDS-12..16 remaining subsystem design
   -> GDS-17 cross-system audit
   -> DESIGN COMPLETE
   -> Technical Architecture
