@@ -1014,6 +1014,39 @@ TA-15 must support deterministic tests for:
 
 Infrastructure must be fakeable/injectable under TA-2.
 
+## 41. Persistence Library Policy
+
+### LIB-01 — Native first-party DataStore repository is the baseline
+
+TA-1 established zero approved third-party runtime Luau dependencies.
+
+TA-4 therefore does not adopt ProfileStore, ProfileService, DataStore2, or another third-party player-profile framework at baseline.
+
+The implementation will use the native Roblox DataStoreService APIs behind MonsterVault's own TA-2 infrastructure contract.
+
+### LIB-02 — A future library must prove semantic compatibility
+
+Adopting a third-party persistence library later requires explicit TA-1 supply-chain/dependency review and TA-4 change control.
+
+It must prove support for the locked requirements, including:
+
+- atomic session ownership;
+- lock-loss detection;
+- ProtectedLoadFailure/no blank overwrite;
+- profile revision discipline;
+- schema migration/version checks;
+- P2 durability checkpoints;
+- server-owned operation IDs;
+- one-writer semantics;
+- shutdown/recovery behavior;
+- testability/fault injection.
+
+### LIB-03 — Legacy convenience is not sufficient reason
+
+A library is not adopted solely because it is popular or reduces boilerplate.
+
+Roblox's current best-practice documentation identifies DataStore2 as a legacy third-party pattern that should not be chosen for new experiences.
+
 ## 41. Current Roblox Persistence Snapshot
 
 TA-4 reviewed official Roblox guidance current on 2026-09-18.
@@ -1034,7 +1067,7 @@ Confirmed platform facts include:
 
 Dated evidence is recorded in `TA4_ROBLOX_PERSISTENCE_SNAPSHOT.md`.
 
-## 42. Downstream Ownership
+## 43. Downstream Ownership
 
 ### TA-5
 
@@ -1087,7 +1120,7 @@ Dated evidence is recorded in `TA4_ROBLOX_PERSISTENCE_SNAPSHOT.md`.
 - repository/wrapper implementation contract;
 - final numeric timing/version pins.
 
-## 43. Open Questions
+## 44. Open Questions
 
 There are **zero TA-4-blocking open questions**.
 
@@ -1102,7 +1135,7 @@ Correctly downstream/tuneable:
 - concrete Marketplace receipt record protocol — TA-11;
 - operator tooling/CI implementation — TA-13/15/17.
 
-## 44. Architecture-Complete Checklist
+## 45. Architecture-Complete Checklist
 
 - [x] durable storage authority selected;
 - [x] environment isolation defined;
