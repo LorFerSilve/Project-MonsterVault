@@ -4,7 +4,7 @@
 
 ## Project Status
 
-**Game Design Specification — DESIGN COMPLETE / Technical Architecture TA-0..4 complete / TA-5 next.**
+**Game Design Specification — DESIGN COMPLETE / Technical Architecture TA-0..5 complete / TA-6 next.**
 
 MonsterVault is intentionally **not in gameplay implementation yet**. The project follows a specification-first workflow:
 
@@ -45,7 +45,8 @@ No gameplay system should be implemented merely because an idea appears promisin
 - **TA-2 — Repository Layout, Module Boundaries, Dependency Direction, and Bootstrapping: ARCHITECTURE COMPLETE — PASS**
 - **TA-3 — Networking, Server Authority, Remote Contracts, and Exploit Boundaries: ARCHITECTURE COMPLETE — PASS**
 - **TA-4 — Player Data, Persistence, Session Ownership, Schema Evolution, and Recovery: ARCHITECTURE COMPLETE — PASS**
-- **TA-5 — Identity, Content Registries, Configuration, and Data-Driven Content: NEXT**
+- **TA-5 — Identity, Content Registries, Configuration, and Data-Driven Content: ARCHITECTURE COMPLETE — PASS**
+- **TA-6 — Runtime Entity, Player, Creature, and World Lifecycle: NEXT**
 - Gameplay implementation: blocked by TA and implementation-lock gates
 
 GDS-17 final evidence is recorded in [`17_cross_system_consistency_and_design_complete_audit.md`](docs/game_design/audit/17_cross_system_consistency_and_design_complete_audit.md), [`GDS17_AUTHORITY_NAMESPACE_AUDIT.md`](docs/game_design/GDS17_AUTHORITY_NAMESPACE_AUDIT.md), [`GDS17_MATURITY_OPEN_QUESTION_AUDIT.md`](docs/game_design/GDS17_MATURITY_OPEN_QUESTION_AUDIT.md), [`GDS17_COMPOUND_SCENARIO_VALIDATION.md`](docs/game_design/GDS17_COMPOUND_SCENARIO_VALIDATION.md), [`GDS17_DECISION_INDEX.md`](docs/game_design/GDS17_DECISION_INDEX.md), and [`GDS17_CLOSURE_REPORT.md`](docs/game_design/GDS17_CLOSURE_REPORT.md).
@@ -439,9 +440,9 @@ Key documents include:
 
 ### Technical Architecture
 
-[`docs/technical_architecture/`](docs/technical_architecture/) is **ACTIVE — TA-0..4 COMPLETE / TA-5 NEXT**.
+[`docs/technical_architecture/`](docs/technical_architecture/) is **ACTIVE — TA-0..5 COMPLETE / TA-6 NEXT**.
 
-TA-0 established governance/traceability, TA-1 locked the Roblox environment/toolchain, TA-2 locked structural boundaries, and TA-3 locked the networking trust boundary. TA-4 has now locked the standard-DataStore Player Profile aggregate, metadata session lease, one-writer/revision rules, durable-before-final-ack checkpoints, schema migration/recovery and multi-key transaction primitives. TA-5 now owns stable IDs and validated data-driven registries/configuration.
+TA-0 established governance/traceability, TA-1 locked the Roblox environment/toolchain, TA-2 locked structural boundaries, TA-3 locked networking trust, and TA-4 locked persistence/session durability. TA-5 has now locked stable semantic/runtime IDs, typed data-driven registries, public/private config separation, lifecycle/tombstone compatibility, environment bindings and prospective ContentSnapshot semantics. TA-6 now owns runtime entity/player/creature/world lifecycle.
 
 TA-0 closure evidence:
 
@@ -485,6 +486,15 @@ TA-4 closure evidence:
 - [`TA4_SCENARIO_VALIDATION.md`](docs/technical_architecture/TA4_SCENARIO_VALIDATION.md) — 180 / 180 PASS;
 - [`TA4_DECISION_INDEX.md`](docs/technical_architecture/TA4_DECISION_INDEX.md);
 - [`TA4_CLOSURE_REPORT.md`](docs/technical_architecture/TA4_CLOSURE_REPORT.md) — PASS.
+TA-5 closure evidence:
+
+- [`content/05_identity_content_registries_configuration_and_data_driven_content.md`](docs/technical_architecture/content/05_identity_content_registries_configuration_and_data_driven_content.md);
+- [`TA5_ROBLOX_CONTENT_AUTHORING_SNAPSHOT.md`](docs/technical_architecture/TA5_ROBLOX_CONTENT_AUTHORING_SNAPSHOT.md);
+- [`TA5_IDENTITY_REGISTRY_MATRIX.md`](docs/technical_architecture/TA5_IDENTITY_REGISTRY_MATRIX.md);
+- [`TA5_GDS_TRACEABILITY.md`](docs/technical_architecture/TA5_GDS_TRACEABILITY.md);
+- [`TA5_SCENARIO_VALIDATION.md`](docs/technical_architecture/TA5_SCENARIO_VALIDATION.md) — 180 / 180 PASS;
+- [`TA5_DECISION_INDEX.md`](docs/technical_architecture/TA5_DECISION_INDEX.md);
+- [`TA5_CLOSURE_REPORT.md`](docs/technical_architecture/TA5_CLOSURE_REPORT.md) — PASS.
 ### Implementation
 
 [`docs/implementation/`](docs/implementation/) remains intentionally **BLOCKED**.
@@ -540,7 +550,7 @@ TA-2 has locked this as the future implementation structure, but the source scaf
 
 ## Current Next Step
 
-Proceed with **TA-5 — Identity, Content Registries, Configuration, and Data-Driven Content**.
+Proceed with **TA-6 — Runtime Entity, Player, Creature, and World Lifecycle**.
 
 The first implementation vertical slice will be selected and locked only after the complete design and architecture dependency chain makes its requirements clear.
 
