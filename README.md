@@ -4,7 +4,7 @@
 
 ## Project Status
 
-**Pre-implementation specification — GDS-0 through GDS-10 complete / GDS-11 next.**
+**Pre-implementation specification — GDS-0 through GDS-11 complete / GDS-12 next.**
 
 MonsterVault is intentionally **not in gameplay implementation yet**. The project follows a specification-first workflow:
 
@@ -32,13 +32,14 @@ No gameplay system should be implemented merely because an idea appears promisin
 - **GDS-8 — Economy, Progression, Unlocks, and Pacing: COMPLETE — PASS**
 - **GDS-9 — World, Biomes, Exploration, Spawning, and Hazards: COMPLETE — PASS**
 - **GDS-10 — Social Play, Cooperation, Competition, and PvP Boundaries: COMPLETE — PASS**
-- **GDS-11 — Server Events, Dynamic Encounters, and Live Content: NEXT**
-- GDS-12 through GDS-16: Draft / dependency-ordered
+- **GDS-11 — Server Events, Dynamic Encounters, and Live Content: COMPLETE — PASS**
+- **GDS-12 — Trading and Player Economy: NEXT**
+- GDS-13 through GDS-16: Draft / dependency-ordered
 - GDS-17: blocked until subsystem design is complete
 - Technical Architecture: blocked by GDS-17
 - Gameplay implementation: blocked by GDS and TA gates
 
-GDS-10 closure evidence is recorded in [`GDS10_SCENARIO_VALIDATION.md`](docs/game_design/GDS10_SCENARIO_VALIDATION.md), [`GDS10_CROSS_VALIDATION.md`](docs/game_design/GDS10_CROSS_VALIDATION.md), [`GDS10_DECISION_INDEX.md`](docs/game_design/GDS10_DECISION_INDEX.md), and [`GDS10_CLOSURE_REPORT.md`](docs/game_design/GDS10_CLOSURE_REPORT.md).
+GDS-11 closure evidence is recorded in [`GDS11_SCENARIO_VALIDATION.md`](docs/game_design/GDS11_SCENARIO_VALIDATION.md), [`GDS11_CROSS_VALIDATION.md`](docs/game_design/GDS11_CROSS_VALIDATION.md), [`GDS11_DECISION_INDEX.md`](docs/game_design/GDS11_DECISION_INDEX.md), and [`GDS11_CLOSURE_REPORT.md`](docs/game_design/GDS11_CLOSURE_REPORT.md).
 
 ## Product Contract
 
@@ -235,6 +236,31 @@ GDS-10 adds intentional multiplayer cooperation and social competition without t
 
 The authoritative GDS-10 specification is [\`10_social_play_cooperation_competition_and_pvp_boundaries.md\`](docs/game_design/social/10_social_play_cooperation_competition_and_pvp_boundaries.md).
 
+## Server Events, Dynamic Encounters, and Live Content Contract
+
+GDS-11 adds live world variation without allowing event timing or server transitions to rewrite ownership/scarcity:
+
+- **Global Event Windows / Event Occurrences** use shared wall-clock timing and do not restart when a player joins another server;
+- each server hosts its own session-local **Server Event Instance**, Rift state, shared-objective progress and public event creature population;
+- event lifecycle is explicit: **Announced -> Active -> Resolving -> Ended**;
+- late join is allowed only while meaningful contribution remains possible;
+- event rewards require personal active **Event Contribution**; AFK presence, Party membership and last-hit status alone are insufficient;
+- Event Participation Rewards and Event Completion Records finalize exact-once;
+- **Event Spawn Modifiers** apply only to genuinely new Creature Instances and never reroll surviving/owned creatures;
+- Event-Limited / Rotating / Legacy Availability changes future obtainability without invalidating owned instances or provenance;
+- Rifts/Event Zones cannot block required Safe Routes, Secure Points or Recovery Anchors;
+- ordinary event creatures remain **single-award** under GDS-5 by default;
+- explicit **Event Multi-Award Encounters** may issue multiple participants separate **Personal Event Capture Opportunities**, each backed by a distinct Creature Instance rather than copied ownership of one target;
+- event end stops new generation but provides bounded **Event Resolution Grace** for legitimate active acquisition/reward resolution;
+- server hopping cannot restart event duration, replay exact-once rewards or reroll a guaranteed personal event opportunity;
+- events layer on the ordinary World Cycle rather than resetting it;
+- no baseline event direct-combat PvP, interception, body-blocking or paid claim priority is authorized;
+- event Energy rewards are bounded active-play Economy Sources;
+- GDS-11 authorizes **no baseline event multiplier to Vault Passive Production, Production Buffer or Offline Production Window**;
+- seasonal rotation, disable and hotfix behavior are prospective and preserve legitimate finalized value.
+
+The authoritative GDS-11 specification is [\`11_server_events_dynamic_encounters_and_live_content.md\`](docs/game_design/events_liveops/11_server_events_dynamic_encounters_and_live_content.md).
+
 ## Working Core Loop
 
 ```text
@@ -254,7 +280,7 @@ Choose or notice a desirable goal
   -> repeat
 ```
 
-Server events, dynamic encounters and live content now belong to GDS-11. Trading, monetization, final presentation, analytics, platform constraints, and technical implementation remain subject to their owning later phases.
+Trading and player economy now belong to GDS-12. Monetization, final presentation, analytics, platform constraints, and technical implementation remain subject to their owning later phases.
 
 ## Documentation Authority
 
@@ -280,16 +306,17 @@ Key documents include:
 - [`economy_progression/`](docs/game_design/economy_progression/) — GDS-8 economy/progression contract;
 - [`world/`](docs/game_design/world/) — GDS-9 world/exploration/spawning/hazard contract;
 - [`social/`](docs/game_design/social/) — GDS-10 social/cooperation/competition/PvP-boundary contract;
-- [`GDS10_SCENARIO_VALIDATION.md`](docs/game_design/GDS10_SCENARIO_VALIDATION.md) — 110 compound GDS-10 scenarios;
-- [`GDS10_CROSS_VALIDATION.md`](docs/game_design/GDS10_CROSS_VALIDATION.md) — authority/consistency audit;
-- [`GDS10_DECISION_INDEX.md`](docs/game_design/GDS10_DECISION_INDEX.md) — phase-local strategic decisions;
-- [`GDS10_CLOSURE_REPORT.md`](docs/game_design/GDS10_CLOSURE_REPORT.md) — formal GDS-10 closure evidence.
+- [`events_liveops/`](docs/game_design/events_liveops/) — GDS-11 server-event/dynamic-encounter/live-content contract;
+- [`GDS11_SCENARIO_VALIDATION.md`](docs/game_design/GDS11_SCENARIO_VALIDATION.md) — 120 compound GDS-11 scenarios;
+- [`GDS11_CROSS_VALIDATION.md`](docs/game_design/GDS11_CROSS_VALIDATION.md) — authority/consistency audit;
+- [`GDS11_DECISION_INDEX.md`](docs/game_design/GDS11_DECISION_INDEX.md) — phase-local strategic decisions;
+- [`GDS11_CLOSURE_REPORT.md`](docs/game_design/GDS11_CLOSURE_REPORT.md) — formal GDS-11 closure evidence.
 
 ### Technical Architecture
 
 [`docs/technical_architecture/`](docs/technical_architecture/) remains **blocked by GDS completion**.
 
-Technical Architecture will later translate approved GDS behavior into concrete Roblox/Luau contracts for identity, persistence, networking, runtime lifecycle, controls, creature/capture/variant/Vault/economy/world/social systems, trading, UI, live operations, performance, testing and CI.
+Technical Architecture will later translate approved GDS behavior into concrete Roblox/Luau contracts for identity, persistence, networking, runtime lifecycle, controls, creature/capture/variant/Vault/economy/world/social/event systems, trading, UI, live operations, performance, testing and CI.
 
 ### Implementation
 
@@ -316,12 +343,13 @@ Project-MonsterVault/
 │   │   ├── economy_progression/
 │   │   ├── world/
 │   │   ├── social/
+│   │   ├── events_liveops/
 │   │   ├── GDS_ROADMAP.md
 │   │   ├── GLOSSARY.md
-│   │   ├── GDS10_SCENARIO_VALIDATION.md
-│   │   ├── GDS10_CROSS_VALIDATION.md
-│   │   ├── GDS10_DECISION_INDEX.md
-│   │   ├── GDS10_CLOSURE_REPORT.md
+│   │   ├── GDS11_SCENARIO_VALIDATION.md
+│   │   ├── GDS11_CROSS_VALIDATION.md
+│   │   ├── GDS11_DECISION_INDEX.md
+│   │   ├── GDS11_CLOSURE_REPORT.md
 │   │   └── <remaining design domains>/
 │   ├── technical_architecture/
 │   ├── implementation/
@@ -336,7 +364,7 @@ The source/test/tooling directories are reserved for later implementation. Their
 
 ## Current Next Step
 
-Proceed with **GDS-11 — Server Events, Dynamic Encounters, and Live Content**.
+Proceed with **GDS-12 — Trading and Player Economy**.
 
 The first implementation vertical slice will be selected and locked only after the complete design and architecture dependency chain makes its requirements clear.
 
