@@ -312,8 +312,59 @@ The Vault owner's player-controlled GDS-10 rule determining the eligible audienc
 ### Party Rejoin Grace
 A short same-server reservation window after an unexpected disconnect during which a former Party member may recover their Party Seat. Absence during grace creates no objective/reward contribution.
 
+### Live Content
+Authored GDS-11 content whose availability, configuration or emphasis may change over calendar time without rewriting already finalized player ownership, progression or provenance.
+
+### Global Event Window
+A GDS-11 wall-clock availability interval shared across ordinary servers for a live-content program, season or Event Occurrence. Joining or changing servers does not restart it.
+
+### Event Occurrence
+One uniquely identifiable scheduled or authorized GDS-11 live-event occurrence with defined wall-clock start/end semantics and reward/participation identity. Multiple Server Event Instances may belong to the same Event Occurrence.
+
 ### Server Event
-A time-bounded multiplayer encounter or world-state change presented to multiple players within a server.
+A time-bounded GDS-11 multiplayer encounter or world-state change presented within a Server Session under an Event Occurrence.
+
+### Server Event Instance
+The session-local realization of an Event Occurrence in one Server Session. Public progress, Rift state and event-created world opportunities are session-scoped unless a personal outcome is explicitly finalized.
+
+### Event Template
+The authored GDS-11 rule/content package from which Event Occurrences are created. It defines eligibility, phases, objectives, allowed modifiers, rewards and encounter modes.
+
+### Event Phase
+A player-facing lifecycle stage of a Server Event Instance such as Announced, Active, Resolving or Ended.
+
+### Event Zone
+A temporary GDS-11 world area/overlay used by an active Server Event Instance. It may host objectives, hazards or prospective Spawn Context changes but does not permanently rewrite world access.
+
+### Rift
+A dynamic Event Zone or event focal point that temporarily creates event-specific world activity. A Rift is not inherently a Creature Instance and does not itself become player-owned.
+
+### Event Spawn Modifier
+An explicitly GDS-11-authorized prospective modification to future Spawn Context eligibility/weights during the applicable event context. It never rerolls a surviving or owned Creature Instance.
+
+### Event Objective
+A GDS-11 personal or shared objective associated with an Event Occurrence and its participation/reward rules.
+
+### Event Contribution
+Objective-specific active participation by one player in a GDS-11 event. Raw presence, spectating, AFK time or Party membership alone are insufficient.
+
+### Event Completion Record
+A persistent exact-once historical fact that a player legitimately completed or qualified for a defined event outcome. It is not automatically a currency, creature or power bonus.
+
+### Event Participation Reward
+A bounded exact-once personal reward created by valid Event Contribution under an Event Occurrence.
+
+### Event Multi-Award Encounter
+An explicitly authored GDS-11 exception to ordinary single-award encounter allocation in which several eligible participants may each receive a distinct Personal Event Capture Opportunity. The shared event target itself is not duplicated as one Creature Instance.
+
+### Personal Event Capture Opportunity
+A separately instantiated event Capture Opportunity created for one qualified participant by an Event Multi-Award Encounter. It has its own Creature Instance identity, lifetime and acquisition path and is not automatic Secured Ownership.
+
+### Event Resolution Grace
+A bounded post-end period allowing already-active event acquisition/reward resolution to finish. It admits no new participation, does not restart event modifiers and cannot be extended by server hopping.
+
+### Event Cooldown
+A bounded GDS-11 period preventing immediate repeated activation/reward cycling for the same event context. A persistent/global cooldown cannot be reset by changing servers.
 
 ### Trading
 An explicit player-to-player ownership transfer mechanism governed by the trading specification. Trading is strategically desirable but is not a launch-critical product requirement and is not considered guaranteed until GDS-12 reaches Design Complete.
@@ -354,7 +405,7 @@ A temporary non-punitive lifecycle state that returns the player to valid active
 The GDS-2 state entered when trusted Persistent Player State cannot be established. Irreversible gameplay is blocked; the player may retry, reconnect, or leave. A blank fallback profile must not silently replace trusted progression.
 
 ### Global Window
-A calendar-based availability period intended to have the same temporal boundary across servers. Joining or changing servers does not restart it. Exact live-event use belongs to GDS-11.
+A calendar-based availability period intended to have the same temporal boundary across servers. GDS-11 specializes live-event use as **Global Event Window**; joining or changing servers does not restart either concept.
 
 ### Player Character
 The controllable in-world avatar through which the player moves, explores and performs world interactions during Active Presence. The Player Character is temporary runtime presence and is not identical to Persistent Player State.
