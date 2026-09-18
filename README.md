@@ -4,7 +4,7 @@
 
 ## Project Status
 
-**Pre-implementation specification — GDS-0 through GDS-11 complete / GDS-12 next.**
+**Pre-implementation specification — GDS-0 through GDS-12 complete / GDS-13 next.**
 
 MonsterVault is intentionally **not in gameplay implementation yet**. The project follows a specification-first workflow:
 
@@ -33,13 +33,14 @@ No gameplay system should be implemented merely because an idea appears promisin
 - **GDS-9 — World, Biomes, Exploration, Spawning, and Hazards: COMPLETE — PASS**
 - **GDS-10 — Social Play, Cooperation, Competition, and PvP Boundaries: COMPLETE — PASS**
 - **GDS-11 — Server Events, Dynamic Encounters, and Live Content: COMPLETE — PASS**
-- **GDS-12 — Trading and Player Economy: NEXT**
-- GDS-13 through GDS-16: Draft / dependency-ordered
+- **GDS-12 — Trading and Player Economy: COMPLETE — PASS**
+- **GDS-13 — Monetization and Commercial Fairness: NEXT**
+- GDS-14 through GDS-16: Draft / dependency-ordered
 - GDS-17: blocked until subsystem design is complete
 - Technical Architecture: blocked by GDS-17
 - Gameplay implementation: blocked by GDS and TA gates
 
-GDS-11 closure evidence is recorded in [`GDS11_SCENARIO_VALIDATION.md`](docs/game_design/GDS11_SCENARIO_VALIDATION.md), [`GDS11_CROSS_VALIDATION.md`](docs/game_design/GDS11_CROSS_VALIDATION.md), [`GDS11_DECISION_INDEX.md`](docs/game_design/GDS11_DECISION_INDEX.md), and [`GDS11_CLOSURE_REPORT.md`](docs/game_design/GDS11_CLOSURE_REPORT.md).
+GDS-12 closure evidence is recorded in [`GDS12_SCENARIO_VALIDATION.md`](docs/game_design/GDS12_SCENARIO_VALIDATION.md), [`GDS12_CROSS_VALIDATION.md`](docs/game_design/GDS12_CROSS_VALIDATION.md), [`GDS12_DECISION_INDEX.md`](docs/game_design/GDS12_DECISION_INDEX.md), and [`GDS12_CLOSURE_REPORT.md`](docs/game_design/GDS12_CLOSURE_REPORT.md).
 
 ## Product Contract
 
@@ -261,6 +262,31 @@ GDS-11 adds live world variation without allowing event timing or server transit
 
 The authoritative GDS-11 specification is [\`11_server_events_dynamic_encounters_and_live_content.md\`](docs/game_design/events_liveops/11_server_events_dynamic_encounters_and_live_content.md).
 
+## Trading and Player Economy Contract
+
+GDS-12 authorizes safe direct creature exchange without turning Energy into transferable market tender:
+
+- baseline **Trade Access** is earned non-premium after onboarding and Starter Region Mastery;
+- trading is direct, same-server and bilateral between exactly two eligible players;
+- each side must offer at least one eligible **Secured Creature**; baseline zero-sided gifting is not authorized;
+- **Energy remains non-transferable** and cannot appear in Trade Offers;
+- no creature-for-Energy market, trade tax, auction house, public order book, offline listing or asynchronous escrow exists at baseline;
+- offers operate on exact Creature Instances, not Species counts;
+- **Creature Lock** blocks transfer; Protected Variants require deliberate unlock and arrive re-locked for the receiver;
+- Production-assigned/active-role creatures cannot be offered until safely removed from those roles;
+- eligible Overflow-Held creatures may be traded out, but the receiver's complete net post-trade state must fit ordinary Collection Capacity;
+- each semantic offer change creates a new **Trade Revision** and clears prior Ready/Final Confirmation state;
+- both players independently become Ready and then explicitly confirm the same immutable final revision;
+- **Trade Commit** is all-or-nothing and exact-once: the complete agreed ownership swap succeeds or nothing transfers;
+- Species, Mutation, Trait, Variant Signature and original provenance remain unchanged;
+- trade history is appended rather than rewriting acquisition origin;
+- receiving a creature may create Species/Mutation/Variant Discovery, but cannot fabricate Region Mastery, Event Completion or other source-bound active milestones;
+- received creatures enter persistent wall-clock **Trade Cooldown**;
+- explicit Tradeable / Time-Locked / Account-Bound restrictions govern transfer eligibility;
+- MonsterVault does not certify one trade as objectively fair through a hidden official value formula;
+- trade volume creates no Energy, progression, rarity or spawn advantage.
+
+The authoritative GDS-12 specification is [`12_trading_and_player_economy.md`](docs/game_design/trading/12_trading_and_player_economy.md).
 ## Working Core Loop
 
 ```text
@@ -280,7 +306,7 @@ Choose or notice a desirable goal
   -> repeat
 ```
 
-Trading and player economy now belong to GDS-12. Monetization, final presentation, analytics, platform constraints, and technical implementation remain subject to their owning later phases.
+Monetization and commercial fairness now belong to GDS-13. Final presentation, analytics, platform constraints, and technical implementation remain subject to their owning later phases.
 
 ## Documentation Authority
 
@@ -307,16 +333,17 @@ Key documents include:
 - [`world/`](docs/game_design/world/) — GDS-9 world/exploration/spawning/hazard contract;
 - [`social/`](docs/game_design/social/) — GDS-10 social/cooperation/competition/PvP-boundary contract;
 - [`events_liveops/`](docs/game_design/events_liveops/) — GDS-11 server-event/dynamic-encounter/live-content contract;
-- [`GDS11_SCENARIO_VALIDATION.md`](docs/game_design/GDS11_SCENARIO_VALIDATION.md) — 120 compound GDS-11 scenarios;
-- [`GDS11_CROSS_VALIDATION.md`](docs/game_design/GDS11_CROSS_VALIDATION.md) — authority/consistency audit;
-- [`GDS11_DECISION_INDEX.md`](docs/game_design/GDS11_DECISION_INDEX.md) — phase-local strategic decisions;
-- [`GDS11_CLOSURE_REPORT.md`](docs/game_design/GDS11_CLOSURE_REPORT.md) — formal GDS-11 closure evidence.
+- [`trading/`](docs/game_design/trading/) — GDS-12 trading/player-economy contract;
+- [`GDS12_SCENARIO_VALIDATION.md`](docs/game_design/GDS12_SCENARIO_VALIDATION.md) — 140 compound GDS-12 scenarios;
+- [`GDS12_CROSS_VALIDATION.md`](docs/game_design/GDS12_CROSS_VALIDATION.md) — authority/consistency audit;
+- [`GDS12_DECISION_INDEX.md`](docs/game_design/GDS12_DECISION_INDEX.md) — phase-local strategic decisions;
+- [`GDS12_CLOSURE_REPORT.md`](docs/game_design/GDS12_CLOSURE_REPORT.md) — formal GDS-12 closure evidence.
 
 ### Technical Architecture
 
 [`docs/technical_architecture/`](docs/technical_architecture/) remains **blocked by GDS completion**.
 
-Technical Architecture will later translate approved GDS behavior into concrete Roblox/Luau contracts for identity, persistence, networking, runtime lifecycle, controls, creature/capture/variant/Vault/economy/world/social/event systems, trading, UI, live operations, performance, testing and CI.
+Technical Architecture will later translate approved GDS behavior into concrete Roblox/Luau contracts for identity, persistence, networking, runtime lifecycle, controls, creature/capture/variant/Vault/economy/world/social/event/trading systems, monetization, UI, live operations, performance, testing and CI.
 
 ### Implementation
 
@@ -344,12 +371,13 @@ Project-MonsterVault/
 │   │   ├── world/
 │   │   ├── social/
 │   │   ├── events_liveops/
+│   │   ├── trading/
 │   │   ├── GDS_ROADMAP.md
 │   │   ├── GLOSSARY.md
-│   │   ├── GDS11_SCENARIO_VALIDATION.md
-│   │   ├── GDS11_CROSS_VALIDATION.md
-│   │   ├── GDS11_DECISION_INDEX.md
-│   │   ├── GDS11_CLOSURE_REPORT.md
+│   │   ├── GDS12_SCENARIO_VALIDATION.md
+│   │   ├── GDS12_CROSS_VALIDATION.md
+│   │   ├── GDS12_DECISION_INDEX.md
+│   │   ├── GDS12_CLOSURE_REPORT.md
 │   │   └── <remaining design domains>/
 │   ├── technical_architecture/
 │   ├── implementation/
@@ -364,7 +392,7 @@ The source/test/tooling directories are reserved for later implementation. Their
 
 ## Current Next Step
 
-Proceed with **GDS-12 — Trading and Player Economy**.
+Proceed with **GDS-13 — Monetization and Commercial Fairness**.
 
 The first implementation vertical slice will be selected and locked only after the complete design and architecture dependency chain makes its requirements clear.
 
