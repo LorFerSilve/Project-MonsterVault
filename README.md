@@ -4,7 +4,7 @@
 
 ## Project Status
 
-**Game Design Specification — DESIGN COMPLETE / Technical Architecture TA-0..7 complete / TA-8 next.**
+**Game Design Specification — DESIGN COMPLETE / Technical Architecture TA-0..8 complete / TA-9 next.**
 
 MonsterVault is intentionally **not in gameplay implementation yet**. The project follows a specification-first workflow:
 
@@ -48,7 +48,8 @@ No gameplay system should be implemented merely because an idea appears promisin
 - **TA-5 — Identity, Content Registries, Configuration, and Data-Driven Content: ARCHITECTURE COMPLETE — PASS**
 - **TA-6 — Runtime Entity, Player, Creature, and World Lifecycle: ARCHITECTURE COMPLETE — PASS**
 - **TA-7 — Capture, Creature Ownership, Mutation, and Reward Resolution: ARCHITECTURE COMPLETE — PASS**
-- **TA-8 — Vault, Economy, Progression, Inventory, and Offline Accrual: NEXT**
+- **TA-8 — Vault, Economy, Progression, Inventory, and Offline Accrual: ARCHITECTURE COMPLETE — PASS**
+- **TA-9 — World, Biomes, Spawn Scheduling, Streaming, and Encounter Scaling: NEXT**
 - Gameplay implementation: blocked by TA and implementation-lock gates
 
 GDS-17 final evidence is recorded in [`17_cross_system_consistency_and_design_complete_audit.md`](docs/game_design/audit/17_cross_system_consistency_and_design_complete_audit.md), [`GDS17_AUTHORITY_NAMESPACE_AUDIT.md`](docs/game_design/GDS17_AUTHORITY_NAMESPACE_AUDIT.md), [`GDS17_MATURITY_OPEN_QUESTION_AUDIT.md`](docs/game_design/GDS17_MATURITY_OPEN_QUESTION_AUDIT.md), [`GDS17_COMPOUND_SCENARIO_VALIDATION.md`](docs/game_design/GDS17_COMPOUND_SCENARIO_VALIDATION.md), [`GDS17_DECISION_INDEX.md`](docs/game_design/GDS17_DECISION_INDEX.md), and [`GDS17_CLOSURE_REPORT.md`](docs/game_design/GDS17_CLOSURE_REPORT.md).
@@ -442,9 +443,9 @@ Key documents include:
 
 ### Technical Architecture
 
-[`docs/technical_architecture/`](docs/technical_architecture/) is **ACTIVE — TA-0..7 COMPLETE / TA-8 NEXT**.
+[`docs/technical_architecture/`](docs/technical_architecture/) is **ACTIVE — TA-0..8 COMPLETE / TA-9 NEXT**.
 
-TA-0 established governance/traceability, TA-1 locked the Roblox environment/toolchain, TA-2 locked structural boundaries, TA-3 locked networking trust, TA-4 locked persistence/session durability, TA-5 locked identity/content registries, and TA-6 locked runtime lifecycle. TA-7 has now locked serialized claim/capture authority, server-owned Variant/RNG resolution, Provisional/Transport custody, anti-reroll semantics and exact-once P2 Secured Ownership. TA-8 now owns Vault, collection capacity, Energy, progression, inventory and offline accrual.
+TA-0 established governance/traceability, TA-1 locked the Roblox environment/toolchain, TA-2 locked structural boundaries, TA-3 locked networking trust, TA-4 locked persistence/session durability, TA-5 locked identity/content registries, TA-6 locked runtime lifecycle, and TA-7 locked capture/ownership resolution. TA-8 has now locked exact collection/Vault state, deterministic non-destructive capacity reconciliation, bounded integer Energy, fixed-point passive production, online/offline elapsed-time settlement and atomic progression transactions. TA-9 now owns world topology, spawn scheduling, streaming and encounter scaling.
 
 TA-0 closure evidence:
 
@@ -515,6 +516,15 @@ TA-7 closure evidence:
 - [`TA7_SCENARIO_VALIDATION.md`](docs/technical_architecture/TA7_SCENARIO_VALIDATION.md) — 200 / 200 PASS;
 - [`TA7_DECISION_INDEX.md`](docs/technical_architecture/TA7_DECISION_INDEX.md);
 - [`TA7_CLOSURE_REPORT.md`](docs/technical_architecture/TA7_CLOSURE_REPORT.md) — PASS.
+TA-8 closure evidence:
+
+- [`economy/08_vault_economy_progression_inventory_and_offline_accrual.md`](docs/technical_architecture/economy/08_vault_economy_progression_inventory_and_offline_accrual.md);
+- [`TA8_ROBLOX_ECONOMY_TIME_NUMERIC_SNAPSHOT.md`](docs/technical_architecture/TA8_ROBLOX_ECONOMY_TIME_NUMERIC_SNAPSHOT.md);
+- [`TA8_VAULT_ECONOMY_OFFLINE_MATRIX.md`](docs/technical_architecture/TA8_VAULT_ECONOMY_OFFLINE_MATRIX.md);
+- [`TA8_GDS_TRACEABILITY.md`](docs/technical_architecture/TA8_GDS_TRACEABILITY.md);
+- [`TA8_SCENARIO_VALIDATION.md`](docs/technical_architecture/TA8_SCENARIO_VALIDATION.md) — 220 / 220 PASS;
+- [`TA8_DECISION_INDEX.md`](docs/technical_architecture/TA8_DECISION_INDEX.md);
+- [`TA8_CLOSURE_REPORT.md`](docs/technical_architecture/TA8_CLOSURE_REPORT.md) — PASS.
 ### Implementation
 
 [`docs/implementation/`](docs/implementation/) remains intentionally **BLOCKED**.
@@ -570,7 +580,7 @@ TA-2 has locked this as the future implementation structure, but the source scaf
 
 ## Current Next Step
 
-Proceed with **TA-8 — Vault, Economy, Progression, Inventory, and Offline Accrual**.
+Proceed with **TA-9 — World, Biomes, Spawn Scheduling, Streaming, and Encounter Scaling**.
 
 The first implementation vertical slice will be selected and locked only after the complete design and architecture dependency chain makes its requirements clear.
 
