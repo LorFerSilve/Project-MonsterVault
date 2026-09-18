@@ -529,56 +529,62 @@ GDS-16 completes the ordinary subsystem-design sequence. It supplies retention/a
 
 ## GDS-17 — Cross-System Consistency and Design-Complete Audit
 
-**Status:** NEXT — Audit
+**Status:** Complete — PASS
 
-Performs the formal pre-architecture audit:
+Final audit established:
 
-- ownership/authority audit;
-- terminology/namespace audit;
-- compound gameplay scenario audit;
-- economy/progression/monetization audit;
-- persistence/disconnect/recovery audit;
-- multiplayer abuse/griefing audit;
-- rarity/variant/value-integrity audit;
-- Vault/capacity/offline-production integrity audit;
-- trading/value-integrity audit;
-- presentation/accessibility audit;
-- Roblox platform/safety audit;
-- specification maturity scan;
-- unresolved-question sweep;
-- final `Design Complete` promotion report.
+- authority/namespace audit PASS with zero blocking ownership collisions;
+- specification maturity/open-question audit PASS;
+- all authoritative GDS-1 through GDS-16 subsystem specs Design Complete;
+- zero implementation-critical unresolved design questions;
+- zero orphaned baseline mechanic families;
+- ownership and Creature Instance identity integrity across capture/Vault/events/trading;
+- persistence/disconnect/recovery/exact-once consistency;
+- capacity/Overflow non-destructive integrity;
+- rarity/Mutation/Availability/provenance/scarcity integrity;
+- Vault/production/Energy/progression consistency;
+- world/mastery/travel/hazard consistency;
+- multiplayer abuse/griefing protections;
+- event/live-content consistency;
+- trade/player-economy atomicity/value integrity;
+- monetization/fairness consistency;
+- presentation/accessibility consistency;
+- Roblox platform/social-safety consistency;
+- retention/analytics/experiment invariants;
+- 200 / 200 final compound cross-system scenarios PASS.
+
+Closure evidence:
+
+- [audit/17_cross_system_consistency_and_design_complete_audit.md](audit/17_cross_system_consistency_and_design_complete_audit.md) — final audit PASS;
+- [GDS17_AUTHORITY_NAMESPACE_AUDIT.md](GDS17_AUTHORITY_NAMESPACE_AUDIT.md) — PASS;
+- [GDS17_MATURITY_OPEN_QUESTION_AUDIT.md](GDS17_MATURITY_OPEN_QUESTION_AUDIT.md) — PASS;
+- [GDS17_COMPOUND_SCENARIO_VALIDATION.md](GDS17_COMPOUND_SCENARIO_VALIDATION.md) — 200 / 200 PASS;
+- [GDS17_DECISION_INDEX.md](GDS17_DECISION_INDEX.md) — accepted promotion decisions;
+- [GDS17_CLOSURE_REPORT.md](GDS17_CLOSURE_REPORT.md) — PASS.
+
+**MonsterVault Game Design Specification: DESIGN COMPLETE.**
 
 ## Current Project Gate
 
-GDS-0 through GDS-16 are formally complete. The active dependency is:
+GDS-0 through GDS-17 are formally complete.
 
-> **GDS-17 — Cross-System Consistency and Design-Complete Audit**
+> **GAME DESIGN SPECIFICATION — DESIGN COMPLETE**
 
-Technical Architecture must not begin until GDS-17 records a formal PASS with no implementation-critical open design questions.
+The active dependency is now:
+
+> **TA-0 — Architecture Governance, Constraints, and GDS Traceability**
+
+Gameplay implementation remains blocked until TA-0 through TA-15 are Architecture Complete, TA-16 passes its integration/readiness audit, and TA-17 locks the implementation roadmap/contracts.
 
 The intended sequence is:
 
 ```text
-GDS-0 governance — COMPLETE
-  -> GDS-1 product vision — COMPLETE
-  -> GDS-2 global rules/session model — COMPLETE
-  -> GDS-3 player/interaction/onboarding — COMPLETE
-  -> GDS-4 creatures/collection/ownership — COMPLETE
-  -> GDS-5 capture/contesting/transport/extraction — COMPLETE
-  -> GDS-6 rarity/mutations/traits/value — COMPLETE
-  -> GDS-7 vault/base/passive production/capacity/upgrades — COMPLETE
-  -> GDS-8 economy/progression/unlocks/pacing — COMPLETE
-  -> GDS-9 world/biomes/exploration/spawning/hazards — COMPLETE
-  -> GDS-10 social/cooperation/competition/PvP boundaries — COMPLETE
-  -> GDS-11 server events/dynamic encounters/live content — COMPLETE
-  -> GDS-12 trading/player economy — COMPLETE
-  -> GDS-13 monetization/commercial fairness — COMPLETE
-  -> GDS-14 presentation/UI/UX/feedback/accessibility — COMPLETE
-  -> GDS-15 Roblox platform/social safety/moderation — COMPLETE
-  -> GDS-16 retention/discovery/analytics/experimentation — COMPLETE
-  -> GDS-17 cross-system audit — NEXT
-  -> DESIGN COMPLETE
-  -> Technical Architecture
-  -> Architecture audit + implementation locking
-  -> Implementation
+GDS-0..16 subsystem design — COMPLETE
+  -> GDS-17 cross-system audit — COMPLETE / PASS
+  -> GAME DESIGN SPECIFICATION — DESIGN COMPLETE
+  -> TA-0 architecture governance/GDS traceability — NEXT
+  -> TA-1..15 architecture
+  -> TA-16 architecture integration audit PASS
+  -> TA-17 implementation roadmap + contract locking
+  -> IMPLEMENTATION OPEN
 ```
