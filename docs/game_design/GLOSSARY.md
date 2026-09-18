@@ -367,7 +367,46 @@ A bounded post-end period allowing already-active event acquisition/reward resol
 A bounded GDS-11 period preventing immediate repeated activation/reward cycling for the same event context. A persistent/global cooldown cannot be reset by changing servers.
 
 ### Trading
-An explicit player-to-player ownership transfer mechanism governed by the trading specification. Trading is strategically desirable but is not a launch-critical product requirement and is not considered guaranteed until GDS-12 reaches Design Complete.
+The GDS-12 direct player-to-player ownership-transfer system for eligible Secured Creature Instances. Baseline trading is explicit, bilateral, same-server, creature-for-creature barter with no Energy transfer, gifting, auction house or offline listing.
+
+### Trade Access Milestone
+A non-paid persistent progression milestone authorizing baseline trading after required onboarding and Starter Region Mastery, subject to any stricter GDS-15 platform-safety eligibility.
+
+### Trade Session
+A temporary explicit two-player same-server negotiation context for one bilateral creature exchange.
+
+### Trade Invite
+A temporary request to open a Trade Session. It requires explicit acceptance and creates no ownership or reservation by itself.
+
+### Trade Offer
+The exact set of Creature Instances one participant currently proposes to transfer in an active Trade Session.
+
+### Trade Revision
+The semantic version of the complete bilateral Trade Offer. Any semantic offer change creates a new revision and invalidates prior Ready/Final Trade Confirmation state.
+
+### Trade Reservation
+A temporary authoritative reservation preventing an offered Creature Instance from simultaneously entering another ownership-changing/destructive action. Reservation is not ownership transfer.
+
+### Trade Ready
+A participant's explicit revision-specific statement that the current Trade Revision is ready for final review.
+
+### Final Trade Confirmation
+A participant's explicit confirmation of the exact immutable final Trade Revision after both sides are Ready.
+
+### Trade Commit
+The all-or-nothing authoritative operation that revalidates both players/offers/restrictions/capacity/concurrency and applies the exchange.
+
+### Trade Ownership Finalization
+The exact-once persistent GDS-12 ownership transition produced by a successful Trade Commit. Every included Creature Instance changes to its receiving owner atomically from the player's perspective.
+
+### Trade Cooldown
+A persistent wall-clock interval after successful Trade Ownership Finalization during which the received Creature Instance cannot be offered again.
+
+### Trade Restriction
+An authored transfer-eligibility rule. Baseline states are **Tradeable**, **Time-Locked**, and **Account-Bound**.
+
+### Trade History Entry
+Append-only provenance metadata recording that a legitimate player-to-player ownership transfer occurred without replacing original acquisition provenance.
 
 ### Offline Progression
 Any progression accrued while the player is not actively present in the experience. GDS-7 explicitly authorizes **bounded Vault Passive Production** from finalized Production Assignments, limited by the Offline Production Window and Production Buffer cap. GDS-8 defines the resulting Energy/economic effects. Other offline progression remains unauthorized unless an owning later specification defines it.
