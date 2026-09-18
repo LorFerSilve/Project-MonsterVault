@@ -4,7 +4,7 @@
 
 ## Project Status
 
-**Pre-implementation specification — GDS-0 through GDS-13 complete / GDS-14 next.**
+**Pre-implementation specification — GDS-0 through GDS-14 complete / GDS-15 next.**
 
 MonsterVault is intentionally **not in gameplay implementation yet**. The project follows a specification-first workflow:
 
@@ -35,13 +35,14 @@ No gameplay system should be implemented merely because an idea appears promisin
 - **GDS-11 — Server Events, Dynamic Encounters, and Live Content: COMPLETE — PASS**
 - **GDS-12 — Trading and Player Economy: COMPLETE — PASS**
 - **GDS-13 — Monetization and Commercial Fairness: COMPLETE — PASS**
-- **GDS-14 — Presentation, UI/UX, Feedback, and Accessibility: NEXT**
-- GDS-15 through GDS-16: Draft / dependency-ordered
+- **GDS-14 — Presentation, UI/UX, Feedback, and Accessibility: COMPLETE — PASS**
+- **GDS-15 — Roblox Platform, Social Safety, and Moderation Constraints: NEXT**
+- GDS-16: Draft / dependency-ordered
 - GDS-17: blocked until subsystem design is complete
 - Technical Architecture: blocked by GDS-17
 - Gameplay implementation: blocked by GDS and TA gates
 
-GDS-13 closure evidence is recorded in [`GDS13_SCENARIO_VALIDATION.md`](docs/game_design/GDS13_SCENARIO_VALIDATION.md), [`GDS13_CROSS_VALIDATION.md`](docs/game_design/GDS13_CROSS_VALIDATION.md), [`GDS13_DECISION_INDEX.md`](docs/game_design/GDS13_DECISION_INDEX.md), and [`GDS13_CLOSURE_REPORT.md`](docs/game_design/GDS13_CLOSURE_REPORT.md).
+GDS-14 closure evidence is recorded in [`GDS14_SCENARIO_VALIDATION.md`](docs/game_design/GDS14_SCENARIO_VALIDATION.md), [`GDS14_CROSS_VALIDATION.md`](docs/game_design/GDS14_CROSS_VALIDATION.md), [`GDS14_DECISION_INDEX.md`](docs/game_design/GDS14_DECISION_INDEX.md), and [`GDS14_CLOSURE_REPORT.md`](docs/game_design/GDS14_CLOSURE_REPORT.md).
 
 ## Product Contract
 
@@ -308,6 +309,28 @@ GDS-13 defines a moderate commercial model that monetizes presentation and bound
 - non-paying players retain viable collection, Vault, world, event and trading progression.
 
 The authoritative GDS-13 specification is [`13_monetization_and_commercial_fairness.md`](docs/game_design/monetization/13_monetization_and_commercial_fairness.md).
+## Presentation, UI/UX, Feedback, and Accessibility Contract
+
+GDS-14 defines how every closed gameplay system is communicated without allowing the UI to redefine gameplay truth:
+
+- presentation follows a strict priority hierarchy: **safety/trust → committed state → time-sensitive opportunity → immediate interaction → progression → social/commercial**;
+- one consequential modal owns input focus at a time, with deterministic Back/Close and focus restoration;
+- Context Prompts communicate both action meaning and the current-device input glyph;
+- grouped collection views must preserve exact-instance inspection for ownership-sensitive actions;
+- Species Rarity, Mutation, Trait, Availability, provenance and commercial cosmetics remain separate presentation dimensions;
+- Capture Success is shown as **Provisional Capture / Transport Custody**, not secured ownership; Extraction Completion gets the persistent ownership confirmation;
+- Collection Capacity, Display Slots, Production Slots, Production Buffer and Offline Production Window are never collapsed into one ambiguous metric;
+- Progression Gates show each missing Energy, milestone and prerequisite separately;
+- event UI distinguishes server progress from personal contribution eligibility and single-award from Multi-Award encounters;
+- trade offer changes visibly reset Ready/confirmation state and final review is immutable;
+- commercial UI must expose truthful price/content/state and cannot interrupt critical gameplay;
+- critical meaning never depends on color alone, audio alone, hover, drag-and-drop or precision pointer control;
+- **Reduced Motion**, readability/contrast support and non-audio equivalents are baseline free accessibility features;
+- touch, keyboard/mouse and gamepad retain semantic parity;
+- onboarding remains show → do → confirm and never becomes store-first;
+- reconnect/reconciliation presentation follows authoritative current state rather than replaying finalization as though it happened again.
+
+The authoritative GDS-14 specification is [`14_presentation_ui_ux_feedback_and_accessibility.md`](docs/game_design/presentation/14_presentation_ui_ux_feedback_and_accessibility.md).
 ## Working Core Loop
 
 ```text
@@ -327,7 +350,7 @@ Choose or notice a desirable goal
   -> repeat
 ```
 
-Presentation, UI/UX, feedback and accessibility now belong to GDS-14. Platform constraints, analytics and technical implementation remain subject to their owning later phases.
+Roblox platform, social safety and moderation constraints now belong to GDS-15. Retention/analytics and technical implementation remain subject to their owning later phases.
 
 ## Documentation Authority
 
@@ -356,16 +379,17 @@ Key documents include:
 - [`events_liveops/`](docs/game_design/events_liveops/) — GDS-11 server-event/dynamic-encounter/live-content contract;
 - [`trading/`](docs/game_design/trading/) — GDS-12 trading/player-economy contract;
 - [`monetization/`](docs/game_design/monetization/) — GDS-13 monetization/commercial-fairness contract;
-- [`GDS13_SCENARIO_VALIDATION.md`](docs/game_design/GDS13_SCENARIO_VALIDATION.md) — 150 compound GDS-13 scenarios;
-- [`GDS13_CROSS_VALIDATION.md`](docs/game_design/GDS13_CROSS_VALIDATION.md) — authority/consistency audit;
-- [`GDS13_DECISION_INDEX.md`](docs/game_design/GDS13_DECISION_INDEX.md) — phase-local strategic decisions;
-- [`GDS13_CLOSURE_REPORT.md`](docs/game_design/GDS13_CLOSURE_REPORT.md) — formal GDS-13 closure evidence.
+- [`presentation/`](docs/game_design/presentation/) — GDS-14 presentation/UI/UX/feedback/accessibility contract;
+- [`GDS14_SCENARIO_VALIDATION.md`](docs/game_design/GDS14_SCENARIO_VALIDATION.md) — 160 compound GDS-14 scenarios;
+- [`GDS14_CROSS_VALIDATION.md`](docs/game_design/GDS14_CROSS_VALIDATION.md) — authority/consistency audit;
+- [`GDS14_DECISION_INDEX.md`](docs/game_design/GDS14_DECISION_INDEX.md) — phase-local strategic decisions;
+- [`GDS14_CLOSURE_REPORT.md`](docs/game_design/GDS14_CLOSURE_REPORT.md) — formal GDS-14 closure evidence.
 
 ### Technical Architecture
 
 [`docs/technical_architecture/`](docs/technical_architecture/) remains **blocked by GDS completion**.
 
-Technical Architecture will later translate approved GDS behavior into concrete Roblox/Luau contracts for identity, persistence, networking, runtime lifecycle, controls, creature/capture/variant/Vault/economy/world/social/event/trading/monetization systems, UI, live operations, performance, testing and CI.
+Technical Architecture will later translate approved GDS behavior into concrete Roblox/Luau contracts for identity, persistence, networking, runtime lifecycle, controls, creature/capture/variant/Vault/economy/world/social/event/trading/monetization/presentation systems, platform safety, live operations, performance, testing and CI.
 
 ### Implementation
 
@@ -395,12 +419,13 @@ Project-MonsterVault/
 │   │   ├── events_liveops/
 │   │   ├── trading/
 │   │   ├── monetization/
+│   │   ├── presentation/
 │   │   ├── GDS_ROADMAP.md
 │   │   ├── GLOSSARY.md
-│   │   ├── GDS13_SCENARIO_VALIDATION.md
-│   │   ├── GDS13_CROSS_VALIDATION.md
-│   │   ├── GDS13_DECISION_INDEX.md
-│   │   ├── GDS13_CLOSURE_REPORT.md
+│   │   ├── GDS14_SCENARIO_VALIDATION.md
+│   │   ├── GDS14_CROSS_VALIDATION.md
+│   │   ├── GDS14_DECISION_INDEX.md
+│   │   ├── GDS14_CLOSURE_REPORT.md
 │   │   └── <remaining design domains>/
 │   ├── technical_architecture/
 │   ├── implementation/
@@ -415,7 +440,7 @@ The source/test/tooling directories are reserved for later implementation. Their
 
 ## Current Next Step
 
-Proceed with **GDS-14 — Presentation, UI/UX, Feedback, and Accessibility**.
+Proceed with **GDS-15 — Roblox Platform, Social Safety, and Moderation Constraints**.
 
 The first implementation vertical slice will be selected and locked only after the complete design and architecture dependency chain makes its requirements clear.
 
