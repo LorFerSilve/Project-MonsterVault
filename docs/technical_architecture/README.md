@@ -1,6 +1,6 @@
 # MonsterVault Technical Architecture
 
-> **Status:** Active — TA-0..5 Complete / TA-6 Next
+> **Status:** Active — TA-0..6 Complete / TA-7 Next
 > **Authority:** Technical implementation contracts after GDS completion
 
 This directory contains the Technical Architecture layer that now becomes active after the GDS-17 Design Complete PASS.
@@ -24,6 +24,8 @@ The TA is deliberately not allowed to redefine gameplay. It translates the appro
 - [`TA4_PERSISTENCE_SESSION_MATRIX.md`](TA4_PERSISTENCE_SESSION_MATRIX.md) locks persistence state, durability and transaction boundaries.
 - [`content/05_identity_content_registries_configuration_and_data_driven_content.md`](content/05_identity_content_registries_configuration_and_data_driven_content.md) is the authoritative TA-5 identity/content/configuration contract.
 - [`TA5_IDENTITY_REGISTRY_MATRIX.md`](TA5_IDENTITY_REGISTRY_MATRIX.md) locks stable identity, registry ownership and lifecycle compatibility.
+- [`runtime/06_runtime_entity_player_creature_and_world_lifecycle.md`](runtime/06_runtime_entity_player_creature_and_world_lifecycle.md) is the authoritative TA-6 runtime/entity-lifecycle contract.
+- [`TA6_RUNTIME_LIFECYCLE_MATRIX.md`](TA6_RUNTIME_LIFECYCLE_MATRIX.md) locks runtime authority, projection and cleanup boundaries.
 - [`TA_ROADMAP.md`](TA_ROADMAP.md) defines the dependency-driven architecture sequence.
 - `audit/` will contain the final TA-16 integration/readiness evidence.
 
@@ -31,12 +33,12 @@ The TA is deliberately not allowed to redefine gameplay. It translates the appro
 
 GDS-17 has recorded a formal **Design Complete — PASS** with zero implementation-critical design questions.
 
-TA-0 through TA-5 are **Architecture Complete — PASS**.
+TA-0 through TA-6 are **Architecture Complete — PASS**.
 
-TA-5 closed with 180 / 180 identity/content/configuration scenarios passing and a complete stable-ID/registry compatibility model.
+TA-6 closed with 190 / 190 runtime-lifecycle scenarios passing and a complete server-record/projection/player-character cleanup model.
 
 The active dependency is:
 
-> **TA-6 — Runtime Entity, Player, Creature, and World Lifecycle**
+> **TA-7 — Capture, Creature Ownership, Mutation, and Reward Resolution**
 
-TA-6 now owns runtime representation, spawn/despawn projection and transitions between persistent Creature/player/world state and active Roblox Instances. Gameplay implementation remains blocked until TA-17.
+TA-7 now owns claim/capture state, random Variant resolution, durable ownership finalization and reward transaction semantics on top of the TA-6 runtime model. Gameplay implementation remains blocked until TA-17.
