@@ -1,6 +1,6 @@
 # MonsterVault Game Design Specification
 
-> **Status:** GDS-0 through GDS-15 Complete / GDS-16 Next  
+> **Status:** GDS-0 through GDS-16 Complete / GDS-17 Next  
 > **Authority:** Player-facing gameplay behavior
 
 This directory contains the authoritative Game Design Specification (GDS) for MonsterVault.
@@ -27,10 +27,11 @@ Completed:
 - **GDS-13 — Monetization and Commercial Fairness: COMPLETE — PASS**
 - **GDS-14 — Presentation, UI/UX, Feedback, and Accessibility: COMPLETE — PASS**
 - **GDS-15 — Roblox Platform, Social Safety, and Moderation Constraints: COMPLETE — PASS**
+- **GDS-16 — Retention, Discovery, Analytics, and Experimentation Boundaries: COMPLETE — PASS**
 
 The active dependency is now:
 
-> **GDS-16 — Retention, Discovery, Analytics, and Experimentation Boundaries**
+> **GDS-17 — Cross-System Consistency and Design-Complete Audit**
 
 Technical Architecture and gameplay implementation remain blocked.
 
@@ -278,10 +279,35 @@ GDS-15 establishes:
 - commercial entitlements kept outside creature trading;
 - mandatory current-policy revalidation before implementation lock/launch.
 
+### GDS-16 — Retention, discovery, analytics and experimentation
+
+Authoritative specification and closure evidence:
+
+- [retention_analytics/16_retention_discovery_analytics_and_experimentation_boundaries.md](retention_analytics/16_retention_discovery_analytics_and_experimentation_boundaries.md) — Design Complete;
+- [GDS16_SCENARIO_VALIDATION.md](GDS16_SCENARIO_VALIDATION.md) — 180 compound retention/analytics/experiment scenarios; PASS;
+- [GDS16_CROSS_VALIDATION.md](GDS16_CROSS_VALIDATION.md) — GDS-1 through GDS-15 and authority audit; PASS;
+- [GDS16_DECISION_INDEX.md](GDS16_DECISION_INDEX.md) — phase-local strategic decisions;
+- [GDS16_CLOSURE_REPORT.md](GDS16_CLOSURE_REPORT.md) — formal closure; PASS.
+
+GDS-16 establishes:
+
+- product-health hierarchy over raw KPI optimization;
+- first-session/return funnels and non-blocking Return Brief;
+- optional Next Aspirations without reward/odds authority;
+- no baseline login reward, login streak, absence punishment or mandatory recurring checklist;
+- meaningful engagement separated from AFK/session-duration inflation;
+- truthful Discovery Packaging and bounded factual reminders;
+- retention/social/economy/collection/event/trade/commercial/safety health metrics;
+- analytics data minimization and no raw-chat/sensitive-trait churn targeting;
+- explicit experiment governance and guardrails;
+- no hidden spend/churn/failure-based gameplay personalization;
+- shared-context and prospective-only rules for public/persistent value experiments;
+- ownership/safety/trading/accessibility/commercial fairness as Experiment Invariants;
+- non-destructive rollback and GDS-1 pivot-over-pressure rule.
+
 ## Remaining Core Specifications
 
-- `retention_analytics/` — GDS-16 retention loops, acquisition/Vault/variant/economy/world funnels, session goals, catch-up/reward cadence, metrics hypotheses and experiment boundaries. **GDS-16 NEXT.**
-- `audit/` — final GDS-17 cross-system consistency/maturity audits.
+- `audit/` — GDS-17 final cross-system consistency/maturity audit. **GDS-17 NEXT.**
 
 ## Rule
 
