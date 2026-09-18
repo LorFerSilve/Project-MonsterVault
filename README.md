@@ -4,7 +4,7 @@
 
 ## Project Status
 
-**Game Design Specification — DESIGN COMPLETE / Technical Architecture TA-0 complete / TA-1 next.**
+**Game Design Specification — DESIGN COMPLETE / Technical Architecture TA-0..1 complete / TA-2 next.**
 
 MonsterVault is intentionally **not in gameplay implementation yet**. The project follows a specification-first workflow:
 
@@ -41,7 +41,8 @@ No gameplay system should be implemented merely because an idea appears promisin
 - **GDS-17 — Cross-System Consistency and Design-Complete Audit: COMPLETE — PASS**
 - **GAME DESIGN SPECIFICATION: DESIGN COMPLETE**
 - **TA-0 — Architecture Governance, Constraints, and GDS Traceability: ARCHITECTURE COMPLETE — PASS**
-- **TA-1 — Roblox System Context, Toolchain, and Development Environment: NEXT**
+- **TA-1 — Roblox System Context, Toolchain, and Development Environment: ARCHITECTURE COMPLETE — PASS**
+- **TA-2 — Repository Layout, Module Boundaries, Dependency Direction, and Bootstrapping: NEXT**
 - Gameplay implementation: blocked by TA and implementation-lock gates
 
 GDS-17 final evidence is recorded in [`17_cross_system_consistency_and_design_complete_audit.md`](docs/game_design/audit/17_cross_system_consistency_and_design_complete_audit.md), [`GDS17_AUTHORITY_NAMESPACE_AUDIT.md`](docs/game_design/GDS17_AUTHORITY_NAMESPACE_AUDIT.md), [`GDS17_MATURITY_OPEN_QUESTION_AUDIT.md`](docs/game_design/GDS17_MATURITY_OPEN_QUESTION_AUDIT.md), [`GDS17_COMPOUND_SCENARIO_VALIDATION.md`](docs/game_design/GDS17_COMPOUND_SCENARIO_VALIDATION.md), [`GDS17_DECISION_INDEX.md`](docs/game_design/GDS17_DECISION_INDEX.md), and [`GDS17_CLOSURE_REPORT.md`](docs/game_design/GDS17_CLOSURE_REPORT.md).
@@ -435,9 +436,9 @@ Key documents include:
 
 ### Technical Architecture
 
-[`docs/technical_architecture/`](docs/technical_architecture/) is **ACTIVE — TA-0 COMPLETE / TA-1 NEXT**.
+[`docs/technical_architecture/`](docs/technical_architecture/) is **ACTIVE — TA-0..1 COMPLETE / TA-2 NEXT**.
 
-TA-0 has established architecture governance, GDS traceability, technical ownership, trust/transaction principles, security/performance/testability gates and architecture change control. Technical Architecture now continues with TA-1 to lock the Roblox system context, toolchain and reproducible development environment before later subsystem contracts.
+TA-0 established architecture governance and traceability. TA-1 has now locked the Roblox execution/environment model, filesystem-first Rojo workflow, Rokit-managed reference toolchain, strict Luau quality baseline, dependency policy and DEV/STAGING/PRODUCTION separation. TA-2 now owns the concrete repository/DataModel mapping, module boundaries and bootstrap graph.
 
 TA-0 closure evidence:
 
@@ -447,6 +448,14 @@ TA-0 closure evidence:
 - [`TA0_SCENARIO_VALIDATION.md`](docs/technical_architecture/TA0_SCENARIO_VALIDATION.md) — 60 / 60 PASS;
 - [`TA0_DECISION_INDEX.md`](docs/technical_architecture/TA0_DECISION_INDEX.md);
 - [`TA0_CLOSURE_REPORT.md`](docs/technical_architecture/TA0_CLOSURE_REPORT.md) — PASS.
+TA-1 closure evidence:
+
+- [`environment/01_roblox_system_context_toolchain_and_development_environment.md`](docs/technical_architecture/environment/01_roblox_system_context_toolchain_and_development_environment.md);
+- [`TA1_TOOLCHAIN_SNAPSHOT.md`](docs/technical_architecture/TA1_TOOLCHAIN_SNAPSHOT.md);
+- [`TA1_GDS_TRACEABILITY.md`](docs/technical_architecture/TA1_GDS_TRACEABILITY.md);
+- [`TA1_SCENARIO_VALIDATION.md`](docs/technical_architecture/TA1_SCENARIO_VALIDATION.md) — 75 / 75 PASS;
+- [`TA1_DECISION_INDEX.md`](docs/technical_architecture/TA1_DECISION_INDEX.md);
+- [`TA1_CLOSURE_REPORT.md`](docs/technical_architecture/TA1_CLOSURE_REPORT.md) — PASS.
 ### Implementation
 
 [`docs/implementation/`](docs/implementation/) remains intentionally **BLOCKED**.
@@ -499,7 +508,7 @@ The source/test/tooling directories are reserved for later implementation. Their
 
 ## Current Next Step
 
-Proceed with **TA-1 — Roblox System Context, Toolchain, and Development Environment**.
+Proceed with **TA-2 — Repository Layout, Module Boundaries, Dependency Direction, and Bootstrapping**.
 
 The first implementation vertical slice will be selected and locked only after the complete design and architecture dependency chain makes its requirements clear.
 
