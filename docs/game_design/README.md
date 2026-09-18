@@ -1,6 +1,6 @@
 # MonsterVault Game Design Specification
 
-> **Status:** GDS-0 through GDS-10 Complete / GDS-11 Next  
+> **Status:** GDS-0 through GDS-11 Complete / GDS-12 Next  
 > **Authority:** Player-facing gameplay behavior
 
 This directory contains the authoritative Game Design Specification (GDS) for MonsterVault.
@@ -22,10 +22,11 @@ Completed:
 - **GDS-8 — Economy, Progression, Unlocks, and Pacing: COMPLETE — PASS**
 - **GDS-9 — World, Biomes, Exploration, Spawning, and Hazards: COMPLETE — PASS**
 - **GDS-10 — Social Play, Cooperation, Competition, and PvP Boundaries: COMPLETE — PASS**
+- **GDS-11 — Server Events, Dynamic Encounters, and Live Content: COMPLETE — PASS**
 
 The active dependency is now:
 
-> **GDS-11 — Server Events, Dynamic Encounters, and Live Content**
+> **GDS-12 — Trading and Player Economy**
 
 Technical Architecture and gameplay implementation remain blocked.
 
@@ -131,10 +132,37 @@ GDS-10 establishes:
 - transient social state versus persistent exact-once personal outcomes;
 - alternate-account, AFK reward and social scarcity-manipulation guardrails.
 
+### GDS-11 — Server events, dynamic encounters, live content
+
+Authoritative specification and closure evidence:
+
+- [events_liveops/11_server_events_dynamic_encounters_and_live_content.md](events_liveops/11_server_events_dynamic_encounters_and_live_content.md) — Design Complete;
+- [GDS11_SCENARIO_VALIDATION.md](GDS11_SCENARIO_VALIDATION.md) — 120 compound event/live-content scenarios; PASS;
+- [GDS11_CROSS_VALIDATION.md](GDS11_CROSS_VALIDATION.md) — GDS-1 through GDS-10 and authority audit; PASS;
+- [GDS11_DECISION_INDEX.md](GDS11_DECISION_INDEX.md) — phase-local strategic decisions;
+- [GDS11_CLOSURE_REPORT.md](GDS11_CLOSURE_REPORT.md) — formal closure; PASS.
+
+GDS-11 establishes:
+
+- shared wall-clock Event Occurrences that do not restart per server;
+- session-local Server Event Instances and Rift/shared-objective state;
+- explicit event lifecycle with late-join and bounded Resolution Grace semantics;
+- contribution-gated exact-once Event Participation Rewards and Completion Records;
+- prospective Event Spawn Modifiers that never reroll existing/owned Creature Instances;
+- Event-Limited/Rotating/Legacy Availability that preserves owned history;
+- dynamic Rifts/Event Zones compatible with Safe Routes, Recovery and hazard safety;
+- ordinary event creatures remaining single-award by default;
+- explicit Event Multi-Award Encounters that create distinct Personal Event Capture Opportunities / Creature Instances;
+- no copying of one shared event target into several owners;
+- server-hop rules preventing duration resets, reward replay and guaranteed personal-opportunity rerolls;
+- event/world-cycle composition without resetting the ordinary World Cycle;
+- social/Party event rules preserving personal contribution and no direct-combat/body-blocking authority;
+- bounded active Event Energy rewards and no baseline Passive Production multiplier;
+- additive seasonal/rotating content, provenance preservation and safe prospective disable/hotfix behavior.
+
 ## Remaining Core Specifications
 
-- `events_liveops/` — GDS-11 events, rotating content, event-specific shared/multi-award capture, variant/production/economy modifiers and seasonal/live rules. **GDS-11 NEXT.**
-- `trading/` — secured-instance trading, Production Assignment reconciliation, scarcity/value integrity, anti-abuse design and explicit Energy-transfer decision.
+- `trading/` — GDS-12 secured-instance trading, Production Assignment reconciliation, scarcity/value integrity, anti-abuse design and explicit Energy-transfer decision. **GDS-12 NEXT.**
 - `monetization/` — monetization surfaces/fairness constraints including any Energy/capacity/convenience/production products.
 - `presentation/` — UI/UX, Energy/gate/transaction/Vault/capture/rarity/event/world feedback, visual/audio language, accessibility and onboarding presentation.
 - `platform_safety/` — Roblox platform constraints, commercial/randomized constraints, social safety and age-appropriate interaction design.
