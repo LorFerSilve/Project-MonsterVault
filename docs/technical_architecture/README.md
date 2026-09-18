@@ -1,6 +1,6 @@
 # MonsterVault Technical Architecture
 
-> **Status:** Active — TA-0..4 Complete / TA-5 Next
+> **Status:** Active — TA-0..5 Complete / TA-6 Next
 > **Authority:** Technical implementation contracts after GDS completion
 
 This directory contains the Technical Architecture layer that now becomes active after the GDS-17 Design Complete PASS.
@@ -22,6 +22,8 @@ The TA is deliberately not allowed to redefine gameplay. It translates the appro
 - [`TA3_REMOTE_CONTRACT_MATRIX.md`](TA3_REMOTE_CONTRACT_MATRIX.md) locks transport/envelope/validation responsibilities.
 - [`persistence/04_player_data_persistence_session_ownership_schema_evolution_and_recovery.md`](persistence/04_player_data_persistence_session_ownership_schema_evolution_and_recovery.md) is the authoritative TA-4 persistence/session/recovery contract.
 - [`TA4_PERSISTENCE_SESSION_MATRIX.md`](TA4_PERSISTENCE_SESSION_MATRIX.md) locks persistence state, durability and transaction boundaries.
+- [`content/05_identity_content_registries_configuration_and_data_driven_content.md`](content/05_identity_content_registries_configuration_and_data_driven_content.md) is the authoritative TA-5 identity/content/configuration contract.
+- [`TA5_IDENTITY_REGISTRY_MATRIX.md`](TA5_IDENTITY_REGISTRY_MATRIX.md) locks stable identity, registry ownership and lifecycle compatibility.
 - [`TA_ROADMAP.md`](TA_ROADMAP.md) defines the dependency-driven architecture sequence.
 - `audit/` will contain the final TA-16 integration/readiness evidence.
 
@@ -29,12 +31,12 @@ The TA is deliberately not allowed to redefine gameplay. It translates the appro
 
 GDS-17 has recorded a formal **Design Complete — PASS** with zero implementation-critical design questions.
 
-TA-0 through TA-4 are **Architecture Complete — PASS**.
+TA-0 through TA-5 are **Architecture Complete — PASS**.
 
-TA-4 closed with 180 / 180 persistence/recovery scenarios passing, atomic session ownership, P2 durability boundaries and a complete persistence/session/transaction matrix.
+TA-5 closed with 180 / 180 identity/content/configuration scenarios passing and a complete stable-ID/registry compatibility model.
 
 The active dependency is:
 
-> **TA-5 — Identity, Content Registries, Configuration, and Data-Driven Content**
+> **TA-6 — Runtime Entity, Player, Creature, and World Lifecycle**
 
-TA-5 now owns stable identifiers and validated content/config registries referenced by persistent state and later runtime systems. Gameplay implementation remains blocked until TA-17.
+TA-6 now owns runtime representation, spawn/despawn projection and transitions between persistent Creature/player/world state and active Roblox Instances. Gameplay implementation remains blocked until TA-17.
