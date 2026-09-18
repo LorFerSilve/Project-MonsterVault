@@ -1,6 +1,6 @@
 # Project MonsterVault Documentation
 
-> **Project phase:** Technical Architecture — TA-0..5 complete / TA-6 next  
+> **Project phase:** Technical Architecture — TA-0..6 complete / TA-7 next  
 > **Implementation status:** Blocked by Technical Architecture and implementation-lock gates
 
 This directory is the authoritative documentation space for Project MonsterVault.
@@ -64,20 +64,21 @@ Technical Architecture completed:
 - **TA-3 — Networking, Server Authority, Remote Contracts, and Exploit Boundaries: Architecture Complete — PASS**
 - **TA-4 — Player Data, Persistence, Session Ownership, Schema Evolution, and Recovery: Architecture Complete — PASS**
 - **TA-5 — Identity, Content Registries, Configuration, and Data-Driven Content: Architecture Complete — PASS**
+- **TA-6 — Runtime Entity, Player, Creature, and World Lifecycle: Architecture Complete — PASS**
 
-TA-5 latest evidence:
+TA-6 latest evidence:
 
-- [`technical_architecture/content/05_identity_content_registries_configuration_and_data_driven_content.md`](technical_architecture/content/05_identity_content_registries_configuration_and_data_driven_content.md);
-- [`technical_architecture/TA5_ROBLOX_CONTENT_AUTHORING_SNAPSHOT.md`](technical_architecture/TA5_ROBLOX_CONTENT_AUTHORING_SNAPSHOT.md);
-- [`technical_architecture/TA5_IDENTITY_REGISTRY_MATRIX.md`](technical_architecture/TA5_IDENTITY_REGISTRY_MATRIX.md);
-- [`technical_architecture/TA5_GDS_TRACEABILITY.md`](technical_architecture/TA5_GDS_TRACEABILITY.md);
-- [`technical_architecture/TA5_SCENARIO_VALIDATION.md`](technical_architecture/TA5_SCENARIO_VALIDATION.md);
-- [`technical_architecture/TA5_DECISION_INDEX.md`](technical_architecture/TA5_DECISION_INDEX.md);
-- [`technical_architecture/TA5_CLOSURE_REPORT.md`](technical_architecture/TA5_CLOSURE_REPORT.md).
+- [`technical_architecture/runtime/06_runtime_entity_player_creature_and_world_lifecycle.md`](technical_architecture/runtime/06_runtime_entity_player_creature_and_world_lifecycle.md);
+- [`technical_architecture/TA6_ROBLOX_RUNTIME_LIFECYCLE_SNAPSHOT.md`](technical_architecture/TA6_ROBLOX_RUNTIME_LIFECYCLE_SNAPSHOT.md);
+- [`technical_architecture/TA6_RUNTIME_LIFECYCLE_MATRIX.md`](technical_architecture/TA6_RUNTIME_LIFECYCLE_MATRIX.md);
+- [`technical_architecture/TA6_GDS_TRACEABILITY.md`](technical_architecture/TA6_GDS_TRACEABILITY.md);
+- [`technical_architecture/TA6_SCENARIO_VALIDATION.md`](technical_architecture/TA6_SCENARIO_VALIDATION.md);
+- [`technical_architecture/TA6_DECISION_INDEX.md`](technical_architecture/TA6_DECISION_INDEX.md);
+- [`technical_architecture/TA6_CLOSURE_REPORT.md`](technical_architecture/TA6_CLOSURE_REPORT.md).
 
 The active dependency is:
 
-> **TA-6 — Runtime Entity, Player, Creature, and World Lifecycle**
+> **TA-7 — Capture, Creature Ownership, Mutation, and Reward Resolution**
 
 No gameplay implementation should begin until:
 
