@@ -4,7 +4,7 @@
 
 ## Project Status
 
-**Game Design Specification — DESIGN COMPLETE / Technical Architecture TA-0 next.**
+**Game Design Specification — DESIGN COMPLETE / Technical Architecture TA-0 complete / TA-1 next.**
 
 MonsterVault is intentionally **not in gameplay implementation yet**. The project follows a specification-first workflow:
 
@@ -40,7 +40,8 @@ No gameplay system should be implemented merely because an idea appears promisin
 - **GDS-16 — Retention, Discovery, Analytics, and Experimentation Boundaries: COMPLETE — PASS**
 - **GDS-17 — Cross-System Consistency and Design-Complete Audit: COMPLETE — PASS**
 - **GAME DESIGN SPECIFICATION: DESIGN COMPLETE**
-- **TA-0 — Architecture Governance, Constraints, and GDS Traceability: NEXT**
+- **TA-0 — Architecture Governance, Constraints, and GDS Traceability: ARCHITECTURE COMPLETE — PASS**
+- **TA-1 — Roblox System Context, Toolchain, and Development Environment: NEXT**
 - Gameplay implementation: blocked by TA and implementation-lock gates
 
 GDS-17 final evidence is recorded in [`17_cross_system_consistency_and_design_complete_audit.md`](docs/game_design/audit/17_cross_system_consistency_and_design_complete_audit.md), [`GDS17_AUTHORITY_NAMESPACE_AUDIT.md`](docs/game_design/GDS17_AUTHORITY_NAMESPACE_AUDIT.md), [`GDS17_MATURITY_OPEN_QUESTION_AUDIT.md`](docs/game_design/GDS17_MATURITY_OPEN_QUESTION_AUDIT.md), [`GDS17_COMPOUND_SCENARIO_VALIDATION.md`](docs/game_design/GDS17_COMPOUND_SCENARIO_VALIDATION.md), [`GDS17_DECISION_INDEX.md`](docs/game_design/GDS17_DECISION_INDEX.md), and [`GDS17_CLOSURE_REPORT.md`](docs/game_design/GDS17_CLOSURE_REPORT.md).
@@ -434,10 +435,18 @@ Key documents include:
 
 ### Technical Architecture
 
-[`docs/technical_architecture/`](docs/technical_architecture/) is now **ACTIVE — TA-0 NEXT**.
+[`docs/technical_architecture/`](docs/technical_architecture/) is **ACTIVE — TA-0 COMPLETE / TA-1 NEXT**.
 
-Technical Architecture now translates the approved Design Complete GDS into concrete Roblox/Luau contracts for identity, persistence, networking, runtime lifecycle, controls, creature/capture/variant/Vault/economy/world/social/event/trading/monetization/presentation/platform-safety systems, retention analytics, live operations, performance, testing and CI.
+TA-0 has established architecture governance, GDS traceability, technical ownership, trust/transaction principles, security/performance/testability gates and architecture change control. Technical Architecture now continues with TA-1 to lock the Roblox system context, toolchain and reproducible development environment before later subsystem contracts.
 
+TA-0 closure evidence:
+
+- [`governance/00_architecture_governance_constraints_and_gds_traceability.md`](docs/technical_architecture/governance/00_architecture_governance_constraints_and_gds_traceability.md);
+- [`TA0_GDS_TRACEABILITY_MATRIX.md`](docs/technical_architecture/TA0_GDS_TRACEABILITY_MATRIX.md);
+- [`TA0_ARCHITECTURE_RISK_REGISTER.md`](docs/technical_architecture/TA0_ARCHITECTURE_RISK_REGISTER.md);
+- [`TA0_SCENARIO_VALIDATION.md`](docs/technical_architecture/TA0_SCENARIO_VALIDATION.md) — 60 / 60 PASS;
+- [`TA0_DECISION_INDEX.md`](docs/technical_architecture/TA0_DECISION_INDEX.md);
+- [`TA0_CLOSURE_REPORT.md`](docs/technical_architecture/TA0_CLOSURE_REPORT.md) — PASS.
 ### Implementation
 
 [`docs/implementation/`](docs/implementation/) remains intentionally **BLOCKED**.
@@ -490,7 +499,7 @@ The source/test/tooling directories are reserved for later implementation. Their
 
 ## Current Next Step
 
-Proceed with **TA-0 — Architecture Governance, Constraints, and GDS Traceability**.
+Proceed with **TA-1 — Roblox System Context, Toolchain, and Development Environment**.
 
 The first implementation vertical slice will be selected and locked only after the complete design and architecture dependency chain makes its requirements clear.
 
