@@ -1,13 +1,13 @@
 # Technical Architecture Roadmap
 
-> **Status:** Blocked by GDS-17
+> **Status:** Active — TA-0 Next
 > **Authority:** Dependency-driven technical architecture sequencing
 
-This roadmap defines how the completed MonsterVault GDS will later be translated into implementation-ready Roblox/Luau contracts.
+This roadmap defines how the Design Complete MonsterVault GDS is translated into implementation-ready Roblox/Luau contracts.
 
 ## TA-0 — Architecture Governance, Constraints, and GDS Traceability
 
-**Status:** Blocked
+**Status:** NEXT — Draft
 
 Establishes architecture authority, GDS-to-TA traceability, decision logging, status model, dependency policy, security/performance principles and implementation gate.
 
@@ -135,3 +135,14 @@ GDS-17 PASS / Design Complete
   -> TA-17 implementation roadmap + contract locking
   -> IMPLEMENTATION OPEN
 ```
+
+
+## Current Architecture Gate
+
+GDS-17 is **Complete — PASS** and the Game Design Specification is **Design Complete**.
+
+The active dependency is:
+
+> **TA-0 — Architecture Governance, Constraints, and GDS Traceability**
+
+TA-1 through TA-17 remain blocked by dependency order. Gameplay implementation remains blocked until TA-17 is formally complete.
