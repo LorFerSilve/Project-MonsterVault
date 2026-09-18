@@ -1,6 +1,6 @@
 # Technical Architecture Roadmap
 
-> **Status:** Active — TA-6 Next
+> **Status:** Active — TA-7 Next
 > **Authority:** Dependency-driven technical architecture sequencing
 
 This roadmap defines how the Design Complete MonsterVault GDS is translated into implementation-ready Roblox/Luau contracts.
@@ -234,13 +234,52 @@ Closure evidence:
 
 ## TA-6 — Runtime Entity, Player, Creature, and World Lifecycle
 
-**Status:** NEXT — Draft
+**Status:** Architecture Complete — PASS
 
-Defines runtime representation, spawning/despawning, ownership/projection, server/client replication expectations, lifecycle state machines and transitions between persistent and active world state.
+Established and formally validated:
+
+- server-authoritative runtime records separated from Roblox Instance projections;
+- explicit runtime entity taxonomy and injected server registry;
+- generic Allocated -> Initializing -> Registered -> Materializing -> Active -> Quiescing -> Terminating -> Destroyed lifecycle;
+- monotonic runtimeRevision for stale-command/callback rejection;
+- Player Session separated from Character Presence;
+- session-local character generation identity;
+- trusted-profile-before-Active-Presence rule;
+- server-owned safe-arrival/recovery boundary;
+- stable World Creature runtime record using CreatureInstanceId;
+- Variant Identity complete before individual actionability;
+- active acquisition protected from ordinary idle despawn;
+- failed/released acquisition preserving the same surviving creature identity;
+- Secured Ownership transition preserving CreatureInstanceId;
+- persistent owned projections separated from collection ownership;
+- runtime/network/persistent/claim ownership concepts separated;
+- Workspace runtime container and stable interaction-target boundary;
+- client streaming tolerance and exceptional Persistent-model policy;
+- physics network ownership/Touched distrust for critical outcomes;
+- revision-aware disposable client projection cache;
+- explicit entity create/destroy transactions;
+- one idempotent cleanup owner per runtime entity;
+- stale async/timer/character-generation protection;
+- static world runtime index handoff;
+- recovery/shutdown/late-join/population hooks;
+- Protected Variant server-lifetime stability handling;
+- current Roblox character/streaming/network-ownership/cleanup behavior reviewed;
+- 190 / 190 TA-6 scenarios PASS;
+- zero TA-6-blocking questions.
+
+Closure evidence:
+
+- [runtime/06_runtime_entity_player_creature_and_world_lifecycle.md](runtime/06_runtime_entity_player_creature_and_world_lifecycle.md) — Architecture Complete;
+- [TA6_ROBLOX_RUNTIME_LIFECYCLE_SNAPSHOT.md](TA6_ROBLOX_RUNTIME_LIFECYCLE_SNAPSHOT.md) — PASS;
+- [TA6_RUNTIME_LIFECYCLE_MATRIX.md](TA6_RUNTIME_LIFECYCLE_MATRIX.md) — PASS;
+- [TA6_GDS_TRACEABILITY.md](TA6_GDS_TRACEABILITY.md) — PASS;
+- [TA6_SCENARIO_VALIDATION.md](TA6_SCENARIO_VALIDATION.md) — 190 / 190 PASS;
+- [TA6_DECISION_INDEX.md](TA6_DECISION_INDEX.md) — accepted;
+- [TA6_CLOSURE_REPORT.md](TA6_CLOSURE_REPORT.md) — PASS.
 
 ## TA-7 — Capture, Creature Ownership, Mutation, and Reward Resolution
 
-**Status:** Blocked
+**Status:** NEXT — Draft
 
 Defines authoritative capture transactions, simultaneous claims, random-outcome authority, mutation generation, ownership commitment, disconnect/retry behavior, anti-reroll rules and reward resolution.
 
@@ -332,10 +371,10 @@ GDS-17 PASS / Design Complete
 
 GDS-17 is **Complete — PASS** and the Game Design Specification is **Design Complete**.
 
-TA-0 through TA-5 are **Architecture Complete — PASS**.
+TA-0 through TA-6 are **Architecture Complete — PASS**.
 
 The active dependency is:
 
-> **TA-6 — Runtime Entity, Player, Creature, and World Lifecycle**
+> **TA-7 — Capture, Creature Ownership, Mutation, and Reward Resolution**
 
-TA-7 through TA-17 remain blocked by dependency order. Gameplay implementation remains blocked until TA-17 is formally complete.
+TA-8 through TA-17 remain blocked by dependency order. Gameplay implementation remains blocked until TA-17 is formally complete.

@@ -1,6 +1,6 @@
 # Architecture Decisions
 
-> **Status:** Active — TA-0..5 Complete / TA-6 Next
+> **Status:** Active — TA-0..6 Complete / TA-7 Next
 > **Authority:** Accepted technical architecture decisions and rationale
 
 This log records material architecture decisions. GDS-17 has formally promoted the Game Design Specification to Design Complete, so architecture decision-making may now begin under TA-0.
@@ -847,3 +847,152 @@ TA-5 is Architecture Complete — PASS with 180/180 scenarios and zero blocking 
 ### Consequence
 
 TA-6 becomes NEXT. Gameplay implementation remains blocked until TA-17.
+
+
+---
+
+## AD-050 — Server Runtime Records Are Authoritative; Roblox Instances Are Projections
+
+**Date:** 2026-09-18  
+**Status:** Accepted  
+**Owning TA phase:** TA-6
+
+### Decision
+
+Dynamic gameplay state lives in server-owned runtime records. Workspace Models/Parts are disposable projections and do not own semantic or persistent truth.
+
+### Consequence
+
+Streaming, local destruction or projection failure cannot independently create or erase gameplay ownership/state.
+
+---
+
+## AD-051 — Player Session and Character Presence Are Separate Lifecycles
+
+**Date:** 2026-09-18  
+**Status:** Accepted  
+**Owning TA phase:** TA-6
+
+### Decision
+
+One Player Session may contain multiple Character generations. Character failure/reset/removal does not destroy the persistent profile/session.
+
+### Consequence
+
+Recovery and respawn become runtime transitions rather than persistence reloads or wipes.
+
+---
+
+## AD-052 — Dynamic Runtime Entities Use an Explicit Registry, Revision, and Lifecycle
+
+**Date:** 2026-09-18  
+**Status:** Accepted  
+**Owning TA phase:** TA-6
+
+### Decision
+
+Runtime entities are server-registered by stable ID, carry a runtimeRevision, and transition through explicit creation/active/quiescing/terminal states.
+
+### Consequence
+
+Stale commands/timers/callbacks can be rejected deterministically.
+
+---
+
+## AD-053 — Character Presence Uses a Generation Identity
+
+**Date:** 2026-09-18  
+**Status:** Accepted  
+**Owning TA phase:** TA-6
+
+### Decision
+
+Each replacement avatar increments a session-local character generation so work tied to a previous Character cannot mutate the new one.
+
+---
+
+## AD-054 — World Creature Identity Survives Acquisition Failure Until Genuine Termination
+
+**Date:** 2026-09-18  
+**Status:** Accepted  
+**Owning TA phase:** TA-6
+
+### Decision
+
+A surviving World Creature keeps one CreatureInstanceId and Variant Identity through claim/capture interruption. Only genuine entity termination permits a later independent replacement.
+
+---
+
+## AD-055 — Active Acquisition Protects Against Ordinary Idle Despawn
+
+**Date:** 2026-09-18  
+**Status:** Accepted  
+**Owning TA phase:** TA-6
+
+### Decision
+
+Engagement Claim, Capture Attempt, Provisional Capture and Transport Custody states are not ended by ordinary encounter-idle lifetime expiration.
+
+### Consequence
+
+TA-7 owns their resolution.
+
+---
+
+## AD-056 — Secured Ownership Preserves the Existing CreatureInstanceId
+
+**Date:** 2026-09-18  
+**Status:** Accepted  
+**Owning TA phase:** TA-6
+
+### Decision
+
+When TA-7/TA-4 finalize ownership, the same creature instance transitions out of its public world role; an owned replacement identity is not minted.
+
+---
+
+## AD-057 — Streaming and Physics Ownership Are Not Gameplay Authority
+
+**Date:** 2026-09-18  
+**Status:** Accepted  
+**Owning TA phase:** TA-6
+
+### Decision
+
+Client Workspace visibility and Roblox physics network ownership are presentation/simulation concerns only.
+
+### Consequence
+
+Client stream-out, Touched events and client-owned physics cannot finalize ownership/reward/state without server validation.
+
+---
+
+## AD-058 — Every Runtime Entity Has One Idempotent Cleanup Owner
+
+**Date:** 2026-09-18  
+**Status:** Accepted  
+**Owning TA phase:** TA-6
+
+### Decision
+
+The lifecycle owner tracks and cleans connections, tasks/timers, projections, registry bindings and long-lived references.
+
+### Consequence
+
+Entity/player churn does not accumulate hidden listeners or stale runtime state.
+
+---
+
+## AD-059 — Close TA-6 and Advance to TA-7
+
+**Date:** 2026-09-18  
+**Status:** Accepted  
+**Owning TA phase:** TA-6
+
+### Decision
+
+TA-6 is Architecture Complete — PASS with 190/190 scenarios and zero blocking questions.
+
+### Consequence
+
+TA-7 becomes NEXT. Gameplay implementation remains blocked until TA-17.
