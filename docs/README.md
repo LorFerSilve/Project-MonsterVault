@@ -1,6 +1,6 @@
 # Project MonsterVault Documentation
 
-> **Project phase:** Technical Architecture — TA-0..7 complete / TA-8 next  
+> **Project phase:** Technical Architecture — TA-0..8 complete / TA-9 next  
 > **Implementation status:** Blocked by Technical Architecture and implementation-lock gates
 
 This directory is the authoritative documentation space for Project MonsterVault.
@@ -66,20 +66,21 @@ Technical Architecture completed:
 - **TA-5 — Identity, Content Registries, Configuration, and Data-Driven Content: Architecture Complete — PASS**
 - **TA-6 — Runtime Entity, Player, Creature, and World Lifecycle: Architecture Complete — PASS**
 - **TA-7 — Capture, Creature Ownership, Mutation, and Reward Resolution: Architecture Complete — PASS**
+- **TA-8 — Vault, Economy, Progression, Inventory, and Offline Accrual: Architecture Complete — PASS**
 
-TA-7 latest evidence:
+TA-8 latest evidence:
 
-- [`technical_architecture/capture/07_capture_creature_ownership_mutation_and_reward_resolution.md`](technical_architecture/capture/07_capture_creature_ownership_mutation_and_reward_resolution.md);
-- [`technical_architecture/TA7_ROBLOX_CAPTURE_RANDOMNESS_SNAPSHOT.md`](technical_architecture/TA7_ROBLOX_CAPTURE_RANDOMNESS_SNAPSHOT.md);
-- [`technical_architecture/TA7_CAPTURE_VARIANT_FINALIZATION_MATRIX.md`](technical_architecture/TA7_CAPTURE_VARIANT_FINALIZATION_MATRIX.md);
-- [`technical_architecture/TA7_GDS_TRACEABILITY.md`](technical_architecture/TA7_GDS_TRACEABILITY.md);
-- [`technical_architecture/TA7_SCENARIO_VALIDATION.md`](technical_architecture/TA7_SCENARIO_VALIDATION.md);
-- [`technical_architecture/TA7_DECISION_INDEX.md`](technical_architecture/TA7_DECISION_INDEX.md);
-- [`technical_architecture/TA7_CLOSURE_REPORT.md`](technical_architecture/TA7_CLOSURE_REPORT.md).
+- [`technical_architecture/economy/08_vault_economy_progression_inventory_and_offline_accrual.md`](technical_architecture/economy/08_vault_economy_progression_inventory_and_offline_accrual.md);
+- [`technical_architecture/TA8_ROBLOX_ECONOMY_TIME_NUMERIC_SNAPSHOT.md`](technical_architecture/TA8_ROBLOX_ECONOMY_TIME_NUMERIC_SNAPSHOT.md);
+- [`technical_architecture/TA8_VAULT_ECONOMY_OFFLINE_MATRIX.md`](technical_architecture/TA8_VAULT_ECONOMY_OFFLINE_MATRIX.md);
+- [`technical_architecture/TA8_GDS_TRACEABILITY.md`](technical_architecture/TA8_GDS_TRACEABILITY.md);
+- [`technical_architecture/TA8_SCENARIO_VALIDATION.md`](technical_architecture/TA8_SCENARIO_VALIDATION.md);
+- [`technical_architecture/TA8_DECISION_INDEX.md`](technical_architecture/TA8_DECISION_INDEX.md);
+- [`technical_architecture/TA8_CLOSURE_REPORT.md`](technical_architecture/TA8_CLOSURE_REPORT.md).
 
 The active dependency is:
 
-> **TA-8 — Vault, Economy, Progression, Inventory, and Offline Accrual**
+> **TA-9 — World, Biomes, Spawn Scheduling, Streaming, and Encounter Scaling**
 
 No gameplay implementation should begin until:
 

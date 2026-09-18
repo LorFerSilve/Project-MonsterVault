@@ -1,6 +1,6 @@
 # MonsterVault Technical Architecture
 
-> **Status:** Active — TA-0..7 Complete / TA-8 Next
+> **Status:** Active — TA-0..8 Complete / TA-9 Next
 > **Authority:** Technical implementation contracts after GDS completion
 
 This directory contains the Technical Architecture layer that now becomes active after the GDS-17 Design Complete PASS.
@@ -28,6 +28,8 @@ The TA is deliberately not allowed to redefine gameplay. It translates the appro
 - [`TA6_RUNTIME_LIFECYCLE_MATRIX.md`](TA6_RUNTIME_LIFECYCLE_MATRIX.md) locks runtime authority, projection and cleanup boundaries.
 - [`capture/07_capture_creature_ownership_mutation_and_reward_resolution.md`](capture/07_capture_creature_ownership_mutation_and_reward_resolution.md) is the authoritative TA-7 capture/ownership/randomness contract.
 - [`TA7_CAPTURE_VARIANT_FINALIZATION_MATRIX.md`](TA7_CAPTURE_VARIANT_FINALIZATION_MATRIX.md) locks claim, Variant and P2 finalization boundaries.
+- [`economy/08_vault_economy_progression_inventory_and_offline_accrual.md`](economy/08_vault_economy_progression_inventory_and_offline_accrual.md) is the authoritative TA-8 Vault/economy/offline-accrual contract.
+- [`TA8_VAULT_ECONOMY_OFFLINE_MATRIX.md`](TA8_VAULT_ECONOMY_OFFLINE_MATRIX.md) locks capacity, numeric, production, wallet and purchase boundaries.
 - [`TA_ROADMAP.md`](TA_ROADMAP.md) defines the dependency-driven architecture sequence.
 - `audit/` will contain the final TA-16 integration/readiness evidence.
 
@@ -35,12 +37,12 @@ The TA is deliberately not allowed to redefine gameplay. It translates the appro
 
 GDS-17 has recorded a formal **Design Complete — PASS** with zero implementation-critical design questions.
 
-TA-0 through TA-7 are **Architecture Complete — PASS**.
+TA-0 through TA-8 are **Architecture Complete — PASS**.
 
-TA-7 closed with 200 / 200 capture/randomness/finalization scenarios passing and a complete anti-reroll, provisional-custody, exact-once ownership model.
+TA-8 closed with 220 / 220 Vault/economy/offline-accrual scenarios passing and a bounded integer, elapsed-time, exact-once transaction model.
 
 The active dependency is:
 
-> **TA-8 — Vault, Economy, Progression, Inventory, and Offline Accrual**
+> **TA-9 — World, Biomes, Spawn Scheduling, Streaming, and Encounter Scaling**
 
-TA-8 now owns the persistent Collection/Vault/Energy/progression schemas and transactions consumed by TA-7 finalization. Gameplay implementation remains blocked until TA-17.
+TA-9 now owns the server world topology, spawn scheduler, spatial/streaming strategy and encounter-population scaling that consume TA-5 content, TA-6 runtime entities, TA-7 capture and TA-8 progression/access state. Gameplay implementation remains blocked until TA-17.
