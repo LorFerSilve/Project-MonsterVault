@@ -1,6 +1,6 @@
 # Technical Architecture Roadmap
 
-> **Status:** Active — TA-1 Next
+> **Status:** Active — TA-2 Next
 > **Authority:** Dependency-driven technical architecture sequencing
 
 This roadmap defines how the Design Complete MonsterVault GDS is translated into implementation-ready Roblox/Luau contracts.
@@ -39,13 +39,41 @@ Closure evidence:
 
 ## TA-1 — Roblox System Context, Toolchain, and Development Environment
 
-**Status:** NEXT — Draft
+**Status:** Architecture Complete — PASS
 
-Defines supported Roblox experience topology, Studio/repository workflow, Luau baseline, Rojo/tooling decision, package/dependency strategy, local development conventions and reproducible developer setup.
+Established and formally validated:
+
+- Roblox Studio stable as authoritative engine execution/playtest/publish environment;
+- DEV / STAGING / PRODUCTION environment classes;
+- one primary gameplay place per environment as launch baseline;
+- Git/filesystem as source of truth for first-party Luau/project configuration;
+- Rojo as primary filesystem-to-Studio sync/build workflow;
+- Roblox Script Sync retained as non-primary alternative rather than competing authority;
+- Rokit as pinned CLI toolchain manager;
+- strict first-party Luau baseline;
+- luau-lsp, StyLua and Selene as reference editor/static tooling;
+- current reference versions recorded in a dated toolchain snapshot;
+- no runtime package manager and no third-party runtime Luau package at baseline;
+- explicit trigger/review process for any future dependency;
+- UTF-8/LF/version-control and generated-artifact conventions;
+- no secrets/credentials in Git;
+- reproducible developer setup and environment-health expectations;
+- supply-chain and local Rojo-server security boundaries;
+- 75 / 75 TA-1 scenarios PASS;
+- zero TA-1-blocking questions.
+
+Closure evidence:
+
+- [environment/01_roblox_system_context_toolchain_and_development_environment.md](environment/01_roblox_system_context_toolchain_and_development_environment.md) — Architecture Complete;
+- [TA1_TOOLCHAIN_SNAPSHOT.md](TA1_TOOLCHAIN_SNAPSHOT.md) — PASS;
+- [TA1_GDS_TRACEABILITY.md](TA1_GDS_TRACEABILITY.md) — PASS;
+- [TA1_SCENARIO_VALIDATION.md](TA1_SCENARIO_VALIDATION.md) — 75 / 75 PASS;
+- [TA1_DECISION_INDEX.md](TA1_DECISION_INDEX.md) — accepted;
+- [TA1_CLOSURE_REPORT.md](TA1_CLOSURE_REPORT.md) — PASS.
 
 ## TA-2 — Repository Layout, Module Boundaries, Dependency Direction, and Bootstrapping
 
-**Status:** Blocked
+**Status:** NEXT — Draft
 
 Defines client/server/shared boundaries, module ownership, dependency graph, startup/lifecycle ordering, configuration/content boundaries and rules that prevent cyclic or hidden cross-domain dependencies.
 
@@ -167,10 +195,10 @@ GDS-17 PASS / Design Complete
 
 GDS-17 is **Complete — PASS** and the Game Design Specification is **Design Complete**.
 
-TA-0 is **Architecture Complete — PASS**.
+TA-0 and TA-1 are **Architecture Complete — PASS**.
 
 The active dependency is:
 
-> **TA-1 — Roblox System Context, Toolchain, and Development Environment**
+> **TA-2 — Repository Layout, Module Boundaries, Dependency Direction, and Bootstrapping**
 
-TA-2 through TA-17 remain blocked by dependency order. Gameplay implementation remains blocked until TA-17 is formally complete.
+TA-3 through TA-17 remain blocked by dependency order. Gameplay implementation remains blocked until TA-17 is formally complete.
