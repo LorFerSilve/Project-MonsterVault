@@ -1,6 +1,6 @@
 # MonsterVault Technical Architecture
 
-> **Status:** Active — TA-0..6 Complete / TA-7 Next
+> **Status:** Active — TA-0..7 Complete / TA-8 Next
 > **Authority:** Technical implementation contracts after GDS completion
 
 This directory contains the Technical Architecture layer that now becomes active after the GDS-17 Design Complete PASS.
@@ -26,6 +26,8 @@ The TA is deliberately not allowed to redefine gameplay. It translates the appro
 - [`TA5_IDENTITY_REGISTRY_MATRIX.md`](TA5_IDENTITY_REGISTRY_MATRIX.md) locks stable identity, registry ownership and lifecycle compatibility.
 - [`runtime/06_runtime_entity_player_creature_and_world_lifecycle.md`](runtime/06_runtime_entity_player_creature_and_world_lifecycle.md) is the authoritative TA-6 runtime/entity-lifecycle contract.
 - [`TA6_RUNTIME_LIFECYCLE_MATRIX.md`](TA6_RUNTIME_LIFECYCLE_MATRIX.md) locks runtime authority, projection and cleanup boundaries.
+- [`capture/07_capture_creature_ownership_mutation_and_reward_resolution.md`](capture/07_capture_creature_ownership_mutation_and_reward_resolution.md) is the authoritative TA-7 capture/ownership/randomness contract.
+- [`TA7_CAPTURE_VARIANT_FINALIZATION_MATRIX.md`](TA7_CAPTURE_VARIANT_FINALIZATION_MATRIX.md) locks claim, Variant and P2 finalization boundaries.
 - [`TA_ROADMAP.md`](TA_ROADMAP.md) defines the dependency-driven architecture sequence.
 - `audit/` will contain the final TA-16 integration/readiness evidence.
 
@@ -33,12 +35,12 @@ The TA is deliberately not allowed to redefine gameplay. It translates the appro
 
 GDS-17 has recorded a formal **Design Complete — PASS** with zero implementation-critical design questions.
 
-TA-0 through TA-6 are **Architecture Complete — PASS**.
+TA-0 through TA-7 are **Architecture Complete — PASS**.
 
-TA-6 closed with 190 / 190 runtime-lifecycle scenarios passing and a complete server-record/projection/player-character cleanup model.
+TA-7 closed with 200 / 200 capture/randomness/finalization scenarios passing and a complete anti-reroll, provisional-custody, exact-once ownership model.
 
 The active dependency is:
 
-> **TA-7 — Capture, Creature Ownership, Mutation, and Reward Resolution**
+> **TA-8 — Vault, Economy, Progression, Inventory, and Offline Accrual**
 
-TA-7 now owns claim/capture state, random Variant resolution, durable ownership finalization and reward transaction semantics on top of the TA-6 runtime model. Gameplay implementation remains blocked until TA-17.
+TA-8 now owns the persistent Collection/Vault/Energy/progression schemas and transactions consumed by TA-7 finalization. Gameplay implementation remains blocked until TA-17.
