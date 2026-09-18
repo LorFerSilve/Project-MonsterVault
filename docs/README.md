@@ -1,6 +1,6 @@
 # Project MonsterVault Documentation
 
-> **Project phase:** Technical Architecture — TA-0 complete / TA-1 next  
+> **Project phase:** Technical Architecture — TA-0..1 complete / TA-2 next  
 > **Implementation status:** Blocked by Technical Architecture and implementation-lock gates
 
 This directory is the authoritative documentation space for Project MonsterVault.
@@ -59,19 +59,20 @@ Latest closure evidence:
 Technical Architecture completed:
 
 - **TA-0 — Architecture Governance, Constraints, and GDS Traceability: Architecture Complete — PASS**
+- **TA-1 — Roblox System Context, Toolchain, and Development Environment: Architecture Complete — PASS**
 
-TA-0 evidence:
+TA-1 latest evidence:
 
-- [`technical_architecture/governance/00_architecture_governance_constraints_and_gds_traceability.md`](technical_architecture/governance/00_architecture_governance_constraints_and_gds_traceability.md);
-- [`technical_architecture/TA0_GDS_TRACEABILITY_MATRIX.md`](technical_architecture/TA0_GDS_TRACEABILITY_MATRIX.md);
-- [`technical_architecture/TA0_ARCHITECTURE_RISK_REGISTER.md`](technical_architecture/TA0_ARCHITECTURE_RISK_REGISTER.md);
-- [`technical_architecture/TA0_SCENARIO_VALIDATION.md`](technical_architecture/TA0_SCENARIO_VALIDATION.md);
-- [`technical_architecture/TA0_DECISION_INDEX.md`](technical_architecture/TA0_DECISION_INDEX.md);
-- [`technical_architecture/TA0_CLOSURE_REPORT.md`](technical_architecture/TA0_CLOSURE_REPORT.md).
+- [`technical_architecture/environment/01_roblox_system_context_toolchain_and_development_environment.md`](technical_architecture/environment/01_roblox_system_context_toolchain_and_development_environment.md);
+- [`technical_architecture/TA1_TOOLCHAIN_SNAPSHOT.md`](technical_architecture/TA1_TOOLCHAIN_SNAPSHOT.md);
+- [`technical_architecture/TA1_GDS_TRACEABILITY.md`](technical_architecture/TA1_GDS_TRACEABILITY.md);
+- [`technical_architecture/TA1_SCENARIO_VALIDATION.md`](technical_architecture/TA1_SCENARIO_VALIDATION.md);
+- [`technical_architecture/TA1_DECISION_INDEX.md`](technical_architecture/TA1_DECISION_INDEX.md);
+- [`technical_architecture/TA1_CLOSURE_REPORT.md`](technical_architecture/TA1_CLOSURE_REPORT.md).
 
 The active dependency is:
 
-> **TA-1 — Roblox System Context, Toolchain, and Development Environment**
+> **TA-2 — Repository Layout, Module Boundaries, Dependency Direction, and Bootstrapping**
 
 No gameplay implementation should begin until:
 
