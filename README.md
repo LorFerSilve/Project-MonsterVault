@@ -4,7 +4,7 @@
 
 ## Project Status
 
-**Pre-implementation specification — GDS-0 through GDS-15 complete / GDS-16 next.**
+**Pre-implementation specification — GDS-0 through GDS-16 complete / GDS-17 audit next.**
 
 MonsterVault is intentionally **not in gameplay implementation yet**. The project follows a specification-first workflow:
 
@@ -37,12 +37,12 @@ No gameplay system should be implemented merely because an idea appears promisin
 - **GDS-13 — Monetization and Commercial Fairness: COMPLETE — PASS**
 - **GDS-14 — Presentation, UI/UX, Feedback, and Accessibility: COMPLETE — PASS**
 - **GDS-15 — Roblox Platform, Social Safety, and Moderation Constraints: COMPLETE — PASS**
-- **GDS-16 — Retention, Discovery, Analytics, and Experimentation Boundaries: NEXT**
-- GDS-17: blocked until subsystem design is complete
+- **GDS-16 — Retention, Discovery, Analytics, and Experimentation Boundaries: COMPLETE — PASS**
+- **GDS-17 — Cross-System Consistency and Design-Complete Audit: NEXT**
 - Technical Architecture: blocked by GDS-17
 - Gameplay implementation: blocked by GDS and TA gates
 
-GDS-15 closure evidence is recorded in [`GDS15_ROBLOX_PLATFORM_POLICY_SNAPSHOT.md`](docs/game_design/GDS15_ROBLOX_PLATFORM_POLICY_SNAPSHOT.md), [`GDS15_SCENARIO_VALIDATION.md`](docs/game_design/GDS15_SCENARIO_VALIDATION.md), [`GDS15_CROSS_VALIDATION.md`](docs/game_design/GDS15_CROSS_VALIDATION.md), [`GDS15_DECISION_INDEX.md`](docs/game_design/GDS15_DECISION_INDEX.md), and [`GDS15_CLOSURE_REPORT.md`](docs/game_design/GDS15_CLOSURE_REPORT.md).
+GDS-16 closure evidence is recorded in [`GDS16_SCENARIO_VALIDATION.md`](docs/game_design/GDS16_SCENARIO_VALIDATION.md), [`GDS16_CROSS_VALIDATION.md`](docs/game_design/GDS16_CROSS_VALIDATION.md), [`GDS16_DECISION_INDEX.md`](docs/game_design/GDS16_DECISION_INDEX.md), and [`GDS16_CLOSURE_REPORT.md`](docs/game_design/GDS16_CLOSURE_REPORT.md).
 
 ## Product Contract
 
@@ -352,6 +352,27 @@ GDS-15 makes Roblox safety/policy a live external boundary while keeping the cor
 - a current official Roblox policy review is mandatory again before implementation lock/launch.
 
 The authoritative GDS-15 specification is [`15_roblox_platform_social_safety_and_moderation_constraints.md`](docs/game_design/platform_safety/15_roblox_platform_social_safety_and_moderation_constraints.md).
+## Retention, Discovery, Analytics, and Experimentation Contract
+
+GDS-16 defines how MonsterVault learns from player behavior without turning analytics into hidden gameplay authority:
+
+- GDS-1's success hierarchy remains binding: **comprehension/satisfaction → retention → meaningful engagement → social value → discovery/acquisition → monetization**;
+- first-session and returning-player funnels measure whether the core product promise is actually understood and reached;
+- a non-blocking **Return Brief** may surface existing Production Buffer, current events, unresolved Overflow and useful next goals;
+- optional **Next Aspirations** guide already-valid progression/collection goals but never grant rewards, eligibility or hidden odds;
+- there is **no baseline daily login reward, login streak, absence punishment or mandatory daily/weekly checklist**;
+- raw session time is not treated as healthy engagement when driven by AFK, waiting, confusion or forced timers;
+- notifications/reminders, if used later, must be factual, policy-aware, frequency-bounded and non-guilt/non-loss-chasing;
+- Discovery Packaging may be A/B tested only while truthfully representing the shipped experience;
+- analytics may segment cohorts for diagnosis, including device, progression and payer/non-payer, but that segmentation cannot secretly personalize collectible odds or claim/capture power;
+- product analytics minimizes data and does not require raw chat content, unnecessary PII or sensitive-trait inference;
+- every decision-grade experiment requires a hypothesis, owner, primary metric, guardrails, stable treatment exposure and stop/rollback conditions;
+- public/shared value experiments require coherent server/event rules rather than contradictory per-player hidden rules;
+- persistent-value experiments are prospective and auditable; valid Finalized Outcomes survive rollback;
+- ownership, Creature Lock, exact-once persistence, trade atomicity, platform safety, accessibility and commercial fairness are **Experiment Invariants**;
+- if the core loop remains weak after substantive iteration, the response is redesign rather than larger rewards, stronger FOMO, more notifications or more monetization pressure.
+
+The authoritative GDS-16 specification is [`16_retention_discovery_analytics_and_experimentation_boundaries.md`](docs/game_design/retention_analytics/16_retention_discovery_analytics_and_experimentation_boundaries.md).
 ## Working Core Loop
 
 ```text
@@ -371,7 +392,7 @@ Choose or notice a desirable goal
   -> repeat
 ```
 
-Retention, discovery, analytics and experimentation boundaries now belong to GDS-16. Technical implementation remains subject to GDS-17 and Technical Architecture.
+All ordinary subsystem design phases GDS-0 through GDS-16 are now complete. The final design dependency is GDS-17 cross-system consistency and Design-Complete audit; Technical Architecture remains blocked until that audit passes.
 
 ## Documentation Authority
 
@@ -402,11 +423,11 @@ Key documents include:
 - [`monetization/`](docs/game_design/monetization/) — GDS-13 monetization/commercial-fairness contract;
 - [`presentation/`](docs/game_design/presentation/) — GDS-14 presentation/UI/UX/feedback/accessibility contract;
 - [`platform_safety/`](docs/game_design/platform_safety/) — GDS-15 Roblox platform/social-safety/moderation contract;
-- [`GDS15_ROBLOX_PLATFORM_POLICY_SNAPSHOT.md`](docs/game_design/GDS15_ROBLOX_PLATFORM_POLICY_SNAPSHOT.md) — dated official-policy review evidence;
-- [`GDS15_SCENARIO_VALIDATION.md`](docs/game_design/GDS15_SCENARIO_VALIDATION.md) — 170 compound GDS-15 scenarios;
-- [`GDS15_CROSS_VALIDATION.md`](docs/game_design/GDS15_CROSS_VALIDATION.md) — authority/consistency audit;
-- [`GDS15_DECISION_INDEX.md`](docs/game_design/GDS15_DECISION_INDEX.md) — phase-local strategic decisions;
-- [`GDS15_CLOSURE_REPORT.md`](docs/game_design/GDS15_CLOSURE_REPORT.md) — formal GDS-15 closure evidence.
+- [`retention_analytics/`](docs/game_design/retention_analytics/) — GDS-16 retention/discovery/analytics/experimentation contract;
+- [`GDS16_SCENARIO_VALIDATION.md`](docs/game_design/GDS16_SCENARIO_VALIDATION.md) — 180 compound GDS-16 scenarios;
+- [`GDS16_CROSS_VALIDATION.md`](docs/game_design/GDS16_CROSS_VALIDATION.md) — authority/consistency audit;
+- [`GDS16_DECISION_INDEX.md`](docs/game_design/GDS16_DECISION_INDEX.md) — phase-local strategic decisions;
+- [`GDS16_CLOSURE_REPORT.md`](docs/game_design/GDS16_CLOSURE_REPORT.md) — formal GDS-16 closure evidence.
 
 ### Technical Architecture
 
@@ -444,13 +465,13 @@ Project-MonsterVault/
 │   │   ├── monetization/
 │   │   ├── presentation/
 │   │   ├── platform_safety/
+│   │   ├── retention_analytics/
 │   │   ├── GDS_ROADMAP.md
 │   │   ├── GLOSSARY.md
-│   │   ├── GDS15_ROBLOX_PLATFORM_POLICY_SNAPSHOT.md
-│   │   ├── GDS15_SCENARIO_VALIDATION.md
-│   │   ├── GDS15_CROSS_VALIDATION.md
-│   │   ├── GDS15_DECISION_INDEX.md
-│   │   ├── GDS15_CLOSURE_REPORT.md
+│   │   ├── GDS16_SCENARIO_VALIDATION.md
+│   │   ├── GDS16_CROSS_VALIDATION.md
+│   │   ├── GDS16_DECISION_INDEX.md
+│   │   ├── GDS16_CLOSURE_REPORT.md
 │   │   └── <remaining design domains>/
 │   ├── technical_architecture/
 │   ├── implementation/
@@ -465,7 +486,7 @@ The source/test/tooling directories are reserved for later implementation. Their
 
 ## Current Next Step
 
-Proceed with **GDS-16 — Retention, Discovery, Analytics, and Experimentation Boundaries**.
+Proceed with **GDS-17 — Cross-System Consistency and Design-Complete Audit**.
 
 The first implementation vertical slice will be selected and locked only after the complete design and architecture dependency chain makes its requirements clear.
 
