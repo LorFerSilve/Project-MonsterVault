@@ -299,13 +299,46 @@ GDS-10 establishes the social/cooperation/competition contract consumed by event
 
 ## GDS-11 — Server Events, Dynamic Encounters, and Live Content
 
-**Status:** NEXT — Draft
+**Status:** Complete — PASS
 
-Defines server-wide events, rifts/rare spawns, announcements, participation rules, reward allocation, event-specific shared/multi-award capture overrides, variant probability modifiers, production/economy modifiers if any, Availability/event windows, provenance/protection, cadence, server-hopping implications, rotating/seasonal content, and live-ops extensibility.
+Established and formally validated:
+
+- shared wall-clock Global Event Window / Event Occurrence semantics that do not restart per server;
+- session-local Server Event Instances and Rift/shared-objective state;
+- explicit Announced -> Active -> Resolving -> Ended event lifecycle;
+- meaningful late-join eligibility and no misleading last-second reward promises;
+- personal Event Contribution requirements with no AFK/Party-presence credit;
+- bounded exact-once Event Participation Rewards and persistent Event Completion Records;
+- prospective Event Spawn Modifiers for future creature generation only;
+- Event-Limited / Rotating / Legacy Availability behavior that preserves owned history;
+- dynamic Rift/Event Zone placement compatible with Safe Routes, Recovery and hazard-value safety;
+- ordinary event-modified public creatures remaining single-award by default;
+- explicit Event Multi-Award Encounter override using distinct Personal Event Capture Opportunities and distinct Creature Instances;
+- no copying of one shared event target into several owners;
+- server-wide rare/event announcement stability and centerpiece participation-fairness requirements;
+- bounded Event Resolution Grace for valid active acquisition/reward resolution at event end;
+- server hopping that cannot restart event duration, replay exact-once rewards or reroll guaranteed personal event opportunities;
+- event/world-cycle composition without resetting the ordinary World Cycle;
+- Party/social event semantics that preserve personal contribution and no direct-combat/body-blocking rules;
+- bounded active Event Energy rewards with no direct Energy transfer;
+- no baseline event multiplier to Vault Passive Production / Production Buffer / Offline Production Window;
+- additive seasonal/rotating live content and provenance preservation;
+- prospective event disable/hotfix semantics that preserve legitimate finalized value;
+- 120 compound event/live-content/lifecycle scenarios validated.
+
+Closure evidence:
+
+- [events_liveops/11_server_events_dynamic_encounters_and_live_content.md](events_liveops/11_server_events_dynamic_encounters_and_live_content.md) — Design Complete;
+- [GDS11_SCENARIO_VALIDATION.md](GDS11_SCENARIO_VALIDATION.md) — 120 / 120 PASS;
+- [GDS11_CROSS_VALIDATION.md](GDS11_CROSS_VALIDATION.md) — PASS;
+- [GDS11_DECISION_INDEX.md](GDS11_DECISION_INDEX.md) — accepted phase-local decisions;
+- [GDS11_CLOSURE_REPORT.md](GDS11_CLOSURE_REPORT.md) — PASS.
+
+GDS-11 establishes the live-event/content contract consumed by trading, monetization, presentation, platform safety, retention/analytics and Technical Architecture. It does not authorize Technical Architecture or implementation.
 
 ## GDS-12 — Trading and Player Economy
 
-**Status:** Draft
+**Status:** NEXT — Draft
 
 Defines trade eligibility, offer/accept flow, secured-instance ownership transfer, Production Assignment reconciliation, preservation of Mutation/Trait/Variant/provenance identity, value/scarcity philosophy, trade restrictions/cooldowns/rollback expectations, alternate-account abuse, safe UX, and whether Energy ever becomes transferable. Baseline direct Energy transfer remains prohibited until this phase explicitly changes it.
 
@@ -335,7 +368,7 @@ Defines first-session funnel, session goals, return loops, daily/weekly engageme
 
 ## GDS-17 — Cross-System Consistency and Design-Complete Audit
 
-**Status:** Blocked by GDS-11 through GDS-16
+**Status:** Blocked by GDS-12 through GDS-16
 
 Performs the formal pre-architecture audit:
 
@@ -356,9 +389,9 @@ Performs the formal pre-architecture audit:
 
 ## Current Project Gate
 
-GDS-0 through GDS-10 are formally complete. The active dependency is:
+GDS-0 through GDS-11 are formally complete. The active dependency is:
 
-> **GDS-11 — Server Events, Dynamic Encounters, and Live Content**
+> **GDS-12 — Trading and Player Economy**
 
 Technical Architecture must not begin until GDS-17 records a formal PASS with no implementation-critical open design questions.
 
@@ -376,8 +409,9 @@ GDS-0 governance — COMPLETE
   -> GDS-8 economy/progression/unlocks/pacing — COMPLETE
   -> GDS-9 world/biomes/exploration/spawning/hazards — COMPLETE
   -> GDS-10 social/cooperation/competition/PvP boundaries — COMPLETE
-  -> GDS-11 server events/dynamic encounters/live content — NEXT
-  -> GDS-12..16 remaining subsystem design
+  -> GDS-11 server events/dynamic encounters/live content — COMPLETE
+  -> GDS-12 trading/player economy — NEXT
+  -> GDS-13..16 remaining subsystem design
   -> GDS-17 cross-system audit
   -> DESIGN COMPLETE
   -> Technical Architecture
