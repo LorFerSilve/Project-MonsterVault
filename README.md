@@ -4,7 +4,7 @@
 
 ## Project Status
 
-**Game Design Specification — DESIGN COMPLETE / Technical Architecture TA-0..6 complete / TA-7 next.**
+**Game Design Specification — DESIGN COMPLETE / Technical Architecture TA-0..7 complete / TA-8 next.**
 
 MonsterVault is intentionally **not in gameplay implementation yet**. The project follows a specification-first workflow:
 
@@ -47,7 +47,8 @@ No gameplay system should be implemented merely because an idea appears promisin
 - **TA-4 — Player Data, Persistence, Session Ownership, Schema Evolution, and Recovery: ARCHITECTURE COMPLETE — PASS**
 - **TA-5 — Identity, Content Registries, Configuration, and Data-Driven Content: ARCHITECTURE COMPLETE — PASS**
 - **TA-6 — Runtime Entity, Player, Creature, and World Lifecycle: ARCHITECTURE COMPLETE — PASS**
-- **TA-7 — Capture, Creature Ownership, Mutation, and Reward Resolution: NEXT**
+- **TA-7 — Capture, Creature Ownership, Mutation, and Reward Resolution: ARCHITECTURE COMPLETE — PASS**
+- **TA-8 — Vault, Economy, Progression, Inventory, and Offline Accrual: NEXT**
 - Gameplay implementation: blocked by TA and implementation-lock gates
 
 GDS-17 final evidence is recorded in [`17_cross_system_consistency_and_design_complete_audit.md`](docs/game_design/audit/17_cross_system_consistency_and_design_complete_audit.md), [`GDS17_AUTHORITY_NAMESPACE_AUDIT.md`](docs/game_design/GDS17_AUTHORITY_NAMESPACE_AUDIT.md), [`GDS17_MATURITY_OPEN_QUESTION_AUDIT.md`](docs/game_design/GDS17_MATURITY_OPEN_QUESTION_AUDIT.md), [`GDS17_COMPOUND_SCENARIO_VALIDATION.md`](docs/game_design/GDS17_COMPOUND_SCENARIO_VALIDATION.md), [`GDS17_DECISION_INDEX.md`](docs/game_design/GDS17_DECISION_INDEX.md), and [`GDS17_CLOSURE_REPORT.md`](docs/game_design/GDS17_CLOSURE_REPORT.md).
@@ -441,9 +442,9 @@ Key documents include:
 
 ### Technical Architecture
 
-[`docs/technical_architecture/`](docs/technical_architecture/) is **ACTIVE — TA-0..6 COMPLETE / TA-7 NEXT**.
+[`docs/technical_architecture/`](docs/technical_architecture/) is **ACTIVE — TA-0..7 COMPLETE / TA-8 NEXT**.
 
-TA-0 established governance/traceability, TA-1 locked the Roblox environment/toolchain, TA-2 locked structural boundaries, TA-3 locked networking trust, TA-4 locked persistence/session durability, and TA-5 locked identity/content registries. TA-6 has now locked server-authoritative runtime records, Player Session versus Character Presence, stable World Creature lifecycle, disposable Instance projections, streaming/physics trust boundaries and idempotent cleanup. TA-7 now owns capture, mutation and durable ownership/reward resolution.
+TA-0 established governance/traceability, TA-1 locked the Roblox environment/toolchain, TA-2 locked structural boundaries, TA-3 locked networking trust, TA-4 locked persistence/session durability, TA-5 locked identity/content registries, and TA-6 locked runtime lifecycle. TA-7 has now locked serialized claim/capture authority, server-owned Variant/RNG resolution, Provisional/Transport custody, anti-reroll semantics and exact-once P2 Secured Ownership. TA-8 now owns Vault, collection capacity, Energy, progression, inventory and offline accrual.
 
 TA-0 closure evidence:
 
@@ -505,6 +506,15 @@ TA-6 closure evidence:
 - [`TA6_SCENARIO_VALIDATION.md`](docs/technical_architecture/TA6_SCENARIO_VALIDATION.md) — 190 / 190 PASS;
 - [`TA6_DECISION_INDEX.md`](docs/technical_architecture/TA6_DECISION_INDEX.md);
 - [`TA6_CLOSURE_REPORT.md`](docs/technical_architecture/TA6_CLOSURE_REPORT.md) — PASS.
+TA-7 closure evidence:
+
+- [`capture/07_capture_creature_ownership_mutation_and_reward_resolution.md`](docs/technical_architecture/capture/07_capture_creature_ownership_mutation_and_reward_resolution.md);
+- [`TA7_ROBLOX_CAPTURE_RANDOMNESS_SNAPSHOT.md`](docs/technical_architecture/TA7_ROBLOX_CAPTURE_RANDOMNESS_SNAPSHOT.md);
+- [`TA7_CAPTURE_VARIANT_FINALIZATION_MATRIX.md`](docs/technical_architecture/TA7_CAPTURE_VARIANT_FINALIZATION_MATRIX.md);
+- [`TA7_GDS_TRACEABILITY.md`](docs/technical_architecture/TA7_GDS_TRACEABILITY.md);
+- [`TA7_SCENARIO_VALIDATION.md`](docs/technical_architecture/TA7_SCENARIO_VALIDATION.md) — 200 / 200 PASS;
+- [`TA7_DECISION_INDEX.md`](docs/technical_architecture/TA7_DECISION_INDEX.md);
+- [`TA7_CLOSURE_REPORT.md`](docs/technical_architecture/TA7_CLOSURE_REPORT.md) — PASS.
 ### Implementation
 
 [`docs/implementation/`](docs/implementation/) remains intentionally **BLOCKED**.
@@ -560,7 +570,7 @@ TA-2 has locked this as the future implementation structure, but the source scaf
 
 ## Current Next Step
 
-Proceed with **TA-7 — Capture, Creature Ownership, Mutation, and Reward Resolution**.
+Proceed with **TA-8 — Vault, Economy, Progression, Inventory, and Offline Accrual**.
 
 The first implementation vertical slice will be selected and locked only after the complete design and architecture dependency chain makes its requirements clear.
 
