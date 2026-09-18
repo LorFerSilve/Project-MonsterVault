@@ -440,7 +440,7 @@ Key documents include:
 
 ### Technical Architecture
 
-[`docs/technical_architecture/`](docs/technical_architecture/) is **ACTIVE — TA-0..4 COMPLETE / TA-5 NEXT**.
+[`docs/technical_architecture/`](docs/technical_architecture/) is **ACTIVE — TA-0..5 COMPLETE / TA-6 NEXT**.
 
 TA-0 established governance/traceability, TA-1 locked the Roblox environment/toolchain, TA-2 locked structural boundaries, TA-3 locked networking trust, and TA-4 locked persistence/session durability. TA-5 has now locked stable semantic/runtime IDs, typed data-driven registries, public/private config separation, lifecycle/tombstone compatibility, environment bindings and prospective ContentSnapshot semantics. TA-6 now owns runtime entity/player/creature/world lifecycle.
 
