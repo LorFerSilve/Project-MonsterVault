@@ -4,7 +4,7 @@
 
 ## Project Status
 
-**Pre-implementation specification — GDS-0 through GDS-12 complete / GDS-13 next.**
+**Pre-implementation specification — GDS-0 through GDS-13 complete / GDS-14 next.**
 
 MonsterVault is intentionally **not in gameplay implementation yet**. The project follows a specification-first workflow:
 
@@ -34,13 +34,14 @@ No gameplay system should be implemented merely because an idea appears promisin
 - **GDS-10 — Social Play, Cooperation, Competition, and PvP Boundaries: COMPLETE — PASS**
 - **GDS-11 — Server Events, Dynamic Encounters, and Live Content: COMPLETE — PASS**
 - **GDS-12 — Trading and Player Economy: COMPLETE — PASS**
-- **GDS-13 — Monetization and Commercial Fairness: NEXT**
-- GDS-14 through GDS-16: Draft / dependency-ordered
+- **GDS-13 — Monetization and Commercial Fairness: COMPLETE — PASS**
+- **GDS-14 — Presentation, UI/UX, Feedback, and Accessibility: NEXT**
+- GDS-15 through GDS-16: Draft / dependency-ordered
 - GDS-17: blocked until subsystem design is complete
 - Technical Architecture: blocked by GDS-17
 - Gameplay implementation: blocked by GDS and TA gates
 
-GDS-12 closure evidence is recorded in [`GDS12_SCENARIO_VALIDATION.md`](docs/game_design/GDS12_SCENARIO_VALIDATION.md), [`GDS12_CROSS_VALIDATION.md`](docs/game_design/GDS12_CROSS_VALIDATION.md), [`GDS12_DECISION_INDEX.md`](docs/game_design/GDS12_DECISION_INDEX.md), and [`GDS12_CLOSURE_REPORT.md`](docs/game_design/GDS12_CLOSURE_REPORT.md).
+GDS-13 closure evidence is recorded in [`GDS13_SCENARIO_VALIDATION.md`](docs/game_design/GDS13_SCENARIO_VALIDATION.md), [`GDS13_CROSS_VALIDATION.md`](docs/game_design/GDS13_CROSS_VALIDATION.md), [`GDS13_DECISION_INDEX.md`](docs/game_design/GDS13_DECISION_INDEX.md), and [`GDS13_CLOSURE_REPORT.md`](docs/game_design/GDS13_CLOSURE_REPORT.md).
 
 ## Product Contract
 
@@ -287,6 +288,26 @@ GDS-12 authorizes safe direct creature exchange without turning Energy into tran
 - trade volume creates no Energy, progression, rarity or spawn advantage.
 
 The authoritative GDS-12 specification is [`12_trading_and_player_economy.md`](docs/game_design/trading/12_trading_and_player_economy.md).
+## Monetization and Commercial Fairness Contract
+
+GDS-13 defines a moderate commercial model that monetizes presentation and bounded convenience without selling collectible luck or system safety:
+
+- deterministic **cosmetics/status** are the primary paid product class;
+- bounded paid **Collection Capacity / Display Capacity** convenience is allowed, but not Production Slots, Production Buffer, Offline Production Window or production multipliers;
+- there is no unlimited direct Robux-to-Energy exchange; only a one-time bounded Starter Value Bundle may include a small deterministic Energy grant;
+- payment cannot buy Species/Mutation/Trait luck, rerolls, capture success, easier capture, claim priority or paid-only baseline Species/Mutations;
+- no paid random Creature Instance, variant roll, loot box, gacha, egg, crate or randomized cosmetic container is authorized at baseline;
+- Region Mastery, world access, ordinary event access/contribution and Trade Access remain gameplay-earned;
+- payment cannot bypass Creature Lock, Trade Cooldown, Account-Bound/Time-Locked rules or trade safety;
+- no baseline recurring subscription or paid server-wide gameplay boost is authorized;
+- product price, contents and durable/one-time semantics must be explicit;
+- fake discounts, fake countdowns, loss-chasing paid rescue and repeated modal nagging are prohibited;
+- commercial prompts cannot interrupt Acquisition-In-Progress, final trade review, event capture resolution, Recovery or Protected Load Failure;
+- **Commercial Finalization** is exact-once across retries/reconnects;
+- loss/reversal of paid capacity uses safe GDS-7 reconciliation and cannot delete Secured Creatures or create Energy debt;
+- non-paying players retain viable collection, Vault, world, event and trading progression.
+
+The authoritative GDS-13 specification is [`13_monetization_and_commercial_fairness.md`](docs/game_design/monetization/13_monetization_and_commercial_fairness.md).
 ## Working Core Loop
 
 ```text
@@ -306,7 +327,7 @@ Choose or notice a desirable goal
   -> repeat
 ```
 
-Monetization and commercial fairness now belong to GDS-13. Final presentation, analytics, platform constraints, and technical implementation remain subject to their owning later phases.
+Presentation, UI/UX, feedback and accessibility now belong to GDS-14. Platform constraints, analytics and technical implementation remain subject to their owning later phases.
 
 ## Documentation Authority
 
@@ -334,16 +355,17 @@ Key documents include:
 - [`social/`](docs/game_design/social/) — GDS-10 social/cooperation/competition/PvP-boundary contract;
 - [`events_liveops/`](docs/game_design/events_liveops/) — GDS-11 server-event/dynamic-encounter/live-content contract;
 - [`trading/`](docs/game_design/trading/) — GDS-12 trading/player-economy contract;
-- [`GDS12_SCENARIO_VALIDATION.md`](docs/game_design/GDS12_SCENARIO_VALIDATION.md) — 140 compound GDS-12 scenarios;
-- [`GDS12_CROSS_VALIDATION.md`](docs/game_design/GDS12_CROSS_VALIDATION.md) — authority/consistency audit;
-- [`GDS12_DECISION_INDEX.md`](docs/game_design/GDS12_DECISION_INDEX.md) — phase-local strategic decisions;
-- [`GDS12_CLOSURE_REPORT.md`](docs/game_design/GDS12_CLOSURE_REPORT.md) — formal GDS-12 closure evidence.
+- [`monetization/`](docs/game_design/monetization/) — GDS-13 monetization/commercial-fairness contract;
+- [`GDS13_SCENARIO_VALIDATION.md`](docs/game_design/GDS13_SCENARIO_VALIDATION.md) — 150 compound GDS-13 scenarios;
+- [`GDS13_CROSS_VALIDATION.md`](docs/game_design/GDS13_CROSS_VALIDATION.md) — authority/consistency audit;
+- [`GDS13_DECISION_INDEX.md`](docs/game_design/GDS13_DECISION_INDEX.md) — phase-local strategic decisions;
+- [`GDS13_CLOSURE_REPORT.md`](docs/game_design/GDS13_CLOSURE_REPORT.md) — formal GDS-13 closure evidence.
 
 ### Technical Architecture
 
 [`docs/technical_architecture/`](docs/technical_architecture/) remains **blocked by GDS completion**.
 
-Technical Architecture will later translate approved GDS behavior into concrete Roblox/Luau contracts for identity, persistence, networking, runtime lifecycle, controls, creature/capture/variant/Vault/economy/world/social/event/trading systems, monetization, UI, live operations, performance, testing and CI.
+Technical Architecture will later translate approved GDS behavior into concrete Roblox/Luau contracts for identity, persistence, networking, runtime lifecycle, controls, creature/capture/variant/Vault/economy/world/social/event/trading/monetization systems, UI, live operations, performance, testing and CI.
 
 ### Implementation
 
@@ -372,12 +394,13 @@ Project-MonsterVault/
 │   │   ├── social/
 │   │   ├── events_liveops/
 │   │   ├── trading/
+│   │   ├── monetization/
 │   │   ├── GDS_ROADMAP.md
 │   │   ├── GLOSSARY.md
-│   │   ├── GDS12_SCENARIO_VALIDATION.md
-│   │   ├── GDS12_CROSS_VALIDATION.md
-│   │   ├── GDS12_DECISION_INDEX.md
-│   │   ├── GDS12_CLOSURE_REPORT.md
+│   │   ├── GDS13_SCENARIO_VALIDATION.md
+│   │   ├── GDS13_CROSS_VALIDATION.md
+│   │   ├── GDS13_DECISION_INDEX.md
+│   │   ├── GDS13_CLOSURE_REPORT.md
 │   │   └── <remaining design domains>/
 │   ├── technical_architecture/
 │   ├── implementation/
@@ -392,7 +415,7 @@ The source/test/tooling directories are reserved for later implementation. Their
 
 ## Current Next Step
 
-Proceed with **GDS-13 — Monetization and Commercial Fairness**.
+Proceed with **GDS-14 — Presentation, UI/UX, Feedback, and Accessibility**.
 
 The first implementation vertical slice will be selected and locked only after the complete design and architecture dependency chain makes its requirements clear.
 
