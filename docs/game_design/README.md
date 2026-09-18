@@ -1,6 +1,6 @@
 # MonsterVault Game Design Specification
 
-> **Status:** GDS-0 through GDS-12 Complete / GDS-13 Next  
+> **Status:** GDS-0 through GDS-13 Complete / GDS-14 Next  
 > **Authority:** Player-facing gameplay behavior
 
 This directory contains the authoritative Game Design Specification (GDS) for MonsterVault.
@@ -24,10 +24,11 @@ Completed:
 - **GDS-10 — Social Play, Cooperation, Competition, and PvP Boundaries: COMPLETE — PASS**
 - **GDS-11 — Server Events, Dynamic Encounters, and Live Content: COMPLETE — PASS**
 - **GDS-12 — Trading and Player Economy: COMPLETE — PASS**
+- **GDS-13 — Monetization and Commercial Fairness: COMPLETE — PASS**
 
 The active dependency is now:
 
-> **GDS-13 — Monetization and Commercial Fairness**
+> **GDS-14 — Presentation, UI/UX, Feedback, and Accessibility**
 
 Technical Architecture and gameplay implementation remain blocked.
 
@@ -190,10 +191,36 @@ GDS-12 establishes:
 - no official fair-value formula;
 - disconnect/retry, bait-and-switch, alt-account/wash-trade and concurrency guardrails.
 
+### GDS-13 — Monetization and commercial fairness
+
+Authoritative specification and closure evidence:
+
+- [monetization/13_monetization_and_commercial_fairness.md](monetization/13_monetization_and_commercial_fairness.md) — Design Complete;
+- [GDS13_SCENARIO_VALIDATION.md](GDS13_SCENARIO_VALIDATION.md) — 150 compound monetization/commercial-fairness scenarios; PASS;
+- [GDS13_CROSS_VALIDATION.md](GDS13_CROSS_VALIDATION.md) — GDS-1 through GDS-12 and authority audit; PASS;
+- [GDS13_DECISION_INDEX.md](GDS13_DECISION_INDEX.md) — phase-local strategic decisions;
+- [GDS13_CLOSURE_REPORT.md](GDS13_CLOSURE_REPORT.md) — formal closure; PASS.
+
+GDS-13 establishes:
+
+- moderate deterministic non-coercive monetization;
+- cosmetics/status as primary paid value;
+- bounded paid Collection/Display Capacity convenience;
+- no paid Production Slots/Buffer/Offline Window/production multiplier;
+- no unlimited direct paid Energy;
+- one-time deterministic Starter Value Bundle with bounded acceleration;
+- no paid rarity/Mutation/Trait luck, rerolls, capture power or claim priority;
+- no paid-only baseline Species/Mutation or randomized paid acquisition;
+- no paid core world/event/trade access or safety bypass;
+- no baseline subscription or paid server-wide gameplay boost;
+- truthful offer/price/content presentation without fake urgency or discounts;
+- no loss-chasing purchase pressure or prompts during critical gameplay states;
+- exact-once Commercial Finalization and safe entitlement reconciliation;
+- explicit non-premium viability across collection, progression, events and trading.
+
 ## Remaining Core Specifications
 
-- `monetization/` — GDS-13 monetization surfaces/fairness constraints including any Energy/capacity/convenience/production products. **GDS-13 NEXT.**
-- `presentation/` — UI/UX, Energy/gate/transaction/Vault/capture/rarity/event/world feedback, visual/audio language, accessibility and onboarding presentation.
+- `presentation/` — GDS-14 UI/UX, Energy/gate/transaction/Vault/capture/rarity/event/world feedback, visual/audio language, accessibility and onboarding presentation. **GDS-14 NEXT.**
 - `platform_safety/` — Roblox platform constraints, commercial/randomized constraints, social safety and age-appropriate interaction design.
 - `retention_analytics/` — retention loops, acquisition/Vault/variant/economy/world funnels, session goals, catch-up/reward cadence, metrics hypotheses and experiment boundaries.
 - `audit/` — final GDS-17 cross-system consistency/maturity audits.

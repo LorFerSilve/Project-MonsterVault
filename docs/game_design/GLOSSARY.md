@@ -408,6 +408,39 @@ An authored transfer-eligibility rule. Baseline states are **Tradeable**, **Time
 ### Trade History Entry
 Append-only provenance metadata recording that a legitimate player-to-player ownership transfer occurred without replacing original acquisition provenance.
 
+### Commercial Offer
+A GDS-13 player-facing proposal to exchange platform-paid value for a clearly identified MonsterVault Product Grant.
+
+### Durable Entitlement
+A successfully finalized paid account entitlement intended to remain available across sessions, such as an authorized cosmetic collection or bounded convenience expansion.
+
+### Consumable Product Grant
+A paid deterministic grant applied once rather than remaining as a reusable entitlement.
+
+### Cosmetic Entitlement
+A paid GDS-13 presentation/status entitlement that changes appearance or expression without changing Creature Instance identity, claim authority, rarity odds, progression milestones or ownership.
+
+### Convenience Entitlement
+A paid durable account capability reducing bounded friction without bypassing required active progression or finite-opportunity competition.
+
+### Commercial Capacity Expansion
+A bounded GDS-13 Convenience Entitlement increasing Collection Capacity and/or Display Capacity without increasing Production Slots, Production Buffer, Offline Production Window, spawn odds or capture priority.
+
+### Starter Value Bundle
+A one-time deterministic GDS-13 Commercial Offer containing clearly listed cosmetic value plus a small bounded Energy grant and/or approved convenience value.
+
+### Paid Acceleration
+A deterministic paid benefit reducing limited progression friction for content already obtainable through ordinary play. GDS-13 baseline only authorizes the small bounded starter form and never grants active Progression Milestones.
+
+### Purchase Pending
+A temporary commercial state in which a purchase was initiated but MonsterVault has not yet established verified Commercial Finalization.
+
+### Commercial Finalization
+The exact-once persistent GDS-13 result of a verified successful purchase. Retry/reconnect cannot duplicate the authorized grant.
+
+### Commercial Reconciliation
+The safe process used when a durable paid entitlement becomes unavailable/revoked under a legitimate downstream platform/account outcome. Reconciliation may remove future entitlement benefit but cannot silently delete Secured Creatures or create negative Energy/debt.
+
 ### Offline Progression
 Any progression accrued while the player is not actively present in the experience. GDS-7 explicitly authorizes **bounded Vault Passive Production** from finalized Production Assignments, limited by the Offline Production Window and Production Buffer cap. GDS-8 defines the resulting Energy/economic effects. Other offline progression remains unauthorized unless an owning later specification defines it.
 

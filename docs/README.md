@@ -1,6 +1,6 @@
 # Project MonsterVault Documentation
 
-> **Project phase:** Pre-implementation specification — GDS-13 next  
+> **Project phase:** Pre-implementation specification — GDS-14 next  
 > **Implementation status:** Blocked by design and architecture gates
 
 This directory is the authoritative documentation space for Project MonsterVault.
@@ -39,22 +39,23 @@ Completed:
 - **GDS-10 — Social Play, Cooperation, Competition, and PvP Boundaries: PASS**
 - **GDS-11 — Server Events, Dynamic Encounters, and Live Content: PASS**
 - **GDS-12 — Trading and Player Economy: PASS**
+- **GDS-13 — Monetization and Commercial Fairness: PASS**
 
 Latest closure evidence:
 
-- [`game_design/trading/12_trading_and_player_economy.md`](game_design/trading/12_trading_and_player_economy.md);
-- [`game_design/GDS12_SCENARIO_VALIDATION.md`](game_design/GDS12_SCENARIO_VALIDATION.md);
-- [`game_design/GDS12_CROSS_VALIDATION.md`](game_design/GDS12_CROSS_VALIDATION.md);
-- [`game_design/GDS12_DECISION_INDEX.md`](game_design/GDS12_DECISION_INDEX.md);
-- [`game_design/GDS12_CLOSURE_REPORT.md`](game_design/GDS12_CLOSURE_REPORT.md).
+- [`game_design/monetization/13_monetization_and_commercial_fairness.md`](game_design/monetization/13_monetization_and_commercial_fairness.md);
+- [`game_design/GDS13_SCENARIO_VALIDATION.md`](game_design/GDS13_SCENARIO_VALIDATION.md);
+- [`game_design/GDS13_CROSS_VALIDATION.md`](game_design/GDS13_CROSS_VALIDATION.md);
+- [`game_design/GDS13_DECISION_INDEX.md`](game_design/GDS13_DECISION_INDEX.md);
+- [`game_design/GDS13_CLOSURE_REPORT.md`](game_design/GDS13_CLOSURE_REPORT.md).
 
 The active dependency is:
 
-> **GDS-13 — Monetization and Commercial Fairness**
+> **GDS-14 — Presentation, UI/UX, Feedback, and Accessibility**
 
 No gameplay implementation should begin until:
 
-- GDS-13 through GDS-16 complete their owning design work;
+- GDS-14 through GDS-16 complete their owning design work;
 - GDS-17 records a formal cross-system `Design Complete` PASS;
 - the complete Technical Architecture reaches `Architecture Complete`;
 - architecture integration validation passes;

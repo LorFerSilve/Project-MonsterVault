@@ -376,13 +376,42 @@ GDS-12 establishes the ownership-transfer/player-economy contract consumed by mo
 
 ## GDS-13 — Monetization and Commercial Fairness
 
-**Status:** NEXT — Draft
+**Status:** Complete — PASS
 
-Defines monetization philosophy, game passes/developer products/subscriptions if used, cosmetics, capacity/convenience, bounded progression/production acceleration if any, Energy interaction if any, server-wide boosts, starter offers, purchase presentation, non-pay-to-win boundaries, spending-pressure limits, probability/variant constraints, and exact-once commercial outcomes.
+Established and formally validated:
+
+- moderate visible-but-non-coercive commercial philosophy;
+- deterministic cosmetics/status as the primary paid-value category;
+- bounded Commercial Capacity Expansion for Collection/Display convenience only;
+- no paid Production Slots, Production Buffer, Offline Production Window or Passive Production multiplier;
+- no unlimited direct paid Energy exchange;
+- one-time deterministic Starter Value Bundle with small bounded Energy/convenience acceleration;
+- durable supporter/style pass limited to cosmetics and approved bounded convenience;
+- no paid Species/Mutation/Trait luck, premium rerolls, capture-success modifier or claim priority;
+- no paid-only baseline Species/Mutation or randomized paid creature/variant acquisition;
+- no randomized paid cosmetic container baseline;
+- no paid Region Mastery/world-access bypass, ordinary event entry/contribution/timing advantage or Trade Access/safety/cooldown bypass;
+- no baseline recurring subscription or paid server-wide gameplay boost;
+- truthful product/price/content disclosure with no fake urgency/discounts;
+- no loss-chasing rescue offers or commercial prompts during critical acquisition/trade/recovery states;
+- exact-once Commercial Finalization with safe Purchase Pending behavior;
+- non-destructive commercial entitlement reconciliation;
+- explicit non-premium viability tests across collection, world, Vault, events and trading;
+- 150 compound commercial/fairness/lifecycle scenarios validated.
+
+Closure evidence:
+
+- [monetization/13_monetization_and_commercial_fairness.md](monetization/13_monetization_and_commercial_fairness.md) — Design Complete;
+- [GDS13_SCENARIO_VALIDATION.md](GDS13_SCENARIO_VALIDATION.md) — 150 / 150 PASS;
+- [GDS13_CROSS_VALIDATION.md](GDS13_CROSS_VALIDATION.md) — PASS;
+- [GDS13_DECISION_INDEX.md](GDS13_DECISION_INDEX.md) — accepted phase-local decisions;
+- [GDS13_CLOSURE_REPORT.md](GDS13_CLOSURE_REPORT.md) — PASS.
+
+GDS-13 establishes the commercial contract consumed by presentation, platform safety, retention/analytics and Technical Architecture. It does not authorize Technical Architecture or implementation.
 
 ## GDS-14 — Presentation, UI/UX, Feedback, and Accessibility
 
-**Status:** Draft
+**Status:** NEXT — Draft
 
 Defines information hierarchy, HUD/menus, collection/Vault/economy presentation, Energy/cost/gate/transaction feedback, rarity/mutation/trait/availability feedback, event/capture feedback, mobile/controller/keyboard expectations, audio/visual language, reduced-motion/readability needs, onboarding presentation, and accessibility requirements.
 
@@ -400,7 +429,7 @@ Defines first-session funnel, session goals, return loops, daily/weekly engageme
 
 ## GDS-17 — Cross-System Consistency and Design-Complete Audit
 
-**Status:** Blocked by GDS-13 through GDS-16
+**Status:** Blocked by GDS-14 through GDS-16
 
 Performs the formal pre-architecture audit:
 
@@ -421,9 +450,9 @@ Performs the formal pre-architecture audit:
 
 ## Current Project Gate
 
-GDS-0 through GDS-12 are formally complete. The active dependency is:
+GDS-0 through GDS-13 are formally complete. The active dependency is:
 
-> **GDS-13 — Monetization and Commercial Fairness**
+> **GDS-14 — Presentation, UI/UX, Feedback, and Accessibility**
 
 Technical Architecture must not begin until GDS-17 records a formal PASS with no implementation-critical open design questions.
 
@@ -443,8 +472,9 @@ GDS-0 governance — COMPLETE
   -> GDS-10 social/cooperation/competition/PvP boundaries — COMPLETE
   -> GDS-11 server events/dynamic encounters/live content — COMPLETE
   -> GDS-12 trading/player economy — COMPLETE
-  -> GDS-13 monetization/commercial fairness — NEXT
-  -> GDS-14..16 remaining subsystem design
+  -> GDS-13 monetization/commercial fairness — COMPLETE
+  -> GDS-14 presentation/UI/UX/feedback/accessibility — NEXT
+  -> GDS-15..16 remaining subsystem design
   -> GDS-17 cross-system audit
   -> DESIGN COMPLETE
   -> Technical Architecture
