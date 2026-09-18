@@ -1,6 +1,6 @@
 # MonsterVault Technical Architecture
 
-> **Status:** Active — TA-0..2 Complete / TA-3 Next
+> **Status:** Active — TA-0..3 Complete / TA-4 Next
 > **Authority:** Technical implementation contracts after GDS completion
 
 This directory contains the Technical Architecture layer that now becomes active after the GDS-17 Design Complete PASS.
@@ -18,6 +18,8 @@ The TA is deliberately not allowed to redefine gameplay. It translates the appro
 - [`TA1_TOOLCHAIN_SNAPSHOT.md`](TA1_TOOLCHAIN_SNAPSHOT.md) records the dated reference toolchain.
 - [`structure/02_repository_layout_module_boundaries_dependency_direction_and_bootstrapping.md`](structure/02_repository_layout_module_boundaries_dependency_direction_and_bootstrapping.md) is the authoritative TA-2 structure/bootstrap contract.
 - [`TA2_DEPENDENCY_OWNERSHIP_MATRIX.md`](TA2_DEPENDENCY_OWNERSHIP_MATRIX.md) defines permitted dependency and mutation ownership boundaries.
+- [`networking/03_networking_server_authority_remote_contracts_and_exploit_boundaries.md`](networking/03_networking_server_authority_remote_contracts_and_exploit_boundaries.md) is the authoritative TA-3 networking/trust-boundary contract.
+- [`TA3_REMOTE_CONTRACT_MATRIX.md`](TA3_REMOTE_CONTRACT_MATRIX.md) locks transport/envelope/validation responsibilities.
 - [`TA_ROADMAP.md`](TA_ROADMAP.md) defines the dependency-driven architecture sequence.
 - `audit/` will contain the final TA-16 integration/readiness evidence.
 
@@ -25,12 +27,12 @@ The TA is deliberately not allowed to redefine gameplay. It translates the appro
 
 GDS-17 has recorded a formal **Design Complete — PASS** with zero implementation-critical design questions.
 
-TA-0 through TA-2 are **Architecture Complete — PASS**.
+TA-0 through TA-3 are **Architecture Complete — PASS**.
 
-TA-2 closed with 110 / 110 structural scenarios passing and a complete dependency/ownership matrix.
+TA-3 closed with 140 / 140 networking/exploit scenarios passing and a complete Remote contract/validation matrix.
 
 The active dependency is:
 
-> **TA-3 — Networking, Server Authority, Remote Contracts, and Exploit Boundaries**
+> **TA-4 — Player Data, Persistence, Session Ownership, Schema Evolution, and Recovery**
 
-TA-3 will define the centrally governed networking layer inside the TA-2 server/client/shared roots. Gameplay implementation remains blocked until TA-17.
+TA-4 now owns trusted player-session state, persistence, schema evolution and durable idempotency/recovery. Gameplay implementation remains blocked until TA-17.

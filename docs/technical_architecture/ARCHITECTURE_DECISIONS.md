@@ -1,6 +1,6 @@
 # Architecture Decisions
 
-> **Status:** Active — TA-0..2 Complete / TA-3 Next
+> **Status:** Active — TA-0..3 Complete / TA-4 Next
 > **Authority:** Accepted technical architecture decisions and rationale
 
 This log records material architecture decisions. GDS-17 has formally promoted the Game Design Specification to Design Complete, so architecture decision-making may now begin under TA-0.
@@ -352,3 +352,140 @@ TA-2 locks the exact structural target but does not create gameplay/source scaff
 ### Consequence
 
 The architecture remains specification-only until TA-17 explicitly opens implementation.
+
+
+---
+
+## AD-020 — Use a Small Central Versioned Remote Transport
+
+**Date:** 2026-09-18  
+**Status:** Accepted  
+**Owning TA phase:** TA-3
+
+### Decision
+
+MonsterVault uses a centrally governed versioned Remote registry with:
+
+- reliable client-to-server Command RemoteEvent;
+- reliable server-to-client Event RemoteEvent;
+- optional server-to-client UnreliableRemoteEvent for loss-tolerant presentation only.
+
+### Consequence
+
+Feature/domain code does not create independent RemoteEvent sprawl.
+
+---
+
+## AD-021 — Client Networking Carries Intent, Never Authoritative Outcomes
+
+**Date:** 2026-09-18  
+**Status:** Accepted  
+**Owning TA phase:** TA-3
+
+### Decision
+
+Client requests cannot finalize ownership, currency, progression, rare outcomes, capture, event rewards, trade, commercial entitlements or moderation state.
+
+### Consequence
+
+Every sensitive request is revalidated and committed by the owning server-side contract.
+
+---
+
+## AD-022 — No RemoteFunctions in the Baseline Protocol
+
+**Date:** 2026-09-18  
+**Status:** Accepted  
+**Owning TA phase:** TA-3
+
+### Decision
+
+MonsterVault uses asynchronous RemoteEvent request/result messaging rather than yielding RemoteFunction calls.
+
+Server `InvokeClient` is prohibited for correctness.
+
+### Consequence
+
+Timeout/disconnect behavior is explicit and no authoritative server path waits on an untrusted client callback.
+
+---
+
+## AD-023 — Every Client Command Uses the Standard Validation Pipeline
+
+**Date:** 2026-09-18  
+**Status:** Accepted  
+**Owning TA phase:** TA-3
+
+### Decision
+
+Commands pass envelope, protocol/route, rate, readiness, exact schema, semantic authorization, authoritative execution and safe result/telemetry stages.
+
+### Consequence
+
+Networking remains a thin trust gateway rather than a parallel gameplay-authority layer.
+
+---
+
+## AD-024 — Network Request IDs Are Correlation Keys, Not Durable Value IDs
+
+**Date:** 2026-09-18  
+**Status:** Accepted  
+**Owning TA phase:** TA-3
+
+### Decision
+
+Client request IDs support async correlation and bounded session duplicate handling.
+
+Durable exact-once outcomes use server-owned downstream operation identities.
+
+### Consequence
+
+Client-controlled identity cannot become the sole authority for persistent grants/transfers.
+
+---
+
+## AD-025 — Client Physics and Prompt Events Are Untrusted for Critical Outcomes
+
+**Date:** 2026-09-18  
+**Status:** Accepted  
+**Owning TA phase:** TA-3
+
+### Decision
+
+Position/timing/context-sensitive interactions triggered through client network ownership, ProximityPrompt, ClickDetector or DragDetector are revalidated server-side.
+
+### Consequence
+
+Local movement/prompt manipulation cannot directly mint or transfer persistent value.
+
+---
+
+## AD-026 — UnreliableRemoteEvent Is Presentation-Only
+
+**Date:** 2026-09-18  
+**Status:** Accepted  
+**Owning TA phase:** TA-3
+
+### Decision
+
+Loss/reordering-tolerant transport may carry transient visual data only. No baseline client-to-server unreliable gameplay stream is authorized.
+
+### Consequence
+
+Persistent/gameplay correctness never depends on unreliable delivery.
+
+---
+
+## AD-027 — Close TA-3 and Advance to TA-4
+
+**Date:** 2026-09-18  
+**Status:** Accepted  
+**Owning TA phase:** TA-3
+
+### Decision
+
+TA-3 is Architecture Complete — PASS with 140/140 scenarios passing and zero blocking questions.
+
+### Consequence
+
+TA-4 becomes NEXT. Gameplay implementation remains blocked until TA-17.
