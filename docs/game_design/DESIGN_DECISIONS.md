@@ -1174,3 +1174,47 @@ Material changes to the five-tier Species Rarity ladder, variant identity timing
 ### Consequence
 
 The active dependency advances to **GDS-7 — Vault/Base, Passive Production, Capacity, and Upgrades**. Technical Architecture and gameplay implementation remain blocked.
+
+
+---
+
+## DD-040 — Promote Complete GDS to Design Complete
+
+**Date:** 2026-09-18  
+**Status:** Accepted
+
+### Context
+
+All ordinary subsystem phases GDS-0 through GDS-16 are formally complete. GDS-17 has completed the final authority/namespace, maturity/open-question and compound cross-system audits.
+
+### Decision
+
+The MonsterVault Game Design Specification is promoted to **Design Complete**.
+
+GDS-17 closes as **Complete — PASS** with:
+
+- zero implementation-critical unresolved design questions;
+- zero blocking authority or namespace collisions;
+- zero orphaned baseline mechanic families;
+- 200 / 200 final compound cross-system scenarios passing;
+- persistence, ownership, economy, scarcity, social, event, trading, monetization, accessibility, platform-safety and experimentation audits passing.
+
+Technical Architecture is authorized to begin at **TA-0 — Architecture Governance, Constraints, and GDS Traceability**.
+
+Gameplay implementation remains blocked until TA-17 closes the architecture and implementation-lock sequence.
+
+### Rationale
+
+The completed GDS now provides deterministic player-facing semantics for every baseline system and leaves only tuneable content/balance values, current platform details and technical implementation choices downstream.
+
+### Evidence
+
+- `audit/17_cross_system_consistency_and_design_complete_audit.md` — PASS;
+- `GDS17_AUTHORITY_NAMESPACE_AUDIT.md` — PASS;
+- `GDS17_MATURITY_OPEN_QUESTION_AUDIT.md` — PASS;
+- `GDS17_COMPOUND_SCENARIO_VALIDATION.md` — 200 / 200 PASS;
+- `GDS17_CLOSURE_REPORT.md` — PASS.
+
+### Consequence
+
+The project gate advances from Game Design Specification to Technical Architecture. Player-facing semantic changes discovered during TA must return to the owning GDS through explicit change control.
