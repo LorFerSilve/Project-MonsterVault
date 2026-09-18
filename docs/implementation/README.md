@@ -9,7 +9,7 @@ This directory is reserved for implementation handoff, phase completion reports,
 Gameplay implementation must not begin until all of the following are true:
 
 1. **SATISFIED:** GDS-17 records a formal cross-system PASS and the GDS is `Design Complete`.
-2. **BLOCKING:** TA-0 through TA-7 are complete; TA-8 through TA-15 must reach `Architecture Complete`.
+2. **BLOCKING:** TA-0 through TA-8 are complete; TA-9 through TA-15 must reach `Architecture Complete`.
 3. **BLOCKING:** TA-16 records a formal architecture-integration PASS.
 4. **BLOCKING:** TA-17 locks the implementation roadmap, vertical slice, toolchain, module dependency graph, test/CI requirements and change-control rules.
 5. **BLOCKING:** The root project status is explicitly changed from Technical Architecture/pre-implementation to implementation.
