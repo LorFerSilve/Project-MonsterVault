@@ -4,7 +4,7 @@
 
 ## Project Status
 
-**Game Design Specification — DESIGN COMPLETE / Technical Architecture TA-0..1 complete / TA-2 next.**
+**Game Design Specification — DESIGN COMPLETE / Technical Architecture TA-0..2 complete / TA-3 next.**
 
 MonsterVault is intentionally **not in gameplay implementation yet**. The project follows a specification-first workflow:
 
@@ -42,7 +42,8 @@ No gameplay system should be implemented merely because an idea appears promisin
 - **GAME DESIGN SPECIFICATION: DESIGN COMPLETE**
 - **TA-0 — Architecture Governance, Constraints, and GDS Traceability: ARCHITECTURE COMPLETE — PASS**
 - **TA-1 — Roblox System Context, Toolchain, and Development Environment: ARCHITECTURE COMPLETE — PASS**
-- **TA-2 — Repository Layout, Module Boundaries, Dependency Direction, and Bootstrapping: NEXT**
+- **TA-2 — Repository Layout, Module Boundaries, Dependency Direction, and Bootstrapping: ARCHITECTURE COMPLETE — PASS**
+- **TA-3 — Networking, Server Authority, Remote Contracts, and Exploit Boundaries: NEXT**
 - Gameplay implementation: blocked by TA and implementation-lock gates
 
 GDS-17 final evidence is recorded in [`17_cross_system_consistency_and_design_complete_audit.md`](docs/game_design/audit/17_cross_system_consistency_and_design_complete_audit.md), [`GDS17_AUTHORITY_NAMESPACE_AUDIT.md`](docs/game_design/GDS17_AUTHORITY_NAMESPACE_AUDIT.md), [`GDS17_MATURITY_OPEN_QUESTION_AUDIT.md`](docs/game_design/GDS17_MATURITY_OPEN_QUESTION_AUDIT.md), [`GDS17_COMPOUND_SCENARIO_VALIDATION.md`](docs/game_design/GDS17_COMPOUND_SCENARIO_VALIDATION.md), [`GDS17_DECISION_INDEX.md`](docs/game_design/GDS17_DECISION_INDEX.md), and [`GDS17_CLOSURE_REPORT.md`](docs/game_design/GDS17_CLOSURE_REPORT.md).
@@ -436,9 +437,9 @@ Key documents include:
 
 ### Technical Architecture
 
-[`docs/technical_architecture/`](docs/technical_architecture/) is **ACTIVE — TA-0..1 COMPLETE / TA-2 NEXT**.
+[`docs/technical_architecture/`](docs/technical_architecture/) is **ACTIVE — TA-0..2 COMPLETE / TA-3 NEXT**.
 
-TA-0 established architecture governance and traceability. TA-1 has now locked the Roblox execution/environment model, filesystem-first Rojo workflow, Rokit-managed reference toolchain, strict Luau quality baseline, dependency policy and DEV/STAGING/PRODUCTION separation. TA-2 now owns the concrete repository/DataModel mapping, module boundaries and bootstrap graph.
+TA-0 established architecture governance and traceability. TA-1 locked the Roblox environment/toolchain baseline. TA-2 has now locked the future server/client/shared Rojo mapping, modular-monolith module boundaries, application/domain/infrastructure dependency direction and explicit bootstrap lifecycle. TA-3 now owns networking, remote contracts and exploit boundaries.
 
 TA-0 closure evidence:
 
@@ -456,6 +457,14 @@ TA-1 closure evidence:
 - [`TA1_SCENARIO_VALIDATION.md`](docs/technical_architecture/TA1_SCENARIO_VALIDATION.md) — 75 / 75 PASS;
 - [`TA1_DECISION_INDEX.md`](docs/technical_architecture/TA1_DECISION_INDEX.md);
 - [`TA1_CLOSURE_REPORT.md`](docs/technical_architecture/TA1_CLOSURE_REPORT.md) — PASS.
+TA-2 closure evidence:
+
+- [`structure/02_repository_layout_module_boundaries_dependency_direction_and_bootstrapping.md`](docs/technical_architecture/structure/02_repository_layout_module_boundaries_dependency_direction_and_bootstrapping.md);
+- [`TA2_DEPENDENCY_OWNERSHIP_MATRIX.md`](docs/technical_architecture/TA2_DEPENDENCY_OWNERSHIP_MATRIX.md);
+- [`TA2_GDS_TRACEABILITY.md`](docs/technical_architecture/TA2_GDS_TRACEABILITY.md);
+- [`TA2_SCENARIO_VALIDATION.md`](docs/technical_architecture/TA2_SCENARIO_VALIDATION.md) — 110 / 110 PASS;
+- [`TA2_DECISION_INDEX.md`](docs/technical_architecture/TA2_DECISION_INDEX.md);
+- [`TA2_CLOSURE_REPORT.md`](docs/technical_architecture/TA2_CLOSURE_REPORT.md) — PASS.
 ### Implementation
 
 [`docs/implementation/`](docs/implementation/) remains intentionally **BLOCKED**.
@@ -498,17 +507,20 @@ Project-MonsterVault/
 │   ├── technical_architecture/
 │   ├── implementation/
 │   └── history/
-├── src/
-├── tests/
+├── src/                         # TA-2 locked future runtime roots; created at TA-17
+│   ├── server/                  # -> ServerScriptService/MonsterVaultServer
+│   ├── client/                  # -> StarterPlayerScripts/MonsterVaultClient
+│   └── shared/                  # -> ReplicatedStorage/MonsterVault/Shared
+├── tests/                       # unit / integration / scenarios / fixtures
 ├── assets/
-└── scripts/
+└── scripts/                     # developer/CI/release tooling only
 ```
 
-The source/test/tooling directories are reserved for later implementation. Their existence does **not** mean the implementation gate is open.
+TA-2 has locked this as the future implementation structure, but the source scaffold remains intentionally uncreated until TA-17 opens implementation.
 
 ## Current Next Step
 
-Proceed with **TA-2 — Repository Layout, Module Boundaries, Dependency Direction, and Bootstrapping**.
+Proceed with **TA-3 — Networking, Server Authority, Remote Contracts, and Exploit Boundaries**.
 
 The first implementation vertical slice will be selected and locked only after the complete design and architecture dependency chain makes its requirements clear.
 

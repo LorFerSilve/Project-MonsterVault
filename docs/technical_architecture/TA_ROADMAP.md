@@ -1,6 +1,6 @@
 # Technical Architecture Roadmap
 
-> **Status:** Active — TA-2 Next
+> **Status:** Active — TA-3 Next
 > **Authority:** Dependency-driven technical architecture sequencing
 
 This roadmap defines how the Design Complete MonsterVault GDS is translated into implementation-ready Roblox/Luau contracts.
@@ -73,13 +73,44 @@ Closure evidence:
 
 ## TA-2 — Repository Layout, Module Boundaries, Dependency Direction, and Bootstrapping
 
-**Status:** NEXT — Draft
+**Status:** Architecture Complete — PASS
 
-Defines client/server/shared boundaries, module ownership, dependency graph, startup/lifecycle ordering, configuration/content boundaries and rules that prevent cyclic or hidden cross-domain dependencies.
+Established and formally validated:
+
+- modular-monolith runtime architecture;
+- future `src/server`, `src/client`, and `src/shared` source roots;
+- Rojo mapping into ServerScriptService, StarterPlayerScripts and ReplicatedStorage;
+- server/client/shared authority boundaries;
+- server bootstrap/application/domain/infrastructure/adapter layers;
+- domain public/internal encapsulation;
+- application-level cross-domain orchestration;
+- one-directional import/dependency rules;
+- shared-as-disclosed security rule;
+- public/private configuration and utility placement rules;
+- no long-lived side effects during module import;
+- explicit Construct -> Validate -> Start -> Ready -> Stop/Shutdown lifecycle;
+- deterministic server/client/player/shutdown bootstrap ordering;
+- explicit constructor injection and no global service locator;
+- cyclic dependency prevention/resolution policy;
+- command/query/completed-fact event structural convention;
+- one ordinary server and client bootstrap entrypoint;
+- tests/scripts/assets structural boundaries;
+- centralized platform-service ownership;
+- 110 / 110 TA-2 scenarios PASS;
+- zero TA-2-blocking questions.
+
+Closure evidence:
+
+- [structure/02_repository_layout_module_boundaries_dependency_direction_and_bootstrapping.md](structure/02_repository_layout_module_boundaries_dependency_direction_and_bootstrapping.md) — Architecture Complete;
+- [TA2_DEPENDENCY_OWNERSHIP_MATRIX.md](TA2_DEPENDENCY_OWNERSHIP_MATRIX.md) — PASS;
+- [TA2_GDS_TRACEABILITY.md](TA2_GDS_TRACEABILITY.md) — PASS;
+- [TA2_SCENARIO_VALIDATION.md](TA2_SCENARIO_VALIDATION.md) — 110 / 110 PASS;
+- [TA2_DECISION_INDEX.md](TA2_DECISION_INDEX.md) — accepted;
+- [TA2_CLOSURE_REPORT.md](TA2_CLOSURE_REPORT.md) — PASS.
 
 ## TA-3 — Networking, Server Authority, Remote Contracts, and Exploit Boundaries
 
-**Status:** Blocked
+**Status:** NEXT — Draft
 
 Defines RemoteEvent/RemoteFunction ownership, request/response/event contracts, validation, rate limiting, replay/idempotency strategy, trust boundaries, client prediction/presentation boundaries and exploit-resistant state mutation.
 
@@ -195,10 +226,10 @@ GDS-17 PASS / Design Complete
 
 GDS-17 is **Complete — PASS** and the Game Design Specification is **Design Complete**.
 
-TA-0 and TA-1 are **Architecture Complete — PASS**.
+TA-0 through TA-2 are **Architecture Complete — PASS**.
 
 The active dependency is:
 
-> **TA-2 — Repository Layout, Module Boundaries, Dependency Direction, and Bootstrapping**
+> **TA-3 — Networking, Server Authority, Remote Contracts, and Exploit Boundaries**
 
-TA-3 through TA-17 remain blocked by dependency order. Gameplay implementation remains blocked until TA-17 is formally complete.
+TA-4 through TA-17 remain blocked by dependency order. Gameplay implementation remains blocked until TA-17 is formally complete.

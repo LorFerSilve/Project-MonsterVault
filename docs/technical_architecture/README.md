@@ -1,6 +1,6 @@
 # MonsterVault Technical Architecture
 
-> **Status:** Active — TA-0..1 Complete / TA-2 Next
+> **Status:** Active — TA-0..2 Complete / TA-3 Next
 > **Authority:** Technical implementation contracts after GDS completion
 
 This directory contains the Technical Architecture layer that now becomes active after the GDS-17 Design Complete PASS.
@@ -16,6 +16,8 @@ The TA is deliberately not allowed to redefine gameplay. It translates the appro
 - [`ARCHITECTURE_DECISIONS.md`](ARCHITECTURE_DECISIONS.md) records accepted architecture decisions and rationale.
 - [`environment/01_roblox_system_context_toolchain_and_development_environment.md`](environment/01_roblox_system_context_toolchain_and_development_environment.md) is the authoritative TA-1 environment/toolchain contract.
 - [`TA1_TOOLCHAIN_SNAPSHOT.md`](TA1_TOOLCHAIN_SNAPSHOT.md) records the dated reference toolchain.
+- [`structure/02_repository_layout_module_boundaries_dependency_direction_and_bootstrapping.md`](structure/02_repository_layout_module_boundaries_dependency_direction_and_bootstrapping.md) is the authoritative TA-2 structure/bootstrap contract.
+- [`TA2_DEPENDENCY_OWNERSHIP_MATRIX.md`](TA2_DEPENDENCY_OWNERSHIP_MATRIX.md) defines permitted dependency and mutation ownership boundaries.
 - [`TA_ROADMAP.md`](TA_ROADMAP.md) defines the dependency-driven architecture sequence.
 - `audit/` will contain the final TA-16 integration/readiness evidence.
 
@@ -23,12 +25,12 @@ The TA is deliberately not allowed to redefine gameplay. It translates the appro
 
 GDS-17 has recorded a formal **Design Complete — PASS** with zero implementation-critical design questions.
 
-TA-0 is **Architecture Complete — PASS**.
+TA-0 through TA-2 are **Architecture Complete — PASS**.
 
-TA-1 is **Architecture Complete — PASS** with 75 / 75 environment/toolchain scenarios passing.
+TA-2 closed with 110 / 110 structural scenarios passing and a complete dependency/ownership matrix.
 
 The active dependency is:
 
-> **TA-2 — Repository Layout, Module Boundaries, Dependency Direction, and Bootstrapping**
+> **TA-3 — Networking, Server Authority, Remote Contracts, and Exploit Boundaries**
 
-TA-2 will lock the concrete source/DataModel mapping and module/bootstrap structure using the TA-1 Rojo/Rokit/strict-Luau baseline. Gameplay implementation remains blocked until TA-17.
+TA-3 will define the centrally governed networking layer inside the TA-2 server/client/shared roots. Gameplay implementation remains blocked until TA-17.

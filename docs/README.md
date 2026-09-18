@@ -1,6 +1,6 @@
 # Project MonsterVault Documentation
 
-> **Project phase:** Technical Architecture — TA-0..1 complete / TA-2 next  
+> **Project phase:** Technical Architecture — TA-0..2 complete / TA-3 next  
 > **Implementation status:** Blocked by Technical Architecture and implementation-lock gates
 
 This directory is the authoritative documentation space for Project MonsterVault.
@@ -60,19 +60,20 @@ Technical Architecture completed:
 
 - **TA-0 — Architecture Governance, Constraints, and GDS Traceability: Architecture Complete — PASS**
 - **TA-1 — Roblox System Context, Toolchain, and Development Environment: Architecture Complete — PASS**
+- **TA-2 — Repository Layout, Module Boundaries, Dependency Direction, and Bootstrapping: Architecture Complete — PASS**
 
-TA-1 latest evidence:
+TA-2 latest evidence:
 
-- [`technical_architecture/environment/01_roblox_system_context_toolchain_and_development_environment.md`](technical_architecture/environment/01_roblox_system_context_toolchain_and_development_environment.md);
-- [`technical_architecture/TA1_TOOLCHAIN_SNAPSHOT.md`](technical_architecture/TA1_TOOLCHAIN_SNAPSHOT.md);
-- [`technical_architecture/TA1_GDS_TRACEABILITY.md`](technical_architecture/TA1_GDS_TRACEABILITY.md);
-- [`technical_architecture/TA1_SCENARIO_VALIDATION.md`](technical_architecture/TA1_SCENARIO_VALIDATION.md);
-- [`technical_architecture/TA1_DECISION_INDEX.md`](technical_architecture/TA1_DECISION_INDEX.md);
-- [`technical_architecture/TA1_CLOSURE_REPORT.md`](technical_architecture/TA1_CLOSURE_REPORT.md).
+- [`technical_architecture/structure/02_repository_layout_module_boundaries_dependency_direction_and_bootstrapping.md`](technical_architecture/structure/02_repository_layout_module_boundaries_dependency_direction_and_bootstrapping.md);
+- [`technical_architecture/TA2_DEPENDENCY_OWNERSHIP_MATRIX.md`](technical_architecture/TA2_DEPENDENCY_OWNERSHIP_MATRIX.md);
+- [`technical_architecture/TA2_GDS_TRACEABILITY.md`](technical_architecture/TA2_GDS_TRACEABILITY.md);
+- [`technical_architecture/TA2_SCENARIO_VALIDATION.md`](technical_architecture/TA2_SCENARIO_VALIDATION.md);
+- [`technical_architecture/TA2_DECISION_INDEX.md`](technical_architecture/TA2_DECISION_INDEX.md);
+- [`technical_architecture/TA2_CLOSURE_REPORT.md`](technical_architecture/TA2_CLOSURE_REPORT.md).
 
 The active dependency is:
 
-> **TA-2 — Repository Layout, Module Boundaries, Dependency Direction, and Bootstrapping**
+> **TA-3 — Networking, Server Authority, Remote Contracts, and Exploit Boundaries**
 
 No gameplay implementation should begin until:
 

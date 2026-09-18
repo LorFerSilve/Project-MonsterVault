@@ -1,6 +1,6 @@
 # Architecture Decisions
 
-> **Status:** Active — TA-0..1 Complete / TA-2 Next
+> **Status:** Active — TA-0..2 Complete / TA-3 Next
 > **Authority:** Accepted technical architecture decisions and rationale
 
 This log records material architecture decisions. GDS-17 has formally promoted the Game Design Specification to Design Complete, so architecture decision-making may now begin under TA-0.
@@ -229,3 +229,126 @@ MonsterVault defaults to one primary gameplay place per environment at launch.
 ### Consequence
 
 TA-9 may propose a multi-place topology only with technical evidence and lifecycle revalidation.
+
+
+---
+
+## AD-013 — Use a Modular-Monolith Runtime Architecture
+
+**Date:** 2026-09-18  
+**Status:** Accepted  
+**Owning TA phase:** TA-2
+
+### Decision
+
+MonsterVault remains one Roblox runtime/deployable with explicit in-process domain ownership rather than premature microservice-style decomposition.
+
+### Consequence
+
+Cross-domain boundaries are enforced by module contracts and application orchestration, not by separate deployables.
+
+---
+
+## AD-014 — Lock Server, Client, and Shared as the Three First-Party Runtime Source Roots
+
+**Date:** 2026-09-18  
+**Status:** Accepted  
+**Owning TA phase:** TA-2
+
+### Decision
+
+The future Rojo source roots are:
+
+- `src/server` -> `ServerScriptService/MonsterVaultServer`;
+- `src/client` -> `StarterPlayer/StarterPlayerScripts/MonsterVaultClient`;
+- `src/shared` -> `ReplicatedStorage/MonsterVault/Shared`.
+
+### Consequence
+
+Later phases may add substructure but may not create parallel authority roots without TA-2 change control.
+
+---
+
+## AD-015 — Cross-Domain Operations Use Public Contracts and Application Orchestration
+
+**Date:** 2026-09-18  
+**Status:** Accepted  
+**Owning TA phase:** TA-2
+
+### Decision
+
+A domain may not directly mutate another domain's private state.
+
+Multi-domain operations are coordinated above domains through explicit application/use-case contracts.
+
+### Consequence
+
+Capture finalization, trade commit, production/economy claims and commercial reconciliation avoid circular ownership.
+
+---
+
+## AD-016 — Module Import Has No Long-Lived Runtime Side Effects
+
+**Date:** 2026-09-18  
+**Status:** Accepted  
+**Owning TA phase:** TA-2
+
+### Decision
+
+Requiring a module does not create remotes, bind long-lived engine events, start loops or mutate persistent/gameplay state.
+
+### Consequence
+
+Lifecycle effects are explicit, testable and bootstrap-owned.
+
+---
+
+## AD-017 — Runtime Components Use Explicit Construction and Lifecycle
+
+**Date:** 2026-09-18  
+**Status:** Accepted  
+**Owning TA phase:** TA-2
+
+### Decision
+
+The conceptual lifecycle is:
+
+`Construct -> Validate -> Start -> Ready -> Stop/Shutdown`.
+
+Dependencies are passed explicitly at composition time rather than retrieved from a global service locator.
+
+### Consequence
+
+Startup order, failure behavior and duplicate initialization become visible and testable.
+
+---
+
+## AD-018 — Platform Services Are Centralized by Technical Concern
+
+**Date:** 2026-09-18  
+**Status:** Accepted  
+**Owning TA phase:** TA-2
+
+### Decision
+
+DataStore, Marketplace, cross-server, telemetry and other platform APIs are accessed through their owning infrastructure/adapters rather than scattered across feature/domain leaf modules.
+
+### Consequence
+
+TA-3 onward can define trust, retry, quota and test behavior centrally.
+
+---
+
+## AD-019 — Actual Source Scaffold Remains Deferred Until TA-17
+
+**Date:** 2026-09-18  
+**Status:** Accepted  
+**Owning TA phase:** TA-2
+
+### Decision
+
+TA-2 locks the exact structural target but does not create gameplay/source scaffold files before the implementation gate.
+
+### Consequence
+
+The architecture remains specification-only until TA-17 explicitly opens implementation.
