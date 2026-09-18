@@ -441,6 +441,54 @@ The exact-once persistent GDS-13 result of a verified successful purchase. Retry
 ### Commercial Reconciliation
 The safe process used when a durable paid entitlement becomes unavailable/revoked under a legitimate downstream platform/account outcome. Reconciliation may remove future entitlement benefit but cannot silently delete Secured Creatures or create negative Energy/debt.
 
+### Presentation Layer
+The GDS-14 player-facing representation of authoritative game state. Presentation may communicate or animate state but is not itself the owner of gameplay state.
+
+### HUD
+The always-available or contextually visible in-play information surface used while ordinary world control remains active.
+
+### Modal Screen
+A presentation state that intentionally owns input focus and suppresses conflicting world actions until closed or resolved.
+
+### Panel
+A non-full-screen information surface that may coexist with world view when it does not create ambiguous input focus.
+
+### Critical State Banner
+A high-priority concise presentation of a state that materially changes what the player can safely do, such as Protected Load Failure, Acquisition-In-Progress, unresolved Overflow, Event Resolving or trade final review.
+
+### Context Prompt
+The GDS-14 visible presentation of the current GDS-3 Active Context and its Primary Interact action.
+
+### Action Feedback
+Immediate presentation confirming that an attempted action was accepted, rejected, pending, completed or changed state.
+
+### Toast
+A short non-modal informational message that does not require acknowledgment and may not obscure critical gameplay.
+
+### Persistent Notice
+A non-modal notice that remains accessible until its underlying unresolved state is resolved or safely dismissed.
+
+### Confirmation Dialog
+A modal review requiring deliberate acceptance before a consequential action.
+
+### Destructive Confirmation
+A stronger confirmation pattern used for irreversible/high-value ownership or transfer actions.
+
+### Focus Target
+The currently selected actionable UI element for keyboard/gamepad navigation.
+
+### Input Glyph
+The presentation symbol/text representing the current input binding for an action.
+
+### Reduced Motion
+A baseline GDS-14 accessibility setting reducing/substituting non-essential camera/UI motion while preserving semantic feedback.
+
+### Readability Mode
+A group of GDS-14 accessibility options improving text size, contrast, background support, icon labels and visual clarity without changing gameplay rules.
+
+### Semantic Redundancy
+Presentation of critical meaning through more than one understandable channel, such as text plus icon/shape or visual plus audio, so meaning does not depend on color or sound alone.
+
 ### Offline Progression
 Any progression accrued while the player is not actively present in the experience. GDS-7 explicitly authorizes **bounded Vault Passive Production** from finalized Production Assignments, limited by the Offline Production Window and Production Buffer cap. GDS-8 defines the resulting Energy/economic effects. Other offline progression remains unauthorized unless an owning later specification defines it.
 
