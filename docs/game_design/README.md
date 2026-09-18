@@ -1,6 +1,6 @@
 # MonsterVault Game Design Specification
 
-> **Status:** GDS-0 through GDS-11 Complete / GDS-12 Next  
+> **Status:** GDS-0 through GDS-12 Complete / GDS-13 Next  
 > **Authority:** Player-facing gameplay behavior
 
 This directory contains the authoritative Game Design Specification (GDS) for MonsterVault.
@@ -23,10 +23,11 @@ Completed:
 - **GDS-9 — World, Biomes, Exploration, Spawning, and Hazards: COMPLETE — PASS**
 - **GDS-10 — Social Play, Cooperation, Competition, and PvP Boundaries: COMPLETE — PASS**
 - **GDS-11 — Server Events, Dynamic Encounters, and Live Content: COMPLETE — PASS**
+- **GDS-12 — Trading and Player Economy: COMPLETE — PASS**
 
 The active dependency is now:
 
-> **GDS-12 — Trading and Player Economy**
+> **GDS-13 — Monetization and Commercial Fairness**
 
 Technical Architecture and gameplay implementation remain blocked.
 
@@ -160,10 +161,38 @@ GDS-11 establishes:
 - bounded active Event Energy rewards and no baseline Passive Production multiplier;
 - additive seasonal/rotating content, provenance preservation and safe prospective disable/hotfix behavior.
 
+### GDS-12 — Trading and player economy
+
+Authoritative specification and closure evidence:
+
+- [trading/12_trading_and_player_economy.md](trading/12_trading_and_player_economy.md) — Design Complete;
+- [GDS12_SCENARIO_VALIDATION.md](GDS12_SCENARIO_VALIDATION.md) — 140 compound trading/player-economy scenarios; PASS;
+- [GDS12_CROSS_VALIDATION.md](GDS12_CROSS_VALIDATION.md) — GDS-1 through GDS-11 and authority audit; PASS;
+- [GDS12_DECISION_INDEX.md](GDS12_DECISION_INDEX.md) — phase-local strategic decisions;
+- [GDS12_CLOSURE_REPORT.md](GDS12_CLOSURE_REPORT.md) — formal closure; PASS.
+
+GDS-12 establishes:
+
+- direct same-server bilateral creature-for-creature barter;
+- non-paid Trade Access after onboarding + Starter Region Mastery;
+- no Energy transfer, creature-for-Energy exchange, gifting, trade tax, auction or offline marketplace at baseline;
+- exact-instance offers and bounded Trade Reservations;
+- Creature Lock enforcement and Protected Variant re-lock on receipt;
+- Production Assignment/active-role eligibility and safe display/showcase reconciliation;
+- Overflow-Held sender tradeability with receiver no-new-overflow capacity validation;
+- Trade Revision invalidating readiness/confirmation after every semantic offer change;
+- independent Ready + independent Final Trade Confirmation on the same immutable revision;
+- all-or-nothing exact-once Trade Commit;
+- stable Species/Mutation/Trait/Variant identity and original provenance;
+- append-only Trade History;
+- trade-acquired collection Discovery without source-bound Region Mastery/Event Completion fabrication;
+- persistent Trade Cooldown and explicit Tradeable/Time-Locked/Account-Bound restrictions;
+- no official fair-value formula;
+- disconnect/retry, bait-and-switch, alt-account/wash-trade and concurrency guardrails.
+
 ## Remaining Core Specifications
 
-- `trading/` — GDS-12 secured-instance trading, Production Assignment reconciliation, scarcity/value integrity, anti-abuse design and explicit Energy-transfer decision. **GDS-12 NEXT.**
-- `monetization/` — monetization surfaces/fairness constraints including any Energy/capacity/convenience/production products.
+- `monetization/` — GDS-13 monetization surfaces/fairness constraints including any Energy/capacity/convenience/production products. **GDS-13 NEXT.**
 - `presentation/` — UI/UX, Energy/gate/transaction/Vault/capture/rarity/event/world feedback, visual/audio language, accessibility and onboarding presentation.
 - `platform_safety/` — Roblox platform constraints, commercial/randomized constraints, social safety and age-appropriate interaction design.
 - `retention_analytics/` — retention loops, acquisition/Vault/variant/economy/world funnels, session goals, catch-up/reward cadence, metrics hypotheses and experiment boundaries.
