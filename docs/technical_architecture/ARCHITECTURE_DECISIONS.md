@@ -1,6 +1,6 @@
 # Architecture Decisions
 
-> **Status:** Active — TA-0..7 Complete / TA-8 Next
+> **Status:** Active — TA-0..8 Complete / TA-9 Next
 > **Authority:** Accepted technical architecture decisions and rationale
 
 This log records material architecture decisions. GDS-17 has formally promoted the Game Design Specification to Design Complete, so architecture decision-making may now begin under TA-0.
@@ -1149,3 +1149,152 @@ TA-7 is Architecture Complete — PASS with 200/200 scenarios and zero blocking 
 ### Consequence
 
 TA-8 becomes NEXT. Gameplay implementation remains blocked until TA-17.
+
+
+---
+
+## AD-071 — Collection, Vault, and Economy Share the Player Profile Aggregate
+
+**Date:** 2026-09-18  
+**Status:** Accepted  
+**Owning TA phase:** TA-8
+
+### Decision
+
+Secured collection placement, Vault assignments/upgrades, Production Buffer, Energy and progression state remain inside TA-4's atomic one-profile authority.
+
+---
+
+## AD-072 — Energy Uses a Bounded Exact Integer Representation
+
+**Date:** 2026-09-18  
+**Status:** Accepted  
+**Owning TA phase:** TA-8
+
+### Decision
+
+Energy is stored as whole integer units with a hard safety ceiling of 1,000,000,000,000. Production uses fixed-point milli-Energy and all validated arithmetic remains below Luau's exact integer limit.
+
+---
+
+## AD-073 — Passive Production Uses Elapsed-Time Settlement
+
+**Date:** 2026-09-18  
+**Status:** Accepted  
+**Owning TA phase:** TA-8
+
+### Decision
+
+Production is computed at explicit state/checkpoint/claim boundaries from authoritative elapsed time rather than per-frame simulation or per-unit DataStore writes.
+
+---
+
+## AD-074 — Production Assignment Changes Are P2
+
+**Date:** 2026-09-18  
+**Status:** Accepted  
+**Owning TA phase:** TA-8
+
+### Decision
+
+Assignment/unassignment first settles prior accrued value, then persists the new assignment before final acknowledgement because assignment state governs future and offline value.
+
+---
+
+## AD-075 — Offline Production Uses Clean Boundaries and Bounded Crash Recovery
+
+**Date:** 2026-09-18  
+**Status:** Accepted  
+**Owning TA phase:** TA-8
+
+### Decision
+
+Clean leave accrues at most one Offline Production Window. An unclean prior session may receive only Offline Window plus a bounded crash-recovery allowance tied to maximum uncheckpointed active time.
+
+---
+
+## AD-076 — Production Rate Changes Are Effective-Time Epochs
+
+**Date:** 2026-09-18  
+**Status:** Accepted  
+**Owning TA phase:** TA-8
+
+### Decision
+
+Production tuning changes are versioned with effective timestamps so elapsed intervals crossing a change settle piecewise and never rewrite historical output.
+
+---
+
+## AD-077 — Capacity Reconciliation Is Deterministic and Non-Destructive
+
+**Date:** 2026-09-18  
+**Status:** Accepted  
+**Owning TA phase:** TA-8
+
+### Decision
+
+Capacity decreases settle production, clear invalid role references and move deterministic exact Creature Instances into Overflow-Held. Automatic ordering does not use rarity, subjective value or spending.
+
+---
+
+## AD-078 — Production Claim Atomically Moves Buffer Value into Energy
+
+**Date:** 2026-09-18  
+**Status:** Accepted  
+**Owning TA phase:** TA-8
+
+### Decision
+
+A Production Claim settles current output and atomically decreases fixed-point Production Buffer while increasing whole-unit Energy. Wallet-limit remainder stays in the buffer.
+
+---
+
+## AD-079 — One-Time Wallet Overflow Uses Deferred Energy Grants
+
+**Date:** 2026-09-18  
+**Status:** Accepted  
+**Owning TA phase:** TA-8
+
+### Decision
+
+One-time/event/commercial Energy value that cannot fit in the wallet is preserved through bounded persistent Deferred Energy Grant records rather than silently lost.
+
+---
+
+## AD-080 — Progression Purchases Use Server Quotes and Atomic Cost/Effect
+
+**Date:** 2026-09-18  
+**Status:** Accepted  
+**Owning TA phase:** TA-8
+
+### Decision
+
+Vault Upgrades, Capture Capability and Access Unlock purchases use server-issued price/prerequisite quotes and one P2 mutation that applies both exact cost and exact effect or neither.
+
+---
+
+## AD-081 — Commercial Capacity Is Isolated from Production Capability
+
+**Date:** 2026-09-18  
+**Status:** Accepted  
+**Owning TA phase:** TA-8
+
+### Decision
+
+Paid capacity contributes only to bounded Collection/Display capacity. It cannot increase Production Slots, Production Buffer, Offline Window, production rate or Capture Capability.
+
+---
+
+## AD-082 — Close TA-8 and Advance to TA-9
+
+**Date:** 2026-09-18  
+**Status:** Accepted  
+**Owning TA phase:** TA-8
+
+### Decision
+
+TA-8 is Architecture Complete — PASS with 220/220 scenarios and zero blocking questions.
+
+### Consequence
+
+TA-9 becomes NEXT. Gameplay implementation remains blocked until TA-17.
