@@ -1,6 +1,6 @@
 # Architecture Decisions
 
-> **Status:** Active — TA-0..4 Complete / TA-5 Next
+> **Status:** Active — TA-0..5 Complete / TA-6 Next
 > **Authority:** Accepted technical architecture decisions and rationale
 
 This log records material architecture decisions. GDS-17 has formally promoted the Game Design Specification to Design Complete, so architecture decision-making may now begin under TA-0.
@@ -670,3 +670,180 @@ TA-4 is Architecture Complete — PASS with 180/180 scenarios and zero blocking 
 ### Consequence
 
 TA-5 becomes NEXT. Gameplay implementation remains blocked until TA-17.
+
+
+---
+
+## AD-039 — Stable MonsterVault Semantic IDs Are Canonical
+
+**Date:** 2026-09-18  
+**Status:** Accepted  
+**Owning TA phase:** TA-5
+
+### Decision
+
+Persistent and cross-system semantic references use MonsterVault-owned canonical IDs rather than display names, Studio paths, list indexes, or environment-specific Roblox asset/product IDs.
+
+### Consequence
+
+Content can be renamed, localized, visually updated or rebound to platform IDs without invalidating persistent meaning.
+
+---
+
+## AD-040 — Canonical Static IDs Are Immutable and Never Reused
+
+**Date:** 2026-09-18  
+**Status:** Accepted  
+**Owning TA phase:** TA-5
+
+### Decision
+
+Shipped content IDs remain stable for the lifetime of persisted/historical references. Retired IDs are never assigned to unrelated content.
+
+### Consequence
+
+Content retirement uses Retired/Tombstone compatibility rather than deletion/reuse.
+
+---
+
+## AD-041 — Dynamic Entity IDs Are Server-Generated GUID-Style IDs
+
+**Date:** 2026-09-18  
+**Status:** Accepted  
+**Owning TA phase:** TA-5
+
+### Decision
+
+CreatureInstanceId and comparable runtime identities are server-generated and never reused.
+
+### Consequence
+
+Clients cannot choose ownership/entity identity and transfers preserve the same instance identity.
+
+---
+
+## AD-042 — Content Registries Are Declarative, Typed, Validated, and Immutable Per Snapshot
+
+**Date:** 2026-09-18  
+**Status:** Accepted  
+**Owning TA phase:** TA-5
+
+### Decision
+
+Canonical definitions are data rather than executable gameplay callbacks, and core registries fully validate before dependent systems start.
+
+### Consequence
+
+Duplicate IDs, broken references and invalid core configuration fail bootstrap closed.
+
+---
+
+## AD-043 — Public and Server-Private Content Definitions Are Separated
+
+**Date:** 2026-09-18  
+**Status:** Accepted  
+**Owning TA phase:** TA-5
+
+### Decision
+
+Replicated definitions contain disclosure-safe fields only. Hidden probabilities, anti-abuse rules, unrevealed rewards and authoritative commercial grant mappings remain server-private.
+
+### Consequence
+
+Replicated content cannot become an accidental side channel for hidden authority state.
+
+---
+
+## AD-044 — Content Lifecycle Is Active / Retired / Tombstone
+
+**Date:** 2026-09-18  
+**Status:** Accepted  
+**Owning TA phase:** TA-5
+
+### Decision
+
+Definitions with persistent/historical references remain resolvable after new generation/availability ends.
+
+### Consequence
+
+Referenced content cannot simply be deleted without migration/compatibility handling.
+
+---
+
+## AD-045 — Configuration Is Classified C0 / C1 / C2 / C3
+
+**Date:** 2026-09-18  
+**Status:** Accepted  
+**Owning TA phase:** TA-5
+
+### Decision
+
+Semantic invariants and static build content are not arbitrary live tuneables. TA-13 may update only explicitly allowlisted C2 fields through validated versioned snapshots.
+
+### Consequence
+
+Live operations/experiments cannot silently redefine GDS/TA semantics.
+
+---
+
+## AD-046 — External Roblox IDs Are Environment Bindings
+
+**Date:** 2026-09-18  
+**Status:** Accepted  
+**Owning TA phase:** TA-5
+
+### Decision
+
+Internal Product/Content IDs remain stable across DEV/STAGING/PRODUCTION while Roblox asset/product IDs map explicitly per environment.
+
+### Consequence
+
+Persisted entitlement/content semantics do not depend on environment-specific platform numbers.
+
+---
+
+## AD-047 — Tags and Attributes Are Authoring Metadata, Not Semantic Authority
+
+**Date:** 2026-09-18  
+**Status:** Accepted  
+**Owning TA phase:** TA-5
+
+### Decision
+
+CollectionService tags declare structural roles and disclosure-safe attributes carry stable IDs. Replicated tags/attributes do not contain hidden odds/security/private grant state.
+
+### Consequence
+
+World authoring remains data-driven without moving canonical content authority into Workspace metadata.
+
+---
+
+## AD-048 — Content Snapshot Identity Preserves Prospective Configuration Semantics
+
+**Date:** 2026-09-18  
+**Status:** Accepted  
+**Owning TA phase:** TA-5
+
+### Decision
+
+Validated content/config state has a ContentSnapshotId that downstream systems may pin where provenance, event fairness or anti-reroll semantics require it.
+
+### Consequence
+
+Later config changes affect future actions and never reroll existing generated identity.
+
+---
+
+## AD-049 — Close TA-5 and Advance to TA-6
+
+**Date:** 2026-09-18  
+**Status:** Accepted  
+**Owning TA phase:** TA-5
+
+### Decision
+
+TA-5 is Architecture Complete — PASS with 180/180 scenarios and zero blocking questions.
+
+### Consequence
+
+TA-6 becomes NEXT. Gameplay implementation remains blocked until TA-17.
