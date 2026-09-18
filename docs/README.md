@@ -1,6 +1,6 @@
 # Project MonsterVault Documentation
 
-> **Project phase:** Technical Architecture — TA-0..6 complete / TA-7 next  
+> **Project phase:** Technical Architecture — TA-0..7 complete / TA-8 next  
 > **Implementation status:** Blocked by Technical Architecture and implementation-lock gates
 
 This directory is the authoritative documentation space for Project MonsterVault.
@@ -65,20 +65,21 @@ Technical Architecture completed:
 - **TA-4 — Player Data, Persistence, Session Ownership, Schema Evolution, and Recovery: Architecture Complete — PASS**
 - **TA-5 — Identity, Content Registries, Configuration, and Data-Driven Content: Architecture Complete — PASS**
 - **TA-6 — Runtime Entity, Player, Creature, and World Lifecycle: Architecture Complete — PASS**
+- **TA-7 — Capture, Creature Ownership, Mutation, and Reward Resolution: Architecture Complete — PASS**
 
-TA-6 latest evidence:
+TA-7 latest evidence:
 
-- [`technical_architecture/runtime/06_runtime_entity_player_creature_and_world_lifecycle.md`](technical_architecture/runtime/06_runtime_entity_player_creature_and_world_lifecycle.md);
-- [`technical_architecture/TA6_ROBLOX_RUNTIME_LIFECYCLE_SNAPSHOT.md`](technical_architecture/TA6_ROBLOX_RUNTIME_LIFECYCLE_SNAPSHOT.md);
-- [`technical_architecture/TA6_RUNTIME_LIFECYCLE_MATRIX.md`](technical_architecture/TA6_RUNTIME_LIFECYCLE_MATRIX.md);
-- [`technical_architecture/TA6_GDS_TRACEABILITY.md`](technical_architecture/TA6_GDS_TRACEABILITY.md);
-- [`technical_architecture/TA6_SCENARIO_VALIDATION.md`](technical_architecture/TA6_SCENARIO_VALIDATION.md);
-- [`technical_architecture/TA6_DECISION_INDEX.md`](technical_architecture/TA6_DECISION_INDEX.md);
-- [`technical_architecture/TA6_CLOSURE_REPORT.md`](technical_architecture/TA6_CLOSURE_REPORT.md).
+- [`technical_architecture/capture/07_capture_creature_ownership_mutation_and_reward_resolution.md`](technical_architecture/capture/07_capture_creature_ownership_mutation_and_reward_resolution.md);
+- [`technical_architecture/TA7_ROBLOX_CAPTURE_RANDOMNESS_SNAPSHOT.md`](technical_architecture/TA7_ROBLOX_CAPTURE_RANDOMNESS_SNAPSHOT.md);
+- [`technical_architecture/TA7_CAPTURE_VARIANT_FINALIZATION_MATRIX.md`](technical_architecture/TA7_CAPTURE_VARIANT_FINALIZATION_MATRIX.md);
+- [`technical_architecture/TA7_GDS_TRACEABILITY.md`](technical_architecture/TA7_GDS_TRACEABILITY.md);
+- [`technical_architecture/TA7_SCENARIO_VALIDATION.md`](technical_architecture/TA7_SCENARIO_VALIDATION.md);
+- [`technical_architecture/TA7_DECISION_INDEX.md`](technical_architecture/TA7_DECISION_INDEX.md);
+- [`technical_architecture/TA7_CLOSURE_REPORT.md`](technical_architecture/TA7_CLOSURE_REPORT.md).
 
 The active dependency is:
 
-> **TA-7 — Capture, Creature Ownership, Mutation, and Reward Resolution**
+> **TA-8 — Vault, Economy, Progression, Inventory, and Offline Accrual**
 
 No gameplay implementation should begin until:
 

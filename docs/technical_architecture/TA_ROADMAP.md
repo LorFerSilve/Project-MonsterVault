@@ -1,6 +1,6 @@
 # Technical Architecture Roadmap
 
-> **Status:** Active — TA-7 Next
+> **Status:** Active — TA-8 Next
 > **Authority:** Dependency-driven technical architecture sequencing
 
 This roadmap defines how the Design Complete MonsterVault GDS is translated into implementation-ready Roblox/Luau contracts.
@@ -279,13 +279,48 @@ Closure evidence:
 
 ## TA-7 — Capture, Creature Ownership, Mutation, and Reward Resolution
 
-**Status:** NEXT — Draft
+**Status:** Architecture Complete — PASS
 
-Defines authoritative capture transactions, simultaneous claims, random-outcome authority, mutation generation, ownership commitment, disconnect/retry behavior, anti-reroll rules and reward resolution.
+Established and formally validated:
+
+- server-owned per-creature acquisition state machine;
+- serialized simultaneous-claim arbitration;
+- claim/attempt/custody identities and stale-state rejection;
+- server-authoritative Capture Challenge result resolution;
+- first-party server RNG abstraction with deterministic test injection;
+- one-time Variant Identity generation before individual actionability;
+- 0–2 compatible canonical Mutation generation and Trait finalization;
+- strict anti-reroll semantics across claim/capture/reconnect/transport/finalization;
+- Capture Success -> Provisional Capture rather than ownership;
+- one ordinary Transport Custody per player;
+- bounded same-server Transport Grace with no cross-server ownership transfer;
+- conservative handling of coarse Roblox PlayerExitReason signals;
+- Secure Point server/context validation;
+- stable ownershipFinalizationOperationId;
+- P2 exact-once same-Creature ownership commit;
+- Species/Mutation/Variant discovery in the finalization bundle;
+- Protected Variant automatic Creature Lock in the same commit;
+- known-full initiation block and capacity-race Overflow-Held fallback;
+- no implicit ordinary per-capture Energy payout;
+- controlled-shutdown protection only for active valid custody;
+- event multi-award and onboarding boundaries;
+- exploit/statistical/observability/testability rules;
+- 200 / 200 TA-7 scenarios PASS;
+- zero TA-7-blocking questions.
+
+Closure evidence:
+
+- [capture/07_capture_creature_ownership_mutation_and_reward_resolution.md](capture/07_capture_creature_ownership_mutation_and_reward_resolution.md) — Architecture Complete;
+- [TA7_ROBLOX_CAPTURE_RANDOMNESS_SNAPSHOT.md](TA7_ROBLOX_CAPTURE_RANDOMNESS_SNAPSHOT.md) — PASS;
+- [TA7_CAPTURE_VARIANT_FINALIZATION_MATRIX.md](TA7_CAPTURE_VARIANT_FINALIZATION_MATRIX.md) — PASS;
+- [TA7_GDS_TRACEABILITY.md](TA7_GDS_TRACEABILITY.md) — PASS;
+- [TA7_SCENARIO_VALIDATION.md](TA7_SCENARIO_VALIDATION.md) — 200 / 200 PASS;
+- [TA7_DECISION_INDEX.md](TA7_DECISION_INDEX.md) — accepted;
+- [TA7_CLOSURE_REPORT.md](TA7_CLOSURE_REPORT.md) — PASS.
 
 ## TA-8 — Vault, Economy, Progression, Inventory, and Offline Accrual
 
-**Status:** Blocked
+**Status:** NEXT — Draft
 
 Defines authoritative currency/resource mutation, vault state, passive production, capacity, upgrades, inventory semantics, progression transactions, offline accrual computation and economic integrity controls.
 
@@ -371,10 +406,10 @@ GDS-17 PASS / Design Complete
 
 GDS-17 is **Complete — PASS** and the Game Design Specification is **Design Complete**.
 
-TA-0 through TA-6 are **Architecture Complete — PASS**.
+TA-0 through TA-7 are **Architecture Complete — PASS**.
 
 The active dependency is:
 
-> **TA-7 — Capture, Creature Ownership, Mutation, and Reward Resolution**
+> **TA-8 — Vault, Economy, Progression, Inventory, and Offline Accrual**
 
-TA-8 through TA-17 remain blocked by dependency order. Gameplay implementation remains blocked until TA-17 is formally complete.
+TA-9 through TA-17 remain blocked by dependency order. Gameplay implementation remains blocked until TA-17 is formally complete.
