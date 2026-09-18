@@ -1,6 +1,6 @@
 # Project MonsterVault Documentation
 
-> **Project phase:** Pre-implementation specification — GDS-16 next  
+> **Project phase:** Pre-implementation specification — GDS-17 audit next  
 > **Implementation status:** Blocked by design and architecture gates
 
 This directory is the authoritative documentation space for Project MonsterVault.
@@ -42,23 +42,22 @@ Completed:
 - **GDS-13 — Monetization and Commercial Fairness: PASS**
 - **GDS-14 — Presentation, UI/UX, Feedback, and Accessibility: PASS**
 - **GDS-15 — Roblox Platform, Social Safety, and Moderation Constraints: PASS**
+- **GDS-16 — Retention, Discovery, Analytics, and Experimentation Boundaries: PASS**
 
 Latest closure evidence:
 
-- [`game_design/platform_safety/15_roblox_platform_social_safety_and_moderation_constraints.md`](game_design/platform_safety/15_roblox_platform_social_safety_and_moderation_constraints.md);
-- [`game_design/GDS15_ROBLOX_PLATFORM_POLICY_SNAPSHOT.md`](game_design/GDS15_ROBLOX_PLATFORM_POLICY_SNAPSHOT.md);
-- [`game_design/GDS15_SCENARIO_VALIDATION.md`](game_design/GDS15_SCENARIO_VALIDATION.md);
-- [`game_design/GDS15_CROSS_VALIDATION.md`](game_design/GDS15_CROSS_VALIDATION.md);
-- [`game_design/GDS15_DECISION_INDEX.md`](game_design/GDS15_DECISION_INDEX.md);
-- [`game_design/GDS15_CLOSURE_REPORT.md`](game_design/GDS15_CLOSURE_REPORT.md).
+- [`game_design/retention_analytics/16_retention_discovery_analytics_and_experimentation_boundaries.md`](game_design/retention_analytics/16_retention_discovery_analytics_and_experimentation_boundaries.md);
+- [`game_design/GDS16_SCENARIO_VALIDATION.md`](game_design/GDS16_SCENARIO_VALIDATION.md);
+- [`game_design/GDS16_CROSS_VALIDATION.md`](game_design/GDS16_CROSS_VALIDATION.md);
+- [`game_design/GDS16_DECISION_INDEX.md`](game_design/GDS16_DECISION_INDEX.md);
+- [`game_design/GDS16_CLOSURE_REPORT.md`](game_design/GDS16_CLOSURE_REPORT.md).
 
 The active dependency is:
 
-> **GDS-16 — Retention, Discovery, Analytics, and Experimentation Boundaries**
+> **GDS-17 — Cross-System Consistency and Design-Complete Audit**
 
 No gameplay implementation should begin until:
 
-- GDS-16 completes its owning design work;
 - GDS-17 records a formal cross-system `Design Complete` PASS;
 - the complete Technical Architecture reaches `Architecture Complete`;
 - architecture integration validation passes;

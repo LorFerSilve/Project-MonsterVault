@@ -490,13 +490,46 @@ GDS-15 establishes the platform/social-safety contract consumed by retention/ana
 
 ## GDS-16 — Retention, Discovery, Analytics, and Experimentation Boundaries
 
-**Status:** NEXT — Draft
+**Status:** Complete — PASS
 
-Defines first-session funnel, session goals, return loops, daily/weekly engagement philosophy, social invitation loops, discovery/Vault/variant progression promises, economy/source-sink hypotheses, catch-up/reward cadence governance, experimentable parameters, and guardrails preventing metric optimization from overriding player experience, fairness, ownership, scarcity, or value integrity.
+Established and formally validated:
+
+- GDS-1 product-success hierarchy preserved above all analytics/KPI optimization;
+- first-session funnel instrumentation mapped to the existing time-to-fun/product gates;
+- Return Funnel with concise non-blocking Return Brief;
+- optional progression-aware Next Aspirations using already-authorized player/game state only;
+- Meaningful Session / Meaningful Engagement separated from raw session duration and AFK/waiting;
+- no baseline daily login reward, login streak, absence punishment or mandatory daily/weekly checklist;
+- live-content cadence supporting return behavior without mandatory-attendance/FOMO mainline progression;
+- catch-up based on existing legitimate state/Offline Production rather than fabricated missed rewards;
+- factual, policy-aware, frequency-bounded notification/reminder boundaries;
+- truthful Discovery Packaging with conversion interpreted alongside bounce/satisfaction/retention;
+- D1/D7/D30 and benchmark-relative retention interpretation consistent with GDS-1;
+- diagnostic cohorting by progression/device/acquisition/payer/social-eligibility without turning segmentation into hidden gameplay authority;
+- social/economy/collection/event/trade/commercial/platform health metric domains;
+- analytics data minimization, no unnecessary PII, no sensitive-trait churn targeting, no raw chat as retention input;
+- explicit experiment governance: hypothesis, owner, cohort, primary metric, guardrails, exposure, invariant review and stop/rollback;
+- Class A Presentation, Class B Session/Scheduling and Class C Value-Affecting experiments;
+- no hidden spend/churn/failure/purchase-refusal-based collectible odds or claim/capture power;
+- coherent shared-context requirements for experiments affecting public/shared opportunities;
+- prospective-only persistent-value experiments with auditability and non-destructive rollback;
+- ownership, exact-once persistence, Creature Lock, safety, trade atomicity, accessibility and commercial fairness as Experiment Invariants;
+- GDS-1 pivot gate preserved: weak core loop triggers redesign rather than stronger rewards/FOMO/notifications;
+- 180 compound retention/analytics/experiment scenarios validated.
+
+Closure evidence:
+
+- [retention_analytics/16_retention_discovery_analytics_and_experimentation_boundaries.md](retention_analytics/16_retention_discovery_analytics_and_experimentation_boundaries.md) — Design Complete;
+- [GDS16_SCENARIO_VALIDATION.md](GDS16_SCENARIO_VALIDATION.md) — 180 / 180 PASS;
+- [GDS16_CROSS_VALIDATION.md](GDS16_CROSS_VALIDATION.md) — PASS;
+- [GDS16_DECISION_INDEX.md](GDS16_DECISION_INDEX.md) — accepted phase-local decisions;
+- [GDS16_CLOSURE_REPORT.md](GDS16_CLOSURE_REPORT.md) — PASS.
+
+GDS-16 completes the ordinary subsystem-design sequence. It supplies retention/analytics/experimentation authority to GDS-17 and Technical Architecture but does not authorize implementation.
 
 ## GDS-17 — Cross-System Consistency and Design-Complete Audit
 
-**Status:** Blocked by GDS-16
+**Status:** NEXT — Audit
 
 Performs the formal pre-architecture audit:
 
@@ -517,9 +550,9 @@ Performs the formal pre-architecture audit:
 
 ## Current Project Gate
 
-GDS-0 through GDS-15 are formally complete. The active dependency is:
+GDS-0 through GDS-16 are formally complete. The active dependency is:
 
-> **GDS-16 — Retention, Discovery, Analytics, and Experimentation Boundaries**
+> **GDS-17 — Cross-System Consistency and Design-Complete Audit**
 
 Technical Architecture must not begin until GDS-17 records a formal PASS with no implementation-critical open design questions.
 
@@ -542,8 +575,8 @@ GDS-0 governance — COMPLETE
   -> GDS-13 monetization/commercial fairness — COMPLETE
   -> GDS-14 presentation/UI/UX/feedback/accessibility — COMPLETE
   -> GDS-15 Roblox platform/social safety/moderation — COMPLETE
-  -> GDS-16 retention/discovery/analytics/experimentation — NEXT
-  -> GDS-17 cross-system audit
+  -> GDS-16 retention/discovery/analytics/experimentation — COMPLETE
+  -> GDS-17 cross-system audit — NEXT
   -> DESIGN COMPLETE
   -> Technical Architecture
   -> Architecture audit + implementation locking
