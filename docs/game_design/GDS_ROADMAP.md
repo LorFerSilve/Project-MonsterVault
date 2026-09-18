@@ -453,19 +453,50 @@ GDS-14 establishes the presentation/accessibility contract consumed by platform 
 
 ## GDS-15 — Roblox Platform, Social Safety, and Moderation Constraints
 
-**Status:** NEXT — Draft
+**Status:** Complete — PASS
 
-Defines player-facing consequences of Roblox platform constraints, age-appropriate social mechanics, naming/text exposure, reporting/blocking expectations, UGC/content boundaries, randomized/paid probability/economy requirements where applicable, and safety constraints for multiplayer/commercial interactions.
+Established and formally validated:
+
+- Roblox-authoritative per-user Platform Eligibility for policy-gated features;
+- no hard-coded mutable age/country policy logic;
+- core onboarding/capture/Vault/world/events/trading independent of unrestricted chat/voice;
+- supported Roblox chat as the only baseline freeform chat integration boundary;
+- no baseline public freeform creature/Vault/Party names, signs, bios or trade notes;
+- future user-visible freeform text requires successful Roblox filtering and fails closed;
+- structured Social Pings as the baseline low-risk coordination layer;
+- Party/trade/contact restrictions that cannot bypass platform communication safety;
+- Roblox report capability remaining accessible and contextual report affordances allowed;
+- blocking/restriction suppressing new directed interaction where applicable without changing finalized value;
+- experience-level social restrictions/kick/ban that do not silently confiscate legitimate secured collection/economy/provenance;
+- no unnecessary personal-information solicitation or off-platform contact/payment requirement;
+- broad Minimal-to-Mild Content Maturity Target with revalidation for higher-maturity proposals;
+- no playable value-bearing gambling/wagering;
+- no baseline paid-random item system, including indirect premium-currency workarounds;
+- commercial entitlements remaining outside GDS-12 trading, avoiding baseline paid-item-trading complexity;
+- platform policy treated as a moving external dependency with mandatory pre-launch/current-policy revalidation;
+- dated official Roblox platform-policy snapshot recorded for closure evidence;
+- 170 compound platform/safety/moderation scenarios validated.
+
+Closure evidence:
+
+- [platform_safety/15_roblox_platform_social_safety_and_moderation_constraints.md](platform_safety/15_roblox_platform_social_safety_and_moderation_constraints.md) — Design Complete;
+- [GDS15_ROBLOX_PLATFORM_POLICY_SNAPSHOT.md](GDS15_ROBLOX_PLATFORM_POLICY_SNAPSHOT.md) — policy snapshot dated 2026-09-18;
+- [GDS15_SCENARIO_VALIDATION.md](GDS15_SCENARIO_VALIDATION.md) — 170 / 170 PASS;
+- [GDS15_CROSS_VALIDATION.md](GDS15_CROSS_VALIDATION.md) — PASS;
+- [GDS15_DECISION_INDEX.md](GDS15_DECISION_INDEX.md) — accepted phase-local decisions;
+- [GDS15_CLOSURE_REPORT.md](GDS15_CLOSURE_REPORT.md) — PASS.
+
+GDS-15 establishes the platform/social-safety contract consumed by retention/analytics, GDS-17 and Technical Architecture. It does not authorize Technical Architecture or implementation.
 
 ## GDS-16 — Retention, Discovery, Analytics, and Experimentation Boundaries
 
-**Status:** Draft
+**Status:** NEXT — Draft
 
 Defines first-session funnel, session goals, return loops, daily/weekly engagement philosophy, social invitation loops, discovery/Vault/variant progression promises, economy/source-sink hypotheses, catch-up/reward cadence governance, experimentable parameters, and guardrails preventing metric optimization from overriding player experience, fairness, ownership, scarcity, or value integrity.
 
 ## GDS-17 — Cross-System Consistency and Design-Complete Audit
 
-**Status:** Blocked by GDS-15 through GDS-16
+**Status:** Blocked by GDS-16
 
 Performs the formal pre-architecture audit:
 
@@ -486,9 +517,9 @@ Performs the formal pre-architecture audit:
 
 ## Current Project Gate
 
-GDS-0 through GDS-14 are formally complete. The active dependency is:
+GDS-0 through GDS-15 are formally complete. The active dependency is:
 
-> **GDS-15 — Roblox Platform, Social Safety, and Moderation Constraints**
+> **GDS-16 — Retention, Discovery, Analytics, and Experimentation Boundaries**
 
 Technical Architecture must not begin until GDS-17 records a formal PASS with no implementation-critical open design questions.
 
@@ -510,8 +541,8 @@ GDS-0 governance — COMPLETE
   -> GDS-12 trading/player economy — COMPLETE
   -> GDS-13 monetization/commercial fairness — COMPLETE
   -> GDS-14 presentation/UI/UX/feedback/accessibility — COMPLETE
-  -> GDS-15 Roblox platform/social safety/moderation — NEXT
-  -> GDS-16 remaining subsystem design
+  -> GDS-15 Roblox platform/social safety/moderation — COMPLETE
+  -> GDS-16 retention/discovery/analytics/experimentation — NEXT
   -> GDS-17 cross-system audit
   -> DESIGN COMPLETE
   -> Technical Architecture
