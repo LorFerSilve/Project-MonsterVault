@@ -1,6 +1,6 @@
 # Technical Architecture Authority
 
-> **Status:** Draft / Blocked by GDS completion
+> **Status:** Draft / Active — TA-0
 > **Authority:** Project-wide technical architecture governance
 
 ## 1. Purpose
@@ -9,7 +9,7 @@ This document defines how approved MonsterVault gameplay design is translated in
 
 ## 2. Prerequisite
 
-Technical Architecture begins only after GDS-17 records a formal `Design Complete` PASS with no implementation-critical open design questions.
+GDS-17 has recorded a formal `Design Complete` PASS with no implementation-critical open design questions. The prerequisite is satisfied and Technical Architecture may proceed beginning with TA-0.
 
 ## 3. Authority Boundary
 
