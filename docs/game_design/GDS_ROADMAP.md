@@ -1,6 +1,6 @@
 # Game Design Specification Roadmap
 
-> **Status:** Active  
+> **Status:** Complete — Game Design Specification Design Complete  
 > **Authority:** Dependency-driven game-design sequencing
 
 This roadmap defines the order in which MonsterVault's authoritative Game Design Specification is developed. Later phases may depend on earlier rules, so phases are completed in dependency order rather than by convenience.
