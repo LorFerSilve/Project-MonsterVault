@@ -1,9 +1,9 @@
 # MonsterVault Technical Architecture
 
-> **Status:** Blocked by Game Design Specification
+> **Status:** Active — TA-0 Next
 > **Authority:** Technical implementation contracts after GDS completion
 
-This directory will contain MonsterVault's authoritative Technical Architecture (TA).
+This directory contains the Technical Architecture layer that now becomes active after the GDS-17 Design Complete PASS.
 
 The TA is deliberately not allowed to redefine gameplay. It translates the approved Game Design Specification into concrete Roblox/Luau architecture, ownership, networking, persistence, security, performance, testing and delivery contracts.
 
@@ -14,8 +14,12 @@ The TA is deliberately not allowed to redefine gameplay. It translates the appro
 - [`ARCHITECTURE_DECISIONS.md`](ARCHITECTURE_DECISIONS.md) will record accepted architecture decisions and rationale.
 - `audit/` will contain the final architecture integration/readiness evidence.
 
-## Current Rule
+## Current Gate
 
-No Technical Architecture phase may be promoted while GDS-17 has not recorded a formal Design Complete PASS.
+GDS-17 has recorded a formal **Design Complete — PASS** with zero implementation-critical design questions.
 
-Early notes about Roblox services, Rojo, Luau tooling, persistence libraries or module patterns are hypotheses only until their owning TA phase is active.
+The active dependency is:
+
+> **TA-0 — Architecture Governance, Constraints, and GDS Traceability**
+
+Early notes about Roblox services, Rojo, Luau tooling, persistence libraries or module patterns remain hypotheses until their owning TA phase is formally closed. Gameplay implementation remains blocked until TA-17.

@@ -4,7 +4,7 @@
 
 ## Project Status
 
-**Pre-implementation specification — GDS-0 through GDS-16 complete / GDS-17 audit next.**
+**Game Design Specification — DESIGN COMPLETE / Technical Architecture TA-0 next.**
 
 MonsterVault is intentionally **not in gameplay implementation yet**. The project follows a specification-first workflow:
 
@@ -38,11 +38,12 @@ No gameplay system should be implemented merely because an idea appears promisin
 - **GDS-14 — Presentation, UI/UX, Feedback, and Accessibility: COMPLETE — PASS**
 - **GDS-15 — Roblox Platform, Social Safety, and Moderation Constraints: COMPLETE — PASS**
 - **GDS-16 — Retention, Discovery, Analytics, and Experimentation Boundaries: COMPLETE — PASS**
-- **GDS-17 — Cross-System Consistency and Design-Complete Audit: NEXT**
-- Technical Architecture: blocked by GDS-17
-- Gameplay implementation: blocked by GDS and TA gates
+- **GDS-17 — Cross-System Consistency and Design-Complete Audit: COMPLETE — PASS**
+- **GAME DESIGN SPECIFICATION: DESIGN COMPLETE**
+- **TA-0 — Architecture Governance, Constraints, and GDS Traceability: NEXT**
+- Gameplay implementation: blocked by TA and implementation-lock gates
 
-GDS-16 closure evidence is recorded in [`GDS16_SCENARIO_VALIDATION.md`](docs/game_design/GDS16_SCENARIO_VALIDATION.md), [`GDS16_CROSS_VALIDATION.md`](docs/game_design/GDS16_CROSS_VALIDATION.md), [`GDS16_DECISION_INDEX.md`](docs/game_design/GDS16_DECISION_INDEX.md), and [`GDS16_CLOSURE_REPORT.md`](docs/game_design/GDS16_CLOSURE_REPORT.md).
+GDS-17 final evidence is recorded in [`17_cross_system_consistency_and_design_complete_audit.md`](docs/game_design/audit/17_cross_system_consistency_and_design_complete_audit.md), [`GDS17_AUTHORITY_NAMESPACE_AUDIT.md`](docs/game_design/GDS17_AUTHORITY_NAMESPACE_AUDIT.md), [`GDS17_MATURITY_OPEN_QUESTION_AUDIT.md`](docs/game_design/GDS17_MATURITY_OPEN_QUESTION_AUDIT.md), [`GDS17_COMPOUND_SCENARIO_VALIDATION.md`](docs/game_design/GDS17_COMPOUND_SCENARIO_VALIDATION.md), [`GDS17_DECISION_INDEX.md`](docs/game_design/GDS17_DECISION_INDEX.md), and [`GDS17_CLOSURE_REPORT.md`](docs/game_design/GDS17_CLOSURE_REPORT.md).
 
 ## Product Contract
 
@@ -392,7 +393,7 @@ Choose or notice a desirable goal
   -> repeat
 ```
 
-All ordinary subsystem design phases GDS-0 through GDS-16 are now complete. The final design dependency is GDS-17 cross-system consistency and Design-Complete audit; Technical Architecture remains blocked until that audit passes.
+GDS-17 has passed the final cross-system audit. The complete Game Design Specification is **Design Complete** with zero implementation-critical open design questions. Technical Architecture is now open at TA-0; gameplay implementation remains blocked.
 
 ## Documentation Authority
 
@@ -424,16 +425,18 @@ Key documents include:
 - [`presentation/`](docs/game_design/presentation/) — GDS-14 presentation/UI/UX/feedback/accessibility contract;
 - [`platform_safety/`](docs/game_design/platform_safety/) — GDS-15 Roblox platform/social-safety/moderation contract;
 - [`retention_analytics/`](docs/game_design/retention_analytics/) — GDS-16 retention/discovery/analytics/experimentation contract;
-- [`GDS16_SCENARIO_VALIDATION.md`](docs/game_design/GDS16_SCENARIO_VALIDATION.md) — 180 compound GDS-16 scenarios;
-- [`GDS16_CROSS_VALIDATION.md`](docs/game_design/GDS16_CROSS_VALIDATION.md) — authority/consistency audit;
-- [`GDS16_DECISION_INDEX.md`](docs/game_design/GDS16_DECISION_INDEX.md) — phase-local strategic decisions;
-- [`GDS16_CLOSURE_REPORT.md`](docs/game_design/GDS16_CLOSURE_REPORT.md) — formal GDS-16 closure evidence.
+- [`audit/17_cross_system_consistency_and_design_complete_audit.md`](docs/game_design/audit/17_cross_system_consistency_and_design_complete_audit.md) — GDS-17 final integrated audit;
+- [`GDS17_AUTHORITY_NAMESPACE_AUDIT.md`](docs/game_design/GDS17_AUTHORITY_NAMESPACE_AUDIT.md) — authority/namespace PASS;
+- [`GDS17_MATURITY_OPEN_QUESTION_AUDIT.md`](docs/game_design/GDS17_MATURITY_OPEN_QUESTION_AUDIT.md) — maturity/open-question PASS;
+- [`GDS17_COMPOUND_SCENARIO_VALIDATION.md`](docs/game_design/GDS17_COMPOUND_SCENARIO_VALIDATION.md) — 200 compound final scenarios;
+- [`GDS17_DECISION_INDEX.md`](docs/game_design/GDS17_DECISION_INDEX.md) — Design Complete promotion decisions;
+- [`GDS17_CLOSURE_REPORT.md`](docs/game_design/GDS17_CLOSURE_REPORT.md) — formal final GDS closure evidence.
 
 ### Technical Architecture
 
-[`docs/technical_architecture/`](docs/technical_architecture/) remains **blocked by GDS completion**.
+[`docs/technical_architecture/`](docs/technical_architecture/) is now **ACTIVE — TA-0 NEXT**.
 
-Technical Architecture will later translate approved GDS behavior into concrete Roblox/Luau contracts for identity, persistence, networking, runtime lifecycle, controls, creature/capture/variant/Vault/economy/world/social/event/trading/monetization/presentation/platform-safety systems, retention analytics, live operations, performance, testing and CI.
+Technical Architecture now translates the approved Design Complete GDS into concrete Roblox/Luau contracts for identity, persistence, networking, runtime lifecycle, controls, creature/capture/variant/Vault/economy/world/social/event/trading/monetization/presentation/platform-safety systems, retention analytics, live operations, performance, testing and CI.
 
 ### Implementation
 
@@ -468,11 +471,12 @@ Project-MonsterVault/
 │   │   ├── retention_analytics/
 │   │   ├── GDS_ROADMAP.md
 │   │   ├── GLOSSARY.md
-│   │   ├── GDS16_SCENARIO_VALIDATION.md
-│   │   ├── GDS16_CROSS_VALIDATION.md
-│   │   ├── GDS16_DECISION_INDEX.md
-│   │   ├── GDS16_CLOSURE_REPORT.md
-│   │   └── <remaining design domains>/
+│   │   ├── audit/
+│   │   ├── GDS17_AUTHORITY_NAMESPACE_AUDIT.md
+│   │   ├── GDS17_MATURITY_OPEN_QUESTION_AUDIT.md
+│   │   ├── GDS17_COMPOUND_SCENARIO_VALIDATION.md
+│   │   ├── GDS17_DECISION_INDEX.md
+│   │   └── GDS17_CLOSURE_REPORT.md
 │   ├── technical_architecture/
 │   ├── implementation/
 │   └── history/
@@ -486,7 +490,7 @@ The source/test/tooling directories are reserved for later implementation. Their
 
 ## Current Next Step
 
-Proceed with **GDS-17 — Cross-System Consistency and Design-Complete Audit**.
+Proceed with **TA-0 — Architecture Governance, Constraints, and GDS Traceability**.
 
 The first implementation vertical slice will be selected and locked only after the complete design and architecture dependency chain makes its requirements clear.
 

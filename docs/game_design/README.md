@@ -1,6 +1,6 @@
 # MonsterVault Game Design Specification
 
-> **Status:** GDS-0 through GDS-16 Complete / GDS-17 Next  
+> **Status:** DESIGN COMPLETE — GDS-0 through GDS-17 Complete / PASS  
 > **Authority:** Player-facing gameplay behavior
 
 This directory contains the authoritative Game Design Specification (GDS) for MonsterVault.
@@ -28,12 +28,15 @@ Completed:
 - **GDS-14 — Presentation, UI/UX, Feedback, and Accessibility: COMPLETE — PASS**
 - **GDS-15 — Roblox Platform, Social Safety, and Moderation Constraints: COMPLETE — PASS**
 - **GDS-16 — Retention, Discovery, Analytics, and Experimentation Boundaries: COMPLETE — PASS**
+- **GDS-17 — Cross-System Consistency and Design-Complete Audit: COMPLETE — PASS**
+
+> **MonsterVault Game Design Specification: DESIGN COMPLETE**
 
 The active dependency is now:
 
-> **GDS-17 — Cross-System Consistency and Design-Complete Audit**
+> **TA-0 — Architecture Governance, Constraints, and GDS Traceability**
 
-Technical Architecture and gameplay implementation remain blocked.
+Technical Architecture is open. Gameplay implementation remains blocked until the full TA and implementation-lock gates close.
 
 ## Governance
 
@@ -305,10 +308,25 @@ GDS-16 establishes:
 - ownership/safety/trading/accessibility/commercial fairness as Experiment Invariants;
 - non-destructive rollback and GDS-1 pivot-over-pressure rule.
 
-## Remaining Core Specifications
+### GDS-17 — Final cross-system audit and Design Complete promotion
 
-- `audit/` — GDS-17 final cross-system consistency/maturity audit. **GDS-17 NEXT.**
+Final evidence:
+
+- [audit/17_cross_system_consistency_and_design_complete_audit.md](audit/17_cross_system_consistency_and_design_complete_audit.md) — final integrated audit; PASS;
+- [GDS17_AUTHORITY_NAMESPACE_AUDIT.md](GDS17_AUTHORITY_NAMESPACE_AUDIT.md) — PASS;
+- [GDS17_MATURITY_OPEN_QUESTION_AUDIT.md](GDS17_MATURITY_OPEN_QUESTION_AUDIT.md) — PASS;
+- [GDS17_COMPOUND_SCENARIO_VALIDATION.md](GDS17_COMPOUND_SCENARIO_VALIDATION.md) — 200 / 200 PASS;
+- [GDS17_DECISION_INDEX.md](GDS17_DECISION_INDEX.md) — accepted promotion/handoff decisions;
+- [GDS17_CLOSURE_REPORT.md](GDS17_CLOSURE_REPORT.md) — formal closure; PASS.
+
+GDS-17 confirms zero implementation-critical design questions, zero blocking authority/namespace collisions, zero orphaned baseline mechanic families and full cross-system consistency across ownership, persistence, economy, scarcity, world, social play, events, trading, monetization, presentation, platform safety and experimentation.
+
+The Game Design Specification is now **Design Complete**.
+
+## Next Layer
+
+- [`../technical_architecture/`](../technical_architecture/) — **TA-0 NEXT**. Technical Architecture derives implementation contracts from the completed GDS.
 
 ## Rule
 
-No subsystem is implementation-ready merely because its directory/specification exists. Gameplay implementation remains blocked until the complete GDS, Technical Architecture, architecture audit, and implementation-lock gates are closed.
+The GDS is Design Complete, but gameplay implementation remains blocked until the complete Technical Architecture, TA-16 integration audit, and TA-17 implementation-lock gates are closed.

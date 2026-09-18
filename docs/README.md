@@ -1,7 +1,7 @@
 # Project MonsterVault Documentation
 
-> **Project phase:** Pre-implementation specification — GDS-17 audit next  
-> **Implementation status:** Blocked by design and architecture gates
+> **Project phase:** Technical Architecture — TA-0 next  
+> **Implementation status:** Blocked by Technical Architecture and implementation-lock gates
 
 This directory is the authoritative documentation space for Project MonsterVault.
 
@@ -43,24 +43,27 @@ Completed:
 - **GDS-14 — Presentation, UI/UX, Feedback, and Accessibility: PASS**
 - **GDS-15 — Roblox Platform, Social Safety, and Moderation Constraints: PASS**
 - **GDS-16 — Retention, Discovery, Analytics, and Experimentation Boundaries: PASS**
+- **GDS-17 — Cross-System Consistency and Design-Complete Audit: PASS**
+
+**Game Design Specification: DESIGN COMPLETE**
 
 Latest closure evidence:
 
-- [`game_design/retention_analytics/16_retention_discovery_analytics_and_experimentation_boundaries.md`](game_design/retention_analytics/16_retention_discovery_analytics_and_experimentation_boundaries.md);
-- [`game_design/GDS16_SCENARIO_VALIDATION.md`](game_design/GDS16_SCENARIO_VALIDATION.md);
-- [`game_design/GDS16_CROSS_VALIDATION.md`](game_design/GDS16_CROSS_VALIDATION.md);
-- [`game_design/GDS16_DECISION_INDEX.md`](game_design/GDS16_DECISION_INDEX.md);
-- [`game_design/GDS16_CLOSURE_REPORT.md`](game_design/GDS16_CLOSURE_REPORT.md).
+- [`game_design/audit/17_cross_system_consistency_and_design_complete_audit.md`](game_design/audit/17_cross_system_consistency_and_design_complete_audit.md);
+- [`game_design/GDS17_AUTHORITY_NAMESPACE_AUDIT.md`](game_design/GDS17_AUTHORITY_NAMESPACE_AUDIT.md);
+- [`game_design/GDS17_MATURITY_OPEN_QUESTION_AUDIT.md`](game_design/GDS17_MATURITY_OPEN_QUESTION_AUDIT.md);
+- [`game_design/GDS17_COMPOUND_SCENARIO_VALIDATION.md`](game_design/GDS17_COMPOUND_SCENARIO_VALIDATION.md);
+- [`game_design/GDS17_DECISION_INDEX.md`](game_design/GDS17_DECISION_INDEX.md);
+- [`game_design/GDS17_CLOSURE_REPORT.md`](game_design/GDS17_CLOSURE_REPORT.md).
 
 The active dependency is:
 
-> **GDS-17 — Cross-System Consistency and Design-Complete Audit**
+> **TA-0 — Architecture Governance, Constraints, and GDS Traceability**
 
 No gameplay implementation should begin until:
 
-- GDS-17 records a formal cross-system `Design Complete` PASS;
-- the complete Technical Architecture reaches `Architecture Complete`;
-- architecture integration validation passes;
-- the final implementation roadmap/contract-locking phase explicitly opens implementation.
+- TA-0 through TA-15 reach `Architecture Complete`;
+- TA-16 records a formal architecture-integration/readiness PASS;
+- TA-17 locks the implementation roadmap, vertical slice and implementation contracts.
 
 Scaffolding used only to inspect/document external tooling does not itself open gameplay implementation.
