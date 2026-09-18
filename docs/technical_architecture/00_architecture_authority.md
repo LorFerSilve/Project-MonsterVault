@@ -90,4 +90,4 @@ Closure evidence:
 - [`TA0_DECISION_INDEX.md`](TA0_DECISION_INDEX.md) — accepted;
 - [`TA0_CLOSURE_REPORT.md`](TA0_CLOSURE_REPORT.md) — PASS.
 
-TA-0 through TA-5 are **Architecture Complete — PASS**. The active dependency is TA-6. Gameplay implementation remains blocked until TA-17.
+TA-0 through TA-6 are **Architecture Complete — PASS**. The active dependency is TA-7. Gameplay implementation remains blocked until TA-17.
