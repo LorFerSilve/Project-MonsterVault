@@ -411,13 +411,49 @@ GDS-13 establishes the commercial contract consumed by presentation, platform sa
 
 ## GDS-14 — Presentation, UI/UX, Feedback, and Accessibility
 
-**Status:** NEXT — Draft
+**Status:** Complete — PASS
 
-Defines information hierarchy, HUD/menus, collection/Vault/economy presentation, Energy/cost/gate/transaction feedback, rarity/mutation/trait/availability feedback, event/capture feedback, mobile/controller/keyboard expectations, audio/visual language, reduced-motion/readability needs, onboarding presentation, and accessibility requirements.
+Established and formally validated:
+
+- global presentation priority: safety/trust -> committed state -> time-sensitive -> immediate interaction -> progression -> social/commercial;
+- sparse context-driven HUD and critical-state dominance;
+- semantic Context Prompts with current-device input glyphs;
+- one consequential Modal Screen owning focus at a time;
+- deterministic Back/Close behavior and safe focus restoration;
+- confirmation severity model for routine, consequential and destructive actions;
+- exact-instance collection/Release/production/trade readability even with grouped duplicates;
+- explicit Overflow-Held ownership/restriction and Creature Lock presentation;
+- redundant Rarity labels and separate Mutation/Trait/Availability/provenance/commercial-cosmetic dimensions;
+- distinct public claim -> Capture Attempt -> Provisional Capture/Transport Custody -> Secured Ownership feedback;
+- separate Collection/Display/Production/Buffer/Offline capacity concepts;
+- Energy/cost/Progression Gate feedback showing every unmet condition;
+- Region Mastery/travel/hazard/Recovery presentation;
+- event phase/timer/contribution/personal eligibility/single-vs-multi-award/Resolution Grace presentation;
+- Party/Social Ping/Friendly Challenge/read-only Visitor presentation;
+- Trade Revision reset visibility, immutable final review and high-value exact-instance review;
+- truthful commercial product/purchase Pending/success/failure presentation with critical-state suppression;
+- prioritized notification queueing and actionable error reasons;
+- no critical color-only or audio-only meaning;
+- Reduced Motion, readability/contrast, non-audio equivalents and relevant volume/control settings;
+- touch/keyboard/gamepad semantic parity with no core hover-only, drag-only or precision-pointer-only path;
+- onboarding show -> do -> confirm presentation and no store-first flow;
+- reconnect/load/reconciliation presentation bound to authoritative state;
+- localization/text-expansion obligations;
+- 160 compound presentation/UI/accessibility/lifecycle scenarios validated.
+
+Closure evidence:
+
+- [presentation/14_presentation_ui_ux_feedback_and_accessibility.md](presentation/14_presentation_ui_ux_feedback_and_accessibility.md) — Design Complete;
+- [GDS14_SCENARIO_VALIDATION.md](GDS14_SCENARIO_VALIDATION.md) — 160 / 160 PASS;
+- [GDS14_CROSS_VALIDATION.md](GDS14_CROSS_VALIDATION.md) — PASS;
+- [GDS14_DECISION_INDEX.md](GDS14_DECISION_INDEX.md) — accepted phase-local decisions;
+- [GDS14_CLOSURE_REPORT.md](GDS14_CLOSURE_REPORT.md) — PASS.
+
+GDS-14 establishes the presentation/accessibility contract consumed by platform safety, retention/analytics and Technical Architecture. It does not authorize Technical Architecture or implementation.
 
 ## GDS-15 — Roblox Platform, Social Safety, and Moderation Constraints
 
-**Status:** Draft
+**Status:** NEXT — Draft
 
 Defines player-facing consequences of Roblox platform constraints, age-appropriate social mechanics, naming/text exposure, reporting/blocking expectations, UGC/content boundaries, randomized/paid probability/economy requirements where applicable, and safety constraints for multiplayer/commercial interactions.
 
@@ -429,7 +465,7 @@ Defines first-session funnel, session goals, return loops, daily/weekly engageme
 
 ## GDS-17 — Cross-System Consistency and Design-Complete Audit
 
-**Status:** Blocked by GDS-14 through GDS-16
+**Status:** Blocked by GDS-15 through GDS-16
 
 Performs the formal pre-architecture audit:
 
@@ -450,9 +486,9 @@ Performs the formal pre-architecture audit:
 
 ## Current Project Gate
 
-GDS-0 through GDS-13 are formally complete. The active dependency is:
+GDS-0 through GDS-14 are formally complete. The active dependency is:
 
-> **GDS-14 — Presentation, UI/UX, Feedback, and Accessibility**
+> **GDS-15 — Roblox Platform, Social Safety, and Moderation Constraints**
 
 Technical Architecture must not begin until GDS-17 records a formal PASS with no implementation-critical open design questions.
 
@@ -473,8 +509,9 @@ GDS-0 governance — COMPLETE
   -> GDS-11 server events/dynamic encounters/live content — COMPLETE
   -> GDS-12 trading/player economy — COMPLETE
   -> GDS-13 monetization/commercial fairness — COMPLETE
-  -> GDS-14 presentation/UI/UX/feedback/accessibility — NEXT
-  -> GDS-15..16 remaining subsystem design
+  -> GDS-14 presentation/UI/UX/feedback/accessibility — COMPLETE
+  -> GDS-15 Roblox platform/social safety/moderation — NEXT
+  -> GDS-16 remaining subsystem design
   -> GDS-17 cross-system audit
   -> DESIGN COMPLETE
   -> Technical Architecture
