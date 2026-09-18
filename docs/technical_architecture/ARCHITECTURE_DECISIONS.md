@@ -1,6 +1,6 @@
 # Architecture Decisions
 
-> **Status:** Active — TA-0..3 Complete / TA-4 Next
+> **Status:** Active — TA-0..4 Complete / TA-5 Next
 > **Authority:** Accepted technical architecture decisions and rationale
 
 This log records material architecture decisions. GDS-17 has formally promoted the Game Design Specification to Design Complete, so architecture decision-making may now begin under TA-0.
@@ -489,3 +489,184 @@ TA-3 is Architecture Complete — PASS with 140/140 scenarios passing and zero b
 ### Consequence
 
 TA-4 becomes NEXT. Gameplay implementation remains blocked until TA-17.
+
+
+---
+
+## AD-028 — Standard DataStore Player Profile Aggregate Is Durable Player Authority
+
+**Date:** 2026-09-18  
+**Status:** Accepted  
+**Owning TA phase:** TA-4
+
+### Decision
+
+MonsterVault uses one standard DataStore Player Profile aggregate per user at baseline.
+
+Related player-local persistent state stays together while safely within measured size/throughput budgets.
+
+### Consequence
+
+Single-player transactions can remain coherent under one aggregate UpdateAsync, and premature sharding is avoided.
+
+---
+
+## AD-029 — Writable Player Sessions Use an Atomic DataStore Metadata Lease
+
+**Date:** 2026-09-18  
+**Status:** Accepted  
+**Owning TA phase:** TA-4
+
+### Decision
+
+Profile acquisition, renewal and release use UpdateAsync plus compact key metadata so at most one server owns writable player-session authority.
+
+### Consequence
+
+Fresh foreign locks are respected; stale locks may be reclaimed only after expiration. Lock loss ends write authority.
+
+---
+
+## AD-030 — Load Failure Never Becomes Writable Default Data
+
+**Date:** 2026-09-18  
+**Status:** Accepted  
+**Owning TA phase:** TA-4
+
+### Decision
+
+A DataStore failure is distinct from a genuinely missing player key.
+
+### Consequence
+
+MonsterVault never saves a default/blank profile over unknown historical player data after load failure.
+
+---
+
+## AD-031 — Persistent Mutations Use P0 / P1 / P2 Durability Classes
+
+**Date:** 2026-09-18  
+**Status:** Accepted  
+**Owning TA phase:** TA-4
+
+### Decision
+
+- P0 is session-only;
+- P1 is buffered durable;
+- P2 is durable-before-final-ack.
+
+GDS Finalized Outcomes and critical player value are P2.
+
+### Consequence
+
+A critical persistent result is not presented as durably final before its checkpoint succeeds.
+
+---
+
+## AD-032 — Player Profile Writes Are UpdateAsync, Revisioned, and Serialized
+
+**Date:** 2026-09-18  
+**Status:** Accepted  
+**Owning TA phase:** TA-4
+
+### Decision
+
+All profile writes pass through one first-party persistence repository, one writer pipeline per profile key, the current session lease, and a monotonic profile revision.
+
+### Consequence
+
+Domains do not call DataStore directly and unexpected concurrency fails closed.
+
+---
+
+## AD-033 — Profile Schema Migrations Are Sequential, Pure, and Fail Closed
+
+**Date:** 2026-09-18  
+**Status:** Accepted  
+**Owning TA phase:** TA-4
+
+### Decision
+
+Profiles carry a schemaVersion. Older supported profiles migrate deterministically; newer-than-server schemas are never downgraded.
+
+### Consequence
+
+Rollback servers cannot silently corrupt data created by newer code.
+
+---
+
+## AD-034 — Server-Owned Operation IDs Provide Durable Exact-Once Identity
+
+**Date:** 2026-09-18  
+**Status:** Accepted  
+**Owning TA phase:** TA-4
+
+### Decision
+
+TA-3 client request IDs remain network correlation. Durable mutations use server-owned operation identities and bounded/dedicated dedupe records according to replay horizon.
+
+### Consequence
+
+Client-controlled IDs cannot be the sole authority for persistent value grants or transfers.
+
+---
+
+## AD-035 — Cross-Profile Atomicity Requires a Durable Transaction Journal
+
+**Date:** 2026-09-18  
+**Status:** Accepted  
+**Owning TA phase:** TA-4
+
+### Decision
+
+MonsterVault does not pretend two sequential DataStore writes are an atomic multi-player transaction.
+
+Cross-profile exact-once flows use a durable transaction record with idempotent participant application and recovery.
+
+### Consequence
+
+TA-10 must build Trade Commit on this primitive.
+
+---
+
+## AD-036 — DataStore Version History Is Operator Recovery, Not Runtime Auto-Rollback
+
+**Date:** 2026-09-18  
+**Status:** Accepted  
+**Owning TA phase:** TA-4
+
+### Decision
+
+Invalid/corrupt current player state enters protected handling. Previous DataStore versions are inspected/reverted through controlled operations rather than selected automatically by runtime code.
+
+---
+
+## AD-037 — Native First-Party Persistence Repository Is the Baseline
+
+**Date:** 2026-09-18  
+**Status:** Accepted  
+**Owning TA phase:** TA-4
+
+### Decision
+
+No third-party player-profile persistence library is adopted at baseline.
+
+### Consequence
+
+Any later ProfileStore/ProfileService-equivalent dependency requires TA-1 dependency/supply-chain review and TA-4 semantic compatibility review.
+
+---
+
+## AD-038 — Close TA-4 and Advance to TA-5
+
+**Date:** 2026-09-18  
+**Status:** Accepted  
+**Owning TA phase:** TA-4
+
+### Decision
+
+TA-4 is Architecture Complete — PASS with 180/180 scenarios and zero blocking questions.
+
+### Consequence
+
+TA-5 becomes NEXT. Gameplay implementation remains blocked until TA-17.

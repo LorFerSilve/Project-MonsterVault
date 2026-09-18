@@ -1,6 +1,6 @@
 # Project MonsterVault Documentation
 
-> **Project phase:** Technical Architecture — TA-0..3 complete / TA-4 next  
+> **Project phase:** Technical Architecture — TA-0..4 complete / TA-5 next  
 > **Implementation status:** Blocked by Technical Architecture and implementation-lock gates
 
 This directory is the authoritative documentation space for Project MonsterVault.
@@ -62,20 +62,21 @@ Technical Architecture completed:
 - **TA-1 — Roblox System Context, Toolchain, and Development Environment: Architecture Complete — PASS**
 - **TA-2 — Repository Layout, Module Boundaries, Dependency Direction, and Bootstrapping: Architecture Complete — PASS**
 - **TA-3 — Networking, Server Authority, Remote Contracts, and Exploit Boundaries: Architecture Complete — PASS**
+- **TA-4 — Player Data, Persistence, Session Ownership, Schema Evolution, and Recovery: Architecture Complete — PASS**
 
-TA-3 latest evidence:
+TA-4 latest evidence:
 
-- [`technical_architecture/networking/03_networking_server_authority_remote_contracts_and_exploit_boundaries.md`](technical_architecture/networking/03_networking_server_authority_remote_contracts_and_exploit_boundaries.md);
-- [`technical_architecture/TA3_ROBLOX_NETWORK_SECURITY_SNAPSHOT.md`](technical_architecture/TA3_ROBLOX_NETWORK_SECURITY_SNAPSHOT.md);
-- [`technical_architecture/TA3_REMOTE_CONTRACT_MATRIX.md`](technical_architecture/TA3_REMOTE_CONTRACT_MATRIX.md);
-- [`technical_architecture/TA3_GDS_TRACEABILITY.md`](technical_architecture/TA3_GDS_TRACEABILITY.md);
-- [`technical_architecture/TA3_SCENARIO_VALIDATION.md`](technical_architecture/TA3_SCENARIO_VALIDATION.md);
-- [`technical_architecture/TA3_DECISION_INDEX.md`](technical_architecture/TA3_DECISION_INDEX.md);
-- [`technical_architecture/TA3_CLOSURE_REPORT.md`](technical_architecture/TA3_CLOSURE_REPORT.md).
+- [`technical_architecture/persistence/04_player_data_persistence_session_ownership_schema_evolution_and_recovery.md`](technical_architecture/persistence/04_player_data_persistence_session_ownership_schema_evolution_and_recovery.md);
+- [`technical_architecture/TA4_ROBLOX_PERSISTENCE_SNAPSHOT.md`](technical_architecture/TA4_ROBLOX_PERSISTENCE_SNAPSHOT.md);
+- [`technical_architecture/TA4_PERSISTENCE_SESSION_MATRIX.md`](technical_architecture/TA4_PERSISTENCE_SESSION_MATRIX.md);
+- [`technical_architecture/TA4_GDS_TRACEABILITY.md`](technical_architecture/TA4_GDS_TRACEABILITY.md);
+- [`technical_architecture/TA4_SCENARIO_VALIDATION.md`](technical_architecture/TA4_SCENARIO_VALIDATION.md);
+- [`technical_architecture/TA4_DECISION_INDEX.md`](technical_architecture/TA4_DECISION_INDEX.md);
+- [`technical_architecture/TA4_CLOSURE_REPORT.md`](technical_architecture/TA4_CLOSURE_REPORT.md).
 
 The active dependency is:
 
-> **TA-4 — Player Data, Persistence, Session Ownership, Schema Evolution, and Recovery**
+> **TA-5 — Identity, Content Registries, Configuration, and Data-Driven Content**
 
 No gameplay implementation should begin until:
 
