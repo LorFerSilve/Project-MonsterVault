@@ -1,6 +1,6 @@
 # Technical Architecture Roadmap
 
-> **Status:** Active — TA-8 Next
+> **Status:** Active — TA-9 Next
 > **Authority:** Dependency-driven technical architecture sequencing
 
 This roadmap defines how the Design Complete MonsterVault GDS is translated into implementation-ready Roblox/Luau contracts.
@@ -320,13 +320,51 @@ Closure evidence:
 
 ## TA-8 — Vault, Economy, Progression, Inventory, and Offline Accrual
 
-**Status:** NEXT — Draft
+**Status:** Architecture Complete — PASS
 
-Defines authoritative currency/resource mutation, vault state, passive production, capacity, upgrades, inventory semantics, progression transactions, offline accrual computation and economic integrity controls.
+Established and formally validated:
+
+- Player Profile collection/Vault/economy authority;
+- exact CreatureInstanceId collection mapping and derived Stored/Active/Overflow-Held state;
+- bounded whole-integer Energy with a 1e12 technical ceiling;
+- fixed-point milli-Energy Production Buffer;
+- exact-integer arithmetic validation below Luau 2^53;
+- persisted Unix + monotonic live-server clock model;
+- elapsed-time production settlement instead of per-tick simulation;
+- P2 Production Assignment changes with settle-before-mutate;
+- continuous online/offline production timeline;
+- clean Offline Production Window handling;
+- bounded crash-recovery accrual for unclean sessions;
+- versioned effective-time Production Rate Epochs;
+- bounded Production Buffer and over-cap value preservation;
+- exact-once Production Claim;
+- Deferred Energy Grants for one-time wallet overflow;
+- deterministic Collection Capacity composition/reconciliation;
+- exact-instance Resolve Overflow;
+- independent Display/Production slot authority;
+- reason-coded Energy transaction primitive;
+- server-issued Progression Quotes;
+- atomic Vault Upgrade/Capture Capability/Access Unlock purchases;
+- deterministic catch-up boundary;
+- commercial capacity isolation from production capability;
+- load/server-hop/shutdown/failure semantics;
+- current Roblox/Luau time/numeric/DataStore behavior reviewed;
+- 220 / 220 TA-8 scenarios PASS;
+- zero TA-8-blocking questions.
+
+Closure evidence:
+
+- [economy/08_vault_economy_progression_inventory_and_offline_accrual.md](economy/08_vault_economy_progression_inventory_and_offline_accrual.md) — Architecture Complete;
+- [TA8_ROBLOX_ECONOMY_TIME_NUMERIC_SNAPSHOT.md](TA8_ROBLOX_ECONOMY_TIME_NUMERIC_SNAPSHOT.md) — PASS;
+- [TA8_VAULT_ECONOMY_OFFLINE_MATRIX.md](TA8_VAULT_ECONOMY_OFFLINE_MATRIX.md) — PASS;
+- [TA8_GDS_TRACEABILITY.md](TA8_GDS_TRACEABILITY.md) — PASS;
+- [TA8_SCENARIO_VALIDATION.md](TA8_SCENARIO_VALIDATION.md) — 220 / 220 PASS;
+- [TA8_DECISION_INDEX.md](TA8_DECISION_INDEX.md) — accepted;
+- [TA8_CLOSURE_REPORT.md](TA8_CLOSURE_REPORT.md) — PASS.
 
 ## TA-9 — World, Biomes, Spawn Scheduling, Streaming, and Encounter Scaling
 
-**Status:** Blocked
+**Status:** NEXT — Draft
 
 Defines place/world topology, biome representation, spawn scheduling, spatial partitioning, StreamingEnabled implications, server performance envelopes, rare encounter authority and world-content scalability.
 
@@ -406,10 +444,10 @@ GDS-17 PASS / Design Complete
 
 GDS-17 is **Complete — PASS** and the Game Design Specification is **Design Complete**.
 
-TA-0 through TA-7 are **Architecture Complete — PASS**.
+TA-0 through TA-8 are **Architecture Complete — PASS**.
 
 The active dependency is:
 
-> **TA-8 — Vault, Economy, Progression, Inventory, and Offline Accrual**
+> **TA-9 — World, Biomes, Spawn Scheduling, Streaming, and Encounter Scaling**
 
-TA-9 through TA-17 remain blocked by dependency order. Gameplay implementation remains blocked until TA-17 is formally complete.
+TA-10 through TA-17 remain blocked by dependency order. Gameplay implementation remains blocked until TA-17 is formally complete.
