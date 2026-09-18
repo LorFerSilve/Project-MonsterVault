@@ -1,6 +1,6 @@
 # Technical Architecture Roadmap
 
-> **Status:** Active — TA-3 Next
+> **Status:** Active — TA-4 Next
 > **Authority:** Dependency-driven technical architecture sequencing
 
 This roadmap defines how the Design Complete MonsterVault GDS is translated into implementation-ready Roblox/Luau contracts.
@@ -110,13 +110,46 @@ Closure evidence:
 
 ## TA-3 — Networking, Server Authority, Remote Contracts, and Exploit Boundaries
 
-**Status:** NEXT — Draft
+**Status:** Architecture Complete — PASS
 
-Defines RemoteEvent/RemoteFunction ownership, request/response/event contracts, validation, rate limiting, replay/idempotency strategy, trust boundaries, client prediction/presentation boundaries and exploit-resistant state mutation.
+Established and formally validated:
+
+- centrally governed versioned Remote registry;
+- reliable client-to-server Command and server-to-client Event transports;
+- optional server-to-client UnreliableEvent restricted to loss-tolerant presentation;
+- no baseline RemoteFunction and no server InvokeClient correctness path;
+- protocol/envelope and request/result correlation contracts;
+- server-authoritative command pipeline;
+- exact bounded client payload schemas;
+- static route registration and direction ownership;
+- hierarchical global/per-route rate limiting;
+- request replay/duplicate and retry semantics;
+- client timeout as unknown/reconcile rather than assumed failure;
+- server-owned durable operation identity boundary;
+- authoritative snapshots/projections and session handshake;
+- audience-scoped server-to-client delivery;
+- server-gated cross-player relay;
+- client physics/network-ownership distrust for critical actions;
+- ProximityPrompt/ClickDetector/DragDetector validation boundary;
+- reversible presentation-only client prediction;
+- structured exploit/error/observability/privacy rules;
+- current Roblox networking/security guidance reviewed;
+- 140 / 140 TA-3 scenarios PASS;
+- zero TA-3-blocking questions.
+
+Closure evidence:
+
+- [networking/03_networking_server_authority_remote_contracts_and_exploit_boundaries.md](networking/03_networking_server_authority_remote_contracts_and_exploit_boundaries.md) — Architecture Complete;
+- [TA3_ROBLOX_NETWORK_SECURITY_SNAPSHOT.md](TA3_ROBLOX_NETWORK_SECURITY_SNAPSHOT.md) — PASS;
+- [TA3_REMOTE_CONTRACT_MATRIX.md](TA3_REMOTE_CONTRACT_MATRIX.md) — PASS;
+- [TA3_GDS_TRACEABILITY.md](TA3_GDS_TRACEABILITY.md) — PASS;
+- [TA3_SCENARIO_VALIDATION.md](TA3_SCENARIO_VALIDATION.md) — 140 / 140 PASS;
+- [TA3_DECISION_INDEX.md](TA3_DECISION_INDEX.md) — accepted;
+- [TA3_CLOSURE_REPORT.md](TA3_CLOSURE_REPORT.md) — PASS.
 
 ## TA-4 — Player Data, Persistence, Session Ownership, Schema Evolution, and Recovery
 
-**Status:** Blocked
+**Status:** NEXT — Draft
 
 Defines player profile model, DataStore strategy, session locking/ownership, autosave/shutdown behavior, retries, versioned schemas, migrations, corruption/recovery policy, offline progression inputs and observability.
 
@@ -226,10 +259,10 @@ GDS-17 PASS / Design Complete
 
 GDS-17 is **Complete — PASS** and the Game Design Specification is **Design Complete**.
 
-TA-0 through TA-2 are **Architecture Complete — PASS**.
+TA-0 through TA-3 are **Architecture Complete — PASS**.
 
 The active dependency is:
 
-> **TA-3 — Networking, Server Authority, Remote Contracts, and Exploit Boundaries**
+> **TA-4 — Player Data, Persistence, Session Ownership, Schema Evolution, and Recovery**
 
-TA-4 through TA-17 remain blocked by dependency order. Gameplay implementation remains blocked until TA-17 is formally complete.
+TA-5 through TA-17 remain blocked by dependency order. Gameplay implementation remains blocked until TA-17 is formally complete.
