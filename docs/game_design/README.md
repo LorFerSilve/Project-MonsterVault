@@ -1,6 +1,6 @@
 # MonsterVault Game Design Specification
 
-> **Status:** GDS-0 through GDS-13 Complete / GDS-14 Next  
+> **Status:** GDS-0 through GDS-14 Complete / GDS-15 Next  
 > **Authority:** Player-facing gameplay behavior
 
 This directory contains the authoritative Game Design Specification (GDS) for MonsterVault.
@@ -25,10 +25,11 @@ Completed:
 - **GDS-11 — Server Events, Dynamic Encounters, and Live Content: COMPLETE — PASS**
 - **GDS-12 — Trading and Player Economy: COMPLETE — PASS**
 - **GDS-13 — Monetization and Commercial Fairness: COMPLETE — PASS**
+- **GDS-14 — Presentation, UI/UX, Feedback, and Accessibility: COMPLETE — PASS**
 
 The active dependency is now:
 
-> **GDS-14 — Presentation, UI/UX, Feedback, and Accessibility**
+> **GDS-15 — Roblox Platform, Social Safety, and Moderation Constraints**
 
 Technical Architecture and gameplay implementation remain blocked.
 
@@ -218,10 +219,41 @@ GDS-13 establishes:
 - exact-once Commercial Finalization and safe entitlement reconciliation;
 - explicit non-premium viability across collection, progression, events and trading.
 
+### GDS-14 — Presentation, UI/UX, feedback and accessibility
+
+Authoritative specification and closure evidence:
+
+- [presentation/14_presentation_ui_ux_feedback_and_accessibility.md](presentation/14_presentation_ui_ux_feedback_and_accessibility.md) — Design Complete;
+- [GDS14_SCENARIO_VALIDATION.md](GDS14_SCENARIO_VALIDATION.md) — 160 compound UI/accessibility scenarios; PASS;
+- [GDS14_CROSS_VALIDATION.md](GDS14_CROSS_VALIDATION.md) — GDS-1 through GDS-13 and authority audit; PASS;
+- [GDS14_DECISION_INDEX.md](GDS14_DECISION_INDEX.md) — phase-local strategic decisions;
+- [GDS14_CLOSURE_REPORT.md](GDS14_CLOSURE_REPORT.md) — formal closure; PASS.
+
+GDS-14 establishes:
+
+- a global state/notification priority hierarchy;
+- sparse context-sensitive HUD behavior and committed-state focus protection;
+- deterministic modal focus, Back/Close and focus restoration;
+- semantic action prompts and dynamic input glyphs;
+- explicit confirmation severity for consequential/high-value actions;
+- exact-instance collection/production/trade presentation;
+- separate Rarity/Mutation/Trait/Availability/provenance/commercial dimensions;
+- clear claim -> capture -> custody -> secure feedback;
+- separate capacity/production/economy concepts and actionable Progression Gate feedback;
+- world/mastery/travel/hazard/Recovery presentation;
+- event phase/contribution/allocation/Resolution Grace clarity;
+- Party/Social Ping/challenge/visitor presentation;
+- immutable trade final review with revision-bound consent;
+- truthful commercial purchase Pending/success/failure presentation;
+- prioritized notifications and actionable rejection messages;
+- non-color-only/non-audio-only critical meaning;
+- Reduced Motion/readability/contrast/audio-control accessibility;
+- touch/keyboard/gamepad semantic parity without hover-only, drag-only or precision-pointer-only core flows;
+- gameplay-first onboarding and authoritative reconnect/reconciliation presentation.
+
 ## Remaining Core Specifications
 
-- `presentation/` — GDS-14 UI/UX, Energy/gate/transaction/Vault/capture/rarity/event/world feedback, visual/audio language, accessibility and onboarding presentation. **GDS-14 NEXT.**
-- `platform_safety/` — Roblox platform constraints, commercial/randomized constraints, social safety and age-appropriate interaction design.
+- `platform_safety/` — GDS-15 Roblox platform constraints, commercial/randomized constraints, social safety and age-appropriate interaction design. **GDS-15 NEXT.**
 - `retention_analytics/` — retention loops, acquisition/Vault/variant/economy/world funnels, session goals, catch-up/reward cadence, metrics hypotheses and experiment boundaries.
 - `audit/` — final GDS-17 cross-system consistency/maturity audits.
 
