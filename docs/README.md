@@ -1,6 +1,6 @@
 # Project MonsterVault Documentation
 
-> **Project phase:** Technical Architecture — TA-0..2 complete / TA-3 next  
+> **Project phase:** Technical Architecture — TA-0..3 complete / TA-4 next  
 > **Implementation status:** Blocked by Technical Architecture and implementation-lock gates
 
 This directory is the authoritative documentation space for Project MonsterVault.
@@ -61,19 +61,21 @@ Technical Architecture completed:
 - **TA-0 — Architecture Governance, Constraints, and GDS Traceability: Architecture Complete — PASS**
 - **TA-1 — Roblox System Context, Toolchain, and Development Environment: Architecture Complete — PASS**
 - **TA-2 — Repository Layout, Module Boundaries, Dependency Direction, and Bootstrapping: Architecture Complete — PASS**
+- **TA-3 — Networking, Server Authority, Remote Contracts, and Exploit Boundaries: Architecture Complete — PASS**
 
-TA-2 latest evidence:
+TA-3 latest evidence:
 
-- [`technical_architecture/structure/02_repository_layout_module_boundaries_dependency_direction_and_bootstrapping.md`](technical_architecture/structure/02_repository_layout_module_boundaries_dependency_direction_and_bootstrapping.md);
-- [`technical_architecture/TA2_DEPENDENCY_OWNERSHIP_MATRIX.md`](technical_architecture/TA2_DEPENDENCY_OWNERSHIP_MATRIX.md);
-- [`technical_architecture/TA2_GDS_TRACEABILITY.md`](technical_architecture/TA2_GDS_TRACEABILITY.md);
-- [`technical_architecture/TA2_SCENARIO_VALIDATION.md`](technical_architecture/TA2_SCENARIO_VALIDATION.md);
-- [`technical_architecture/TA2_DECISION_INDEX.md`](technical_architecture/TA2_DECISION_INDEX.md);
-- [`technical_architecture/TA2_CLOSURE_REPORT.md`](technical_architecture/TA2_CLOSURE_REPORT.md).
+- [`technical_architecture/networking/03_networking_server_authority_remote_contracts_and_exploit_boundaries.md`](technical_architecture/networking/03_networking_server_authority_remote_contracts_and_exploit_boundaries.md);
+- [`technical_architecture/TA3_ROBLOX_NETWORK_SECURITY_SNAPSHOT.md`](technical_architecture/TA3_ROBLOX_NETWORK_SECURITY_SNAPSHOT.md);
+- [`technical_architecture/TA3_REMOTE_CONTRACT_MATRIX.md`](technical_architecture/TA3_REMOTE_CONTRACT_MATRIX.md);
+- [`technical_architecture/TA3_GDS_TRACEABILITY.md`](technical_architecture/TA3_GDS_TRACEABILITY.md);
+- [`technical_architecture/TA3_SCENARIO_VALIDATION.md`](technical_architecture/TA3_SCENARIO_VALIDATION.md);
+- [`technical_architecture/TA3_DECISION_INDEX.md`](technical_architecture/TA3_DECISION_INDEX.md);
+- [`technical_architecture/TA3_CLOSURE_REPORT.md`](technical_architecture/TA3_CLOSURE_REPORT.md).
 
 The active dependency is:
 
-> **TA-3 — Networking, Server Authority, Remote Contracts, and Exploit Boundaries**
+> **TA-4 — Player Data, Persistence, Session Ownership, Schema Evolution, and Recovery**
 
 No gameplay implementation should begin until:
 
