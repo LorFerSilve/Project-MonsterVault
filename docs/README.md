@@ -1,6 +1,6 @@
 # Project MonsterVault Documentation
 
-> **Project phase:** Technical Architecture — TA-0 next  
+> **Project phase:** Technical Architecture — TA-0 complete / TA-1 next  
 > **Implementation status:** Blocked by Technical Architecture and implementation-lock gates
 
 This directory is the authoritative documentation space for Project MonsterVault.
@@ -56,9 +56,22 @@ Latest closure evidence:
 - [`game_design/GDS17_DECISION_INDEX.md`](game_design/GDS17_DECISION_INDEX.md);
 - [`game_design/GDS17_CLOSURE_REPORT.md`](game_design/GDS17_CLOSURE_REPORT.md).
 
+Technical Architecture completed:
+
+- **TA-0 — Architecture Governance, Constraints, and GDS Traceability: Architecture Complete — PASS**
+
+TA-0 evidence:
+
+- [`technical_architecture/governance/00_architecture_governance_constraints_and_gds_traceability.md`](technical_architecture/governance/00_architecture_governance_constraints_and_gds_traceability.md);
+- [`technical_architecture/TA0_GDS_TRACEABILITY_MATRIX.md`](technical_architecture/TA0_GDS_TRACEABILITY_MATRIX.md);
+- [`technical_architecture/TA0_ARCHITECTURE_RISK_REGISTER.md`](technical_architecture/TA0_ARCHITECTURE_RISK_REGISTER.md);
+- [`technical_architecture/TA0_SCENARIO_VALIDATION.md`](technical_architecture/TA0_SCENARIO_VALIDATION.md);
+- [`technical_architecture/TA0_DECISION_INDEX.md`](technical_architecture/TA0_DECISION_INDEX.md);
+- [`technical_architecture/TA0_CLOSURE_REPORT.md`](technical_architecture/TA0_CLOSURE_REPORT.md).
+
 The active dependency is:
 
-> **TA-0 — Architecture Governance, Constraints, and GDS Traceability**
+> **TA-1 — Roblox System Context, Toolchain, and Development Environment**
 
 No gameplay implementation should begin until:
 
