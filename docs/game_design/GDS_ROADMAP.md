@@ -338,13 +338,45 @@ GDS-11 establishes the live-event/content contract consumed by trading, monetiza
 
 ## GDS-12 — Trading and Player Economy
 
-**Status:** NEXT — Draft
+**Status:** Complete — PASS
 
-Defines trade eligibility, offer/accept flow, secured-instance ownership transfer, Production Assignment reconciliation, preservation of Mutation/Trait/Variant/provenance identity, value/scarcity philosophy, trade restrictions/cooldowns/rollback expectations, alternate-account abuse, safe UX, and whether Energy ever becomes transferable. Baseline direct Energy transfer remains prohibited until this phase explicitly changes it.
+Established and formally validated:
+
+- non-paid Trade Access after onboarding + Starter Region Mastery;
+- direct same-server bilateral creature-for-creature barter;
+- both sides required to offer at least one eligible Creature Instance;
+- Energy remains explicitly non-transferable;
+- no baseline creature-for-Energy trade, gifting, trade fee, auction, marketplace, offline listing or asynchronous escrow;
+- exact-instance Trade Offers with bounded offer size;
+- Creature Lock blocking transfer and Protected Variant re-lock on receipt;
+- Production Assignment / active-role eligibility rules;
+- display/showcase reconciliation and Overflow-Held sender eligibility;
+- recipient capacity evaluated on the complete net atomic exchange with no new receiver overflow;
+- Trade Reservation preventing conflicting ownership/destructive actions;
+- Trade Revision invalidating all prior Ready/Final Confirmation state after any semantic offer change;
+- independent Trade Ready plus independent Final Trade Confirmation for the same immutable revision;
+- authoritative all-or-nothing exact-once Trade Commit;
+- stable Species/Mutation/Trait/Variant identity and immutable original provenance;
+- append-only Trade History rather than origin rewriting;
+- trade-acquired collection Discovery without fabricating source-bound active progression/Event Completion;
+- persistent wall-clock Trade Cooldown and explicit Tradeable/Time-Locked/Account-Bound restrictions;
+- no official fair-value formula or guaranteed creature market price;
+- scam/bait-and-switch, disconnect/retry, alt-account/wash-trade and concurrency guardrails;
+- 140 compound trading/player-economy/lifecycle scenarios validated.
+
+Closure evidence:
+
+- [trading/12_trading_and_player_economy.md](trading/12_trading_and_player_economy.md) — Design Complete;
+- [GDS12_SCENARIO_VALIDATION.md](GDS12_SCENARIO_VALIDATION.md) — 140 / 140 PASS;
+- [GDS12_CROSS_VALIDATION.md](GDS12_CROSS_VALIDATION.md) — PASS;
+- [GDS12_DECISION_INDEX.md](GDS12_DECISION_INDEX.md) — accepted phase-local decisions;
+- [GDS12_CLOSURE_REPORT.md](GDS12_CLOSURE_REPORT.md) — PASS.
+
+GDS-12 establishes the ownership-transfer/player-economy contract consumed by monetization, presentation, platform safety, retention/analytics and Technical Architecture. It does not authorize Technical Architecture or implementation.
 
 ## GDS-13 — Monetization and Commercial Fairness
 
-**Status:** Draft
+**Status:** NEXT — Draft
 
 Defines monetization philosophy, game passes/developer products/subscriptions if used, cosmetics, capacity/convenience, bounded progression/production acceleration if any, Energy interaction if any, server-wide boosts, starter offers, purchase presentation, non-pay-to-win boundaries, spending-pressure limits, probability/variant constraints, and exact-once commercial outcomes.
 
@@ -368,7 +400,7 @@ Defines first-session funnel, session goals, return loops, daily/weekly engageme
 
 ## GDS-17 — Cross-System Consistency and Design-Complete Audit
 
-**Status:** Blocked by GDS-12 through GDS-16
+**Status:** Blocked by GDS-13 through GDS-16
 
 Performs the formal pre-architecture audit:
 
@@ -389,9 +421,9 @@ Performs the formal pre-architecture audit:
 
 ## Current Project Gate
 
-GDS-0 through GDS-11 are formally complete. The active dependency is:
+GDS-0 through GDS-12 are formally complete. The active dependency is:
 
-> **GDS-12 — Trading and Player Economy**
+> **GDS-13 — Monetization and Commercial Fairness**
 
 Technical Architecture must not begin until GDS-17 records a formal PASS with no implementation-critical open design questions.
 
@@ -410,8 +442,9 @@ GDS-0 governance — COMPLETE
   -> GDS-9 world/biomes/exploration/spawning/hazards — COMPLETE
   -> GDS-10 social/cooperation/competition/PvP boundaries — COMPLETE
   -> GDS-11 server events/dynamic encounters/live content — COMPLETE
-  -> GDS-12 trading/player economy — NEXT
-  -> GDS-13..16 remaining subsystem design
+  -> GDS-12 trading/player economy — COMPLETE
+  -> GDS-13 monetization/commercial fairness — NEXT
+  -> GDS-14..16 remaining subsystem design
   -> GDS-17 cross-system audit
   -> DESIGN COMPLETE
   -> Technical Architecture
