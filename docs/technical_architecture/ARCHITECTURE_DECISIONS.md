@@ -1,6 +1,6 @@
 # Architecture Decisions
 
-> **Status:** Active — TA-0..6 Complete / TA-7 Next
+> **Status:** Active — TA-0..7 Complete / TA-8 Next
 > **Authority:** Accepted technical architecture decisions and rationale
 
 This log records material architecture decisions. GDS-17 has formally promoted the Game Design Specification to Design Complete, so architecture decision-making may now begin under TA-0.
@@ -996,3 +996,156 @@ TA-6 is Architecture Complete — PASS with 190/190 scenarios and zero blocking 
 ### Consequence
 
 TA-7 becomes NEXT. Gameplay implementation remains blocked until TA-17.
+
+
+---
+
+## AD-060 — Ordinary Capture Uses a Server-Owned Per-Creature State Machine
+
+**Date:** 2026-09-18  
+**Status:** Accepted  
+**Owning TA phase:** TA-7
+
+### Decision
+
+Claim, attempt, provisional, transport and finalization transitions are serialized by CreatureInstanceId. The first currently eligible server-accepted BeginClaim transition wins.
+
+### Consequence
+
+Client timestamps, ping, party state and premium state cannot arbitrate finite ordinary claims.
+
+---
+
+## AD-061 — Variant Identity Is Generated Exactly Once Before Actionability
+
+**Date:** 2026-09-18  
+**Status:** Accepted  
+**Owning TA phase:** TA-7
+
+### Decision
+
+Species Rarity, Mutation set, Traits, Variant Signature and generation snapshot are server-finalized before a creature becomes individually actionable.
+
+### Consequence
+
+Claim/capture/reconnect/transport/finalization retries cannot reroll one surviving Creature Instance.
+
+---
+
+## AD-062 — Production Randomness Is Server-Owned Behind an Injectable RNG Contract
+
+**Date:** 2026-09-18  
+**Status:** Accepted  
+**Owning TA phase:** TA-7
+
+### Decision
+
+Production uses a server-owned first-party RNG abstraction backed by Roblox Random without client-selected seeds. Tests may inject deterministic seeded/fake generators.
+
+### Consequence
+
+Critical random outcomes remain authoritative while statistical and boundary tests are reproducible.
+
+---
+
+## AD-063 — Capture Success Creates Provisional Custody, Not Persistent Ownership
+
+**Date:** 2026-09-18  
+**Status:** Accepted  
+**Owning TA phase:** TA-7
+
+### Decision
+
+Capture Success creates one Provisional Capture and one Transport Custody holder for the existing CreatureInstanceId. No Collection ownership is written at this stage.
+
+---
+
+## AD-064 — Provisional Capture Gets One Durable Ownership Finalization Operation ID
+
+**Date:** 2026-09-18  
+**Status:** Accepted  
+**Owning TA phase:** TA-7
+
+### Decision
+
+The server generates the ownership finalization operation identity when Provisional Capture begins. Normal extraction, retry/reconciliation and protected orderly-shutdown finalization reuse that same logical operation.
+
+---
+
+## AD-065 — Secured Ownership Is an Atomic P2 Creature/Discovery/Protection Bundle
+
+**Date:** 2026-09-18  
+**Status:** Accepted  
+**Owning TA phase:** TA-7
+
+### Decision
+
+The same CreatureInstanceId, immutable Variant Identity, provenance, placement/Overflow outcome, Protected auto-lock and Species/Mutation/Variant discoveries commit before the client is told the creature is Secured.
+
+---
+
+## AD-066 — Capacity Race After Valid Acquisition Resolves to Overflow-Held
+
+**Date:** 2026-09-18  
+**Status:** Accepted  
+**Owning TA phase:** TA-7
+
+### Decision
+
+Known-full capacity blocks new ordinary capture initiation. If capacity becomes unavailable only after a valid loop was accepted, the final creature is retained via Overflow-Held rather than deleted.
+
+---
+
+## AD-067 — Transport Grace Is Same-Server, Bounded, and Non-Persistent
+
+**Date:** 2026-09-18  
+**Status:** Accepted  
+**Owning TA phase:** TA-7
+
+### Decision
+
+Unexpected/ambiguous disconnect may suspend active Transport Custody briefly for same-server resume. Grace grants no ownership, cannot cross servers, and expiry ends the provisional state.
+
+### Consequence
+
+Current coarse Roblox PlayerExitReason signaling is handled conservatively without converting ambiguous disconnect into persistent value.
+
+---
+
+## AD-068 — Controlled Shutdown Protects Only Active Valid Transport Custody
+
+**Date:** 2026-09-18  
+**Status:** Accepted  
+**Owning TA phase:** TA-7
+
+### Decision
+
+Orderly server drain can invoke the existing ownership finalization operation for active valid Transport Custody only. Idle, claimed, attempt-only, expired and disconnected-grace states are not auto-secured.
+
+---
+
+## AD-069 — Ordinary Capture Does Not Implicitly Grant Energy
+
+**Date:** 2026-09-18  
+**Status:** Accepted  
+**Owning TA phase:** TA-7
+
+### Decision
+
+The baseline capture outcome is the Secured Creature plus explicitly authorized discovery/milestone changes. Any Energy/event reward must be owned elsewhere and remain exact-once.
+
+---
+
+## AD-070 — Close TA-7 and Advance to TA-8
+
+**Date:** 2026-09-18  
+**Status:** Accepted  
+**Owning TA phase:** TA-7
+
+### Decision
+
+TA-7 is Architecture Complete — PASS with 200/200 scenarios and zero blocking questions.
+
+### Consequence
+
+TA-8 becomes NEXT. Gameplay implementation remains blocked until TA-17.
