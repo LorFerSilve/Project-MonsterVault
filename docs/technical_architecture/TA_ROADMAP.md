@@ -1,19 +1,45 @@
 # Technical Architecture Roadmap
 
-> **Status:** Active — TA-0 Next
+> **Status:** Active — TA-1 Next
 > **Authority:** Dependency-driven technical architecture sequencing
 
 This roadmap defines how the Design Complete MonsterVault GDS is translated into implementation-ready Roblox/Luau contracts.
 
 ## TA-0 — Architecture Governance, Constraints, and GDS Traceability
 
-**Status:** NEXT — Draft
+**Status:** Architecture Complete — PASS
 
-Establishes architecture authority, GDS-to-TA traceability, decision logging, status model, dependency policy, security/performance principles and implementation gate.
+Established and formally validated:
+
+- GDS semantic authority over technical convenience;
+- Draft / Under Review / Architecture Complete / Implementation Locked maturity model;
+- GDS -> TA -> verification -> implementation traceability contract;
+- one technical owner per persistent field family, runtime transition, remote handler and transaction commit;
+- server authority for ownership/currency/rare outcomes/progression/rewards/trading/purchases/moderation;
+- explicit trust-boundary model;
+- explicit transaction/idempotency requirements for exact-once outcomes;
+- versioned persistence and safe load-failure principles;
+- prospective/auditable configuration and server-side randomness authority;
+- value-preserving failure semantics;
+- security/performance/testability/observability as architecture closure requirements;
+- Architecture Decision Record and change-control protocol;
+- 12 architecture risk families with named owners;
+- design-conflict protocol returning player-facing conflicts to owning GDS;
+- 60 / 60 governance scenarios PASS;
+- complete high-level mapping of GDS-0 through GDS-17 into TA-0 through TA-17.
+
+Closure evidence:
+
+- [governance/00_architecture_governance_constraints_and_gds_traceability.md](governance/00_architecture_governance_constraints_and_gds_traceability.md) — Architecture Complete;
+- [TA0_GDS_TRACEABILITY_MATRIX.md](TA0_GDS_TRACEABILITY_MATRIX.md) — PASS;
+- [TA0_ARCHITECTURE_RISK_REGISTER.md](TA0_ARCHITECTURE_RISK_REGISTER.md) — all risk families owned;
+- [TA0_SCENARIO_VALIDATION.md](TA0_SCENARIO_VALIDATION.md) — 60 / 60 PASS;
+- [TA0_DECISION_INDEX.md](TA0_DECISION_INDEX.md) — accepted;
+- [TA0_CLOSURE_REPORT.md](TA0_CLOSURE_REPORT.md) — PASS.
 
 ## TA-1 — Roblox System Context, Toolchain, and Development Environment
 
-**Status:** Blocked
+**Status:** NEXT — Draft
 
 Defines supported Roblox experience topology, Studio/repository workflow, Luau baseline, Rojo/tooling decision, package/dependency strategy, local development conventions and reproducible developer setup.
 
@@ -141,8 +167,10 @@ GDS-17 PASS / Design Complete
 
 GDS-17 is **Complete — PASS** and the Game Design Specification is **Design Complete**.
 
+TA-0 is **Architecture Complete — PASS**.
+
 The active dependency is:
 
-> **TA-0 — Architecture Governance, Constraints, and GDS Traceability**
+> **TA-1 — Roblox System Context, Toolchain, and Development Environment**
 
-TA-1 through TA-17 remain blocked by dependency order. Gameplay implementation remains blocked until TA-17 is formally complete.
+TA-2 through TA-17 remain blocked by dependency order. Gameplay implementation remains blocked until TA-17 is formally complete.

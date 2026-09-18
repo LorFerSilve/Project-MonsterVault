@@ -1,6 +1,6 @@
 # Technical Architecture Authority
 
-> **Status:** Draft / Active — TA-0
+> **Status:** Architecture Complete — TA-0 PASS
 > **Authority:** Project-wide technical architecture governance
 
 ## 1. Purpose
@@ -76,3 +76,18 @@ Implementation may begin only after the final TA roadmap phase locks:
 - test/CI requirements;
 - performance budgets;
 - implementation sequence and vertical-slice acceptance criteria.
+
+
+## 11. TA-0 Closure
+
+The detailed governance contract is authoritative in [`governance/00_architecture_governance_constraints_and_gds_traceability.md`](governance/00_architecture_governance_constraints_and_gds_traceability.md).
+
+Closure evidence:
+
+- [`TA0_GDS_TRACEABILITY_MATRIX.md`](TA0_GDS_TRACEABILITY_MATRIX.md) — PASS;
+- [`TA0_ARCHITECTURE_RISK_REGISTER.md`](TA0_ARCHITECTURE_RISK_REGISTER.md) — all risk families owned;
+- [`TA0_SCENARIO_VALIDATION.md`](TA0_SCENARIO_VALIDATION.md) — 60 / 60 PASS;
+- [`TA0_DECISION_INDEX.md`](TA0_DECISION_INDEX.md) — accepted;
+- [`TA0_CLOSURE_REPORT.md`](TA0_CLOSURE_REPORT.md) — PASS.
+
+TA-0 is **Architecture Complete**. The active dependency is TA-1. Gameplay implementation remains blocked until TA-17.
