@@ -1,6 +1,6 @@
 # MonsterVault Game Design Specification
 
-> **Status:** GDS-0 through GDS-14 Complete / GDS-15 Next  
+> **Status:** GDS-0 through GDS-15 Complete / GDS-16 Next  
 > **Authority:** Player-facing gameplay behavior
 
 This directory contains the authoritative Game Design Specification (GDS) for MonsterVault.
@@ -26,10 +26,11 @@ Completed:
 - **GDS-12 — Trading and Player Economy: COMPLETE — PASS**
 - **GDS-13 — Monetization and Commercial Fairness: COMPLETE — PASS**
 - **GDS-14 — Presentation, UI/UX, Feedback, and Accessibility: COMPLETE — PASS**
+- **GDS-15 — Roblox Platform, Social Safety, and Moderation Constraints: COMPLETE — PASS**
 
 The active dependency is now:
 
-> **GDS-15 — Roblox Platform, Social Safety, and Moderation Constraints**
+> **GDS-16 — Retention, Discovery, Analytics, and Experimentation Boundaries**
 
 Technical Architecture and gameplay implementation remain blocked.
 
@@ -251,10 +252,35 @@ GDS-14 establishes:
 - touch/keyboard/gamepad semantic parity without hover-only, drag-only or precision-pointer-only core flows;
 - gameplay-first onboarding and authoritative reconnect/reconciliation presentation.
 
+### GDS-15 — Roblox platform, social safety and moderation
+
+Authoritative specification and closure evidence:
+
+- [platform_safety/15_roblox_platform_social_safety_and_moderation_constraints.md](platform_safety/15_roblox_platform_social_safety_and_moderation_constraints.md) — Design Complete;
+- [GDS15_ROBLOX_PLATFORM_POLICY_SNAPSHOT.md](GDS15_ROBLOX_PLATFORM_POLICY_SNAPSHOT.md) — official-policy snapshot dated 2026-09-18;
+- [GDS15_SCENARIO_VALIDATION.md](GDS15_SCENARIO_VALIDATION.md) — 170 compound platform/safety scenarios; PASS;
+- [GDS15_CROSS_VALIDATION.md](GDS15_CROSS_VALIDATION.md) — GDS-1 through GDS-14 and authority audit; PASS;
+- [GDS15_DECISION_INDEX.md](GDS15_DECISION_INDEX.md) — phase-local strategic decisions;
+- [GDS15_CLOSURE_REPORT.md](GDS15_CLOSURE_REPORT.md) — formal closure; PASS.
+
+GDS-15 establishes:
+
+- Roblox-authoritative per-user policy eligibility rather than hard-coded mutable age/country logic;
+- core progression independent of unrestricted chat/voice;
+- no baseline public freeform creature/Vault/Party names, signs, bios or trade notes;
+- successful Roblox filtering required for any future user-visible freeform text;
+- structured Social Pings as the baseline coordination layer;
+- report/block accessibility and spam/re-contact suppression;
+- non-confiscatory experience-level moderation;
+- no unnecessary personal-information solicitation or off-platform contact/payment requirement;
+- a Minimal-to-Mild content maturity target;
+- no playable wagering and no baseline paid-random item mechanics;
+- commercial entitlements kept outside creature trading;
+- mandatory current-policy revalidation before implementation lock/launch.
+
 ## Remaining Core Specifications
 
-- `platform_safety/` — GDS-15 Roblox platform constraints, commercial/randomized constraints, social safety and age-appropriate interaction design. **GDS-15 NEXT.**
-- `retention_analytics/` — retention loops, acquisition/Vault/variant/economy/world funnels, session goals, catch-up/reward cadence, metrics hypotheses and experiment boundaries.
+- `retention_analytics/` — GDS-16 retention loops, acquisition/Vault/variant/economy/world funnels, session goals, catch-up/reward cadence, metrics hypotheses and experiment boundaries. **GDS-16 NEXT.**
 - `audit/` — final GDS-17 cross-system consistency/maturity audits.
 
 ## Rule

@@ -1,6 +1,6 @@
 # Project MonsterVault Documentation
 
-> **Project phase:** Pre-implementation specification — GDS-15 next  
+> **Project phase:** Pre-implementation specification — GDS-16 next  
 > **Implementation status:** Blocked by design and architecture gates
 
 This directory is the authoritative documentation space for Project MonsterVault.
@@ -41,22 +41,24 @@ Completed:
 - **GDS-12 — Trading and Player Economy: PASS**
 - **GDS-13 — Monetization and Commercial Fairness: PASS**
 - **GDS-14 — Presentation, UI/UX, Feedback, and Accessibility: PASS**
+- **GDS-15 — Roblox Platform, Social Safety, and Moderation Constraints: PASS**
 
 Latest closure evidence:
 
-- [`game_design/presentation/14_presentation_ui_ux_feedback_and_accessibility.md`](game_design/presentation/14_presentation_ui_ux_feedback_and_accessibility.md);
-- [`game_design/GDS14_SCENARIO_VALIDATION.md`](game_design/GDS14_SCENARIO_VALIDATION.md);
-- [`game_design/GDS14_CROSS_VALIDATION.md`](game_design/GDS14_CROSS_VALIDATION.md);
-- [`game_design/GDS14_DECISION_INDEX.md`](game_design/GDS14_DECISION_INDEX.md);
-- [`game_design/GDS14_CLOSURE_REPORT.md`](game_design/GDS14_CLOSURE_REPORT.md).
+- [`game_design/platform_safety/15_roblox_platform_social_safety_and_moderation_constraints.md`](game_design/platform_safety/15_roblox_platform_social_safety_and_moderation_constraints.md);
+- [`game_design/GDS15_ROBLOX_PLATFORM_POLICY_SNAPSHOT.md`](game_design/GDS15_ROBLOX_PLATFORM_POLICY_SNAPSHOT.md);
+- [`game_design/GDS15_SCENARIO_VALIDATION.md`](game_design/GDS15_SCENARIO_VALIDATION.md);
+- [`game_design/GDS15_CROSS_VALIDATION.md`](game_design/GDS15_CROSS_VALIDATION.md);
+- [`game_design/GDS15_DECISION_INDEX.md`](game_design/GDS15_DECISION_INDEX.md);
+- [`game_design/GDS15_CLOSURE_REPORT.md`](game_design/GDS15_CLOSURE_REPORT.md).
 
 The active dependency is:
 
-> **GDS-15 — Roblox Platform, Social Safety, and Moderation Constraints**
+> **GDS-16 — Retention, Discovery, Analytics, and Experimentation Boundaries**
 
 No gameplay implementation should begin until:
 
-- GDS-15 through GDS-16 complete their owning design work;
+- GDS-16 completes its owning design work;
 - GDS-17 records a formal cross-system `Design Complete` PASS;
 - the complete Technical Architecture reaches `Architecture Complete`;
 - architecture integration validation passes;

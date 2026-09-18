@@ -489,6 +489,39 @@ A group of GDS-14 accessibility options improving text size, contrast, backgroun
 ### Semantic Redundancy
 Presentation of critical meaning through more than one understandable channel, such as text plus icon/shape or visual plus audio, so meaning does not depend on color or sound alone.
 
+### Platform Eligibility
+A GDS-15 Roblox-authoritative per-player result indicating whether a platform-regulated feature is currently permitted for that user/account/context.
+
+### Policy-Gated Feature
+A MonsterVault feature whose availability or behavior must respect Roblox-provided policy/eligibility information rather than a hard-coded local age/country rule.
+
+### Communication Eligibility
+The platform-authoritative result governing whether a player may participate in a given text/direct/social communication capability.
+
+### Structured Communication
+A predefined non-freeform message/action vocabulary such as Social Pings, where players select authored meanings instead of entering arbitrary public text.
+
+### User-Generated Text
+Text whose semantic content is chosen by a player and displayed to one or more other users.
+
+### Filtered User Text
+User-Generated Text that has successfully passed the appropriate Roblox-authoritative filtering flow for its intended audience.
+
+### Safety Restriction
+A MonsterVault experience-level limitation applied to unsafe/disruptive behavior, such as suppressing directed social requests, restricting trading/social interaction, kicking or banning from the experience.
+
+### Safety Action
+An experience-level moderation result that changes access/social capability without rewriting unrelated legitimate collection/economy history.
+
+### Platform Report Flow
+Roblox's built-in or platform-authoritative reporting capability for users/content/communication.
+
+### Social Isolation
+A safe fallback state in which optional directed social interaction is unavailable while solo/core gameplay remains functional.
+
+### Content Maturity Target
+The intended Roblox content-maturity envelope for MonsterVault launch content. GDS-15 targets a broad Minimal-to-Mild envelope and requires revalidation for materially higher-maturity content.
+
 ### Offline Progression
 Any progression accrued while the player is not actively present in the experience. GDS-7 explicitly authorizes **bounded Vault Passive Production** from finalized Production Assignments, limited by the Offline Production Window and Production Buffer cap. GDS-8 defines the resulting Energy/economic effects. Other offline progression remains unauthorized unless an owning later specification defines it.
 

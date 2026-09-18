@@ -4,7 +4,7 @@
 
 ## Project Status
 
-**Pre-implementation specification — GDS-0 through GDS-14 complete / GDS-15 next.**
+**Pre-implementation specification — GDS-0 through GDS-15 complete / GDS-16 next.**
 
 MonsterVault is intentionally **not in gameplay implementation yet**. The project follows a specification-first workflow:
 
@@ -36,13 +36,13 @@ No gameplay system should be implemented merely because an idea appears promisin
 - **GDS-12 — Trading and Player Economy: COMPLETE — PASS**
 - **GDS-13 — Monetization and Commercial Fairness: COMPLETE — PASS**
 - **GDS-14 — Presentation, UI/UX, Feedback, and Accessibility: COMPLETE — PASS**
-- **GDS-15 — Roblox Platform, Social Safety, and Moderation Constraints: NEXT**
-- GDS-16: Draft / dependency-ordered
+- **GDS-15 — Roblox Platform, Social Safety, and Moderation Constraints: COMPLETE — PASS**
+- **GDS-16 — Retention, Discovery, Analytics, and Experimentation Boundaries: NEXT**
 - GDS-17: blocked until subsystem design is complete
 - Technical Architecture: blocked by GDS-17
 - Gameplay implementation: blocked by GDS and TA gates
 
-GDS-14 closure evidence is recorded in [`GDS14_SCENARIO_VALIDATION.md`](docs/game_design/GDS14_SCENARIO_VALIDATION.md), [`GDS14_CROSS_VALIDATION.md`](docs/game_design/GDS14_CROSS_VALIDATION.md), [`GDS14_DECISION_INDEX.md`](docs/game_design/GDS14_DECISION_INDEX.md), and [`GDS14_CLOSURE_REPORT.md`](docs/game_design/GDS14_CLOSURE_REPORT.md).
+GDS-15 closure evidence is recorded in [`GDS15_ROBLOX_PLATFORM_POLICY_SNAPSHOT.md`](docs/game_design/GDS15_ROBLOX_PLATFORM_POLICY_SNAPSHOT.md), [`GDS15_SCENARIO_VALIDATION.md`](docs/game_design/GDS15_SCENARIO_VALIDATION.md), [`GDS15_CROSS_VALIDATION.md`](docs/game_design/GDS15_CROSS_VALIDATION.md), [`GDS15_DECISION_INDEX.md`](docs/game_design/GDS15_DECISION_INDEX.md), and [`GDS15_CLOSURE_REPORT.md`](docs/game_design/GDS15_CLOSURE_REPORT.md).
 
 ## Product Contract
 
@@ -331,6 +331,27 @@ GDS-14 defines how every closed gameplay system is communicated without allowing
 - reconnect/reconciliation presentation follows authoritative current state rather than replaying finalization as though it happened again.
 
 The authoritative GDS-14 specification is [`14_presentation_ui_ux_feedback_and_accessibility.md`](docs/game_design/presentation/14_presentation_ui_ux_feedback_and_accessibility.md).
+## Roblox Platform, Social Safety, and Moderation Contract
+
+GDS-15 makes Roblox safety/policy a live external boundary while keeping the core game robust when optional communication or commerce differs per user:
+
+- policy-gated features use **Roblox-authoritative per-user eligibility**, not hard-coded mutable age/country rules;
+- core onboarding, capture, Vault, world progression, events and structured trading do not require unrestricted text chat or voice;
+- MonsterVault does not provide a parallel unfiltered custom chat system;
+- launch baseline has no custom public freeform creature names, Vault names, Party names, signs, bios or trade notes;
+- any future user-visible freeform text must successfully pass the appropriate Roblox filtering path; filter failure never displays raw text;
+- structured Social Pings remain authored, rate-limited, duplicate-suppressed and freely muteable;
+- platform reporting remains accessible and blocking/restrictions suppress new directed contact where applicable;
+- experience-level moderation may restrict social access, kick or ban, but does not silently confiscate unrelated legitimate Secured Creatures, Energy or provenance;
+- MonsterVault does not solicit unnecessary personal information or require Discord/external contact/payment;
+- launch content targets a broad **Minimal-to-Mild** maturity envelope; materially higher-maturity content reopens GDS-15;
+- no playable value-bearing wagering exists;
+- no baseline paid-random item mechanic exists, including premium-currency workarounds;
+- commercial entitlements remain outside GDS-12 Trade Offers, avoiding baseline paid-item-trading complexity;
+- Roblox policy changes may narrow optional features, but more permissive platform capability never auto-authorizes new risky mechanics;
+- a current official Roblox policy review is mandatory again before implementation lock/launch.
+
+The authoritative GDS-15 specification is [`15_roblox_platform_social_safety_and_moderation_constraints.md`](docs/game_design/platform_safety/15_roblox_platform_social_safety_and_moderation_constraints.md).
 ## Working Core Loop
 
 ```text
@@ -350,7 +371,7 @@ Choose or notice a desirable goal
   -> repeat
 ```
 
-Roblox platform, social safety and moderation constraints now belong to GDS-15. Retention/analytics and technical implementation remain subject to their owning later phases.
+Retention, discovery, analytics and experimentation boundaries now belong to GDS-16. Technical implementation remains subject to GDS-17 and Technical Architecture.
 
 ## Documentation Authority
 
@@ -380,16 +401,18 @@ Key documents include:
 - [`trading/`](docs/game_design/trading/) — GDS-12 trading/player-economy contract;
 - [`monetization/`](docs/game_design/monetization/) — GDS-13 monetization/commercial-fairness contract;
 - [`presentation/`](docs/game_design/presentation/) — GDS-14 presentation/UI/UX/feedback/accessibility contract;
-- [`GDS14_SCENARIO_VALIDATION.md`](docs/game_design/GDS14_SCENARIO_VALIDATION.md) — 160 compound GDS-14 scenarios;
-- [`GDS14_CROSS_VALIDATION.md`](docs/game_design/GDS14_CROSS_VALIDATION.md) — authority/consistency audit;
-- [`GDS14_DECISION_INDEX.md`](docs/game_design/GDS14_DECISION_INDEX.md) — phase-local strategic decisions;
-- [`GDS14_CLOSURE_REPORT.md`](docs/game_design/GDS14_CLOSURE_REPORT.md) — formal GDS-14 closure evidence.
+- [`platform_safety/`](docs/game_design/platform_safety/) — GDS-15 Roblox platform/social-safety/moderation contract;
+- [`GDS15_ROBLOX_PLATFORM_POLICY_SNAPSHOT.md`](docs/game_design/GDS15_ROBLOX_PLATFORM_POLICY_SNAPSHOT.md) — dated official-policy review evidence;
+- [`GDS15_SCENARIO_VALIDATION.md`](docs/game_design/GDS15_SCENARIO_VALIDATION.md) — 170 compound GDS-15 scenarios;
+- [`GDS15_CROSS_VALIDATION.md`](docs/game_design/GDS15_CROSS_VALIDATION.md) — authority/consistency audit;
+- [`GDS15_DECISION_INDEX.md`](docs/game_design/GDS15_DECISION_INDEX.md) — phase-local strategic decisions;
+- [`GDS15_CLOSURE_REPORT.md`](docs/game_design/GDS15_CLOSURE_REPORT.md) — formal GDS-15 closure evidence.
 
 ### Technical Architecture
 
 [`docs/technical_architecture/`](docs/technical_architecture/) remains **blocked by GDS completion**.
 
-Technical Architecture will later translate approved GDS behavior into concrete Roblox/Luau contracts for identity, persistence, networking, runtime lifecycle, controls, creature/capture/variant/Vault/economy/world/social/event/trading/monetization/presentation systems, platform safety, live operations, performance, testing and CI.
+Technical Architecture will later translate approved GDS behavior into concrete Roblox/Luau contracts for identity, persistence, networking, runtime lifecycle, controls, creature/capture/variant/Vault/economy/world/social/event/trading/monetization/presentation/platform-safety systems, retention analytics, live operations, performance, testing and CI.
 
 ### Implementation
 
@@ -420,12 +443,14 @@ Project-MonsterVault/
 │   │   ├── trading/
 │   │   ├── monetization/
 │   │   ├── presentation/
+│   │   ├── platform_safety/
 │   │   ├── GDS_ROADMAP.md
 │   │   ├── GLOSSARY.md
-│   │   ├── GDS14_SCENARIO_VALIDATION.md
-│   │   ├── GDS14_CROSS_VALIDATION.md
-│   │   ├── GDS14_DECISION_INDEX.md
-│   │   ├── GDS14_CLOSURE_REPORT.md
+│   │   ├── GDS15_ROBLOX_PLATFORM_POLICY_SNAPSHOT.md
+│   │   ├── GDS15_SCENARIO_VALIDATION.md
+│   │   ├── GDS15_CROSS_VALIDATION.md
+│   │   ├── GDS15_DECISION_INDEX.md
+│   │   ├── GDS15_CLOSURE_REPORT.md
 │   │   └── <remaining design domains>/
 │   ├── technical_architecture/
 │   ├── implementation/
@@ -440,7 +465,7 @@ The source/test/tooling directories are reserved for later implementation. Their
 
 ## Current Next Step
 
-Proceed with **GDS-15 — Roblox Platform, Social Safety, and Moderation Constraints**.
+Proceed with **GDS-16 — Retention, Discovery, Analytics, and Experimentation Boundaries**.
 
 The first implementation vertical slice will be selected and locked only after the complete design and architecture dependency chain makes its requirements clear.
 
