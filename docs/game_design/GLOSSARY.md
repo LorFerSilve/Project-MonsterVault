@@ -1,9 +1,9 @@
 # Game Design Glossary
 
-> **Status:** Draft / Active  
+> **Status:** Design Complete / Change-Controlled  
 > **Authority:** Canonical gameplay terminology
 
-This glossary owns shared terms used across MonsterVault design specifications. Terms are intentionally conservative during the design phase; subsystem documents may propose additions, but shared terms must be normalized here before `Design Complete`.
+This glossary owns shared terms used across MonsterVault design specifications. The GDS is Design Complete. This glossary remains the canonical gameplay namespace; material semantic changes require owning-GDS change control, while downstream Technical Architecture may add technical terms without redefining gameplay terms.
 
 ## Current Canonical Terms
 
