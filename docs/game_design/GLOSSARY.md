@@ -522,6 +522,51 @@ A safe fallback state in which optional directed social interaction is unavailab
 ### Content Maturity Target
 The intended Roblox content-maturity envelope for MonsterVault launch content. GDS-15 targets a broad Minimal-to-Mild envelope and requires revalidation for materially higher-maturity content.
 
+### Meaningful Session
+A GDS-16 session in which the player accomplishes at least one product-relevant satisfaction: acquisition/collection progress, visible Vault/progression improvement, or a memorable intentional social/event outcome.
+
+### First-Session Funnel
+The measured GDS-16 path from initial Active Presence through the first complete capture -> secure -> visible progression cycle and next-goal comprehension.
+
+### Return Funnel
+The measured path by which a returning player regains context, identifies a worthwhile goal and resumes meaningful play without unnecessary re-tutorialization.
+
+### Return Brief
+A concise non-blocking GDS-16 session-entry summary of relevant current opportunities and persistent state, such as claimable Production Buffer, active events, unresolved Overflow-Held and Next Aspirations.
+
+### Next Aspiration
+A surfaced optional goal selected from already-authorized gameplay/progression state. A Next Aspiration is guidance only and cannot itself grant progression, alter odds or fabricate eligibility.
+
+### Retention Metric
+A measurement of whether players voluntarily return after elapsed time, such as D1/D7/D30 cohort retention.
+
+### Meaningful Engagement
+Active play that advances or explores the product promise rather than AFK presence, forced waiting, menu idling or repetitive low-value input.
+
+### Guardrail Metric
+A metric that must remain within acceptable bounds while optimizing a primary experiment metric, such as safety incidents, fairness divergence, persistence failures or player-trust signals.
+
+### Experiment Assignment
+The deterministic treatment/control allocation used to evaluate a hypothesis. Assignment is not gameplay authority.
+
+### Experiment Invariant
+An upstream rule that an experiment may not change, including ownership integrity, exact-once persistence, safety, accessibility, stable collectible identity and commercial fairness.
+
+### Value-Affecting Experiment
+A GDS-16 experiment that can change persistent economic or collection opportunity, such as reward values, progression prices, spawn weights or event availability, and therefore requires stronger shared-context/prospective/audit controls.
+
+### Presentation Experiment
+An experiment limited to non-authoritative UI/content presentation while upstream semantics remain unchanged.
+
+### Discovery Packaging
+Public-facing title, thumbnail, icon and description presentation used to attract players to MonsterVault.
+
+### Cohort Health
+Measured product behavior for a defined group such as first-time players, returning players, progression band, device/input class or acquisition source.
+
+### Return Support
+Non-destructive assistance for a returning/lapsed player that restores comprehension and useful direction without fabricating missed history or requiring paid rescue.
+
 ### Offline Progression
 Any progression accrued while the player is not actively present in the experience. GDS-7 explicitly authorizes **bounded Vault Passive Production** from finalized Production Assignments, limited by the Offline Production Window and Production Buffer cap. GDS-8 defines the resulting Energy/economic effects. Other offline progression remains unauthorized unless an owning later specification defines it.
 
