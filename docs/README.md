@@ -1,6 +1,6 @@
 # Project MonsterVault Documentation
 
-> **Project phase:** Pre-implementation specification — GDS-12 next  
+> **Project phase:** Pre-implementation specification — GDS-13 next  
 > **Implementation status:** Blocked by design and architecture gates
 
 This directory is the authoritative documentation space for Project MonsterVault.
@@ -38,22 +38,23 @@ Completed:
 - **GDS-9 — World, Biomes, Exploration, Spawning, and Hazards: PASS**
 - **GDS-10 — Social Play, Cooperation, Competition, and PvP Boundaries: PASS**
 - **GDS-11 — Server Events, Dynamic Encounters, and Live Content: PASS**
+- **GDS-12 — Trading and Player Economy: PASS**
 
 Latest closure evidence:
 
-- [`game_design/events_liveops/11_server_events_dynamic_encounters_and_live_content.md`](game_design/events_liveops/11_server_events_dynamic_encounters_and_live_content.md);
-- [`game_design/GDS11_SCENARIO_VALIDATION.md`](game_design/GDS11_SCENARIO_VALIDATION.md);
-- [`game_design/GDS11_CROSS_VALIDATION.md`](game_design/GDS11_CROSS_VALIDATION.md);
-- [`game_design/GDS11_DECISION_INDEX.md`](game_design/GDS11_DECISION_INDEX.md);
-- [`game_design/GDS11_CLOSURE_REPORT.md`](game_design/GDS11_CLOSURE_REPORT.md).
+- [`game_design/trading/12_trading_and_player_economy.md`](game_design/trading/12_trading_and_player_economy.md);
+- [`game_design/GDS12_SCENARIO_VALIDATION.md`](game_design/GDS12_SCENARIO_VALIDATION.md);
+- [`game_design/GDS12_CROSS_VALIDATION.md`](game_design/GDS12_CROSS_VALIDATION.md);
+- [`game_design/GDS12_DECISION_INDEX.md`](game_design/GDS12_DECISION_INDEX.md);
+- [`game_design/GDS12_CLOSURE_REPORT.md`](game_design/GDS12_CLOSURE_REPORT.md).
 
 The active dependency is:
 
-> **GDS-12 — Trading and Player Economy**
+> **GDS-13 — Monetization and Commercial Fairness**
 
 No gameplay implementation should begin until:
 
-- GDS-12 through GDS-16 complete their owning design work;
+- GDS-13 through GDS-16 complete their owning design work;
 - GDS-17 records a formal cross-system `Design Complete` PASS;
 - the complete Technical Architecture reaches `Architecture Complete`;
 - architecture integration validation passes;
