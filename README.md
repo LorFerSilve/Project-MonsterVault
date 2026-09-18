@@ -4,7 +4,7 @@
 
 ## Project Status
 
-**Game Design Specification — DESIGN COMPLETE / Technical Architecture TA-0..2 complete / TA-3 next.**
+**Game Design Specification — DESIGN COMPLETE / Technical Architecture TA-0..3 complete / TA-4 next.**
 
 MonsterVault is intentionally **not in gameplay implementation yet**. The project follows a specification-first workflow:
 
@@ -43,7 +43,8 @@ No gameplay system should be implemented merely because an idea appears promisin
 - **TA-0 — Architecture Governance, Constraints, and GDS Traceability: ARCHITECTURE COMPLETE — PASS**
 - **TA-1 — Roblox System Context, Toolchain, and Development Environment: ARCHITECTURE COMPLETE — PASS**
 - **TA-2 — Repository Layout, Module Boundaries, Dependency Direction, and Bootstrapping: ARCHITECTURE COMPLETE — PASS**
-- **TA-3 — Networking, Server Authority, Remote Contracts, and Exploit Boundaries: NEXT**
+- **TA-3 — Networking, Server Authority, Remote Contracts, and Exploit Boundaries: ARCHITECTURE COMPLETE — PASS**
+- **TA-4 — Player Data, Persistence, Session Ownership, Schema Evolution, and Recovery: NEXT**
 - Gameplay implementation: blocked by TA and implementation-lock gates
 
 GDS-17 final evidence is recorded in [`17_cross_system_consistency_and_design_complete_audit.md`](docs/game_design/audit/17_cross_system_consistency_and_design_complete_audit.md), [`GDS17_AUTHORITY_NAMESPACE_AUDIT.md`](docs/game_design/GDS17_AUTHORITY_NAMESPACE_AUDIT.md), [`GDS17_MATURITY_OPEN_QUESTION_AUDIT.md`](docs/game_design/GDS17_MATURITY_OPEN_QUESTION_AUDIT.md), [`GDS17_COMPOUND_SCENARIO_VALIDATION.md`](docs/game_design/GDS17_COMPOUND_SCENARIO_VALIDATION.md), [`GDS17_DECISION_INDEX.md`](docs/game_design/GDS17_DECISION_INDEX.md), and [`GDS17_CLOSURE_REPORT.md`](docs/game_design/GDS17_CLOSURE_REPORT.md).
@@ -437,9 +438,9 @@ Key documents include:
 
 ### Technical Architecture
 
-[`docs/technical_architecture/`](docs/technical_architecture/) is **ACTIVE — TA-0..2 COMPLETE / TA-3 NEXT**.
+[`docs/technical_architecture/`](docs/technical_architecture/) is **ACTIVE — TA-0..3 COMPLETE / TA-4 NEXT**.
 
-TA-0 established architecture governance and traceability. TA-1 locked the Roblox environment/toolchain baseline. TA-2 has now locked the future server/client/shared Rojo mapping, modular-monolith module boundaries, application/domain/infrastructure dependency direction and explicit bootstrap lifecycle. TA-3 now owns networking, remote contracts and exploit boundaries.
+TA-0 established governance/traceability, TA-1 locked the Roblox environment/toolchain, and TA-2 locked module/dependency/bootstrap structure. TA-3 has now locked the centralized Remote protocol, server-authoritative validation pipeline, rate/replay/idempotency boundaries, client-prediction limits and exploit/physics trust model. TA-4 now owns player persistence, session ownership, schema evolution and recovery.
 
 TA-0 closure evidence:
 
@@ -465,6 +466,15 @@ TA-2 closure evidence:
 - [`TA2_SCENARIO_VALIDATION.md`](docs/technical_architecture/TA2_SCENARIO_VALIDATION.md) — 110 / 110 PASS;
 - [`TA2_DECISION_INDEX.md`](docs/technical_architecture/TA2_DECISION_INDEX.md);
 - [`TA2_CLOSURE_REPORT.md`](docs/technical_architecture/TA2_CLOSURE_REPORT.md) — PASS.
+TA-3 closure evidence:
+
+- [`networking/03_networking_server_authority_remote_contracts_and_exploit_boundaries.md`](docs/technical_architecture/networking/03_networking_server_authority_remote_contracts_and_exploit_boundaries.md);
+- [`TA3_ROBLOX_NETWORK_SECURITY_SNAPSHOT.md`](docs/technical_architecture/TA3_ROBLOX_NETWORK_SECURITY_SNAPSHOT.md);
+- [`TA3_REMOTE_CONTRACT_MATRIX.md`](docs/technical_architecture/TA3_REMOTE_CONTRACT_MATRIX.md);
+- [`TA3_GDS_TRACEABILITY.md`](docs/technical_architecture/TA3_GDS_TRACEABILITY.md);
+- [`TA3_SCENARIO_VALIDATION.md`](docs/technical_architecture/TA3_SCENARIO_VALIDATION.md) — 140 / 140 PASS;
+- [`TA3_DECISION_INDEX.md`](docs/technical_architecture/TA3_DECISION_INDEX.md);
+- [`TA3_CLOSURE_REPORT.md`](docs/technical_architecture/TA3_CLOSURE_REPORT.md) — PASS.
 ### Implementation
 
 [`docs/implementation/`](docs/implementation/) remains intentionally **BLOCKED**.
@@ -520,7 +530,7 @@ TA-2 has locked this as the future implementation structure, but the source scaf
 
 ## Current Next Step
 
-Proceed with **TA-3 — Networking, Server Authority, Remote Contracts, and Exploit Boundaries**.
+Proceed with **TA-4 — Player Data, Persistence, Session Ownership, Schema Evolution, and Recovery**.
 
 The first implementation vertical slice will be selected and locked only after the complete design and architecture dependency chain makes its requirements clear.
 
