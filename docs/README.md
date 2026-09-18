@@ -1,6 +1,6 @@
 # Project MonsterVault Documentation
 
-> **Project phase:** Pre-implementation specification — GDS-11 next  
+> **Project phase:** Pre-implementation specification — GDS-12 next  
 > **Implementation status:** Blocked by design and architecture gates
 
 This directory is the authoritative documentation space for Project MonsterVault.
@@ -37,22 +37,23 @@ Completed:
 - **GDS-8 — Economy, Progression, Unlocks, and Pacing: PASS**
 - **GDS-9 — World, Biomes, Exploration, Spawning, and Hazards: PASS**
 - **GDS-10 — Social Play, Cooperation, Competition, and PvP Boundaries: PASS**
+- **GDS-11 — Server Events, Dynamic Encounters, and Live Content: PASS**
 
 Latest closure evidence:
 
-- [`game_design/social/10_social_play_cooperation_competition_and_pvp_boundaries.md`](game_design/social/10_social_play_cooperation_competition_and_pvp_boundaries.md);
-- [`game_design/GDS10_SCENARIO_VALIDATION.md`](game_design/GDS10_SCENARIO_VALIDATION.md);
-- [`game_design/GDS10_CROSS_VALIDATION.md`](game_design/GDS10_CROSS_VALIDATION.md);
-- [`game_design/GDS10_DECISION_INDEX.md`](game_design/GDS10_DECISION_INDEX.md);
-- [`game_design/GDS10_CLOSURE_REPORT.md`](game_design/GDS10_CLOSURE_REPORT.md).
+- [`game_design/events_liveops/11_server_events_dynamic_encounters_and_live_content.md`](game_design/events_liveops/11_server_events_dynamic_encounters_and_live_content.md);
+- [`game_design/GDS11_SCENARIO_VALIDATION.md`](game_design/GDS11_SCENARIO_VALIDATION.md);
+- [`game_design/GDS11_CROSS_VALIDATION.md`](game_design/GDS11_CROSS_VALIDATION.md);
+- [`game_design/GDS11_DECISION_INDEX.md`](game_design/GDS11_DECISION_INDEX.md);
+- [`game_design/GDS11_CLOSURE_REPORT.md`](game_design/GDS11_CLOSURE_REPORT.md).
 
 The active dependency is:
 
-> **GDS-11 — Server Events, Dynamic Encounters, and Live Content**
+> **GDS-12 — Trading and Player Economy**
 
 No gameplay implementation should begin until:
 
-- GDS-11 through GDS-16 complete their owning design work;
+- GDS-12 through GDS-16 complete their owning design work;
 - GDS-17 records a formal cross-system `Design Complete` PASS;
 - the complete Technical Architecture reaches `Architecture Complete`;
 - architecture integration validation passes;
