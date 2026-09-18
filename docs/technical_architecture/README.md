@@ -1,6 +1,6 @@
 # MonsterVault Technical Architecture
 
-> **Status:** Active — TA-0..3 Complete / TA-4 Next
+> **Status:** Active — TA-0..4 Complete / TA-5 Next
 > **Authority:** Technical implementation contracts after GDS completion
 
 This directory contains the Technical Architecture layer that now becomes active after the GDS-17 Design Complete PASS.
@@ -20,6 +20,8 @@ The TA is deliberately not allowed to redefine gameplay. It translates the appro
 - [`TA2_DEPENDENCY_OWNERSHIP_MATRIX.md`](TA2_DEPENDENCY_OWNERSHIP_MATRIX.md) defines permitted dependency and mutation ownership boundaries.
 - [`networking/03_networking_server_authority_remote_contracts_and_exploit_boundaries.md`](networking/03_networking_server_authority_remote_contracts_and_exploit_boundaries.md) is the authoritative TA-3 networking/trust-boundary contract.
 - [`TA3_REMOTE_CONTRACT_MATRIX.md`](TA3_REMOTE_CONTRACT_MATRIX.md) locks transport/envelope/validation responsibilities.
+- [`persistence/04_player_data_persistence_session_ownership_schema_evolution_and_recovery.md`](persistence/04_player_data_persistence_session_ownership_schema_evolution_and_recovery.md) is the authoritative TA-4 persistence/session/recovery contract.
+- [`TA4_PERSISTENCE_SESSION_MATRIX.md`](TA4_PERSISTENCE_SESSION_MATRIX.md) locks persistence state, durability and transaction boundaries.
 - [`TA_ROADMAP.md`](TA_ROADMAP.md) defines the dependency-driven architecture sequence.
 - `audit/` will contain the final TA-16 integration/readiness evidence.
 
@@ -27,12 +29,12 @@ The TA is deliberately not allowed to redefine gameplay. It translates the appro
 
 GDS-17 has recorded a formal **Design Complete — PASS** with zero implementation-critical design questions.
 
-TA-0 through TA-3 are **Architecture Complete — PASS**.
+TA-0 through TA-4 are **Architecture Complete — PASS**.
 
-TA-3 closed with 140 / 140 networking/exploit scenarios passing and a complete Remote contract/validation matrix.
+TA-4 closed with 180 / 180 persistence/recovery scenarios passing, atomic session ownership, P2 durability boundaries and a complete persistence/session/transaction matrix.
 
 The active dependency is:
 
-> **TA-4 — Player Data, Persistence, Session Ownership, Schema Evolution, and Recovery**
+> **TA-5 — Identity, Content Registries, Configuration, and Data-Driven Content**
 
-TA-4 now owns trusted player-session state, persistence, schema evolution and durable idempotency/recovery. Gameplay implementation remains blocked until TA-17.
+TA-5 now owns stable identifiers and validated content/config registries referenced by persistent state and later runtime systems. Gameplay implementation remains blocked until TA-17.
