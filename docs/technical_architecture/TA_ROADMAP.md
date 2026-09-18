@@ -1,6 +1,6 @@
 # Technical Architecture Roadmap
 
-> **Status:** Active — TA-4 Next
+> **Status:** Active — TA-5 Next
 > **Authority:** Dependency-driven technical architecture sequencing
 
 This roadmap defines how the Design Complete MonsterVault GDS is translated into implementation-ready Roblox/Luau contracts.
@@ -149,13 +149,49 @@ Closure evidence:
 
 ## TA-4 — Player Data, Persistence, Session Ownership, Schema Evolution, and Recovery
 
-**Status:** NEXT — Draft
+**Status:** Architecture Complete — PASS
 
-Defines player profile model, DataStore strategy, session locking/ownership, autosave/shutdown behavior, retries, versioned schemas, migrations, corruption/recovery policy, offline progression inputs and observability.
+Established and formally validated:
+
+- standard DataStoreService as durable player-data authority;
+- isolated DEV / STAGING / PRODUCTION persistence domains;
+- one Player Profile Aggregate per user at baseline;
+- monotonic durable profile revision discipline;
+- atomic DataStore metadata session lease through UpdateAsync;
+- fresh-lock respect, stale-lock recovery and ownership-loss fail-closed behavior;
+- trusted load/migrate/validate state machine before gameplay readiness;
+- no blank/default overwrite after load failure;
+- one server-local working profile and one writer queue per player;
+- P0 session-only, P1 buffered-durable and P2 durable-before-final-ack classes;
+- UpdateAsync checkpoint/save/revision pipeline;
+- staggered autosave and lease renewal;
+- leave and BindToClose final-save/unlock ordering;
+- bounded retry/backoff/budget awareness;
+- monotonic schemaVersion and pure sequential migration rules;
+- newer-than-server schema downgrade prevention;
+- corruption classification and controlled DataStore-version recovery;
+- server-owned operation identities and bounded/dedicated dedupe records;
+- single-profile atomicity;
+- explicit no-general-multi-key-transaction boundary;
+- durable transaction-journal primitive for TA-10/TA-11;
+- profile-size/sharding change-control policy;
+- native first-party persistence repository baseline;
+- 180 / 180 TA-4 scenarios PASS;
+- zero TA-4-blocking questions.
+
+Closure evidence:
+
+- [persistence/04_player_data_persistence_session_ownership_schema_evolution_and_recovery.md](persistence/04_player_data_persistence_session_ownership_schema_evolution_and_recovery.md) — Architecture Complete;
+- [TA4_ROBLOX_PERSISTENCE_SNAPSHOT.md](TA4_ROBLOX_PERSISTENCE_SNAPSHOT.md) — PASS;
+- [TA4_PERSISTENCE_SESSION_MATRIX.md](TA4_PERSISTENCE_SESSION_MATRIX.md) — PASS;
+- [TA4_GDS_TRACEABILITY.md](TA4_GDS_TRACEABILITY.md) — PASS;
+- [TA4_SCENARIO_VALIDATION.md](TA4_SCENARIO_VALIDATION.md) — 180 / 180 PASS;
+- [TA4_DECISION_INDEX.md](TA4_DECISION_INDEX.md) — accepted;
+- [TA4_CLOSURE_REPORT.md](TA4_CLOSURE_REPORT.md) — PASS.
 
 ## TA-5 — Identity, Content Registries, Configuration, and Data-Driven Content
 
-**Status:** Blocked
+**Status:** NEXT — Draft
 
 Defines stable IDs for species, creature instances, mutations, items, regions, events and products; data schemas; configuration ownership; content registry/loading; compatibility and validation.
 
@@ -259,10 +295,10 @@ GDS-17 PASS / Design Complete
 
 GDS-17 is **Complete — PASS** and the Game Design Specification is **Design Complete**.
 
-TA-0 through TA-3 are **Architecture Complete — PASS**.
+TA-0 through TA-4 are **Architecture Complete — PASS**.
 
 The active dependency is:
 
-> **TA-4 — Player Data, Persistence, Session Ownership, Schema Evolution, and Recovery**
+> **TA-5 — Identity, Content Registries, Configuration, and Data-Driven Content**
 
-TA-5 through TA-17 remain blocked by dependency order. Gameplay implementation remains blocked until TA-17 is formally complete.
+TA-6 through TA-17 remain blocked by dependency order. Gameplay implementation remains blocked until TA-17 is formally complete.
