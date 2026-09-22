@@ -1,6 +1,6 @@
 # Project MonsterVault Documentation
 
-> **Project phase:** Technical Architecture — TA-0..9 complete / TA-10 next  
+> **Project phase:** Technical Architecture — TA-0..10 complete / TA-11 next  
 > **Implementation status:** Blocked by Technical Architecture and implementation-lock gates
 
 This directory is the authoritative documentation space for Project MonsterVault.
@@ -68,20 +68,21 @@ Technical Architecture completed:
 - **TA-7 — Capture, Creature Ownership, Mutation, and Reward Resolution: Architecture Complete — PASS**
 - **TA-8 — Vault, Economy, Progression, Inventory, and Offline Accrual: Architecture Complete — PASS**
 - **TA-9 — World, Biomes, Spawn Scheduling, Streaming, and Encounter Scaling: Architecture Complete — PASS**
+- **TA-10 — Social Systems, Server Events, Cross-Server Coordination, and Trading: Architecture Complete — PASS**
 
-TA-9 latest evidence:
+TA-10 latest evidence:
 
-- [`technical_architecture/world/09_world_biomes_spawn_scheduling_streaming_and_encounter_scaling.md`](technical_architecture/world/09_world_biomes_spawn_scheduling_streaming_and_encounter_scaling.md);
-- [`technical_architecture/TA9_ROBLOX_WORLD_STREAMING_SPATIAL_SNAPSHOT.md`](technical_architecture/TA9_ROBLOX_WORLD_STREAMING_SPATIAL_SNAPSHOT.md);
-- [`technical_architecture/TA9_WORLD_SPAWN_STREAMING_MATRIX.md`](technical_architecture/TA9_WORLD_SPAWN_STREAMING_MATRIX.md);
-- [`technical_architecture/TA9_GDS_TRACEABILITY.md`](technical_architecture/TA9_GDS_TRACEABILITY.md);
-- [`technical_architecture/TA9_SCENARIO_VALIDATION.md`](technical_architecture/TA9_SCENARIO_VALIDATION.md);
-- [`technical_architecture/TA9_DECISION_INDEX.md`](technical_architecture/TA9_DECISION_INDEX.md);
-- [`technical_architecture/TA9_CLOSURE_REPORT.md`](technical_architecture/TA9_CLOSURE_REPORT.md).
+- [`technical_architecture/social_events_trading/10_social_events_cross_server_coordination_and_trading.md`](technical_architecture/social_events_trading/10_social_events_cross_server_coordination_and_trading.md);
+- [`technical_architecture/TA10_ROBLOX_CROSS_SERVER_TRANSACTION_SNAPSHOT.md`](technical_architecture/TA10_ROBLOX_CROSS_SERVER_TRANSACTION_SNAPSHOT.md);
+- [`technical_architecture/TA10_SOCIAL_EVENT_TRADE_MATRIX.md`](technical_architecture/TA10_SOCIAL_EVENT_TRADE_MATRIX.md);
+- [`technical_architecture/TA10_GDS_TRACEABILITY.md`](technical_architecture/TA10_GDS_TRACEABILITY.md);
+- [`technical_architecture/TA10_SCENARIO_VALIDATION.md`](technical_architecture/TA10_SCENARIO_VALIDATION.md);
+- [`technical_architecture/TA10_DECISION_INDEX.md`](technical_architecture/TA10_DECISION_INDEX.md);
+- [`technical_architecture/TA10_CLOSURE_REPORT.md`](technical_architecture/TA10_CLOSURE_REPORT.md).
 
 The active dependency is:
 
-> **TA-10 — Social Systems, Server Events, Cross-Server Coordination, and Trading**
+> **TA-11 — Monetization, MarketplaceService, Receipt Processing, and Entitlements**
 
 No gameplay implementation should begin until:
 
