@@ -1,6 +1,6 @@
 # Architecture Decisions
 
-> **Status:** Active — TA-0..9 Complete / TA-10 Next
+> **Status:** Active — TA-0..10 Complete / TA-11 Next
 > **Authority:** Accepted technical architecture decisions and rationale
 
 This log records material architecture decisions. GDS-17 has formally promoted the Game Design Specification to Design Complete, so architecture decision-making may now begin under TA-0.
@@ -1531,3 +1531,248 @@ TA-9 is Architecture Complete — PASS with 240/240 scenarios and zero blocking 
 ### Consequence
 
 TA-10 becomes NEXT. Gameplay implementation remains blocked until TA-17.
+
+
+---
+
+## AD-098 — Parties Are Same-Server Transient State
+
+**Date:** 2026-09-23  
+**Status:** Accepted  
+**Owning TA phase:** TA-10
+
+### Decision
+
+Party membership, leadership, invites, Pings and rejoin grace remain bounded server-session state. Persistent outcomes created during social play remain in their owning Player Profile domains.
+
+---
+
+## AD-099 — Social Relationships Never Grant Cross-Player Value Authority
+
+**Date:** 2026-09-23  
+**Status:** Accepted  
+**Owning TA phase:** TA-10
+
+### Decision
+
+Friendship, Party membership, challenges and visitor status cannot mutate another player's ownership, Energy, progression, claims, custody or Vault state.
+
+---
+
+## AD-100 — Shared Social Rewards Are Personal Contribution-Gated P2 Outcomes
+
+**Date:** 2026-09-23  
+**Status:** Accepted  
+**Owning TA phase:** TA-10
+
+### Decision
+
+Shared Objective rewards require server-observed Eligible Contribution and finalize independently/exactly once for each player.
+
+---
+
+## AD-101 — Friendly Challenges Remain Explicit and Non-Destructive
+
+**Date:** 2026-09-23  
+**Status:** Accepted  
+**Owning TA phase:** TA-10
+
+### Decision
+
+Baseline Friendly Challenges are opt-in session competitions with no staking, direct combat, forced movement or persistent-value loss.
+
+---
+
+## AD-102 — EventOccurrence Is the Cross-Server Event Identity
+
+**Date:** 2026-09-23  
+**Status:** Accepted  
+**Owning TA phase:** TA-10
+
+### Decision
+
+EventOccurrenceId identifies one wall-clock occurrence across servers; ServerEventInstanceId identifies only one local realization.
+
+---
+
+## AD-103 — Scheduled Events Reconstruct from Shared Wall Clock
+
+**Date:** 2026-09-23  
+**Status:** Accepted  
+**Owning TA phase:** TA-10
+
+### Decision
+
+Scheduled event phase is derived from validated schedule/config plus server-observed time, so server join/restart cannot reset a live window.
+
+---
+
+## AD-104 — Dynamic Occurrences Require Durable Authority Before Broadcast
+
+**Date:** 2026-09-23  
+**Status:** Accepted  
+**Owning TA phase:** TA-10
+
+### Decision
+
+A dynamically authorized global occurrence must be durably recorded before cross-server notification can make it authoritative.
+
+---
+
+## AD-105 — MessagingService Is Refresh/Notification, Not Durable Truth
+
+**Date:** 2026-09-23  
+**Status:** Accepted  
+**Owning TA phase:** TA-10
+
+### Decision
+
+MessagingService may accelerate occurrence/config propagation, but missed/duplicate/stale messages cannot decide ownership, rewards or occurrence history.
+
+---
+
+## AD-106 — MemoryStore Is Optional Ephemeral Coordination Only
+
+**Date:** 2026-09-23  
+**Status:** Accepted  
+**Owning TA phase:** TA-10
+
+### Decision
+
+MemoryStore may be used for short-lived cache/liveness/coordination after measured justification; TTL expiry/throttling cannot delete durable outcomes.
+
+---
+
+## AD-107 — Event Spawn Modifiers Are Prospective
+
+**Date:** 2026-09-23  
+**Status:** Accepted  
+**Owning TA phase:** TA-10
+
+### Decision
+
+Event modifiers affect future TA-9 Spawn Reservations only and never reroll existing World or Secured Creatures.
+
+---
+
+## AD-108 — Multi-Award Events Create Distinct Personal Creature Instances
+
+**Date:** 2026-09-23  
+**Status:** Accepted  
+**Owning TA phase:** TA-10
+
+### Decision
+
+Every qualified personal event capture opportunity gets its own CreatureInstanceId and Variant Identity. One shared CreatureInstanceId is never multi-owned.
+
+---
+
+## AD-109 — Baseline Trading Is Direct, Bilateral, and Same-Server
+
+**Date:** 2026-09-23  
+**Status:** Accepted  
+**Owning TA phase:** TA-10
+
+### Decision
+
+Both trade participants must be present and eligible in one server. Baseline trading has no offline listing, global market or cross-server negotiation.
+
+---
+
+## AD-110 — Trade Consent Binds One Exact Revision
+
+**Date:** 2026-09-23  
+**Status:** Accepted  
+**Owning TA phase:** TA-10
+
+### Decision
+
+Every semantic offer edit creates a new Trade Revision and clears Ready/Final Confirmation. Commit requires independent Final Confirmation of the same immutable revision.
+
+---
+
+## AD-111 — Trade Negotiation Uses Exact-Instance Runtime Reservations
+
+**Date:** 2026-09-23  
+**Status:** Accepted  
+**Owning TA phase:** TA-10
+
+### Decision
+
+Offered CreatureInstanceIds are reserved in server runtime during negotiation to prevent conflicting same-server mutations without generating DataStore writes for every edit.
+
+---
+
+## AD-112 — Trade Commit Uses a Durable Multi-Profile Transaction Journal
+
+**Date:** 2026-09-23  
+**Status:** Accepted  
+**Owning TA phase:** TA-10
+
+### Decision
+
+Cross-profile Trade Commit uses TA-4's durable transaction store with immutable intent, participant prepare fences, durable decision, idempotent apply and recovery. Sequential unrelated saves are prohibited.
+
+---
+
+## AD-113 — COMMIT_DECIDED Is Irreversible
+
+**Date:** 2026-09-23  
+**Status:** Accepted  
+**Owning TA phase:** TA-10
+
+### Decision
+
+Once both participants are durably prepared and the journal records COMMIT_DECIDED, recovery must finish that exact exchange; ordinary cancellation is no longer valid.
+
+---
+
+## AD-114 — Pending Trade Profiles Are Transaction-Blocked
+
+**Date:** 2026-09-23  
+**Status:** Accepted  
+**Owning TA phase:** TA-10
+
+### Decision
+
+A Player Profile with unresolved pendingTrade cannot expose normal gameplay/value mutations or become Ready until the durable journal resolves.
+
+---
+
+## AD-115 — Participant Apply Moves the Same Creature Record
+
+**Date:** 2026-09-23  
+**Status:** Accepted  
+**Owning TA phase:** TA-10
+
+### Decision
+
+Trade apply transfers the same CreatureInstanceId, immutable Variant and original provenance, adds bounded transfer provenance/cooldown, re-locks Protected Variants and never transfers Energy, Production Buffer or Vault upgrades.
+
+---
+
+## AD-116 — Trade Recovery Does Not Depend on Client Connectivity
+
+**Date:** 2026-09-23  
+**Status:** Accepted  
+**Owning TA phase:** TA-10
+
+### Decision
+
+After a durable transaction decision, participant application can be recovered through transaction-fenced idempotent profile transforms even if one or both clients disconnect or the original server dies.
+
+---
+
+## AD-117 — Close TA-10 and Advance to TA-11
+
+**Date:** 2026-09-23  
+**Status:** Accepted  
+**Owning TA phase:** TA-10
+
+### Decision
+
+TA-10 is Architecture Complete — PASS with 332/332 scenarios and zero blocking questions.
+
+### Consequence
+
+TA-11 becomes NEXT. Gameplay implementation remains blocked until TA-17.
