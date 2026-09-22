@@ -1,6 +1,6 @@
 # Project MonsterVault Documentation
 
-> **Project phase:** Technical Architecture — TA-0..8 complete / TA-9 next  
+> **Project phase:** Technical Architecture — TA-0..9 complete / TA-10 next  
 > **Implementation status:** Blocked by Technical Architecture and implementation-lock gates
 
 This directory is the authoritative documentation space for Project MonsterVault.
@@ -67,20 +67,21 @@ Technical Architecture completed:
 - **TA-6 — Runtime Entity, Player, Creature, and World Lifecycle: Architecture Complete — PASS**
 - **TA-7 — Capture, Creature Ownership, Mutation, and Reward Resolution: Architecture Complete — PASS**
 - **TA-8 — Vault, Economy, Progression, Inventory, and Offline Accrual: Architecture Complete — PASS**
+- **TA-9 — World, Biomes, Spawn Scheduling, Streaming, and Encounter Scaling: Architecture Complete — PASS**
 
-TA-8 latest evidence:
+TA-9 latest evidence:
 
-- [`technical_architecture/economy/08_vault_economy_progression_inventory_and_offline_accrual.md`](technical_architecture/economy/08_vault_economy_progression_inventory_and_offline_accrual.md);
-- [`technical_architecture/TA8_ROBLOX_ECONOMY_TIME_NUMERIC_SNAPSHOT.md`](technical_architecture/TA8_ROBLOX_ECONOMY_TIME_NUMERIC_SNAPSHOT.md);
-- [`technical_architecture/TA8_VAULT_ECONOMY_OFFLINE_MATRIX.md`](technical_architecture/TA8_VAULT_ECONOMY_OFFLINE_MATRIX.md);
-- [`technical_architecture/TA8_GDS_TRACEABILITY.md`](technical_architecture/TA8_GDS_TRACEABILITY.md);
-- [`technical_architecture/TA8_SCENARIO_VALIDATION.md`](technical_architecture/TA8_SCENARIO_VALIDATION.md);
-- [`technical_architecture/TA8_DECISION_INDEX.md`](technical_architecture/TA8_DECISION_INDEX.md);
-- [`technical_architecture/TA8_CLOSURE_REPORT.md`](technical_architecture/TA8_CLOSURE_REPORT.md).
+- [`technical_architecture/world/09_world_biomes_spawn_scheduling_streaming_and_encounter_scaling.md`](technical_architecture/world/09_world_biomes_spawn_scheduling_streaming_and_encounter_scaling.md);
+- [`technical_architecture/TA9_ROBLOX_WORLD_STREAMING_SPATIAL_SNAPSHOT.md`](technical_architecture/TA9_ROBLOX_WORLD_STREAMING_SPATIAL_SNAPSHOT.md);
+- [`technical_architecture/TA9_WORLD_SPAWN_STREAMING_MATRIX.md`](technical_architecture/TA9_WORLD_SPAWN_STREAMING_MATRIX.md);
+- [`technical_architecture/TA9_GDS_TRACEABILITY.md`](technical_architecture/TA9_GDS_TRACEABILITY.md);
+- [`technical_architecture/TA9_SCENARIO_VALIDATION.md`](technical_architecture/TA9_SCENARIO_VALIDATION.md);
+- [`technical_architecture/TA9_DECISION_INDEX.md`](technical_architecture/TA9_DECISION_INDEX.md);
+- [`technical_architecture/TA9_CLOSURE_REPORT.md`](technical_architecture/TA9_CLOSURE_REPORT.md).
 
 The active dependency is:
 
-> **TA-9 — World, Biomes, Spawn Scheduling, Streaming, and Encounter Scaling**
+> **TA-10 — Social Systems, Server Events, Cross-Server Coordination, and Trading**
 
 No gameplay implementation should begin until:
 
