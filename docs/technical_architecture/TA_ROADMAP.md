@@ -1,6 +1,6 @@
 # Technical Architecture Roadmap
 
-> **Status:** Active — TA-10 Next
+> **Status:** Active — TA-11 Next
 > **Authority:** Dependency-driven technical architecture sequencing
 
 This roadmap defines how the Design Complete MonsterVault GDS is translated into implementation-ready Roblox/Luau contracts.
@@ -405,13 +405,50 @@ Closure evidence:
 
 ## TA-10 — Social Systems, Server Events, Cross-Server Coordination, and Trading
 
-**Status:** NEXT — Draft
+**Status:** Architecture Complete — PASS
 
-Defines parties/social state where required, event orchestration, MessagingService/MemoryStore/cross-server needs if justified, safe trading transactions, lock/commit semantics, duplicate prevention and cross-server failure behavior.
+Established and formally validated:
+
+- same-server transient Party identity/membership/leadership/invite/rejoin-grace model;
+- structured bounded Social Pings and read-only Visitor/Showcase boundaries;
+- contribution-gated Shared Objectives and exact-once personal Collaboration Rewards;
+- explicit opt-in non-destructive Friendly Challenges;
+- non-obstructive player collision/body-blocking requirement;
+- stable cross-server EventOccurrence identity separated from ServerEventInstanceId;
+- scheduled event reconstruction from server wall clock and versioned schedule/config;
+- durable authority-before-notification for dynamically authorized occurrences;
+- MessagingService as low-latency refresh/announcement hint rather than durable truth;
+- optional MemoryStore ephemeral cache/coordination only;
+- server-local event lifecycle, Event Zones/Rifts and bounded Event Resolution Grace;
+- prospective Event Spawn Modifiers consuming TA-9 future Spawn Reservations only;
+- exact-once personal event contribution/completion/reward operations;
+- event multi-award generation through distinct personal CreatureInstanceIds;
+- direct bilateral same-server Trade Sessions;
+- exact-instance Trade Reservations;
+- immutable revision-bound Ready and Final Confirmation semantics;
+- full precommit ownership/lock/cooldown/capacity revalidation;
+- durable cross-profile Trade transaction journal;
+- transaction-fenced PREPARE -> ABORT/COMMIT decision -> idempotent participant apply;
+- irreversible/recoverable COMMIT_DECIDED semantics;
+- profile TransactionBlocked state hiding partial backend apply until resolution;
+- exact CreatureInstanceId/Variant/provenance transfer with cooldown and Protected re-lock;
+- no Energy transfer, trade fee, gifting, listing, auction or global marketplace baseline;
+- 332 / 332 TA-10 scenarios PASS;
+- zero TA-10-blocking questions.
+
+Closure evidence:
+
+- [social_events_trading/10_social_events_cross_server_coordination_and_trading.md](social_events_trading/10_social_events_cross_server_coordination_and_trading.md) — Architecture Complete;
+- [TA10_ROBLOX_CROSS_SERVER_TRANSACTION_SNAPSHOT.md](TA10_ROBLOX_CROSS_SERVER_TRANSACTION_SNAPSHOT.md) — PASS;
+- [TA10_SOCIAL_EVENT_TRADE_MATRIX.md](TA10_SOCIAL_EVENT_TRADE_MATRIX.md) — PASS;
+- [TA10_GDS_TRACEABILITY.md](TA10_GDS_TRACEABILITY.md) — PASS;
+- [TA10_SCENARIO_VALIDATION.md](TA10_SCENARIO_VALIDATION.md) — 332 / 332 PASS;
+- [TA10_DECISION_INDEX.md](TA10_DECISION_INDEX.md) — accepted;
+- [TA10_CLOSURE_REPORT.md](TA10_CLOSURE_REPORT.md) — PASS.
 
 ## TA-11 — Monetization, MarketplaceService, Receipt Processing, and Entitlements
 
-**Status:** Blocked
+**Status:** NEXT — Draft
 
 Defines game-pass/product/subscription entitlements if approved, receipt processing, idempotent grants, retry/recovery, purchase-state projection, analytics hooks and separation between premium and earned state.
 
@@ -479,10 +516,10 @@ GDS-17 PASS / Design Complete
 
 GDS-17 is **Complete — PASS** and the Game Design Specification is **Design Complete**.
 
-TA-0 through TA-9 are **Architecture Complete — PASS**.
+TA-0 through TA-10 are **Architecture Complete — PASS**.
 
 The active dependency is:
 
-> **TA-10 — Social Systems, Server Events, Cross-Server Coordination, and Trading**
+> **TA-11 — Monetization, MarketplaceService, Receipt Processing, and Entitlements**
 
-TA-11 through TA-17 remain blocked by dependency order. Gameplay implementation remains blocked until TA-17 is formally complete.
+TA-12 through TA-17 remain blocked by dependency order. Gameplay implementation remains blocked until TA-17 is formally complete.
