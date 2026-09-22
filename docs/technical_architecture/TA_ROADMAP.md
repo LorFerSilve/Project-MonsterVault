@@ -1,6 +1,6 @@
 # Technical Architecture Roadmap
 
-> **Status:** Active — TA-9 Next
+> **Status:** Active — TA-10 Next
 > **Authority:** Dependency-driven technical architecture sequencing
 
 This roadmap defines how the Design Complete MonsterVault GDS is translated into implementation-ready Roblox/Luau contracts.
@@ -364,13 +364,48 @@ Closure evidence:
 
 ## TA-9 — World, Biomes, Spawn Scheduling, Streaming, and Encounter Scaling
 
-**Status:** NEXT — Draft
+**Status:** Architecture Complete — PASS
 
-Defines place/world topology, biome representation, spawn scheduling, spatial partitioning, StreamingEnabled implications, server performance envelopes, rare encounter authority and world-content scalability.
+Established and formally validated:
+
+- one-primary-place launch world with server-authoritative logical Regions;
+- typed Region/Habitat/Landmark/utility/Spawn Context definitions;
+- immutable validated World Authoring Index built from registries and disclosure-safe Studio metadata;
+- server-authoritative Region entitlement enforcement;
+- persistent Landmark, regional collection, Field Objective and Region Mastery evidence;
+- exact-once P2 world progression/reward finalization;
+- deterministic epoch-derived ordinary World Cycle with no server-hop reset;
+- centralized staggered ordinary spawn scheduler;
+- bounded min/base/max encounter population buckets;
+- area dormancy and gradual bounded activation/refill;
+- count-only population scaling with no personalized/spending-based collectible odds;
+- server-side static/coarse spatial indexes plus bounded localized WorldRoot queries;
+- stable Spawn Reservation fixing Spawn Context, Species, CreatureInstanceId and Variant Identity before materialization;
+- projection/placement/streaming retries that preserve identity and cannot reroll;
+- TA-7 acquisition protection against ordinary idle despawn;
+- Protected Variant minimum stability under load;
+- Workspace StreamingEnabled baseline with client residency treated only as presentation/performance state;
+- restrained Default/Atomic/Persistent/PersistentPerPlayer model-streaming policy;
+- server-validated fast travel with optional best-effort target-area stream preparation;
+- server-validated recovery, Secure Point, Vault Access Point and hazard integration;
+- load shedding that reduces ordinary refill before fairness/security/P2 guarantees;
+- no baseline MemoryStore/MessagingService/global coordinator for ordinary encounters;
+- 240 / 240 TA-9 scenarios PASS;
+- zero TA-9-blocking questions.
+
+Closure evidence:
+
+- [world/09_world_biomes_spawn_scheduling_streaming_and_encounter_scaling.md](world/09_world_biomes_spawn_scheduling_streaming_and_encounter_scaling.md) — Architecture Complete;
+- [TA9_ROBLOX_WORLD_STREAMING_SPATIAL_SNAPSHOT.md](TA9_ROBLOX_WORLD_STREAMING_SPATIAL_SNAPSHOT.md) — PASS;
+- [TA9_WORLD_SPAWN_STREAMING_MATRIX.md](TA9_WORLD_SPAWN_STREAMING_MATRIX.md) — PASS;
+- [TA9_GDS_TRACEABILITY.md](TA9_GDS_TRACEABILITY.md) — PASS;
+- [TA9_SCENARIO_VALIDATION.md](TA9_SCENARIO_VALIDATION.md) — 240 / 240 PASS;
+- [TA9_DECISION_INDEX.md](TA9_DECISION_INDEX.md) — accepted;
+- [TA9_CLOSURE_REPORT.md](TA9_CLOSURE_REPORT.md) — PASS.
 
 ## TA-10 — Social Systems, Server Events, Cross-Server Coordination, and Trading
 
-**Status:** Blocked
+**Status:** NEXT — Draft
 
 Defines parties/social state where required, event orchestration, MessagingService/MemoryStore/cross-server needs if justified, safe trading transactions, lock/commit semantics, duplicate prevention and cross-server failure behavior.
 
@@ -444,10 +479,10 @@ GDS-17 PASS / Design Complete
 
 GDS-17 is **Complete — PASS** and the Game Design Specification is **Design Complete**.
 
-TA-0 through TA-8 are **Architecture Complete — PASS**.
+TA-0 through TA-9 are **Architecture Complete — PASS**.
 
 The active dependency is:
 
-> **TA-9 — World, Biomes, Spawn Scheduling, Streaming, and Encounter Scaling**
+> **TA-10 — Social Systems, Server Events, Cross-Server Coordination, and Trading**
 
-TA-10 through TA-17 remain blocked by dependency order. Gameplay implementation remains blocked until TA-17 is formally complete.
+TA-11 through TA-17 remain blocked by dependency order. Gameplay implementation remains blocked until TA-17 is formally complete.
