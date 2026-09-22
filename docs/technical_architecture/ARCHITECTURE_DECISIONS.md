@@ -1,6 +1,6 @@
 # Architecture Decisions
 
-> **Status:** Active — TA-0..8 Complete / TA-9 Next
+> **Status:** Active — TA-0..9 Complete / TA-10 Next
 > **Authority:** Accepted technical architecture decisions and rationale
 
 This log records material architecture decisions. GDS-17 has formally promoted the Game Design Specification to Design Complete, so architecture decision-making may now begin under TA-0.
@@ -1298,3 +1298,236 @@ TA-8 is Architecture Complete — PASS with 220/220 scenarios and zero blocking 
 ### Consequence
 
 TA-9 becomes NEXT. Gameplay implementation remains blocked until TA-17.
+
+
+---
+
+## AD-083 — Keep the Launch World in One Primary Gameplay Place
+
+**Date:** 2026-09-22  
+**Status:** Accepted  
+**Owning TA phase:** TA-9
+
+### Decision
+
+Home Hub, Starter, both Mid Biomes and Advanced Biome are logical Regions inside the primary gameplay place at baseline. Ordinary region progression does not require a cross-place teleport boundary.
+
+### Consequence
+
+World/capture/transport/session semantics remain local to one server process unless a later architecture change explicitly introduces multi-place behavior.
+
+---
+
+## AD-084 — Build an Immutable Validated World Authoring Index
+
+**Date:** 2026-09-22  
+**Status:** Accepted  
+**Owning TA phase:** TA-9
+
+### Decision
+
+Typed content registries plus disclosure-safe Studio tags/attributes are validated at bootstrap into one immutable server-side index of Regions, Habitats, Landmarks, utilities, hazards and spawn scopes.
+
+### Consequence
+
+Workspace names/paths are not semantic authority and invalid required authoring fails bootstrap closed.
+
+---
+
+## AD-085 — Use One Centralized Staggered Ordinary Spawn Scheduler
+
+**Date:** 2026-09-22  
+**Status:** Accepted  
+**Owning TA phase:** TA-9
+
+### Decision
+
+Ordinary spawn work is coordinated through bounded Habitat/area queues rather than one permanent loop per spawn point or creature.
+
+### Consequence
+
+Scheduler work can be staggered, budgeted and load-shed deterministically.
+
+---
+
+## AD-086 — Population Scaling Changes Counts, Not Personalized Odds
+
+**Date:** 2026-09-22  
+**Status:** Accepted  
+**Owning TA phase:** TA-9
+
+### Decision
+
+Player population and server performance may alter encounter counts within authored min/base/max bounds but never alter collectible odds by player, payer state, device or monetization behavior.
+
+### Consequence
+
+Performance/scaling cannot silently become a rarity-personalization system.
+
+---
+
+## AD-087 — Create a Stable Spawn Reservation Before Materialization
+
+**Date:** 2026-09-22  
+**Status:** Accepted  
+**Owning TA phase:** TA-9
+
+### Decision
+
+One Spawn Reservation fixes Spawn Context/config snapshot, Species, CreatureInstanceId and complete TA-7 Variant Identity before Roblox projection materialization.
+
+### Consequence
+
+Placement, projection, streaming and claim retries cannot reroll the same logical creature.
+
+---
+
+## AD-088 — Derive Ordinary World Cycle from a Shared Time Epoch
+
+**Date:** 2026-09-22  
+**Status:** Accepted  
+**Owning TA phase:** TA-9
+
+### Decision
+
+Ordinary World Cycle phase is calculated from server-observed time and a versioned epoch/cycle definition.
+
+### Consequence
+
+Joining or server hopping does not restart a favorable cycle and ordinary cycle operation needs no global coordinator.
+
+---
+
+## AD-089 — Keep Ordinary Encounter Populations Server-Session Local
+
+**Date:** 2026-09-22  
+**Status:** Accepted  
+**Owning TA phase:** TA-9
+
+### Decision
+
+Ordinary public encounters, reservations and population counters live only in the current server session.
+
+### Consequence
+
+MemoryStoreService/MessagingService/global rare-spawn ownership is not a baseline TA-9 dependency; TA-10 may add cross-server coordination only for explicit event/social requirements.
+
+---
+
+## AD-090 — Enable Instance Streaming Without Making It Authority
+
+**Date:** 2026-09-22  
+**Status:** Accepted  
+**Owning TA phase:** TA-9
+
+### Decision
+
+Workspace instance streaming is the baseline for the gameplay place. Client Workspace residency is presentation/performance state only.
+
+### Consequence
+
+Stream-in/out cannot grant or erase access, encounters, progression, rewards, claims or ownership.
+
+---
+
+## AD-091 — Restrict Persistent Model Streaming Modes
+
+**Date:** 2026-09-22  
+**Status:** Accepted  
+**Owning TA phase:** TA-9
+
+### Decision
+
+Default streaming is preferred; Atomic is allowed for self-contained interaction models. Persistent and PersistentPerPlayer require narrow measured justification.
+
+### Consequence
+
+Streaming scalability is not undermined by globally pinning ordinary world content.
+
+---
+
+## AD-092 — Make Fast Travel a Server-Validated State Transition
+
+**Date:** 2026-09-22  
+**Status:** Accepted  
+**Owning TA phase:** TA-9
+
+### Decision
+
+Fast travel validates node discovery, Region access, Character generation and absence of Acquisition-In-Progress. Stream preparation may assist presentation but does not authorize travel.
+
+---
+
+## AD-093 — Index Space Before Running Bounded Physics Queries
+
+**Date:** 2026-09-22  
+**Status:** Accepted  
+**Owning TA phase:** TA-9
+
+### Decision
+
+Static authored data is indexed at bootstrap and relevant dynamic state uses coarse spatial buckets. Localized WorldRoot queries follow candidate narrowing.
+
+### Consequence
+
+TA-9 prohibits global per-frame Workspace scans as the ordinary scheduling architecture.
+
+---
+
+## AD-094 — Finalize Valuable World Progression as Exact-Once P2 State
+
+**Date:** 2026-09-22  
+**Status:** Accepted  
+**Owning TA phase:** TA-9
+
+### Decision
+
+Landmark Discovery, final Field Objective completion, Region Mastery and attached one-time world rewards use stable operation identities and P2 Player Profile commits.
+
+### Consequence
+
+Reconnect, duplicate triggers and lost responses cannot duplicate persistent progression or Energy.
+
+---
+
+## AD-095 — Keep Hazard Consequences Server-Validated
+
+**Date:** 2026-09-22  
+**Status:** Accepted  
+**Owning TA phase:** TA-9
+
+### Decision
+
+Client reports and physics/Touched signals may inform hazard handling but are not sole authority. Hazard recovery is revision/generation aware and delegates acquisition effects to TA-7.
+
+### Consequence
+
+Hazards cannot become a client-authoritative value/progression mutation path.
+
+---
+
+## AD-096 — Load Shedding Preserves Fairness and Valuable State
+
+**Date:** 2026-09-22  
+**Status:** Accepted  
+**Owning TA phase:** TA-9
+
+### Decision
+
+Under pressure, MonsterVault defers ordinary scheduler work and reduces refill/optional updates before weakening access validation, P2 correctness, active acquisition protection or Protected Variant stability.
+
+---
+
+## AD-097 — Close TA-9 and Advance to TA-10
+
+**Date:** 2026-09-22  
+**Status:** Accepted  
+**Owning TA phase:** TA-9
+
+### Decision
+
+TA-9 is Architecture Complete — PASS with 240/240 scenarios and zero blocking questions.
+
+### Consequence
+
+TA-10 becomes NEXT. Gameplay implementation remains blocked until TA-17.
