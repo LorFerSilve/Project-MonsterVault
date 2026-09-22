@@ -1,6 +1,6 @@
 # MonsterVault Technical Architecture
 
-> **Status:** Active — TA-0..8 Complete / TA-9 Next
+> **Status:** Active — TA-0..9 Complete / TA-10 Next
 > **Authority:** Technical implementation contracts after GDS completion
 
 This directory contains the Technical Architecture layer that now becomes active after the GDS-17 Design Complete PASS.
@@ -30,6 +30,8 @@ The TA is deliberately not allowed to redefine gameplay. It translates the appro
 - [`TA7_CAPTURE_VARIANT_FINALIZATION_MATRIX.md`](TA7_CAPTURE_VARIANT_FINALIZATION_MATRIX.md) locks claim, Variant and P2 finalization boundaries.
 - [`economy/08_vault_economy_progression_inventory_and_offline_accrual.md`](economy/08_vault_economy_progression_inventory_and_offline_accrual.md) is the authoritative TA-8 Vault/economy/offline-accrual contract.
 - [`TA8_VAULT_ECONOMY_OFFLINE_MATRIX.md`](TA8_VAULT_ECONOMY_OFFLINE_MATRIX.md) locks capacity, numeric, production, wallet and purchase boundaries.
+- [`world/09_world_biomes_spawn_scheduling_streaming_and_encounter_scaling.md`](world/09_world_biomes_spawn_scheduling_streaming_and_encounter_scaling.md) is the authoritative TA-9 world/spawn/streaming contract.
+- [`TA9_WORLD_SPAWN_STREAMING_MATRIX.md`](TA9_WORLD_SPAWN_STREAMING_MATRIX.md) locks world authority, scheduling, streaming, progression and failure boundaries.
 - [`TA_ROADMAP.md`](TA_ROADMAP.md) defines the dependency-driven architecture sequence.
 - `audit/` will contain the final TA-16 integration/readiness evidence.
 
@@ -37,12 +39,12 @@ The TA is deliberately not allowed to redefine gameplay. It translates the appro
 
 GDS-17 has recorded a formal **Design Complete — PASS** with zero implementation-critical design questions.
 
-TA-0 through TA-8 are **Architecture Complete — PASS**.
+TA-0 through TA-9 are **Architecture Complete — PASS**.
 
-TA-8 closed with 220 / 220 Vault/economy/offline-accrual scenarios passing and a bounded integer, elapsed-time, exact-once transaction model.
+TA-9 closed with 240 / 240 world/spawn/streaming/scaling scenarios passing and a bounded scheduler, stable Spawn Reservation, streaming-safe authority and exact-once world progression model.
 
 The active dependency is:
 
-> **TA-9 — World, Biomes, Spawn Scheduling, Streaming, and Encounter Scaling**
+> **TA-10 — Social Systems, Server Events, Cross-Server Coordination, and Trading**
 
-TA-9 now owns the server world topology, spawn scheduler, spatial/streaming strategy and encounter-population scaling that consume TA-5 content, TA-6 runtime entities, TA-7 capture and TA-8 progression/access state. Gameplay implementation remains blocked until TA-17.
+TA-10 now owns social state, server-event orchestration, justified cross-server coordination and trading transactions on top of the closed TA-9 world/runtime primitives. Gameplay implementation remains blocked until TA-17.
