@@ -1,6 +1,6 @@
 # MonsterVault Technical Architecture
 
-> **Status:** Active — TA-0..9 Complete / TA-10 Next
+> **Status:** Active — TA-0..10 Complete / TA-11 Next
 > **Authority:** Technical implementation contracts after GDS completion
 
 This directory contains the Technical Architecture layer that now becomes active after the GDS-17 Design Complete PASS.
@@ -32,6 +32,8 @@ The TA is deliberately not allowed to redefine gameplay. It translates the appro
 - [`TA8_VAULT_ECONOMY_OFFLINE_MATRIX.md`](TA8_VAULT_ECONOMY_OFFLINE_MATRIX.md) locks capacity, numeric, production, wallet and purchase boundaries.
 - [`world/09_world_biomes_spawn_scheduling_streaming_and_encounter_scaling.md`](world/09_world_biomes_spawn_scheduling_streaming_and_encounter_scaling.md) is the authoritative TA-9 world/spawn/streaming contract.
 - [`TA9_WORLD_SPAWN_STREAMING_MATRIX.md`](TA9_WORLD_SPAWN_STREAMING_MATRIX.md) locks world authority, scheduling, streaming, progression and failure boundaries.
+- [`social_events_trading/10_social_events_cross_server_coordination_and_trading.md`](social_events_trading/10_social_events_cross_server_coordination_and_trading.md) is the authoritative TA-10 social/event/trade architecture contract.
+- [`TA10_SOCIAL_EVENT_TRADE_MATRIX.md`](TA10_SOCIAL_EVENT_TRADE_MATRIX.md) locks social state, event authority, cross-server coordination and trade transaction boundaries.
 - [`TA_ROADMAP.md`](TA_ROADMAP.md) defines the dependency-driven architecture sequence.
 - `audit/` will contain the final TA-16 integration/readiness evidence.
 
@@ -39,12 +41,12 @@ The TA is deliberately not allowed to redefine gameplay. It translates the appro
 
 GDS-17 has recorded a formal **Design Complete — PASS** with zero implementation-critical design questions.
 
-TA-0 through TA-9 are **Architecture Complete — PASS**.
+TA-0 through TA-10 are **Architecture Complete — PASS**.
 
-TA-9 closed with 240 / 240 world/spawn/streaming/scaling scenarios passing and a bounded scheduler, stable Spawn Reservation, streaming-safe authority and exact-once world progression model.
+TA-10 closed with 332 / 332 social/event/cross-server/trade scenarios passing and a contribution-gated social model, stable global Event Occurrences, durable-notification separation and recoverable journaled multi-profile trade protocol.
 
 The active dependency is:
 
-> **TA-10 — Social Systems, Server Events, Cross-Server Coordination, and Trading**
+> **TA-11 — Monetization, MarketplaceService, Receipt Processing, and Entitlements**
 
-TA-10 now owns social state, server-event orchestration, justified cross-server coordination and trading transactions on top of the closed TA-9 world/runtime primitives. Gameplay implementation remains blocked until TA-17.
+TA-11 now owns MarketplaceService receipt authority, idempotent commercial grants and entitlement projection on top of the closed TA-10 social/event/trade boundaries. Gameplay implementation remains blocked until TA-17.
