@@ -4,7 +4,7 @@
 
 ## Project Status
 
-**Game Design Specification — DESIGN COMPLETE / Technical Architecture TA-0..8 complete / TA-9 next.**
+**Game Design Specification — DESIGN COMPLETE / Technical Architecture TA-0..9 complete / TA-10 next.**
 
 MonsterVault is intentionally **not in gameplay implementation yet**. The project follows a specification-first workflow:
 
@@ -49,7 +49,8 @@ No gameplay system should be implemented merely because an idea appears promisin
 - **TA-6 — Runtime Entity, Player, Creature, and World Lifecycle: ARCHITECTURE COMPLETE — PASS**
 - **TA-7 — Capture, Creature Ownership, Mutation, and Reward Resolution: ARCHITECTURE COMPLETE — PASS**
 - **TA-8 — Vault, Economy, Progression, Inventory, and Offline Accrual: ARCHITECTURE COMPLETE — PASS**
-- **TA-9 — World, Biomes, Spawn Scheduling, Streaming, and Encounter Scaling: NEXT**
+- **TA-9 — World, Biomes, Spawn Scheduling, Streaming, and Encounter Scaling: ARCHITECTURE COMPLETE — PASS**
+- **TA-10 — Social Systems, Server Events, Cross-Server Coordination, and Trading: NEXT**
 - Gameplay implementation: blocked by TA and implementation-lock gates
 
 GDS-17 final evidence is recorded in [`17_cross_system_consistency_and_design_complete_audit.md`](docs/game_design/audit/17_cross_system_consistency_and_design_complete_audit.md), [`GDS17_AUTHORITY_NAMESPACE_AUDIT.md`](docs/game_design/GDS17_AUTHORITY_NAMESPACE_AUDIT.md), [`GDS17_MATURITY_OPEN_QUESTION_AUDIT.md`](docs/game_design/GDS17_MATURITY_OPEN_QUESTION_AUDIT.md), [`GDS17_COMPOUND_SCENARIO_VALIDATION.md`](docs/game_design/GDS17_COMPOUND_SCENARIO_VALIDATION.md), [`GDS17_DECISION_INDEX.md`](docs/game_design/GDS17_DECISION_INDEX.md), and [`GDS17_CLOSURE_REPORT.md`](docs/game_design/GDS17_CLOSURE_REPORT.md).
@@ -443,9 +444,9 @@ Key documents include:
 
 ### Technical Architecture
 
-[`docs/technical_architecture/`](docs/technical_architecture/) is **ACTIVE — TA-0..8 COMPLETE / TA-9 NEXT**.
+[`docs/technical_architecture/`](docs/technical_architecture/) is **ACTIVE — TA-0..9 COMPLETE / TA-10 NEXT**.
 
-TA-0 established governance/traceability, TA-1 locked the Roblox environment/toolchain, TA-2 locked structural boundaries, TA-3 locked networking trust, TA-4 locked persistence/session durability, TA-5 locked identity/content registries, TA-6 locked runtime lifecycle, and TA-7 locked capture/ownership resolution. TA-8 has now locked exact collection/Vault state, deterministic non-destructive capacity reconciliation, bounded integer Energy, fixed-point passive production, online/offline elapsed-time settlement and atomic progression transactions. TA-9 now owns world topology, spawn scheduling, streaming and encounter scaling.
+TA-0 established governance/traceability, TA-1 locked the Roblox environment/toolchain, TA-2 locked structural boundaries, TA-3 locked networking trust, TA-4 locked persistence/session durability, TA-5 locked identity/content registries, TA-6 locked runtime lifecycle, TA-7 locked capture/ownership resolution, and TA-8 locked collection/Vault/economy semantics. TA-9 has now locked world topology, deterministic World Cycle, bounded spawn scheduling, stable Spawn Reservations, streaming-safe authority, persistent world progression and load-shedding/fairness boundaries. TA-10 now owns social systems, server events, cross-server coordination and trading.
 
 TA-0 closure evidence:
 
@@ -525,6 +526,15 @@ TA-8 closure evidence:
 - [`TA8_SCENARIO_VALIDATION.md`](docs/technical_architecture/TA8_SCENARIO_VALIDATION.md) — 220 / 220 PASS;
 - [`TA8_DECISION_INDEX.md`](docs/technical_architecture/TA8_DECISION_INDEX.md);
 - [`TA8_CLOSURE_REPORT.md`](docs/technical_architecture/TA8_CLOSURE_REPORT.md) — PASS.
+TA-9 closure evidence:
+
+- [`world/09_world_biomes_spawn_scheduling_streaming_and_encounter_scaling.md`](docs/technical_architecture/world/09_world_biomes_spawn_scheduling_streaming_and_encounter_scaling.md);
+- [`TA9_ROBLOX_WORLD_STREAMING_SPATIAL_SNAPSHOT.md`](docs/technical_architecture/TA9_ROBLOX_WORLD_STREAMING_SPATIAL_SNAPSHOT.md);
+- [`TA9_WORLD_SPAWN_STREAMING_MATRIX.md`](docs/technical_architecture/TA9_WORLD_SPAWN_STREAMING_MATRIX.md);
+- [`TA9_GDS_TRACEABILITY.md`](docs/technical_architecture/TA9_GDS_TRACEABILITY.md);
+- [`TA9_SCENARIO_VALIDATION.md`](docs/technical_architecture/TA9_SCENARIO_VALIDATION.md) — 240 / 240 PASS;
+- [`TA9_DECISION_INDEX.md`](docs/technical_architecture/TA9_DECISION_INDEX.md);
+- [`TA9_CLOSURE_REPORT.md`](docs/technical_architecture/TA9_CLOSURE_REPORT.md) — PASS.
 ### Implementation
 
 [`docs/implementation/`](docs/implementation/) remains intentionally **BLOCKED**.
@@ -580,7 +590,7 @@ TA-2 has locked this as the future implementation structure, but the source scaf
 
 ## Current Next Step
 
-Proceed with **TA-9 — World, Biomes, Spawn Scheduling, Streaming, and Encounter Scaling**.
+Proceed with **TA-10 — Social Systems, Server Events, Cross-Server Coordination, and Trading**.
 
 The first implementation vertical slice will be selected and locked only after the complete design and architecture dependency chain makes its requirements clear.
 
