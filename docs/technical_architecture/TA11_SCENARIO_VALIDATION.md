@@ -91,7 +91,7 @@ TA-11 validates semantic product identity, platform binding, pass ownership, rec
 | # | Situation | Required behavior | Result |
 |---:|---|---|---|
 | 61 | known receipt for Ready player | journal/apply/finalize | PASS |
-| 62 | same PurchaseId twice | one identity | PASS |
+| 62 | same PurchaseId is redelivered later or on another server | compare stable receipt-derived facts only; retain create-time firstSeenAt metadata and process idempotently | PASS |
 | 63 | PromptProductPurchaseFinished true | no grant | PASS |
 | 64 | prompt event false | no grant | PASS |
 | 65 | player absent | NotProcessedYet | PASS |
