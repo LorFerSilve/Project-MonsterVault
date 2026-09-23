@@ -5,7 +5,7 @@
 
 ## TA10-D01 — Parties Are Same-Server Transient State
 
-**Decision:** Party membership, leadership, invites, pings and rejoin grace are P0 server-session state. Persistent player outcomes produced during social play live in their owning Player Profile domains.
+**Decision:** Party membership, leadership, invites, pings and rejoin grace are P0 server-session state. Party-local mutations serialize by PartyId, while affiliation transitions additionally serialize through a participant-scoped membership guard/index so one player cannot concurrently join two Parties. Persistent player outcomes produced during social play live in their owning Player Profile domains.
 
 ---
 
@@ -89,7 +89,7 @@
 
 ## TA10-D15 — Trade Commit Uses a Durable Multi-Profile Journal Protocol
 
-**Decision:** TA-10 uses TA-4's transaction-store primitive with participant prepare fences, immutable commit/abort decision, idempotent participant apply and recovery. Sequential unrelated profile writes are not accepted as atomic trade.
+**Decision:** TA-10 uses TA-4's transaction-store primitive with participant prepare fences, immutable commit/abort decision, idempotent participant apply and recovery. Every participant write continues to obey TA-4 lease ownership/single-writer serialization; sequential unrelated profile writes are not accepted as atomic trade.
 
 ---
 
@@ -101,7 +101,7 @@
 
 ## TA10-D17 — Pending Trade Profiles Are Transaction-Blocked
 
-**Decision:** A profile with unresolved pendingTrade cannot become normal gameplay Ready or execute conflicting irreversible mutations until journal resolution prevents partial backend apply from becoming partial gameplay state.
+**Decision:** A profile with unresolved pendingTrade cannot become normal gameplay Ready or execute conflicting irreversible mutations. An APPLIED participant retains its transaction fence until both applies are acknowledged, the journal reaches FINALIZED_COMMIT, and authorized profile reconciliation clears the marker.
 
 ---
 
@@ -113,10 +113,10 @@
 
 ## TA10-D19 — Trade Recovery Does Not Require Connected Clients
 
-**Decision:** Journal recovery can complete participant transforms after disconnect/server crash through transaction-fenced idempotent UpdateAsync operations.
+**Decision:** Journal recovery can complete participant transforms without connected clients, but it never bypasses TA-4 profile authority: a live lease routes recovery through the lease-owner writer queue, while an absent owner requires legal stale/expired-lease recovery ownership before UpdateAsync.
 
 ---
 
 ## TA10-D20 — Close TA-10 and Advance to TA-11
 
-**Decision:** TA-10 is Architecture Complete — PASS with 332/332 scenarios and zero blocking questions. TA-11 becomes NEXT; gameplay implementation remains blocked until TA-17.
+**Decision:** TA-10 is Architecture Complete — PASS with 335/335 scenarios and zero blocking questions. TA-11 becomes NEXT; gameplay implementation remains blocked until TA-17.

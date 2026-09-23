@@ -1543,7 +1543,7 @@ TA-10 becomes NEXT. Gameplay implementation remains blocked until TA-17.
 
 ### Decision
 
-Party membership, leadership, invites, Pings and rejoin grace remain bounded server-session state. Persistent outcomes created during social play remain in their owning Player Profile domains.
+Party membership, leadership, invites, Pings and rejoin grace remain bounded server-session state. Party affiliation transitions additionally serialize through a participant-scoped membership guard/index so independent Party queues cannot admit one player concurrently. Persistent outcomes created during social play remain in their owning Player Profile domains.
 
 ---
 
@@ -1711,7 +1711,7 @@ Offered CreatureInstanceIds are reserved in server runtime during negotiation to
 
 ### Decision
 
-Cross-profile Trade Commit uses TA-4's durable transaction store with immutable intent, participant prepare fences, durable decision, idempotent apply and recovery. Sequential unrelated saves are prohibited.
+Cross-profile Trade Commit uses TA-4's durable transaction store with immutable intent, participant prepare fences, durable decision, idempotent apply and recovery. Participant writes continue to obey TA-4 lease ownership and its single-writer queue; sequential unrelated saves are prohibited.
 
 ---
 
@@ -1735,7 +1735,7 @@ Once both participants are durably prepared and the journal records COMMIT_DECID
 
 ### Decision
 
-A Player Profile with unresolved pendingTrade cannot expose normal gameplay/value mutations or become Ready until the durable journal resolves.
+A Player Profile with unresolved pendingTrade cannot expose normal gameplay/value mutations or become Ready until the durable journal resolves. A participant already marked APPLIED retains the matching transaction fence until both applies are acknowledged, FINALIZED_COMMIT is durable, and authorized reconciliation clears it.
 
 ---
 
@@ -1759,7 +1759,7 @@ Trade apply transfers the same CreatureInstanceId, immutable Variant and origina
 
 ### Decision
 
-After a durable transaction decision, participant application can be recovered through transaction-fenced idempotent profile transforms even if one or both clients disconnect or the original server dies.
+After a durable transaction decision, participant application can be recovered even if clients disconnect or the original server dies, but recovery never bypasses a live profile lease: it routes through the lease-owning writer queue or first acquires legal profile authority under TA-4 stale/expired-lease rules.
 
 ---
 
@@ -1771,7 +1771,7 @@ After a durable transaction decision, participant application can be recovered t
 
 ### Decision
 
-TA-10 is Architecture Complete — PASS with 332/332 scenarios and zero blocking questions.
+TA-10 is Architecture Complete — PASS with 335/335 scenarios and zero blocking questions.
 
 ### Consequence
 

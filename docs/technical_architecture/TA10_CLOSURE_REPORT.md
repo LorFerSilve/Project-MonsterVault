@@ -43,14 +43,14 @@ It defines:
 | TA10_ROBLOX_CROSS_SERVER_TRANSACTION_SNAPSHOT.md | PASS |
 | TA10_SOCIAL_EVENT_TRADE_MATRIX.md | PASS |
 | TA10_GDS_TRACEABILITY.md | PASS |
-| TA10_SCENARIO_VALIDATION.md | 332 / 332 PASS |
+| TA10_SCENARIO_VALIDATION.md | 335 / 335 PASS |
 | TA10_DECISION_INDEX.md | Accepted |
 | Blocking TA-10 questions | 0 |
 | Unresolved upstream conflicts | 0 |
 
 ## 3. Social Result
 
-Parties remain explicit, bounded, same-server transient coordination state.
+Parties remain explicit, bounded, same-server transient coordination state. Party-local changes serialize by PartyId, while affiliation transitions also serialize by participant membership guard/index so concurrent cross-Party accepts cannot create dual membership.
 
 No social relation grants authority over another player's value.
 
@@ -99,11 +99,12 @@ TA-10 therefore uses:
 1. durable immutable journal intent;
 2. participant prepare fences;
 3. durable ABORT_DECIDED or COMMIT_DECIDED;
-4. idempotent participant apply;
-5. transaction-blocked profiles until resolution;
-6. final terminal journal state.
+4. idempotent participant apply through the TA-4 lease-owning single-writer path;
+5. persistent pendingTrade/APPLIED fences that remain transaction-blocking after a participant apply;
+6. FINALIZED_COMMIT only after both participant applies are durably acknowledged;
+7. authorized post-finalization profile reconciliation that clears the fences before gameplay Ready.
 
-COMMIT_DECIDED is irreversible and recoverable without connected clients.
+COMMIT_DECIDED is irreversible and recoverable without connected clients. Recovery routes through a live lease owner's writer queue or first acquires legal profile authority under TA-4 stale/expired-lease rules.
 
 Partial infrastructure progress never becomes partially usable gameplay state.
 

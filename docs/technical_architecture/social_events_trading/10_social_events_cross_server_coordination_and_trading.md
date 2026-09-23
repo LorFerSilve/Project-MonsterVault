@@ -102,7 +102,11 @@ Party state is never persisted in Player Profile.
 
 ## 5. Party Mutation Serialization
 
-Party mutations are serialized by PartyId through one server-owned mutation queue/critical section.
+Party-local mutations are serialized by PartyId through one server-owned mutation queue/critical section.
+
+Any mutation that can change a player's Party affiliation additionally acquires a participant-scoped membership guard keyed by UserId against one server-owned membership index. This prevents the same player from concurrently joining two different Parties whose PartyId queues are otherwise independent.
+
+When an operation spans a participant guard and one or more Party queues, locks/guards are acquired in deterministic key order and released in reverse order so cross-Party admission cannot deadlock.
 
 Operations include:
 
@@ -122,6 +126,14 @@ Two simultaneous accept operations cannot overfill the four-seat cap.
 ### PARTY-10-07
 
 Deterministic leader succession uses join sequence among remaining eligible members.
+
+### PARTY-10-08
+
+A Party acceptance/rejoin must atomically validate and transition the server membership index while holding the participant-scoped membership guard.
+
+### PARTY-10-09
+
+Two concurrent valid invitations for the same player into different Parties can produce at most one membership transition; the loser revalidates the membership index and fails safely.
 
 ## 6. Party Rejoin Grace
 
@@ -789,8 +801,9 @@ The transform:
 - re-locks incoming Protected Variants;
 - finalizes applicable collection Discovery;
 - leaves Energy/Production Buffer/Vault upgrades unchanged;
-- marks participant apply result;
-- clears/terminalizes the transaction fence.
+- marks participant apply result as APPLIED for the exact transaction/hash;
+- retains the pendingTrade transaction fence/terminal applied marker while the journal is not yet FINALIZED_COMMIT;
+- clears the fence only during post-finalization reconciliation after the journal proves both participant applies are durably acknowledged.
 
 ### APPLY-10-01
 
@@ -803,6 +816,10 @@ Applying twice produces the same terminal participant state.
 ### APPLY-10-03
 
 Incoming creatures are not auto-assigned to Production/Display.
+
+### APPLY-10-04
+
+An APPLIED participant remains TransactionBlocked until the journal reaches FINALIZED_COMMIT and the profile reconciles/clears the matching transaction fence. Participant apply success alone never exposes a half-applied trade as normal gameplay state.
 
 ## 36. Logical Atomicity During Partial Infrastructure Apply
 
@@ -818,17 +835,25 @@ On load, pendingTrade must resolve against the durable journal before profile Re
 
 ### ATOMIC-10-03
 
-After COMMIT_DECIDED, a transaction-aware recovery worker may apply the matching participant transform even after original server failure.
+After COMMIT_DECIDED, transaction recovery may continue without connected clients, but every participant profile mutation still obeys TA-4 session ownership and its single-writer pipeline.
 
 ### ATOMIC-10-04
 
-Multiple recovery workers may race only through idempotent UpdateAsync transforms against the same transaction fence; ordinary profile writers remain blocked until resolution.
+If a participant has a valid live or unexpired profile lease, recovery is routed through that lease owner's profile writer queue. An external worker must not directly UpdateAsync the profile behind the owner's in-memory aggregate.
 
-This is a narrow transaction-fenced exception to normal one-writer gameplay mutation, not a general multi-writer model.
+### ATOMIC-10-05
+
+If the original owner is unavailable, another worker may mutate the participant only after TA-4's stale/expired-lease rules allow it to atomically acquire recovery/session ownership and reconcile the latest durable profile revision.
+
+### ATOMIC-10-06
+
+A participant already marked APPLIED retains its matching pendingTrade/APPLIED fence and remains TransactionBlocked until both participant applies are acknowledged, the journal reaches FINALIZED_COMMIT, and post-finalization reconciliation clears the fence.
+
+Idempotence makes duplicate attempts safe after legal profile authority is established; it is not permission for concurrent writers. TA-10 creates no exception to TA-4's lease-owning single-writer model.
 
 ## 37. Trade Finalization
 
-After both participant applies are durably acknowledged, the journal transitions to FINALIZED_COMMIT.
+After both participant applies are durably acknowledged, the journal transitions to FINALIZED_COMMIT. Each participant profile then reconciles that terminal journal state through its authorized TA-4 writer, clears the matching pendingTrade/APPLIED fence idempotently, and only then may become normal gameplay Ready.
 
 For abort, both prepared markers must be cleared before FINALIZED_ABORT where possible; load recovery treats an ABORT_DECIDED marker as mandatory cleanup before Ready.
 
@@ -928,11 +953,19 @@ Crash after COMMIT_DECIDED: finish both participant applies.
 
 ### RECOVER-10-05
 
-Crash after one participant applied: second participant remains blocked until apply completes; first cannot trigger duplicate transfer.
+Crash after one participant applied: both participant profiles remain transaction-blocked; the applied participant retains its APPLIED fence while recovery completes the second apply and journal finalization.
 
 ### RECOVER-10-06
 
 Reconnect reads journal/profile state and exposes only authoritative terminal/pending result.
+
+### RECOVER-10-07
+
+If recovery finds an active/unexpired participant profile lease, it routes apply/cleanup through the lease-owning server writer queue rather than racing a direct external UpdateAsync.
+
+### RECOVER-10-08
+
+If the lease owner is gone, recovery waits for or atomically acquires profile authority under TA-4 lease rules before applying and reconciling the transaction.
 
 ## 43. Trade Session and Server Shutdown
 

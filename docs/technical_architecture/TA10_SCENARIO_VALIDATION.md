@@ -2,7 +2,7 @@
 
 > **Phase:** TA-10 — Social Systems, Server Events, Cross-Server Coordination, and Trading  
 > **Status:** PASS  
-> **Scenario count:** 332 / 332 PASS
+> **Scenario count:** 335 / 335 PASS
 
 TA-10 validation covers Party/social lifecycle, cooperative contribution, events, cross-server coordination, multi-award encounters, same-server trade consent, durable multi-profile transaction recovery, capacity/provenance/cooldown semantics, service failures and shutdown.
 
@@ -354,11 +354,11 @@ TA-10 validation covers Party/social lifecycle, cooperative contribution, events
 | 257 | A prepared, B not prepared, crash | recover abort/cleanup | PASS |
 | 258 | both prepared, no decision, crash | recover decision only after validating same immutable intent or abort | PASS |
 | 259 | COMMIT_DECIDED, neither applied | recover both | PASS |
-| 260 | A applied, B pending | B remains blocked; recover B | PASS |
+| 260 | A applied, B pending | A retains APPLIED transaction fence and remains blocked; recover B before finalization | PASS |
 | 261 | B reconnects while pending | resolve journal before Ready | PASS |
-| 262 | A reconnects after applied but journal not final | reconcile pending/final state before normal gameplay | PASS |
-| 263 | two recovery workers target A | UpdateAsync fence makes duplicate apply harmless | PASS |
-| 264 | ordinary writer races recovery | pendingTrade blocks ordinary mutation | PASS |
+| 262 | A reconnects after applied but journal not final | keep A transaction-blocked until FINALIZED_COMMIT and fence reconciliation | PASS |
+| 263 | two recovery workers target A | only current/acquired profile authority may write; duplicate legal attempts are idempotent | PASS |
+| 264 | ordinary writer races recovery | lease owner serializes through the profile writer queue; pendingTrade blocks gameplay mutation | PASS |
 | 265 | journal FINALIZED_COMMIT but stale pending marker remains | cleanup/reconcile before Ready | PASS |
 | 266 | journal ABORT_DECIDED but marker remains | clear marker before Ready | PASS |
 | 267 | journal missing unexpectedly for pending profile | QUARANTINED/protected recovery | PASS |
@@ -447,6 +447,9 @@ TA-10 validation covers Party/social lifecycle, cooperative contribution, events
 | 330 | TA-14 changes quotas/timeouts | semantic invariants remain | PASS |
 | 331 | TA-15 fault tests every journal cut point | required downstream | PASS |
 | 332 | operator sees QUARANTINED transaction | requires protected recovery rather than silent mutation | PASS |
+| 333 | same player concurrently accepts invites to two different Parties | participant-scoped membership guard/index serializes admission; at most one Party membership succeeds | PASS |
+| 334 | participant A is APPLIED while participant B is still pending | A retains matching pendingTrade/APPLIED fence and cannot become gameplay Ready before FINALIZED_COMMIT reconciliation | PASS |
+| 335 | recovery targets a participant with a live/unexpired profile lease | route through lease-owner writer queue; otherwise wait for/atomically acquire TA-4 profile authority before UpdateAsync | PASS |
 
 ## Verdict
 
