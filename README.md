@@ -4,7 +4,7 @@
 
 ## Project Status
 
-**Game Design Specification — DESIGN COMPLETE / Technical Architecture TA-0..10 complete / TA-11 next.**
+**Game Design Specification — DESIGN COMPLETE / Technical Architecture TA-0..11 complete / TA-12 next.**
 
 MonsterVault is intentionally **not in gameplay implementation yet**. The project follows a specification-first workflow:
 
@@ -51,7 +51,8 @@ No gameplay system should be implemented merely because an idea appears promisin
 - **TA-8 — Vault, Economy, Progression, Inventory, and Offline Accrual: ARCHITECTURE COMPLETE — PASS**
 - **TA-9 — World, Biomes, Spawn Scheduling, Streaming, and Encounter Scaling: ARCHITECTURE COMPLETE — PASS**
 - **TA-10 — Social Systems, Server Events, Cross-Server Coordination, and Trading: ARCHITECTURE COMPLETE — PASS**
-- **TA-11 — Monetization, MarketplaceService, Receipt Processing, and Entitlements: NEXT**
+- **TA-11 — Monetization, MarketplaceService, Receipt Processing, and Entitlements: ARCHITECTURE COMPLETE — PASS**
+- **TA-12 — Client Presentation, UI State, Input, Camera, Audio, and Accessibility: NEXT**
 - Gameplay implementation: blocked by TA and implementation-lock gates
 
 GDS-17 final evidence is recorded in [`17_cross_system_consistency_and_design_complete_audit.md`](docs/game_design/audit/17_cross_system_consistency_and_design_complete_audit.md), [`GDS17_AUTHORITY_NAMESPACE_AUDIT.md`](docs/game_design/GDS17_AUTHORITY_NAMESPACE_AUDIT.md), [`GDS17_MATURITY_OPEN_QUESTION_AUDIT.md`](docs/game_design/GDS17_MATURITY_OPEN_QUESTION_AUDIT.md), [`GDS17_COMPOUND_SCENARIO_VALIDATION.md`](docs/game_design/GDS17_COMPOUND_SCENARIO_VALIDATION.md), [`GDS17_DECISION_INDEX.md`](docs/game_design/GDS17_DECISION_INDEX.md), and [`GDS17_CLOSURE_REPORT.md`](docs/game_design/GDS17_CLOSURE_REPORT.md).
@@ -545,6 +546,15 @@ TA-10 closure evidence:
 - [`TA10_SCENARIO_VALIDATION.md`](docs/technical_architecture/TA10_SCENARIO_VALIDATION.md) — 335 / 335 PASS;
 - [`TA10_DECISION_INDEX.md`](docs/technical_architecture/TA10_DECISION_INDEX.md);
 - [`TA10_CLOSURE_REPORT.md`](docs/technical_architecture/TA10_CLOSURE_REPORT.md) — PASS.
+TA-11 closure evidence:
+
+- [`commerce/11_monetization_marketplace_receipts_and_entitlements.md`](docs/technical_architecture/commerce/11_monetization_marketplace_receipts_and_entitlements.md);
+- [`TA11_ROBLOX_COMMERCE_PLATFORM_SNAPSHOT.md`](docs/technical_architecture/TA11_ROBLOX_COMMERCE_PLATFORM_SNAPSHOT.md);
+- [`TA11_COMMERCE_RECEIPT_ENTITLEMENT_MATRIX.md`](docs/technical_architecture/TA11_COMMERCE_RECEIPT_ENTITLEMENT_MATRIX.md);
+- [`TA11_GDS_TRACEABILITY.md`](docs/technical_architecture/TA11_GDS_TRACEABILITY.md);
+- [`TA11_SCENARIO_VALIDATION.md`](docs/technical_architecture/TA11_SCENARIO_VALIDATION.md) — 240 / 240 PASS;
+- [`TA11_DECISION_INDEX.md`](docs/technical_architecture/TA11_DECISION_INDEX.md);
+- [`TA11_CLOSURE_REPORT.md`](docs/technical_architecture/TA11_CLOSURE_REPORT.md) — PASS.
 ### Implementation
 
 [`docs/implementation/`](docs/implementation/) remains intentionally **BLOCKED**.
@@ -600,7 +610,7 @@ TA-2 has locked this as the future implementation structure, but the source scaf
 
 ## Current Next Step
 
-Proceed with **TA-11 — Monetization, MarketplaceService, Receipt Processing, and Entitlements**.
+Proceed with **TA-12 — Client Presentation, UI State, Input, Camera, Audio, and Accessibility**.
 
 The first implementation vertical slice will be selected and locked only after the complete design and architecture dependency chain makes its requirements clear.
 

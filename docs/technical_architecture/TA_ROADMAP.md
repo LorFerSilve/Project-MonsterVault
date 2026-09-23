@@ -1,6 +1,6 @@
 # Technical Architecture Roadmap
 
-> **Status:** Active — TA-11 Next
+> **Status:** Active — TA-12 Next
 > **Authority:** Dependency-driven technical architecture sequencing
 
 This roadmap defines how the Design Complete MonsterVault GDS is translated into implementation-ready Roblox/Luau contracts.
@@ -448,13 +448,44 @@ Closure evidence:
 
 ## TA-11 — Monetization, MarketplaceService, Receipt Processing, and Entitlements
 
-**Status:** NEXT — Draft
+**Status:** Architecture Complete — PASS
 
-Defines game-pass/product/subscription entitlements if approved, receipt processing, idempotent grants, retry/recovery, purchase-state projection, analytics hooks and separation between premium and earned state.
+Established and formally validated:
+
+- stable MonsterVault ProductDefinition identity separated from Roblox platform IDs;
+- environment-specific commerce bindings and bootstrap validation;
+- sold-grant immutability plus Retired/Tombstone delayed-outcome compatibility;
+- baseline one-time account products mapped to Game Pass ownership where practical;
+- Game Pass join/readiness and post-prompt ownership reconciliation;
+- ownership-query failure treated as VerificationUnknown rather than destructive revocation;
+- one-time Starter Value Bundle grant separated from durable pass ownership;
+- centralized server Developer Product receipt authority;
+- PurchaseId-keyed durable receipt journal;
+- TA-4 lease-owner/single-writer profile application;
+- profile apply before receipt journal FINALIZED;
+- duplicate/retry/crash/reconnect exact-once semantics;
+- bounded Commercial Capacity with TA-8 Overflow-Held reversal safety;
+- cosmetic/status presentation-only entitlement boundary;
+- one-time Starter Energy with TA-8 Deferred Energy overflow;
+- runtime regional/managed price metadata separated from grant semantics;
+- subscriptions and Robux transfers disabled by baseline GDS authority;
+- explicit prohibited paid luck/capture/claim/event/trade/production paths;
+- 240 / 240 TA-11 scenarios PASS;
+- zero TA-11-blocking questions.
+
+Closure evidence:
+
+- [commerce/11_monetization_marketplace_receipts_and_entitlements.md](commerce/11_monetization_marketplace_receipts_and_entitlements.md) — Architecture Complete;
+- [TA11_ROBLOX_COMMERCE_PLATFORM_SNAPSHOT.md](TA11_ROBLOX_COMMERCE_PLATFORM_SNAPSHOT.md) — PASS;
+- [TA11_COMMERCE_RECEIPT_ENTITLEMENT_MATRIX.md](TA11_COMMERCE_RECEIPT_ENTITLEMENT_MATRIX.md) — PASS;
+- [TA11_GDS_TRACEABILITY.md](TA11_GDS_TRACEABILITY.md) — PASS;
+- [TA11_SCENARIO_VALIDATION.md](TA11_SCENARIO_VALIDATION.md) — 240 / 240 PASS;
+- [TA11_DECISION_INDEX.md](TA11_DECISION_INDEX.md) — accepted;
+- [TA11_CLOSURE_REPORT.md](TA11_CLOSURE_REPORT.md) — PASS.
 
 ## TA-12 — Client Presentation, UI State, Input, Camera, Audio, and Accessibility
 
-**Status:** Blocked
+**Status:** NEXT — Draft
 
 Defines client-side state projection, UI architecture, input abstraction, mobile/controller/keyboard support, camera ownership, feedback/event presentation, accessibility settings and presentation-only prediction.
 
@@ -516,10 +547,10 @@ GDS-17 PASS / Design Complete
 
 GDS-17 is **Complete — PASS** and the Game Design Specification is **Design Complete**.
 
-TA-0 through TA-10 are **Architecture Complete — PASS**.
+TA-0 through TA-11 are **Architecture Complete — PASS**.
 
 The active dependency is:
 
-> **TA-11 — Monetization, MarketplaceService, Receipt Processing, and Entitlements**
+> **TA-12 — Client Presentation, UI State, Input, Camera, Audio, and Accessibility**
 
-TA-12 through TA-17 remain blocked by dependency order. Gameplay implementation remains blocked until TA-17 is formally complete.
+TA-13 through TA-17 remain blocked by dependency order. Gameplay implementation remains blocked until TA-17 is formally complete.

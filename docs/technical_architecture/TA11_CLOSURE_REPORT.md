@@ -64,6 +64,6 @@ Current Roblox documentation was reviewed for MarketplaceService, Developer Prod
 
 Next dependency:
 
-> **TA-12 — Presentation, UI/UX, Feedback, Accessibility, and Client Architecture**
+> **TA-12 — Client Presentation, UI State, Input, Camera, Audio, and Accessibility**
 
 TA-13 through TA-17 remain dependency-blocked. Gameplay implementation remains **BLOCKED** until TA-17.

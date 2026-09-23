@@ -1,6 +1,6 @@
 # Architecture Decisions
 
-> **Status:** Active — TA-0..10 Complete / TA-11 Next
+> **Status:** Active — TA-0..11 Complete / TA-12 Next
 > **Authority:** Accepted technical architecture decisions and rationale
 
 This log records material architecture decisions. GDS-17 has formally promoted the Game Design Specification to Design Complete, so architecture decision-making may now begin under TA-0.
@@ -1776,3 +1776,176 @@ TA-10 is Architecture Complete — PASS with 335/335 scenarios and zero blocking
 ### Consequence
 
 TA-11 becomes NEXT. Gameplay implementation remains blocked until TA-17.
+
+
+---
+
+## AD-118 — Separate Semantic Product Identity from Platform IDs
+
+**Date:** 2026-09-24  
+**Status:** Accepted  
+**Owning TA phase:** TA-11
+
+### Decision
+
+MonsterVault ProductDefinitionId is stable semantic commerce identity. Roblox Game Pass, Developer Product and other platform IDs are environment-specific external bindings and never replace semantic identity.
+
+---
+
+## AD-119 — Keep Sold Product Grant Meaning Immutable
+
+**Date:** 2026-09-24  
+**Status:** Accepted  
+**Owning TA phase:** TA-11
+
+### Decision
+
+A material commercial grant change cannot silently reuse an already-sold platform binding when doing so would make delayed ownership/receipt outcomes ambiguous. Retired/Tombstone mappings remain resolvable.
+
+---
+
+## AD-120 — Use Game Pass Ownership for Baseline One-Time Account Products
+
+**Date:** 2026-09-24  
+**Status:** Accepted  
+**Owning TA phase:** TA-11
+
+### Decision
+
+Baseline durable cosmetics/capacity/supporter products and the one-time Starter Value Bundle use Game Pass ownership where practical. A one-time account product is not implemented as a repeatable Developer Product protected only by UI.
+
+---
+
+## AD-121 — Reconcile Game Pass Entitlements from Current Platform Ownership
+
+**Date:** 2026-09-24  
+**Status:** Accepted  
+**Owning TA phase:** TA-11
+
+### Decision
+
+Pass ownership is reconciled on trusted profile readiness and after purchase-prompt refresh. Prompt completion triggers reconciliation but is not a substitute for authoritative ownership state.
+
+---
+
+## AD-122 — Treat Ownership-Query Failure as Unknown, Not Revocation
+
+**Date:** 2026-09-24  
+**Status:** Accepted  
+**Owning TA phase:** TA-11
+
+### Decision
+
+A failed pass-ownership query cannot grant a new entitlement and cannot destructively revoke a previously verified active entitlement. It yields VerificationUnknown until authoritative resolution.
+
+---
+
+## AD-123 — Make the Starter Historical Grant Separately Exact-Once
+
+**Date:** 2026-09-24  
+**Status:** Accepted  
+**Owning TA phase:** TA-11
+
+### Decision
+
+Starter pass ownership may reconcile repeatedly while the historical deterministic Energy/one-time grant is protected by one stable per-account operation identity and TA-8 deferred-grant semantics.
+
+---
+
+## AD-124 — Use Server Receipt Authority for Developer Products
+
+**Date:** 2026-09-24  
+**Status:** Accepted  
+**Owning TA phase:** TA-11
+
+### Decision
+
+Developer Product Commercial Finalization is driven by one centralized server receipt path. PromptProductPurchaseFinished is never grant authority.
+
+---
+
+## AD-125 — Use PurchaseId as Developer Product Exact-Once Identity
+
+**Date:** 2026-09-24  
+**Status:** Accepted  
+**Owning TA phase:** TA-11
+
+### Decision
+
+Every valid Developer Product receipt is journaled by PurchaseId with immutable player/product/grant facts. Duplicate delivery reuses the same identity.
+
+---
+
+## AD-126 — Route Receipt Apply Through TA-4 Profile Authority
+
+**Date:** 2026-09-24  
+**Status:** Accepted  
+**Owning TA phase:** TA-11
+
+### Decision
+
+Commercial profile application routes through the active lease-owner writer queue or legally acquired TA-4 profile authority. Receipt recovery creates no external writer exception.
+
+---
+
+## AD-127 — Finalize Receipt Journal Only After Durable Profile Apply
+
+**Date:** 2026-09-24  
+**Status:** Accepted  
+**Owning TA phase:** TA-11
+
+### Decision
+
+A receipt reaches FINALIZED only after its deterministic grant and PurchaseId marker are durably present in the Player Profile. Partial failure retries the same receipt identity.
+
+---
+
+## AD-128 — Make Commercial Capacity Reversal Non-Destructive
+
+**Date:** 2026-09-24  
+**Status:** Accepted  
+**Owning TA phase:** TA-11
+
+### Decision
+
+Commercial capacity loss invokes TA-8 capacity reconciliation/Overflow-Held and never releases creatures, creates Energy debt or grants production capability.
+
+---
+
+## AD-129 — Separate Runtime Platform Price from Grant Semantics
+
+**Date:** 2026-09-24  
+**Status:** Accepted  
+**Owning TA phase:** TA-11
+
+### Decision
+
+Custom commerce UI uses current platform price metadata rather than hard-coded transaction prices. Regional/managed/experimental price variation never changes deterministic MonsterVault grant semantics.
+
+---
+
+## AD-130 — Keep Subscriptions and Robux Transfers Disabled at Baseline
+
+**Date:** 2026-09-24  
+**Status:** Accepted  
+**Owning TA phase:** TA-11
+
+### Decision
+
+Roblox platform support for subscriptions or Robux transfers does not authorize MonsterVault gameplay use. Baseline GDS-13/GDS-12 prohibit recurring commercial gameplay value and protected premium player tender.
+
+---
+
+## AD-131 — Close TA-11 and Advance to TA-12
+
+**Date:** 2026-09-24  
+**Status:** Accepted  
+**Owning TA phase:** TA-11
+
+### Decision
+
+TA-11 is Architecture Complete — PASS with 240/240 scenarios and zero blocking questions.
+
+### Consequence
+
+TA-12 becomes NEXT. Gameplay implementation remains blocked until TA-17.

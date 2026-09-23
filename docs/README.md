@@ -1,6 +1,6 @@
 # Project MonsterVault Documentation
 
-> **Project phase:** Technical Architecture — TA-0..10 complete / TA-11 next  
+> **Project phase:** Technical Architecture — TA-0..11 complete / TA-12 next  
 > **Implementation status:** Blocked by Technical Architecture and implementation-lock gates
 
 This directory is the authoritative documentation space for Project MonsterVault.
@@ -69,20 +69,21 @@ Technical Architecture completed:
 - **TA-8 — Vault, Economy, Progression, Inventory, and Offline Accrual: Architecture Complete — PASS**
 - **TA-9 — World, Biomes, Spawn Scheduling, Streaming, and Encounter Scaling: Architecture Complete — PASS**
 - **TA-10 — Social Systems, Server Events, Cross-Server Coordination, and Trading: Architecture Complete — PASS**
+- **TA-11 — Monetization, MarketplaceService, Receipt Processing, and Entitlements: Architecture Complete — PASS**
 
-TA-10 latest evidence:
+TA-11 latest evidence:
 
-- [`technical_architecture/social_events_trading/10_social_events_cross_server_coordination_and_trading.md`](technical_architecture/social_events_trading/10_social_events_cross_server_coordination_and_trading.md);
-- [`technical_architecture/TA10_ROBLOX_CROSS_SERVER_TRANSACTION_SNAPSHOT.md`](technical_architecture/TA10_ROBLOX_CROSS_SERVER_TRANSACTION_SNAPSHOT.md);
-- [`technical_architecture/TA10_SOCIAL_EVENT_TRADE_MATRIX.md`](technical_architecture/TA10_SOCIAL_EVENT_TRADE_MATRIX.md);
-- [`technical_architecture/TA10_GDS_TRACEABILITY.md`](technical_architecture/TA10_GDS_TRACEABILITY.md);
-- [`technical_architecture/TA10_SCENARIO_VALIDATION.md`](technical_architecture/TA10_SCENARIO_VALIDATION.md);
-- [`technical_architecture/TA10_DECISION_INDEX.md`](technical_architecture/TA10_DECISION_INDEX.md);
-- [`technical_architecture/TA10_CLOSURE_REPORT.md`](technical_architecture/TA10_CLOSURE_REPORT.md).
+- [`technical_architecture/commerce/11_monetization_marketplace_receipts_and_entitlements.md`](technical_architecture/commerce/11_monetization_marketplace_receipts_and_entitlements.md);
+- [`technical_architecture/TA11_ROBLOX_COMMERCE_PLATFORM_SNAPSHOT.md`](technical_architecture/TA11_ROBLOX_COMMERCE_PLATFORM_SNAPSHOT.md);
+- [`technical_architecture/TA11_COMMERCE_RECEIPT_ENTITLEMENT_MATRIX.md`](technical_architecture/TA11_COMMERCE_RECEIPT_ENTITLEMENT_MATRIX.md);
+- [`technical_architecture/TA11_GDS_TRACEABILITY.md`](technical_architecture/TA11_GDS_TRACEABILITY.md);
+- [`technical_architecture/TA11_SCENARIO_VALIDATION.md`](technical_architecture/TA11_SCENARIO_VALIDATION.md) — 240 / 240 PASS;
+- [`technical_architecture/TA11_DECISION_INDEX.md`](technical_architecture/TA11_DECISION_INDEX.md);
+- [`technical_architecture/TA11_CLOSURE_REPORT.md`](technical_architecture/TA11_CLOSURE_REPORT.md).
 
 The active dependency is:
 
-> **TA-11 — Monetization, MarketplaceService, Receipt Processing, and Entitlements**
+> **TA-12 — Client Presentation, UI State, Input, Camera, Audio, and Accessibility**
 
 No gameplay implementation should begin until:
 
