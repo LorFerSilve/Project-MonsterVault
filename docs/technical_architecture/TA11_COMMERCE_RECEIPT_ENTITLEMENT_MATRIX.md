@@ -52,6 +52,7 @@
 | Protected Load Failure | NotProcessedYet |
 | fresh foreign lease | no direct UpdateAsync |
 | duplicate FINALIZED PurchaseId | PurchaseGranted; no regrant |
+| same PurchaseId observed later/on another server | compare stable receipt-derived identity only; firstSeenAt remains set-on-create journal metadata |
 | duplicate PROFILE_APPLIED | finalize journal; no regrant |
 | immutable fact mismatch | quarantine |
 | DataStore throttle | NotProcessedYet |
