@@ -446,9 +446,9 @@ Key documents include:
 
 ### Technical Architecture
 
-[`docs/technical_architecture/`](docs/technical_architecture/) is **ACTIVE — TA-0..10 COMPLETE / TA-11 NEXT**.
+[`docs/technical_architecture/`](docs/technical_architecture/) is **ACTIVE — TA-0..11 COMPLETE / TA-12 NEXT**.
 
-TA-0 established governance/traceability, TA-1 locked the Roblox environment/toolchain, TA-2 locked structural boundaries, TA-3 locked networking trust, TA-4 locked persistence/session durability, TA-5 locked identity/content registries, TA-6 locked runtime lifecycle, TA-7 locked capture/ownership resolution, TA-8 locked collection/Vault/economy semantics, and TA-9 locked world/spawn/streaming authority. TA-10 has now locked transient social coordination, global event occurrence semantics, cross-server notification/durability boundaries, exact-once event rewards and recoverable multi-profile creature trading. TA-11 now owns monetization, MarketplaceService receipt processing and entitlements.
+TA-0 established governance/traceability, TA-1 locked the Roblox environment/toolchain, TA-2 locked structural boundaries, TA-3 locked networking trust, TA-4 locked persistence/session durability, TA-5 locked identity/content registries, TA-6 locked runtime lifecycle, TA-7 locked capture/ownership resolution, TA-8 locked collection/Vault/economy semantics, and TA-9 locked world/spawn/streaming authority. TA-10 locked transient social coordination, global event occurrence/cooldown semantics, cross-server notification/durability boundaries, exact-once event rewards and recoverable multi-profile creature trading. TA-11 has now locked commercial product identity, MarketplaceService ownership/receipt authority, exact-once grants, entitlement reconciliation and runtime price boundaries. TA-12 now owns client presentation, UI state, input, camera, audio and accessibility architecture.
 
 TA-0 closure evidence:
 
