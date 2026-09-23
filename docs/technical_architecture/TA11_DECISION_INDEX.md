@@ -25,7 +25,7 @@ Repeated pass reconciliation cannot duplicate historical Starter Energy/value.
 PromptProductPurchaseFinished is never grant authority.
 
 ## TA11-D08 — Use PurchaseId as Exact-Once Receipt Identity
-Immutable receipt facts are journaled by PurchaseId.
+Stable receipt-derived player/product/grant facts are journaled by PurchaseId. Local observation metadata such as firstSeenAt is set on journal creation and excluded from replay identity comparisons.
 
 ## TA11-D09 — Route Receipt Apply Through TA-4 Profile Authority
 Apply uses the active lease-owner writer queue or legally acquired profile authority; commerce creates no writer bypass.
