@@ -226,7 +226,7 @@
 | A applied, B pending | partial backend state hidden behind transaction resolution |
 | both applied, journal not finalized | ownership committed; journal recovery finalizes |
 | profile loads with pendingTrade | resolve journal before Ready |
-| two recovery workers race | idempotent UpdateAsync/fence checks |
+| two recovery workers target same participant | only the current TA-4 lease-owner writer queue, or a worker that has legally acquired profile authority under stale/expired-lease rules, may perform the retry; duplicate authorized attempts remain idempotent |
 
 ## 18. Trade Capacity Matrix
 
