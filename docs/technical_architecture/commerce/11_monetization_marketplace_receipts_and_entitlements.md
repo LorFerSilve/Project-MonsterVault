@@ -126,7 +126,9 @@ PromptProductPurchaseFinished is presentation/pending feedback only.
 
 A dedicated durable journal is keyed by PurchaseId.
 
-Immutable facts include PurchaseId, PlayerId, ProductId, ProductDefinitionId, GrantSemanticVersion, grant hash, firstSeenAt and optional CurrencySpent audit metadata.
+Stable identity/comparison facts include PurchaseId, PlayerId, ProductId, ProductDefinitionId, GrantSemanticVersion and grant hash.
+
+`firstSeenAt` is **set-on-create journal metadata**, not receipt identity. A redelivery observed later or by another server retains the original journal firstSeenAt and does not compare the new local observation time as an immutable receipt fact. Optional CurrencySpent is receipt/audit metadata and never changes grant semantics.
 
 State:
 
@@ -134,7 +136,7 @@ State:
 
 Invariant contradiction -> `QUARANTINED`.
 
-Same PurchaseId/same facts is idempotent. Conflicting facts quarantine. FINALIZED replay acknowledges without regrant.
+Same PurchaseId plus the same stable receipt/grant identity facts is idempotent even when redelivery is observed at a different local time. Conflicting stable identity facts quarantine. FINALIZED replay acknowledges without regrant.
 
 ## 11. Receipt Profile Apply and Finalization
 
