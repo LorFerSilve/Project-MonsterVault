@@ -2,7 +2,7 @@
 
 > **Phase:** TA-10 — Social Systems, Server Events, Cross-Server Coordination, and Trading  
 > **Status:** PASS  
-> **Scenario count:** 335 / 335 PASS
+> **Scenario count:** 338 / 338 PASS
 
 TA-10 validation covers Party/social lifecycle, cooperative contribution, events, cross-server coordination, multi-award encounters, same-server trade consent, durable multi-profile transaction recovery, capacity/provenance/cooldown semantics, service failures and shutdown.
 
@@ -450,9 +450,12 @@ TA-10 validation covers Party/social lifecycle, cooperative contribution, events
 | 333 | same player concurrently accepts invites to two different Parties | participant-scoped membership guard/index serializes admission; at most one Party membership succeeds | PASS |
 | 334 | participant A is APPLIED while participant B is still pending | A retains matching pendingTrade/APPLIED fence and cannot become gameplay Ready before FINALIZED_COMMIT reconciliation | PASS |
 | 335 | recovery targets a participant with a live/unexpired profile lease | route through lease-owner writer queue; otherwise wait for/atomically acquire TA-4 profile authority before UpdateAsync | PASS |
+| 336 | persistent personal Event Cooldown is active and player server-hops | persisted profile deadline is reconciled before eligibility; cooldown remains active | PASS |
+| 337 | player changes device/client clock during persistent Event Cooldown | server wall clock governs; cooldown cannot shorten/reset | PASS |
+| 338 | crash follows a value-sensitive event outcome while cooldown persistence acknowledgement is uncertain | retry/reconcile the same P2 operation so the outcome cannot replay by losing its cooldown fence | PASS |
 
 ## Verdict
 
-**335 / 335 scenarios: PASS.**
+**338 / 338 scenarios: PASS.**
 
 No TA-10 social-consent, event-occurrence, cross-server coordination, reward, multi-award, trade-revision, multi-profile transaction, recovery, capacity, provenance, cooldown, failure or exploit contradiction remains.

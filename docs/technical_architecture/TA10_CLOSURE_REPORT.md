@@ -23,6 +23,7 @@ It defines:
 - Server Event Instance lifecycle;
 - prospective event Spawn Modifiers;
 - contribution/reward exact-once event outcomes;
+- persistent personal Event Cooldown profile/wall-clock semantics;
 - bounded Event Resolution Grace;
 - event multi-award distinct personal capture opportunities;
 - same-server bilateral Trade Session/Revision/consent;
@@ -43,7 +44,7 @@ It defines:
 | TA10_ROBLOX_CROSS_SERVER_TRANSACTION_SNAPSHOT.md | PASS |
 | TA10_SOCIAL_EVENT_TRADE_MATRIX.md | PASS |
 | TA10_GDS_TRACEABILITY.md | PASS |
-| TA10_SCENARIO_VALIDATION.md | 335 / 335 PASS |
+| TA10_SCENARIO_VALIDATION.md | 338 / 338 PASS |
 | TA10_DECISION_INDEX.md | Accepted |
 | Blocking TA-10 questions | 0 |
 | Unresolved upstream conflicts | 0 |
@@ -75,6 +76,8 @@ Event modifiers affect future Spawn Reservations only.
 Existing Creature identity remains immutable.
 
 Event contribution is player-specific and event rewards dedupe by stable occurrence/reward/player identity.
+
+Authored persistent personal Event Cooldowns are profile-backed server-wall-clock deadlines, persist across server changes and reconcile before guarded eligibility. Explicit global cooldowns use shared durable/config authority rather than fresh per-server timers.
 
 Multi-award encounters create distinct personal CreatureInstanceIds rather than multiple ownership of one instance.
 

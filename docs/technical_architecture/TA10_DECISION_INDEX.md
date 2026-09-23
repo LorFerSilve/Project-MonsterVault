@@ -117,6 +117,12 @@
 
 ---
 
-## TA10-D20 — Close TA-10 and Advance to TA-11
+## TA10-D20 — Persistent Personal Event Cooldowns Are Profile-Backed Wall-Clock State
 
-**Decision:** TA-10 is Architecture Complete — PASS with 335/335 scenarios and zero blocking questions. TA-11 becomes NEXT; gameplay implementation remains blocked until TA-17.
+**Decision:** An authored persistent personal Event Cooldown is stored in the TA-4 Player Profile with a server-wall-clock deadline and stable semantic scope. Value-sensitive cooldown activation is P2 and reconnect/server-hop reconciles the persisted deadline before guarded eligibility.
+
+---
+
+## TA10-D21 — Close TA-10 and Advance to TA-11
+
+**Decision:** TA-10 is Architecture Complete — PASS with 338/338 scenarios and zero blocking questions. TA-11 becomes NEXT; gameplay implementation remains blocked until TA-17.

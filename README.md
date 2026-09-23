@@ -543,7 +543,7 @@ TA-10 closure evidence:
 - [`TA10_ROBLOX_CROSS_SERVER_TRANSACTION_SNAPSHOT.md`](docs/technical_architecture/TA10_ROBLOX_CROSS_SERVER_TRANSACTION_SNAPSHOT.md);
 - [`TA10_SOCIAL_EVENT_TRADE_MATRIX.md`](docs/technical_architecture/TA10_SOCIAL_EVENT_TRADE_MATRIX.md);
 - [`TA10_GDS_TRACEABILITY.md`](docs/technical_architecture/TA10_GDS_TRACEABILITY.md);
-- [`TA10_SCENARIO_VALIDATION.md`](docs/technical_architecture/TA10_SCENARIO_VALIDATION.md) — 335 / 335 PASS;
+- [`TA10_SCENARIO_VALIDATION.md`](docs/technical_architecture/TA10_SCENARIO_VALIDATION.md) — 338 / 338 PASS;
 - [`TA10_DECISION_INDEX.md`](docs/technical_architecture/TA10_DECISION_INDEX.md);
 - [`TA10_CLOSURE_REPORT.md`](docs/technical_architecture/TA10_CLOSURE_REPORT.md) — PASS.
 TA-11 closure evidence:

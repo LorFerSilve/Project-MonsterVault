@@ -156,6 +156,20 @@
 | both final confirm same unchanged revision | precommit revalidation may begin |
 | disconnect before durable commit | cancel/no ownership change |
 
+## 12A. Persistent Event Cooldown Matrix
+
+| Cooldown case | Authority / behavior |
+|---|---|
+| explicitly server-local cooldown | P0 runtime only when GDS scope permits |
+| persistent personal cooldown | TA-4 Player Profile state keyed by stable cooldown definition/scope |
+| persistent personal deadline | server-observed Unix wall clock |
+| player changes server | reconcile persisted deadline before eligibility |
+| client clock changes | no effect |
+| value-sensitive cooldown starts | P2; coherently coupled to guarded outcome or same stable operation identity |
+| cooldown write result unknown | reconcile same profile operation; do not reopen eligibility |
+| cooldown expires | idempotent server-time reconciliation; no reward replay |
+| global/shared cooldown | durable/config occurrence/global-window authority |
+
 ## 13. Offer Eligibility Matrix
 
 | Creature/state | Offerable? |

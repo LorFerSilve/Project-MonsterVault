@@ -65,6 +65,8 @@
 | no reroll existing creature | pinned reservation identity | PASS |
 | Event Zones/Rifts temporary | local runtime projection | PASS |
 | server-hop no restart | occurrence ID/time shared | PASS |
+| personal Event Cooldown survives server hop | Player Profile deadline + server wall-clock reconciliation | PASS |
+| global cooldown survives server change | durable/config occurrence/global-window authority | PASS |
 | Event Resolution Grace | bounded no-new-participation grace | PASS |
 | event multi-award | distinct personal opportunities/CreatureInstanceIds | PASS |
 | Event-Limited provenance | occurrence/template provenance pinned | PASS |

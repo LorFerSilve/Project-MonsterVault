@@ -28,6 +28,7 @@ TA-10 owns:
 - Global Event Window and Event Occurrence identity;
 - server-local Server Event Instance lifecycle;
 - event contribution, completion and reward operation identities;
+- persistent personal Event Cooldown state and wall-clock reconciliation;
 - Event Spawn Modifier injection into TA-9 prospective Spawn Context generation;
 - Event Resolution Grace;
 - event multi-award qualification and creation of distinct personal capture opportunities;
@@ -507,6 +508,36 @@ Event Energy uses TA-8 wallet/deferred-grant semantics.
 ### EVENT-REWARD-10-03
 
 Event Completion Record and attached reward commit coherently when semantically one outcome.
+
+## 21A. Persistent Personal Event Cooldowns
+
+An Event Template may explicitly define a player-scoped cooldown that prevents repeated activation, qualification or reward cycling across server transitions.
+
+A persistent personal cooldown is Player Profile state under TA-4, keyed by a stable EventCooldownDefinitionId plus its authored semantic scope. Conceptual state records the cooldown definition/scope, cooldownUntilUnixSeconds, source EventOccurrenceId when applicable, config version and lastCooldownOperationId.
+
+### EVENT-COOLDOWN-10-01
+
+Persistent personal cooldown time uses server-observed wall-clock timestamps. Client/device time never starts, shortens, expires or clears it.
+
+### EVENT-COOLDOWN-10-02
+
+Starting or extending a value-sensitive persistent personal cooldown is a P2 profile mutation. When semantically coupled to an activation/completion/reward, the cooldown and outcome commit coherently or share one stable operation identity so a crash cannot grant value while losing the anti-repeat fence.
+
+### EVENT-COOLDOWN-10-03
+
+On profile load, reconnect or server hop, the persisted deadline is reconciled before the guarded event action becomes eligible. Changing servers cannot reset or shorten it.
+
+### EVENT-COOLDOWN-10-04
+
+Expired cooldown records may be compacted idempotently only after authoritative server-time comparison; expiry never fabricates a reward or replays a consumed opportunity.
+
+### EVENT-COOLDOWN-10-05
+
+A cooldown explicitly authored as server-session-local may remain P0 runtime state only when GDS semantics permit that scope. A persistent personal cooldown cannot silently downgrade to local state.
+
+### EVENT-COOLDOWN-10-06
+
+A global/shared cooldown that must survive server changes uses durable/config EventOccurrence/global-window authority rather than a fresh per-server timer.
 
 ## 22. Event Resolution Grace
 
@@ -1156,13 +1187,14 @@ Locks concrete services/modules/stores/topics/remotes/schemas/state enums and im
 5. MessagingService/MemoryStore accelerate coordination but are not durable truth.
 6. Event modifiers affect future Spawn Reservations only.
 7. Event multi-award creates distinct personal CreatureInstanceIds.
-8. Trade requires same-server bilateral explicit consent on one immutable revision.
+8. Authored persistent personal Event Cooldowns use profile-backed server-wall-clock state and survive server changes.
+10. Trade requires same-server bilateral explicit consent on one immutable revision.
 9. Any semantic offer change clears consent.
-10. No durable Trade Commit occurs without both profiles prepared under one immutable journal intent.
-11. COMMIT_DECIDED is irreversible and recoverable.
-12. Pending Trade profiles cannot expose partial infrastructure state as usable gameplay state.
-13. Trade never mints a creature, rerolls Variant Identity, transfers Energy or fabricates active progression.
-14. Protected/event provenance and cooldown/restriction semantics survive transfer.
+11. No durable Trade Commit occurs without both profiles prepared under one immutable journal intent.
+12. COMMIT_DECIDED is irreversible and recoverable.
+13. Pending Trade profiles cannot expose partial infrastructure state as usable gameplay state.
+14. Trade never mints a creature, rerolls Variant Identity, transfers Energy or fabricates active progression.
+15. Protected/event provenance and cooldown/restriction semantics survive transfer.
 
 ## 52. Open Questions
 
@@ -1190,6 +1222,7 @@ Correctly downstream/tuneable:
 - [x] scheduled and dynamic occurrence authority explicit;
 - [x] cross-server Messaging/MemoryStore role explicit;
 - [x] event lifecycle/spawn/contribution/reward/grace explicit;
+- [x] persistent personal/global Event Cooldown scope, wall-clock storage and server-hop reconciliation explicit;
 - [x] multi-award distinct-instance architecture explicit;
 - [x] direct same-server Trade Session/Revision/consent explicit;
 - [x] exact-instance reservations explicit;

@@ -1595,7 +1595,7 @@ EventOccurrenceId identifies one wall-clock occurrence across servers; ServerEve
 
 ---
 
-## AD-103 — Scheduled Events Reconstruct from Shared Wall Clock
+## AD-103 — Event Windows and Persistent Cooldowns Use Authoritative Wall Clock
 
 **Date:** 2026-09-23  
 **Status:** Accepted  
@@ -1603,7 +1603,7 @@ EventOccurrenceId identifies one wall-clock occurrence across servers; ServerEve
 
 ### Decision
 
-Scheduled event phase is derived from validated schedule/config plus server-observed time, so server join/restart cannot reset a live window.
+Scheduled event phase is derived from validated schedule/config plus server-observed time, so server join/restart cannot reset a live window. Authored persistent personal Event Cooldowns are stored in the Player Profile with server-wall-clock deadlines and reconciled before eligibility after reconnect/server hop; global cooldowns that must survive server changes use durable/config authority.
 
 ---
 
@@ -1771,7 +1771,7 @@ After a durable transaction decision, participant application can be recovered e
 
 ### Decision
 
-TA-10 is Architecture Complete — PASS with 335/335 scenarios and zero blocking questions.
+TA-10 is Architecture Complete — PASS with 338/338 scenarios and zero blocking questions.
 
 ### Consequence
 
