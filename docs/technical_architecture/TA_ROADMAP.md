@@ -433,7 +433,7 @@ Established and formally validated:
 - profile TransactionBlocked state hiding partial backend apply until resolution;
 - exact CreatureInstanceId/Variant/provenance transfer with cooldown and Protected re-lock;
 - no Energy transfer, trade fee, gifting, listing, auction or global marketplace baseline;
-- 332 / 332 TA-10 scenarios PASS;
+- 335 / 335 TA-10 scenarios PASS;
 - zero TA-10-blocking questions.
 
 Closure evidence:
@@ -442,7 +442,7 @@ Closure evidence:
 - [TA10_ROBLOX_CROSS_SERVER_TRANSACTION_SNAPSHOT.md](TA10_ROBLOX_CROSS_SERVER_TRANSACTION_SNAPSHOT.md) — PASS;
 - [TA10_SOCIAL_EVENT_TRADE_MATRIX.md](TA10_SOCIAL_EVENT_TRADE_MATRIX.md) — PASS;
 - [TA10_GDS_TRACEABILITY.md](TA10_GDS_TRACEABILITY.md) — PASS;
-- [TA10_SCENARIO_VALIDATION.md](TA10_SCENARIO_VALIDATION.md) — 332 / 332 PASS;
+- [TA10_SCENARIO_VALIDATION.md](TA10_SCENARIO_VALIDATION.md) — 335 / 335 PASS;
 - [TA10_DECISION_INDEX.md](TA10_DECISION_INDEX.md) — accepted;
 - [TA10_CLOSURE_REPORT.md](TA10_CLOSURE_REPORT.md) — PASS.
 

@@ -453,6 +453,6 @@ TA-10 validation covers Party/social lifecycle, cooperative contribution, events
 
 ## Verdict
 
-**332 / 332 scenarios: PASS.**
+**335 / 335 scenarios: PASS.**
 
 No TA-10 social-consent, event-occurrence, cross-server coordination, reward, multi-award, trade-revision, multi-profile transaction, recovery, capacity, provenance, cooldown, failure or exploit contradiction remains.
