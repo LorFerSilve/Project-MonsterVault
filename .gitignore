@@ -26,3 +26,9 @@ DevPackages/
 .env
 .env.*
 !.env.example
+
+# Test / verification artifacts
+.test-results/
+coverage/
+*.rbxl
+*.rbxlx

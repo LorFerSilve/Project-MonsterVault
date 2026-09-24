@@ -1,0 +1,53 @@
+{
+  "name": "MonsterVault",
+  "servePort": 34872,
+  "serveAddress": "127.0.0.1",
+  "emitLegacyScripts": false,
+  "globIgnorePaths": ["**/*.spec.luau", "**/*.test.luau"],
+  "tree": {
+    "$className": "DataModel",
+    "ReplicatedStorage": {
+      "$className": "ReplicatedStorage",
+      "MonsterVault": {
+        "$className": "Folder",
+        "$ignoreUnknownInstances": false,
+        "Shared": { "$path": "src/shared", "$ignoreUnknownInstances": true },
+        "Remotes": {
+          "$className": "Folder",
+          "V1": {
+            "$className": "Folder",
+            "Command": { "$className": "RemoteEvent" },
+            "Event": { "$className": "RemoteEvent" },
+            "UnreliableEvent": { "$className": "UnreliableRemoteEvent" }
+          }
+        }
+      }
+    },
+    "ServerScriptService": {
+      "$className": "ServerScriptService",
+      "MonsterVaultServer": { "$path": "src/server", "$ignoreUnknownInstances": true }
+    },
+    "ServerStorage": {
+      "$className": "ServerStorage",
+      "MonsterVault": { "$className": "Folder", "$ignoreUnknownInstances": false }
+    },
+    "StarterPlayer": {
+      "$className": "StarterPlayer",
+      "StarterPlayerScripts": {
+        "$className": "StarterPlayerScripts",
+        "MonsterVaultClient": { "$path": "src/client", "$ignoreUnknownInstances": true }
+      }
+    },
+    "Workspace": {
+      "$className": "Workspace",
+      "$ignoreUnknownInstances": false,
+      "$properties": {
+        "StreamingEnabled": true,
+        "StreamingMinRadius": 64,
+        "StreamingTargetRadius": 1024,
+        "StreamingIntegrityMode": "PauseOutsideLoadedArea",
+        "StreamOutBehavior": "Opportunistic"
+      }
+    }
+  }
+}

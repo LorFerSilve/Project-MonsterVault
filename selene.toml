@@ -1,0 +1,7 @@
+std = "roblox"
+exclude = ["build/**", "dist/**"]
+
+[config]
+empty_if = { comments_count = true }
+unused_variable = { ignore_pattern = "^_" }
+shadowing = { ignore_pattern = "^_" }

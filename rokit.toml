@@ -1,0 +1,8 @@
+# TA-17 implementation-locked developer/test toolchain.
+# Runtime gameplay dependencies remain first-party only.
+[tools]
+rojo = "rojo-rbx/rojo@7.7.0"
+luau-lsp = "JohnnyMorganz/luau-lsp@1.70.0"
+stylua = "JohnnyMorganz/StyLua@2.5.2"
+selene = "Kampfkarren/selene@0.31.0"
+lune = "lune-org/lune@0.10.5"

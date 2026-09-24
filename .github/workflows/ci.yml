@@ -1,0 +1,72 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  static-build:
+    name: CI / static-build
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+          fetch-depth: 1
+      - name: Install locked Roblox toolchain
+        uses: paradoxum-games/setup-rokit@29e6ee09651a3711e3a287a1037671d7b74db6d0 # v3
+        with:
+          version: "1.2.0"
+          cache: false
+      - name: Verify tool versions
+        shell: bash
+        run: |
+          set -euo pipefail
+          rojo --version
+          luau-lsp --version
+          stylua --version
+          selene --version
+          lune --version
+      - name: Formatting
+        run: stylua --check src tests scripts
+      - name: Lint
+        run: selene src tests scripts
+      - name: Rojo build and sourcemap
+        shell: bash
+        run: |
+          set -euo pipefail
+          rojo build default.project.json --output /tmp/MonsterVault.rbxlx
+          rojo sourcemap default.project.json --output sourcemap.json
+      - name: Strict Luau analysis
+        shell: bash
+        run: |
+          set -euo pipefail
+          if find src tests scripts -type f -name '*.luau' -print -quit | grep -q .; then
+            luau-lsp analyze --platform roblox --settings=luau-lsp.json --sourcemap=sourcemap.json src tests scripts
+          else
+            echo "TA-17 scaffold contains no Luau implementation files yet; analysis becomes mandatory when implementation opens."
+          fi
+      - name: Deterministic unit/property tests
+        shell: bash
+        run: |
+          set -euo pipefail
+          if find src -type f -name '*.luau' -print -quit | grep -q .; then
+            test -f tests/runner.luau || {
+              echo "::error::Runtime Luau exists but tests/runner.luau is missing."
+              exit 1
+            }
+            lune run tests/runner.luau -- --suite fast
+          else
+            echo "No runtime Luau yet; test runner is introduced with IMP-1 before gameplay modules."
+          fi
