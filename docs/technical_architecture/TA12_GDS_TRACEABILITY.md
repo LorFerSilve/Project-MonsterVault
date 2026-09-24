@@ -45,7 +45,7 @@ TA-12 preserves optional chat/voice, Roblox-supported communication/filtering, p
 
 ## 3. TA-3 Networking
 
-TA-12 consumes typed server projections and submits semantic commands only. It never upgrades client-visible IDs, InputActions or UI state into authorization.
+TA-12 consumes typed server projections and submits semantic commands only. It never upgrades client-visible IDs, InputActions or UI state into authorization. A consequential transport/request timeout maps to OutcomeUnknown/ReconciliationRequired and authoritative domain refresh per TA-3; it is never presented as rejection or permission for a blind duplicate irreversible command.
 
 ## 4. TA-4 Persistence
 
