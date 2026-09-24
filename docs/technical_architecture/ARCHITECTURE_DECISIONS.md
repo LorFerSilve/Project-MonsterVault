@@ -1,6 +1,6 @@
 # Architecture Decisions
 
-> **Status:** Active — TA-0..15 Complete / TA-16 Next
+> **Status:** Active — TA-0..16 Integration PASS / TA-17 Next
 > **Authority:** Accepted technical architecture decisions and rationale
 
 This log records material architecture decisions. GDS-17 has formally promoted the Game Design Specification to Design Complete, so architecture decision-making may now begin under TA-0.
@@ -3008,3 +3008,189 @@ TA-15 is Architecture Complete — PASS with 360/360 verification-architecture s
 ### Consequence
 
 TA-16 becomes NEXT. Gameplay implementation remains blocked until TA-17.
+
+
+---
+
+## AD-215 — Accept TA-0 Through TA-15 Maturity
+
+**Date:** 2026-09-24  
+**Status:** Accepted  
+**Owning TA phase:** TA-16
+
+### Decision
+
+TA-0 through TA-15 are accepted as Architecture Complete with 3,393/3,393 phase-local architecture scenarios and no phase-level blockers.
+
+
+---
+
+## AD-216 — Confirm One Mutation Authority per State Family
+
+**Date:** 2026-09-24  
+**Status:** Accepted  
+**Owning TA phase:** TA-16
+
+### Decision
+
+TA-16 accepts the integrated mutation-ownership map with zero competing generic infrastructure owners and zero unowned durable mutation families.
+
+
+---
+
+## AD-217 — Preserve TA-2 Dependency Direction Across All Domains
+
+**Date:** 2026-09-24  
+**Status:** Accepted  
+**Owning TA phase:** TA-16
+
+### Decision
+
+Later networking, persistence, runtime, gameplay-domain, client, live-ops, performance and verification contracts remain implementable inside TA-2's public-contract/application-orchestration dependency rules.
+
+
+---
+
+## AD-218 — Accept the Unified Authoritative Request Pipeline
+
+**Date:** 2026-09-24  
+**Status:** Accepted  
+**Owning TA phase:** TA-16
+
+### Decision
+
+Client intent flows through TA-3 validation, TA-4/6 session/runtime checks, domain authority, application coordination, TA-4 durable writer/recovery and TA-12 projection without client-owned durable truth.
+
+
+---
+
+## AD-219 — Use One Durable Transaction Pattern Across Value Systems
+
+**Date:** 2026-09-24  
+**Status:** Accepted  
+**Owning TA phase:** TA-16
+
+### Decision
+
+Capture, economy, event, trade and commerce keep domain-specific semantic owners while sharing TA-4 single-writer/journal/idempotency/recovery primitives rather than inventing parallel generic persistence systems.
+
+
+---
+
+## AD-220 — Preserve Exact Creature and Value Identity Across Transfers
+
+**Date:** 2026-09-24  
+**Status:** Accepted  
+**Owning TA phase:** TA-16
+
+### Decision
+
+CreatureInstanceId and finalized value remain coherent across capture, Vault/capacity, trade and commercial reconciliation; performance/failure recovery cannot replace/delete identity for convenience.
+
+
+---
+
+## AD-221 — Keep Live Operations Subordinate to Domain Authority
+
+**Date:** 2026-09-24  
+**Status:** Accepted  
+**Owning TA phase:** TA-16
+
+### Decision
+
+Analytics, C2 configuration, feature flags, experiments and cross-server hints cannot override durable domain invariants or become positive gameplay truth.
+
+
+---
+
+## AD-222 — Preserve Correctness Under TA-14 Degradation
+
+**Date:** 2026-09-24  
+**Status:** Accepted  
+**Owning TA phase:** TA-16
+
+### Decision
+
+Operational pressure may shed optional work/fidelity only; ownership, exact-once value, safety, recovery and accessibility-critical meaning remain non-sheddable.
+
+
+---
+
+## AD-223 — Accept Complete TA-15 Evidence Routing
+
+**Date:** 2026-09-24  
+**Status:** Accepted  
+**Owning TA phase:** TA-16
+
+### Decision
+
+Every critical architecture family has a deterministic, adversarial, fault, engine/staging and/or performance evidence path appropriate to its trust boundary.
+
+
+---
+
+## AD-224 — Close TA-0 Risks R1 Through R12 at Architecture Layer
+
+**Date:** 2026-09-24  
+**Status:** Accepted  
+**Owning TA phase:** TA-16
+
+### Decision
+
+All seeded architecture risk families now have an owner, bounded failure behavior and TA-15 evidence path. Runtime implementation verification remains future work.
+
+
+---
+
+## AD-225 — Do Not Confuse Architecture Closure with Runtime Correctness
+
+**Date:** 2026-09-24  
+**Status:** Accepted  
+**Owning TA phase:** TA-16
+
+### Decision
+
+TA-16 PASS means implementation can be locked without inventing architecture; it does not claim unimplemented gameplay code has executed or passed tests.
+
+
+---
+
+## AD-226 — Defer Only Bounded Concrete Artifacts to TA-17
+
+**Date:** 2026-09-24  
+**Status:** Accepted  
+**Owning TA phase:** TA-16
+
+### Decision
+
+Exact tool pins, files/modules, routes, stores/topics, workflows/check names, runner implementation, vertical slice and implementation order are TA-17 lock decisions inside already-approved semantics.
+
+
+---
+
+## AD-227 — Record Zero Architecture Blockers
+
+**Date:** 2026-09-24  
+**Status:** Accepted  
+**Owning TA phase:** TA-16
+
+### Decision
+
+TA-16 records zero implementation-critical architecture questions, zero authority collisions, zero unowned risk families and zero critical verification-routing gaps.
+
+
+---
+
+## AD-228 — Close TA-16 and Advance to TA-17
+
+**Date:** 2026-09-24  
+**Status:** Accepted  
+**Owning TA phase:** TA-16
+
+### Decision
+
+TA-16 is Architecture Integration Complete — PASS with 240/240 compound integration scenarios. TA-17 becomes NEXT; gameplay implementation remains blocked until TA-17.
+
+### Consequence
+
+TA-17 becomes the final pre-code dependency. Gameplay implementation remains blocked until TA-17 formally completes and the project gate is explicitly opened.
