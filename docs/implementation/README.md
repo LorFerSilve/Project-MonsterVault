@@ -10,7 +10,7 @@ Gameplay implementation must not begin until all of the following are true:
 
 1. **SATISFIED:** GDS-17 records a formal cross-system PASS and the GDS is `Design Complete`.
 2. **SATISFIED:** TA-0 through TA-15 are `Architecture Complete`.
-3. **BLOCKING:** TA-16 records a formal architecture-integration PASS.
+3. **SATISFIED:** TA-16 records a formal architecture-integration/readiness PASS.
 4. **BLOCKING:** TA-17 locks the implementation roadmap, vertical slice, toolchain, module dependency graph, test/CI requirements and change-control rules.
 5. **BLOCKING:** The root project status is explicitly changed from Technical Architecture/pre-implementation to implementation.
 
