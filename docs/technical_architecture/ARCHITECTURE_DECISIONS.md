@@ -1,6 +1,6 @@
 # Architecture Decisions
 
-> **Status:** Active — TA-0..14 Complete / TA-15 Next
+> **Status:** Active — TA-0..15 Complete / TA-16 Next
 > **Authority:** Accepted technical architecture decisions and rationale
 
 This log records material architecture decisions. GDS-17 has formally promoted the Game Design Specification to Design Complete, so architecture decision-making may now begin under TA-0.
@@ -2705,3 +2705,306 @@ TA-14 is Architecture Complete — PASS with 300/300 architecture scenarios and 
 ### Consequence
 
 TA-15 becomes NEXT. Gameplay implementation remains blocked until TA-17.
+
+
+---
+
+## AD-192 — Test at the Cheapest Trustworthy Layer
+
+**Date:** 2026-09-24  
+**Status:** Accepted  
+**Owning TA phase:** TA-15
+
+### Decision
+
+Pure deterministic contracts are tested outside engine dependencies where possible, while Roblox engine/platform claims require Studio/staging evidence; mocks never substitute for required engine truth.
+
+
+---
+
+## AD-193 — Use Stable Test Identity and Traceability
+
+**Date:** 2026-09-24  
+**Status:** Accepted  
+**Owning TA phase:** TA-15
+
+### Decision
+
+Tests have semantic TestIds tied to TA/GDS requirements rather than volatile implementation filenames.
+
+
+---
+
+## AD-194 — Make C0 Invariants Non-Quarantinable
+
+**Date:** 2026-09-24  
+**Status:** Accepted  
+**Owning TA phase:** TA-15
+
+### Decision
+
+Ownership, P2 exact-once, persistence single-writer, transaction recovery, receipt idempotency, trade atomicity and authorization tests are mandatory and cannot be quarantined.
+
+
+---
+
+## AD-195 — Require Clean Static and Build Gates
+
+**Date:** 2026-09-24  
+**Status:** Accepted  
+**Owning TA phase:** TA-15
+
+### Decision
+
+StyLua, Selene, strict Luau analysis, Rojo build and architecture dependency checks must pass once implementation opens.
+
+
+---
+
+## AD-196 — Inject Time Randomness and Platform Dependencies
+
+**Date:** 2026-09-24  
+**Status:** Accepted  
+**Owning TA phase:** TA-15
+
+### Decision
+
+Critical logic receives clocks, RNG and platform adapters through explicit boundaries so verification is deterministic and failures reproducible.
+
+
+---
+
+## AD-197 — Use Deterministic Property Corpora
+
+**Date:** 2026-09-24  
+**Status:** Accepted  
+**Owning TA phase:** TA-15
+
+### Decision
+
+Affected critical property families run at least 1,000 generated cases in the fast suite and 10,000 in the extended suite, recording failing seeds/sequences.
+
+
+---
+
+## AD-198 — Do Not Use Statistical Randomness as Sole Correctness Oracle
+
+**Date:** 2026-09-24  
+**Status:** Accepted  
+**Owning TA phase:** TA-15
+
+### Decision
+
+Random systems require deterministic boundary/mapping/anti-reroll tests; fixed large statistical corpora are additional diagnostics.
+
+
+---
+
+## AD-199 — Use Roblox Studio as Authoritative Engine Test Runtime
+
+**Date:** 2026-09-24  
+**Status:** Accepted  
+**Owning TA phase:** TA-15
+
+### Decision
+
+Studio scripted testing, especially StudioTestService, is the baseline for engine/multiplayer integration behavior.
+
+
+---
+
+## AD-200 — Automate Cross-Device and Network Presentation Evidence
+
+**Date:** 2026-09-24  
+**Status:** Accepted  
+**Owning TA phase:** TA-15
+
+### Decision
+
+Studio device simulation, VirtualInput, Network Simulator and Player Emulator/pseudolocalization are used where applicable.
+
+
+---
+
+## AD-201 — Separate Untrusted and Privileged CI Lanes
+
+**Date:** 2026-09-24  
+**Status:** Accepted  
+**Owning TA phase:** TA-15
+
+### Decision
+
+Ordinary PR code runs on low-trust GitHub-hosted compute without secrets; engine/staging jobs require explicit trusted context and isolated compute.
+
+
+---
+
+## AD-202 — Do Not Run Arbitrary Public-Fork Code on Persistent Personal Runners
+
+**Date:** 2026-09-24  
+**Status:** Accepted  
+**Owning TA phase:** TA-15
+
+### Decision
+
+The public repository does not use a general long-lived self-hosted personal machine for untrusted PR execution.
+
+
+---
+
+## AD-203 — Require Hostile-Client Negative Testing
+
+**Date:** 2026-09-24  
+**Status:** Accepted  
+**Owning TA phase:** TA-15
+
+### Decision
+
+Every client-triggered authority surface has malformed, oversized, replay, rate, permission and context-abuse tests with bounded rejection-cost checks.
+
+
+---
+
+## AD-204 — Require Persistence Fault and Migration Evidence
+
+**Date:** 2026-09-24  
+**Status:** Accepted  
+**Owning TA phase:** TA-15
+
+### Decision
+
+Load/save/lease/migration/retry/shutdown paths support deterministic timeout, throttle, corruption, concurrency and crash injection.
+
+
+---
+
+## AD-205 — Test Exact-Once Transactions at Durable Cut Points
+
+**Date:** 2026-09-24  
+**Status:** Accepted  
+**Owning TA phase:** TA-15
+
+### Decision
+
+Capture, economy, event, trade and commerce transactions are tested before/after durable mutation and across duplicate/retry/reconnect/server-loss boundaries.
+
+
+---
+
+## AD-206 — Isolate Test Environments and Data
+
+**Date:** 2026-09-24  
+**Status:** Accepted  
+**Owning TA phase:** TA-15
+
+### Decision
+
+DEV/STAGING/PRODUCTION stores, bindings, credentials and synthetic data cannot silently overlap.
+
+
+---
+
+## AD-207 — Make TA-14 Hard Guardrails Release Gates
+
+**Date:** 2026-09-24  
+**Status:** Accepted  
+**Owning TA phase:** TA-15
+
+### Decision
+
+All applicable L0-L5 hard performance/memory/network/persistence/service guardrails require reproducible evidence before release.
+
+
+---
+
+## AD-208 — Require Real-Client Evidence for Client Performance
+
+**Date:** 2026-09-24  
+**Status:** Accepted  
+**Owning TA phase:** TA-15
+
+### Decision
+
+An empty or solo Studio run cannot by itself close client frame/memory support claims.
+
+
+---
+
+## AD-209 — Standardize Privacy-Minimized Test Evidence
+
+**Date:** 2026-09-24  
+**Status:** Accepted  
+**Owning TA phase:** TA-15
+
+### Decision
+
+Results include TestId, build, requirement, environment, seed/fault/device/load identity and relevant redacted diagnostics without unnecessary player data.
+
+
+---
+
+## AD-210 — Prohibit Retry-Until-Green
+
+**Date:** 2026-09-24  
+**Status:** Accepted  
+**Owning TA phase:** TA-15
+
+### Decision
+
+Original failures remain visible; C0 cannot quarantine, C1 remains release-required and C2 quarantine is limited to seven days with owner/issue/expiry.
+
+
+---
+
+## AD-211 — Require Complete Applicable C0/C1 Evidence Before Release
+
+**Date:** 2026-09-24  
+**Status:** Accepted  
+**Owning TA phase:** TA-15
+
+### Decision
+
+Static, deterministic, engine, adversarial, fault, performance, accessibility and staging gates cannot be silently skipped because automation is temporarily unavailable.
+
+
+---
+
+## AD-212 — Use Bounded Evidence Retention
+
+**Date:** 2026-09-24  
+**Status:** Accepted  
+**Owning TA phase:** TA-15
+
+### Decision
+
+Ordinary PR artifacts target 14 days and release-candidate evidence 90 days where current public-repository retention permits, with durable release summaries retained separately.
+
+
+---
+
+## AD-213 — Add Regression Tests for Fixed Critical Defects
+
+**Date:** 2026-09-24  
+**Status:** Accepted  
+**Owning TA phase:** TA-15
+
+### Decision
+
+Every fixed C0/C1 defect adds a lowest-trustworthy-layer regression test unless technically impossible.
+
+
+---
+
+## AD-214 — Close TA-15 and Advance to TA-16
+
+**Date:** 2026-09-24  
+**Status:** Accepted  
+**Owning TA phase:** TA-15
+
+### Decision
+
+TA-15 is Architecture Complete — PASS with 360/360 verification-architecture scenarios and zero blocking questions. TA-16 becomes NEXT; gameplay implementation remains blocked until TA-17.
+
+### Consequence
+
+TA-16 becomes NEXT. Gameplay implementation remains blocked until TA-17.
