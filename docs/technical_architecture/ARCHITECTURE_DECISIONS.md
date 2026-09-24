@@ -1836,7 +1836,7 @@ Pass ownership is reconciled on trusted profile readiness and after purchase-pro
 
 ### Decision
 
-A failed pass-ownership query cannot grant a new entitlement and cannot destructively revoke a previously verified active entitlement. It yields VerificationUnknown and schedules bounded asynchronous in-session reconciliation; exact retry/backoff budgets are owned by TA-14. Exhaustion preserves unknown/Pending state and permits later safe reconciliation triggers.
+A failed pass-ownership query cannot grant a new entitlement and cannot destructively revoke a previously verified active entitlement. It yields VerificationUnknown and schedules bounded asynchronous in-session reconciliation; exact retry/backoff budgets are owned by TA-14. Product Hidden/Retired state may stop new prompting but never cancels reconciliation of already-owned or Pending outcomes. Exhaustion preserves unknown/Pending state and permits later safe reconciliation triggers.
 
 ---
 
@@ -1848,7 +1848,7 @@ A failed pass-ownership query cannot grant a new entitlement and cannot destruct
 
 ### Decision
 
-Starter pass ownership may reconcile repeatedly while the historical deterministic Energy/one-time grant is protected by one stable per-account operation identity and TA-8 deferred-grant semantics.
+Starter pass ownership may reconcile repeatedly while the historical deterministic Energy/one-time grant is protected by one stable account-level StarterProgramId finalized marker and TA-8 deferred-grant semantics. ProductDefinitionId, external binding and GrantSemanticVersion remain source/audit facts and cannot reset the account-level Starter finalization state.
 
 ---
 
