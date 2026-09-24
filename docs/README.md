@@ -1,6 +1,6 @@
 # Project MonsterVault Documentation
 
-> **Project phase:** Technical Architecture — TA-0..15 complete / TA-16 next  
+> **Project phase:** Technical Architecture — TA-0..16 integration PASS / TA-17 next  
 > **Implementation status:** Blocked by Technical Architecture and implementation-lock gates
 
 This directory is the authoritative documentation space for Project MonsterVault.
@@ -74,6 +74,7 @@ Technical Architecture completed:
 - **TA-13 — Analytics, Telemetry, Feature Flags, Configuration Rollouts, and Live Operations: Architecture Complete — PASS**
 - **TA-14 — Performance, Network, Memory, Persistence, and Scalability Budgets: Architecture Complete — PASS**
 - **TA-15 — Testing, Diagnostics, Security Validation, and CI Architecture: Architecture Complete — PASS**
+- **TA-16 — Architecture Integration and Implementation-Readiness Audit: Integration Complete — PASS**
 
 TA-13 latest evidence:
 
@@ -105,9 +106,20 @@ TA-15 latest evidence:
 - [`technical_architecture/TA15_DECISION_INDEX.md`](technical_architecture/TA15_DECISION_INDEX.md);
 - [`technical_architecture/TA15_CLOSURE_REPORT.md`](technical_architecture/TA15_CLOSURE_REPORT.md).
 
+TA-16 latest evidence:
+
+- [`technical_architecture/audit/16_architecture_integration_and_implementation_readiness_audit.md`](technical_architecture/audit/16_architecture_integration_and_implementation_readiness_audit.md);
+- [`technical_architecture/TA16_AUTHORITY_DEPENDENCY_AUDIT.md`](technical_architecture/TA16_AUTHORITY_DEPENDENCY_AUDIT.md);
+- [`technical_architecture/TA16_RISK_CLOSURE_REGISTER.md`](technical_architecture/TA16_RISK_CLOSURE_REGISTER.md);
+- [`technical_architecture/TA16_IMPLEMENTATION_READINESS_MATRIX.md`](technical_architecture/TA16_IMPLEMENTATION_READINESS_MATRIX.md);
+- [`technical_architecture/TA16_MATURITY_OPEN_QUESTION_AUDIT.md`](technical_architecture/TA16_MATURITY_OPEN_QUESTION_AUDIT.md);
+- [`technical_architecture/TA16_COMPOUND_SCENARIO_VALIDATION.md`](technical_architecture/TA16_COMPOUND_SCENARIO_VALIDATION.md) — 240 / 240 PASS;
+- [`technical_architecture/TA16_DECISION_INDEX.md`](technical_architecture/TA16_DECISION_INDEX.md);
+- [`technical_architecture/TA16_CLOSURE_REPORT.md`](technical_architecture/TA16_CLOSURE_REPORT.md).
+
 The active dependency is:
 
-> **TA-16 — Architecture Integration and Implementation-Readiness Audit**
+> **TA-17 — Implementation Roadmap, Vertical Slice, Contract Locking, and Change Control**
 
 No gameplay implementation should begin until:
 
