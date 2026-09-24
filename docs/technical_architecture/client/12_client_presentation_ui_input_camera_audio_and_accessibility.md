@@ -280,26 +280,45 @@ ContextActionService is not a second parallel gameplay input architecture. If TA
 
 ## 10. Input Context Stack
 
-Baseline contexts:
+Baseline contexts use one explicit precedence order, highest first:
 
-- **SystemBlockedContext** — no irreversible gameplay; only safe recovery/back/system actions.
-- **ModalContext** — modal navigation/confirm/cancel; conflicting world actions sunk.
-- **CommittedGameplayContext** — capture/custody/trade-specific action set.
-- **WorldContext** — ordinary PrimaryInteract/PrimaryAction/navigation.
-- **PanelNavigationContext** — UI navigation actions.
-- **PlatformMenuSuspended** — MonsterVault gameplay actions suspended while Roblox system menu owns interaction.
+1. **PlatformMenuSuspended** — Roblox/Core UI owns interaction; MonsterVault semantic actions are suspended/sunk.
+2. **SystemBlockedContext** — Critical Trust/recovery UI owns input; all irreversible gameplay/commercial/trade actions are sunk.
+3. **ModalContext** — the one primary modal owns Confirm/Back/navigation and any shared PrimaryAction/PrimaryInteract binding.
+4. **CommittedGameplayContext** — capture/custody/trade-specific actions own conflicting gameplay bindings while no higher context is active.
+5. **PanelNavigationContext** — a safe non-modal panel owns its UI navigation/Confirm/Back and any shared action bindings while focused.
+6. **WorldContext** — ordinary PrimaryInteract/PrimaryAction/navigation receives only actions not owned or sunk above.
+
+Dispatch is **single-owner per semantic action event**: scan active contexts from highest to lowest; the first context that either handles or explicitly sinks the action terminates dispatch. The same semantic action event is never fanned out to multiple contexts.
+
+Sink policy:
+
+- PlatformMenuSuspended sinks all MonsterVault gameplay/UI actions until platform ownership ends.
+- SystemBlockedContext sinks all gameplay/value actions and exposes only explicitly safe recovery/system/accessibility actions.
+- ModalContext sinks Confirm, Back, navigation, PrimaryAction, PrimaryInteract and any physical binding participating in the modal flow.
+- CommittedGameplayContext sinks ordinary world/panel aliases that could conflict with the committed operation; unrelated panel opening is suppressed where GDS-14 requires dominance.
+- PanelNavigationContext sinks its navigation/Confirm/Back/shared action bindings while focused. Movement/camera may pass only when the panel is explicitly non-modal, the bindings are distinct, and no consequential action can be triggered underneath.
+- WorldContext is the fallback and never receives an action already handled/sunk above.
 
 ### INPUTCTX-12-01
 
-Only contexts valid for the current presentation mode are enabled.
+Only contexts valid for the current authoritative/presentation mode are enabled.
 
 ### INPUTCTX-12-02
 
-Opening a modal cannot let the same physical press fall through and trigger a world action.
+Opening a modal cannot let the physical gesture that opened it fall through and trigger a lower-context action.
 
 ### INPUTCTX-12-03
 
-Context priority/sink rules are deterministic.
+The precedence and sink table above is architecture authority; TA-17 may choose concrete InputContext priority numbers but may not reorder the semantic precedence.
+
+### INPUTCTX-12-04
+
+Closing/dismissing a higher context does not immediately expose lower contexts to the same physical gesture. The outgoing context or a short-lived **Input Handoff Guard** continues to sink every binding that participated in dismissal until that keyboard/gamepad/touch/pointer input has reached its completed/released/neutral state. Only a subsequent fresh gesture may reach the newly exposed lower context.
+
+### INPUTCTX-12-05
+
+If several physical inputs map to the same semantic action, neutralization is tracked for the actual input(s) that caused the transition; unrelated already-neutral controls do not delay restoration.
 
 ## 11. Input Family and Glyph Switching
 
@@ -380,6 +399,10 @@ A destroyed/virtualized prior control does not receive focus; restore by semanti
 ### FOCUS-12-05
 
 Back never implicitly confirms Buy, Release, Trade, Unlock or another consequential action.
+
+### FOCUS-12-06
+
+Focus/context restoration after modal dismissal occurs only after INPUTCTX-12-04's input-handoff guard has consumed the complete dismissal gesture. Visual focus may be prepared earlier, but newly exposed consequential actions remain non-triggerable until neutral.
 
 ## 14. Confirmation Severity Architecture
 
@@ -540,6 +563,14 @@ Retry controls are exposed only where the upstream operation is safe/idempotent 
 ### FEEDBACK-12-04
 
 Trade/purchase uncertain outcomes remain visible as persistent Pending/Reconciliation state.
+
+### FEEDBACK-12-05
+
+A transport/request timeout for a consequential command is **not** a rejection. It transitions the presentation from Submitting/Pending to a non-success **ReconciliationRequired / OutcomeUnknown** state, triggers the owning domain's authoritative refresh/reconciliation path required by TA-3, and prevents a blind second irreversible attempt while the first outcome is unknown.
+
+### FEEDBACK-12-06
+
+After reconciliation, presentation moves to Confirmed, Rejected/NotApplied, or remains Pending/Unknown according to authoritative state. A retry control appears only if the upstream domain proves retry/idempotency safety and preserves the required operation/quote/revision identity.
 
 ## 20. Authoritative Time Presentation
 
