@@ -1,6 +1,6 @@
 # MonsterVault Technical Architecture
 
-> **Status:** Active — TA-0..13 Complete / TA-14 Next
+> **Status:** Active — TA-0..14 Complete / TA-15 Next
 > **Authority:** Technical implementation contracts after GDS completion
 
 This directory contains the Technical Architecture layer that now becomes active after the GDS-17 Design Complete PASS.
@@ -40,6 +40,8 @@ The TA is deliberately not allowed to redefine gameplay. It translates the appro
 - [`TA12_CLIENT_PRESENTATION_INPUT_ACCESSIBILITY_MATRIX.md`](TA12_CLIENT_PRESENTATION_INPUT_ACCESSIBILITY_MATRIX.md) locks client state, input context, focus, safe-area, accessibility and authoritative-feedback boundaries.
 - [`operations/13_analytics_telemetry_feature_flags_configuration_rollouts_and_live_operations.md`](operations/13_analytics_telemetry_feature_flags_configuration_rollouts_and_live_operations.md) is the authoritative TA-13 analytics/config/experiment/live-ops contract.
 - [`TA13_ANALYTICS_CONFIG_LIVEOPS_MATRIX.md`](TA13_ANALYTICS_CONFIG_LIVEOPS_MATRIX.md) locks telemetry channels, C2 snapshots, flags, experiment and privileged-operation boundaries.
+- [`performance/14_performance_network_memory_persistence_and_scalability_budgets.md`](performance/14_performance_network_memory_persistence_and_scalability_budgets.md) is the authoritative TA-14 budget/scalability contract.
+- [`TA14_PERFORMANCE_SCALABILITY_BUDGET_MATRIX.md`](TA14_PERFORMANCE_SCALABILITY_BUDGET_MATRIX.md) locks the cross-system numeric performance, network, memory and service guardrails.
 - [`TA_ROADMAP.md`](TA_ROADMAP.md) defines the dependency-driven architecture sequence.
 - `audit/` will contain the final TA-16 integration/readiness evidence.
 
@@ -47,12 +49,12 @@ The TA is deliberately not allowed to redefine gameplay. It translates the appro
 
 GDS-17 has recorded a formal **Design Complete — PASS** with zero implementation-critical design questions.
 
-TA-0 through TA-13 are **Architecture Complete — PASS**.
+TA-0 through TA-14 are **Architecture Complete — PASS**.
 
-TA-13 closed with 260 / 260 scenarios passing and a non-authoritative versioned telemetry registry, low-cardinality/privacy constraints, Roblox AnalyticsService adapter boundary, ConfigService-backed validated atomic C2 snapshots, safe feature rollout/rollback, deterministic experiment assignment/exposure/provenance, conservative emergency disable and external least-privilege live-operations audit.
+TA-14 closed with 300 / 300 architecture scenarios passing and numeric server/client frame, memory, streaming, custom-network, persistence, cross-server, world-scheduler, collection, UI and telemetry/config budgets; it also locks conservative pressure/degradation semantics that preserve upstream authority and exact-once/value guarantees.
 
 The active dependency is:
 
-> **TA-14 — Performance, Network, Memory, Persistence, and Scalability Budgets**
+> **TA-15 — Testing, Diagnostics, Security Validation, and CI Architecture**
 
-TA-14 now owns measurable server/client performance, network, memory, persistence and scalability budgets on top of the closed TA-13 operational architecture. Gameplay implementation remains blocked until TA-17.
+TA-15 now owns executable/static/fault/security/performance verification, diagnostics and CI quality gates on top of the closed TA-14 budget architecture. Gameplay implementation remains blocked until TA-17.
