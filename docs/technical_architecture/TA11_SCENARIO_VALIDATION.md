@@ -84,7 +84,7 @@ TA-11 validates semantic product identity, platform binding, pass ownership, rec
 | 57 | grant tries Region Mastery | reject | PASS |
 | 58 | grant tries Event Completion | reject | PASS |
 | 59 | grant tries Trade Access | reject | PASS |
-| 60 | Starter ProductDefinition/binding/grant version is replaced within the same baseline Starter program | migration may require a new binding, but the stable StarterProgramId account marker prevents a second historical grant | PASS |
+| 60 | account owns legacy and materially revised replacement Starter SKUs before any StarterProgramId finalization | reconcile all configured sources and choose only the explicit approved StarterSourcePriority/migration result; registry/query order cannot choose the grant, and incompatible migration fails protected | PASS |
 
 ## Developer Product receipt ingress
 
