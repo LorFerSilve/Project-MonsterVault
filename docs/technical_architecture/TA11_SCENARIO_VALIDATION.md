@@ -52,14 +52,14 @@ TA-11 validates semantic product identity, platform binding, pass ownership, rec
 |---:|---|---|---|
 | 31 | owns pass before join | successful check activates | PASS |
 | 32 | does not own | no entitlement | PASS |
-| 33 | query errors for never-owned | do not grant | PASS |
-| 34 | query errors for previously active | preserve as VerificationUnknown | PASS |
+| 33 | query errors for never-owned | do not grant; schedule bounded asynchronous in-session reconciliation | PASS |
+| 34 | query errors for previously active | preserve as VerificationUnknown and schedule bounded asynchronous in-session reconciliation | PASS |
 | 35 | successful false after active | deactivate safely | PASS |
 | 36 | positive check repeats | idempotent | PASS |
 | 37 | bought through prompt | event triggers refresh | PASS |
 | 38 | bought outside experience | join discovers | PASS |
 | 39 | prompt says not purchased | no grant | PASS |
-| 40 | prompt says purchased but query errors | Pending | PASS |
+| 40 | prompt says purchased but ownership query errors | remain Pending and retry asynchronously in-session without requiring reprompt/reconnect | PASS |
 | 41 | profile save fails after positive | retry same mutation | PASS |
 | 42 | reconnect active owner | consistent and reverified | PASS |
 | 43 | two refreshes race | TA-4 serialization | PASS |
