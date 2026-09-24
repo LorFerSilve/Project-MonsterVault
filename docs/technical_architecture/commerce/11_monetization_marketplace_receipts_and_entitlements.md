@@ -95,7 +95,7 @@ On profile readiness, MonsterVault reconciles configured pass ownership using Ma
 **PASS-11-04:** Successful authoritative negative ownership may deactivate and invoke safe reconciliation.  
 **PASS-11-05:** External pass purchases are discovered on later reconciliation.
 
-**PASS-11-06:** A VerificationUnknown result schedules bounded asynchronous in-session ownership reconciliation while the session remains eligible. The retry uses backoff/jitter, is coalesced per player/product, and stops on authoritative positive/negative resolution, session end, product retirement/ineligibility, or the TA-14 retry budget. A player is not required to reprompt, reconnect, or reopen the shop to obtain a retry.
+**PASS-11-06:** A VerificationUnknown result schedules bounded asynchronous in-session ownership reconciliation. The retry uses backoff/jitter, is coalesced per player/product, and stops on authoritative positive/negative resolution, session end, an integrity condition that makes authoritative reconciliation unsafe/impossible, or the TA-14 retry budget. Product lifecycle retirement/Hidden state may stop **new offers/prompts** but does not cancel reconciliation of already-owned or Pending outcomes. Offer eligibility is therefore distinct from reconciliation eligibility. A player is not required to reprompt, reconnect, reopen the shop or keep the product Active to obtain the scheduled retry.
 
 **PASS-11-07:** Exhausting the current in-session retry budget preserves VerificationUnknown/Pending without inventing entitlement truth; a later safe reconciliation trigger (for example renewed session readiness, product-state refresh, or reconnect) may resume attempts under the current budget policy.
 
@@ -107,12 +107,16 @@ The Starter Value Bundle combines durable one-time account ownership with a sepa
 
 Allowed deterministic grant components: listed cosmetics, bounded convenience and a small fixed Energy grant.
 
-Stable grant identity derives from `UserId + ProductDefinitionId + GrantSemanticVersion`.
+All ProductDefinitions that represent the baseline Starter offer map to one immutable **StarterProgramId**.
 
-**STARTER-11-01:** repeated ownership checks cannot duplicate the historical grant.  
-**STARTER-11-02:** Starter Energy and its grant marker commit through the same TA-4 P2 profile operation; overflow uses TA-8 Deferred Energy.  
+The account-level historical-grant dedupe identity is the Player Profile plus StarterProgramId. ProductDefinitionId, external platform binding and GrantSemanticVersion are stored as source/audit facts but are **not** part of the exact-once key and cannot reset Starter eligibility after catalog/version changes.
+
+**STARTER-11-01:** repeated ownership checks, reconnects, product rebindings and grant-version/catalog migrations within the same StarterProgramId cannot duplicate the historical grant.  
+**STARTER-11-02:** Starter Energy and the account-level StarterProgramId finalized marker commit through the same TA-4 P2 profile operation; overflow uses TA-8 Deferred Energy.  
 **STARTER-11-03:** reversal never creates Energy debt or claws back already-spent Starter Energy.  
-**STARTER-11-04:** revocable capacity/cosmetic components reconcile separately from historical Energy.
+**STARTER-11-04:** revocable capacity/cosmetic components reconcile separately from historical Energy.  
+**STARTER-11-05:** a replacement ProductDefinition/platform binding for the same baseline Starter program inherits the same StarterProgramId and therefore cannot create a second historical grant for an account that already finalized Starter value.  
+**STARTER-11-06:** baseline authorizes one account-level Starter program. Creating a genuinely new StarterProgramId or exposing a replacement SKU in a way that could misleadingly recharge prior Starter participants requires GDS-13 change control plus an explicit commercial migration plan.
 
 ## 9. Developer Product Receipt Authority
 
