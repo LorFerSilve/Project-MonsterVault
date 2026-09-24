@@ -2009,7 +2009,7 @@ InputAction.PreferredBinding feeds a MonsterVault glyph/text resolver; the beta 
 
 ### Decision
 
-One client input/focus architecture prevents modal-to-world input fallthrough, provides predictable Back/Close and maintains complete gamepad reachability.
+One client input/focus architecture uses fixed precedence PlatformMenuSuspended > SystemBlocked > Modal > CommittedGameplay > PanelNavigation > World, single-owner action dispatch and explicit sink behavior. A context/modal dismissal retains ownership of its triggering physical gesture until release/completed/neutral before lower contexts become triggerable, preventing press/release fallthrough while preserving predictable Back/Close and complete gamepad reachability.
 
 ---
 
@@ -2069,7 +2069,7 @@ Custom contrast, shake, captions, volume categories, sensitivity and safe social
 
 ### Decision
 
-Capture ownership, Energy/progression, Release, trade, event rewards and commercial entitlements present success only after authoritative outcomes.
+Capture ownership, Energy/progression, Release, trade, event rewards and commercial entitlements present success only after authoritative outcomes. A consequential command timeout is an unknown outcome that enters reconciliation, never an implicit rejection; blind duplicate irreversible submission remains blocked until authoritative refresh or upstream-proven retry safety.
 
 ---
 
