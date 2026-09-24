@@ -1,6 +1,6 @@
 # MonsterVault Technical Architecture
 
-> **Status:** Active — TA-0..15 Complete / TA-16 Next
+> **Status:** Active — TA-0..16 Integration PASS / TA-17 Next
 > **Authority:** Technical implementation contracts after GDS completion
 
 This directory contains the Technical Architecture layer that now becomes active after the GDS-17 Design Complete PASS.
@@ -45,18 +45,18 @@ The TA is deliberately not allowed to redefine gameplay. It translates the appro
 - [`verification/15_testing_diagnostics_security_validation_and_ci_architecture.md`](verification/15_testing_diagnostics_security_validation_and_ci_architecture.md) is the authoritative TA-15 verification/security/CI contract.
 - [`TA15_VERIFICATION_QUALITY_GATE_MATRIX.md`](TA15_VERIFICATION_QUALITY_GATE_MATRIX.md) locks the required test classes, criticality and merge/release evidence.
 - [`TA_ROADMAP.md`](TA_ROADMAP.md) defines the dependency-driven architecture sequence.
-- `audit/` will contain the final TA-16 integration/readiness evidence.
+- [`audit/16_architecture_integration_and_implementation_readiness_audit.md`](audit/16_architecture_integration_and_implementation_readiness_audit.md) is the authoritative TA-16 final integration/readiness audit.
 
 ## Current Gate
 
 GDS-17 has recorded a formal **Design Complete — PASS** with zero implementation-critical design questions.
 
-TA-0 through TA-15 are **Architecture Complete — PASS**.
+TA-0 through TA-15 are **Architecture Complete — PASS** and TA-16 is **Architecture Integration Complete — PASS**.
 
-TA-15 closed with 360 / 360 verification-architecture scenarios passing and deterministic/static/Studio/fault/security/performance evidence contracts, public-repository CI privilege separation, non-quarantinable C0 invariants and explicit merge/release quality gates.
+TA-16 closed with 240 / 240 compound integration scenarios passing, all 12 TA-0 risk families closed at the architecture layer, zero authority collisions, zero unowned durable mutation families and zero implementation-critical architecture questions.
 
 The active dependency is:
 
-> **TA-16 — Architecture Integration and Implementation-Readiness Audit**
+> **TA-17 — Implementation Roadmap, Vertical Slice, Contract Locking, and Change Control**
 
-TA-16 now owns the final cross-system architecture integration/readiness audit across TA-0..15. Gameplay implementation remains blocked until TA-17.
+TA-17 now owns final tool/module/route/store/test/CI/vertical-slice/implementation-order locking. Gameplay implementation remains blocked until TA-17 is formally complete.
