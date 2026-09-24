@@ -63,7 +63,7 @@ TA-11 validates semantic product identity, platform binding, pass ownership, rec
 | 41 | profile save fails after positive | retry same mutation | PASS |
 | 42 | reconnect active owner | consistent and reverified | PASS |
 | 43 | two refreshes race | TA-4 serialization | PASS |
-| 44 | Retired pass remains owned | preserve | PASS |
+| 44 | pass becomes Retired while ownership is VerificationUnknown/Pending | stop new prompts but continue bounded in-session reconciliation; retirement cannot strand entitlement resolution | PASS |
 | 45 | binding missing | protected failure | PASS |
 
 ## Starter exact-once
@@ -71,7 +71,7 @@ TA-11 validates semantic product identity, platform binding, pass ownership, rec
 | # | Situation | Required behavior | Result |
 |---:|---|---|---|
 | 46 | first verified Starter ownership | grant once | PASS |
-| 47 | ownership check repeats | no second Energy | PASS |
+| 47 | ownership check or Starter SKU/version reconciliation repeats | stable account-level StarterProgramId marker prevents a second historical grant | PASS |
 | 48 | reconnect after grant | no duplicate | PASS |
 | 49 | two servers attempt Starter grant | lease/op identity dedupes | PASS |
 | 50 | profile write response unknown | reconcile same operation | PASS |
@@ -84,7 +84,7 @@ TA-11 validates semantic product identity, platform binding, pass ownership, rec
 | 57 | grant tries Region Mastery | reject | PASS |
 | 58 | grant tries Event Completion | reject | PASS |
 | 59 | grant tries Trade Access | reject | PASS |
-| 60 | contents materially edited | new binding required | PASS |
+| 60 | Starter ProductDefinition/binding/grant version is replaced within the same baseline Starter program | migration may require a new binding, but the stable StarterProgramId account marker prevents a second historical grant | PASS |
 
 ## Developer Product receipt ingress
 
