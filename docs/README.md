@@ -1,6 +1,6 @@
 # Project MonsterVault Documentation
 
-> **Project phase:** Technical Architecture — TA-0..14 complete / TA-15 next  
+> **Project phase:** Technical Architecture — TA-0..15 complete / TA-16 next  
 > **Implementation status:** Blocked by Technical Architecture and implementation-lock gates
 
 This directory is the authoritative documentation space for Project MonsterVault.
@@ -73,6 +73,7 @@ Technical Architecture completed:
 - **TA-12 — Client Presentation, UI State, Input, Camera, Audio, and Accessibility: Architecture Complete — PASS**
 - **TA-13 — Analytics, Telemetry, Feature Flags, Configuration Rollouts, and Live Operations: Architecture Complete — PASS**
 - **TA-14 — Performance, Network, Memory, Persistence, and Scalability Budgets: Architecture Complete — PASS**
+- **TA-15 — Testing, Diagnostics, Security Validation, and CI Architecture: Architecture Complete — PASS**
 
 TA-13 latest evidence:
 
@@ -94,9 +95,19 @@ TA-14 latest evidence:
 - [`technical_architecture/TA14_DECISION_INDEX.md`](technical_architecture/TA14_DECISION_INDEX.md);
 - [`technical_architecture/TA14_CLOSURE_REPORT.md`](technical_architecture/TA14_CLOSURE_REPORT.md).
 
+TA-15 latest evidence:
+
+- [`technical_architecture/verification/15_testing_diagnostics_security_validation_and_ci_architecture.md`](technical_architecture/verification/15_testing_diagnostics_security_validation_and_ci_architecture.md);
+- [`technical_architecture/TA15_ROBLOX_TESTING_SECURITY_CI_PLATFORM_SNAPSHOT.md`](technical_architecture/TA15_ROBLOX_TESTING_SECURITY_CI_PLATFORM_SNAPSHOT.md);
+- [`technical_architecture/TA15_VERIFICATION_QUALITY_GATE_MATRIX.md`](technical_architecture/TA15_VERIFICATION_QUALITY_GATE_MATRIX.md);
+- [`technical_architecture/TA15_GDS_TRACEABILITY.md`](technical_architecture/TA15_GDS_TRACEABILITY.md);
+- [`technical_architecture/TA15_SCENARIO_VALIDATION.md`](technical_architecture/TA15_SCENARIO_VALIDATION.md) — 360 / 360 PASS;
+- [`technical_architecture/TA15_DECISION_INDEX.md`](technical_architecture/TA15_DECISION_INDEX.md);
+- [`technical_architecture/TA15_CLOSURE_REPORT.md`](technical_architecture/TA15_CLOSURE_REPORT.md).
+
 The active dependency is:
 
-> **TA-15 — Testing, Diagnostics, Security Validation, and CI Architecture**
+> **TA-16 — Architecture Integration and Implementation-Readiness Audit**
 
 No gameplay implementation should begin until:
 
