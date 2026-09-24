@@ -134,3 +134,18 @@ Do **not** solve cycles with:
 **TA-2 DEPENDENCY AND OWNERSHIP MATRIX: PASS.**
 
 The future module graph has explicit allowed directions, mutation owners, Roblox DataModel owners, and cycle-resolution rules.
+
+
+## 9. TA-17 Scaffold Realization
+
+TA-17 materializes the previously deferred non-gameplay scaffold:
+
+- `src/server/{bootstrap,application,domains,infrastructure,adapters}`;
+- `src/client/{bootstrap,networking,store,input,controllers,features,presentation}`;
+- `src/shared/{contracts,config,types,util}`;
+- `tests/{unit,integration,scenarios,fixtures}`;
+- `scripts/{ci,test}`.
+
+`default.project.json` realizes the DataModel mapping. TA17_MODULE_SERVICE_GRAPH.md locks the concrete implementation service graph while preserving this TA-2 dependency matrix.
+
+**TA-2 -> TA-17 structural handoff: SATISFIED.**

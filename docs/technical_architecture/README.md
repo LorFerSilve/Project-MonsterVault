@@ -1,6 +1,6 @@
 # MonsterVault Technical Architecture
 
-> **Status:** Active — TA-0..16 Integration PASS / TA-17 Next
+> **Status:** COMPLETE — TA-17 Implementation Locked — PASS
 > **Authority:** Technical implementation contracts after GDS completion
 
 This directory contains the Technical Architecture layer that now becomes active after the GDS-17 Design Complete PASS.
@@ -46,17 +46,20 @@ The TA is deliberately not allowed to redefine gameplay. It translates the appro
 - [`TA15_VERIFICATION_QUALITY_GATE_MATRIX.md`](TA15_VERIFICATION_QUALITY_GATE_MATRIX.md) locks the required test classes, criticality and merge/release evidence.
 - [`TA_ROADMAP.md`](TA_ROADMAP.md) defines the dependency-driven architecture sequence.
 - [`audit/16_architecture_integration_and_implementation_readiness_audit.md`](audit/16_architecture_integration_and_implementation_readiness_audit.md) is the authoritative TA-16 final integration/readiness audit.
+- [`implementation/17_implementation_roadmap_vertical_slice_contract_locking_and_change_control.md`](implementation/17_implementation_roadmap_vertical_slice_contract_locking_and_change_control.md) is the authoritative TA-17 implementation lock.
 
 ## Current Gate
 
 GDS-17 has recorded a formal **Design Complete — PASS** with zero implementation-critical design questions.
 
-TA-0 through TA-15 are **Architecture Complete — PASS** and TA-16 is **Architecture Integration Complete — PASS**.
+TA-0 through TA-15 are **Architecture Complete — PASS**, TA-16 is **Architecture Integration Complete — PASS**, and TA-17 is **Implementation Locked — PASS**.
 
-TA-16 closed with 240 / 240 compound integration scenarios passing, all 12 TA-0 risk families closed at the architecture layer, zero authority collisions, zero unowned durable mutation families and zero implementation-critical architecture questions.
+TA-17 closed with 180 / 180 implementation-lock scenarios passing and concrete toolchain, repository/Rojo, module/service, V1 namespace, VS-1, CI/change-control and implementation-order contracts. Implementation is open at IMP-1.
 
-The active dependency is:
+Technical Architecture is complete.
 
-> **TA-17 — Implementation Roadmap, Vertical Slice, Contract Locking, and Change Control**
+The active project dependency is:
 
-TA-17 now owns final tool/module/route/store/test/CI/vertical-slice/implementation-order locking. Gameplay implementation remains blocked until TA-17 is formally complete.
+> **IMP-1 — Contracts and Test Harness**
+
+Implementation is open under the TA-17 lock; production release remains downstream-gated.

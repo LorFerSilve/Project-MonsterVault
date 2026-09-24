@@ -1,6 +1,6 @@
 # Technical Architecture Roadmap
 
-> **Status:** Active — TA-17 Next
+> **Status:** COMPLETE — TA-17 Implementation Locked / Implementation Open
 > **Authority:** Dependency-driven technical architecture sequencing
 
 This roadmap defines how the Design Complete MonsterVault GDS is translated into implementation-ready Roblox/Luau contracts.
@@ -681,31 +681,48 @@ Closure evidence:
 
 ## TA-17 — Implementation Roadmap, Vertical Slice, Contract Locking, and Change Control
 
-**Status:** NEXT — Draft
+**Status:** Implementation Locked — PASS
 
-Final pre-code phase. Locks:
+Locked and materialized:
 
-- exact toolchain and dependency baseline;
-- repository/source layout;
-- module/service dependency graph;
-- GDS-to-TA-to-implementation traceability;
-- implementation dependency order;
-- first end-to-end vertical-slice acceptance matrix;
-- test/CI requirements;
-- performance reference scenarios;
-- implementation-lock/change-control rules;
-- branch/PR/release workflow.
+- Rokit 1.2.0, Rojo 7.7.0, luau-lsp 1.70.0, StyLua 2.5.2, Selene 0.31.0 and Lune 0.10.5 test-only;
+- no runtime package manager / no approved third-party runtime Luau packages;
+- rokit, formatting, lint, strict-analysis and Rojo project configuration;
+- actual server/client/shared + tests/scripts layer scaffold;
+- V1 Command/Event/UnreliableEvent transport objects and route namespace;
+- profile schema generation 1 and environment-scoped PlayerProfile/TradeJournal/ReceiptJournal namespaces;
+- exact module/service dependency graph;
+- GDS/TA/implementation traceability;
+- IMP-1..IMP-15 dependency roadmap;
+- VS-1 Trusted Join -> Capture -> Secure Ownership -> Rejoin acceptance matrix;
+- CI / static-build public-PR workflow with immutable action pins/read-only trust;
+- branch/merge/release and architecture-reopen change control;
+- 180 / 180 TA-17 implementation-lock scenarios PASS;
+- zero TA-17 blocking contract questions.
+
+Closure evidence:
+
+- [implementation/17_implementation_roadmap_vertical_slice_contract_locking_and_change_control.md](implementation/17_implementation_roadmap_vertical_slice_contract_locking_and_change_control.md) — PASS;
+- [TA17_TOOLCHAIN_ENVIRONMENT_LOCK.md](TA17_TOOLCHAIN_ENVIRONMENT_LOCK.md) — PASS;
+- [TA17_MODULE_SERVICE_GRAPH.md](TA17_MODULE_SERVICE_GRAPH.md) — PASS;
+- [TA17_RUNTIME_NAMESPACE_CONTRACT.md](TA17_RUNTIME_NAMESPACE_CONTRACT.md) — PASS;
+- [TA17_VERTICAL_SLICE_ACCEPTANCE_MATRIX.md](TA17_VERTICAL_SLICE_ACCEPTANCE_MATRIX.md) — LOCKED;
+- [TA17_IMPLEMENTATION_TRACEABILITY.md](TA17_IMPLEMENTATION_TRACEABILITY.md) — PASS;
+- [TA17_CI_RELEASE_CHANGE_CONTROL.md](TA17_CI_RELEASE_CHANGE_CONTROL.md) — PASS;
+- [TA17_SCENARIO_VALIDATION.md](TA17_SCENARIO_VALIDATION.md) — 180 / 180 PASS;
+- [TA17_DECISION_INDEX.md](TA17_DECISION_INDEX.md) — accepted;
+- [TA17_CLOSURE_REPORT.md](TA17_CLOSURE_REPORT.md) — IMPLEMENTATION OPEN.
 
 ## Implementation Gate
 
-Gameplay implementation begins only after TA-17 is formally complete.
+TA-17 is formally complete. Gameplay implementation is OPEN under the locked contracts; production release remains separately gated.
 
 ```text
 GDS-17 PASS / Design Complete
   -> TA-0..15 architecture
   -> TA-16 integration audit PASS
-  -> TA-17 implementation roadmap + contract locking
-  -> IMPLEMENTATION OPEN
+  -> TA-17 implementation roadmap + contract locking PASS
+  -> IMPLEMENTATION OPEN -> IMP-1
 ```
 
 
@@ -713,10 +730,12 @@ GDS-17 PASS / Design Complete
 
 GDS-17 is **Complete — PASS** and the Game Design Specification is **Design Complete**.
 
-TA-0 through TA-15 are **Architecture Complete — PASS** and TA-16 is **Architecture Integration Complete — PASS**.
+TA-0 through TA-15 are **Architecture Complete — PASS**, TA-16 is **Architecture Integration Complete — PASS**, and TA-17 is **Implementation Locked — PASS**.
 
-The active dependency is:
+Technical Architecture is complete.
 
-> **TA-17 — Implementation Roadmap, Vertical Slice, Contract Locking, and Change Control**
+The active project dependency is:
 
-TA-17 is the final pre-code dependency. Gameplay implementation remains blocked until TA-17 is formally complete and the project implementation gate is explicitly opened.
+> **IMP-1 — Contracts and Test Harness**
+
+Implementation is open; production release remains downstream-gated.

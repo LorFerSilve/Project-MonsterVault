@@ -4,9 +4,9 @@
 
 ## Project Status
 
-**Game Design Specification — DESIGN COMPLETE / Technical Architecture TA-0..16 integration PASS / TA-17 next.**
+**Game Design Specification — DESIGN COMPLETE / Technical Architecture TA-0..17 COMPLETE / IMPLEMENTATION OPEN — IMP-1 next.**
 
-MonsterVault is intentionally **not in gameplay implementation yet**. The project follows a specification-first workflow:
+MonsterVault has completed the specification and Technical Architecture gates. **Implementation is now OPEN under the TA-17 locked contracts**; production release remains gated by TA-15 verification and the implementation roadmap.
 
 ```text
 Game Design Specification (GDS)
@@ -57,8 +57,9 @@ No gameplay system should be implemented merely because an idea appears promisin
 - **TA-14 — Performance, Network, Memory, Persistence, and Scalability Budgets: ARCHITECTURE COMPLETE — PASS**
 - **TA-15 — Testing, Diagnostics, Security Validation, and CI Architecture: ARCHITECTURE COMPLETE — PASS**
 - **TA-16 — Architecture Integration and Implementation-Readiness Audit: INTEGRATION COMPLETE — PASS**
-- **TA-17 — Implementation Roadmap, Vertical Slice, Contract Locking, and Change Control: NEXT**
-- Gameplay implementation: blocked by TA and implementation-lock gates
+- **TA-17 — Implementation Roadmap, Vertical Slice, Contract Locking, and Change Control: IMPLEMENTATION LOCKED — PASS**
+- **Gameplay implementation: OPEN — IMP-1 Contracts and Test Harness next**
+- Production release: blocked until applicable TA-15/TA-14/staging/release gates pass
 
 GDS-17 final evidence is recorded in [`17_cross_system_consistency_and_design_complete_audit.md`](docs/game_design/audit/17_cross_system_consistency_and_design_complete_audit.md), [`GDS17_AUTHORITY_NAMESPACE_AUDIT.md`](docs/game_design/GDS17_AUTHORITY_NAMESPACE_AUDIT.md), [`GDS17_MATURITY_OPEN_QUESTION_AUDIT.md`](docs/game_design/GDS17_MATURITY_OPEN_QUESTION_AUDIT.md), [`GDS17_COMPOUND_SCENARIO_VALIDATION.md`](docs/game_design/GDS17_COMPOUND_SCENARIO_VALIDATION.md), [`GDS17_DECISION_INDEX.md`](docs/game_design/GDS17_DECISION_INDEX.md), and [`GDS17_CLOSURE_REPORT.md`](docs/game_design/GDS17_CLOSURE_REPORT.md).
 
@@ -410,7 +411,7 @@ Choose or notice a desirable goal
   -> repeat
 ```
 
-GDS-17 has passed the final cross-system audit. The complete Game Design Specification is **Design Complete** with zero implementation-critical open design questions. Technical Architecture is now open at TA-0; gameplay implementation remains blocked.
+GDS-17 passed the final cross-system audit and the complete Game Design Specification is **Design Complete**. TA-0..17 have subsequently passed their architecture/integration/implementation-lock gates, so implementation is now open under the locked contracts.
 
 ## Documentation Authority
 
@@ -451,9 +452,9 @@ Key documents include:
 
 ### Technical Architecture
 
-[`docs/technical_architecture/`](docs/technical_architecture/) is **ACTIVE — TA-0..16 INTEGRATION PASS / TA-17 NEXT**.
+[`docs/technical_architecture/`](docs/technical_architecture/) is **COMPLETE — TA-17 IMPLEMENTATION LOCKED / IMPLEMENTATION OPEN**.
 
-TA-0 established governance/traceability, TA-1 locked the Roblox environment/toolchain, TA-2 locked structural boundaries, TA-3 locked networking trust, TA-4 locked persistence/session durability, TA-5 locked identity/content registries, TA-6 locked runtime lifecycle, TA-7 locked capture/ownership resolution, TA-8 locked collection/Vault/economy semantics, and TA-9 locked world/spawn/streaming authority. TA-10 locked transient social coordination, global event occurrence/cooldown semantics, cross-server notification/durability boundaries, exact-once event rewards and recoverable multi-profile creature trading. TA-11 locked commercial product identity, MarketplaceService ownership/receipt authority, exact-once grants, entitlement reconciliation and runtime price boundaries. TA-12 locked revision-aware client projection, semantic cross-device input, modal/focus safety, responsive/safe-area UI, accessibility preferences, authoritative feedback, camera/audio/caption and localization boundaries. TA-13 locked non-authoritative versioned telemetry, privacy/cardinality rules, ConfigService-backed validated C2 snapshots, feature rollout/rollback, experiment assignment/exposure/provenance, emergency disable semantics and external least-privilege live-operations audit. TA-14 locked measurable compute, memory, streaming, network, persistence, cross-server, world, client and live-ops budgets with conservative load shedding. TA-15 locked deterministic/static/engine/fault/security/performance verification, public-repository CI trust boundaries and merge/release evidence gates. TA-16 has now completed the cross-system authority/dependency/risk/readiness audit with zero implementation-critical architecture questions. TA-17 now owns final implementation contract locking and vertical-slice sequencing.
+TA-0 established governance/traceability, TA-1 locked the Roblox environment/toolchain, TA-2 locked structural boundaries, TA-3 locked networking trust, TA-4 locked persistence/session durability, TA-5 locked identity/content registries, TA-6 locked runtime lifecycle, TA-7 locked capture/ownership resolution, TA-8 locked collection/Vault/economy semantics, and TA-9 locked world/spawn/streaming authority. TA-10 locked transient social coordination, global event occurrence/cooldown semantics, cross-server notification/durability boundaries, exact-once event rewards and recoverable multi-profile creature trading. TA-11 locked commercial product identity, MarketplaceService ownership/receipt authority, exact-once grants, entitlement reconciliation and runtime price boundaries. TA-12 locked revision-aware client projection, semantic cross-device input, modal/focus safety, responsive/safe-area UI, accessibility preferences, authoritative feedback, camera/audio/caption and localization boundaries. TA-13 locked non-authoritative versioned telemetry, privacy/cardinality rules, ConfigService-backed validated C2 snapshots, feature rollout/rollback, experiment assignment/exposure/provenance, emergency disable semantics and external least-privilege live-operations audit. TA-14 locked measurable compute, memory, streaming, network, persistence, cross-server, world, client and live-ops budgets with conservative load shedding. TA-15 locked deterministic/static/engine/fault/security/performance verification, public-repository CI trust boundaries and merge/release evidence gates. TA-16 completed the cross-system authority/dependency/risk/readiness audit with zero implementation-critical architecture questions. TA-17 has now locked the toolchain, source/module graph, V1 runtime namespaces, CI/change-control contract, implementation sequence and VS-1 vertical slice; IMP-1 is the active implementation dependency.
 
 TA-0 closure evidence:
 
@@ -609,11 +610,24 @@ TA-16 closure evidence:
 - [`TA16_DECISION_INDEX.md`](docs/technical_architecture/TA16_DECISION_INDEX.md);
 - [`TA16_CLOSURE_REPORT.md`](docs/technical_architecture/TA16_CLOSURE_REPORT.md) — PASS.
 
+TA-17 closure evidence:
+
+- [`implementation/17_implementation_roadmap_vertical_slice_contract_locking_and_change_control.md`](docs/technical_architecture/implementation/17_implementation_roadmap_vertical_slice_contract_locking_and_change_control.md);
+- [`TA17_TOOLCHAIN_ENVIRONMENT_LOCK.md`](docs/technical_architecture/TA17_TOOLCHAIN_ENVIRONMENT_LOCK.md);
+- [`TA17_MODULE_SERVICE_GRAPH.md`](docs/technical_architecture/TA17_MODULE_SERVICE_GRAPH.md);
+- [`TA17_RUNTIME_NAMESPACE_CONTRACT.md`](docs/technical_architecture/TA17_RUNTIME_NAMESPACE_CONTRACT.md);
+- [`TA17_VERTICAL_SLICE_ACCEPTANCE_MATRIX.md`](docs/technical_architecture/TA17_VERTICAL_SLICE_ACCEPTANCE_MATRIX.md);
+- [`TA17_IMPLEMENTATION_TRACEABILITY.md`](docs/technical_architecture/TA17_IMPLEMENTATION_TRACEABILITY.md);
+- [`TA17_CI_RELEASE_CHANGE_CONTROL.md`](docs/technical_architecture/TA17_CI_RELEASE_CHANGE_CONTROL.md);
+- [`TA17_SCENARIO_VALIDATION.md`](docs/technical_architecture/TA17_SCENARIO_VALIDATION.md) — 180 / 180 PASS;
+- [`TA17_DECISION_INDEX.md`](docs/technical_architecture/TA17_DECISION_INDEX.md);
+- [`TA17_CLOSURE_REPORT.md`](docs/technical_architecture/TA17_CLOSURE_REPORT.md) — IMPLEMENTATION OPEN.
+
 ### Implementation
 
-[`docs/implementation/`](docs/implementation/) remains intentionally **BLOCKED**.
+[`docs/implementation/`](docs/implementation/) is **OPEN** under the TA-17 implementation lock.
 
-Gameplay implementation opens only after the complete GDS and Technical Architecture gates are passed and the final architecture phase locks the implementation roadmap and exact vertical slice.
+The active dependency is **IMP-1 — Contracts and Test Harness**. Production release remains gated by the downstream implementation phases and TA-15/TA-14 evidence.
 
 ## Repository Structure
 
@@ -651,7 +665,7 @@ Project-MonsterVault/
 │   ├── technical_architecture/
 │   ├── implementation/
 │   └── history/
-├── src/                         # TA-2 locked future runtime roots; created at TA-17
+├── src/                         # TA-17 locked runtime roots; scaffold created
 │   ├── server/                  # -> ServerScriptService/MonsterVaultServer
 │   ├── client/                  # -> StarterPlayerScripts/MonsterVaultClient
 │   └── shared/                  # -> ReplicatedStorage/MonsterVault/Shared
@@ -660,13 +674,13 @@ Project-MonsterVault/
 └── scripts/                     # developer/CI/release tooling only
 ```
 
-TA-2 has locked this as the future implementation structure, but the source scaffold remains intentionally uncreated until TA-17 opens implementation.
+TA-17 has now created the non-gameplay source/test scaffold and locked the implementation graph. Runtime modules are introduced dependency-by-dependency beginning with IMP-1.
 
 ## Current Next Step
 
-Proceed with **TA-17 — Implementation Roadmap, Vertical Slice, Contract Locking, and Change Control**.
+Proceed with **IMP-1 — Contracts and Test Harness**.
 
-The first implementation vertical slice will be selected and locked only after the complete design and architecture dependency chain makes its requirements clear.
+The first implementation vertical slice is locked as **VS-1 — Trusted Join → One World Creature → Capture → Secure Ownership → Rejoin**.
 
 ## License
 

@@ -1,7 +1,7 @@
 # Project MonsterVault Documentation
 
-> **Project phase:** Technical Architecture — TA-0..16 integration PASS / TA-17 next  
-> **Implementation status:** Blocked by Technical Architecture and implementation-lock gates
+> **Project phase:** Implementation — TA-17 Implementation Locked — PASS  
+> **Implementation status:** OPEN — IMP-1 Contracts and Test Harness next
 
 This directory is the authoritative documentation space for Project MonsterVault.
 
@@ -11,7 +11,7 @@ The project follows a specification-first discipline: gameplay is designed first
 
 1. [`game_design/`](game_design/) — authoritative Game Design Specification (GDS).
 2. [`technical_architecture/`](technical_architecture/) — technical contracts derived from the approved GDS.
-3. [`implementation/`](implementation/) — implementation handoff/completion evidence; currently blocked.
+3. [`implementation/`](implementation/) — active implementation roadmap, vertical slice, completion and verification evidence.
 4. [`history/`](history/) — preserved early concept material and superseded planning artifacts.
 
 ## Authority Order
@@ -75,6 +75,7 @@ Technical Architecture completed:
 - **TA-14 — Performance, Network, Memory, Persistence, and Scalability Budgets: Architecture Complete — PASS**
 - **TA-15 — Testing, Diagnostics, Security Validation, and CI Architecture: Architecture Complete — PASS**
 - **TA-16 — Architecture Integration and Implementation-Readiness Audit: Integration Complete — PASS**
+- **TA-17 — Implementation Roadmap, Vertical Slice, Contract Locking, and Change Control: Implementation Locked — PASS**
 
 TA-13 latest evidence:
 
@@ -117,14 +118,20 @@ TA-16 latest evidence:
 - [`technical_architecture/TA16_DECISION_INDEX.md`](technical_architecture/TA16_DECISION_INDEX.md);
 - [`technical_architecture/TA16_CLOSURE_REPORT.md`](technical_architecture/TA16_CLOSURE_REPORT.md).
 
+TA-17 latest evidence:
+
+- [`technical_architecture/implementation/17_implementation_roadmap_vertical_slice_contract_locking_and_change_control.md`](technical_architecture/implementation/17_implementation_roadmap_vertical_slice_contract_locking_and_change_control.md);
+- [`technical_architecture/TA17_TOOLCHAIN_ENVIRONMENT_LOCK.md`](technical_architecture/TA17_TOOLCHAIN_ENVIRONMENT_LOCK.md);
+- [`technical_architecture/TA17_MODULE_SERVICE_GRAPH.md`](technical_architecture/TA17_MODULE_SERVICE_GRAPH.md);
+- [`technical_architecture/TA17_RUNTIME_NAMESPACE_CONTRACT.md`](technical_architecture/TA17_RUNTIME_NAMESPACE_CONTRACT.md);
+- [`technical_architecture/TA17_VERTICAL_SLICE_ACCEPTANCE_MATRIX.md`](technical_architecture/TA17_VERTICAL_SLICE_ACCEPTANCE_MATRIX.md);
+- [`technical_architecture/TA17_SCENARIO_VALIDATION.md`](technical_architecture/TA17_SCENARIO_VALIDATION.md) — 180 / 180 PASS;
+- [`technical_architecture/TA17_CLOSURE_REPORT.md`](technical_architecture/TA17_CLOSURE_REPORT.md) — IMPLEMENTATION OPEN.
+
 The active dependency is:
 
-> **TA-17 — Implementation Roadmap, Vertical Slice, Contract Locking, and Change Control**
+> **IMP-1 — Contracts and Test Harness**
 
-No gameplay implementation should begin until:
+All pre-code gates are satisfied. Gameplay implementation is now open under TA-17.
 
-- TA-0 through TA-15 reach `Architecture Complete`;
-- TA-16 records a formal architecture-integration/readiness PASS;
-- TA-17 locks the implementation roadmap, vertical slice and implementation contracts.
-
-Scaffolding used only to inspect/document external tooling does not itself open gameplay implementation.
+The implementation dependency order is defined in [`implementation/IMPLEMENTATION_ROADMAP.md`](implementation/IMPLEMENTATION_ROADMAP.md), beginning with **IMP-1**. Production/staging release remains separately gated.

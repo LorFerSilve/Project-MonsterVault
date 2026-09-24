@@ -247,3 +247,21 @@ Before implementation opens, TA-17 must:
 ## Verdict
 
 **TA-1 TOOLCHAIN SNAPSHOT: PASS.**
+
+
+## 14. TA-17 Final Implementation Lock (2026-09-24)
+
+TA-17 revalidated the toolchain immediately before implementation opening.
+
+Final pins:
+
+- Rokit 1.2.0;
+- Rojo 7.7.0;
+- luau-lsp **1.70.0** (supersedes the TA-1 1.69.0 reference);
+- StyLua 2.5.2;
+- Selene 0.31.0;
+- Lune 0.10.5 as dev/test-only runner;
+- no runtime package manager;
+- no third-party runtime Luau packages.
+
+The executable lock is `rokit.toml`; TA17_TOOLCHAIN_ENVIRONMENT_LOCK.md records the final review.

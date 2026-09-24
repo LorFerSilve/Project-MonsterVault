@@ -1,17 +1,29 @@
 # Implementation Documentation
 
-> **Status:** BLOCKED
+> **Status:** OPEN — IMP-1 Contracts and Test Harness
+> **Opened by:** TA-17 Implementation Locked — PASS (2026-09-24)
 
-This directory is reserved for implementation handoff, phase completion reports, verification evidence and later release/operational implementation records.
+This directory is the authoritative implementation handoff and phase-evidence layer.
 
-## Hard Gate
+## Completed pre-code gates
 
-Gameplay implementation must not begin until all of the following are true:
+1. **SATISFIED:** GDS-17 Design Complete — PASS.
+2. **SATISFIED:** TA-0 through TA-15 Architecture Complete — PASS.
+3. **SATISFIED:** TA-16 Architecture Integration Complete — PASS.
+4. **SATISFIED:** TA-17 implementation roadmap, VS-1, toolchain, module graph, test/CI and change-control contract locked.
+5. **SATISFIED:** project status changed to implementation open.
 
-1. **SATISFIED:** GDS-17 records a formal cross-system PASS and the GDS is `Design Complete`.
-2. **SATISFIED:** TA-0 through TA-15 are `Architecture Complete`.
-3. **SATISFIED:** TA-16 records a formal architecture-integration/readiness PASS.
-4. **BLOCKING:** TA-17 locks the implementation roadmap, vertical slice, toolchain, module dependency graph, test/CI requirements and change-control rules.
-5. **BLOCKING:** The root project status is explicitly changed from Technical Architecture/pre-implementation to implementation.
+## Active dependency
 
-Until then, this directory intentionally contains no implementation-phase plan that could be mistaken for authorization to code gameplay.
+> **IMP-1 — Contracts and Test Harness**
+
+Roadmap: [IMPLEMENTATION_ROADMAP.md](IMPLEMENTATION_ROADMAP.md)  
+First vertical slice: [FIRST_VERTICAL_SLICE.md](FIRST_VERTICAL_SLICE.md)
+
+## Implementation rule
+
+Implementation may proceed only inside the GDS/TA contracts. A discovered architecture conflict is escalated to the owning TA/GDS rather than patched around locally.
+
+## Release boundary
+
+Implementation open does **not** mean production release is open. STG/PROD publishing remains gated by TA-15 C0/C1 evidence, TA-14 budgets, actual environment bindings and the later implementation/release phases.

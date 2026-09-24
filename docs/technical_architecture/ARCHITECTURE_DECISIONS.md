@@ -1,6 +1,6 @@
 # Architecture Decisions
 
-> **Status:** Active — TA-0..16 Integration PASS / TA-17 Next
+> **Status:** COMPLETE — TA-17 Implementation Locked / Implementation Open
 > **Authority:** Accepted technical architecture decisions and rationale
 
 This log records material architecture decisions. GDS-17 has formally promoted the Game Design Specification to Design Complete, so architecture decision-making may now begin under TA-0.
@@ -3194,3 +3194,267 @@ TA-16 is Architecture Integration Complete — PASS with 240/240 compound integr
 ### Consequence
 
 TA-17 becomes the final pre-code dependency. Gameplay implementation remains blocked until TA-17 formally completes and the project gate is explicitly opened.
+
+
+---
+
+## AD-229 — Lock the Final Developer Toolchain
+
+**Date:** 2026-09-24  
+**Status:** Accepted  
+**Owning TA phase:** TA-17
+
+### Decision
+
+Implementation pins Rokit 1.2.0, Rojo 7.7.0, luau-lsp 1.70.0, StyLua 2.5.2 and Selene 0.31.0.
+
+
+---
+
+## AD-230 — Keep the Runtime Dependency Surface First-Party
+
+**Date:** 2026-09-24  
+**Status:** Accepted  
+**Owning TA phase:** TA-17
+
+### Decision
+
+No runtime package manager and no third-party runtime Luau package is approved at baseline.
+
+
+---
+
+## AD-231 — Adopt Lune as Test-Only Tooling
+
+**Date:** 2026-09-24  
+**Status:** Accepted  
+**Owning TA phase:** TA-17
+
+### Decision
+
+Lune 0.10.5 is pinned for deterministic dev/test scripts and is prohibited as a production runtime dependency.
+
+
+---
+
+## AD-232 — Materialize the Locked Rojo and Source Scaffold
+
+**Date:** 2026-09-24  
+**Status:** Accepted  
+**Owning TA phase:** TA-17
+
+### Decision
+
+default.project.json, source/test layer directories and TA-14 streaming properties are committed; Rojo serves on 127.0.0.1 by default.
+
+
+---
+
+## AD-233 — Lock Network Protocol Generation V1
+
+**Date:** 2026-09-24  
+**Status:** Accepted  
+**Owning TA phase:** TA-17
+
+### Decision
+
+The central Command, Event and UnreliableEvent objects and registered route IDs form V1; breaking meaning requires a protocol generation change.
+
+
+---
+
+## AD-234 — Lock Persistent Namespace Generation v1
+
+**Date:** 2026-09-24  
+**Status:** Accepted  
+**Owning TA phase:** TA-17
+
+### Decision
+
+PlayerProfile, TradeJournal and ReceiptJournal stores use environment-scoped v1 names and profile schemaVersion 1.
+
+
+---
+
+## AD-235 — Use Logical Environment Tags Without Fabricated Platform IDs
+
+**Date:** 2026-09-24  
+**Status:** Accepted  
+**Owning TA phase:** TA-17
+
+### Decision
+
+DEV/STG/PROD are locked semantic environment tags; real Roblox universe/place/product IDs remain external deployment bindings and are never guessed.
+
+
+---
+
+## AD-236 — Lock the Concrete Module and Service Graph
+
+**Date:** 2026-09-24  
+**Status:** Accepted  
+**Owning TA phase:** TA-17
+
+### Decision
+
+Server/client/shared physical layers, composition roots, application coordinators, domains, infrastructure and adapters follow TA17_MODULE_SERVICE_GRAPH.md.
+
+
+---
+
+## AD-237 — Select VS-1 as the First End-to-End Slice
+
+**Date:** 2026-09-24  
+**Status:** Accepted  
+**Owning TA phase:** TA-17
+
+### Decision
+
+VS-1 is Trusted Join -> One World Creature -> Capture -> Secure Ownership -> Rejoin and must close before broad feature expansion.
+
+
+---
+
+## AD-238 — Use a Dependency-Driven IMP-1 Through IMP-15 Roadmap
+
+**Date:** 2026-09-24  
+**Status:** Accepted  
+**Owning TA phase:** TA-17
+
+### Decision
+
+Implementation advances through the locked foundation, vertical-slice and post-slice phases without bypassing upstream C0/C1 gates.
+
+
+---
+
+## AD-239 — Materialize CI / static-build
+
+**Date:** 2026-09-24  
+**Status:** Accepted  
+**Owning TA phase:** TA-17
+
+### Decision
+
+Public PR CI uses GitHub-hosted Ubuntu 24.04, read-only permissions, immutable action pins and the locked Rokit toolchain.
+
+
+---
+
+## AD-240 — Require a Test Runner Before Runtime Luau
+
+**Date:** 2026-09-24  
+**Status:** Accepted  
+**Owning TA phase:** TA-17
+
+### Decision
+
+CI rejects runtime Luau if tests/runner.luau has not been introduced, forcing the verification foundation to precede gameplay code.
+
+
+---
+
+## AD-241 — Separate Privileged Engine and Staging Evidence
+
+**Date:** 2026-09-24  
+**Status:** Accepted  
+**Owning TA phase:** TA-17
+
+### Decision
+
+Studio/staging/performance evidence remains trusted-context work and is never granted to untrusted public PR code.
+
+
+---
+
+## AD-242 — Use PR-Based Implementation and Squash Merge by Default
+
+**Date:** 2026-09-24  
+**Status:** Accepted  
+**Owning TA phase:** TA-17
+
+### Decision
+
+main is the integration branch; ordinary implementation changes use short-lived PR branches and squash merge, with no ordinary direct feature push to main.
+
+
+---
+
+## AD-243 — Version Breaking Protocol and Persistent Schema Changes
+
+**Date:** 2026-09-24  
+**Status:** Accepted  
+**Owning TA phase:** TA-17
+
+### Decision
+
+Breaking remote or persisted meanings require explicit version increments/migrations rather than silent reinterpretation.
+
+
+---
+
+## AD-244 — Lock the Implementation Definition of Done
+
+**Date:** 2026-09-24  
+**Status:** Accepted  
+**Owning TA phase:** TA-17
+
+### Decision
+
+Implementation completion requires code, deterministic/adversarial/fault evidence where applicable, traceability and relevant performance/security evidence.
+
+
+---
+
+## AD-245 — Keep TA-14/TA-15 Gates Binding After Implementation Opens
+
+**Date:** 2026-09-24  
+**Status:** Accepted  
+**Owning TA phase:** TA-17
+
+### Decision
+
+Implementation-open does not waive hard budgets or C0/C1 release evidence.
+
+
+---
+
+## AD-246 — Reopen Architecture Instead of Coding Around a Contract Conflict
+
+**Date:** 2026-09-24  
+**Status:** Accepted  
+**Owning TA phase:** TA-17
+
+### Decision
+
+Evidence that invalidates a locked architecture assumption stops the affected implementation and reopens the owning TA/GDS.
+
+
+---
+
+## AD-247 — Open DEV Implementation While Deployment Bindings Remain External
+
+**Date:** 2026-09-24  
+**Status:** Accepted  
+**Owning TA phase:** TA-17
+
+### Decision
+
+Missing real STG/PROD universe/place/product IDs do not block local DEV implementation, but publishing/integration remains disabled until genuine bindings exist.
+
+
+---
+
+## AD-248 — Close TA-17 and Advance to IMP-1
+
+**Date:** 2026-09-24  
+**Status:** Accepted  
+**Owning TA phase:** TA-17
+
+### Decision
+
+TA-17 is Implementation Locked — PASS with 180/180 lock scenarios. The project implementation gate opens at IMP-1 — Contracts and Test Harness.
+
+### Consequence
+
+Technical Architecture is complete. Implementation is OPEN at IMP-1. Production release remains gated by TA-15/TA-14 and downstream implementation acceptance.

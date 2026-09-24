@@ -90,4 +90,18 @@ Closure evidence:
 - [`TA0_DECISION_INDEX.md`](TA0_DECISION_INDEX.md) — accepted;
 - [`TA0_CLOSURE_REPORT.md`](TA0_CLOSURE_REPORT.md) — PASS.
 
-TA-0 through TA-8 are **Architecture Complete — PASS**. The active dependency is TA-9. Gameplay implementation remains blocked until TA-17.
+TA-0 through TA-15 are **Architecture Complete — PASS**, TA-16 is **Architecture Integration Complete — PASS**, and TA-17 is **Implementation Locked — PASS**. The implementation gate is open at IMP-1 under the locked contracts.
+
+
+## 12. TA-17 Final Gate
+
+TA-17 has satisfied the final gate defined in section 10:
+
+- toolchain/repository contracts locked;
+- subsystem ownership/dependency graph locked;
+- networking/persistence/security contracts translated into concrete namespaces;
+- test/CI requirements materialized;
+- performance budgets carried forward;
+- implementation sequence and VS-1 acceptance criteria locked.
+
+**Technical Architecture final status: IMPLEMENTATION LOCKED — PASS.**
