@@ -53,6 +53,9 @@
 | replacement ProductDefinition/binding in same StarterProgramId | historical grant remains finalized; ProductDefinition/version does not reset it |
 | grant semantic version changes under controlled migration | source/audit version may change; StarterProgramId marker remains exact-once authority |
 | proposal for new StarterProgramId | requires GDS-13 change control and migration review |
+| legacy + replacement Starter SKUs both owned before finalization | reconcile all configured Starter ownership, then choose explicit highest StarterSourcePriority under approved migration policy |
+| ownership queries complete in different orders | no effect; query/registry order is never grant precedence |
+| highest-priority replacement cannot prove compatible fulfillment/compensation for lower source | protected commercial reconciliation; do not write StarterProgramId finalized marker |
 
 ## Receipt Processing
 
