@@ -1,6 +1,6 @@
 # Project MonsterVault Documentation
 
-> **Project phase:** Technical Architecture — TA-0..12 complete / TA-13 next  
+> **Project phase:** Technical Architecture — TA-0..13 complete / TA-14 next  
 > **Implementation status:** Blocked by Technical Architecture and implementation-lock gates
 
 This directory is the authoritative documentation space for Project MonsterVault.
@@ -71,20 +71,21 @@ Technical Architecture completed:
 - **TA-10 — Social Systems, Server Events, Cross-Server Coordination, and Trading: Architecture Complete — PASS**
 - **TA-11 — Monetization, MarketplaceService, Receipt Processing, and Entitlements: Architecture Complete — PASS**
 - **TA-12 — Client Presentation, UI State, Input, Camera, Audio, and Accessibility: Architecture Complete — PASS**
+- **TA-13 — Analytics, Telemetry, Feature Flags, Configuration Rollouts, and Live Operations: Architecture Complete — PASS**
 
-TA-12 latest evidence:
+TA-13 latest evidence:
 
-- [`technical_architecture/client/12_client_presentation_ui_input_camera_audio_and_accessibility.md`](technical_architecture/client/12_client_presentation_ui_input_camera_audio_and_accessibility.md);
-- [`technical_architecture/TA12_ROBLOX_CLIENT_ACCESSIBILITY_PLATFORM_SNAPSHOT.md`](technical_architecture/TA12_ROBLOX_CLIENT_ACCESSIBILITY_PLATFORM_SNAPSHOT.md);
-- [`technical_architecture/TA12_CLIENT_PRESENTATION_INPUT_ACCESSIBILITY_MATRIX.md`](technical_architecture/TA12_CLIENT_PRESENTATION_INPUT_ACCESSIBILITY_MATRIX.md);
-- [`technical_architecture/TA12_GDS_TRACEABILITY.md`](technical_architecture/TA12_GDS_TRACEABILITY.md);
-- [`technical_architecture/TA12_SCENARIO_VALIDATION.md`](technical_architecture/TA12_SCENARIO_VALIDATION.md) — 300 / 300 PASS;
-- [`technical_architecture/TA12_DECISION_INDEX.md`](technical_architecture/TA12_DECISION_INDEX.md);
-- [`technical_architecture/TA12_CLOSURE_REPORT.md`](technical_architecture/TA12_CLOSURE_REPORT.md).
+- [`technical_architecture/operations/13_analytics_telemetry_feature_flags_configuration_rollouts_and_live_operations.md`](technical_architecture/operations/13_analytics_telemetry_feature_flags_configuration_rollouts_and_live_operations.md);
+- [`technical_architecture/TA13_ROBLOX_ANALYTICS_CONFIG_LIVEOPS_PLATFORM_SNAPSHOT.md`](technical_architecture/TA13_ROBLOX_ANALYTICS_CONFIG_LIVEOPS_PLATFORM_SNAPSHOT.md);
+- [`technical_architecture/TA13_ANALYTICS_CONFIG_LIVEOPS_MATRIX.md`](technical_architecture/TA13_ANALYTICS_CONFIG_LIVEOPS_MATRIX.md);
+- [`technical_architecture/TA13_GDS_TRACEABILITY.md`](technical_architecture/TA13_GDS_TRACEABILITY.md);
+- [`technical_architecture/TA13_SCENARIO_VALIDATION.md`](technical_architecture/TA13_SCENARIO_VALIDATION.md) — 260 / 260 PASS;
+- [`technical_architecture/TA13_DECISION_INDEX.md`](technical_architecture/TA13_DECISION_INDEX.md);
+- [`technical_architecture/TA13_CLOSURE_REPORT.md`](technical_architecture/TA13_CLOSURE_REPORT.md).
 
 The active dependency is:
 
-> **TA-13 — Analytics, Telemetry, Feature Flags, Configuration Rollouts, and Live Operations**
+> **TA-14 — Performance, Network, Memory, Persistence, and Scalability Budgets**
 
 No gameplay implementation should begin until:
 
