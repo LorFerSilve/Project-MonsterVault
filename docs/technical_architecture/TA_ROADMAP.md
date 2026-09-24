@@ -1,6 +1,6 @@
 # Technical Architecture Roadmap
 
-> **Status:** Active — TA-16 Next
+> **Status:** Active — TA-17 Next
 > **Authority:** Dependency-driven technical architecture sequencing
 
 This roadmap defines how the Design Complete MonsterVault GDS is translated into implementation-ready Roblox/Luau contracts.
@@ -646,13 +646,42 @@ Closure evidence:
 
 ## TA-16 — Architecture Integration and Implementation-Readiness Audit
 
-**Status:** NEXT — Draft
+**Status:** Architecture Integration Complete — PASS
 
-Cross-validates authority, dependency direction, networking, persistence, transactions, security, performance, monetization, trading, live-ops, failure recovery and GDS traceability. Must end with zero implementation-critical architecture questions.
+Established and formally validated:
+
+- TA-0..15 maturity: 16 / 16 Architecture Complete;
+- 3,393 / 3,393 phase-local architecture scenarios PASS;
+- one mutation authority per state/value family;
+- zero competing generic networking/persistence/runtime/client/live-ops authorities;
+- TA-2 dependency direction compatible with TA-3..15;
+- networking -> runtime/session -> domain -> persistence -> projection pipeline coherent;
+- capture/economy/event/trade/commerce exact-once contracts compatible with TA-4 recovery;
+- ownership/capacity/trade/commerce value identity coherent;
+- live config/analytics/experiments remain subordinate to domain invariants;
+- TA-14 load shedding preserves correctness/value/safety/accessibility;
+- TA-15 evidence routing covers every critical architecture family;
+- all TA-0 risk families R1..R12 CLOSED at architecture layer;
+- 240 / 240 TA-16 compound integration scenarios PASS;
+- zero implementation-critical architecture questions;
+- zero authority collisions;
+- zero unowned durable mutation families;
+- concrete implementation details explicitly bounded for TA-17.
+
+Closure evidence:
+
+- [audit/16_architecture_integration_and_implementation_readiness_audit.md](audit/16_architecture_integration_and_implementation_readiness_audit.md) — PASS;
+- [TA16_AUTHORITY_DEPENDENCY_AUDIT.md](TA16_AUTHORITY_DEPENDENCY_AUDIT.md) — PASS;
+- [TA16_RISK_CLOSURE_REGISTER.md](TA16_RISK_CLOSURE_REGISTER.md) — PASS;
+- [TA16_IMPLEMENTATION_READINESS_MATRIX.md](TA16_IMPLEMENTATION_READINESS_MATRIX.md) — PASS FOR TA-17;
+- [TA16_MATURITY_OPEN_QUESTION_AUDIT.md](TA16_MATURITY_OPEN_QUESTION_AUDIT.md) — PASS;
+- [TA16_COMPOUND_SCENARIO_VALIDATION.md](TA16_COMPOUND_SCENARIO_VALIDATION.md) — 240 / 240 PASS;
+- [TA16_DECISION_INDEX.md](TA16_DECISION_INDEX.md) — accepted;
+- [TA16_CLOSURE_REPORT.md](TA16_CLOSURE_REPORT.md) — PASS.
 
 ## TA-17 — Implementation Roadmap, Vertical Slice, Contract Locking, and Change Control
 
-**Status:** Blocked
+**Status:** NEXT — Draft
 
 Final pre-code phase. Locks:
 
@@ -684,10 +713,10 @@ GDS-17 PASS / Design Complete
 
 GDS-17 is **Complete — PASS** and the Game Design Specification is **Design Complete**.
 
-TA-0 through TA-15 are **Architecture Complete — PASS**.
+TA-0 through TA-15 are **Architecture Complete — PASS** and TA-16 is **Architecture Integration Complete — PASS**.
 
 The active dependency is:
 
-> **TA-16 — Architecture Integration and Implementation-Readiness Audit**
+> **TA-17 — Implementation Roadmap, Vertical Slice, Contract Locking, and Change Control**
 
-TA-17 remains blocked by dependency order. Gameplay implementation remains blocked until TA-17 is formally complete.
+TA-17 is the final pre-code dependency. Gameplay implementation remains blocked until TA-17 is formally complete and the project implementation gate is explicitly opened.
