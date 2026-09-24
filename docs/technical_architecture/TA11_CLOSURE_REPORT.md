@@ -30,7 +30,7 @@ Semantic product identity is separate from platform IDs. Sold grant meaning is i
 
 ## Pass / Starter
 
-Durable one-time products use pass ownership where practical. Ownership is reconciled on readiness and prompt refresh; API failure is unknown rather than destructive false. Starter historical value is separately exact-once.
+Durable one-time products use pass ownership where practical. Ownership is reconciled on readiness and prompt refresh; transient query failure becomes VerificationUnknown and schedules bounded asynchronous in-session reconciliation rather than destructive false or waiting for a reconnect. Starter historical value is separately exact-once.
 
 **PASS.**
 
