@@ -1836,7 +1836,7 @@ Pass ownership is reconciled on trusted profile readiness and after purchase-pro
 
 ### Decision
 
-A failed pass-ownership query cannot grant a new entitlement and cannot destructively revoke a previously verified active entitlement. It yields VerificationUnknown until authoritative resolution.
+A failed pass-ownership query cannot grant a new entitlement and cannot destructively revoke a previously verified active entitlement. It yields VerificationUnknown and schedules bounded asynchronous in-session reconciliation; exact retry/backoff budgets are owned by TA-14. Exhaustion preserves unknown/Pending state and permits later safe reconciliation triggers.
 
 ---
 
