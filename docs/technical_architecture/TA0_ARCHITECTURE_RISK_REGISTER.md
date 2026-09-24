@@ -1,7 +1,7 @@
 # TA-0 Architecture Risk Register
 
 > **Phase:** TA-0 — Architecture Governance, Constraints, and GDS Traceability  
-> **Status:** Active / Seeded  
+> **Status:** TA-16 Architecture Risk Closure — PASS  
 > **Purpose:** Seed the architecture risk taxonomy and assign each risk family to the TA phase responsible for resolving or bounding it before implementation opens.
 
 | ID | Risk family | Primary owner | Supporting phases | Required closure evidence |
@@ -32,3 +32,19 @@
 All architecture risk families have an explicit owner.
 
 Unowned implementation-critical risk classes: **0**.
+
+
+## TA-16 Closure
+
+TA16_RISK_CLOSURE_REGISTER.md re-audits R1..R12 after completion of TA-0..15.
+
+Result:
+
+- R1..R12: **CLOSED at the architecture layer**;
+- unowned implementation-critical risk classes: **0**;
+- Open/Transferred architecture risks: **0**;
+- implementation verification remains mandatory under TA-15.
+
+Architecture closure means the risk has a defined owner, bounded failure behavior and verification path. It does not claim runtime code has already passed tests before implementation exists.
+
+**TA-16 risk register verdict: PASS.**
