@@ -41,7 +41,18 @@
 | API failure | active | VerificationUnknown; preserve + schedule bounded in-session retry |
 | API failure | absent | VerificationUnknown; do not grant + schedule bounded in-session retry |
 | retry budget exhausted | unknown | remain Pending/unknown; later safe reconciliation trigger may resume |
+| product becomes Hidden/Retired while Pending/unknown | any | stop new prompts but continue bounded ownership reconciliation |
 | prompt-finished | any | trigger ownership refresh |
+
+## Starter Account-Level Exact-Once
+
+| Situation | Result |
+|---|---|
+| first Starter ownership for account/program | apply historical grant + persist StarterProgramId finalized marker |
+| same ownership/reconnect | marker suppresses duplicate historical grant |
+| replacement ProductDefinition/binding in same StarterProgramId | historical grant remains finalized; ProductDefinition/version does not reset it |
+| grant semantic version changes under controlled migration | source/audit version may change; StarterProgramId marker remains exact-once authority |
+| proposal for new StarterProgramId | requires GDS-13 change control and migration review |
 
 ## Receipt Processing
 
