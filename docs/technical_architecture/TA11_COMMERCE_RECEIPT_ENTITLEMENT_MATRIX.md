@@ -38,8 +38,9 @@
 | owns true | active | idempotent refresh |
 | owns false | active | deactivate + safe reconciliation |
 | owns false | absent | remain absent |
-| API failure | active | VerificationUnknown; preserve |
-| API failure | absent | do not grant |
+| API failure | active | VerificationUnknown; preserve + schedule bounded in-session retry |
+| API failure | absent | VerificationUnknown; do not grant + schedule bounded in-session retry |
+| retry budget exhausted | unknown | remain Pending/unknown; later safe reconciliation trigger may resume |
 | prompt-finished | any | trigger ownership refresh |
 
 ## Receipt Processing
