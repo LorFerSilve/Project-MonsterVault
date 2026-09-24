@@ -1848,7 +1848,7 @@ A failed pass-ownership query cannot grant a new entitlement and cannot destruct
 
 ### Decision
 
-Starter pass ownership may reconcile repeatedly while the historical deterministic Energy/one-time grant is protected by one stable account-level StarterProgramId finalized marker and TA-8 deferred-grant semantics. ProductDefinitionId, external binding and GrantSemanticVersion remain source/audit facts and cannot reset the account-level Starter finalization state.
+Starter pass ownership may reconcile repeatedly while the historical deterministic Energy/one-time grant is protected by one stable account-level StarterProgramId finalized marker and TA-8 deferred-grant semantics. ProductDefinitionId, external binding and GrantSemanticVersion remain source/audit facts and cannot reset the account-level Starter finalization state. When multiple Starter source SKUs are owned before finalization, all configured ownership facts are reconciled first and an explicit unique StarterSourcePriority from the approved migration selects the source; query/registry order is never allowed to choose, and unproven compatibility/compensation enters protected reconciliation.
 
 ---
 
