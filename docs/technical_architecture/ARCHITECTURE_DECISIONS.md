@@ -1,6 +1,6 @@
 # Architecture Decisions
 
-> **Status:** Active — TA-0..12 Complete / TA-13 Next
+> **Status:** Active — TA-0..13 Complete / TA-14 Next
 > **Authority:** Accepted technical architecture decisions and rationale
 
 This log records material architecture decisions. GDS-17 has formally promoted the Game Design Specification to Design Complete, so architecture decision-making may now begin under TA-0.
@@ -2170,3 +2170,248 @@ TA-12 is Architecture Complete — PASS with 300/300 scenarios and zero blocking
 ### Consequence
 
 TA-13 becomes NEXT. Gameplay implementation remains blocked until TA-17.
+
+
+---
+
+## AD-150 — Keep Analytics Observational
+
+**Date:** 2026-09-24  
+**Status:** Accepted  
+**Owning TA phase:** TA-13
+
+### Decision
+
+Product analytics, dashboards, cohorts and alerts never mutate gameplay truth or replace durable transaction/persistence authority.
+
+---
+
+## AD-151 — Use a Versioned Semantic Telemetry Registry
+
+**Date:** 2026-09-24  
+**Status:** Accepted  
+**Owning TA phase:** TA-13
+
+### Decision
+
+Every event has stable identity, schema, owner, trigger, sampling/privacy policy and adapter mapping; breaking meaning is versioned.
+
+---
+
+## AD-152 — Emit Consequential Success After Authoritative Outcome
+
+**Date:** 2026-09-24  
+**Status:** Accepted  
+**Owning TA phase:** TA-13
+
+### Decision
+
+Capture, economy, progression, trade and commerce success telemetry originates after the owning server transition, not client intent.
+
+---
+
+## AD-153 — Make Analytics Failure Non-Blocking
+
+**Date:** 2026-09-24  
+**Status:** Accepted  
+**Owning TA phase:** TA-13
+
+### Decision
+
+Telemetry uses bounded best-effort delivery; gameplay does not wait for analytics and no profile writes exist solely for analytics delivery.
+
+---
+
+## AD-154 — Separate Analytics, Diagnostics, Security and Audit
+
+**Date:** 2026-09-24  
+**Status:** Accepted  
+**Owning TA phase:** TA-13
+
+### Decision
+
+Different trust/access/durability needs are not collapsed into one unrestricted event stream.
+
+---
+
+## AD-155 — Enforce Data Minimization and Low Cardinality
+
+**Date:** 2026-09-24  
+**Status:** Accepted  
+**Owning TA phase:** TA-13
+
+### Decision
+
+No raw chat/freeform personal data or sensitive-trait inference; Creator Analytics dimensions remain bounded and exclude runtime IDs.
+
+---
+
+## AD-156 — Use ConfigService as Baseline C2 Transport
+
+**Date:** 2026-09-24  
+**Status:** Accepted  
+**Owning TA phase:** TA-13
+
+### Decision
+
+Experience Configs provide read-only-in-game live values/flags; MonsterVault wraps them in validation and snapshots.
+
+---
+
+## AD-157 — Activate Config Atomically
+
+**Date:** 2026-09-24  
+**Status:** Accepted  
+**Owning TA phase:** TA-13
+
+### Decision
+
+Only allowlisted C2 values are materialized; the full candidate is validated, staged and swapped at safe boundaries.
+
+---
+
+## AD-158 — Pin Operations to Coherent Config Context
+
+**Date:** 2026-09-24  
+**Status:** Accepted  
+**Owning TA phase:** TA-13
+
+### Decision
+
+Transactions/encounters/events retain their starting snapshot when required; new snapshots affect future work prospectively.
+
+---
+
+## AD-159 — Keep C0/C1 Outside Live Flags
+
+**Date:** 2026-09-24  
+**Status:** Accepted  
+**Owning TA phase:** TA-13
+
+### Decision
+
+Flags may gate reachability but cannot redefine invariants/static identity or break persisted references.
+
+---
+
+## AD-160 — Fail Optional/Unsafe Features Closed
+
+**Date:** 2026-09-24  
+**Status:** Accepted  
+**Owning TA phase:** TA-13
+
+### Decision
+
+Missing/invalid config keeps optional new features disabled or uses a reviewed safe default; no cross-environment fallback.
+
+---
+
+## AD-161 — Make Rollback Prospective and Non-Destructive
+
+**Date:** 2026-09-24  
+**Status:** Accepted  
+**Owning TA phase:** TA-13
+
+### Decision
+
+Rollback returns future work to a validated revision and never silently removes legitimate finalized value.
+
+---
+
+## AD-162 — Allow Conservative Emergency Disable Hints Only
+
+**Date:** 2026-09-24  
+**Status:** Accepted  
+**Owning TA phase:** TA-13
+
+### Decision
+
+Cross-server messages may reduce new reachability/request refresh but cannot enable features, grant value or become durable positive truth.
+
+---
+
+## AD-163 — Separate Reviewed Experiment Semantics from Live Allocation
+
+**Date:** 2026-09-24  
+**Status:** Accepted  
+**Owning TA phase:** TA-13
+
+### Decision
+
+Experiment plans/treatments/invariants are reviewed; C2 controls only activate/deactivate and allocate inside the approved envelope.
+
+---
+
+## AD-164 — Match Assignment Unit to Blast Radius
+
+**Date:** 2026-09-24  
+**Status:** Accepted  
+**Owning TA phase:** TA-13
+
+### Decision
+
+Per-player assignment is limited to isolated semantics; shared/value-affecting opportunities use coherent server/occurrence context.
+
+---
+
+## AD-165 — Record Exposure Separately from Assignment
+
+**Date:** 2026-09-24  
+**Status:** Accepted  
+**Owning TA phase:** TA-13
+
+### Decision
+
+Exposure occurs only when treatment is reached; durable-value opportunities retain config/experiment provenance where needed.
+
+---
+
+## AD-166 — Do Not Use Platform Player Segments as Gameplay Value Authority
+
+**Date:** 2026-09-24  
+**Status:** Accepted  
+**Owning TA phase:** TA-13
+
+### Decision
+
+Payer/activity segments cannot determine hidden odds, priority, reward strength, pricing, safety or progression.
+
+---
+
+## AD-167 — Keep Production Live-Ops External and Least-Privilege
+
+**Date:** 2026-09-24  
+**Status:** Accepted  
+**Owning TA phase:** TA-13
+
+### Decision
+
+No baseline client/in-game arbitrary admin console; Creator Hub/Open Cloud tooling uses scoped credentials outside the experience.
+
+---
+
+## AD-168 — Audit Every Privileged Mutation
+
+**Date:** 2026-09-24  
+**Status:** Accepted  
+**Owning TA phase:** TA-13
+
+### Decision
+
+Config/flag/experiment publish and rollback record operator/action/revision/reason/result metadata; rollback appends history.
+
+---
+
+## AD-169 — Close TA-13 and Advance to TA-14
+
+**Date:** 2026-09-24  
+**Status:** Accepted  
+**Owning TA phase:** TA-13
+
+### Decision
+
+TA-13 is Architecture Complete — PASS with 260/260 scenarios and zero blocking questions. TA-14 becomes NEXT; gameplay implementation remains blocked until TA-17.
+
+### Consequence
+
+TA-14 becomes NEXT. Gameplay implementation remains blocked until TA-17.

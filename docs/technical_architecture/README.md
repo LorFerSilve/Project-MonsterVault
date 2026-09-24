@@ -1,6 +1,6 @@
 # MonsterVault Technical Architecture
 
-> **Status:** Active — TA-0..12 Complete / TA-13 Next
+> **Status:** Active — TA-0..13 Complete / TA-14 Next
 > **Authority:** Technical implementation contracts after GDS completion
 
 This directory contains the Technical Architecture layer that now becomes active after the GDS-17 Design Complete PASS.
@@ -38,6 +38,8 @@ The TA is deliberately not allowed to redefine gameplay. It translates the appro
 - [`TA11_COMMERCE_RECEIPT_ENTITLEMENT_MATRIX.md`](TA11_COMMERCE_RECEIPT_ENTITLEMENT_MATRIX.md) locks product, receipt, entitlement, price and reversal boundaries.
 - [`client/12_client_presentation_ui_input_camera_audio_and_accessibility.md`](client/12_client_presentation_ui_input_camera_audio_and_accessibility.md) is the authoritative TA-12 client/presentation/input/accessibility contract.
 - [`TA12_CLIENT_PRESENTATION_INPUT_ACCESSIBILITY_MATRIX.md`](TA12_CLIENT_PRESENTATION_INPUT_ACCESSIBILITY_MATRIX.md) locks client state, input context, focus, safe-area, accessibility and authoritative-feedback boundaries.
+- [`operations/13_analytics_telemetry_feature_flags_configuration_rollouts_and_live_operations.md`](operations/13_analytics_telemetry_feature_flags_configuration_rollouts_and_live_operations.md) is the authoritative TA-13 analytics/config/experiment/live-ops contract.
+- [`TA13_ANALYTICS_CONFIG_LIVEOPS_MATRIX.md`](TA13_ANALYTICS_CONFIG_LIVEOPS_MATRIX.md) locks telemetry channels, C2 snapshots, flags, experiment and privileged-operation boundaries.
 - [`TA_ROADMAP.md`](TA_ROADMAP.md) defines the dependency-driven architecture sequence.
 - `audit/` will contain the final TA-16 integration/readiness evidence.
 
@@ -45,12 +47,12 @@ The TA is deliberately not allowed to redefine gameplay. It translates the appro
 
 GDS-17 has recorded a formal **Design Complete — PASS** with zero implementation-critical design questions.
 
-TA-0 through TA-12 are **Architecture Complete — PASS**.
+TA-0 through TA-13 are **Architecture Complete — PASS**.
 
-TA-12 closed with 300 / 300 client/presentation/accessibility scenarios passing and a disposable revision-aware client state model, semantic InputAction/InputContext routing, explicit modal/gamepad focus ownership, responsive safe-area UI, live Roblox accessibility-preference composition, authoritative consequential feedback, bounded camera/motion ownership, semantic audio/captions and localization/reconnect safety.
+TA-13 closed with 260 / 260 scenarios passing and a non-authoritative versioned telemetry registry, low-cardinality/privacy constraints, Roblox AnalyticsService adapter boundary, ConfigService-backed validated atomic C2 snapshots, safe feature rollout/rollback, deterministic experiment assignment/exposure/provenance, conservative emergency disable and external least-privilege live-operations audit.
 
 The active dependency is:
 
-> **TA-13 — Analytics, Telemetry, Feature Flags, Configuration Rollouts, and Live Operations**
+> **TA-14 — Performance, Network, Memory, Persistence, and Scalability Budgets**
 
-TA-13 now owns analytics/telemetry schemas, feature/config rollout, experimentation and live-operations architecture on top of the closed gameplay, commerce and client-presentation contracts. Gameplay implementation remains blocked until TA-17.
+TA-14 now owns measurable server/client performance, network, memory, persistence and scalability budgets on top of the closed TA-13 operational architecture. Gameplay implementation remains blocked until TA-17.
