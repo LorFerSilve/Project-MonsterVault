@@ -1,6 +1,6 @@
 # Technical Architecture Roadmap
 
-> **Status:** Active — TA-12 Next
+> **Status:** Active — TA-13 Next
 > **Authority:** Dependency-driven technical architecture sequencing
 
 This roadmap defines how the Design Complete MonsterVault GDS is translated into implementation-ready Roblox/Luau contracts.
@@ -485,13 +485,49 @@ Closure evidence:
 
 ## TA-12 — Client Presentation, UI State, Input, Camera, Audio, and Accessibility
 
-**Status:** NEXT — Draft
+**Status:** Architecture Complete — PASS
 
-Defines client-side state projection, UI architecture, input abstraction, mobile/controller/keyboard support, camera ownership, feedback/event presentation, accessibility settings and presentation-only prediction.
+Established and formally validated:
+
+- disposable client authoritative-projection/local-presentation/preference state separation;
+- unidirectional server projection -> revision-aware store -> view-model -> presentation flow;
+- semantic intent routing back to server without client authority escalation;
+- stale revision rejection and reconnect/domain resynchronization;
+- InputAction/InputContext/InputBinding baseline for touch, keyboard/mouse and gamepad parity;
+- custom PreferredBinding glyph resolution without production dependency on beta InputActionLabel;
+- deterministic input-context priority/sink behavior and platform-menu suspension;
+- one consequential modal owner and complete gamepad focus restoration/navigation;
+- GDS-14 confirmation severity and exact-target review;
+- CoreUISafeInsets baseline, responsive reflow and TV/mobile control-zone safety;
+- PreferredTextSize-aware text architecture and contrast/background composition;
+- Roblox ReducedMotionEnabled + MonsterVault Reduced Motion conservative composition;
+- non-value-critical persisted presentation/accessibility preferences;
+- priority-aware notification queue, aggregation and persistent unresolved-state presentation;
+- authoritative Pending/rejection/reconciliation feedback for value-sensitive operations;
+- semantic-ID-keyed collection/trade/Vault UI with bounded virtualization;
+- authoritative timestamp/countdown presentation;
+- one bounded local camera-presentation owner with deterministic restoration;
+- semantic audio categories plus visual/text/caption equivalents;
+- localization-key driven expansion-tolerant text plumbing;
+- chat/voice-independent core UI and Roblox platform safety/menu/reporting accessibility;
+- TA-11 commercial price/Pending/entitlement presentation integration;
+- current Roblox InputAction, GuiService accessibility, safe-area, camera, localization and audio behavior reviewed;
+- 300 / 300 TA-12 scenarios PASS;
+- zero TA-12-blocking questions.
+
+Closure evidence:
+
+- [client/12_client_presentation_ui_input_camera_audio_and_accessibility.md](client/12_client_presentation_ui_input_camera_audio_and_accessibility.md) — Architecture Complete;
+- [TA12_ROBLOX_CLIENT_ACCESSIBILITY_PLATFORM_SNAPSHOT.md](TA12_ROBLOX_CLIENT_ACCESSIBILITY_PLATFORM_SNAPSHOT.md) — PASS;
+- [TA12_CLIENT_PRESENTATION_INPUT_ACCESSIBILITY_MATRIX.md](TA12_CLIENT_PRESENTATION_INPUT_ACCESSIBILITY_MATRIX.md) — PASS;
+- [TA12_GDS_TRACEABILITY.md](TA12_GDS_TRACEABILITY.md) — PASS;
+- [TA12_SCENARIO_VALIDATION.md](TA12_SCENARIO_VALIDATION.md) — 300 / 300 PASS;
+- [TA12_DECISION_INDEX.md](TA12_DECISION_INDEX.md) — accepted;
+- [TA12_CLOSURE_REPORT.md](TA12_CLOSURE_REPORT.md) — PASS.
 
 ## TA-13 — Analytics, Telemetry, Feature Flags, Configuration Rollouts, and Live Operations
 
-**Status:** Blocked
+**Status:** NEXT — Draft
 
 Defines analytics event contracts, metrics hygiene, feature/config flags, safe rollout/rollback, admin/live-ops boundaries, experiment assignment where justified and operational auditability.
 
@@ -547,10 +583,10 @@ GDS-17 PASS / Design Complete
 
 GDS-17 is **Complete — PASS** and the Game Design Specification is **Design Complete**.
 
-TA-0 through TA-11 are **Architecture Complete — PASS**.
+TA-0 through TA-12 are **Architecture Complete — PASS**.
 
 The active dependency is:
 
-> **TA-12 — Client Presentation, UI State, Input, Camera, Audio, and Accessibility**
+> **TA-13 — Analytics, Telemetry, Feature Flags, Configuration Rollouts, and Live Operations**
 
-TA-13 through TA-17 remain blocked by dependency order. Gameplay implementation remains blocked until TA-17 is formally complete.
+TA-14 through TA-17 remain blocked by dependency order. Gameplay implementation remains blocked until TA-17 is formally complete.
