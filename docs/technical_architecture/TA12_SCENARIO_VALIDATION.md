@@ -98,9 +98,9 @@ TA-12 validation covers client/server authority, projection revisions, UI layeri
 | 66 | Protected Load Failure | SystemBlockedContext limits to safe actions | PASS |
 | 67 | Roblox menu opens | MonsterVault gameplay contexts suspended | PASS |
 | 68 | Roblox menu closes | restore current safe context | PASS |
-| 69 | modal closes into capture | restore CommittedGameplayContext | PASS |
+| 69 | modal dismisses over an active Capture Attempt using the same button as PrimaryAction | keep dismissal binding sunk through release/neutral, then restore CommittedGameplayContext; no underlying capture action fires | PASS |
 | 70 | panel closes into world | restore WorldContext | PASS |
-| 71 | two contexts bind same input | priority/sink deterministic | PASS |
+| 71 | PlatformMenu, SystemBlocked, Modal, Committed, Panel and World contexts overlap on one semantic binding | resolve exactly once using PlatformMenu > SystemBlocked > Modal > Committed > Panel > World; first handler/sink terminates dispatch | PASS |
 | 72 | stale context owner destroyed | context removed | PASS |
 | 73 | device changes | context set unchanged semantically | PASS |
 | 74 | system blocked state clears | recompute from current authoritative state | PASS |
@@ -241,7 +241,7 @@ TA-12 validation covers client/server authority, projection revisions, UI layeri
 | 174 | server rejects locked creature trade | show actionable locked reason | PASS |
 | 175 | server rejects changed trade revision | show review-again reason | PASS |
 | 176 | technical stack trace exists | not required player-facing | PASS |
-| 177 | safe retry available | offer retry | PASS |
+| 177 | consequential command transport response times out | enter OutcomeUnknown/ReconciliationRequired, trigger authoritative refresh and do not present rejection or expose a blind duplicate retry | PASS |
 | 178 | unsafe duplicate retry | do not offer blind retry | PASS |
 | 179 | rejected purchase | do not animate owned entitlement | PASS |
 | 180 | Toast expires | required action remains accessible elsewhere | PASS |
