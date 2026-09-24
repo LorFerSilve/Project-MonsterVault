@@ -1,6 +1,6 @@
 # Technical Architecture Roadmap
 
-> **Status:** Active — TA-15 Next
+> **Status:** Active — TA-16 Next
 > **Authority:** Dependency-driven technical architecture sequencing
 
 This roadmap defines how the Design Complete MonsterVault GDS is translated into implementation-ready Roblox/Luau contracts.
@@ -606,13 +606,47 @@ Closure evidence:
 
 ## TA-15 — Testing, Diagnostics, Security Validation, and CI Architecture
 
-**Status:** NEXT — Draft
+**Status:** Architecture Complete — PASS
 
-Defines Luau/static checks, unit/integration/scenario tests, Studio/headless automation possibilities, security tests, persistence fault cases, deterministic/randomness validation, CI gates and evidence requirements.
+Established and formally validated:
+
+- stable test identity and GDS/TA traceability;
+- C0/C1/C2 test criticality and release semantics;
+- formatting, Selene lint, strict Luau analysis and deterministic Rojo build gates;
+- deterministic unit/property/state-machine tests with injected clocks/RNG/platform adapters;
+- 1,000-case fast and 10,000-case extended property-test corpus requirements;
+- deterministic random-selection/anti-reroll testing plus reproducible statistical diagnostics;
+- Roblox Studio scripted integration via StudioTestService/TestService;
+- device, VirtualInput, network simulation, pseudolocalization and accessibility validation;
+- hostile-client remote/prompt/physics negative-test matrix;
+- persistence migration/lease/throttle/crash/shutdown fault injection;
+- exact-once capture/economy/event/trade/commerce transaction cut-point verification;
+- MemoryStore/Messaging/config/experiment/platform failure evidence;
+- TA-14 L0-L5 performance/load/memory/network/service verification;
+- structured diagnostics/profiler artifacts;
+- DEV/STAGING/PRODUCTION test-data and credential isolation;
+- public-repository GitHub Actions trust boundary with no privileged fork-code execution;
+- no general persistent self-hosted personal runner for arbitrary public PR code;
+- merge/release quality gates, no retry-until-green and non-quarantinable C0 tests;
+- 7-day bounded C2 quarantine only;
+- 14-day ordinary PR / 90-day release evidence targets;
+- current Roblox Studio/security and GitHub Actions security behavior reviewed;
+- 360 / 360 TA-15 verification-architecture scenarios PASS;
+- zero TA-15-blocking questions.
+
+Closure evidence:
+
+- [verification/15_testing_diagnostics_security_validation_and_ci_architecture.md](verification/15_testing_diagnostics_security_validation_and_ci_architecture.md) — Architecture Complete;
+- [TA15_ROBLOX_TESTING_SECURITY_CI_PLATFORM_SNAPSHOT.md](TA15_ROBLOX_TESTING_SECURITY_CI_PLATFORM_SNAPSHOT.md) — PASS;
+- [TA15_VERIFICATION_QUALITY_GATE_MATRIX.md](TA15_VERIFICATION_QUALITY_GATE_MATRIX.md) — PASS;
+- [TA15_GDS_TRACEABILITY.md](TA15_GDS_TRACEABILITY.md) — PASS;
+- [TA15_SCENARIO_VALIDATION.md](TA15_SCENARIO_VALIDATION.md) — 360 / 360 PASS;
+- [TA15_DECISION_INDEX.md](TA15_DECISION_INDEX.md) — accepted;
+- [TA15_CLOSURE_REPORT.md](TA15_CLOSURE_REPORT.md) — PASS.
 
 ## TA-16 — Architecture Integration and Implementation-Readiness Audit
 
-**Status:** Blocked
+**Status:** NEXT — Draft
 
 Cross-validates authority, dependency direction, networking, persistence, transactions, security, performance, monetization, trading, live-ops, failure recovery and GDS traceability. Must end with zero implementation-critical architecture questions.
 
@@ -650,10 +684,10 @@ GDS-17 PASS / Design Complete
 
 GDS-17 is **Complete — PASS** and the Game Design Specification is **Design Complete**.
 
-TA-0 through TA-14 are **Architecture Complete — PASS**.
+TA-0 through TA-15 are **Architecture Complete — PASS**.
 
 The active dependency is:
 
-> **TA-15 — Testing, Diagnostics, Security Validation, and CI Architecture**
+> **TA-16 — Architecture Integration and Implementation-Readiness Audit**
 
-TA-16 through TA-17 remain blocked by dependency order. Gameplay implementation remains blocked until TA-17 is formally complete.
+TA-17 remains blocked by dependency order. Gameplay implementation remains blocked until TA-17 is formally complete.
