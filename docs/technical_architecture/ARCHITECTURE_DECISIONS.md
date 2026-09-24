@@ -1,6 +1,6 @@
 # Architecture Decisions
 
-> **Status:** Active — TA-0..13 Complete / TA-14 Next
+> **Status:** Active — TA-0..14 Complete / TA-15 Next
 > **Authority:** Accepted technical architecture decisions and rationale
 
 This log records material architecture decisions. GDS-17 has formally promoted the Game Design Specification to Design Complete, so architecture decision-making may now begin under TA-0.
@@ -2415,3 +2415,293 @@ TA-13 is Architecture Complete — PASS with 260/260 scenarios and zero blocking
 ### Consequence
 
 TA-14 becomes NEXT. Gameplay implementation remains blocked until TA-17.
+
+
+---
+
+## AD-170 — Separate Platform Ceilings from MonsterVault Budgets
+
+**Date:** 2026-09-24  
+**Status:** Accepted  
+**Owning TA phase:** TA-14
+
+### Decision
+
+Roblox service/engine ceilings are external limits, not operating targets. MonsterVault locks lower targets, warning thresholds and hard guardrails so transient platform variation and burst demand retain headroom.
+
+
+---
+
+## AD-171 — Validate Representative Load Classes
+
+**Date:** 2026-09-24  
+**Status:** Accepted  
+**Owning TA phase:** TA-14
+
+### Decision
+
+TA-15 must validate L0 solo, L1 half occupancy, L2 full occupancy, L3 full plus burst, L4 dependency-recovery and L5 long-session conditions. A budget proven only in Studio or at solo load is not closed.
+
+
+---
+
+## AD-172 — Reserve Server Frame Headroom
+
+**Date:** 2026-09-24  
+**Status:** Accepted  
+**Owning TA phase:** TA-14
+
+### Decision
+
+MonsterVault targets <=6 ms p95 script-owned server CPU per frame, warns above 8 ms and performs staged load shedding above 10 ms sustained. The 16.67 ms 60 Hz frame remains a whole-server envelope rather than a MonsterVault script allowance.
+
+
+---
+
+## AD-173 — Use 30 FPS as the Client Correctness Floor
+
+**Date:** 2026-09-24  
+**Status:** Accepted  
+**Owning TA phase:** TA-14
+
+### Decision
+
+All core interaction and accessibility semantics must remain correct at 30 FPS. Reference mobile/tablet/console/desktop targets remain 60 FPS where supported, but no exact-once or input semantics depend on 60+ FPS.
+
+
+---
+
+## AD-174 — Measure Client Memory Relative to Warm Baselines
+
+**Date:** 2026-09-24  
+**Status:** Accepted  
+**Owning TA phase:** TA-14
+
+### Decision
+
+Server memory uses percentage guardrails; client memory uses real-device warm-baseline deltas plus OOM/crash hard failures because Roblox exposes no single portable client-memory ceiling valid across devices.
+
+
+---
+
+## AD-175 — Adopt Conservative Streaming Defaults
+
+**Date:** 2026-09-24  
+**Status:** Accepted  
+**Owning TA phase:** TA-14
+
+### Decision
+
+Baseline streaming uses StreamingMinRadius 64, StreamingTargetRadius 1024, PauseOutsideLoadedArea and Opportunistic stream-out. Persistent/PersistentPerPlayer is rare and capped rather than used to defeat streaming.
+
+
+---
+
+## AD-176 — Bound Runtime Growth
+
+**Date:** 2026-09-24  
+**Status:** Accepted  
+**Owning TA phase:** TA-14
+
+### Decision
+
+Active World Creatures, interactables, tasks, connections and caches have technical ceilings/cleanup owners. No collection may grow with session age without an explicit retention or eviction policy.
+
+
+---
+
+## AD-177 — Keep Application Remotes Far Below Platform Throttles
+
+**Date:** 2026-09-24  
+**Status:** Accepted  
+**Owning TA phase:** TA-14
+
+### Decision
+
+MonsterVault defines per-player message and byte budgets plus per-route rate limits. Platform remote throttles are emergency ceilings, not a target capacity model.
+
+
+---
+
+## AD-178 — Cap Unreliable Payloads at 768 Bytes
+
+**Date:** 2026-09-24  
+**Status:** Accepted  
+**Owning TA phase:** TA-14
+
+### Decision
+
+UnreliableRemoteEvent payloads are capped at 768 encoded bytes, below Roblox's 1000-byte drop ceiling. Durable/critical state never uses unreliable delivery.
+
+
+---
+
+## AD-179 — Protect Single-Profile Atomicity with Size Limits
+
+**Date:** 2026-09-24  
+**Status:** Accepted  
+**Owning TA phase:** TA-14
+
+### Decision
+
+Player Profile warns at 1 MiB and hard-stops growth at 1.5 MiB, with 2048 owned Creature records as a technical ceiling. Crossing those bounds triggers protected failure/change control rather than ad-hoc sharding or value deletion.
+
+
+---
+
+## AD-180 — Lock Persistence Timing Headroom
+
+**Date:** 2026-09-24  
+**Status:** Accepted  
+**Owning TA phase:** TA-14
+
+### Decision
+
+Healthy autosave and lease renewal target 90 seconds with jitter, lease reclaim requires the 300-second stale policy, and active-production crash recovery allows 180 seconds so it exceeds the healthy uncheckpointed interval.
+
+
+---
+
+## AD-181 — Reserve DataStore Capacity for Critical Work
+
+**Date:** 2026-09-24  
+**Status:** Accepted  
+**Owning TA phase:** TA-14
+
+### Decision
+
+P2/load/lease/recovery work owns a protected dynamic request reserve of max(30, 2 × connectedPlayers) budget units per relevant request class; background/P1 work pauses before consuming that reserve.
+
+
+---
+
+## AD-182 — Keep MemoryStore Optional and Transient
+
+**Date:** 2026-09-24  
+**Status:** Accepted  
+**Owning TA phase:** TA-14
+
+### Decision
+
+MemoryStore is not durable truth. If used, MonsterVault stays within small percentages of universe request/memory quotas, uses compact short-lived items and degrades coordination when the service is pressured.
+
+
+---
+
+## AD-183 — Keep Messaging Coarse and Non-Authoritative
+
+**Date:** 2026-09-24  
+**Status:** Accepted  
+**Owning TA phase:** TA-14
+
+### Decision
+
+MessagingService carries bounded invalidation/refresh/hint traffic only, with <=12 steady publishes/minute/server, <=4 baseline topics and <=512-byte encoded messages.
+
+
+---
+
+## AD-184 — Budget World Scheduling and Spatial Work
+
+**Date:** 2026-09-24  
+**Status:** Accepted  
+**Owning TA phase:** TA-14
+
+### Decision
+
+Ordinary world scheduling runs on a 250 ms cadence with <=2 ms p95 passes; the baseline spatial cell is 128 studs and ordinary pre-validation candidate sets are capped at 64 before exact validation.
+
+
+---
+
+## AD-185 — Virtualize Large Client Surfaces
+
+**Date:** 2026-09-24  
+**Status:** Accepted  
+**Owning TA phase:** TA-14
+
+### Decision
+
+Long collection/trade/Vault surfaces materialize at most 60 logical rows/cards plus 12 overscan; expensive sort/filter work is chunked, timers are centralized and notification/preferences work is bounded.
+
+
+---
+
+## AD-186 — Bound Analytics and Config Overhead
+
+**Date:** 2026-09-24  
+**Status:** Accepted  
+**Owning TA phase:** TA-14
+
+### Decision
+
+Telemetry queues/rates/memory and config/experiment compute are bounded. Product analytics samples/coalesces before gameplay waits, and config activation remains complete, validated and atomic.
+
+
+---
+
+## AD-187 — Coalesce Commerce Reconciliation
+
+**Date:** 2026-09-24  
+**Status:** Accepted  
+**Owning TA phase:** TA-14
+
+### Decision
+
+Product metadata is freshness-cached; ownership verification retries are bounded/coalesced and exhausted retries preserve Pending/VerificationUnknown instead of inventing entitlement truth.
+
+
+---
+
+## AD-188 — Use Ordered Pressure States and Hysteresis
+
+**Date:** 2026-09-24  
+**Status:** Accepted  
+**Owning TA phase:** TA-14
+
+### Decision
+
+Servers classify operational pressure as GREEN/YELLOW/ORANGE/RED-DRAIN. Pressure changes only optional fidelity/scheduling/admission, and recovery requires 30 seconds below lower thresholds to avoid catch-up oscillation.
+
+
+---
+
+## AD-189 — Make Performance Observable Without Cardinality Explosion
+
+**Date:** 2026-09-24  
+**Status:** Accepted  
+**Owning TA phase:** TA-14
+
+### Decision
+
+Compute, memory, network, service budgets, queues and degradation states are instrumented by stable low-cardinality dimensions. Runtime IDs are not exported merely to make performance dashboards easier.
+
+
+---
+
+## AD-190 — Require Review Before Relaxing Hard Budgets
+
+**Date:** 2026-09-24  
+**Status:** Accepted  
+**Owning TA phase:** TA-14
+
+### Decision
+
+Raising hard guardrails, reducing platform headroom, increasing streaming radii/profile maxima/remote envelopes or changing degradation order is material TA-14 change control and needs TA-15 evidence.
+
+
+---
+
+## AD-191 — Close TA-14 and Advance to TA-15
+
+**Date:** 2026-09-24  
+**Status:** Accepted  
+**Owning TA phase:** TA-14
+
+### Decision
+
+TA-14 is Architecture Complete — PASS with 300/300 architecture scenarios and zero blocking questions. TA-15 becomes NEXT; gameplay implementation remains blocked until TA-17.
+
+### Consequence
+
+TA-15 becomes NEXT. Gameplay implementation remains blocked until TA-17.
