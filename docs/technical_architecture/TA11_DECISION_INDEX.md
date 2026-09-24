@@ -19,7 +19,7 @@ Join/readiness and post-prompt refresh query ownership; prompt completion is a r
 Failure creates no new entitlement and does not destructively remove last-known-good active state. VerificationUnknown schedules bounded asynchronous in-session ownership reconciliation; TA-14 owns the exact retry/backoff budget. Product Hidden/Retired state stops new prompting but does not stop reconciliation of already-owned or Pending outcomes.
 
 ## TA11-D06 — Make Starter Historical Grant Separately Exact-Once
-The baseline Starter program uses one stable account-level StarterProgramId finalized marker. ProductDefinitionId, platform rebinding and GrantSemanticVersion are audit/source facts and cannot reset Starter eligibility or duplicate historical Starter Energy/value.
+The baseline Starter program uses one stable account-level StarterProgramId finalized marker. ProductDefinitionId, platform rebinding and GrantSemanticVersion are audit/source facts and cannot reset Starter eligibility or duplicate historical Starter Energy/value. If multiple Starter sources are owned before finalization, the migration definition resolves them by explicit unique StarterSourcePriority after reconciling all configured ownership facts; registry/query completion order is never precedence, and incompatible source migration fails protected rather than choosing arbitrarily.
 
 ## TA11-D07 — Use Server Receipt Authority for Developer Products
 PromptProductPurchaseFinished is never grant authority.
