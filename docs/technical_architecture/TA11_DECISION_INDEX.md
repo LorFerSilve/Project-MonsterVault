@@ -16,10 +16,10 @@ Durable cosmetics/capacity/supporter and Starter products use Game Pass ownershi
 Join/readiness and post-prompt refresh query ownership; prompt completion is a refresh trigger.
 
 ## TA11-D05 — Treat Ownership API Failure as Unknown, Not Revocation
-Failure creates no new entitlement and does not destructively remove last-known-good active state. VerificationUnknown schedules bounded asynchronous in-session ownership reconciliation; TA-14 owns the exact retry/backoff budget.
+Failure creates no new entitlement and does not destructively remove last-known-good active state. VerificationUnknown schedules bounded asynchronous in-session ownership reconciliation; TA-14 owns the exact retry/backoff budget. Product Hidden/Retired state stops new prompting but does not stop reconciliation of already-owned or Pending outcomes.
 
 ## TA11-D06 — Make Starter Historical Grant Separately Exact-Once
-Repeated pass reconciliation cannot duplicate historical Starter Energy/value.
+The baseline Starter program uses one stable account-level StarterProgramId finalized marker. ProductDefinitionId, platform rebinding and GrantSemanticVersion are audit/source facts and cannot reset Starter eligibility or duplicate historical Starter Energy/value.
 
 ## TA11-D07 — Use Server Receipt Authority for Developer Products
 PromptProductPurchaseFinished is never grant authority.
