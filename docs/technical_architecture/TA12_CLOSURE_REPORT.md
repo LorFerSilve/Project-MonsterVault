@@ -52,7 +52,7 @@ Consequential success never comes from local click/tap completion.
 
 InputAction/InputContext provide semantic cross-device actions. Touch, keyboard/mouse and gamepad remain capability-equivalent.
 
-One modal/focus architecture prevents action fallthrough and keeps all core gamepad actions reachable. InputActionLabel beta is not required.
+One modal/focus architecture uses explicit PlatformMenu > SystemBlocked > Modal > CommittedGameplay > Panel > World precedence and single-owner sink behavior. Dismissal gestures remain sunk through release/neutral before lower contexts react, preventing both press and release fallthrough. All core gamepad actions remain reachable. InputActionLabel beta is not required.
 
 **PASS.**
 
@@ -68,7 +68,7 @@ PreferredTextSize, PreferredTransparency and ReducedMotionEnabled are live first
 
 Notification priority follows GDS-14. Persistent unresolved states are not represented solely by Toasts.
 
-Pending/rejected/reconciliation states remain distinguishable for trade, purchase, persistence and capacity. Reconnect reconstructs current authority without implying duplicate finalization.
+Pending/rejected/reconciliation states remain distinguishable for trade, purchase, persistence and capacity. A consequential request timeout becomes OutcomeUnknown/ReconciliationRequired and triggers authoritative refresh instead of false rejection or blind resubmission. Reconnect reconstructs current authority without implying duplicate finalization.
 
 **PASS.**
 
