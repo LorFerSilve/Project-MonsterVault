@@ -1,6 +1,6 @@
 # Architecture Decisions
 
-> **Status:** Active — TA-0..11 Complete / TA-12 Next
+> **Status:** Active — TA-0..12 Complete / TA-13 Next
 > **Authority:** Accepted technical architecture decisions and rationale
 
 This log records material architecture decisions. GDS-17 has formally promoted the Game Design Specification to Design Complete, so architecture decision-making may now begin under TA-0.
@@ -1949,3 +1949,224 @@ TA-11 is Architecture Complete — PASS with 240/240 scenarios and zero blocking
 ### Consequence
 
 TA-12 becomes NEXT. Gameplay implementation remains blocked until TA-17.
+
+
+---
+
+## AD-132 — Keep Client State Non-Authoritative
+
+**Date:** 2026-09-24  
+**Status:** Accepted  
+**Owning TA phase:** TA-12
+
+### Decision
+
+Server-owned gameplay facts are read-only projections; local UI/navigation/camera state is disposable; user preferences alter presentation only.
+
+---
+
+## AD-133 — Use Unidirectional Client State Flow
+
+**Date:** 2026-09-24  
+**Status:** Accepted  
+**Owning TA phase:** TA-12
+
+### Decision
+
+Authoritative projections feed a revision-aware client application store and view models; consequential semantic intents return to the server and final presentation follows authoritative outcome.
+
+---
+
+## AD-134 — Use InputAction/InputContext for Semantic Cross-Device Input
+
+**Date:** 2026-09-24  
+**Status:** Accepted  
+**Owning TA phase:** TA-12
+
+### Decision
+
+TA-12 uses InputAction/InputContext/InputBinding as the baseline action architecture with touch, keyboard/mouse and gamepad parity.
+
+---
+
+## AD-135 — Avoid Production Dependency on Beta InputActionLabel
+
+**Date:** 2026-09-24  
+**Status:** Accepted  
+**Owning TA phase:** TA-12
+
+### Decision
+
+InputAction.PreferredBinding feeds a MonsterVault glyph/text resolver; the beta InputActionLabel is not required for runtime correctness.
+
+---
+
+## AD-136 — Centralize Input Context, Modal and Focus Arbitration
+
+**Date:** 2026-09-24  
+**Status:** Accepted  
+**Owning TA phase:** TA-12
+
+### Decision
+
+One client input/focus architecture prevents modal-to-world input fallthrough, provides predictable Back/Close and maintains complete gamepad reachability.
+
+---
+
+## AD-137 — Enforce Presentation Priority
+
+**Date:** 2026-09-24  
+**Status:** Accepted  
+**Owning TA phase:** TA-12
+
+### Decision
+
+Critical trust and committed gameplay presentation suppress or queue lower-priority social/commercial/informational UI without changing server obligations.
+
+---
+
+## AD-138 — Use Roblox Safe Areas and Responsive Reflow
+
+**Date:** 2026-09-24  
+**Status:** Accepted  
+**Owning TA phase:** TA-12
+
+### Decision
+
+Critical/actionable UI uses CoreUISafeInsets by default and adapts through reflow/wrapping/scrolling rather than desktop-first shrink-only layouts.
+
+---
+
+## AD-139 — Treat Roblox Accessibility Preferences as Live Floors
+
+**Date:** 2026-09-24  
+**Status:** Accepted  
+**Owning TA phase:** TA-12
+
+### Decision
+
+PreferredTextSize, PreferredTransparency and ReducedMotionEnabled are live inputs that MonsterVault preferences may strengthen but never weaken.
+
+---
+
+## AD-140 — Persist Custom Presentation Preferences as P1
+
+**Date:** 2026-09-24  
+**Status:** Accepted  
+**Owning TA phase:** TA-12
+
+### Decision
+
+Custom contrast, shake, captions, volume categories, sensitivity and safe social/notification preferences are validated non-value-critical state; platform-safe defaults work before profile readiness.
+
+---
+
+## AD-141 — Never Finalize Consequential UI Optimistically
+
+**Date:** 2026-09-24  
+**Status:** Accepted  
+**Owning TA phase:** TA-12
+
+### Decision
+
+Capture ownership, Energy/progression, Release, trade, event rewards and commercial entitlements present success only after authoritative outcomes.
+
+---
+
+## AD-142 — Key Exact-Instance UI by Semantic IDs and Virtualize Large Lists
+
+**Date:** 2026-09-24  
+**Status:** Accepted  
+**Owning TA phase:** TA-12
+
+### Decision
+
+CreatureInstanceId and other stable semantic IDs survive recycled GuiObjects; large collection/trade/Vault views render bounded subsets.
+
+---
+
+## AD-143 — Use One Bounded Local Camera Presentation Owner
+
+**Date:** 2026-09-24  
+**Status:** Accepted  
+**Owning TA phase:** TA-12
+
+### Decision
+
+Baseline exploration keeps familiar Roblox camera behavior; temporary camera assistance is locally arbitrated and deterministically restored.
+
+---
+
+## AD-144 — Compose Reduced Motion Conservatively
+
+**Date:** 2026-09-24  
+**Status:** Accepted  
+**Owning TA phase:** TA-12
+
+### Decision
+
+Effective Reduced Motion is true when Roblox or MonsterVault requests it and removes non-essential motion/shake without removing semantic feedback.
+
+---
+
+## AD-145 — Use Semantic Audio Categories and Caption Events
+
+**Date:** 2026-09-24  
+**Status:** Accepted  
+**Owning TA phase:** TA-12
+
+### Decision
+
+Audio reinforces but never solely carries critical meaning; actionable sound/dialogue has visual/text equivalents and semantic caption events.
+
+---
+
+## AD-146 — Keep Localization Separate from Semantic Identity
+
+**Date:** 2026-09-24  
+**Status:** Accepted  
+**Owning TA phase:** TA-12
+
+### Decision
+
+UI text is localization-key driven and expansion-tolerant; localized display strings never become gameplay identity or logic keys.
+
+---
+
+## AD-147 — Yield to Roblox Platform Safety UI
+
+**Date:** 2026-09-24  
+**Status:** Accepted  
+**Owning TA phase:** TA-12
+
+### Decision
+
+Core play never requires chat/voice, supported filtering remains mandatory for uncontrolled text, and Roblox menu/report/settings paths remain accessible.
+
+---
+
+## AD-148 — Bind Commercial Presentation to TA-11 Truth
+
+**Date:** 2026-09-24  
+**Status:** Accepted  
+**Owning TA phase:** TA-12
+
+### Decision
+
+Current platform price/content/Pending/reconciliation projections drive shop UI; commercial presentation cannot steal critical focus or fabricate entitlements.
+
+---
+
+## AD-149 — Close TA-12 and Advance to TA-13
+
+**Date:** 2026-09-24  
+**Status:** Accepted  
+**Owning TA phase:** TA-12
+
+### Decision
+
+TA-12 is Architecture Complete — PASS with 300/300 scenarios and zero blocking questions. TA-13 becomes NEXT; gameplay implementation remains blocked until TA-17.
+
+### Consequence
+
+TA-13 becomes NEXT. Gameplay implementation remains blocked until TA-17.
