@@ -29,14 +29,16 @@
 
 ## 3. Input Contexts
 
-| Context | Purpose | World input |
-|---|---|---|
-| SystemBlocked | recovery/safe actions | sunk |
-| Modal | confirm/cancel/navigation | sunk |
-| CommittedGameplay | capture/trade-specific actions | restricted |
-| World | ordinary semantic actions | active |
-| PanelNavigation | UI navigation | suppressed/restricted as configured |
-| PlatformMenuSuspended | Roblox menu owns interaction | suspended |
+| Precedence | Context | Owns / sinks |
+|---:|---|---|
+| 1 highest | PlatformMenuSuspended | sinks all MonsterVault semantic actions while Roblox/Core UI owns interaction |
+| 2 | SystemBlocked | owns safe recovery/system/accessibility actions; sinks all gameplay/value actions |
+| 3 | Modal | owns Confirm/Back/navigation and shared PrimaryAction/PrimaryInteract bindings; sinks lower-context copies |
+| 4 | CommittedGameplay | owns capture/custody/trade-specific actions; sinks conflicting ordinary world/panel actions |
+| 5 | PanelNavigation | owns panel navigation/Confirm/Back/shared actions while focused; only explicitly non-conflicting movement/camera may pass |
+| 6 fallback | World | receives only actions not handled/sunk above |
+
+For each semantic action event, the first active context in this order that handles or sinks it terminates dispatch. On dismissal, the outgoing context/Input Handoff Guard continues sinking the triggering physical input until release/completed/neutral before lower contexts become triggerable.
 
 ## 4. Cross-Device Action Contract
 
@@ -58,7 +60,7 @@ No core action requires hover, right-click, drag, keyboard chord or pointer emul
 |---|---|
 | modal opens | deterministic first/remembered valid control |
 | nested strong confirmation | confirmation owns primary focus |
-| modal closes | prior valid semantic target or fallback |
+| modal closes | prepare prior valid target/fallback, but lower actions remain sunk until dismissal gesture reaches release/neutral |
 | focused virtualized item removed | nearest deterministic semantic fallback |
 | device switches to gamepad | select current/first valid control |
 | device switches away from gamepad | state preserved; visual selection may relax |
@@ -101,6 +103,18 @@ No core action requires hover, right-click, drag, keyboard chord or pointer emul
 | trade commit | NO | TA-10/server |
 | event reward | NO | TA-10/server |
 | entitlement/purchase | NO | TA-11/platform+server |
+
+## 8A. Consequential Timeout Matrix
+
+| Condition | Presentation / action |
+|---|---|
+| request acknowledged success | wait for/apply authoritative confirmed projection |
+| explicit authoritative rejection | Rejected with actionable semantic reason |
+| transport/request timeout | OutcomeUnknown / ReconciliationRequired; never treat as rejection |
+| unknown outcome | trigger authoritative domain refresh/reconciliation and block blind duplicate irreversible submit |
+| reconciliation proves applied | Confirmed/current authoritative state |
+| reconciliation proves not applied | Rejected/NotApplied; safe retry only under upstream identity rules |
+| reconciliation remains unknown | persistent Pending/Unknown state |
 
 ## 9. Notification Matrix
 
