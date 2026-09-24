@@ -21,7 +21,7 @@
 
 ## TA12-D05 — Centralize Input Context, Modal and Focus Arbitration
 
-**Decision:** One context/focus architecture prevents input fallthrough, ensures predictable Back/Close and maintains complete gamepad navigation.
+**Decision:** One context/focus architecture uses fixed precedence PlatformMenuSuspended > SystemBlocked > Modal > CommittedGameplay > PanelNavigation > World, with single-owner dispatch and explicit sink rules. Modal/context dismissal keeps the triggering physical gesture sunk until release/completed/neutral before lower contexts become triggerable; predictable Back/Close and complete gamepad navigation remain mandatory.
 
 ## TA12-D06 — Prioritize Critical and Committed Presentation over Social/Commercial Noise
 
@@ -41,7 +41,7 @@
 
 ## TA12-D10 — Consequential UI Never Presents Final Success Optimistically
 
-**Decision:** Capture ownership, Energy/progression, Release, trade, event reward and commercial entitlement success follow authoritative server/platform outcomes.
+**Decision:** Capture ownership, Energy/progression, Release, trade, event reward and commercial entitlement success follow authoritative server/platform outcomes. A consequential command timeout is OutcomeUnknown/ReconciliationRequired, never a rejection; it triggers authoritative refresh and blocks blind duplicate irreversible submission until the owning domain resolves or proves retry safety.
 
 ## TA12-D11 — Key Exact-Instance UI by Semantic IDs and Virtualize Large Lists
 
