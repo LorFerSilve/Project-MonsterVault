@@ -95,6 +95,10 @@ On profile readiness, MonsterVault reconciles configured pass ownership using Ma
 **PASS-11-04:** Successful authoritative negative ownership may deactivate and invoke safe reconciliation.  
 **PASS-11-05:** External pass purchases are discovered on later reconciliation.
 
+**PASS-11-06:** A VerificationUnknown result schedules bounded asynchronous in-session ownership reconciliation while the session remains eligible. The retry uses backoff/jitter, is coalesced per player/product, and stops on authoritative positive/negative resolution, session end, product retirement/ineligibility, or the TA-14 retry budget. A player is not required to reprompt, reconnect, or reopen the shop to obtain a retry.
+
+**PASS-11-07:** Exhausting the current in-session retry budget preserves VerificationUnknown/Pending without inventing entitlement truth; a later safe reconciliation trigger (for example renewed session readiness, product-state refresh, or reconnect) may resume attempts under the current budget policy.
+
 The profile stores a durable entitlement projection with ProductDefinitionId, source kind/binding reference, active state, last successful verification, grant version and reconciliation state. Entitlement activation/removal is P2 when persistent capability/value changes.
 
 ## 8. Starter Value Bundle
