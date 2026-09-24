@@ -1,6 +1,6 @@
 # Project MonsterVault Documentation
 
-> **Project phase:** Technical Architecture — TA-0..11 complete / TA-12 next  
+> **Project phase:** Technical Architecture — TA-0..12 complete / TA-13 next  
 > **Implementation status:** Blocked by Technical Architecture and implementation-lock gates
 
 This directory is the authoritative documentation space for Project MonsterVault.
@@ -70,20 +70,21 @@ Technical Architecture completed:
 - **TA-9 — World, Biomes, Spawn Scheduling, Streaming, and Encounter Scaling: Architecture Complete — PASS**
 - **TA-10 — Social Systems, Server Events, Cross-Server Coordination, and Trading: Architecture Complete — PASS**
 - **TA-11 — Monetization, MarketplaceService, Receipt Processing, and Entitlements: Architecture Complete — PASS**
+- **TA-12 — Client Presentation, UI State, Input, Camera, Audio, and Accessibility: Architecture Complete — PASS**
 
-TA-11 latest evidence:
+TA-12 latest evidence:
 
-- [`technical_architecture/commerce/11_monetization_marketplace_receipts_and_entitlements.md`](technical_architecture/commerce/11_monetization_marketplace_receipts_and_entitlements.md);
-- [`technical_architecture/TA11_ROBLOX_COMMERCE_PLATFORM_SNAPSHOT.md`](technical_architecture/TA11_ROBLOX_COMMERCE_PLATFORM_SNAPSHOT.md);
-- [`technical_architecture/TA11_COMMERCE_RECEIPT_ENTITLEMENT_MATRIX.md`](technical_architecture/TA11_COMMERCE_RECEIPT_ENTITLEMENT_MATRIX.md);
-- [`technical_architecture/TA11_GDS_TRACEABILITY.md`](technical_architecture/TA11_GDS_TRACEABILITY.md);
-- [`technical_architecture/TA11_SCENARIO_VALIDATION.md`](technical_architecture/TA11_SCENARIO_VALIDATION.md) — 240 / 240 PASS;
-- [`technical_architecture/TA11_DECISION_INDEX.md`](technical_architecture/TA11_DECISION_INDEX.md);
-- [`technical_architecture/TA11_CLOSURE_REPORT.md`](technical_architecture/TA11_CLOSURE_REPORT.md).
+- [`technical_architecture/client/12_client_presentation_ui_input_camera_audio_and_accessibility.md`](technical_architecture/client/12_client_presentation_ui_input_camera_audio_and_accessibility.md);
+- [`technical_architecture/TA12_ROBLOX_CLIENT_ACCESSIBILITY_PLATFORM_SNAPSHOT.md`](technical_architecture/TA12_ROBLOX_CLIENT_ACCESSIBILITY_PLATFORM_SNAPSHOT.md);
+- [`technical_architecture/TA12_CLIENT_PRESENTATION_INPUT_ACCESSIBILITY_MATRIX.md`](technical_architecture/TA12_CLIENT_PRESENTATION_INPUT_ACCESSIBILITY_MATRIX.md);
+- [`technical_architecture/TA12_GDS_TRACEABILITY.md`](technical_architecture/TA12_GDS_TRACEABILITY.md);
+- [`technical_architecture/TA12_SCENARIO_VALIDATION.md`](technical_architecture/TA12_SCENARIO_VALIDATION.md) — 300 / 300 PASS;
+- [`technical_architecture/TA12_DECISION_INDEX.md`](technical_architecture/TA12_DECISION_INDEX.md);
+- [`technical_architecture/TA12_CLOSURE_REPORT.md`](technical_architecture/TA12_CLOSURE_REPORT.md).
 
 The active dependency is:
 
-> **TA-12 — Client Presentation, UI State, Input, Camera, Audio, and Accessibility**
+> **TA-13 — Analytics, Telemetry, Feature Flags, Configuration Rollouts, and Live Operations**
 
 No gameplay implementation should begin until:
 
