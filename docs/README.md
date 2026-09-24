@@ -1,6 +1,6 @@
 # Project MonsterVault Documentation
 
-> **Project phase:** Technical Architecture — TA-0..13 complete / TA-14 next  
+> **Project phase:** Technical Architecture — TA-0..14 complete / TA-15 next  
 > **Implementation status:** Blocked by Technical Architecture and implementation-lock gates
 
 This directory is the authoritative documentation space for Project MonsterVault.
@@ -72,6 +72,7 @@ Technical Architecture completed:
 - **TA-11 — Monetization, MarketplaceService, Receipt Processing, and Entitlements: Architecture Complete — PASS**
 - **TA-12 — Client Presentation, UI State, Input, Camera, Audio, and Accessibility: Architecture Complete — PASS**
 - **TA-13 — Analytics, Telemetry, Feature Flags, Configuration Rollouts, and Live Operations: Architecture Complete — PASS**
+- **TA-14 — Performance, Network, Memory, Persistence, and Scalability Budgets: Architecture Complete — PASS**
 
 TA-13 latest evidence:
 
@@ -83,9 +84,19 @@ TA-13 latest evidence:
 - [`technical_architecture/TA13_DECISION_INDEX.md`](technical_architecture/TA13_DECISION_INDEX.md);
 - [`technical_architecture/TA13_CLOSURE_REPORT.md`](technical_architecture/TA13_CLOSURE_REPORT.md).
 
+TA-14 latest evidence:
+
+- [`technical_architecture/performance/14_performance_network_memory_persistence_and_scalability_budgets.md`](technical_architecture/performance/14_performance_network_memory_persistence_and_scalability_budgets.md);
+- [`technical_architecture/TA14_ROBLOX_PERFORMANCE_SCALABILITY_PLATFORM_SNAPSHOT.md`](technical_architecture/TA14_ROBLOX_PERFORMANCE_SCALABILITY_PLATFORM_SNAPSHOT.md);
+- [`technical_architecture/TA14_PERFORMANCE_SCALABILITY_BUDGET_MATRIX.md`](technical_architecture/TA14_PERFORMANCE_SCALABILITY_BUDGET_MATRIX.md);
+- [`technical_architecture/TA14_GDS_TRACEABILITY.md`](technical_architecture/TA14_GDS_TRACEABILITY.md);
+- [`technical_architecture/TA14_SCENARIO_VALIDATION.md`](technical_architecture/TA14_SCENARIO_VALIDATION.md) — 300 / 300 PASS;
+- [`technical_architecture/TA14_DECISION_INDEX.md`](technical_architecture/TA14_DECISION_INDEX.md);
+- [`technical_architecture/TA14_CLOSURE_REPORT.md`](technical_architecture/TA14_CLOSURE_REPORT.md).
+
 The active dependency is:
 
-> **TA-14 — Performance, Network, Memory, Persistence, and Scalability Budgets**
+> **TA-15 — Testing, Diagnostics, Security Validation, and CI Architecture**
 
 No gameplay implementation should begin until:
 
