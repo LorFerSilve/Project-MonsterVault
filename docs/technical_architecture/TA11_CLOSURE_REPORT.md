@@ -30,7 +30,7 @@ Semantic product identity is separate from platform IDs. Sold grant meaning is i
 
 ## Pass / Starter
 
-Durable one-time products use pass ownership where practical. Ownership is reconciled on readiness and prompt refresh; transient query failure becomes VerificationUnknown and schedules bounded asynchronous in-session reconciliation rather than destructive false or waiting for a reconnect. Starter historical value is separately exact-once.
+Durable one-time products use pass ownership where practical. Ownership is reconciled on readiness and prompt refresh; transient query failure becomes VerificationUnknown and schedules bounded asynchronous in-session reconciliation rather than destructive false or waiting for a reconnect. Hidden/Retired lifecycle stops new prompting but does not strand already-owned or Pending reconciliation. Starter historical value is separately exact-once through one stable account-level StarterProgramId marker that survives ProductDefinition, binding and grant-version changes within the same baseline Starter program.
 
 **PASS.**
 
