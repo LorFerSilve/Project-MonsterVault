@@ -1,6 +1,6 @@
 # MonsterVault Technical Architecture
 
-> **Status:** Active — TA-0..14 Complete / TA-15 Next
+> **Status:** Active — TA-0..15 Complete / TA-16 Next
 > **Authority:** Technical implementation contracts after GDS completion
 
 This directory contains the Technical Architecture layer that now becomes active after the GDS-17 Design Complete PASS.
@@ -42,6 +42,8 @@ The TA is deliberately not allowed to redefine gameplay. It translates the appro
 - [`TA13_ANALYTICS_CONFIG_LIVEOPS_MATRIX.md`](TA13_ANALYTICS_CONFIG_LIVEOPS_MATRIX.md) locks telemetry channels, C2 snapshots, flags, experiment and privileged-operation boundaries.
 - [`performance/14_performance_network_memory_persistence_and_scalability_budgets.md`](performance/14_performance_network_memory_persistence_and_scalability_budgets.md) is the authoritative TA-14 budget/scalability contract.
 - [`TA14_PERFORMANCE_SCALABILITY_BUDGET_MATRIX.md`](TA14_PERFORMANCE_SCALABILITY_BUDGET_MATRIX.md) locks the cross-system numeric performance, network, memory and service guardrails.
+- [`verification/15_testing_diagnostics_security_validation_and_ci_architecture.md`](verification/15_testing_diagnostics_security_validation_and_ci_architecture.md) is the authoritative TA-15 verification/security/CI contract.
+- [`TA15_VERIFICATION_QUALITY_GATE_MATRIX.md`](TA15_VERIFICATION_QUALITY_GATE_MATRIX.md) locks the required test classes, criticality and merge/release evidence.
 - [`TA_ROADMAP.md`](TA_ROADMAP.md) defines the dependency-driven architecture sequence.
 - `audit/` will contain the final TA-16 integration/readiness evidence.
 
@@ -49,12 +51,12 @@ The TA is deliberately not allowed to redefine gameplay. It translates the appro
 
 GDS-17 has recorded a formal **Design Complete — PASS** with zero implementation-critical design questions.
 
-TA-0 through TA-14 are **Architecture Complete — PASS**.
+TA-0 through TA-15 are **Architecture Complete — PASS**.
 
-TA-14 closed with 300 / 300 architecture scenarios passing and numeric server/client frame, memory, streaming, custom-network, persistence, cross-server, world-scheduler, collection, UI and telemetry/config budgets; it also locks conservative pressure/degradation semantics that preserve upstream authority and exact-once/value guarantees.
+TA-15 closed with 360 / 360 verification-architecture scenarios passing and deterministic/static/Studio/fault/security/performance evidence contracts, public-repository CI privilege separation, non-quarantinable C0 invariants and explicit merge/release quality gates.
 
 The active dependency is:
 
-> **TA-15 — Testing, Diagnostics, Security Validation, and CI Architecture**
+> **TA-16 — Architecture Integration and Implementation-Readiness Audit**
 
-TA-15 now owns executable/static/fault/security/performance verification, diagnostics and CI quality gates on top of the closed TA-14 budget architecture. Gameplay implementation remains blocked until TA-17.
+TA-16 now owns the final cross-system architecture integration/readiness audit across TA-0..15. Gameplay implementation remains blocked until TA-17.
