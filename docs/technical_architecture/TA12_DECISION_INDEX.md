@@ -21,7 +21,7 @@
 
 ## TA12-D05 — Centralize Input Context, Modal and Focus Arbitration
 
-**Decision:** One context/focus architecture uses fixed precedence PlatformMenuSuspended > SystemBlocked > Modal > CommittedGameplay > PanelNavigation > World, with single-owner dispatch and explicit sink rules. Modal/context dismissal keeps the triggering physical gesture sunk until release/completed/neutral before lower contexts become triggerable; predictable Back/Close and complete gamepad navigation remain mandatory.
+**Decision:** One context/focus architecture uses fixed precedence PlatformMenuSuspended > SystemBlocked > Modal > CommittedGameplay > PanelNavigation > World, with single-owner dispatch and explicit sink rules. Context transitions caused by physical input keep the triggering gesture sunk through release/completed/neutral against both a newly enabled higher context and newly exposed lower contexts. A modal opened by a press may prepare focus, but cannot Confirm from that press/release; confirmation requires a fresh gesture. Predictable Back/Close and complete gamepad navigation remain mandatory.
 
 ## TA12-D06 — Prioritize Critical and Committed Presentation over Social/Commercial Noise
 

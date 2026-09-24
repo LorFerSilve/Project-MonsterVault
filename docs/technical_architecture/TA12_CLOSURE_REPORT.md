@@ -52,7 +52,7 @@ Consequential success never comes from local click/tap completion.
 
 InputAction/InputContext provide semantic cross-device actions. Touch, keyboard/mouse and gamepad remain capability-equivalent.
 
-One modal/focus architecture uses explicit PlatformMenu > SystemBlocked > Modal > CommittedGameplay > Panel > World precedence and single-owner sink behavior. Dismissal gestures remain sunk through release/neutral before lower contexts react, preventing both press and release fallthrough. All core gamepad actions remain reachable. InputActionLabel beta is not required.
+One modal/focus architecture uses explicit PlatformMenu > SystemBlocked > Modal > CommittedGameplay > Panel > World precedence and single-owner sink behavior. Input Handoff Guards cover both entry and dismissal: an opening gesture remains sunk against the newly enabled modal through release/neutral, so it cannot immediately Confirm, while a dismissal gesture remains sunk before lower contexts react. Consequential modal activation therefore requires a fresh gesture. All core gamepad actions remain reachable. InputActionLabel beta is not required.
 
 **PASS.**
 

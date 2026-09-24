@@ -2009,7 +2009,7 @@ InputAction.PreferredBinding feeds a MonsterVault glyph/text resolver; the beta 
 
 ### Decision
 
-One client input/focus architecture uses fixed precedence PlatformMenuSuspended > SystemBlocked > Modal > CommittedGameplay > PanelNavigation > World, single-owner action dispatch and explicit sink behavior. A context/modal dismissal retains ownership of its triggering physical gesture until release/completed/neutral before lower contexts become triggerable, preventing press/release fallthrough while preserving predictable Back/Close and complete gamepad reachability.
+One client input/focus architecture uses fixed precedence PlatformMenuSuspended > SystemBlocked > Modal > CommittedGameplay > PanelNavigation > World, single-owner action dispatch and explicit sink behavior. Any context transition caused by physical input retains an Input Handoff Guard for the triggering gesture until release/completed/neutral. On entry, the guard also sinks that input against the newly enabled higher context, so a modal opened by press cannot consume the matching release as Confirm and requires a fresh gesture. On dismissal, the guard prevents the same gesture from reaching newly exposed lower contexts. This prevents entry and exit fallthrough while preserving predictable Back/Close and complete gamepad reachability.
 
 ---
 

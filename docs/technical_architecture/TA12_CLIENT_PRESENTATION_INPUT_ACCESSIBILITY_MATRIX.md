@@ -38,7 +38,7 @@
 | 5 | PanelNavigation | owns panel navigation/Confirm/Back/shared actions while focused; only explicitly non-conflicting movement/camera may pass |
 | 6 fallback | World | receives only actions not handled/sunk above |
 
-For each semantic action event, the first active context in this order that handles or sinks it terminates dispatch. On dismissal, the outgoing context/Input Handoff Guard continues sinking the triggering physical input until release/completed/neutral before lower contexts become triggerable.
+For each semantic action event, the first active context in this order that handles or sinks it terminates dispatch. Any context transition caused by physical input installs an Input Handoff Guard for the triggering input until release/completed/neutral. On modal entry, that input is sunk against the newly enabled Modal context as well as every lower context, so opening focus may appear but Confirm/PrimaryAction cannot fire until a fresh gesture. On dismissal, the same rule prevents the closing gesture from reaching newly exposed lower contexts.
 
 ## 4. Cross-Device Action Contract
 
@@ -58,7 +58,7 @@ No core action requires hover, right-click, drag, keyboard chord or pointer emul
 
 | Event | Focus result |
 |---|---|
-| modal opens | deterministic first/remembered valid control |
+| modal opens | deterministic first/remembered valid control may be prepared immediately; opening input remains guarded through neutral and cannot confirm |
 | nested strong confirmation | confirmation owns primary focus |
 | modal closes | prepare prior valid target/fallback, but lower actions remain sunk until dismissal gesture reaches release/neutral |
 | focused virtualized item removed | nearest deterministic semantic fallback |

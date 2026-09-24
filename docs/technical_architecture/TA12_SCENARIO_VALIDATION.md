@@ -93,7 +93,7 @@ TA-12 validation covers client/server authority, projection revisions, UI layeri
 | 61 | normal exploration | WorldContext active | PASS |
 | 62 | panel opens | PanelNavigation enabled and conflicting world inputs restricted | PASS |
 | 63 | modal opens | ModalContext sinks world confirm input | PASS |
-| 64 | same press opens modal | cannot also trigger world action | PASS |
+| 64 | same press opens modal and its release maps to modal Confirm | opening input remains sunk against the new ModalContext and all lower contexts through release/neutral; modal Confirm requires a fresh gesture | PASS |
 | 65 | Capture Attempt begins | CommittedGameplayContext activates | PASS |
 | 66 | Protected Load Failure | SystemBlockedContext limits to safe actions | PASS |
 | 67 | Roblox menu opens | MonsterVault gameplay contexts suspended | PASS |

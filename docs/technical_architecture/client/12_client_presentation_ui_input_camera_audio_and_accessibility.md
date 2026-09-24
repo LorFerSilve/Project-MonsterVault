@@ -306,7 +306,7 @@ Only contexts valid for the current authoritative/presentation mode are enabled.
 
 ### INPUTCTX-12-02
 
-Opening a modal cannot let the physical gesture that opened it fall through and trigger a lower-context action.
+Opening/enabling a higher context, including `ModalContext`, activates an **Input Handoff Guard** for the physical input(s) that caused the transition. Those inputs remain sunk against both the newly enabled context and every lower context until they reach completed/released/neutral. The modal may prepare visual focus immediately, but Confirm, PrimaryAction, PrimaryInteract or another consequential action cannot consume the opening gesture; a subsequent fresh gesture is required.
 
 ### INPUTCTX-12-03
 
@@ -402,7 +402,7 @@ Back never implicitly confirms Buy, Release, Trade, Unlock or another consequent
 
 ### FOCUS-12-06
 
-Focus/context restoration after modal dismissal occurs only after INPUTCTX-12-04's input-handoff guard has consumed the complete dismissal gesture. Visual focus may be prepared earlier, but newly exposed consequential actions remain non-triggerable until neutral.
+Focus/context activation or restoration around modal entry/dismissal is subject to INPUTCTX-12-02 and INPUTCTX-12-04. Visual focus may be prepared immediately, but the opening or dismissal input remains guarded through completed/released/neutral; newly focused or newly exposed consequential actions remain non-triggerable until then, and modal confirmation after entry requires a fresh gesture.
 
 ## 14. Confirmation Severity Architecture
 
