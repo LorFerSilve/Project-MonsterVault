@@ -1,6 +1,6 @@
 # Technical Architecture Roadmap
 
-> **Status:** Active — TA-13 Next
+> **Status:** Active — TA-15 Next
 > **Authority:** Dependency-driven technical architecture sequencing
 
 This roadmap defines how the Design Complete MonsterVault GDS is translated into implementation-ready Roblox/Luau contracts.
@@ -567,13 +567,46 @@ Closure evidence:
 
 ## TA-14 — Performance, Network, Memory, Persistence, and Scalability Budgets
 
-**Status:** NEXT — Draft
+**Status:** Architecture Complete — PASS
 
-Defines measurable server/client frame, memory, instance, network, remote-rate, DataStore, MemoryStore and content budgets across representative device/server scenarios, with degradation strategies.
+Established and formally validated:
+
+- Roblox platform ceilings separated from stricter MonsterVault targets/warnings/hard guardrails;
+- L0 solo through L5 long-session reference load classes;
+- 60 Hz server frame envelope with 6 ms p95 MonsterVault script target and staged load shedding;
+- 30 FPS client correctness floor with 60 FPS reference-device targets;
+- server 40/45/50% memory target/warning/hard-action policy;
+- client warm-baseline memory/leak and supported-device crash gates;
+- bounded runtime Creature/interactable/Persistent-model ceilings;
+- current Roblox streaming baseline: MinRadius 64, TargetRadius 1024, PauseOutsideLoadedArea and Opportunistic stream-out;
+- custom C2S/S2C request, byte, payload and projection-frequency budgets;
+- 768-byte UnreliableRemoteEvent internal payload ceiling;
+- 1 MiB Player Profile warning / 1.5 MiB hard architecture guardrail;
+- 2048 owned-Creature technical record ceiling before profile-architecture reconsideration;
+- 90-second autosave/lease cadence, 300-second stale threshold and 180-second crash-production allowance;
+- DataStore request reserve, retry/backoff and per-key throughput headroom;
+- optional/transient MemoryStore quotas and coarse MessagingService budgets;
+- 250 ms world scheduler, 128-stud spatial baseline and 256 active ordinary World Creature technical ceiling;
+- bounded Vault, trade, commerce, UI virtualization, timer, notification, telemetry, config and experiment work;
+- GREEN/YELLOW/ORANGE/RED pressure states with ordered degradation and 30-second recovery hysteresis;
+- pressure cannot weaken authority, exact-once behavior, safety, value preservation or accessibility-critical meaning;
+- current Roblox performance/DataStore/MemoryStore/network/streaming/Messaging behavior reviewed;
+- 300 / 300 TA-14 architecture scenarios PASS;
+- zero TA-14-blocking questions.
+
+Closure evidence:
+
+- [performance/14_performance_network_memory_persistence_and_scalability_budgets.md](performance/14_performance_network_memory_persistence_and_scalability_budgets.md) — Architecture Complete;
+- [TA14_ROBLOX_PERFORMANCE_SCALABILITY_PLATFORM_SNAPSHOT.md](TA14_ROBLOX_PERFORMANCE_SCALABILITY_PLATFORM_SNAPSHOT.md) — PASS;
+- [TA14_PERFORMANCE_SCALABILITY_BUDGET_MATRIX.md](TA14_PERFORMANCE_SCALABILITY_BUDGET_MATRIX.md) — PASS;
+- [TA14_GDS_TRACEABILITY.md](TA14_GDS_TRACEABILITY.md) — PASS;
+- [TA14_SCENARIO_VALIDATION.md](TA14_SCENARIO_VALIDATION.md) — 300 / 300 PASS;
+- [TA14_DECISION_INDEX.md](TA14_DECISION_INDEX.md) — accepted;
+- [TA14_CLOSURE_REPORT.md](TA14_CLOSURE_REPORT.md) — PASS.
 
 ## TA-15 — Testing, Diagnostics, Security Validation, and CI Architecture
 
-**Status:** Blocked
+**Status:** NEXT — Draft
 
 Defines Luau/static checks, unit/integration/scenario tests, Studio/headless automation possibilities, security tests, persistence fault cases, deterministic/randomness validation, CI gates and evidence requirements.
 
@@ -617,10 +650,10 @@ GDS-17 PASS / Design Complete
 
 GDS-17 is **Complete — PASS** and the Game Design Specification is **Design Complete**.
 
-TA-0 through TA-13 are **Architecture Complete — PASS**.
+TA-0 through TA-14 are **Architecture Complete — PASS**.
 
 The active dependency is:
 
-> **TA-14 — Performance, Network, Memory, Persistence, and Scalability Budgets**
+> **TA-15 — Testing, Diagnostics, Security Validation, and CI Architecture**
 
-TA-15 through TA-17 remain blocked by dependency order. Gameplay implementation remains blocked until TA-17 is formally complete.
+TA-16 through TA-17 remain blocked by dependency order. Gameplay implementation remains blocked until TA-17 is formally complete.
