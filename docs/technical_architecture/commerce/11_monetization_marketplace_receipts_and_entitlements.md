@@ -118,6 +118,28 @@ The account-level historical-grant dedupe identity is the Player Profile plus St
 **STARTER-11-05:** a replacement ProductDefinition/platform binding for the same baseline Starter program inherits the same StarterProgramId and therefore cannot create a second historical grant for an account that already finalized Starter value.  
 **STARTER-11-06:** baseline authorizes one account-level Starter program. Creating a genuinely new StarterProgramId or exposing a replacement SKU in a way that could misleadingly recharge prior Starter participants requires GDS-13 change control plus an explicit commercial migration plan.
 
+### Starter Source Resolution
+
+A Starter catalog migration may temporarily create an account that owns more than one ProductDefinition/platform binding inside the same StarterProgramId before the account-level historical grant has finalized.
+
+Grant choice must never depend on registry iteration, asynchronous ownership-query completion order, server identity or reconnect timing.
+
+The migration definition therefore assigns every Starter source ProductDefinition a unique deterministic **StarterSourcePriority** and pins the exact historical GrantDefinition/hash represented by that source.
+
+Before writing the StarterProgramId finalized marker:
+
+1. reconcile the bounded configured set of Starter source ownership facts for the account;
+2. collect all authoritatively owned sources in the StarterProgramId;
+3. sort/resolve them by the migration's explicit StarterSourcePriority;
+4. select the highest-priority owned source only if the migration plan declares that source's historical grant a valid fulfillment for every lower-priority owned source it supersedes, including any required deterministic compensation;
+5. atomically persist StarterProgramId finalized + selected source ProductDefinitionId + selected grant hash/version + applied grant outcome.
+
+**STARTER-11-07:** two owned Starter SKUs before finalization cannot race to choose a grant; source resolution completes before the program marker write.
+
+**STARTER-11-08:** a replacement source may outrank a legacy source only under an approved migration rule that proves purchased deterministic contents are not silently lost. If this cannot be proven within GDS-13 bounded Starter semantics, automatic grant finalization enters protected commercial reconciliation and the rollout/migration must be corrected; query order is never a fallback.
+
+**STARTER-11-09:** once StarterProgramId is finalized, later ownership discovery of another SKU in the same program cannot replace, top-up or replay the historical Starter grant unless a separately approved remediation operation explicitly exists.
+
 ## 9. Developer Product Receipt Authority
 
 TA-11 baseline uses one centralized server-side MarketplaceService.ProcessReceipt adapter for Developer Products.
