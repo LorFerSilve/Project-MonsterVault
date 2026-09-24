@@ -1,6 +1,6 @@
 # MonsterVault Technical Architecture
 
-> **Status:** Active — TA-0..11 Complete / TA-12 Next
+> **Status:** Active — TA-0..12 Complete / TA-13 Next
 > **Authority:** Technical implementation contracts after GDS completion
 
 This directory contains the Technical Architecture layer that now becomes active after the GDS-17 Design Complete PASS.
@@ -36,6 +36,8 @@ The TA is deliberately not allowed to redefine gameplay. It translates the appro
 - [`TA10_SOCIAL_EVENT_TRADE_MATRIX.md`](TA10_SOCIAL_EVENT_TRADE_MATRIX.md) locks social state, event authority, cross-server coordination and trade transaction boundaries.
 - [`commerce/11_monetization_marketplace_receipts_and_entitlements.md`](commerce/11_monetization_marketplace_receipts_and_entitlements.md) is the authoritative TA-11 commerce/receipt/entitlement contract.
 - [`TA11_COMMERCE_RECEIPT_ENTITLEMENT_MATRIX.md`](TA11_COMMERCE_RECEIPT_ENTITLEMENT_MATRIX.md) locks product, receipt, entitlement, price and reversal boundaries.
+- [`client/12_client_presentation_ui_input_camera_audio_and_accessibility.md`](client/12_client_presentation_ui_input_camera_audio_and_accessibility.md) is the authoritative TA-12 client/presentation/input/accessibility contract.
+- [`TA12_CLIENT_PRESENTATION_INPUT_ACCESSIBILITY_MATRIX.md`](TA12_CLIENT_PRESENTATION_INPUT_ACCESSIBILITY_MATRIX.md) locks client state, input context, focus, safe-area, accessibility and authoritative-feedback boundaries.
 - [`TA_ROADMAP.md`](TA_ROADMAP.md) defines the dependency-driven architecture sequence.
 - `audit/` will contain the final TA-16 integration/readiness evidence.
 
@@ -43,12 +45,12 @@ The TA is deliberately not allowed to redefine gameplay. It translates the appro
 
 GDS-17 has recorded a formal **Design Complete — PASS** with zero implementation-critical design questions.
 
-TA-0 through TA-11 are **Architecture Complete — PASS**.
+TA-0 through TA-12 are **Architecture Complete — PASS**.
 
-TA-11 closed with 240 / 240 commerce scenarios passing and stable semantic product identity, platform-binding separation, Game Pass ownership reconciliation, PurchaseId-journaled Developer Product exact-once finalization, TA-4 lease-owner integration, non-destructive commercial reconciliation and runtime-price/grant separation.
+TA-12 closed with 300 / 300 client/presentation/accessibility scenarios passing and a disposable revision-aware client state model, semantic InputAction/InputContext routing, explicit modal/gamepad focus ownership, responsive safe-area UI, live Roblox accessibility-preference composition, authoritative consequential feedback, bounded camera/motion ownership, semantic audio/captions and localization/reconnect safety.
 
 The active dependency is:
 
-> **TA-12 — Client Presentation, UI State, Input, Camera, Audio, and Accessibility**
+> **TA-13 — Analytics, Telemetry, Feature Flags, Configuration Rollouts, and Live Operations**
 
-TA-12 now owns client presentation/state projection, UI/input/camera/audio/accessibility architecture on top of the closed server-authoritative domain contracts. Gameplay implementation remains blocked until TA-17.
+TA-13 now owns analytics/telemetry schemas, feature/config rollout, experimentation and live-operations architecture on top of the closed gameplay, commerce and client-presentation contracts. Gameplay implementation remains blocked until TA-17.
