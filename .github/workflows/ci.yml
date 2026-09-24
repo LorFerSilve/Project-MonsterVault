@@ -42,6 +42,13 @@ jobs:
         run: stylua --check src tests scripts
       - name: Lint
         run: selene src tests scripts
+      - name: Repository integrity and architecture dependencies
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 -B -m unittest discover -s scripts/ci -p 'test_*.py'
+          python3 -B scripts/ci/check_dependencies.py
+          python3 -B scripts/ci/check_integrity.py
       - name: Rojo build and sourcemap
         shell: bash
         run: |

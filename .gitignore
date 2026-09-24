@@ -21,6 +21,8 @@ DevPackages/
 
 # Tool caches
 .luau-lsp/
+__pycache__/
+*.pyc
 
 # Environment/local-only files
 .env
