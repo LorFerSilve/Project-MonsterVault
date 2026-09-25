@@ -1,6 +1,6 @@
 # Implementation Documentation
 
-> **Status:** OPEN — IMP-1 Contracts and Test Harness COMPLETE; IMP-2 next
+> **Status:** OPEN — IMP-1 complete; IMP-2 Composition and Diagnostics in review
 > **Opened by:** TA-17 Implementation Locked — PASS (2026-09-24)
 
 This directory is the authoritative implementation handoff and phase-evidence layer.
@@ -20,6 +20,8 @@ This directory is the authoritative implementation handoff and phase-evidence la
 ## Active dependency
 
 > **IMP-2 — Composition and Diagnostics**
+
+Implementation evidence: [IMP2_IMPLEMENTATION_EVIDENCE.md](IMP2_IMPLEMENTATION_EVIDENCE.md).
 
 Roadmap: [IMPLEMENTATION_ROADMAP.md](IMPLEMENTATION_ROADMAP.md)  
 First vertical slice: [FIRST_VERTICAL_SLICE.md](FIRST_VERTICAL_SLICE.md)
