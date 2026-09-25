@@ -2,7 +2,7 @@
   "name": "MonsterVault",
   "servePort": 34872,
   "serveAddress": "127.0.0.1",
-  "emitLegacyScripts": false,
+  "emitLegacyScripts": true,
   "globIgnorePaths": ["**/*.spec.luau", "**/*.test.luau"],
   "tree": {
     "$className": "DataModel",
@@ -47,6 +47,44 @@
         "StreamingTargetRadius": 1024,
         "StreamingIntegrityMode": "PauseOutsideLoadedArea",
         "StreamOutBehavior": "Opportunistic"
+      },
+      "MonsterVaultWorld": {
+        "$className": "Folder",
+        "FixtureGround": {
+          "$className": "Part",
+          "$properties": {
+            "Anchored": true,
+            "Size": [128, 1, 128],
+            "Position": [0, -0.5, 0],
+            "Color": [0.17, 0.32, 0.21],
+            "Material": "Grass"
+          }
+        },
+        "FixtureSpawn": {
+          "$className": "SpawnLocation",
+          "$properties": {
+            "Anchored": true,
+            "Neutral": true,
+            "Size": [8, 1, 8],
+            "Position": [0, 0.5, 18]
+          }
+        },
+        "FixtureCreatureAnchor": {
+          "$className": "Part",
+          "$properties": {
+            "Anchored": true,
+            "CanCollide": false,
+            "CanTouch": false,
+            "CanQuery": false,
+            "Transparency": 1,
+            "Size": [2, 2, 2],
+            "Position": [0, 3, -16],
+            "Attributes": {
+              "SpawnContextId": { "String": "spawn-context/fixture-clearing" },
+              "SpeciesId": { "String": "species/fixture-orb" }
+            }
+          }
+        }
       }
     }
   }

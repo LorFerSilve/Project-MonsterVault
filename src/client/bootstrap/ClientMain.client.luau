@@ -3,6 +3,7 @@
 local HttpService = game:GetService("HttpService")
 local ClientComposition = require(script.Parent.ClientComposition)
 local NetworkingRuntimeService = require(script.Parent.NetworkingRuntimeService)
+local WorldModelObserver = require(script.Parent.WorldModelObserver)
 
 local composition = ClientComposition.new({
 	sink = function(record)
@@ -19,6 +20,10 @@ local composition = ClientComposition.new({
 				command = remotes:WaitForChild("Command"),
 				event = remotes:WaitForChild("Event"),
 				unreliableEvent = remotes:WaitForChild("UnreliableEvent"),
+				diagnostics = diagnostics,
+			}),
+			WorldModelObserver.new({
+				collectionService = game:GetService("CollectionService"),
 				diagnostics = diagnostics,
 			}),
 		}
