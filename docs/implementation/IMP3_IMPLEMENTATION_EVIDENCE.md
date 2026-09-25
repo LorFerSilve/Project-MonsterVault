@@ -1,8 +1,9 @@
 # IMP-3 — Profile Session Foundation
 
-> **Status:** Implementation complete; local and pull-request gates recorded below.
+> **Status:** COMPLETE — local roadmap gate and pull-request CI PASS (2026-09-25).
 >
 > **Base:** `main` after TA-9 through IMP-2 were incorporated.
+> **Review:** [IMP-3 PR #40](https://github.com/LorFerSilve/Project-MonsterVault/pull/40)
 
 ## Delivered
 
@@ -28,7 +29,7 @@ The persistence C0 tests cover first load, failed load, current/stale leases, ma
 
 ## Pull-request CI evidence
 
-Pending pull request and CI run.
+`CI / static-build` passed for implementation commit `74e2d53` on [GitHub Actions run 36130883679](https://github.com/LorFerSilve/Project-MonsterVault/actions/runs/36130883679). The final evidence update is checked on its own PR head before merging.
 
 ## Runtime and release boundary
 
