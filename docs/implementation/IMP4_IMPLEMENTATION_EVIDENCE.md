@@ -1,8 +1,9 @@
 # IMP-4 — V1 Networking and Projection
 
-> **Status:** Implementation complete; local and pull-request gates recorded below.
+> **Status:** COMPLETE — local roadmap gate and pull-request CI PASS (2026-09-25).
 >
 > **Base:** `main` after IMP-3.
+> **Review:** [IMP-4 PR #41](https://github.com/LorFerSilve/Project-MonsterVault/pull/41)
 
 ## Delivered
 
@@ -31,7 +32,7 @@ The IMP-4 C0 tests cover malformed envelopes, spoofed readiness, unknown/wrong-d
 
 ## Pull-request CI evidence
 
-Pending pull request and CI run.
+`CI / static-build` passed for implementation commit `7a03431` on [GitHub Actions run 36132776107](https://github.com/LorFerSilve/Project-MonsterVault/actions/runs/36132776107). The final evidence update is checked on its own PR head before merging.
 
 ## Engine and release boundary
 
