@@ -5,7 +5,7 @@ export type Service = {
 	id: string,
 	dependencies: { string },
 	start: () -> (),
-	stop: () -> (),
+	stop: any,
 }
 
 local StartupPlan = {}
@@ -81,9 +81,13 @@ function StartupPlan.start(ordered: { Service }): () -> { string }
 		local failures = {}
 		for index = #started, 1, -1 do
 			local service = started[index]
-			local ok, failure = pcall(service.stop :: () -> any)
+			local ok, result = pcall(service.stop :: () -> any)
 			if not ok then
-				table.insert(failures, service.id .. ": " .. tostring(failure))
+				table.insert(failures, service.id .. ": " .. tostring(result))
+			elseif type(result) == "table" then
+				for _, failure in result do
+					table.insert(failures, service.id .. ": " .. tostring(failure))
+				end
 			end
 		end
 		return failures

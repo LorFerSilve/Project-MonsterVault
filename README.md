@@ -4,7 +4,7 @@
 
 ## Project Status
 
-**Game Design Specification — DESIGN COMPLETE / Technical Architecture TA-0..17 COMPLETE / IMPLEMENTATION OPEN — IMP-1 and IMP-2 complete; IMP-3 next.**
+**Game Design Specification — DESIGN COMPLETE / Technical Architecture TA-0..17 COMPLETE / IMPLEMENTATION OPEN — IMP-1 through IMP-3 complete; IMP-4 next.**
 
 MonsterVault has completed the specification and Technical Architecture gates. **Implementation is now OPEN under the TA-17 locked contracts**; production release remains gated by TA-15 verification and the implementation roadmap.
 
@@ -58,7 +58,7 @@ No gameplay system should be implemented merely because an idea appears promisin
 - **TA-15 — Testing, Diagnostics, Security Validation, and CI Architecture: ARCHITECTURE COMPLETE — PASS**
 - **TA-16 — Architecture Integration and Implementation-Readiness Audit: INTEGRATION COMPLETE — PASS**
 - **TA-17 — Implementation Roadmap, Vertical Slice, Contract Locking, and Change Control: IMPLEMENTATION LOCKED — PASS**
-- **Gameplay implementation: OPEN — IMP-1 and IMP-2 complete; IMP-3 Profile Session Foundation next**
+- **Gameplay implementation: OPEN — IMP-1 through IMP-3 complete; IMP-4 V1 Networking and Projection next**
 - Production release: blocked until applicable TA-15/TA-14/staging/release gates pass
 
 GDS-17 final evidence is recorded in [`17_cross_system_consistency_and_design_complete_audit.md`](docs/game_design/audit/17_cross_system_consistency_and_design_complete_audit.md), [`GDS17_AUTHORITY_NAMESPACE_AUDIT.md`](docs/game_design/GDS17_AUTHORITY_NAMESPACE_AUDIT.md), [`GDS17_MATURITY_OPEN_QUESTION_AUDIT.md`](docs/game_design/GDS17_MATURITY_OPEN_QUESTION_AUDIT.md), [`GDS17_COMPOUND_SCENARIO_VALIDATION.md`](docs/game_design/GDS17_COMPOUND_SCENARIO_VALIDATION.md), [`GDS17_DECISION_INDEX.md`](docs/game_design/GDS17_DECISION_INDEX.md), and [`GDS17_CLOSURE_REPORT.md`](docs/game_design/GDS17_CLOSURE_REPORT.md).
@@ -454,7 +454,7 @@ Key documents include:
 
 [`docs/technical_architecture/`](docs/technical_architecture/) is **COMPLETE — TA-17 IMPLEMENTATION LOCKED / IMPLEMENTATION OPEN**.
 
-TA-0 established governance/traceability, TA-1 locked the Roblox environment/toolchain, TA-2 locked structural boundaries, TA-3 locked networking trust, TA-4 locked persistence/session durability, TA-5 locked identity/content registries, TA-6 locked runtime lifecycle, TA-7 locked capture/ownership resolution, TA-8 locked collection/Vault/economy semantics, and TA-9 locked world/spawn/streaming authority. TA-10 locked transient social coordination, global event occurrence/cooldown semantics, cross-server notification/durability boundaries, exact-once event rewards and recoverable multi-profile creature trading. TA-11 locked commercial product identity, MarketplaceService ownership/receipt authority, exact-once grants, entitlement reconciliation and runtime price boundaries. TA-12 locked revision-aware client projection, semantic cross-device input, modal/focus safety, responsive/safe-area UI, accessibility preferences, authoritative feedback, camera/audio/caption and localization boundaries. TA-13 locked non-authoritative versioned telemetry, privacy/cardinality rules, ConfigService-backed validated C2 snapshots, feature rollout/rollback, experiment assignment/exposure/provenance, emergency disable semantics and external least-privilege live-operations audit. TA-14 locked measurable compute, memory, streaming, network, persistence, cross-server, world, client and live-ops budgets with conservative load shedding. TA-15 locked deterministic/static/engine/fault/security/performance verification, public-repository CI trust boundaries and merge/release evidence gates. TA-16 completed the cross-system authority/dependency/risk/readiness audit with zero implementation-critical architecture questions. TA-17 has now locked the toolchain, source/module graph, V1 runtime namespaces, CI/change-control contract, implementation sequence and VS-1 vertical slice; IMP-1 and IMP-2 are complete; IMP-3 is the active implementation dependency.
+TA-0 established governance/traceability, TA-1 locked the Roblox environment/toolchain, TA-2 locked structural boundaries, TA-3 locked networking trust, TA-4 locked persistence/session durability, TA-5 locked identity/content registries, TA-6 locked runtime lifecycle, TA-7 locked capture/ownership resolution, TA-8 locked collection/Vault/economy semantics, and TA-9 locked world/spawn/streaming authority. TA-10 locked transient social coordination, global event occurrence/cooldown semantics, cross-server notification/durability boundaries, exact-once event rewards and recoverable multi-profile creature trading. TA-11 locked commercial product identity, MarketplaceService ownership/receipt authority, exact-once grants, entitlement reconciliation and runtime price boundaries. TA-12 locked revision-aware client projection, semantic cross-device input, modal/focus safety, responsive/safe-area UI, accessibility preferences, authoritative feedback, camera/audio/caption and localization boundaries. TA-13 locked non-authoritative versioned telemetry, privacy/cardinality rules, ConfigService-backed validated C2 snapshots, feature rollout/rollback, experiment assignment/exposure/provenance, emergency disable semantics and external least-privilege live-operations audit. TA-14 locked measurable compute, memory, streaming, network, persistence, cross-server, world, client and live-ops budgets with conservative load shedding. TA-15 locked deterministic/static/engine/fault/security/performance verification, public-repository CI trust boundaries and merge/release evidence gates. TA-16 completed the cross-system authority/dependency/risk/readiness audit with zero implementation-critical architecture questions. TA-17 has now locked the toolchain, source/module graph, V1 runtime namespaces, CI/change-control contract, implementation sequence and VS-1 vertical slice; IMP-1 through IMP-3 are complete; IMP-4 is the active implementation dependency.
 
 TA-0 closure evidence:
 
@@ -627,7 +627,7 @@ TA-17 closure evidence:
 
 [`docs/implementation/`](docs/implementation/) is **OPEN** under the TA-17 implementation lock.
 
-The active dependency is **IMP-3 — Profile Session Foundation**. Production release remains gated by the downstream implementation phases and TA-15/TA-14 evidence.
+The active dependency is **IMP-4 — V1 Networking and Projection**. Production release remains gated by the downstream implementation phases and TA-15/TA-14 evidence.
 
 ## Repository Structure
 
@@ -674,11 +674,11 @@ Project-MonsterVault/
 └── scripts/                     # developer/CI/release tooling only
 ```
 
-TA-17 created the non-gameplay source/test scaffold and locked the implementation graph. IMP-1 added the contracts and test harness, and IMP-2 added composition and diagnostics; runtime modules continue dependency-by-dependency with IMP-3.
+TA-17 created the non-gameplay source/test scaffold and locked the implementation graph. IMP-1 added the contracts and test harness, IMP-2 added composition and diagnostics, and IMP-3 added the profile session foundation; runtime modules continue dependency-by-dependency with IMP-4.
 
 ## Current Next Step
 
-Proceed with **IMP-3 — Profile Session Foundation**.
+Proceed with **IMP-4 — V1 Networking and Projection**.
 
 The first implementation vertical slice is locked as **VS-1 — Trusted Join → One World Creature → Capture → Secure Ownership → Rejoin**.
 
