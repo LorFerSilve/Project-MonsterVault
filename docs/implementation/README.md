@@ -1,6 +1,6 @@
 # Implementation Documentation
 
-> **Status:** OPEN — IMP-1 Contracts and Test Harness
+> **Status:** OPEN — IMP-1 Contracts and Test Harness COMPLETE; IMP-2 next
 > **Opened by:** TA-17 Implementation Locked — PASS (2026-09-24)
 
 This directory is the authoritative implementation handoff and phase-evidence layer.
@@ -13,9 +13,13 @@ This directory is the authoritative implementation handoff and phase-evidence la
 4. **SATISFIED:** TA-17 implementation roadmap, VS-1, toolchain, module graph, test/CI and change-control contract locked.
 5. **SATISFIED:** project status changed to implementation open.
 
+## Completed implementation phase
+
+> **IMP-1 — Contracts and Test Harness: COMPLETE — PASS** ([evidence](IMP1_IMPLEMENTATION_EVIDENCE.md))
+
 ## Active dependency
 
-> **IMP-1 — Contracts and Test Harness**
+> **IMP-2 — Composition and Diagnostics**
 
 Roadmap: [IMPLEMENTATION_ROADMAP.md](IMPLEMENTATION_ROADMAP.md)  
 First vertical slice: [FIRST_VERTICAL_SLICE.md](FIRST_VERTICAL_SLICE.md)

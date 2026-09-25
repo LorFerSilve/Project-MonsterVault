@@ -1,8 +1,9 @@
 # IMP-1 — Contracts and Test Harness
 
-> **Status:** Implementation and local gate PASS; pull-request CI pending
+> **Status:** COMPLETE — local gate and pull-request CI PASS (2026-09-25)
 >
 > **Base:** codex/ta17-implementation-roadmap-contract-lock (TA-17 PR #37 is open)
+> **Review:** [IMP-1 PR #38](https://github.com/LorFerSilve/Project-MonsterVault/pull/38)
 
 ## Delivered
 
@@ -26,6 +27,10 @@ No gameplay behavior, remote handler, persistent-state mutation or client author
 | Repository dependency and integrity scans | PASS |
 
 The local Luau analyzer notes that Roblox definition files were not supplied. IMP-1 contains no engine API implementation; this warning does not constitute engine validation.
+
+## Pull-request CI evidence
+
+The `CI / static-build` check passed on PR #38 for implementation commit `e7e7cc4e5489bfe6bbbc87e36a8724e335484a9a`: [GitHub Actions run](https://github.com/LorFerSilve/Project-MonsterVault/actions/runs/36123544396). The final documentation commit is checked separately before the PR is considered ready.
 
 ## Studio and Rojo evidence
 
