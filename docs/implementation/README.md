@@ -1,6 +1,6 @@
 # Implementation Documentation
 
-> **Status:** OPEN — IMP-1 and IMP-2 complete; IMP-3 next
+> **Status:** OPEN — IMP-1 through IMP-3 complete; IMP-4 next
 > **Opened by:** TA-17 Implementation Locked — PASS (2026-09-24)
 
 This directory is the authoritative implementation handoff and phase-evidence layer.
@@ -21,9 +21,13 @@ This directory is the authoritative implementation handoff and phase-evidence la
 
 > **IMP-2 — Composition and Diagnostics: COMPLETE — PASS** ([evidence](IMP2_IMPLEMENTATION_EVIDENCE.md))
 
+## Completed implementation phase
+
+> **IMP-3 — Profile Session Foundation: COMPLETE — PASS** ([evidence](IMP3_IMPLEMENTATION_EVIDENCE.md))
+
 ## Active dependency
 
-> **IMP-3 — Profile Session Foundation**
+> **IMP-4 — V1 Networking and Projection**
 
 Roadmap: [IMPLEMENTATION_ROADMAP.md](IMPLEMENTATION_ROADMAP.md)  
 First vertical slice: [FIRST_VERTICAL_SLICE.md](FIRST_VERTICAL_SLICE.md)

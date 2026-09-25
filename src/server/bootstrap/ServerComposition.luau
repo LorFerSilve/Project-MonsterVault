@@ -16,10 +16,17 @@ function ServerComposition.new(options: {
 	unixSeconds: () -> number,
 	monotonicSeconds: () -> number,
 	services: { StartupPlan.Service }?,
+	buildServices: ((any) -> { StartupPlan.Service })?,
 })
-	local services = options.services or {}
-	local ordered = StartupValidator.validate(services)
 	local diagnostics = StructuredDiagnostics.new(options.sink, options.unixSeconds, "server")
+	assert(
+		options.services == nil or options.buildServices == nil,
+		"choose services or buildServices"
+	)
+	local services = if options.buildServices
+		then options.buildServices(diagnostics)
+		else options.services or {}
+	local ordered = StartupValidator.validate(services)
 	local counters = PerformanceCounters.new({
 		"bootstrap_attempts",
 		"bootstrap_failures",
