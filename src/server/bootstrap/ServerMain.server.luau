@@ -5,6 +5,7 @@ local ServerComposition = require(script.Parent.ServerComposition)
 local ProfileBinding = require(script.Parent.ProfileBinding)
 local ProfileRuntimeService = require(script.Parent.ProfileRuntimeService)
 local NetworkingRuntimeService = require(script.Parent.NetworkingRuntimeService)
+local WorldRuntimeService = require(script.Parent.WorldRuntimeService)
 
 local composition = ServerComposition.new({
 	sink = function(record)
@@ -32,6 +33,15 @@ local composition = ServerComposition.new({
 			table.insert(services, profileRuntime)
 		end
 		local remotes = game:GetService("ReplicatedStorage").MonsterVault.Remotes.V1
+		table.insert(
+			services,
+			WorldRuntimeService.new({
+				workspace = game:GetService("Workspace"),
+				collectionService = game:GetService("CollectionService"),
+				httpService = HttpService,
+				diagnostics = diagnostics,
+			})
+		)
 		table.insert(
 			services,
 			NetworkingRuntimeService.new({
