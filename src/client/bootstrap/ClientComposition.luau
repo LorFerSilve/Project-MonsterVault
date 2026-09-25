@@ -11,9 +11,17 @@ function ClientComposition.new(options: {
 	sink: (any) -> (),
 	unixSeconds: () -> number,
 	services: { StartupPlan.Service }?,
+	buildServices: ((any) -> { StartupPlan.Service })?,
 })
-	local ordered = StartupPlan.prepare(options.services or {})
 	local diagnostics = StructuredDiagnostics.new(options.sink, options.unixSeconds, "client")
+	assert(
+		options.services == nil or options.buildServices == nil,
+		"choose services or buildServices"
+	)
+	local services = if options.buildServices
+		then options.buildServices(diagnostics)
+		else options.services or {}
+	local ordered = StartupPlan.prepare(services)
 	local started = false
 	local stopServices: (() -> { string })? = nil
 
