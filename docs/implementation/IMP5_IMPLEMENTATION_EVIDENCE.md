@@ -1,8 +1,9 @@
 # IMP-5 — Minimal Runtime World
 
-> **Status:** LOCAL GATE PASS — pull-request CI pending (2026-09-25).
+> **Status:** COMPLETE — local and pull-request CI PASS (2026-09-25).
 >
 > **Base:** `main` after IMP-4.
+> **Review:** [IMP-5 PR #42](https://github.com/LorFerSilve/Project-MonsterVault/pull/42).
 > **Traceability:** GDS-4/5/9; TA-5/6/9/12/14/15/17.
 
 ## Delivered
@@ -30,6 +31,10 @@
 | Studio streaming round trip | PASS; at 5,000 studs the client streamed out the model while the server retained it; on return the client saw the same ID and revision 2 |
 
 The new C0/C1 tests cover the single-slot budget, exact interaction distance, stale expiry, same-ID technical retry, failed-projection cleanup, exhausted retry cleanup, scheduler stop generation, stream-out/stream-in recovery, stale client revisions, public attribute validation, and bounded client cache.
+
+## Pull-request CI evidence
+
+`CI / static-build` passed for implementation commit `13d7165` on [GitHub Actions run 36136427865](https://github.com/LorFerSilve/Project-MonsterVault/actions/runs/36136427865). The final evidence/status update is checked on its own PR head before merging.
 
 ## Engine and release boundary
 
