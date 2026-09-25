@@ -1,8 +1,9 @@
 # IMP-2 — Composition and Diagnostics
 
-> **Status:** Implementation and local gate PASS; pull-request CI pending
+> **Status:** COMPLETE — local roadmap gate and pull-request CI PASS (2026-09-25)
 >
 > **Base:** imp/imp-1-contracts-test-harness (IMP-1 PR #38 is open)
+> **Review:** [IMP-2 PR #39](https://github.com/LorFerSilve/Project-MonsterVault/pull/39)
 
 ## Delivered
 
@@ -27,6 +28,10 @@ No gameplay, remote handlers, player profiles, persistence mutations or client a
 | Repository dependency and integrity scans | PASS |
 
 The 10 new fast tests cover deterministic lifecycle order, duplicate/missing/cyclic registration, startup rollback, reverse shutdown/deadline, diagnostic safety/sink failure, and bounded counters. The Luau analyzer still lacks Roblox engine definition files, so its success does not prove live engine behavior.
+
+## Pull-request CI evidence
+
+`CI / static-build` passed for implementation commit `62f49b5` on [GitHub Actions run 36127897444](https://github.com/LorFerSilve/Project-MonsterVault/actions/runs/36127897444). The final evidence update is validated on its own PR head before review.
 
 ## Studio boundary
 
