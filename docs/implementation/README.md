@@ -35,7 +35,7 @@ This directory is the authoritative implementation handoff and phase-evidence la
 
 ## Completed implementation phase
 
-> **IMP-6 — Capture and Durable Ownership: COMPLETE — local and DEV Studio PASS; remote CI pending publication** ([evidence](IMP6_IMPLEMENTATION_EVIDENCE.md))
+> **IMP-6 — Capture and Durable Ownership: COMPLETE — local, DEV Studio and pull-request CI PASS** ([evidence](IMP6_IMPLEMENTATION_EVIDENCE.md))
 
 ## Active dependency
 

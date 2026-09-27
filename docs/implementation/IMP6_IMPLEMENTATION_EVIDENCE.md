@@ -1,9 +1,9 @@
 # IMP-6 — Capture and Durable Ownership
 
-> **Status:** COMPLETE — local and DEV Studio gates PASS (2026-09-27); pull-request CI pending publication.
+> **Status:** COMPLETE — local, DEV Studio and pull-request CI PASS (2026-09-27).
 >
 > **Base:** `main` after IMP-5.
-> **Review:** Pending publication.
+> **Review:** [IMP-6 PR #43](https://github.com/LorFerSilve/Project-MonsterVault/pull/43).
 > **Traceability:** GDS-4/5/6; TA-3/4/6/7/12/14/15/17.
 
 ## Delivered
@@ -46,7 +46,7 @@ Verification used the connected `project_monstervault` DEV place in Studio Play 
 
 ## Pull-request CI evidence
 
-Publication and remote `CI / static-build` evidence are pending. The final implementation commit, pull request and checked head/run will be recorded after publication; local PASS does not assert remote CI success.
+`CI / static-build` passed for implementation commit `1327032735a489b5916d5d7eb852acf3b4ed302a` on [GitHub Actions run 36353050973](https://github.com/LorFerSilve/Project-MonsterVault/actions/runs/36353050973). The final evidence-only PR head is checked before merging.
 
 ## Engine and release boundary
 
