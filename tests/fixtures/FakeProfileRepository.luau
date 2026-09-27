@@ -24,6 +24,7 @@ function FakeProfileRepository.new()
 	local callCount = 0
 	local replayTransform = false
 	local beforeTransform: (() -> ())? = nil
+	local loseResultAfterWrite = false
 
 	local function update(key: string, transform: (any, { [string]: any }) -> any)
 		callCount += 1
@@ -43,6 +44,10 @@ function FakeProfileRepository.new()
 		end
 		assert(decision.kind == "write", "invalid repository decision")
 		entries[key] = { value = copy(decision.value), metadata = copy(decision.metadata) }
+		if loseResultAfterWrite then
+			loseResultAfterWrite = false
+			return { status = "error", reason = "LOST_AFTER_WRITE", retryable = true }
+		end
 		return {
 			status = "ok",
 			value = copy(entries[key].value),
@@ -66,6 +71,9 @@ function FakeProfileRepository.new()
 		end,
 		setBeforeTransform = function(callback: (() -> ())?)
 			beforeTransform = callback
+		end,
+		loseNextResultAfterWrite = function()
+			loseResultAfterWrite = true
 		end,
 		calls = function(): number
 			return callCount

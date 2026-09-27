@@ -84,6 +84,21 @@
               "SpeciesId": { "String": "species/fixture-orb" }
             }
           }
+        },
+        "FixtureSecurePoint": {
+          "$className": "Part",
+          "$properties": {
+            "Anchored": true,
+            "CanCollide": false,
+            "CanTouch": true,
+            "Size": [10, 1, 10],
+            "Position": [0, 0.5, 10],
+            "Color": [0.12, 0.72, 0.48],
+            "Material": "Neon",
+            "Attributes": {
+              "SecurePointId": { "String": "secure-point/fixture-spawn" }
+            }
+          }
         }
       }
     }

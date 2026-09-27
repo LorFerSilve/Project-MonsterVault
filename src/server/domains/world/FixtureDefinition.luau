@@ -1,7 +1,7 @@
 --!strict
 
 -- IMP-5 authored fixture. The matching Studio anchor is validated at startup.
--- This fixed identity is presentation-only until TA-7 owns Variant generation.
+-- IMP-6 resolves the fixed fixture species into one immutable server Variant.
 return table.freeze({
 	regionId = "region/fixture-clearing",
 	habitatId = "habitat/fixture-clearing",

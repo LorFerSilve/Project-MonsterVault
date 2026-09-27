@@ -1,11 +1,10 @@
 --!strict
 
--- Fill only after the DEV universe ID and Studio API permissions are verified.
--- An absent binding keeps live DataStore access disabled; no environment is
--- inferred from a place name, branch or Studio session.
+-- Verified against the connected DEV Studio place (GameId) on 2026-09-25;
+-- the user explicitly authorized Studio DataStore testing for this place.
 local binding: { environment: string?, declaredUniverseId: number? } = {
-	environment = nil,
-	declaredUniverseId = nil,
+	environment = "DEV",
+	declaredUniverseId = 10766503968,
 }
 
 return table.freeze(binding)

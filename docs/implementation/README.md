@@ -1,6 +1,6 @@
 # Implementation Documentation
 
-> **Status:** OPEN — IMP-1 through IMP-5 complete; IMP-6 next
+> **Status:** OPEN — IMP-1 through IMP-6 complete; IMP-7 next
 > **Opened by:** TA-17 Implementation Locked — PASS (2026-09-24)
 
 This directory is the authoritative implementation handoff and phase-evidence layer.
@@ -33,9 +33,13 @@ This directory is the authoritative implementation handoff and phase-evidence la
 
 > **IMP-5 — Minimal Runtime World: COMPLETE — PASS** ([evidence](IMP5_IMPLEMENTATION_EVIDENCE.md))
 
+## Completed implementation phase
+
+> **IMP-6 — Capture and Durable Ownership: COMPLETE — local and DEV Studio PASS; remote CI pending publication** ([evidence](IMP6_IMPLEMENTATION_EVIDENCE.md))
+
 ## Active dependency
 
-> **IMP-6 — Capture and Durable Ownership**
+> **IMP-7 — Capture Client Experience**
 
 Roadmap: [IMPLEMENTATION_ROADMAP.md](IMPLEMENTATION_ROADMAP.md)  
 First vertical slice: [FIRST_VERTICAL_SLICE.md](FIRST_VERTICAL_SLICE.md)

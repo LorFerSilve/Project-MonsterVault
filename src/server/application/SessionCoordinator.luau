@@ -14,6 +14,7 @@ function SessionCoordinator.new(options: {
 	local sessions: { [number]: any } = {}
 	local dueAt: { [number]: number } = {}
 	local pendingClose: { [number]: boolean } = {}
+	local reopening: { [number]: boolean } = {}
 	local admissionClosed = false
 	local loopStarted = false
 	local close: (number, number) -> any
@@ -27,7 +28,29 @@ function SessionCoordinator.new(options: {
 			return { status = "Closing" }
 		end
 		if sessions[userId] ~= nil then
-			return { status = "DuplicateSession" }
+			if not pendingClose[userId] then
+				return { status = "DuplicateSession" }
+			end
+			if reopening[userId] then
+				return { status = "PendingClose" }
+			end
+			reopening[userId] = true
+			local prior = sessions[userId]
+			local absoluteDeadline = options.monotonicSeconds() + 25
+			local outcome = close(userId, absoluteDeadline)
+			while sessions[userId] == prior and options.monotonicSeconds() < absoluteDeadline do
+				options.waitSeconds(math.min(1, absoluteDeadline - options.monotonicSeconds()))
+				outcome = close(userId, absoluteDeadline)
+			end
+			reopening[userId] = nil
+			if sessions[userId] ~= nil then
+				return if sessions[userId] == prior
+					then outcome
+					else { status = "DuplicateSession" }
+			end
+			if admissionClosed then
+				return { status = "Closing" }
+			end
 		end
 		local session = options.createSession(userId)
 		sessions[userId] = session
@@ -37,7 +60,7 @@ function SessionCoordinator.new(options: {
 				return close(userId, options.monotonicSeconds() + 25)
 			end
 			dueAt[userId] = options.unixSeconds() + interval(userId)
-		elseif pendingClose[userId] then
+		elseif pendingClose[userId] and sessions[userId] == session then
 			sessions[userId] = nil
 			pendingClose[userId] = nil
 		end
@@ -50,8 +73,8 @@ function SessionCoordinator.new(options: {
 			return { status = "NoSession" }
 		end
 		local state = session.state()
+		pendingClose[userId] = true
 		if state == "Acquiring" then
-			pendingClose[userId] = true
 			while state == "Acquiring" and options.monotonicSeconds() < absoluteDeadline do
 				options.waitSeconds(0.05)
 				state = session.state()
@@ -61,9 +84,11 @@ function SessionCoordinator.new(options: {
 			end
 		end
 		if state ~= "Ready" and state ~= "PersistenceAtRisk" and state ~= "Releasing" then
-			sessions[userId] = nil
-			dueAt[userId] = nil
-			pendingClose[userId] = nil
+			if sessions[userId] == session then
+				sessions[userId] = nil
+				dueAt[userId] = nil
+				pendingClose[userId] = nil
+			end
 			return { status = state }
 		end
 		local outcome = session.release(absoluteDeadline)
@@ -72,9 +97,13 @@ function SessionCoordinator.new(options: {
 			outcome = session.release(absoluteDeadline)
 		end
 		if outcome.status == "Closed" then
-			sessions[userId] = nil
-			dueAt[userId] = nil
-			pendingClose[userId] = nil
+			if sessions[userId] == session then
+				sessions[userId] = nil
+				dueAt[userId] = nil
+				pendingClose[userId] = nil
+			end
+		elseif sessions[userId] == session then
+			dueAt[userId] = options.unixSeconds() + 5
 		end
 		return outcome
 	end
@@ -86,7 +115,11 @@ function SessionCoordinator.new(options: {
 		local now = options.unixSeconds()
 		for userId, session in sessions do
 			local state = session.state()
-			if
+			if pendingClose[userId] then
+				if now >= (dueAt[userId] or math.huge) and not reopening[userId] then
+					close(userId, options.monotonicSeconds() + 25)
+				end
+			elseif
 				(state == "Ready" or state == "PersistenceAtRisk")
 				and now >= (dueAt[userId] or math.huge)
 			then

@@ -14,6 +14,7 @@ function NetworkingGateway.new(options: {
 	getSession: (any) -> any,
 	emitReliable: (any, any) -> (),
 	emitUnreliable: (any, any) -> (),
+	routeHandlers: { [string]: any }?,
 })
 	local function event(player: any, routeId: string, payload: any, correlationId: string?)
 		options.emitReliable(player, {
@@ -86,6 +87,11 @@ function NetworkingGateway.new(options: {
 			return presentSession(player, envelope.requestId)
 		end
 	)
+	if options.routeHandlers ~= nil then
+		for routeId, handler in options.routeHandlers do
+			options.registry.bind(routeId, handler)
+		end
+	end
 	options.registry.seal()
 
 	local function handle(player: any, envelope: any): any

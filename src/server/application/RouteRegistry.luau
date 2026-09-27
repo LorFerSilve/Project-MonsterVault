@@ -29,7 +29,7 @@ local function resyncPayload(payload: any, expectedRevision: any): boolean
 	return true
 end
 
-function RouteRegistry.new(RouteIds: any)
+function RouteRegistry.new(RouteIds: any, enabledSchemas: { [string]: any }?)
 	local contracts: { [string]: any } = {}
 	local handlers: { [string]: any } = {}
 	local cosmeticSchemas: { [string]: any } = {}
@@ -44,11 +44,13 @@ function RouteRegistry.new(RouteIds: any)
 				or class == "D"
 				or routeId == RouteIds.commands.settingsUpdatePreferences,
 			retryAllowed = class == "A",
-			schema = if routeId == RouteIds.commands.sessionClientHello
-				then helloPayload
-				else if routeId == RouteIds.commands.sessionRequestResync
-					then resyncPayload
-					else nil,
+			schema = if enabledSchemas and enabledSchemas[routeId]
+				then enabledSchemas[routeId]
+				else if routeId == RouteIds.commands.sessionClientHello
+					then helloPayload
+					else if routeId == RouteIds.commands.sessionRequestResync
+						then resyncPayload
+						else nil,
 		})
 	end
 

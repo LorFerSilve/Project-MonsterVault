@@ -66,6 +66,19 @@ function ProfileSession.new(options: {
 	local dirty = false
 	local mutating = false
 	local closingRequested = false
+	local pendingCheckpoint: any = nil
+
+	local function validOwnedProfile(candidate: any): boolean
+		if not options.schema.validate(candidate) then
+			return false
+		end
+		for _, creature in candidate.collection.creaturesById or {} do
+			if creature.ownerUserId ~= nil and creature.ownerUserId ~= options.userId then
+				return false
+			end
+		end
+		return true
+	end
 
 	local function deadline(seconds: number): number
 		return options.monotonicSeconds() + seconds
@@ -126,7 +139,7 @@ function ProfileSession.new(options: {
 							candidate.lastSuccessfulSaveAt = now
 						else
 							local migrated = options.schema.migrate(current)
-							if migrated == nil then
+							if migrated == nil or not validOwnedProfile(migrated) then
 								return { kind = "abort", reason = "PROFILE_INVALID" }
 							end
 							candidate = copy(migrated)
@@ -149,7 +162,7 @@ function ProfileSession.new(options: {
 				else "ProtectedLoadFailure"
 			return { status = state, reason = result.reason }
 		end
-		local valid = options.schema.validate(result.value)
+		local valid = validOwnedProfile(result.value)
 		if
 			not valid
 			or not validLease(result.metadata.mvLease)
@@ -170,6 +183,10 @@ function ProfileSession.new(options: {
 		if state ~= "Ready" and state ~= "PersistenceAtRisk" and state ~= "Releasing" then
 			return { status = state, reason = "NOT_WRITABLE" }
 		end
+		if pendingCheckpoint ~= nil then
+			state = "PersistenceAtRisk"
+			return { status = "PersistenceAtRisk", reason = "PENDING_CHECKPOINT" }
+		end
 		local now = options.unixSeconds()
 		local expectedRevision = persistedRevision :: number
 		local candidate = copy(profile)
@@ -177,7 +194,7 @@ function ProfileSession.new(options: {
 			candidate.profileRevision = expectedRevision + 1
 			candidate.lastSuccessfulSaveAt = now
 		end
-		local valid = options.schema.validate(candidate)
+		local valid = validOwnedProfile(candidate)
 		if not valid then
 			state = "PersistenceAtRisk"
 			return { status = state, reason = "INVALID_BUFFER" }
@@ -270,7 +287,7 @@ function ProfileSession.new(options: {
 		candidate.profileRevision = (persistedRevision :: number) + 1
 		candidate.lastSuccessfulSaveAt = options.unixSeconds()
 		candidate.recentOperations[operationId] = candidate.profileRevision
-		if not options.schema.validate(candidate) then
+		if not validOwnedProfile(candidate) then
 			return { status = "Rejected", reason = "INVALID_MUTATION" }
 		end
 		local now = options.unixSeconds()
@@ -306,6 +323,11 @@ function ProfileSession.new(options: {
 		if result.status ~= "ok" then
 			classifyFailure(result)
 			if result.reason == "OUTCOME_UNKNOWN" or result.status == "error" then
+				pendingCheckpoint = {
+					operationId = operationId,
+					candidate = candidate,
+					expectedRevision = expectedRevision,
+				}
 				state = "PersistenceAtRisk"
 				return { status = "OutcomeUnknown", reason = result.reason }
 			end
@@ -315,6 +337,61 @@ function ProfileSession.new(options: {
 		persistedRevision = profile.profileRevision
 		leaseExpiresAt = now + LEASE_SECONDS
 		dirty = false
+		pendingCheckpoint = nil
+		return { status = "Committed", profileRevision = persistedRevision }
+	end
+
+	local function reconcileCheckpoint(operationId: string, absoluteDeadline: number?): any
+		local pending = pendingCheckpoint
+		if pending == nil or pending.operationId ~= operationId or state ~= "PersistenceAtRisk" then
+			return { status = "Rejected", reason = "NO_PENDING_OPERATION" }
+		end
+		local now = options.unixSeconds()
+		local result = queued("critical", function()
+			return options.retry.run(function()
+				return options.repository.update(
+					key,
+					function(current: any, metadata: { [string]: any }): any
+						if not ownLease(metadata) then
+							return { kind = "abort", reason = "OWNERSHIP_LOST" }
+						end
+						if
+							type(current) ~= "table"
+							or type(current.recentOperations) ~= "table"
+							or not validOwnedProfile(current)
+						then
+							return { kind = "abort", reason = "PROFILE_INVALID" }
+						end
+						local nextMetadata = copy(metadata)
+						nextMetadata.mvLease.expiresAt = now + LEASE_SECONDS
+						if current.recentOperations[operationId] ~= nil then
+							return { kind = "write", value = current, metadata = nextMetadata }
+						end
+						if current.profileRevision ~= pending.expectedRevision then
+							return { kind = "abort", reason = "REVISION_MISMATCH" }
+						end
+						return { kind = "write", value = pending.candidate, metadata = nextMetadata }
+					end
+				)
+			end, absoluteDeadline or deadline(25))
+		end)
+		if result.status ~= "ok" then
+			classifyFailure(result)
+			return { status = "OutcomeUnknown", reason = result.reason }
+		end
+		if
+			not validOwnedProfile(result.value)
+			or result.value.recentOperations[operationId] == nil
+		then
+			state = "PersistenceAtRisk"
+			return { status = "OutcomeUnknown", reason = "INVALID_RECONCILE_RESULT" }
+		end
+		profile = copy(result.value)
+		persistedRevision = profile.profileRevision
+		leaseExpiresAt = now + LEASE_SECONDS
+		pendingCheckpoint = nil
+		dirty = false
+		state = "Ready"
 		return { status = "Committed", profileRevision = persistedRevision }
 	end
 
@@ -346,6 +423,14 @@ function ProfileSession.new(options: {
 		if state ~= "Ready" and state ~= "PersistenceAtRisk" and state ~= "Releasing" then
 			return { status = state, reason = "NOT_OWNED" }
 		end
+		if pendingCheckpoint ~= nil then
+			-- Resolve the accepted P2 operation before releasing the lease. An
+			-- uncertain result must keep the candidate and its operation ID alive.
+			local reconciled = reconcileCheckpoint(pendingCheckpoint.operationId, absoluteDeadline)
+			if reconciled.status ~= "Committed" then
+				return reconciled
+			end
+		end
 		state = "Releasing"
 		return save(true, true, absoluteDeadline)
 	end
@@ -365,6 +450,9 @@ function ProfileSession.new(options: {
 	end
 
 	return {
+		userId = function(): number
+			return options.userId
+		end,
 		acquire = function()
 			return serialized(acquire)
 		end,
@@ -374,6 +462,11 @@ function ProfileSession.new(options: {
 			end
 			return serialized(function()
 				return checkpoint(operationId, mutate)
+			end)
+		end,
+		reconcileCheckpoint = function(operationId: string)
+			return serialized(function()
+				return reconcileCheckpoint(operationId)
 			end)
 		end,
 		bufferSettings = function(mutate: (any) -> ())
