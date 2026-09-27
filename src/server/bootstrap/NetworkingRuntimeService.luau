@@ -21,7 +21,65 @@ function NetworkingRuntimeService.new(options: {
 	players: any,
 	profileCoordinator: any?,
 	diagnostics: any,
+	captureRuntime: any?,
 })
+	local function id(value: any): boolean
+		return type(value) == "string" and #value > 0 and #value <= 96
+	end
+	local schemas = {}
+	local handlers = {}
+	if options.captureRuntime ~= nil then
+		schemas[RouteIds.commands.interactionPrimaryInteract] = function(
+			payload: any,
+			expected: any
+		): boolean
+			if expected ~= nil or type(payload) ~= "table" or not id(payload.interactionId) then
+				return false
+			end
+			for key in payload do
+				if key ~= "interactionId" then
+					return false
+				end
+			end
+			return true
+		end
+		schemas[RouteIds.commands.captureSubmitAction] = function(
+			payload: any,
+			expected: any
+		): boolean
+			if
+				expected ~= nil
+				or type(payload) ~= "table"
+				or not id(payload.captureSessionId)
+				or payload.actionId ~= "capture"
+				or payload.clientSequence ~= 1
+			then
+				return false
+			end
+			for key in payload do
+				if key ~= "captureSessionId" and key ~= "actionId" and key ~= "clientSequence" then
+					return false
+				end
+			end
+			return true
+		end
+		handlers[RouteIds.commands.interactionPrimaryInteract] = function(
+			player: any,
+			envelope: any
+		): string
+			return options.captureRuntime.interact(
+				player,
+				envelope.payload.interactionId,
+				envelope.requestId
+			)
+		end
+		handlers[RouteIds.commands.captureSubmitAction] = function(
+			player: any,
+			envelope: any
+		): string
+			return options.captureRuntime.submit(player, envelope.payload, envelope.requestId)
+		end
+	end
 	local function getSession(player: any): any
 		if options.profileCoordinator == nil then
 			return { status = "Protected" }
@@ -57,7 +115,7 @@ function NetworkingRuntimeService.new(options: {
 		routes = RouteIds,
 		resultCodes = ResultCodes,
 		wire = WireValidation,
-		registry = RouteRegistry.new(RouteIds),
+		registry = RouteRegistry.new(RouteIds, schemas),
 		rate = NetworkRateLimiter.new(os.clock),
 		replay = ReplayWindow.new(os.clock, WireValidation),
 		projection = projection,
@@ -68,6 +126,7 @@ function NetworkingRuntimeService.new(options: {
 		emitUnreliable = function(player, envelope)
 			options.unreliableEvent:FireClient(player, envelope)
 		end,
+		routeHandlers = handlers,
 	})
 	local connections = {}
 
@@ -106,7 +165,9 @@ function NetworkingRuntimeService.new(options: {
 
 	return {
 		id = "networking",
-		dependencies = if options.profileCoordinator == nil then {} else { "profiles" },
+		dependencies = if options.captureRuntime ~= nil
+			then { "capture" }
+			else if options.profileCoordinator == nil then {} else { "profiles" },
 		start = start,
 		stop = stop,
 		gateway = gateway,

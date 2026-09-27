@@ -2,6 +2,7 @@
 
 local FixtureDefinition = require(script.Parent.Parent.domains.world.FixtureDefinition)
 local WorldService = require(script.Parent.Parent.domains.world.WorldService)
+local VariantIdentity = require(script.Parent.Parent.domains.capture.VariantIdentity)
 
 local WorldRuntimeService = {}
 
@@ -12,6 +13,7 @@ function WorldRuntimeService.new(options: {
 	diagnostics: any,
 	clock: (() -> number)?,
 	scheduler: any?,
+	random: any?,
 })
 	local globals = getfenv() :: any
 	local Instance = globals.Instance
@@ -20,6 +22,7 @@ function WorldRuntimeService.new(options: {
 	local Enum = globals.Enum
 	local clock = options.clock or os.clock
 	local scheduler = options.scheduler or globals.task
+	local random = options.random or globals.Random.new()
 	local world: any = nil
 	local runtimeRoot: any = nil
 	local creatures: any = nil
@@ -127,8 +130,19 @@ function WorldRuntimeService.new(options: {
 			newId = function()
 				return "creature-" .. options.httpService:GenerateGUID(false)
 			end,
+			generateVariant = function(candidate)
+				return VariantIdentity.generate(candidate, {
+					nextUnit = function()
+						return random:NextNumber()
+					end,
+				})
+			end,
 			materialize = materialize,
 			activate = activate,
+			updateProjection = function(model, projection)
+				model:SetAttribute("Availability", projection.availability)
+				model:SetAttribute("RuntimeRevision", projection.runtimeRevision)
+			end,
 			destroyProjection = function(model)
 				model:Destroy()
 			end,

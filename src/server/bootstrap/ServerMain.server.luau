@@ -6,6 +6,7 @@ local ProfileBinding = require(script.Parent.ProfileBinding)
 local ProfileRuntimeService = require(script.Parent.ProfileRuntimeService)
 local NetworkingRuntimeService = require(script.Parent.NetworkingRuntimeService)
 local WorldRuntimeService = require(script.Parent.WorldRuntimeService)
+local CaptureRuntimeService = require(script.Parent.CaptureRuntimeService)
 
 local composition = ServerComposition.new({
 	sink = function(record)
@@ -33,15 +34,26 @@ local composition = ServerComposition.new({
 			table.insert(services, profileRuntime)
 		end
 		local remotes = game:GetService("ReplicatedStorage").MonsterVault.Remotes.V1
-		table.insert(
-			services,
-			WorldRuntimeService.new({
+		local worldRuntime = WorldRuntimeService.new({
+			workspace = game:GetService("Workspace"),
+			collectionService = game:GetService("CollectionService"),
+			httpService = HttpService,
+			diagnostics = diagnostics,
+		})
+		table.insert(services, worldRuntime)
+		local captureRuntime = nil
+		if profileRuntime ~= nil then
+			captureRuntime = CaptureRuntimeService.new({
+				worldRuntime = worldRuntime,
+				profileCoordinator = profileRuntime.coordinator,
+				players = game:GetService("Players"),
 				workspace = game:GetService("Workspace"),
-				collectionService = game:GetService("CollectionService"),
+				event = remotes.Event,
 				httpService = HttpService,
 				diagnostics = diagnostics,
 			})
-		)
+			table.insert(services, captureRuntime)
+		end
 		table.insert(
 			services,
 			NetworkingRuntimeService.new({
@@ -50,6 +62,7 @@ local composition = ServerComposition.new({
 				unreliableEvent = remotes.UnreliableEvent,
 				players = game:GetService("Players"),
 				profileCoordinator = if profileRuntime then profileRuntime.coordinator else nil,
+				captureRuntime = captureRuntime,
 				diagnostics = diagnostics,
 			})
 		)

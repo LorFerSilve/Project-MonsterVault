@@ -32,6 +32,8 @@ function WorldService.new(options: {
 	materialize: (any) -> any,
 	activate: (any, any) -> (),
 	destroyProjection: (any) -> (),
+	generateVariant: ((any) -> any)?,
+	updateProjection: ((any, any) -> ())?,
 })
 	local fixture = options.fixture
 	assert(validPosition(fixture.position), "invalid fixture position")
@@ -125,7 +127,17 @@ function WorldService.new(options: {
 			revision = 1,
 			state = "Reserved",
 			projection = nil,
+			variantIdentity = nil,
 		}
+		if options.generateVariant ~= nil then
+			record.variantIdentity = options.generateVariant({
+				creatureInstanceId = id,
+				speciesId = record.speciesId,
+				rarityId = record.rarityId,
+				contentSnapshotId = record.contentSnapshotId,
+				spawnContextId = record.spawnContextId,
+			})
+		end
 		records[id] = record
 		currentId = id -- A reservation already consumes the one-creature budget.
 		return record
@@ -220,6 +232,33 @@ function WorldService.new(options: {
 		return "Available", public(record)
 	end
 
+	local function transition(id: string, from: string, to: string): boolean
+		local record = records[id]
+		if record == nil or record.state ~= from then
+			return false
+		end
+		record.state = to
+		record.revision += 1
+		if record.projection ~= nil and options.updateProjection ~= nil then
+			options.updateProjection(record.projection, public(record))
+		end
+		return true
+	end
+
+	local function identity(id: string): any
+		local record = records[id]
+		if record == nil then
+			return nil
+		end
+		return {
+			creatureInstanceId = record.id,
+			speciesId = record.speciesId,
+			spawnContextId = record.spawnContextId,
+			contentSnapshotId = record.contentSnapshotId,
+			variantIdentity = record.variantIdentity,
+		}
+	end
+
 	local function nearby(position: any, radius: number): { any }
 		if not validPosition(position) or not finite(radius) or radius < 0 or radius > 256 then
 			return {}
@@ -281,6 +320,12 @@ function WorldService.new(options: {
 		end,
 		nearby = nearby,
 		interaction = interaction,
+		transition = transition,
+		identity = identity,
+		retire = function(id: string): boolean
+			local record = records[id]
+			return record ~= nil and terminate(record, options.clock())
+		end,
 		expireIfCurrent = expireIfCurrent,
 	}
 end

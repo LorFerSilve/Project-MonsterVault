@@ -33,6 +33,61 @@ local function finiteInteger(value: any, minimum: number): boolean
 		and value >= minimum
 end
 
+local function validId(value: any): boolean
+	return type(value) == "string" and #value > 0 and #value <= 128
+end
+
+local function validIdArray(value: any, limit: number, sorted: boolean): boolean
+	if type(value) ~= "table" or #value > limit then
+		return false
+	end
+	local previous = ""
+	for index, id in value do
+		if
+			type(index) ~= "number"
+			or index % 1 ~= 0
+			or index < 1
+			or index > #value
+			or not validId(id)
+		then
+			return false
+		end
+		if sorted and id <= previous then
+			return false
+		end
+		previous = id
+	end
+	return true
+end
+
+local function validCreature(id: any, record: any): boolean
+	if
+		not validId(id)
+		or type(record) ~= "table"
+		or record.creatureInstanceId ~= id
+		or (record.ownerUserId ~= nil and not finiteInteger(record.ownerUserId, 1))
+		or not validId(record.speciesId)
+		or not validId(record.operationId)
+		or not finiteInteger(record.securedAt, 0)
+		or type(record.locked) ~= "boolean"
+		or type(record.overflowHeld) ~= "boolean"
+		or type(record.origin) ~= "table"
+		or not validId(record.origin.spawnContextId)
+		or not validId(record.origin.contentSnapshotId)
+	then
+		return false
+	end
+	local variant = record.variantIdentity
+	return type(variant) == "table"
+		and validId(variant.speciesRarityId)
+		and validId(variant.variantSignature)
+		and variant.contentSnapshotId == record.origin.contentSnapshotId
+		and variant.spawnContextId == record.origin.spawnContextId
+		and validIdArray(variant.mutationIdsCanonical, 2, true)
+		and validIdArray(variant.traitIds, 16, false)
+		and validIdArray(variant.protectedVariantReasons, 16, false)
+end
+
 local function serializable(
 	value: any,
 	depth: number,
@@ -128,6 +183,17 @@ function ProfileSchemaV1.validate(profile: any): (boolean, string?)
 	for _, bucket in BUCKETS do
 		if type(profile[bucket]) ~= "table" then
 			return false, "invalid_domain_bucket"
+		end
+	end
+	local owned = profile.collection.creaturesById
+	if owned ~= nil then
+		if type(owned) ~= "table" then
+			return false, "invalid_collection"
+		end
+		for id, record in owned do
+			if not validCreature(id, record) then
+				return false, "invalid_creature_record"
+			end
 		end
 	end
 	if type(profile.recentOperations) ~= "table" then
