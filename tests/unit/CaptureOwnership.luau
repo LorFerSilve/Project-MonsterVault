@@ -186,6 +186,47 @@ local function claimAndProvisionalRequireServerContext()
 	world.stop()
 end
 
+local function invalidContextPrecedesCapacityWithoutClaim()
+	local world = worldHarness()
+	local id = check(world.currentId(), "spawned creature ID")
+	local capacityChecks = 0
+	local mintedIds = 0
+	local capture = CaptureService.new({
+		world = world,
+		clock = function()
+			return 0
+		end,
+		unixSeconds = function()
+			return 1
+		end,
+		newId = function()
+			mintedIds += 1
+			return "claim-" .. mintedIds
+		end,
+		random = {
+			nextUnit = function()
+				return 0.1
+			end,
+		},
+		canInitiate = function()
+			capacityChecks += 1
+			return false
+		end,
+		finalize = function()
+			error("blocked claim cannot finalize")
+		end,
+	})
+	local near = { x = 0, y = 3, z = -16 }
+	check(capture.begin(42, id, { x = 999, y = 3, z = -16 }, 1, {}).status == "OutOfRange")
+	check(capture.begin(42, id, { x = 0, y = 3 }, 1, {}).status == "InvalidPosition")
+	check(capture.begin(42, "forged-creature", near, 1, {}).status == "Unavailable")
+	check(capacityChecks == 0, "untrusted context must reject before checking capacity")
+	check(capture.begin(42, id, near, 1, {}).status == "CapacityBlocked")
+	check(capacityChecks == 1 and mintedIds == 0, "capacity blocks before claim mutation")
+	check(capture.state(id) == nil and world.interaction(id, near) == "Available")
+	world.stop()
+end
+
 local function durableFinalizationAndRetry()
 	local session, repository = profileHarness()
 	local item = payload("creature-a", "operation-a")
@@ -522,6 +563,7 @@ end
 return {
 	variantDoesNotRerollOnMaterializationRetry = variantDoesNotRerollOnMaterializationRetry,
 	claimAndProvisionalRequireServerContext = claimAndProvisionalRequireServerContext,
+	invalidContextPrecedesCapacityWithoutClaim = invalidContextPrecedesCapacityWithoutClaim,
 	durableFinalizationAndRetry = durableFinalizationAndRetry,
 	lostResultReconcilesExactOnce = lostResultReconcilesExactOnce,
 	failureBeforeWriteNeverFabricatesOwnership = failureBeforeWriteNeverFabricatesOwnership,

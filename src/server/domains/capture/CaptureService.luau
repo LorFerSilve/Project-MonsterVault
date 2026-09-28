@@ -179,12 +179,12 @@ function CaptureService.new(options: {
 			end
 			return { status = "Busy" }
 		end
-		if not options.canInitiate(profile) then
-			return { status = "CapacityBlocked" }
-		end
 		local available, projection = options.world.interaction(creatureId, position)
 		if available ~= "Available" then
 			return { status = available }
+		end
+		if not options.canInitiate(profile) then
+			return { status = "CapacityBlocked" }
 		end
 		local identity = options.world.identity(creatureId)
 		if identity == nil or identity.variantIdentity == nil then

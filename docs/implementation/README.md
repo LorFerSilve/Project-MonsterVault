@@ -41,7 +41,7 @@ This directory is the authoritative implementation handoff and phase-evidence la
 
 > **IMP-8 — VS-1 Closure**
 
-IMP-7 is **COMPLETE — local and connected DEV Studio PASS** ([evidence](IMP7_IMPLEMENTATION_EVIDENCE.md)). IMP-8 has [partial closure evidence](IMP8_IMPLEMENTATION_EVIDENCE.md): durable rejoin projection and local gates pass, while the locked VS-1 matrix remains open for trusted input, timeout and L1/real-client evidence.
+IMP-7 is **COMPLETE — local and connected DEV Studio PASS** ([evidence](IMP7_IMPLEMENTATION_EVIDENCE.md)). IMP-8 has [partial closure evidence](IMP8_IMPLEMENTATION_EVIDENCE.md): durable rejoin projection, hostile interaction context, streaming and client timeout reconciliation have DEV evidence; the locked VS-1 matrix remains open for native gamepad input, L1/real-client performance and a trusted capture correlation log.
 
 Roadmap: [IMPLEMENTATION_ROADMAP.md](IMPLEMENTATION_ROADMAP.md)  
 First vertical slice: [FIRST_VERTICAL_SLICE.md](FIRST_VERTICAL_SLICE.md)
