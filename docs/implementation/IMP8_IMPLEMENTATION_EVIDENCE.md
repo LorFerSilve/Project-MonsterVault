@@ -14,7 +14,7 @@
 
 | Row | Evidence in this run and prior phases | State |
 |---|---|---|
-| VS1-01 | 109/109 fast tests; StyLua, Selene, Luau analysis, Rojo build, dependency/integrity checks and 28 Python checker tests pass locally. | PASS locally; PR CI pending |
+| VS1-01 | 109/109 fast tests; StyLua, Selene, Luau analysis, Rojo build, dependency/integrity checks and 28 Python checker tests pass locally; PR #45 `CI / static-build` passed. | PASS |
 | VS1-02 | Single server/client entrypoints and integrity checker. | PASS |
 | VS1-03 | `T15.persistence.load.failureProtected`; no default save or Ready on failed load. | PASS in fake adapter |
 | VS1-04 | `T15.persistence.lease.freshStale` and loss/revision cases. | PASS in fake adapter |
@@ -54,6 +54,7 @@ DEV place `110304961224794`, universe `10766503968`: two Play sessions reached `
 - `selene src tests scripts`: **0 errors, 0 warnings**.
 - `luau-lsp analyze --platform roblox --settings=luau-lsp.json --sourcemap=sourcemap.json src tests scripts`: **0 diagnostics**; existing missing engine-definition warning.
 - `rojo build default.project.json`, architecture/integrity checkers and 28 Python checker tests: **PASS**.
+- PR #45 `CI / static-build`: **PASS**.
 
 Complete the remaining trusted hostile/timeout/input and L1 plus real-client performance evidence before changing this status to COMPLETE or starting IMP-9. An isolated STG place is also needed before the persistence adapter can be called production-ready; only DEV is currently available.
 
