@@ -4,6 +4,8 @@ local fsModuleName = "@lune/fs"
 local luauModuleName = "@lune/luau"
 local fs = require(fsModuleName) :: any
 local luau = require(luauModuleName) :: any
+local CaptureProjectionV1 = require("../../src/shared/contracts/CaptureProjectionV1")
+local CaptureService = require("../../src/server/domains/capture/CaptureService")
 
 local function signal(): any
 	local listeners = {}
@@ -41,7 +43,7 @@ local function character(): any
 	}
 end
 
-local function harness(): any
+local function harness(useRealCapture: boolean?): any
 	local calls: { any } = {}
 	local pending: { number } = {}
 	local custodies: { any } = {}
@@ -56,7 +58,7 @@ local function harness(): any
 		table.insert(calls, entry)
 		return entry
 	end
-	for _, method in { "interrupt", "disconnect", "resume", "tick" } do
+	for _, method in { "interrupt", "disconnect", "resume", "tick", "playerLeft" } do
 		capture[method] = function(...: any)
 			record(method, ...)
 			return { status = "TransportActive" }
@@ -84,6 +86,9 @@ local function harness(): any
 	end
 	capture.state = function()
 		return "TransportActive"
+	end
+	capture.snapshot = function()
+		return { status = "Idle", revision = 1 }
 	end
 	local scheduler = {
 		spawn = function(callback: () -> ())
@@ -133,10 +138,13 @@ local function harness(): any
 			return if name == "SecurePointId" then "secure-point/fixture-spawn" else nil
 		end,
 	}
-	local captureToken, finalizationToken, routesToken = {}, {}, {}
+	local captureToken, finalizationToken, routesToken, projectionToken = {}, {}, {}, {}
 	local moduleMap: { [any]: any } = {
 		[captureToken] = {
 			new = function(_options: any)
+				if useRealCapture then
+					capture = CaptureService.new(_options)
+				end
 				return capture
 			end,
 		},
@@ -149,6 +157,7 @@ local function harness(): any
 			end,
 		},
 		[routesToken] = { events = { captureStateChanged = "capture-state" } },
+		[projectionToken] = CaptureProjectionV1,
 	}
 	-- Execute the shipped Roblox module unchanged. Only its engine imports are
 	-- replaced; lifecycle, admission, drain and queued callbacks are real code.
@@ -168,7 +177,14 @@ local function harness(): any
 					GetService = function(_self: any, name: string)
 						assert(name == "ReplicatedStorage", "unexpected engine service")
 						return {
-							MonsterVault = { Shared = { contracts = { RouteIds = routesToken } } },
+							MonsterVault = {
+								Shared = {
+									contracts = {
+										RouteIds = routesToken,
+										CaptureProjectionV1 = projectionToken,
+									},
+								},
+							},
 						}
 					end,
 				},
@@ -179,10 +195,34 @@ local function harness(): any
 			},
 			injectGlobals = true,
 		})()
+	local worldState = "IdleAvailable"
 	local runtime = runtimeModule.new({
 		worldRuntime = {
 			world = function()
-				return {}
+				return {
+					interaction = function()
+						return if worldState == "IdleAvailable" then "Available" else "Busy",
+							{ position = { x = 1, y = 3, z = 10 } }
+					end,
+					identity = function()
+						return {
+							speciesId = "fixture",
+							variantIdentity = {},
+							spawnContextId = "spawn",
+							contentSnapshotId = "content",
+						}
+					end,
+					transition = function(_id, from, to)
+						if worldState ~= from then
+							return false
+						end
+						worldState = to
+						return true
+					end,
+					retire = function()
+						worldState = "Retired"
+					end,
+				}
 			end,
 		},
 		profileCoordinator = {
@@ -192,6 +232,9 @@ local function harness(): any
 		},
 		players = players,
 		workspace = {
+			GetServerTimeNow = function()
+				return 100
+			end,
 			FindFirstChild = function(_self: any, name: string)
 				assert(name == "MonsterVaultWorld", "authored world is selected")
 				return {
@@ -241,6 +284,9 @@ local function harness(): any
 	return {
 		runtime = runtime,
 		capture = capture,
+		getCapture = function()
+			return capture
+		end,
 		players = players,
 		playersById = playersById,
 		profiles = profiles,
@@ -433,10 +479,75 @@ local function queuedPulseAndTouchCallbacksCannotRunAfterStop()
 	assert(#h.delayed == delayedAfterStop, "stopped pulse cannot schedule another pulse")
 end
 
+local function captureResyncRecoversLifecycleAndKeepsRequestCorrelation()
+	local h = harness(true)
+	local player = h.addPlayer(42)
+	h.runtime.start()
+	assert(
+		h.runtime.resync(player, "initial") == "OK_CAPTURE_RESYNC",
+		"initial capture resync admitted"
+	)
+	local first = h.events[#h.events].envelope
+	assert(
+		first.payload.status == "Idle"
+			and first.payload.revision == 1
+			and first.correlationId == "initial",
+		"new controller receives authoritative idle"
+	)
+	table.clear(h.events)
+	assert(
+		h.runtime.interact(player, "creature-a", "claim-request") == "OK_CAPTURE_CLAIMED",
+		"server claim admitted"
+	)
+	assert(#h.events == 1, "one projection emitted per accepted transition")
+	local claim = h.events[1].envelope
+	assert(
+		claim.correlationId == "claim-request" and claim.payload.claimExpiresAt == 120,
+		"claim correlation and server deadline survive wire"
+	)
+	assert(h.runtime.submit(player, {
+		captureSessionId = claim.payload.captureSessionId,
+		actionId = "capture",
+		clientSequence = 1,
+	}, "submit-request") == "OK_CAPTURE_PROVISIONAL", "server attempt admitted")
+	assert(
+		h.events[#h.events].envelope.correlationId == "submit-request",
+		"capture attempt is correlated"
+	)
+	table.clear(h.events) -- A lost capture event must be reconstructable.
+	h.runtime.resync(player, "recover-transport")
+	local transport = h.events[#h.events].envelope.payload
+	assert(
+		transport.status == "TransportActive"
+			and transport.custodyId ~= nil
+			and transport.profileRevision == nil,
+		"transport never claims ownership"
+	)
+	h.runtime.secure(player)
+	assert(
+		h.events[#h.events - 1].envelope.payload.status == "FinalizationPending",
+		"pending is published before finalization"
+	)
+	local secured = h.events[#h.events].envelope.payload
+	assert(
+		secured.status == "Secured" and secured.profileRevision == 2,
+		"only confirmed P2 produces secured"
+	)
+	table.clear(h.events)
+	h.runtime.resync(player, "recover-secured")
+	assert(
+		h.events[1].envelope.payload.revision == secured.revision
+			and h.events[1].envelope.payload.custodyId == transport.custodyId,
+		"resync reconstructs latest exact result without a new revision"
+	)
+	h.runtime.stop()
+end
+
 return {
 	shutdownRequiresLiveMatchingCharacter = shutdownRequiresLiveMatchingCharacter,
 	pendingPulseReconcilesWithoutSpatialProof = pendingPulseReconcilesWithoutSpatialProof,
 	shutdownReconcilesPendingWithoutPlayer = shutdownReconcilesPendingWithoutPlayer,
 	playerLifecycleInterruptsAndResumes = playerLifecycleInterruptsAndResumes,
 	queuedPulseAndTouchCallbacksCannotRunAfterStop = queuedPulseAndTouchCallbacksCannotRunAfterStop,
+	captureResyncRecoversLifecycleAndKeepsRequestCorrelation = captureResyncRecoversLifecycleAndKeepsRequestCorrelation,
 }

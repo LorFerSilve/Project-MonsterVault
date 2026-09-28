@@ -5,6 +5,8 @@ local CaptureFinalizationUseCase =
 	require(script.Parent.Parent.application.CaptureFinalizationUseCase)
 local RouteIds =
 	require(game:GetService("ReplicatedStorage").MonsterVault.Shared.contracts.RouteIds)
+local CaptureProjectionV1 =
+	require(game:GetService("ReplicatedStorage").MonsterVault.Shared.contracts.CaptureProjectionV1)
 local CaptureRuntimeService = {}
 
 function CaptureRuntimeService.new(options: {
@@ -26,6 +28,7 @@ function CaptureRuntimeService.new(options: {
 	local connections = {}
 	local playerConnections: { [number]: { any } } = {}
 	local generations: { [number]: number } = {}
+	local correlations: { [number]: string } = {}
 	local running = false
 	local pulseGeneration = 0
 
@@ -49,7 +52,10 @@ function CaptureRuntimeService.new(options: {
 	end
 
 	local function emit(player: any, state: any, requestId: string?)
-		if options.players:GetPlayerByUserId(player.UserId) ~= player then
+		if
+			options.players:GetPlayerByUserId(player.UserId) ~= player
+			or not CaptureProjectionV1.validState(state)
+		then
 			return
 		end
 		options.event:FireClient(player, {
@@ -69,12 +75,19 @@ function CaptureRuntimeService.new(options: {
 		if active == nil or p == nil or generation == nil then
 			return "REJECT_STATE_CAPTURE_CONTEXT"
 		end
+		local priorRevision = capture.snapshot(player.UserId).revision
+		correlations[player.UserId] = requestId
 		local result = capture.begin(player.UserId, creatureId, p, generation, active.snapshot())
+		correlations[player.UserId] = nil
 		if result.status == "Claimed" then
-			emit(player, result, requestId)
+			if capture.snapshot(player.UserId).revision == priorRevision then
+				emit(player, capture.snapshot(player.UserId), requestId)
+			end
 			return "OK_CAPTURE_CLAIMED"
 		elseif result.status == "TransportActive" then
-			emit(player, result, requestId)
+			if capture.snapshot(player.UserId).revision == priorRevision then
+				emit(player, capture.snapshot(player.UserId), requestId)
+			end
 			return "OK_CAPTURE_RESUMED"
 		end
 		return "REJECT_STATE_CAPTURE_" .. string.upper(result.status)
@@ -89,6 +102,8 @@ function CaptureRuntimeService.new(options: {
 		if active == nil or p == nil or generation == nil then
 			return "REJECT_STATE_CAPTURE_CONTEXT"
 		end
+		local priorRevision = capture.snapshot(player.UserId).revision
+		correlations[player.UserId] = requestId
 		local result = capture.submit(
 			player.UserId,
 			payload.captureSessionId,
@@ -97,11 +112,16 @@ function CaptureRuntimeService.new(options: {
 			p,
 			generation
 		)
+		correlations[player.UserId] = nil
 		if result.status == "TransportActive" then
-			emit(player, result, requestId)
+			if capture.snapshot(player.UserId).revision == priorRevision then
+				emit(player, capture.snapshot(player.UserId), requestId)
+			end
 			return "OK_CAPTURE_PROVISIONAL"
 		elseif result.status == "Failed" then
-			emit(player, result, requestId)
+			if capture.snapshot(player.UserId).revision == priorRevision then
+				emit(player, capture.snapshot(player.UserId), requestId)
+			end
 			return "OK_CAPTURE_FAILED"
 		end
 		return "REJECT_STATE_CAPTURE_" .. string.upper(result.status)
@@ -117,17 +137,7 @@ function CaptureRuntimeService.new(options: {
 			return
 		end
 		local s = securePoint.Position
-		local result =
-			capture.secure(player.UserId, p, { x = s.X, y = s.Y, z = s.Z }, generation, active)
-		if result.status == "Secured" then
-			emit(player, {
-				status = "Secured",
-				creatureInstanceId = result.creatureInstanceId,
-				profileRevision = result.profileRevision,
-			})
-		elseif result.status == "OutcomeUnknown" then
-			emit(player, { status = "FinalizationPending" })
-		end
+		capture.secure(player.UserId, p, { x = s.X, y = s.Y, z = s.Z }, generation, active)
 	end
 
 	local function reconcile(userId: number)
@@ -138,15 +148,26 @@ function CaptureRuntimeService.new(options: {
 		if active == nil then
 			return
 		end
-		local result = capture.reconcile(userId, active)
-		local player = options.players:GetPlayerByUserId(userId)
-		if player ~= nil and result.status == "Secured" then
-			emit(player, {
-				status = "Secured",
-				creatureInstanceId = result.creatureInstanceId,
-				profileRevision = result.profileRevision,
-			})
+		capture.reconcile(userId, active)
+	end
+
+	local function resync(player: any, requestId: string): string
+		if not running or capture == nil then
+			return "UNAVAILABLE_CAPTURE"
 		end
+		local active = session(player)
+		if active == nil then
+			return "REJECT_STATE_CAPTURE_CONTEXT"
+		end
+		local p, generation = position(player)
+		if p ~= nil and generation ~= nil then
+			capture.resume(player.UserId, generation, active.snapshot())
+		end
+		-- Only the existing exact P2 reconciliation can turn Pending into Secured.
+		-- A client hint or a locally expired countdown never establishes ownership.
+		capture.reconcile(player.UserId, active)
+		emit(player, capture.snapshot(player.UserId), requestId)
+		return "OK_CAPTURE_RESYNC"
 	end
 
 	local function pulse(generation: number)
@@ -163,10 +184,7 @@ function CaptureRuntimeService.new(options: {
 			local active = session(player)
 			local p, presenceGeneration = position(player)
 			if active ~= nil and p ~= nil and presenceGeneration ~= nil then
-				local result = capture.resume(player.UserId, presenceGeneration, active.snapshot())
-				if result.status == "TransportActive" then
-					emit(player, result)
-				end
+				capture.resume(player.UserId, presenceGeneration, active.snapshot())
 			elseif p == nil then
 				capture.interrupt(player.UserId)
 			end
@@ -189,7 +207,9 @@ function CaptureRuntimeService.new(options: {
 		assert(world ~= nil, "world runtime unavailable")
 		capture = CaptureService.new({
 			world = world,
-			clock = os.clock,
+			clock = function()
+				return options.workspace:GetServerTimeNow()
+			end,
 			unixSeconds = os.time,
 			newId = function()
 				return options.httpService:GenerateGUID(false)
@@ -201,6 +221,15 @@ function CaptureRuntimeService.new(options: {
 			},
 			canInitiate = CaptureFinalizationUseCase.canInitiate,
 			finalize = CaptureFinalizationUseCase.finalize,
+			isPlayerConnected = function(userId: number): boolean
+				return playerConnections[userId] ~= nil
+			end,
+			onChanged = function(userId: number, state: any)
+				local player = options.players:GetPlayerByUserId(userId)
+				if player ~= nil then
+					emit(player, state, correlations[userId])
+				end
+			end,
 		})
 		running = true
 		pulseGeneration += 1
@@ -256,9 +285,10 @@ function CaptureRuntimeService.new(options: {
 		table.insert(
 			connections,
 			options.players.PlayerRemoving:Connect(function(player)
-				capture.disconnect(player.UserId)
 				untrack(player.UserId)
 				generations[player.UserId] = nil
+				capture.disconnect(player.UserId)
+				capture.playerLeft(player.UserId)
 			end)
 		)
 		table.insert(
@@ -331,6 +361,7 @@ function CaptureRuntimeService.new(options: {
 		submit = submit,
 		secure = secure,
 		reconcile = reconcile,
+		resync = resync,
 		state = function(id: string): string?
 			return if capture then capture.state(id) else nil
 		end,

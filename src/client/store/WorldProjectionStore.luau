@@ -82,6 +82,20 @@ function WorldProjectionStore.new(contract: any)
 		streamIn = streamIn,
 		streamOut = streamOut,
 		view = view,
+		present = function(): { any }
+			local models = {}
+			for _, id in order do
+				local entry = byId[id]
+				if entry ~= nil and entry.model ~= nil then
+					table.insert(models, {
+						creatureInstanceId = id,
+						availability = entry.availability,
+						model = entry.model,
+					})
+				end
+			end
+			return models
+		end,
 		reset = function()
 			byId = {}
 			byModel = {}

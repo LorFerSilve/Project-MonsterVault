@@ -22,7 +22,21 @@ local function resyncPayload(payload: any, expectedRevision: any): boolean
 		return false
 	end
 	for key, value in payload do
-		if key ~= "domain" or value ~= "session" then
+		if key == "domain" then
+			if value ~= "session" and value ~= "capture" then
+				return false
+			end
+		elseif key == "knownRevision" then
+			if
+				payload.domain ~= "capture"
+				or type(value) ~= "number"
+				or value < 0
+				or value % 1 ~= 0
+				or value == math.huge
+			then
+				return false
+			end
+		else
 			return false
 		end
 	end

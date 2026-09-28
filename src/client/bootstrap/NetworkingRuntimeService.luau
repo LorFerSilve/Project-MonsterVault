@@ -6,6 +6,7 @@ local RouteIds = require(shared.RouteIds)
 local ResultCodes = require(shared.ResultCodes)
 local WireValidation = require(shared.WireValidation)
 local ProjectionV1 = require(shared.ProjectionV1)
+local CaptureProjectionV1 = require(shared.CaptureProjectionV1)
 local ProjectionStore = require(script.Parent.Parent.store.ProjectionStore)
 local ClientGateway = require(script.Parent.Parent.networking.ClientGateway)
 
@@ -24,6 +25,7 @@ function NetworkingRuntimeService.new(options: {
 		resultCodes = ResultCodes,
 		wire = WireValidation,
 		store = store,
+		captureProjection = CaptureProjectionV1,
 		sendCommand = function(envelope)
 			options.command:FireServer(envelope)
 		end,
@@ -31,6 +33,7 @@ function NetworkingRuntimeService.new(options: {
 	local connections = {}
 	local scheduler = (getfenv() :: any).task
 	local running = false
+	local captureListener: ((any) -> ())? = nil
 
 	local function start()
 		assert(not running, "networking already started")
@@ -42,6 +45,9 @@ function NetworkingRuntimeService.new(options: {
 			connections,
 			options.event.OnClientEvent:Connect(function(envelope)
 				local ok, outcome = pcall(gateway.handleEvent, envelope)
+				if ok and outcome == "Capture" and captureListener ~= nil then
+					captureListener(envelope)
+				end
 				if not ok or outcome == "Invalid" then
 					options.diagnostics.emit(
 						"warn",
@@ -92,6 +98,7 @@ function NetworkingRuntimeService.new(options: {
 		end
 		table.clear(connections)
 		gateway.reset()
+		captureListener = nil
 		return {}
 	end
 
@@ -102,6 +109,15 @@ function NetworkingRuntimeService.new(options: {
 		stop = stop,
 		gateway = gateway,
 		store = store,
+		subscribeCapture = function(listener: (any) -> ())
+			assert(captureListener == nil, "capture listener already bound")
+			captureListener = listener
+			return function()
+				if captureListener == listener then
+					captureListener = nil
+				end
+			end
+		end,
 	}
 end
 

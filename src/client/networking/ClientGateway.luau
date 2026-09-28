@@ -8,24 +8,36 @@ function ClientGateway.new(options: {
 	resultCodes: any,
 	wire: any,
 	store: any,
+	captureProjection: any?,
 	sendCommand: (any) -> (),
 })
 	local nextRequest = 0
 	local resyncInFlight = false
 	local results: { [string]: string } = {}
 	local resultOrder: { string } = {}
+	local outgoing: { [string]: any } = {}
+	local outgoingOrder: { string } = {}
 
 	local function send(routeId: string, payload: any): string
 		assert(options.routes.isCommand(routeId), "unknown client command")
 		assert(options.wire.payload(payload), "invalid client payload")
 		nextRequest += 1
 		local requestId = "client-" .. tostring(nextRequest)
-		options.sendCommand({
+		local envelope = {
 			protocolVersion = options.protocol.version,
 			routeId = routeId,
 			requestId = requestId,
 			payload = options.wire.copy(payload),
-		})
+		}
+		outgoing[requestId] = envelope
+		table.insert(outgoingOrder, requestId)
+		if #outgoingOrder > 128 then
+			local oldest = table.remove(outgoingOrder, 1)
+			if oldest ~= nil then
+				outgoing[oldest] = nil
+			end
+		end
+		options.sendCommand(options.wire.copy(envelope))
 		return requestId
 	end
 
@@ -97,6 +109,15 @@ function ClientGateway.new(options: {
 				end
 			end
 			return "Result"
+		elseif envelope.routeId == options.routes.events.captureStateChanged then
+			if
+				options.captureProjection == nil
+				or not options.captureProjection.validState(envelope.payload)
+				or (envelope.revision ~= nil and envelope.revision ~= envelope.payload.revision)
+			then
+				return "Invalid"
+			end
+			return "Capture"
 		end
 		-- Session.Ready is a server hint; only a validated projection updates
 		-- the client store, and no client store value grants server permission.
@@ -105,6 +126,14 @@ function ClientGateway.new(options: {
 
 	return {
 		send = send,
+		resend = function(requestId: string): boolean
+			local envelope = outgoing[requestId]
+			if envelope == nil then
+				return false
+			end
+			options.sendCommand(options.wire.copy(envelope))
+			return true
+		end,
 		handleEvent = handleEvent,
 		hello = function(): string
 			return send(options.routes.commands.sessionClientHello, {})
@@ -116,6 +145,8 @@ function ClientGateway.new(options: {
 			resyncInFlight = false
 			results = {}
 			resultOrder = {}
+			outgoing = {}
+			outgoingOrder = {}
 			options.store.reset()
 		end,
 	}

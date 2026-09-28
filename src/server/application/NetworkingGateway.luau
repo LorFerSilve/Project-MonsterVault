@@ -15,6 +15,7 @@ function NetworkingGateway.new(options: {
 	emitReliable: (any, any) -> (),
 	emitUnreliable: (any, any) -> (),
 	routeHandlers: { [string]: any }?,
+	captureResync: ((any, string) -> string)?,
 })
 	local function event(player: any, routeId: string, payload: any, correlationId: string?)
 		options.emitReliable(player, {
@@ -84,6 +85,14 @@ function NetworkingGateway.new(options: {
 	options.registry.bind(
 		options.routes.commands.sessionRequestResync,
 		function(player: any, envelope: any)
+			if envelope.payload.domain == "capture" then
+				if options.getSession(player).status ~= "Ready" then
+					return "REJECT_STATE_NOT_READY"
+				end
+				return if options.captureResync ~= nil
+					then options.captureResync(player, envelope.requestId)
+					else "UNAVAILABLE_CAPTURE"
+			end
 			return presentSession(player, envelope.requestId)
 		end
 	)
