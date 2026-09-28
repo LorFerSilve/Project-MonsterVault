@@ -3,6 +3,16 @@
 -- Public model attributes are presentation data only. A client cache built from
 -- them never grants interaction, capture, or ownership authority.
 local WorldProjectionV1 = {}
+local availability = table.freeze({
+	IdleAvailable = true,
+	Claimed = true,
+	AttemptActive = true,
+	Provisional = true,
+	TransportActive = true,
+	TransportGrace = true,
+	FinalizationPending = true,
+	Secured = true,
+})
 
 local function publicId(value: any): boolean
 	return type(value) == "string" and #value > 0 and #value <= 96
@@ -32,7 +42,7 @@ function WorldProjectionV1.valid(value: any): boolean
 		and value.RuntimeRevision >= 1
 		and value.RuntimeRevision % 1 == 0
 		and value.RuntimeRevision < math.huge
-		and value.Availability == "IdleAvailable"
+		and availability[value.Availability] == true
 end
 
 return table.freeze(WorldProjectionV1)

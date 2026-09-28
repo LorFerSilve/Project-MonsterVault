@@ -4,6 +4,7 @@ local CaptureService = {}
 local CLAIM_SECONDS = 20
 local GRACE_SECONDS = 30
 local TERMINAL_RECORD_LIMIT = 128
+local RECENT_PROJECTION_LIMIT = 256
 
 local function frozenCopy(value: any): any
 	if type(value) ~= "table" then
@@ -43,19 +44,72 @@ function CaptureService.new(options: {
 	random: any,
 	canInitiate: (any) -> boolean,
 	finalize: (any, any) -> any,
+	onChanged: ((number, any) -> ())?,
+	isPlayerConnected: ((number) -> boolean)?,
 })
 	local byCreature: { [string]: any } = {}
 	local byUser: { [number]: string } = {}
+	-- One small latest-state summary per user survives terminal cleanup and
+	-- same-server reconnect. It never retains a profile or finalization payload.
+	local projections: { [number]: any } = {}
+	local recentUsers: { number } = {}
+	local function connected(userId: number): boolean
+		return options.isPlayerConnected ~= nil and options.isPlayerConnected(userId)
+	end
+	local function touchProjection(userId: number)
+		for index = #recentUsers, 1, -1 do
+			if recentUsers[index] == userId then
+				table.remove(recentUsers, index)
+				break
+			end
+		end
+		-- Active custody/pending and connected players keep their revision.
+		if byUser[userId] ~= nil or connected(userId) then
+			return
+		end
+		table.insert(recentUsers, userId)
+		if #recentUsers > RECENT_PROJECTION_LIMIT then
+			local oldest = table.remove(recentUsers, 1)
+			if oldest ~= nil and byUser[oldest] == nil and not connected(oldest) then
+				projections[oldest] = nil
+			end
+		end
+	end
+	local function snapshot(userId: number): any
+		if projections[userId] == nil then
+			projections[userId] = table.freeze({ status = "Idle", revision = 1 })
+		end
+		touchProjection(userId)
+		return table.clone(projections[userId])
+	end
+	local function project(record: any, status: string, profileRevision: number?)
+		local prior = snapshot(record.userId)
+		local state = {
+			status = status,
+			revision = prior.revision + 1,
+			captureSessionId = record.captureSessionId,
+			creatureInstanceId = record.creatureId,
+			custodyId = record.custodyId,
+			claimExpiresAt = if status == "Claimed" then record.claimExpiresAt else nil,
+			profileRevision = if status == "Secured" then profileRevision else nil,
+		}
+		projections[record.userId] = table.freeze(state)
+		touchProjection(record.userId)
+		if options.onChanged ~= nil then
+			options.onChanged(record.userId, table.clone(state))
+		end
+	end
 	-- Keep only a bounded diagnostic history; terminal entries never retain
 	-- profiles, immutable finalization payloads, or mutable custody records.
 	local terminalStates: { [string]: any } = {}
 	local terminalOrder: { any } = {}
-	local function terminal(record: any, state: string)
+	local function terminal(record: any, state: string, profileRevision: number?)
 		record.state = state
 		byCreature[record.creatureId] = nil
 		if byUser[record.userId] == record.creatureId then
 			byUser[record.userId] = nil
 		end
+		project(record, if state == "Invalidated" then "Interrupted" else state, profileRevision)
 		local summary = { creatureId = record.creatureId, state = state }
 		terminalStates[record.creatureId] = summary
 		table.insert(terminalOrder, summary)
@@ -91,6 +145,7 @@ function CaptureService.new(options: {
 		record.state = "TransportActive"
 		record.generation = generation
 		record.graceExpiresAt = nil
+		project(record, "TransportActive")
 		return {
 			status = "TransportActive",
 			custodyId = record.custodyId,
@@ -153,6 +208,7 @@ function CaptureService.new(options: {
 		byCreature[creatureId] = record
 		terminalStates[creatureId] = nil
 		byUser[userId] = creatureId
+		project(record, "Claimed")
 		return {
 			status = "Claimed",
 			captureSessionId = record.captureSessionId,
@@ -212,6 +268,7 @@ function CaptureService.new(options: {
 		record.operationId = options.newId()
 		options.world.transition(id, "Provisional", "TransportActive")
 		record.state = "TransportActive"
+		project(record, "TransportActive")
 		return { status = "TransportActive", custodyId = record.custodyId, creatureInstanceId = id }
 	end
 
@@ -244,7 +301,7 @@ function CaptureService.new(options: {
 		if result.status == "Secured" then
 			options.world.transition(id, "FinalizationPending", "Secured")
 			options.world.retire(id)
-			terminal(record, "Secured")
+			terminal(record, "Secured", result.profileRevision)
 		end
 		local projected = table.clone(result)
 		projected.creatureInstanceId = id
@@ -293,6 +350,7 @@ function CaptureService.new(options: {
 		end
 		record.finalizationPayload = candidate
 		record.state = "FinalizationPending"
+		project(record, "FinalizationPending")
 		return reconcile(userId, session)
 	end
 
@@ -306,6 +364,7 @@ function CaptureService.new(options: {
 			if options.world.transition(id, "TransportActive", "TransportGrace") then
 				record.state = "TransportGrace"
 				record.graceExpiresAt = options.clock() + GRACE_SECONDS
+				project(record, "Interrupted")
 			end
 		elseif
 			record.state == "Claimed"
@@ -369,6 +428,19 @@ function CaptureService.new(options: {
 		disconnect = disconnect,
 		interrupt = interrupt,
 		finalizeForShutdown = finalizeForShutdown,
+		snapshot = snapshot,
+		playerLeft = function(userId: number)
+			if projections[userId] ~= nil then
+				touchProjection(userId)
+			end
+		end,
+		projectionCounts = function(): any
+			local total = 0
+			for _ in projections do
+				total += 1
+			end
+			return { total = total, recent = #recentUsers }
+		end,
 		activeCustodies = function(): { any }
 			local result = {}
 			for userId, id in byUser do

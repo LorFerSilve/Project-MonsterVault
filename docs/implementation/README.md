@@ -1,6 +1,6 @@
 # Implementation Documentation
 
-> **Status:** OPEN — IMP-1 through IMP-6 complete; IMP-7 next
+> **Status:** OPEN — IMP-1 through IMP-7 complete; IMP-8 next
 > **Opened by:** TA-17 Implementation Locked — PASS (2026-09-24)
 
 This directory is the authoritative implementation handoff and phase-evidence layer.
@@ -39,7 +39,9 @@ This directory is the authoritative implementation handoff and phase-evidence la
 
 ## Active dependency
 
-> **IMP-7 — Capture Client Experience**
+> **IMP-8 — VS-1 Closure**
+
+IMP-7 is **COMPLETE — local and connected DEV Studio PASS** ([evidence](IMP7_IMPLEMENTATION_EVIDENCE.md)). The physical controller and full VS-1 matrix are carried into IMP-8.
 
 Roadmap: [IMPLEMENTATION_ROADMAP.md](IMPLEMENTATION_ROADMAP.md)  
 First vertical slice: [FIRST_VERTICAL_SLICE.md](FIRST_VERTICAL_SLICE.md)

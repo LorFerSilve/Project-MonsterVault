@@ -5,6 +5,7 @@ local RouteIds = require("../../src/shared/contracts/RouteIds")
 local ResultCodes = require("../../src/shared/contracts/ResultCodes")
 local WireValidation = require("../../src/shared/contracts/WireValidation")
 local ProjectionV1 = require("../../src/shared/contracts/ProjectionV1")
+local CaptureProjectionV1 = require("../../src/shared/contracts/CaptureProjectionV1")
 local ProjectionStore = require("../../src/client/store/ProjectionStore")
 local ClientGateway = require("../../src/client/networking/ClientGateway")
 local ProjectionPublisher = require("../../src/server/application/ProjectionPublisher")
@@ -164,7 +165,48 @@ local function publisherOrdersOwnerOnlyState()
 	)
 end
 
+local function captureRecoveryReusesOriginalEnvelope()
+	local sent = {}
+	local gateway = ClientGateway.new({
+		protocol = ProtocolV1,
+		routes = RouteIds,
+		resultCodes = ResultCodes,
+		wire = WireValidation,
+		store = ProjectionStore.new(ProjectionV1, WireValidation),
+		captureProjection = CaptureProjectionV1,
+		sendCommand = function(envelope)
+			table.insert(sent, envelope)
+		end,
+	})
+	local id = gateway.send(
+		RouteIds.commands.captureSubmitAction,
+		{ captureSessionId = "capture-1", actionId = "capture", clientSequence = 1 }
+	)
+	sent[1].payload.captureSessionId = "tampered"
+	assert(gateway.resend(id), "retained request can retry")
+	assert(
+		sent[2].requestId == id and sent[2].payload.captureSessionId == "capture-1",
+		"retry preserves identity and immutable payload"
+	)
+	local valid = event(RouteIds.events.captureStateChanged, { status = "Idle", revision = 1 }, 1)
+	assert(gateway.handleEvent(valid) == "Capture", "validated capture dispatched")
+	valid.payload.status = "Secured"
+	assert(
+		gateway.handleEvent(valid) == "Invalid",
+		"ownership cannot be fabricated from malformed notice"
+	)
+	for _ = 1, 128 do
+		gateway.hello()
+	end
+	assert(not gateway.resend(id), "retry cache bounded")
+	local last = sent[#sent].requestId
+	assert(gateway.resend(last), "latest retained")
+	gateway.reset()
+	assert(not gateway.resend(last), "stop clears replay memory")
+end
+
 return {
+	captureRecoveryReusesOriginalEnvelope = captureRecoveryReusesOriginalEnvelope,
 	projectionRevisionAndResync = projectionRevisionAndResync,
 	invalidProjectionAndResultRejected = invalidProjectionAndResultRejected,
 	publisherOrdersOwnerOnlyState = publisherOrdersOwnerOnlyState,

@@ -127,6 +127,9 @@ function NetworkingRuntimeService.new(options: {
 			options.unreliableEvent:FireClient(player, envelope)
 		end,
 		routeHandlers = handlers,
+		captureResync = if options.captureRuntime ~= nil
+			then options.captureRuntime.resync
+			else nil,
 	})
 	local connections = {}
 

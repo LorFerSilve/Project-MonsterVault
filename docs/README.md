@@ -130,8 +130,8 @@ TA-17 latest evidence:
 
 The active dependency is:
 
-> **IMP-1 — Contracts and Test Harness**
+> **IMP-8 — VS-1 Closure**
 
 All pre-code gates are satisfied. Gameplay implementation is now open under TA-17.
 
-The implementation dependency order is defined in [`implementation/IMPLEMENTATION_ROADMAP.md`](implementation/IMPLEMENTATION_ROADMAP.md), beginning with **IMP-1**. Production/staging release remains separately gated.
+The implementation dependency order is defined in [`implementation/IMPLEMENTATION_ROADMAP.md`](implementation/IMPLEMENTATION_ROADMAP.md), currently at **IMP-8**. Production/staging release remains separately gated.

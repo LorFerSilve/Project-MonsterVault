@@ -77,7 +77,41 @@ local function cacheIsBoundedAcrossRefills()
 	assert(store.view("creature-300") ~= nil, "recent presentation retained")
 end
 
+local function captureAvailabilityAndStreamOutKeepIdentity()
+	local store = WorldProjectionStore.new(WorldProjectionV1)
+	local model = {}
+	for index, state in
+		{
+			"IdleAvailable",
+			"Claimed",
+			"AttemptActive",
+			"Provisional",
+			"TransportActive",
+			"TransportGrace",
+			"FinalizationPending",
+			"Secured",
+		}
+	do
+		local record = attributes("creature-1", index)
+		record.Availability = state
+		assert(store.streamIn(model, record) == "Applied", "known authoritative lifecycle accepted")
+		assert(
+			store.present()[1].model == model and store.present()[1].availability == state,
+			"target presentation follows revision"
+		)
+	end
+	local invalid = attributes("creature-1", 9)
+	invalid.Availability = "OwnedForever"
+	assert(store.streamIn(model, invalid) == "Invalid", "unknown authority rejected")
+	store.streamOut(model)
+	assert(
+		#store.present() == 0 and store.view("creature-1").availability == "Secured",
+		"stream loss removes target without local lifecycle change"
+	)
+end
+
 return {
+	captureAvailabilityAndStreamOutKeepIdentity = captureAvailabilityAndStreamOutKeepIdentity,
 	streamOutDoesNotClaimTerminalLifecycle = streamOutDoesNotClaimTerminalLifecycle,
 	lateStreamInReconstructsByStableId = lateStreamInReconstructsByStableId,
 	staleRevisionCannotReplaceCurrentProjection = staleRevisionCannotReplaceCurrentProjection,
