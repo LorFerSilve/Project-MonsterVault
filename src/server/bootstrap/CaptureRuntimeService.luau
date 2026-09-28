@@ -224,7 +224,15 @@ function CaptureRuntimeService.new(options: {
 			isPlayerConnected = function(userId: number): boolean
 				return playerConnections[userId] ~= nil
 			end,
-			onChanged = function(userId: number, state: any)
+			onChanged = function(userId: number, state: any, operationId: string?)
+				local fields: any = { component = "capture", detailCode = state.status }
+				if correlations[userId] ~= nil then
+					fields.requestId = correlations[userId]
+				end
+				if operationId ~= nil then
+					fields.operationId = operationId
+				end
+				options.diagnostics.emit("info", "CAPTURE_STATE", fields)
 				local player = options.players:GetPlayerByUserId(userId)
 				if player ~= nil then
 					emit(player, state, correlations[userId])

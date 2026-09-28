@@ -627,7 +627,7 @@ TA-17 closure evidence:
 
 [`docs/implementation/`](docs/implementation/) is **OPEN** under the TA-17 implementation lock.
 
-IMP-6 completed the capture and durable ownership backend fixture ([evidence](docs/implementation/IMP6_IMPLEMENTATION_EVIDENCE.md)). IMP-7 completed the capture client experience ([evidence](docs/implementation/IMP7_IMPLEMENTATION_EVIDENCE.md)). The active dependency is **IMP-8 — VS-1 Closure**. Production release remains gated by the downstream implementation phases and TA-15/TA-14 evidence.
+IMP-6 completed the capture and durable ownership backend fixture ([evidence](docs/implementation/IMP6_IMPLEMENTATION_EVIDENCE.md)). IMP-7 completed the capture client experience ([evidence](docs/implementation/IMP7_IMPLEMENTATION_EVIDENCE.md)). The active dependency is **IMP-8 — VS-1 Closure** ([current evidence](docs/implementation/IMP8_IMPLEMENTATION_EVIDENCE.md)); its durable rejoin projection is implemented but the full acceptance matrix is still open. Production release remains gated by the downstream implementation phases and TA-15/TA-14 evidence.
 
 ## Repository Structure
 

@@ -30,6 +30,7 @@ end
 local selected = Harness.select(manifest, suite)
 local failed = 0
 for _, testCase in selected do
+	local caseLabel = `{testCase.testId} seed={testCase.seedId}`
 	local startedMs = DateTime.now().unixTimestampMillis
 	local child = process.create("lune", {
 		"run",
@@ -57,12 +58,12 @@ for _, testCase in selected do
 
 	if timedOut or elapsedMs > testCase.timeoutMs then
 		failed += 1
-		print(`FAIL {testCase.testId}: timeout after {elapsedMs}ms (limit {testCase.timeoutMs}ms)`)
+		print(`FAIL {caseLabel}: timeout after {elapsedMs}ms (limit {testCase.timeoutMs}ms)`)
 	elseif not status.ok then
 		failed += 1
-		print(`FAIL {testCase.testId}: child exited with code {status.code}`)
+		print(`FAIL {caseLabel}: child exited with code {status.code}`)
 	else
-		print(`PASS {testCase.testId} ({elapsedMs}ms)`)
+		print(`PASS {caseLabel} ({elapsedMs}ms)`)
 	end
 	if stdout ~= "" then
 		print(stdout)

@@ -11,17 +11,25 @@ function NetworkingGateway.new(options: {
 	rate: any,
 	replay: any,
 	projection: any,
+	securedCollectionProjection: any?,
 	getSession: (any) -> any,
 	emitReliable: (any, any) -> (),
 	emitUnreliable: (any, any) -> (),
 	routeHandlers: { [string]: any }?,
 	captureResync: ((any, string) -> string)?,
 })
-	local function event(player: any, routeId: string, payload: any, correlationId: string?)
+	local function event(
+		player: any,
+		routeId: string,
+		payload: any,
+		correlationId: string?,
+		revision: number?
+	)
 		options.emitReliable(player, {
 			protocolVersion = options.protocol.version,
 			routeId = routeId,
 			correlationId = correlationId,
+			revision = revision,
 			payload = payload,
 		})
 	end
@@ -73,6 +81,28 @@ function NetworkingGateway.new(options: {
 			)
 		end
 		options.projection.snapshot(player, projectionState)
+		if code == "OK_SESSION_READY" and options.securedCollectionProjection ~= nil then
+			local collection = if type(session.securedCollection) == "function"
+				then session.securedCollection()
+				else session.securedCollection
+			local payload = {
+				domain = "securedCollection",
+				revision = session.profileRevision,
+				state = collection,
+			}
+			if
+				options.securedCollectionProjection.validSnapshot(payload)
+				and options.wire.payload(payload)
+			then
+				event(
+					player,
+					options.routes.events.projectionSnapshot,
+					payload,
+					requestId,
+					payload.revision
+				)
+			end
+		end
 		return code
 	end
 

@@ -6,6 +6,7 @@ local fs = require(fsModuleName) :: any
 local luau = require(luauModuleName) :: any
 local CaptureProjectionV1 = require("../../src/shared/contracts/CaptureProjectionV1")
 local CaptureService = require("../../src/server/domains/capture/CaptureService")
+local StructuredDiagnostics = require("../../src/shared/util/StructuredDiagnostics")
 
 local function signal(): any
 	local listeners = {}
@@ -52,6 +53,12 @@ local function harness(useRealCapture: boolean?): any
 	local delayed: { any } = {}
 	local spawned: { any } = {}
 	local events: { any } = {}
+	local diagnosticRecords: { any } = {}
+	local diagnostics = StructuredDiagnostics.new(function(record)
+		table.insert(diagnosticRecords, record)
+	end, function()
+		return 1_700_000_000
+	end, "server")
 	local capture: any = {}
 	local function record(method: string, ...: any)
 		local entry = { method = method, arguments = table.pack(...) }
@@ -254,7 +261,7 @@ local function harness(useRealCapture: boolean?): any
 				return "runtime-server-id"
 			end,
 		},
-		diagnostics = { emit = function() end },
+		diagnostics = diagnostics,
 		scheduler = scheduler,
 		random = {
 			NextNumber = function()
@@ -297,6 +304,7 @@ local function harness(useRealCapture: boolean?): any
 		delayed = delayed,
 		spawned = spawned,
 		events = events,
+		diagnostics = diagnosticRecords,
 		addPlayer = addPlayer,
 		callsFor = function(method: string): { any }
 			local result = {}
@@ -532,6 +540,30 @@ local function captureResyncRecoversLifecycleAndKeepsRequestCorrelation()
 	assert(
 		secured.status == "Secured" and secured.profileRevision == 2,
 		"only confirmed P2 produces secured"
+	)
+	local byStatus: { [string]: any } = {}
+	for _, record in h.diagnostics do
+		assert(record.code == "CAPTURE_STATE", "capture diagnostics use a fixed code")
+		byStatus[record.fields.detailCode] = record.fields
+		for key in record.fields do
+			assert(
+				key == "component"
+					or key == "detailCode"
+					or key == "requestId"
+					or key == "operationId",
+				"diagnostic record contains no player or profile data"
+			)
+		end
+	end
+	assert(byStatus.Claimed.requestId == "claim-request", "claim request is traceable")
+	assert(
+		byStatus.TransportActive.requestId == "submit-request"
+			and byStatus.TransportActive.operationId == "runtime-server-id",
+		"submitted custody links request and server operation"
+	)
+	assert(
+		byStatus.FinalizationPending.operationId == byStatus.Secured.operationId,
+		"pending and durable outcomes retain the same operation identity"
 	)
 	table.clear(h.events)
 	h.runtime.resync(player, "recover-secured")
