@@ -9,6 +9,8 @@ function ClientGateway.new(options: {
 	wire: any,
 	store: any,
 	captureProjection: any?,
+	securedCollectionProjection: any?,
+	securedCollectionStore: any?,
 	sendCommand: (any) -> (),
 })
 	local nextRequest = 0
@@ -78,13 +80,52 @@ function ClientGateway.new(options: {
 			return "Invalid"
 		end
 		if envelope.routeId == options.routes.events.projectionSnapshot then
+			if
+				type(envelope.payload) == "table"
+				and envelope.payload.domain == "securedCollection"
+			then
+				if
+					options.securedCollectionProjection == nil
+					or options.securedCollectionStore == nil
+					or not options.securedCollectionProjection.validSnapshot(envelope.payload)
+					or envelope.revision ~= envelope.payload.revision
+				then
+					return "Invalid"
+				end
+				return options.securedCollectionStore.snapshot(
+					envelope.payload,
+					options.store.view()
+				)
+			end
 			local outcome = options.store.snapshot(envelope.payload)
 			if outcome == "Applied" then
 				resyncInFlight = false
+				if options.securedCollectionStore ~= nil then
+					local session = options.store.view()
+					local collection = options.securedCollectionStore.view()
+					if
+						session.status ~= "Ready"
+						or collection == nil
+						or collection.profileRevision ~= session.profileRevision
+					then
+						options.securedCollectionStore.reset()
+					end
+				end
 			end
 			return outcome
 		elseif envelope.routeId == options.routes.events.projectionDelta then
 			local outcome = options.store.delta(envelope.payload)
+			if outcome == "Applied" and options.securedCollectionStore ~= nil then
+				local session = options.store.view()
+				local collection = options.securedCollectionStore.view()
+				if
+					session.status ~= "Ready"
+					or collection == nil
+					or collection.profileRevision ~= session.profileRevision
+				then
+					options.securedCollectionStore.reset()
+				end
+			end
 			if outcome == "Gap" then
 				requestResync()
 			end
@@ -148,6 +189,9 @@ function ClientGateway.new(options: {
 			outgoing = {}
 			outgoingOrder = {}
 			options.store.reset()
+			if options.securedCollectionStore ~= nil then
+				options.securedCollectionStore.reset()
+			end
 		end,
 	}
 end

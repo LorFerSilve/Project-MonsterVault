@@ -23,7 +23,7 @@ local function resyncPayload(payload: any, expectedRevision: any): boolean
 	end
 	for key, value in payload do
 		if key == "domain" then
-			if value ~= "session" and value ~= "capture" then
+			if value ~= "session" and value ~= "capture" and value ~= "securedCollection" then
 				return false
 			end
 		elseif key == "knownRevision" then

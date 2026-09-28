@@ -44,7 +44,7 @@ function CaptureService.new(options: {
 	random: any,
 	canInitiate: (any) -> boolean,
 	finalize: (any, any) -> any,
-	onChanged: ((number, any) -> ())?,
+	onChanged: ((number, any, string?) -> ())?,
 	isPlayerConnected: ((number) -> boolean)?,
 })
 	local byCreature: { [string]: any } = {}
@@ -96,7 +96,7 @@ function CaptureService.new(options: {
 		projections[record.userId] = table.freeze(state)
 		touchProjection(record.userId)
 		if options.onChanged ~= nil then
-			options.onChanged(record.userId, table.clone(state))
+			options.onChanged(record.userId, table.clone(state), record.operationId)
 		end
 	end
 	-- Keep only a bounded diagnostic history; terminal entries never retain

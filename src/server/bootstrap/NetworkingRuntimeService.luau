@@ -6,11 +6,14 @@ local RouteIds = require(shared.RouteIds)
 local ResultCodes = require(shared.ResultCodes)
 local WireValidation = require(shared.WireValidation)
 local ProjectionV1 = require(shared.ProjectionV1)
+local SecuredCollectionProjectionV1 = require(shared.SecuredCollectionProjectionV1)
 local RouteRegistry = require(script.Parent.Parent.application.RouteRegistry)
 local NetworkRateLimiter = require(script.Parent.Parent.application.NetworkRateLimiter)
 local ReplayWindow = require(script.Parent.Parent.application.ReplayWindow)
 local ProjectionPublisher = require(script.Parent.Parent.application.ProjectionPublisher)
 local NetworkingGateway = require(script.Parent.Parent.application.NetworkingGateway)
+local SecuredCollectionProjection =
+	require(script.Parent.Parent.application.SecuredCollectionProjection)
 
 local NetworkingRuntimeService = {}
 
@@ -92,7 +95,13 @@ function NetworkingRuntimeService.new(options: {
 		if status == "Ready" then
 			local snapshot = session.snapshot()
 			if type(snapshot) == "table" and type(snapshot.profileRevision) == "number" then
-				return { status = "Ready", profileRevision = snapshot.profileRevision }
+				return {
+					status = "Ready",
+					profileRevision = snapshot.profileRevision,
+					securedCollection = function()
+						return SecuredCollectionProjection.fromProfile(snapshot, player.UserId)
+					end,
+				}
 			end
 		end
 		if status == "Acquiring" then
@@ -119,6 +128,7 @@ function NetworkingRuntimeService.new(options: {
 		rate = NetworkRateLimiter.new(os.clock),
 		replay = ReplayWindow.new(os.clock, WireValidation),
 		projection = projection,
+		securedCollectionProjection = SecuredCollectionProjectionV1,
 		getSession = getSession,
 		emitReliable = function(player, envelope)
 			options.event:FireClient(player, envelope)

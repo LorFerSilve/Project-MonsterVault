@@ -7,7 +7,9 @@ local ResultCodes = require(shared.ResultCodes)
 local WireValidation = require(shared.WireValidation)
 local ProjectionV1 = require(shared.ProjectionV1)
 local CaptureProjectionV1 = require(shared.CaptureProjectionV1)
+local SecuredCollectionProjectionV1 = require(shared.SecuredCollectionProjectionV1)
 local ProjectionStore = require(script.Parent.Parent.store.ProjectionStore)
+local SecuredCollectionStore = require(script.Parent.Parent.store.SecuredCollectionStore)
 local ClientGateway = require(script.Parent.Parent.networking.ClientGateway)
 
 local NetworkingRuntimeService = {}
@@ -19,6 +21,8 @@ function NetworkingRuntimeService.new(options: {
 	diagnostics: any,
 })
 	local store = ProjectionStore.new(ProjectionV1, WireValidation)
+	local securedCollectionStore =
+		SecuredCollectionStore.new(SecuredCollectionProjectionV1, WireValidation)
 	local gateway = ClientGateway.new({
 		protocol = ProtocolV1,
 		routes = RouteIds,
@@ -26,6 +30,8 @@ function NetworkingRuntimeService.new(options: {
 		wire = WireValidation,
 		store = store,
 		captureProjection = CaptureProjectionV1,
+		securedCollectionProjection = SecuredCollectionProjectionV1,
+		securedCollectionStore = securedCollectionStore,
 		sendCommand = function(envelope)
 			options.command:FireServer(envelope)
 		end,
@@ -83,10 +89,19 @@ function NetworkingRuntimeService.new(options: {
 					break
 				end
 				local state = store.view()
-				if state ~= nil and state.status ~= "Loading" then
+				if state ~= nil and state.status == "Protected" then
 					break
 				end
-				gateway.hello() -- Bounded cadence covers load/listener races.
+				if state ~= nil and state.status == "Ready" then
+					if securedCollectionStore.view() ~= nil then
+						break
+					end
+					gateway.send(RouteIds.commands.sessionRequestResync, {
+						domain = "securedCollection",
+					})
+				else
+					gateway.hello() -- Bounded cadence covers load/listener races.
+				end
 			end
 		end)
 	end
@@ -109,6 +124,7 @@ function NetworkingRuntimeService.new(options: {
 		stop = stop,
 		gateway = gateway,
 		store = store,
+		securedCollectionStore = securedCollectionStore,
 		subscribeCapture = function(listener: (any) -> ())
 			assert(captureListener == nil, "capture listener already bound")
 			captureListener = listener
