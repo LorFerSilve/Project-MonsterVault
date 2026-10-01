@@ -30,6 +30,7 @@ Required baseline modules/services by final implementation:
 - `CaptureFinalizationUseCase.luau`;
 - `ProductionClaimUseCase.luau`;
 - `ProgressionPurchaseUseCase.luau`;
+- `WorldActionUseCase.luau` — AD-255 bounded spatial world evidence through the existing P2 writer;
 - `EventRewardUseCase.luau`;
 - `TradeCommitUseCase.luau`;
 - `CommerceReconciliationUseCase.luau`.
@@ -54,6 +55,8 @@ Domain service namespaces:
 - safety.
 
 Each domain exposes one narrow public API module and hides internals below its own namespace.
+
+AD-255 binds `domains/world/{WorldRegistry,WorldDefinitions,WorldProgressionService}` to the existing `WorldService`. Bootstrap validates registries during composition construction, builds the immutable authored spatial index and starts world before profiles; capture depends on both. ProfileRuntimeService prepares/validates World V1, injects the actual mastery reader into progression and exposes WorldActionUseCase for P2/recovery. CaptureFinalizationUseCase receives a same-commit secured-evidence callback. Networking dispatches existing interaction IDs and Class A world resync through WorldRuntimeService. No domain imports another domain; current fixture spawn/variant/production behavior is retained.
 
 ### infrastructure
 

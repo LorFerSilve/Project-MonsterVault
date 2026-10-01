@@ -15,6 +15,7 @@ local BUCKETS = {
 	"settings",
 }
 local ROOT_KEYS = {
+	world = true, -- AD-255: optional only for pre-world V1; owner prepares before Ready.
 	schemaVersion = true,
 	profileRevision = true,
 	createdAt = true,
@@ -165,6 +166,9 @@ end
 function ProfileSchemaV1.validate(profile: any): (boolean, string?)
 	if type(profile) ~= "table" then
 		return false, "profile_not_table"
+	end
+	if profile.world ~= nil and type(profile.world) ~= "table" then
+		return false, "invalid_world_bucket"
 	end
 	if profile.schemaVersion ~= 1 then
 		return false, "unsupported_schema"

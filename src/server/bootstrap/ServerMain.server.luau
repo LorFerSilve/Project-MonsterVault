@@ -39,6 +39,10 @@ local composition = ServerComposition.new({
 			collectionService = game:GetService("CollectionService"),
 			httpService = HttpService,
 			diagnostics = diagnostics,
+			worldProgression = if profileRuntime then profileRuntime.worldProgression else nil,
+			worldActions = if profileRuntime then profileRuntime.worldActions else nil,
+			profileCoordinator = if profileRuntime then profileRuntime.coordinator else nil,
+			event = remotes.Event,
 		})
 		table.insert(services, worldRuntime)
 		local captureRuntime = nil
@@ -48,6 +52,7 @@ local composition = ServerComposition.new({
 				profileCoordinator = profileRuntime.coordinator,
 				vault = profileRuntime.vault,
 				progression = profileRuntime.progression,
+				worldProgression = profileRuntime.worldProgression,
 				players = game:GetService("Players"),
 				workspace = game:GetService("Workspace"),
 				event = remotes.Event,
@@ -65,6 +70,7 @@ local composition = ServerComposition.new({
 				players = game:GetService("Players"),
 				profileCoordinator = if profileRuntime then profileRuntime.coordinator else nil,
 				captureRuntime = captureRuntime,
+				worldRuntime = worldRuntime,
 				vault = if profileRuntime then profileRuntime.vault else nil,
 				capacity = if profileRuntime then profileRuntime.capacity else nil,
 				production = if profileRuntime then profileRuntime.production else nil,

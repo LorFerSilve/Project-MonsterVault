@@ -3619,3 +3619,31 @@ Class A progression resync accepts an optional bounded unlockId selector; it has
 All twenty phase-owned rows in the [complete TA-8 / IMP-9 audit](../implementation/IMP9_GATE_AUDIT.md) pass. Evidence includes 153 Lune tests, forty native C0 checks, real DEV mouse confirmation/lost-result recovery, pre-/post-write failures, prerequisite/tampering/insufficient/race negatives and twelve exact historic retries after a fresh shipped runtime rejoin. **IMP-9 COMPLETE; IMP-10 may OPEN for its next dependency.** No IMP-10 world implementation starts in this change.
 
 TA-17's later world/reward/event/commerce/live-config owners remain unbound and protected; their enablement/release validation is not represented as PASS here. **VS1-19 remains DEFERRED under AD-249, with unchanged mandatory full L0/L1 and real-client evidence before IMP-10 COMPLETE.**
+
+## AD-255 — Bind the TA-9 world registry and active mastery/access owner
+
+Status: ACCEPTED. Date: 2026-10-02. Scope: first IMP-10 dependency; GDS-5/8/9, TA-3/4/5/7/8/9/12/15/17.
+
+### Ownership and authored scope
+
+WorldRegistry validates and deeply freezes server-only DEV Region/Species/Habitat/Spawn Context/Landmark/Field Objective definitions. Exactly the five GDS-9 launch roles are registered. `region/fixture-clearing` remains the historic ID and now has the explicit Starter role. Mid A/B/Advanced bind the existing access IDs; their actual topology/content remains open. Two existing authored parts receive stable LandmarkId/RegionId attributes and MonsterVaultLandmark tags. WorldRuntime snapshots their transforms and definition-owned radii before profiles start; invalid or overlapping authoring fails closed. The current scheduler/Orb projection, IDs, rarity/variant rolls and production epoch remain unchanged.
+
+DEV mastery uses two survey points, one distinct Common Core Species below the two-definition registered Core Species pool and one bounded entry → clearing → entry traversal. The companion species is a definition pending spawn/production binding, not a new materialized gameplay system. No rare, event, paid or passive wall is introduced. The first owner ships a real Starter recipe; un-authored Mid/Advanced recipes cannot finalize until their content owner binds them.
+
+### Persistence and effects
+
+Profile V1 gains an optional `world` root for compatibility with pre-world V1 profiles. Before Ready, the owner initializes only absent/empty state to world schema version 1: landmarks, objectives, regionalSpecies and mastery. Unknown/nonempty unversioned state and unsupported grants remain protected, never reset or converted. Limits are 64 landmarks, 32 one-time traversal objectives of at most 8 steps, 4 regional evidence sets of at most 64 species, and 4 mastery records. Permanent facts contain server operationId, committed profile revision and contentSnapshotId. Objective progress is an integer bounded by its immutable definition. No ordinary encounter is persisted.
+
+Qualified Secured RegionId + SpeciesId evidence is attached to the exact ownership P2 through an application-injected callback. Provenance requires a registered context, eligible species and approved context content snapshot. Existing legacy fixture provenance stays recognized; no global discovery, old ownership, traded-only record, purchase or position claim becomes world proof. Repeated species counts once; Held captures still qualify. Mastery is evaluated from all three authoritative evidence categories inside the final evidence P2, never from a client completion flag. Its historic fact survives creature release and later content additions.
+
+The actual owner is injected into TA-8's existing mastery reader and into capture action admission/resume/submit/secure. Persistent access reads the existing permanent receipt, preserving historical ownership independently of current prices/recipes. Context validation still precedes capacity; unknown/locked provenance cannot claim or roll. Finalization already admitted to P2 keeps its immutable candidate across character loss, retries and unknown outcomes.
+
+### Wire and recovery
+
+Existing V1 remotes/routes are retained. Interaction.PrimaryInteract's strict sole interactionId selector also recognizes known landmarks, and native Survey prompts resolve through the same server spatial action owner. A visit's first-discovery/one-time objective progress/mastery effects share one existing P2 write. Repeated delivery at one point has no effect. At Risk blocks new valuable admission, while Class A Session.RequestResync with domain=world recovers the exact pending candidate before reporting public history. World.StateChanged emits only `{profileRevision, masteryMilestoneIds}` to the requesting owner; at most four sorted registered IDs, never private evidence or operation IDs. No client field can set world state.
+
+World Energy rewards and deferred/event/commercial/temporary sources remain unbound and protected. This change grants no world Energy and does not change existing wallet, quotes, debit receipts, capacity, assignments or production semantics.
+
+### Gate consequence
+
+First dependency PASS with [evidence and full open gate matrix](../implementation/IMP10_IMPLEMENTATION_EVIDENCE.md). **IMP-10 remains OPEN.** Full authored biome/utility content, remaining spawn/travel/mastery/hazard/reward scaling and phase validation are not replaced by the fixture. **VS1-19 / AD-249 full 30-player L1 at MaxPlayers=60 and supported real-client performance remain mandatory before IMP-10 COMPLETE.**

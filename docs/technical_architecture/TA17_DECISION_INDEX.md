@@ -32,5 +32,6 @@
 | AD-252 | Bind the versioned Energy wallet and exact-once Production Claim, revision-bound receipts and authoritative readback; progression remains open. |
 | AD-253 | Bind opaque server quotes, strict purchase confirmation, one atomic Energy debit/capacity unlock and permanent receipts through the existing P2 writer; remaining progression catalog and full IMP-9 gates remain open. |
 | AD-254 | Complete the bounded TA-8 Vault/Capture/Access catalog and prospective effects through existing P2 purchases; register compact selected quotes and protected mastery ownership; close the full IMP-9 audit and permit IMP-10 OPEN, retaining VS1-19 before its completion. |
+| AD-255 | Bind server world/content registries, existing authored Starter actions, the actual persistent mastery owner and TA-8 access/action authority; register compatible World V1 state and Class A recovery; first IMP-10 dependency PASS while full content/scaling and VS1-19 remain open. |
 
 **Decision index result: ACCEPTED.**

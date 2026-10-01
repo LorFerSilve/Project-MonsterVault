@@ -8,7 +8,7 @@ local function creatures(profile: any): any
 	return profile.collection.creaturesById or {}
 end
 
-function CaptureFinalizationUseCase.new(vault: any)
+function CaptureFinalizationUseCase.new(vault: any, recordWorldEvidence: ((any, any) -> ())?)
 	assert(type(vault.collectionStatus) == "function", "Vault capacity authority required")
 
 	local function canInitiate(profile: any): boolean
@@ -71,6 +71,9 @@ function CaptureFinalizationUseCase.new(vault: any)
 				profile.discovery.mutationsById = profile.discovery.mutationsById or {}
 				for _, mutationId in payload.variantIdentity.mutationIdsCanonical do
 					profile.discovery.mutationsById[mutationId] = true
+				end
+				if recordWorldEvidence then
+					recordWorldEvidence(profile, profile.collection.creaturesById[id])
 				end
 			end)
 		end

@@ -65,6 +65,8 @@ IMP-9 dependency traceability (earlier rows retain their original handoff scope)
 | GDS-8; TA-3/4/8/12/15/17 | AD-253 opaque server quote, strict PurchaseUnlock, atomic signed Energy debit/earned tier/permanent receipt, active Discovery gate and explicit confirmation/readback; eight T15.progression.purchase C0 tests, real DEV cut points, mouse confirmation and fresh shipped composition in [IMP-9 evidence](../implementation/IMP9_IMPLEMENTATION_EVIDENCE.md). | Minimal capacity target PASS. Remaining Vault/Capture Capability/Access definitions and full TA-8 gate audit remain open; IMP-10 has not started. |
 | GDS-5/7/8/9; TA-3/4/7/8/9/12/15/17 | AD-254 remaining Vault tiers, settlement-before-effect, persistent bounded Capture Capability and Access mastery/prior-unlock consumer; six additional T15.progression.catalog C0 suites, forty current native C0 checks, real DEV GUI/cut points/rejoin and [full gate audit](../implementation/IMP9_GATE_AUDIT.md). | IMP-9 COMPLETE. IMP-10 may OPEN; actual mastery/world actions belong there. External grants/deferred transfer stay protected until their respective owners bind. VS1-19 remains mandatory before IMP-10 COMPLETE. |
 
+AD-255: GDS-5/8/9 and TA-3/4/5/7/8/9/12/15/17 bind immutable registries, an authored index, actual mastery history, same-P2 regional Secured evidence and TA-8 access checks/recovery. Eight T15.world.progression C0 suites, native authoring/client/DEV cut points and fresh-server persistence are recorded in [IMP-10 evidence](../implementation/IMP10_IMPLEMENTATION_EVIDENCE.md). First dependency PASS; [remaining phase gates](../implementation/IMP10_GATE_MATRIX.md), including VS1-19, remain open. IMP-9 stays COMPLETE.
+
 Every implementation PR names:
 
 - implementation phase;

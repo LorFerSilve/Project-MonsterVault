@@ -14,6 +14,10 @@ local VaultProductionUseCase = require(script.Parent.Parent.application.VaultPro
 local EnergyService = require(script.Parent.Parent.domains.economy.EnergyService)
 local ProductionClaimUseCase = require(script.Parent.Parent.application.ProductionClaimUseCase)
 local ProgressionService = require(script.Parent.Parent.domains.progression.ProgressionService)
+local WorldRegistry = require(script.Parent.Parent.domains.world.WorldRegistry)
+local WorldDefinitions = require(script.Parent.Parent.domains.world.WorldDefinitions)
+local WorldProgressionService = require(script.Parent.Parent.domains.world.WorldProgressionService)
+local WorldActionUseCase = require(script.Parent.Parent.application.WorldActionUseCase)
 local ProgressionPurchaseUseCase =
 	require(script.Parent.Parent.application.ProgressionPurchaseUseCase)
 local ProgressionFixture =
@@ -57,7 +61,16 @@ function ProfileRuntimeService.new(options: {
 		else options.httpService:GenerateGUID(false)
 	local vault = VaultService.new(VaultCapacityFixture)
 	local production = VaultProductionService.new(VaultProductionFixture)
-	local progression = ProgressionService.new(ProgressionFixture)
+	local worldProgression = WorldProgressionService.new(WorldRegistry.new(WorldDefinitions))
+	local progression =
+		ProgressionService.new(ProgressionFixture, { mastery = worldProgression.mastery })
+	local worldActions = WorldActionUseCase.new({
+		world = worldProgression,
+		progression = progression,
+		newOperationId = function()
+			return options.httpService:GenerateGUID(false)
+		end,
+	})
 	for _, d in progression.definitions do
 		if d.kind == "Vault" then
 			local effect = if d.effectField == "collectionCapacity"
@@ -117,6 +130,10 @@ function ProfileRuntimeService.new(options: {
 				repository = repository,
 				schema = ProfileSchemaV1,
 				prepareProfile = function(profile: any)
+					local worldState = worldProgression.prepare(profile)
+					if worldState.status ~= "Prepared" then
+						return worldState
+					end
 					local wallet = energy.prepare(profile)
 					if wallet.status ~= "Prepared" then
 						return wallet
@@ -129,11 +146,16 @@ function ProfileRuntimeService.new(options: {
 					if unlocks.status ~= "Prepared" then
 						return unlocks
 					end
-					prepared.changed = prepared.changed or wallet.changed or unlocks.changed
+					prepared.changed = prepared.changed
+						or wallet.changed
+						or unlocks.changed
+						or worldState.changed
 					return prepared
 				end,
 				prepareSave = function(profile: any, release: boolean, atMono: number)
-					local invalid = energy.validate(profile) or progression.validate(profile)
+					local invalid = energy.validate(profile)
+						or progression.validate(profile)
+						or worldProgression.validate(profile)
 					if invalid ~= nil then
 						return { status = "Protected", reason = invalid }
 					end
@@ -225,7 +247,7 @@ function ProfileRuntimeService.new(options: {
 
 	return {
 		id = "profiles",
-		dependencies = {},
+		dependencies = { "world" },
 		start = start,
 		stop = stop,
 		coordinator = coordinator,
@@ -237,6 +259,8 @@ function ProfileRuntimeService.new(options: {
 		claims = claims,
 		progression = progression,
 		purchases = purchases,
+		worldProgression = worldProgression,
+		worldActions = worldActions,
 	}
 end
 

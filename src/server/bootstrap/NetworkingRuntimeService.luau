@@ -33,6 +33,7 @@ function NetworkingRuntimeService.new(options: {
 	profileCoordinator: any?,
 	diagnostics: any,
 	captureRuntime: any?,
+	worldRuntime: any?,
 	vault: any?,
 	capacity: any?,
 	production: any?,
@@ -176,6 +177,12 @@ function NetworkingRuntimeService.new(options: {
 			player: any,
 			envelope: any
 		): string
+			if
+				options.worldRuntime
+				and options.worldRuntime.isLandmark(envelope.payload.interactionId)
+			then
+				return options.worldRuntime.discover(player, envelope.payload.interactionId)
+			end
 			return options.captureRuntime.interact(
 				player,
 				envelope.payload.interactionId,
@@ -437,6 +444,7 @@ function NetworkingRuntimeService.new(options: {
 		vaultResync = publishVault,
 		assignmentsResync = publishAssignments,
 		progressionResync = publishProgression,
+		worldResync = if options.worldRuntime then options.worldRuntime.resync else nil,
 		captureResync = if options.captureRuntime ~= nil
 			then options.captureRuntime.resync
 			else nil,
