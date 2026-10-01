@@ -11,6 +11,7 @@ function VaultAssignmentRuntimeService.new(
 )
 	local globals = getfenv() :: any
 	local screen, panel, summary, message: any = nil, nil, nil, nil
+	local claimButton: any = nil
 	local rows: { any } = {}
 	local buttons: { any } = {}
 	local connections: { any } = {}
@@ -39,13 +40,17 @@ function VaultAssignmentRuntimeService.new(
 			local data = if state.snapshot then state.snapshot.state else nil
 			summary.Text = if data
 				then string.format(
-					"Saved output %.3f / %.3f | Offline +%.3f",
+					"Energy %d | Saved output %.3f / %.3f | Offline +%.3f",
+					data.energyUnits,
 					data.bufferMilli / 1000,
 					data.bufferCapacityMilli / 1000,
 					data.offlineCreditedMilli / 1000
 				)
 				else "Vault output loading..."
 			message.Text = state.message
+			if claimButton ~= nil then
+				enable(claimButton, state.canClaim)
+			end
 			for index, row in rows do
 				local entry = if data then data.creatures[index] else nil
 				row.Visible = entry ~= nil
@@ -112,6 +117,8 @@ function VaultAssignmentRuntimeService.new(
 		summary = item("TextLabel", "Output", "", 44)
 		message = item("TextLabel", "Message", "", 44)
 		summary.BackgroundTransparency, message.BackgroundTransparency = 1, 1
+		claimButton = item("TextButton", "ClaimProduction", "Claim production", 36)
+		table.insert(connections, claimButton.Activated:Connect(controller.claim))
 		for index = 1, 2 do
 			local row = item("TextButton", "Creature" .. index, "", 64)
 			rows[index] = row

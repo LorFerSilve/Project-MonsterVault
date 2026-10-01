@@ -35,6 +35,8 @@ function NetworkingRuntimeService.new(options: {
 	capacity: any?,
 	production: any?,
 	assignments: any?,
+	energy: any?,
+	claims: any?,
 })
 	local function id(value: any): boolean
 		return type(value) == "string" and #value > 0 and #value <= 96
@@ -43,6 +45,32 @@ function NetworkingRuntimeService.new(options: {
 	local handlers = {}
 	local publishVault: any = nil
 	local publishAssignments: any = nil
+	if options.claims ~= nil then
+		schemas[RouteIds.commands.vaultClaimProduction] = VaultAssignmentProjectionV1.validClaim
+		handlers[RouteIds.commands.vaultClaimProduction] = function(
+			player: any,
+			envelope: any
+		): string
+			local outcome = options.claims.claim(
+				options.profileCoordinator.get(player.UserId),
+				envelope.expectedRevision
+			)
+			if outcome.status == "Committed" or outcome.status == "AlreadyCommitted" then
+				publishAssignments(player, envelope.requestId, nil)
+				return "OK_VAULT_PRODUCTION_CLAIMED"
+			end
+			if outcome.status == "Rejected" then
+				return "REJECT_STATE_VAULT_" .. (outcome.reason or "INVALID")
+			end
+			if outcome.status == "Busy" then
+				return "PENDING_VAULT_CLAIM"
+			end
+			return if outcome.status == "OutcomeUnknown"
+					or outcome.status == "PersistenceAtRisk"
+				then "OUTCOME_UNKNOWN_VAULT_CLAIM"
+				else "PROTECTED_VAULT_UNAVAILABLE"
+		end
+	end
 	if options.assignments ~= nil and options.production ~= nil then
 		for route, kind in
 			{
@@ -203,6 +231,9 @@ function NetworkingRuntimeService.new(options: {
 			return "UNAVAILABLE_VAULT"
 		end
 		local active = options.profileCoordinator.get(player.UserId)
+		if options.claims ~= nil then
+			options.claims.reconcile(active)
+		end
 		if options.assignments ~= nil then
 			options.assignments.reconcile(active)
 		end
@@ -250,6 +281,9 @@ function NetworkingRuntimeService.new(options: {
 			return "UNAVAILABLE_VAULT_ASSIGNMENTS"
 		end
 		local active = options.profileCoordinator.get(player.UserId)
+		if options.claims ~= nil then
+			options.claims.reconcile(active)
+		end
 		options.assignments.reconcile(active)
 		local capacityResult = if options.capacity ~= nil
 			then options.capacity.reconcile(active)
@@ -257,6 +291,7 @@ function NetworkingRuntimeService.new(options: {
 		local ready = active ~= nil
 			and active.state() == "Ready"
 			and options.production.validate(active.snapshot()) == nil
+			and (options.energy == nil or options.energy.validate(active.snapshot()) == nil)
 			and (
 				capacityResult.status == "Unchanged"
 				or capacityResult.status == "Committed"

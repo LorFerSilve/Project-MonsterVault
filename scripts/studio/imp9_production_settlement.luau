@@ -22,7 +22,7 @@ local function equal(a: any, b: any): boolean
 	end
 	return true
 end
-local function setup(resume: any?): any
+local function setup(resume: any?, withEnergy: boolean?): any
 	assert(
 		state == nil
 			and game:GetService("RunService"):IsStudio()
@@ -66,6 +66,20 @@ local function setup(resume: any?): any
 			return http:GenerateGUID(false)
 		end,
 	})
+	local energy: any = if withEnergy
+		then require(server.domains.economy.EnergyService).new()
+		else nil
+	local claims: any = if withEnergy
+		then require(server.application.ProductionClaimUseCase).new({
+			energy = energy,
+			production = production,
+			vault = vault,
+			assignments = assignments,
+			newOperationId = function()
+				return http:GenerateGUID(false)
+			end,
+		})
+		else nil
 	local capacity = require(server.application.VaultCapacityUseCase).new({
 		vault = vault,
 		settleProduction = assignments.settleProfile,
@@ -102,6 +116,12 @@ local function setup(resume: any?): any
 		repository = wrapped,
 		schema = schema,
 		prepareProfile = function(p: any)
+			if energy then
+				local wallet = energy.prepare(p)
+				if wallet.status ~= "Prepared" then
+					return wallet
+				end
+			end
 			return assignments.prepareProfile(p, loadAt)
 		end,
 		prepareSave = assignments.prepareSave,
@@ -174,6 +194,16 @@ local function setup(resume: any?): any
 				== resume.cleanProfile.vault.productionBufferMilli + elapsed * 100,
 			"fresh server offline credit exactly once"
 		)
+		if withEnergy then
+			assert(
+				equal(restored.economy, resume.cleanProfile.economy),
+				"fresh server restores exact wallet/audit"
+			)
+			assert(
+				claims.claim(active, resume.claimRevision).status == "AlreadyCommitted",
+				"rejoin retry keeps original claim"
+			)
+		end
 	end
 	local root = globals.Instance.new("Folder")
 	root.Name, root.Parent = "IMP9ProductionProbeRemotes", game:GetService("ReplicatedStorage")
@@ -218,6 +248,8 @@ local function setup(resume: any?): any
 		production = production,
 		assignments = assignments,
 		capacity = capacity,
+		energy = energy,
+		claims = claims,
 		profileCoordinator = {
 			get = function(userId: number)
 				return if userId == player.UserId then active else nil
@@ -242,6 +274,8 @@ local function setup(resume: any?): any
 		vault = vault,
 		assignments = assignments,
 		production = production,
+		energy = energy,
+		claims = claims,
 		setFault = function(value: string)
 			fault = value
 		end,
@@ -251,9 +285,107 @@ local function setup(resume: any?): any
 	}
 	return result
 end
+local function prepareClaims(): any
+	assert(state ~= nil and state.claims ~= nil, "Energy probe setup")
+	local active, app, id = state.active, state.assignments, state.ids[1]
+	assert(
+		app.assign(active, "production", "production/1", id, active.snapshot().profileRevision).status
+			== "Committed",
+		"native claim producer assigned"
+	)
+	assert(
+		app.assign(active, "display", "display/1", id, active.snapshot().profileRevision).status
+			== "Committed",
+		"native claim display assigned"
+	)
+	state.result.beforeClaimProfile = active.snapshot()
+	state.result.claimRevision = active.snapshot().profileRevision
+	return state.result.beforeClaimProfile
+end
+local function claimCases(): any
+	assert(state ~= nil and state.claims ~= nil, "Energy probe setup")
+	local active, claims = state.active, state.claims
+	local saved = active.snapshot()
+	state.result.nativeClaimProfile = saved
+	assert(saved.economy.energyUnits > 0, "native GUI claim grants real Energy")
+	local first = saved.economy.recentEnergyOperations[1]
+	assert(
+		first.expectedRevision == state.result.claimRevision,
+		"claim is bound to clicked revision"
+	)
+	assert(saved.profileRevision == first.expectedRevision + 1, "one durable claim revision")
+	assert(
+		equal(saved.collection, state.result.beforeClaimProfile.collection),
+		"claim preserves exact collection"
+	)
+	assert(
+		claims.claim(active, first.expectedRevision).status == "AlreadyCommitted",
+		"durable duplicate receipt"
+	)
+	assert(equal(saved, active.snapshot()), "duplicate consumes no new interval")
+	state.result.claimFaults = {}
+	for _, point in { "Before", "After" } do
+		local before = active.snapshot()
+		state.setFault(point)
+		local result = claims.claim(active, before.profileRevision)
+		assert(
+			result.status == "OutcomeUnknown" and equal(before, active.snapshot()),
+			"claim fault remains uncertain"
+		)
+		assert(claims.reconcile(active).status == "Unchanged", "claim reconciles exact checkpoint")
+		local p = active.snapshot()
+		assert(
+			p.profileRevision == before.profileRevision + 1 and state.energy.validate(p) == nil,
+			"exact claim revision"
+		)
+		assert(
+			claims.claim(active, before.profileRevision).operationId == result.operationId,
+			"retry retains GUID"
+		)
+		table.insert(state.result.claimFaults, { point = point, result = result, profile = p })
+	end
+	local raced: any = nil
+	state.setNested(function()
+		raced = claims.claim(active, active.snapshot().profileRevision)
+	end)
+	assert(
+		claims.claim(active, active.snapshot().profileRevision).status == "Committed",
+		"primary claim commits"
+	)
+	assert(raced.status == "Busy", "same profile writer fences concurrent claim")
+	state.result.claimRace = raced
+	-- Separate source authority remains unbound and cannot mint at a full wallet.
+	assert(
+		state.energy.apply(active.snapshot(), { reasonCode = "starter-commercial-grant" }).status
+			== "Protected",
+		"unbound starter authority protected"
+	)
+	state.result.unboundStarterGrant = "Protected"
+	return state.result
+end
 local function inspect(): any
 	assert(state ~= nil, "probe setup required")
 	return { profile = state.active.snapshot(), result = state.result }
+end
+local function armClaimFault(point: string): any
+	assert(state ~= nil and state.claims ~= nil, "Energy probe setup")
+	state.result.clientFaultBefore = state.active.snapshot()
+	state.setFault(point)
+	return { expectedRevision = state.result.clientFaultBefore.profileRevision, point = point }
+end
+local function verifyClaimFault(): any
+	local before, after = state.result.clientFaultBefore, state.active.snapshot()
+	assert(
+		state.active.state() == "Ready" and after.profileRevision == before.profileRevision + 1,
+		"client Class A resync reconciles exactly one claim"
+	)
+	local audit = after.economy.recentEnergyOperations[#after.economy.recentEnergyOperations]
+	assert(
+		audit.expectedRevision == before.profileRevision and state.energy.validate(after) == nil,
+		"correlated claim receipt and wallet after lost response"
+	)
+	state.result.clientFaultAfter = after
+	return { profile = after, audit = audit }
 end
 local function saveLeave(): any
 	assert(state ~= nil, "probe setup required")
@@ -363,14 +495,23 @@ local function faultRaceAndFinish(): any
 	state.result.protectedLoads = {}
 	local server: any = game:GetService("ServerScriptService").MonsterVaultServer
 	local stores, http = game:GetService("DataStoreService"), game:GetService("HttpService")
-	for _, kind in { "CommercialGrant", "MissingEpoch" } do
+	local protectedKinds = { "CommercialGrant", "MissingEpoch" }
+	if state.energy then
+		table.insert(protectedKinds, "InvalidEnergy")
+		table.insert(protectedKinds, "DeferredGrant")
+	end
+	for _, kind in protectedKinds do
 		local badScope = "IMP9PB-" .. http:GenerateGUID(false)
 		local badStore = stores:GetDataStore("MV_DEV_PlayerProfile_v1", badScope)
 		local invalid = active.snapshot()
 		if kind == "CommercialGrant" then
 			invalid.commerce.productionGrants = { unbound = true }
-		else
+		elseif kind == "MissingEpoch" then
 			invalid.vault.productionRateEpochId = "production-epoch/unavailable"
+		elseif kind == "InvalidEnergy" then
+			invalid.economy.energyUnits = 1_000_000_000_001
+		else
+			invalid.economy.deferredEnergyGrants = { unbound = { remainingUnits = 100 } }
 		end
 		local badRepository = require(server.adapters.RobloxProfileRepository).new({
 			GetDataStore = function()
@@ -388,6 +529,12 @@ local function faultRaceAndFinish(): any
 			repository = badRepository,
 			schema = require(server.infrastructure.persistence.ProfileSchemaV1),
 			prepareProfile = function(p: any)
+				if state.energy then
+					local wallet = state.energy.prepare(p)
+					if wallet.status ~= "Prepared" then
+						return wallet
+					end
+				end
 				return app.prepareProfile(p, now)
 			end,
 			queue = require(server.infrastructure.persistence.SingleWriterQueue).new(
@@ -417,7 +564,28 @@ local function faultRaceAndFinish(): any
 			{ kind = kind, scope = badScope, outcome = protected, preserved = true }
 		)
 	end
+	if state.claims then
+		local before = active.snapshot()
+		state.setFault("After")
+		local unknown = state.claims.claim(active, before.profileRevision)
+		assert(unknown.status == "OutcomeUnknown", "native unknown claim before disconnect")
+		state.result.unknownDisconnect = { before = before, outcome = unknown }
+	end
 	assert(active.release(os.clock() + 25).status == "Closed", "fixture lease released")
+	if state.claims then
+		local stored = state.repository.update(state.key, function(current: any, metadata: any)
+			return { kind = "write", value = current, metadata = metadata }
+		end)
+		local before = state.result.unknownDisconnect.before
+		local receipt = state.energy.claimReceipt(stored.value, before.profileRevision)
+		assert(
+			receipt ~= nil
+				and stored.value.economy.energyUnits
+					== before.economy.energyUnits + receipt.deltaUnits,
+			"native release preserves accepted unknown wallet/buffer transfer"
+		)
+		state.result.unknownDisconnect.savedProfile = stored.value
+	end
 	local normal = state.normalStore:GetAsync(state.key)
 	assert(
 		equal(normal.collection, state.result.normalCollectionBefore)
@@ -438,5 +606,9 @@ return {
 	setup = setup,
 	inspect = inspect,
 	saveLeave = saveLeave,
+	prepareClaims = prepareClaims,
+	claimCases = claimCases,
+	armClaimFault = armClaimFault,
+	verifyClaimFault = verifyClaimFault,
 	faultRaceAndFinish = faultRaceAndFinish,
 }

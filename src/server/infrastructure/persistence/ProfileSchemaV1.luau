@@ -193,6 +193,23 @@ function ProfileSchemaV1.validate(profile: any): (boolean, string?)
 		return false, "invalid_collection_capacity"
 	end
 	local vault = profile.vault
+	local energy = profile.economy
+	if
+		energy.energyUnits ~= nil
+		and (not finiteInteger(energy.energyUnits, 0) or energy.energyUnits > 1_000_000_000_000)
+	then
+		return false, "invalid_energy_wallet"
+	end
+	if energy.energySchemaVersion ~= nil then
+		if
+			energy.energySchemaVersion ~= 1
+			or energy.energyUnits == nil
+			or type(energy.recentEnergyOperations) ~= "table"
+			or #energy.recentEnergyOperations > 32
+		then
+			return false, "invalid_energy_state"
+		end
+	end
 	if vault.productionSchemaVersion ~= nil then
 		if
 			vault.productionSchemaVersion ~= 1
