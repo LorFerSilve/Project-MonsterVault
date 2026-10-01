@@ -60,6 +60,7 @@ Same base envelope but no critical/durable truth and <=768 encoded bytes.
 | Creature.Release | C | creatureInstanceId:string |
 | Vault.SetProductionAssignment | C | slotId:string, creatureInstanceId:string? |
 | Vault.ClaimProduction | C | claimScope:enum |
+| Vault.ResolveOverflow | C | creatureInstanceId:string; required envelope expectedRevision:integer |
 | Progression.PurchaseUnlock | C | unlockId:string, quoteRevision:number |
 | Social.PartyInvite | B | targetUserId:number |
 | Social.PartyRespond | B | invitationId:string, accept:boolean |
@@ -76,6 +77,10 @@ Same base envelope but no critical/durable truth and <=768 encoded bytes.
 | Settings.UpdatePreferences | B | reducedMotion:boolean?, captionsEnabled:boolean?, masterVolume:number? |
 
 Routes are allowlisted registry constants; unknown strings never map dynamically to module paths.
+
+IMP-9 extension under [AD-250](ARCHITECTURE_DECISIONS.md#ad-250--register-imp-9-capacity-migration-and-explicit-overflow-resolution): RequestResync permits domain=vault and optional afterCreatureInstanceId:string (1..128 bytes), exclusively for that domain. ResolveOverflow permits no other payload field or client capacity/owner/quantity. Both preserve the existing envelope, ingress schema/rate/replay and readiness gates. Class A Vault resync may reconcile an uncertain P2 operation before publishing Ready; Class C cannot grant readiness.
+
+The owner-only Vault snapshot has domain=vault, revision=profileRevision and state={capacity, ordinaryUsed, overflowHeldCount, components={base,earned,commercial,temporary}, overflowCreatureInstanceIds, hasMore}. Pages have at most five sorted exact IDs and 480 total ID bytes and must pass the existing reliable wire budget. The session projection with matching profileRevision precedes each Vault snapshot; only a Ready client store at that revision accepts it.
 
 ## 4. V1 reliable server event routes
 

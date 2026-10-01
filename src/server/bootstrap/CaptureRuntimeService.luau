@@ -4,9 +4,8 @@ local CaptureService = require(script.Parent.Parent.domains.capture.CaptureServi
 local VaultService = require(script.Parent.Parent.domains.vault.VaultService)
 local VaultCapacityFixture =
 	require(game:GetService("ReplicatedStorage").MonsterVault.Shared.config.VaultCapacityFixture)
-local CaptureFinalizationUseCase = require(
-	script.Parent.Parent.application.CaptureFinalizationUseCase
-).new(VaultService.new(VaultCapacityFixture))
+local CaptureFinalizationUseCaseFactory =
+	require(script.Parent.Parent.application.CaptureFinalizationUseCase)
 local RouteIds =
 	require(game:GetService("ReplicatedStorage").MonsterVault.Shared.contracts.RouteIds)
 local CaptureProjectionV1 =
@@ -15,6 +14,7 @@ local CaptureRuntimeService = {}
 
 function CaptureRuntimeService.new(options: {
 	worldRuntime: any,
+	vault: any?,
 	profileCoordinator: any,
 	players: any,
 	workspace: any,
@@ -24,6 +24,9 @@ function CaptureRuntimeService.new(options: {
 	scheduler: any?,
 	random: any?,
 })
+	local CaptureFinalizationUseCase = CaptureFinalizationUseCaseFactory.new(
+		options.vault or VaultService.new(VaultCapacityFixture)
+	)
 	local globals = getfenv() :: any
 	local scheduler = options.scheduler or globals.task
 	local random = options.random or globals.Random.new()

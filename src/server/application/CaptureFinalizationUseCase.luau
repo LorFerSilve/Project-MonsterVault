@@ -59,6 +59,7 @@ function CaptureFinalizationUseCase.new(vault: any)
 					origin = payload.origin,
 					operationId = op,
 					securedAt = payload.securedAt,
+					securedSequence = profile.profileRevision + 1,
 					locked = #payload.variantIdentity.protectedVariantReasons > 0,
 					overflowHeld = overflowHeld,
 				}

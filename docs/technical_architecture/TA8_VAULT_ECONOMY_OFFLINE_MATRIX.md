@@ -151,6 +151,21 @@ All exact arithmetic/intermediates must remain below `2^53`.
 | unknown rate epoch needed for unsettled value | Protected settlement failure |
 | deferred grant duplicate op | dedupe/reconcile |
 
+## IMP-9 runtime acceptance — 2026-10-01
+
+Architecture PASS above defines the contract; it does not mark all runtime economy features complete. [Current implementation evidence](../implementation/IMP9_IMPLEMENTATION_EVIDENCE.md) and AD-250 record this dependency's actual gates:
+
+| Runtime dependency | Status | Acceptance evidence |
+|---|---|---|
+| Capacity component policy and source authorization boundary | PASS | T15.vault.components.authorizedSources; commercial/temporary integration is unbound and nonempty claims fail protected. |
+| Deterministic non-destructive reconciliation | PASS | T15.vault.reconcile.deterministicLossless / protectedLoad / idempotentMigration; real DEV rejoin preserves ownership and unknown upgrade load never overwrites. |
+| Explicit owner-selected Overflow-Held P2 resolution | PASS | T15.vault.resolution.exactOnce / uncertainWrites; native UI clicks traverse the shipped gateway; foreign/forged requests reject. |
+| Production settlement prerequisite | PROTECTED while unbound | Buffer/epoch/production-bearing data never loses value or has references cleared without successful staged settlement. Callback-order fixture is PASS; live production settlement remains OPEN. |
+| Display/Production assignment commands and production/offline settlement | OPEN — next dependency | TA-8 assignment, integer/time/epoch, buffer and offline gates remain mandatory. |
+| Energy wallet/claim and progression transactions | OPEN | Full exact-once cost/effect, quote/config and numeric gates remain mandatory before IMP-9 COMPLETE. |
+
+IMP-9 remains OPEN; IMP-10 cannot start. Actual commerce/temporary grant systems remain with their owning later phases. AD-249's VS1-19 performance validation remains mandatory before IMP-10 COMPLETE.
+
 ## Verdict
 
 **TA-8 VAULT / ECONOMY / OFFLINE ACCRUAL MATRIX: PASS.**

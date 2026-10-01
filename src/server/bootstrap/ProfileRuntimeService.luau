@@ -7,6 +7,11 @@ local SingleWriterQueue = require(script.Parent.Parent.infrastructure.persistenc
 local RetryPolicy = require(script.Parent.Parent.infrastructure.persistence.RetryPolicy)
 local RobloxProfileRepository = require(script.Parent.Parent.adapters.RobloxProfileRepository)
 
+local VaultService = require(script.Parent.Parent.domains.vault.VaultService)
+local VaultCapacityUseCase = require(script.Parent.Parent.application.VaultCapacityUseCase)
+local VaultCapacityFixture =
+	require(game:GetService("ReplicatedStorage").MonsterVault.Shared.config.VaultCapacityFixture)
+
 local ProfileRuntimeService = {}
 
 function ProfileRuntimeService.new(options: {
@@ -39,6 +44,13 @@ function ProfileRuntimeService.new(options: {
 	local jobId = if options.gameJobId ~= ""
 		then options.gameJobId
 		else options.httpService:GenerateGUID(false)
+	local vault = VaultService.new(VaultCapacityFixture)
+	local capacity = VaultCapacityUseCase.new({
+		vault = vault,
+		newOperationId = function()
+			return "vault-" .. options.httpService:GenerateGUID(false)
+		end,
+	})
 	local coordinator = SessionCoordinator.new({
 		createSession = function(userId: number)
 			local queue = SingleWriterQueue.new(os.clock, scheduler.wait, 25)
@@ -51,6 +63,7 @@ function ProfileRuntimeService.new(options: {
 				jobId = jobId,
 				repository = repository,
 				schema = ProfileSchemaV1,
+				prepareProfile = vault.prepare,
 				queue = queue,
 				retry = retry,
 				unixSeconds = os.time,
@@ -127,6 +140,8 @@ function ProfileRuntimeService.new(options: {
 		start = start,
 		stop = stop,
 		coordinator = coordinator,
+		vault = vault,
+		capacity = capacity,
 	}
 end
 

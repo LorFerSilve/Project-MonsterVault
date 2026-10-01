@@ -3488,3 +3488,30 @@ Keeping IMP-9 blocked on an unavailable environment was rejected by the owner in
 ### Affected contracts and change control
 
 Update the TA-17 master contract, acceptance matrix, CI/change-control lock, decision index, traceability, IMP-8 evidence and implementation roadmap together. Retain the original L0 and diagnostic records with their actual scope. This narrow exception does not authorize other deferrals or alter gameplay authority, GDS semantics, protocol V1, profile schema v1, persistence/STG readiness or release gates. No runtime migration is required.
+
+
+---
+
+## AD-250 — Register IMP-9 Capacity Migration and Explicit Overflow Resolution
+
+**Date:** 2026-10-01
+
+**Status:** Accepted — local implementation of the owner-requested GDS-7 / TA-8 dependency
+
+**Owning TA phase:** TA-17; affected contracts TA-3/4/7/8/12/15
+
+### Decision
+
+Register the additive V1 Class C route `Vault.ResolveOverflow`: exactly one `creatureInstanceId` plus the existing required envelope `expectedRevision`. Identity comes from OnServerEvent. Extend the existing Class A RequestResync with `domain = vault` and an optional bounded `afterCreatureInstanceId`; publish bounded owner-only pages over the existing Projection.Snapshot. Existing command shapes, remotes and protocol generation remain valid. This implements the already locked Resolve Overflow action without a new gameplay rule.
+
+Profile schema generation remains 1 with explicit capacity-domain migration version `vault.capacitySchemaVersion = 1`. On the existing lease-acquisition UpdateAsync, migrate a valid optional DEV scalar `progression.collectionCapacity` into `vault.capacityBase = { units, sourceId = migration/imp9-dev-capacity-v1 }`, preserving its exact base. Backfill an optional Creature record `securedSequence` only from its original durable operation-ledger revision; future capture finalizations store that sequence directly. Reconciliation occurs before Ready, advances the aggregate revision once when changed, and is idempotent under transform replay/rejoin. Unknown, conflicting, out-of-bound or unprovable data aborts protected load without overwriting the durable profile. This is an explicit forward migration, not an implicit reinterpretation or an automatic rollback to the old DEV scalar policy.
+
+Capacity definitions are sampled immutable server fixtures. Valid earned levels select authored quantities; active commercial and temporary sources require server-bound verified readers and known source definitions. The current DEV composition binds neither external source; nonempty persisted claims then fail protected. Actual commerce/temporary grant integrations remain with their owning later systems. The DEV +6 earned-capacity fixture uses the existing GDS-8 PE-08 reference; purchase/pricing/unlock rules are not implemented here.
+
+### Authority and gates
+
+ProfileSession remains the sole profile writer. Capture keeps its lifecycle/finalization boundary and consumes the same Vault policy. Live resolution/reconciliation uses single-profile P2 checkpoints and retains the server operation identity across OutcomeUnknown. Production-bearing state requires a successful settlement of the staged candidate before references are cleared; until the next production dependency binds that authority, it stays protected without deleting buffer, ownership or progress. Resolve Overflow changes only the selected instance's placement flag and never assigns a role, releases a creature or grants Energy.
+
+### Evidence and consequence
+
+[IMP-9 evidence](../implementation/IMP9_IMPLEMENTATION_EVIDENCE.md) records deterministic/fault/security tests and native UI -> real client/server gateway -> DEV UpdateAsync -> rejoin evidence. IMP-9 remains OPEN for assignments, production/offline settlement, wallet/claims and progression transactions. IMP-10 does not start. AD-249 / VS1-19 remains DEFERRED, mandatory before IMP-10 COMPLETE; no other gate is waived.

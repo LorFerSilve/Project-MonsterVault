@@ -1,0 +1,763 @@
+{
+  "phase": "IMP-9",
+  "phaseStatus": "OPEN",
+  "dependency": "Authorized capacity components, non-destructive reconciliation and explicit Overflow-Held resolution",
+  "dependencyStatus": "PASS",
+  "date": "2026-10-01",
+  "baseMainCommit": "a1e3489d4e067d69f36ed292fd394f1701b12776",
+  "decision": "AD-250",
+  "studio": {
+    "studioId": "510b1800-f548-4a53-8b9e-116acccf6346",
+    "placeId": 110304961224794,
+    "universeId": 10766503968,
+    "studioVersion": "0.741.19.7411056",
+    "finalMode": "Edit",
+    "sourceParity": true,
+    "scriptCount": 60,
+    "worldChildren": 4,
+    "probeRemaining": false,
+    "obsoleteDuplicatesRemoved": [
+      "ReplicatedStorage.MonsterVault.Shared.config.VaultCapacityFixture",
+      "ServerScriptService.MonsterVaultServer.domains.vault.VaultService"
+    ],
+    "removalGuard": "Only duplicate copies whose Source exactly matched the inspected PR #48 baseline were removed. The tested new capacity/component modules were retained; final names are unique."
+  },
+  "sourceSha256": {
+    "src/shared/config/VaultCapacityFixture.luau": "54a6c61a2bf7408ba19f03783b28bc0716ed27b2c6483e8ac802258650693b75",
+    "src/shared/contracts/CaptureProjectionV1.luau": "43b16d1f2e4fed9699f4b8013ecc78a9323da9a6a58e480b92f762c83809b708",
+    "src/shared/contracts/ProjectionV1.luau": "e0c524382ad38e3579a703c5d60ee8668bb7cd6be95f63b47a3657b761cb1d22",
+    "src/shared/contracts/ProtocolV1.luau": "5543ded452d216f86ae7302f1b628a6edd533fbc63d647330d805216cf5970a3",
+    "src/shared/contracts/ResultCodes.luau": "b3d6c7a2cd5e0eff5a44f8e8061ce1d4d519e0cac55f3a86175aaeae380fbbdf",
+    "src/shared/contracts/RouteIds.luau": "3a4e0e3f8e907c3dff87d867370366078cf52a317e4cfb0dd4aba5108c9902f2",
+    "src/shared/contracts/SecuredCollectionProjectionV1.luau": "0ab8d95693d50b85f6fe27160f4c7933d58a458c34ed7f4dae6b46c37eba1740",
+    "src/shared/contracts/VaultProjectionV1.luau": "3f75b2618dc3f0950a98ee8f39adb85f5630a548e7b3dec85348ab09f35428d3",
+    "src/shared/contracts/WireValidation.luau": "b6a99c3f9b83b56b5c2881f28054b4f201f78c47b8017c4bcacce9a3d50bad1e",
+    "src/shared/contracts/WorldProjectionV1.luau": "319ca3ae38d13a41a172d9986a68a7481739aa80cf07b6f2fdb9846b4f04683e",
+    "src/shared/types/Ids.luau": "0d95471d6c66cb9baa4245f7fd0755e3e334d5a608787477f0368bc700b21cd4",
+    "src/shared/util/StartupPlan.luau": "feea980a3c0e61eebafacb4fa3975d34e34a22b3ffa3dc0a3631eb10798e50f0",
+    "src/shared/util/StructuredDiagnostics.luau": "bdd58852e86548217f7b7efed3f24241053f955ab0b581f0775ffb00119a994d",
+    "src/server/adapters/RobloxProfileRepository.luau": "70fd63a9bb943f79b02cfe33bb849dd4113ec5d845da6f045ccead05c0dc5a8e",
+    "src/server/application/CaptureFinalizationUseCase.luau": "40c35373cfcedb4f690e3d7f71fc1c2eef2d95fa0fb38de64b9e741c542e483e",
+    "src/server/application/NetworkingGateway.luau": "cf6323b73a64e8a1e04a037a8358655d98b02dcd4856a36df04efbfdb6e39b8f",
+    "src/server/application/NetworkRateLimiter.luau": "a04e3175334977635ff1edfae9a168bef41f05ede09c468561534c011134cff8",
+    "src/server/application/ProjectionPublisher.luau": "7588fcec6c97199e7a54dba42d031ce516e3565bcb05f6a24583a362cc11994e",
+    "src/server/application/ReplayWindow.luau": "8fbb8bfae7e50b902e779d99a041a7682ad65c5116a72c6e7c6635bfd55ad4b6",
+    "src/server/application/RouteRegistry.luau": "f2f62d1b811cd64b2645eb0b5112495b8ff67c436573077d2452215167122a76",
+    "src/server/application/SecuredCollectionProjection.luau": "231c086d6265a9a5745caf258baa5434721489846e68b5abb128b9b3389b44a4",
+    "src/server/application/SessionCoordinator.luau": "765917d27f0a897bffcd6435ad8d1d3dd8df99a34fbadcaa342ab0526b910a3e",
+    "src/server/application/VaultCapacityProjection.luau": "2d595d65ac73d642cb4c15f55d088fae17a24d3baaf495a1ca66e393ccf5266b",
+    "src/server/application/VaultCapacityUseCase.luau": "8a007a90f3c2de5d698bfd8b67e09e15dd371ebfffc6bb80817baac67f42e82f",
+    "src/server/bootstrap/CaptureRuntimeService.luau": "23d31627375093e8099630a8bf80963297dd14fdbd696653d0a746f90446ab65",
+    "src/server/bootstrap/NetworkingRuntimeService.luau": "9a41ef59b213b8d9d06dd3bd21f074a61a301b9e8b02ab0c598fcc4ea632ccbe",
+    "src/server/bootstrap/ProfileBinding.luau": "a6568070be25030d53e090bb6bbd5b35033322f83a373c1c2782ad442cd3531f",
+    "src/server/bootstrap/ProfileRuntimeService.luau": "4f7066d4d43cb137ed876f42fb0026d8f16fb27f253206119fe61b7235d0d017",
+    "src/server/bootstrap/ServerComposition.luau": "d115ce151f3d70adec2e578d4f76306962a8e506ece22a89d0ffac24912df46c",
+    "src/server/bootstrap/ServerMain.server.luau": "88fa2de0e4380fac01d3e1c25a0f020dec79c956411605114912fddb9c2f8194",
+    "src/server/bootstrap/ShutdownCoordinator.luau": "0d5db72a3bf82128bca827212df0aabff4074af18c416f578ee236050de3999c",
+    "src/server/bootstrap/StartupValidator.luau": "4632462504a8afa26b4e40a2d4845cd4edceb3b1023b557eba688e112b1387af",
+    "src/server/bootstrap/WorldRuntimeService.luau": "7e14786382412734dc29acd77836b5d5c0933b9c82f5d3b2c933f670f941372c",
+    "src/server/infrastructure/clock/ClockInterface.luau": "e50b368217f9e8e67c0e9a7d94d82536ae8e3f72c45fa1a0d212679810ef7534",
+    "src/server/infrastructure/performance/PerformanceCounters.luau": "b6a01c851a31d4d50d72f1271cc0557d54914bcce74111b6bf681bde508f20fb",
+    "src/server/infrastructure/persistence/ProfileRepositoryInterface.luau": "0f97143f20b8430c702f4015b7571601fb4ab5141d913abfe35602d80fdf5f61",
+    "src/server/infrastructure/persistence/ProfileSchemaV1.luau": "1a8b8ad429350b847c0f516c48ff8f631b7c446aea45da7de30696c673641da4",
+    "src/server/infrastructure/persistence/ProfileSession.luau": "28ddd0df1be162f6ee973b42ed810acbb93d465ebc62484fb25a80ca618197d0",
+    "src/server/infrastructure/persistence/RetryPolicy.luau": "76174178e801e0fdf965c906733110643766a146796ca2a66758efbc136aec08",
+    "src/server/infrastructure/persistence/SingleWriterQueue.luau": "7e5e9591f498c05e501cacce2753f4f3e59930bdfa076d76ce7126ffc5d9c8cc",
+    "src/server/infrastructure/rng/RandomSourceInterface.luau": "a26d9636ce029acfd36097f4a20c839da2c62b9198d6da7a90ef56e8b0ac1952",
+    "src/server/domains/capture/CaptureService.luau": "2a169d3b0a5028aea92a05e404a781afd3f4be61a957ded5c2652caf850f490d",
+    "src/server/domains/capture/VariantIdentity.luau": "638675e4894c33ca5488eaf23ea92a4568981e95193ff6ee843c90e1f0795adc",
+    "src/server/domains/vault/VaultService.luau": "0d2a99b5ef523a514d6e5d08bd43ba91f3e6306be97925134fcba40b3e0e86bd",
+    "src/server/domains/world/FixtureDefinition.luau": "c59eac75e28f4ebdb850c7aefcbc1de464b5401ec13a33b230f0b0d084ab6e1f",
+    "src/server/domains/world/WorldService.luau": "2da3659e244fc3a795d245677ac3e0f0fc617e2279334221ede29ef0070f7545",
+    "src/client/bootstrap/CaptureRuntimeService.luau": "bb1b6b2121f8c0c1d81b5b80b7417f5d6648dd30db186bd1ba9c9e6ee9be7e25",
+    "src/client/bootstrap/ClientComposition.luau": "6a076b90c55a57dc695c548dceba00fd2319c6b8aadb587aeb96514f8b08da97",
+    "src/client/bootstrap/ClientMain.client.luau": "e8d73e293f8d23e13cbf3a8e3ef6c13029764fc8283f75c1237ffe646e560423",
+    "src/client/bootstrap/NetworkingRuntimeService.luau": "76735193183506df1758212d3ceed99a572f004156dd5298852c0d97fa7a92cc",
+    "src/client/bootstrap/VaultRuntimeService.luau": "2e84d30eebc4d25fcf16050153af7d20e7ec67990fe9f56a4c5b8e6198e1faab",
+    "src/client/bootstrap/WorldModelObserver.luau": "cc54050d83df0ed5f7dcce8c97bd9e1a086e5defa785464f528c8ee0e8f24e66",
+    "src/client/controllers/CaptureController.luau": "debcbf89912245c004125fed7c16fb8a63ce8a20405465feadb167effbe0baae",
+    "src/client/controllers/VaultController.luau": "f71220af052b239c9be127f8aafc5eeba9fbf10a353be23e4f01aa11e7060056",
+    "src/client/input/InputRouter.luau": "93f41d4e56f3c7046a92393b122d049773d9f5db511290ebab8cbf0ba208ddcf",
+    "src/client/networking/ClientGateway.luau": "22d516e426859d126b9038bb6608e90183df5888e17ac783a93bfd07188cbf8a",
+    "src/client/presentation/CaptureView.luau": "43ad25166e5bd473f488b5aa05a3665b64747e0fdf6f6be00ed902cd7e364151",
+    "src/client/store/ProjectionStore.luau": "c437b00617b9e3f006005a81e8729ab79398284df1c6a22702a28cd0b49f6708",
+    "src/client/store/SecuredCollectionStore.luau": "3bfef9a9086fc3adb35f72c4ea123690565393392ec2df851fb01c7a3f3cf2a1",
+    "src/client/store/WorldProjectionStore.luau": "b3e509b0b49a8df55eaee4342f6b411072fb74e23879cd78b392f54ad88462b6",
+    "scripts/studio/imp9_capacity_reconciliation.luau": "ac3b203a74fc5c8b736961415152e3f44183942c289b32c0c6662c5f78af305f",
+    "scripts/studio/imp9_capacity_client.luau": "a37e30c208821700a3af8694b6ef620b2d76750318ea76c8fbb8b2435f719f7d",
+    "scripts/studio/imp8_capture_diagnostics.luau": "4f7b2b323ce2c60d8755b170a241d6578e008622b1fcaa44eb0261257dc5446f"
+  },
+  "reconciliationResolution": {
+    "universeId": 10766503968,
+    "protectedLoad": {
+      "status": "ProtectedLoadFailure",
+      "reason": "UNKNOWN_UPGRADE_ID"
+    },
+    "placeId": 110304961224794,
+    "userId": 1925180832,
+    "diagnostics": [],
+    "result": "PASS",
+    "fullCapacityResult": {
+      "status": "Rejected",
+      "reason": "CAPACITY_FULL"
+    },
+    "afterResolutionRevision": 6,
+    "testId": "T15.vault.Studio.reconciliationResolution",
+    "criticality": "C0",
+    "studioVersion": "0.741.19.7411056",
+    "creatureInstanceIds": [
+      "imp9-creature-a113d093-99ee-4d84-87ec-1e3833b30415",
+      "imp9-creature-8f9e85fc-ee0e-441a-9a7a-a1143af1ae7b",
+      "imp9-creature-62520398-917b-4230-975c-e982cb332d8a"
+    ],
+    "rejoinRevision": 7,
+    "scope": "IMP9Reconcile-04760da7-2287-4613-b654-733a75ffae75",
+    "captureOperationIds": [
+      "cc17aae3-bb6b-43bd-be65-f534f227ab4a",
+      "56a41d6d-25a5-48ec-8a26-3ba66c55eb63",
+      "f4d53455-aa0f-4a1b-a315-3c65241123e2"
+    ],
+    "afterDropCapacity": {
+      "ordinaryUsed": 2,
+      "canInitiate": false,
+      "overflowHeldCount": 1,
+      "capacity": 2,
+      "components": {
+        "earned": 0,
+        "temporary": 0,
+        "base": 2,
+        "commercial": 0
+      }
+    },
+    "rejoinCapacity": {
+      "ordinaryUsed": 2,
+      "canInitiate": false,
+      "overflowHeldCount": 1,
+      "capacity": 2,
+      "components": {
+        "earned": 0,
+        "temporary": 0,
+        "base": 2,
+        "commercial": 0
+      }
+    },
+    "duplicateResult": {
+      "status": "AlreadyStored",
+      "profileRevision": 6
+    },
+    "events": [
+      {
+        "userId": 1925180832,
+        "envelope": {
+          "payload": [],
+          "requestId": "client-1",
+          "protocolVersion": 1,
+          "routeId": "Session.ClientHello"
+        }
+      },
+      {
+        "userId": 1925180832,
+        "envelope": {
+          "payload": {
+            "domain": "vault"
+          },
+          "requestId": "client-2",
+          "protocolVersion": 1,
+          "routeId": "Session.RequestResync"
+        }
+      },
+      {
+        "userId": 1925180832,
+        "envelope": {
+          "payload": {
+            "domain": "vault"
+          },
+          "requestId": "client-3",
+          "protocolVersion": 1,
+          "routeId": "Session.RequestResync"
+        }
+      },
+      {
+        "userId": 1925180832,
+        "envelope": {
+          "payload": {
+            "domain": "vault"
+          },
+          "requestId": "client-4",
+          "protocolVersion": 1,
+          "routeId": "Session.RequestResync"
+        }
+      },
+      {
+        "userId": 1925180832,
+        "envelope": {
+          "payload": {
+            "domain": "vault"
+          },
+          "requestId": "client-5",
+          "protocolVersion": 1,
+          "routeId": "Session.RequestResync"
+        }
+      },
+      {
+        "userId": 1925180832,
+        "envelope": {
+          "payload": {
+            "domain": "vault"
+          },
+          "requestId": "client-6",
+          "protocolVersion": 1,
+          "routeId": "Session.RequestResync"
+        }
+      },
+      {
+        "userId": 1925180832,
+        "envelope": {
+          "protocolVersion": 1,
+          "payload": {
+            "creatureInstanceId": "imp9-creature-62520398-917b-4230-975c-e982cb332d8a"
+          },
+          "expectedRevision": 5,
+          "routeId": "Vault.ResolveOverflow",
+          "requestId": "client-7"
+        }
+      }
+    ],
+    "seedId": "fixture:imp9-capacity-reconciliation-v1",
+    "environment": "DEV",
+    "beforeResolutionRevision": 5,
+    "rejoinOwnedCount": 3,
+    "afterDropRevision": 7,
+    "verificationClass": "V4"
+  },
+  "nativeInput": {
+    "result": "PASS",
+    "method": "Roblox MCP Client mouseButtonClick on the native Creature1 TextButton then Resolve TextButton; no scripted Activated callback or signal firing.",
+    "firstRun": {
+      "scope": "IMP9Reconcile-56746339-4018-448d-aab9-fe2f1d62548b",
+      "targetId": "imp9-creature-3c97231a-6dcf-4559-97df-4dd212d5ee82",
+      "requestId": "client-10",
+      "durableResult": "OK_VAULT_OVERFLOW_RESOLVED",
+      "negativeResults": {
+        "foreign": "REJECT_PERMISSION_VAULT_OWNERSHIP",
+        "forged": "REJECT_VALIDATION_PAYLOAD",
+        "duplicate": "OK_VAULT_ALREADY_STORED"
+      },
+      "finalFixtureFailure": "Initial invalid-data fixture exceeded the DataStore scope length; same isolated test lease was reacquired by its recorded owner identity and released without a value mutation. Probe scope was shortened and the complete scenario rerun."
+    },
+    "successfulRun": {
+      "scope": "IMP9Reconcile-04760da7-2287-4613-b654-733a75ffae75",
+      "targetId": "imp9-creature-62520398-917b-4230-975c-e982cb332d8a",
+      "client": {
+        "message": "Saved collection refreshed.",
+        "heading": "Collection 3 / 8   |   Overflow 0",
+        "events": [
+          {
+            "routeId": "Session.Ready",
+            "correlationId": "client-1",
+            "protocolVersion": 1,
+            "payload": {
+              "profileRevision": 5
+            }
+          },
+          {
+            "routeId": "Projection.Snapshot",
+            "revision": 1,
+            "protocolVersion": 1,
+            "payload": {
+              "state": {
+                "status": "Ready",
+                "profileRevision": 5
+              },
+              "revision": 1,
+              "domain": "session"
+            }
+          },
+          {
+            "revision": 5,
+            "protocolVersion": 1,
+            "payload": {
+              "state": {
+                "profileRevision": 5,
+                "creatureInstanceIds": [
+                  "imp9-creature-62520398-917b-4230-975c-e982cb332d8a",
+                  "imp9-creature-8f9e85fc-ee0e-441a-9a7a-a1143af1ae7b",
+                  "imp9-creature-a113d093-99ee-4d84-87ec-1e3833b30415"
+                ],
+                "hasMore": false
+              },
+              "revision": 5,
+              "domain": "securedCollection"
+            },
+            "correlationId": "client-1",
+            "routeId": "Projection.Snapshot"
+          },
+          {
+            "routeId": "Command.Result",
+            "correlationId": "client-1",
+            "protocolVersion": 1,
+            "payload": {
+              "code": "OK_SESSION_READY"
+            }
+          },
+          {
+            "routeId": "Projection.Snapshot",
+            "revision": 1,
+            "protocolVersion": 1,
+            "payload": {
+              "state": {
+                "status": "Ready",
+                "profileRevision": 5
+              },
+              "revision": 1,
+              "domain": "session"
+            }
+          },
+          {
+            "revision": 5,
+            "protocolVersion": 1,
+            "payload": {
+              "state": {
+                "ordinaryUsed": 2,
+                "overflowCreatureInstanceIds": [
+                  "imp9-creature-62520398-917b-4230-975c-e982cb332d8a"
+                ],
+                "overflowHeldCount": 1,
+                "capacity": 8,
+                "components": {
+                  "earned": 6,
+                  "temporary": 0,
+                  "base": 2,
+                  "commercial": 0
+                },
+                "hasMore": false
+              },
+              "revision": 5,
+              "domain": "vault"
+            },
+            "correlationId": "client-2",
+            "routeId": "Projection.Snapshot"
+          },
+          {
+            "routeId": "Command.Result",
+            "correlationId": "client-2",
+            "protocolVersion": 1,
+            "payload": {
+              "code": "OK_VAULT_SNAPSHOT"
+            }
+          },
+          {
+            "routeId": "Projection.Snapshot",
+            "revision": 1,
+            "protocolVersion": 1,
+            "payload": {
+              "state": {
+                "status": "Ready",
+                "profileRevision": 5
+              },
+              "revision": 1,
+              "domain": "session"
+            }
+          },
+          {
+            "revision": 5,
+            "protocolVersion": 1,
+            "payload": {
+              "state": {
+                "ordinaryUsed": 2,
+                "overflowCreatureInstanceIds": [
+                  "imp9-creature-62520398-917b-4230-975c-e982cb332d8a"
+                ],
+                "overflowHeldCount": 1,
+                "capacity": 8,
+                "components": {
+                  "earned": 6,
+                  "temporary": 0,
+                  "base": 2,
+                  "commercial": 0
+                },
+                "hasMore": false
+              },
+              "revision": 5,
+              "domain": "vault"
+            },
+            "correlationId": "client-3",
+            "routeId": "Projection.Snapshot"
+          },
+          {
+            "routeId": "Command.Result",
+            "correlationId": "client-3",
+            "protocolVersion": 1,
+            "payload": {
+              "code": "OK_VAULT_SNAPSHOT"
+            }
+          },
+          {
+            "routeId": "Projection.Snapshot",
+            "revision": 1,
+            "protocolVersion": 1,
+            "payload": {
+              "state": {
+                "status": "Ready",
+                "profileRevision": 5
+              },
+              "revision": 1,
+              "domain": "session"
+            }
+          },
+          {
+            "revision": 5,
+            "protocolVersion": 1,
+            "payload": {
+              "state": {
+                "ordinaryUsed": 2,
+                "overflowCreatureInstanceIds": [
+                  "imp9-creature-62520398-917b-4230-975c-e982cb332d8a"
+                ],
+                "overflowHeldCount": 1,
+                "capacity": 8,
+                "components": {
+                  "earned": 6,
+                  "temporary": 0,
+                  "base": 2,
+                  "commercial": 0
+                },
+                "hasMore": false
+              },
+              "revision": 5,
+              "domain": "vault"
+            },
+            "correlationId": "client-4",
+            "routeId": "Projection.Snapshot"
+          },
+          {
+            "routeId": "Command.Result",
+            "correlationId": "client-4",
+            "protocolVersion": 1,
+            "payload": {
+              "code": "OK_VAULT_SNAPSHOT"
+            }
+          },
+          {
+            "routeId": "Projection.Snapshot",
+            "revision": 1,
+            "protocolVersion": 1,
+            "payload": {
+              "state": {
+                "status": "Ready",
+                "profileRevision": 5
+              },
+              "revision": 1,
+              "domain": "session"
+            }
+          },
+          {
+            "revision": 5,
+            "protocolVersion": 1,
+            "payload": {
+              "state": {
+                "ordinaryUsed": 2,
+                "overflowCreatureInstanceIds": [
+                  "imp9-creature-62520398-917b-4230-975c-e982cb332d8a"
+                ],
+                "overflowHeldCount": 1,
+                "capacity": 8,
+                "components": {
+                  "earned": 6,
+                  "temporary": 0,
+                  "base": 2,
+                  "commercial": 0
+                },
+                "hasMore": false
+              },
+              "revision": 5,
+              "domain": "vault"
+            },
+            "correlationId": "client-5",
+            "routeId": "Projection.Snapshot"
+          },
+          {
+            "routeId": "Command.Result",
+            "correlationId": "client-5",
+            "protocolVersion": 1,
+            "payload": {
+              "code": "OK_VAULT_SNAPSHOT"
+            }
+          },
+          {
+            "routeId": "Projection.Snapshot",
+            "revision": 1,
+            "protocolVersion": 1,
+            "payload": {
+              "state": {
+                "status": "Ready",
+                "profileRevision": 5
+              },
+              "revision": 1,
+              "domain": "session"
+            }
+          },
+          {
+            "revision": 5,
+            "protocolVersion": 1,
+            "payload": {
+              "state": {
+                "ordinaryUsed": 2,
+                "overflowCreatureInstanceIds": [
+                  "imp9-creature-62520398-917b-4230-975c-e982cb332d8a"
+                ],
+                "overflowHeldCount": 1,
+                "capacity": 8,
+                "components": {
+                  "earned": 6,
+                  "temporary": 0,
+                  "base": 2,
+                  "commercial": 0
+                },
+                "hasMore": false
+              },
+              "revision": 5,
+              "domain": "vault"
+            },
+            "correlationId": "client-6",
+            "routeId": "Projection.Snapshot"
+          },
+          {
+            "routeId": "Command.Result",
+            "correlationId": "client-6",
+            "protocolVersion": 1,
+            "payload": {
+              "code": "OK_VAULT_SNAPSHOT"
+            }
+          },
+          {
+            "routeId": "Projection.Snapshot",
+            "revision": 2,
+            "protocolVersion": 1,
+            "payload": {
+              "state": {
+                "status": "Ready",
+                "profileRevision": 6
+              },
+              "revision": 2,
+              "domain": "session"
+            }
+          },
+          {
+            "revision": 6,
+            "protocolVersion": 1,
+            "payload": {
+              "state": {
+                "ordinaryUsed": 3,
+                "overflowCreatureInstanceIds": [],
+                "overflowHeldCount": 0,
+                "capacity": 8,
+                "components": {
+                  "earned": 6,
+                  "temporary": 0,
+                  "base": 2,
+                  "commercial": 0
+                },
+                "hasMore": false
+              },
+              "revision": 6,
+              "domain": "vault"
+            },
+            "correlationId": "client-7",
+            "routeId": "Projection.Snapshot"
+          },
+          {
+            "routeId": "Command.Result",
+            "correlationId": "client-7",
+            "protocolVersion": 1,
+            "payload": {
+              "code": "OK_VAULT_OVERFLOW_RESOLVED"
+            }
+          }
+        ],
+        "resolveVisible": false,
+        "row": "",
+        "resolveActive": false
+      }
+    }
+  },
+  "captureRegression": {
+    "universeId": 10766503968,
+    "requirements": [
+      "TA-4",
+      "TA-7",
+      "TA-8",
+      "TA-15",
+      "GDS-4",
+      "GDS-7"
+    ],
+    "placeId": 110304961224794,
+    "rejoinOccurrences": 1,
+    "invocation": "Studio MCP Server Play; isolated runtime; owner event sink",
+    "result": "PASS",
+    "testId": "T15.vault.Studio.capacityRace",
+    "criticality": "C1",
+    "creatureInstanceId": "creature-9f6b631f-52f6-4b25-ba07-dc2f2a0f345c",
+    "durationMs": 2480.590099999972,
+    "afterCapacity": {
+      "ordinaryUsed": 0,
+      "canInitiate": false,
+      "overflowHeldCount": 1,
+      "capacity": 0,
+      "components": {
+        "earned": 0,
+        "temporary": 0,
+        "base": 0,
+        "commercial": 0
+      }
+    },
+    "scope": "IMP9Capacity-cef27280-4401-48a6-a936-0121b3c77721",
+    "rejoinRevision": 3,
+    "rejoinCapacity": {
+      "ordinaryUsed": 0,
+      "canInitiate": false,
+      "overflowHeldCount": 1,
+      "capacity": 0,
+      "components": {
+        "earned": 0,
+        "temporary": 0,
+        "base": 0,
+        "commercial": 0
+      }
+    },
+    "operationId": "26f0b003-c476-4322-ad85-4f4f652b4ddb",
+    "records": [
+      {
+        "fields": {
+          "component": "world"
+        },
+        "version": 1,
+        "environment": "server",
+        "severity": "info",
+        "code": "WORLD_SPAWNED",
+        "atUnixSeconds": 1790865620,
+        "sequence": 1
+      },
+      {
+        "fields": {
+          "component": "capture",
+          "seedId": "fixture:imp9-capacity-v1"
+        },
+        "version": 1,
+        "environment": "server",
+        "severity": "info",
+        "code": "VS1_PROBE",
+        "atUnixSeconds": 1790865620,
+        "sequence": 2
+      },
+      {
+        "fields": {
+          "component": "capture",
+          "detailCode": "Claimed",
+          "requestId": "imp8-claim-792aa1ab-8b0a-4951-a59b-a98226e88ccb"
+        },
+        "version": 1,
+        "environment": "server",
+        "severity": "info",
+        "code": "CAPTURE_STATE",
+        "atUnixSeconds": 1790865620,
+        "sequence": 3
+      },
+      {
+        "fields": {
+          "detailCode": "TransportActive",
+          "operationId": "26f0b003-c476-4322-ad85-4f4f652b4ddb",
+          "component": "capture",
+          "requestId": "imp8-submit-091b935e-e679-4abb-ab39-0000b6ef7da5"
+        },
+        "version": 1,
+        "environment": "server",
+        "severity": "info",
+        "code": "CAPTURE_STATE",
+        "atUnixSeconds": 1790865620,
+        "sequence": 4
+      },
+      {
+        "fields": {
+          "detailCode": "FinalizationPending",
+          "operationId": "26f0b003-c476-4322-ad85-4f4f652b4ddb",
+          "component": "capture",
+          "requestId": "imp8-submit-091b935e-e679-4abb-ab39-0000b6ef7da5"
+        },
+        "version": 1,
+        "environment": "server",
+        "severity": "info",
+        "code": "CAPTURE_STATE",
+        "atUnixSeconds": 1790865620,
+        "sequence": 5
+      },
+      {
+        "fields": {
+          "detailCode": "Secured",
+          "operationId": "26f0b003-c476-4322-ad85-4f4f652b4ddb",
+          "component": "capture",
+          "requestId": "imp8-submit-091b935e-e679-4abb-ab39-0000b6ef7da5"
+        },
+        "version": 1,
+        "environment": "server",
+        "severity": "info",
+        "code": "CAPTURE_STATE",
+        "atUnixSeconds": 1790865620,
+        "sequence": 6
+      }
+    ],
+    "afterRevision": 3,
+    "seedId": "fixture:imp9-capacity-v1",
+    "environment": "DEV",
+    "studioVersion": "0.741.19.7411056",
+    "failures": [],
+    "requestId": "imp8-submit-091b935e-e679-4abb-ab39-0000b6ef7da5",
+    "beforeRevision": 1
+  },
+  "normalProfile": {
+    "priorFoundationRevision": 11,
+    "firstCurrentLoadRevision": 12,
+    "currentBeforeRevision": 12,
+    "afterRevision": 12,
+    "ordinaryOwnedCount": 10,
+    "overflowHeldCount": 0,
+    "progressUnchangedAcrossSuccessfulRun": true,
+    "migration": "One-time capacity-domain version/securedSequence migration advanced 11 to 12; sequences come from each original durable capture operation revision. No test reset of normal progress."
+  },
+  "quality": {
+    "fast": {
+      "command": "lune run tests/runner.luau -- --suite fast",
+      "passed": 121,
+      "total": 121,
+      "newRegisteredC0Tests": 8
+    },
+    "python": {
+      "command": "python -m unittest discover -s scripts/ci -p \"test_*.py\"",
+      "passed": 28,
+      "total": 28
+    },
+    "styLua": "PASS",
+    "selene": "PASS (0 errors/0 warnings)",
+    "integrity": "PASS",
+    "dependencies": "PASS",
+    "rojoBuild": "PASS",
+    "rojoSourcemap": "PASS",
+    "luauLsp": "PASS (0 type errors; pre-existing missing Roblox engine definitions / watched-files registration warning)"
+  },
+  "limitations": [
+    "DEV base remains 10. One server-authored +6 earned tier follows GDS-8 PE-08 as a fixture; purchases and progression are pending.",
+    "Commercial/temporary verified-source readers are unbound in shipped DEV. Their authorization seam is tested with server fixtures; no real entitlement/grant integration is claimed.",
+    "Production-bearing data fails protected until actual staged settlement authority is bound. Callback-order/buffer tests are fixtures, not live production evidence.",
+    "Native probe uses a separate real DEV profile scope and the shipped gateway over temporary equivalent V1 remotes; the normal shipped player profile remains intact.",
+    "Existing avatar-animation asset permission warning remains. No real-client performance, L1, STG/PROD or new native gamepad/touch PASS is claimed."
+  ],
+  "deferredGate": {
+    "id": "VS1-19",
+    "decision": "AD-249",
+    "status": "DEFERRED — environment limitation",
+    "mandatory": true,
+    "deadline": "before IMP-10 COMPLETE"
+  },
+  "nextDependency": "Canonical Display/Production assignments and coherent production settlement (integer buffer, rate epochs, clocks and online/offline accrual), then Energy/claim and progression transactions.",
+  "imp10Started": false
+}

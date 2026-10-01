@@ -17,6 +17,7 @@ function NetworkingGateway.new(options: {
 	emitUnreliable: (any, any) -> (),
 	routeHandlers: { [string]: any }?,
 	captureResync: ((any, string) -> string)?,
+	vaultResync: ((any, string, string?) -> string)?,
 })
 	local function event(
 		player: any,
@@ -115,6 +116,15 @@ function NetworkingGateway.new(options: {
 	options.registry.bind(
 		options.routes.commands.sessionRequestResync,
 		function(player: any, envelope: any)
+			if envelope.payload.domain == "vault" then
+				return if options.vaultResync ~= nil
+					then options.vaultResync(
+						player,
+						envelope.requestId,
+						envelope.payload.afterCreatureInstanceId
+					)
+					else "UNAVAILABLE_VAULT"
+			end
 			if envelope.payload.domain == "capture" then
 				if options.getSession(player).status ~= "Ready" then
 					return "REJECT_STATE_NOT_READY"
