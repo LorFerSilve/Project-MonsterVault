@@ -28,6 +28,22 @@ function VaultAssignmentProjectionV1.validAssignment(payload: any, revision: any
 	end
 	return true
 end
+function VaultAssignmentProjectionV1.validClaim(payload: any, revision: any): boolean
+	if
+		type(payload) ~= "table"
+		or payload.claimScope ~= "All"
+		or not integer(revision, 9_007_199_254_740_991)
+		or revision < 1
+	then
+		return false
+	end
+	for key in payload do
+		if key ~= "claimScope" then
+			return false
+		end
+	end
+	return true
+end
 function VaultAssignmentProjectionV1.validSnapshot(payload: any): boolean
 	if
 		type(payload) ~= "table"
@@ -52,6 +68,9 @@ function VaultAssignmentProjectionV1.validSnapshot(payload: any): boolean
 			displaySlotCount = 24,
 			offlineWindowSeconds = 43200,
 			offlineCreditedMilli = 1_000_000_000_000_000,
+			energyUnits = 1_000_000_000_000,
+			claimExpectedRevision = 9_007_199_254_740_991,
+			claimUnits = 1_000_000_000_000,
 		}
 	do
 		if not integer(state[key], maximum :: number) then
@@ -110,6 +129,9 @@ function VaultAssignmentProjectionV1.validSnapshot(payload: any): boolean
 			and key ~= "displaySlotCount"
 			and key ~= "offlineWindowSeconds"
 			and key ~= "offlineCreditedMilli"
+			and key ~= "energyUnits"
+			and key ~= "claimExpectedRevision"
+			and key ~= "claimUnits"
 			and key ~= "creatures"
 			and key ~= "hasMore"
 		then

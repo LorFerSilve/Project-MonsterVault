@@ -11,6 +11,8 @@ local VaultService = require(script.Parent.Parent.domains.vault.VaultService)
 local VaultCapacityUseCase = require(script.Parent.Parent.application.VaultCapacityUseCase)
 local VaultProductionService = require(script.Parent.Parent.domains.vault.VaultProductionService)
 local VaultProductionUseCase = require(script.Parent.Parent.application.VaultProductionUseCase)
+local EnergyService = require(script.Parent.Parent.domains.economy.EnergyService)
+local ProductionClaimUseCase = require(script.Parent.Parent.application.ProductionClaimUseCase)
 local VaultProductionFixture =
 	require(game:GetService("ReplicatedStorage").MonsterVault.Shared.config.VaultProductionFixture)
 local VaultCapacityFixture =
@@ -50,6 +52,7 @@ function ProfileRuntimeService.new(options: {
 		else options.httpService:GenerateGUID(false)
 	local vault = VaultService.new(VaultCapacityFixture)
 	local production = VaultProductionService.new(VaultProductionFixture)
+	local energy = EnergyService.new()
 	local assignments = VaultProductionUseCase.new({
 		production = production,
 		vault = vault,
@@ -66,6 +69,15 @@ function ProfileRuntimeService.new(options: {
 			return "vault-" .. options.httpService:GenerateGUID(false)
 		end,
 	})
+	local claims = ProductionClaimUseCase.new({
+		energy = energy,
+		production = production,
+		vault = vault,
+		assignments = assignments,
+		newOperationId = function()
+			return options.httpService:GenerateGUID(false)
+		end,
+	})
 	local coordinator = SessionCoordinator.new({
 		createSession = function(userId: number)
 			local loadTime = os.time() -- Fixed across UpdateAsync transform replay.
@@ -80,9 +92,21 @@ function ProfileRuntimeService.new(options: {
 				repository = repository,
 				schema = ProfileSchemaV1,
 				prepareProfile = function(profile: any)
-					return assignments.prepareProfile(profile, loadTime)
+					local wallet = energy.prepare(profile)
+					if wallet.status ~= "Prepared" then
+						return wallet
+					end
+					local prepared = assignments.prepareProfile(profile, loadTime)
+					prepared.changed = prepared.changed or wallet.changed
+					return prepared
 				end,
-				prepareSave = assignments.prepareSave,
+				prepareSave = function(profile: any, release: boolean, atMono: number)
+					local invalid = energy.validate(profile)
+					if invalid ~= nil then
+						return { status = "Protected", reason = invalid }
+					end
+					return assignments.prepareSave(profile, release, atMono)
+				end,
 				queue = queue,
 				retry = retry,
 				unixSeconds = os.time,
@@ -177,6 +201,8 @@ function ProfileRuntimeService.new(options: {
 		capacity = capacity,
 		production = production,
 		assignments = assignments,
+		energy = energy,
+		claims = claims,
 	}
 end
 

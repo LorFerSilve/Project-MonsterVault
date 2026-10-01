@@ -123,7 +123,7 @@ VS-1 functional acceptance must be complete before broad feature expansion, with
 
 ## IMP-9 — Vault / Economy / Progression
 
-**Status: OPEN for DEV implementation; capacity, reconciliation, Overflow-Held resolution, assignments and production/offline settlement implemented and validated.** Upstream IMP-8 is formally complete under AD-249. [IMP-9 evidence](IMP9_IMPLEMENTATION_EVIDENCE.md) records the current implementation and remaining gates.
+**Status: OPEN for DEV implementation; capacity, reconciliation, Overflow-Held resolution, assignments, production/offline settlement and Energy/Production Claim implemented and validated.** Upstream IMP-8 is formally complete under AD-249. [IMP-9 evidence](IMP9_IMPLEMENTATION_EVIDENCE.md) records the current implementation and remaining gates.
 
 Collection capacity, assignments, production, offline settlement, Energy and progression transactions.
 
@@ -133,7 +133,9 @@ Completed next dependency (AD-250): separately identifiable server-authorized ca
 
 Completed current dependency (AD-251): server-owned Display/Production assignments, strict revision/ownership/role/slot validation, integer buffer and historical epochs, monotonic online settlement, bounded clean-offline/crash recovery and coherent save/leave/rejoin/uncertain-write recovery. Capacity loss settles before clearing roles; grants remain protected while unbound. Native UI/gateway/DEV DataStore/fresh Play server and negative/race evidence is linked from IMP-9 evidence.
 
-Next dependency: Energy wallet/transaction primitive and exact-once Production Claim, followed by progression quotes/purchases/unlocks. This slice does not start Energy/progression. IMP-9 cannot be COMPLETE, and IMP-10 cannot start, until the full TA-8 gates pass.
+Completed current dependency (AD-252): versioned server-owned integer Energy wallet, one bound reason-coded transaction primitive and exact-once Production Claim through the existing P2 writer. Settlement, whole-unit wallet transfer, buffer remainder and revision-bound claim receipt commit together. Duplicate/retry/reconnect, both uncertain-write cut points, client Class A resync, Busy/races, numeric ceilings, unbound grants and fresh-server save/rejoin are validated. Capacity, assignments, exact ownership and Overflow-Held semantics are preserved.
+
+Next dependency: progression quotes, atomic purchases and persistent unlocks. Progression has not started in this slice. IMP-9 cannot be COMPLETE, and IMP-10 cannot start, until the full TA-8 gates pass. Actual one-time/event/commercial/temporary reward integrations and deferred grants remain protected until their owning systems bind authoritative sources.
 
 ## IMP-10 — World Scaling
 

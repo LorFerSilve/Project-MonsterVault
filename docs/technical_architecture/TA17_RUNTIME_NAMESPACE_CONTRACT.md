@@ -60,7 +60,7 @@ Same base envelope but no critical/durable truth and <=768 encoded bytes.
 | Creature.Release | C | creatureInstanceId:string |
 | Vault.SetProductionAssignment | C | slotId:string, creatureInstanceId:string?; required envelope expectedRevision:integer |
 | Vault.SetDisplayAssignment | C | slotId:string, creatureInstanceId:string?; required envelope expectedRevision:integer |
-| Vault.ClaimProduction | C | claimScope:enum |
+| Vault.ClaimProduction | C | claimScope:All; required envelope expectedRevision:integer |
 | Vault.ResolveOverflow | C | creatureInstanceId:string; required envelope expectedRevision:integer |
 | Progression.PurchaseUnlock | C | unlockId:string, quoteRevision:number |
 | Social.PartyInvite | B | targetUserId:number |
@@ -157,6 +157,14 @@ No username/display name is used as durable identity.
 - profileRevision: monotonic durable aggregate version.
 
 These identities are not interchangeable.
+
+## IMP-9 Energy/Claim binding — AD-252
+
+[AD-252](ARCHITECTURE_DECISIONS.md#ad-252--register-imp-9-energy-wallet-and-exact-once-production-claim) enables Vault.ClaimProduction. Its entire payload is `{claimScope = "All"}` with a positive exact expectedRevision. Sender identity supplies the owner; requestId only correlates transport. A server-generated GUID identifies the accepted P2 wallet/buffer transaction. A receipt binds that GUID/outcome to the submitted aggregate revision; another request ID or reconnect cannot turn that old revision into a claim of new production. After bounded audit eviction, the old revision is rejected stale.
+
+Profile generation 1 adds economy-domain version 1, whole-unit Energy capped at 1e12 and 32 recent reason-coded audit/claim receipts. Only production-claim is bound in this DEV slice. Empty wallet initializes to zero; valid legacy energyUnits persists; unavailable source/grant authority and invalid state remain protected. No spending/progression or external deferred-grant reader is enabled.
+
+The existing vaultAssignments owner snapshot adds `energyUnits`, `claimExpectedRevision` and `claimUnits` (zero receipt fields before the first claim). Row ID/slot text totals at most 240 bytes instead of 300 to accommodate these fields under the existing 4 KiB validator. Matching Ready revision and request correlation remain required; Command.Result alone cannot infer a wallet update. Class A readback reconciles accepted unknown checkpoints. A Busy result with fresh readback permits resubmission; a missing receipt during a yielding/unknown write does not prove not-applied. Remotes and protocol V1 are unchanged.
 
 ## 9. Cross-server names
 

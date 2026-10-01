@@ -27,17 +27,22 @@ function VaultAssignmentProjection.fromProfile(profile: any, production: any, af
 				end
 			end
 		end
-		if chars + rowChars > 300 then
+		if chars + rowChars > 240 then
 			break
 		end
 		table.insert(rows, row)
 		chars += rowChars
 	end
 	local caps = production.capabilities(profile)
+	local audit = profile.economy.recentEnergyOperations or {}
+	local claim = audit[#audit]
 	return {
 		domain = "vaultAssignments",
 		revision = profile.profileRevision,
 		state = {
+			energyUnits = profile.economy.energyUnits or 0,
+			claimExpectedRevision = if claim then claim.expectedRevision else 0,
+			claimUnits = if claim then claim.deltaUnits else 0,
 			bufferMilli = profile.vault.productionBufferMilli,
 			bufferCapacityMilli = caps.bufferCapacityMilli,
 			productionSlotCount = caps.productionSlotCount,

@@ -1,6 +1,6 @@
 # IMP-9 Implementation Evidence
 
-> **Status:** OPEN — capacity, reconciliation, Overflow-Held resolution, assignments and production/offline settlement PASS; Energy/claim and progression remain open
+> **Status:** OPEN — capacity, reconciliation, Overflow-Held resolution, assignments, production/offline settlement and Energy/claim PASS; progression remains open
 >
 > **Date:** 2026-10-01
 >
@@ -27,7 +27,8 @@ Ordinary use counts each non-overflow CreatureInstanceId once, regardless of dis
 | Full collection through shipped gateway | PASS | Scripted real-client Command RemoteEvent receives REJECT_STATE_CAPTURE_CAPACITYBLOCKED from the live server. |
 | Authorized additive capacity policy, deterministic reconciliation and Resolve Overflow | PASS — PR #49 evidence below | TA-8 sections 21–24; content-bounded verified source boundary, protected migration, deterministic P2 preservation and native exact-instance resolution. Actual external grant integrations remain with their later owners. |
 | Display/production assignments, settlement and offline accrual | PASS — AD-251 evidence below | Canonical assignments, integer buffer, immutable epoch history, server clocks, bounded offline/crash settlement and uncertain-write recovery. |
-| Energy, claims, quotes and progression transactions | OPEN | TA-8 exact-once atomic wallet/effect, overflow and prospective config gates remain required. |
+| Energy wallet and Production Claim | PASS — AD-252 evidence below | Atomic whole-unit transfer, preserved remainder, durable revision-bound receipts and native retry/rejoin/fault evidence. |
+| Quotes and progression transactions | OPEN | TA-8 atomic cost/effect, milestone, unlock and prospective config gates remain required. |
 
 These PASS rows close the selected policy dependency, not IMP-9 as a whole. IMP-10 cannot start until the remaining IMP-9 gates pass.
 
@@ -78,7 +79,7 @@ The final structure check also found two obsolete same-name VaultService/VaultCa
 
 PR #49 completed the capacity dependency. The assignment/settlement dependency that followed is recorded below. The external VS1-19 gate and its before-IMP-10-COMPLETE deadline are unchanged.
 
-## Display/Production assignments and production/offline settlement — current evidence
+## Display/Production assignments and production/offline settlement — PR #50 evidence
 
 The selected dependency is complete under [AD-251](../technical_architecture/ARCHITECTURE_DECISIONS.md#ad-251--register-imp-9-assignments-and-production-settlement). The [raw native Studio evidence](evidence/IMP9_STUDIO_PRODUCTION_2026-10-01.json) records all 67 runtime source identities, exact instance/operation/request IDs, real gateway envelopes, isolated DEV DataStore results, fresh-server rejoin and final Edit parity. The reusable probes are [imp9_production_settlement.luau](../../scripts/studio/imp9_production_settlement.luau) and [imp9_production_client.luau](../../scripts/studio/imp9_production_client.luau).
 
@@ -108,4 +109,34 @@ All ten new registered C0 tests also passed on native Studio ModuleScripts using
 
 Validation: **131/131 fast Lune tests**, including the ten new registered tests; **28/28 Python checker tests**; StyLua, Selene (0 errors/0 warnings), architecture dependencies, Rojo build/sourcemap and luau-lsp with zero type errors. Luau analysis retains the existing missing Roblox engine-definition warning; native Studio validates the engine paths. Repository integrity is checked with the final evidence/contract updates. Protocol V1 and profile schema generation 1 remain explicit under AD-251; production has its own version-1 initialization and no new runtime transport/package.
 
-**Next dependency:** Energy wallet/transaction primitive and exact-once Production Claim, then progression quotes/purchases/unlocks. These have not started. **IMP-9 remains OPEN** until the full TA-8 economy/progression gates pass; **IMP-10 has not started**. This dependency does not close the deferred VS1-19 performance gate.
+PR #50 was verified merged as `8c176f49d5103d72aae1602ac23eab5ef7d85afc`. The following Energy/Claim dependency starts from that merge. This historical assignment evidence does not close the deferred VS1-19 performance gate.
+
+## Energy wallet and exact-once Production Claim — current evidence
+
+The selected dependency is complete under [AD-252](../technical_architecture/ARCHITECTURE_DECISIONS.md#ad-252--register-imp-9-energy-wallet-and-exact-once-production-claim). The [native Studio evidence](evidence/IMP9_STUDIO_ENERGY_CLAIM_2026-10-01.json) records candidate source SHA-256 identities, real request/operation IDs, isolated DEV DataStore outcomes and three Play-server runs. The existing [server probe](../../scripts/studio/imp9_production_settlement.luau) and [client probe](../../scripts/studio/imp9_production_client.luau) now also exercise Energy/claim; their assignment-only mode remains usable.
+
+EnergyService owns a non-negative whole-unit wallet capped at 1,000,000,000,000. Profile generation remains 1 with explicit `economy.energySchemaVersion = 1`. An empty reserved wallet initializes to zero; a valid legacy DEV `energyUnits` balance is preserved. Invalid versions, numeric values, valuable unversioned audit/grant state and unbound deferred/temporary/commercial Energy data remain protected. Production is the only bound source; no reward owner, commerce grant, spending route or progression effect is inferred. Thirty-two recent audit records retain server operation GUID, reason, amount, resulting wallet, original expected revision, timestamp, content snapshot and applied result. Existing TA-4 operation markers remain the durable idempotency authority.
+
+ProductionClaimUseCase settles the staged profile at one server clock boundary, reconciles capacity without losing ownership, computes whole output and wallet headroom, then commits wallet increment, buffer decrement and claim receipt in one ProfileSession checkpoint. Fractions, wallet-limit remainder and existing over-cap output remain in the buffer. An empty/full-wallet claim persists a zero-value receipt and its settlement boundary, so an old retry cannot consume a later interval. The Class C payload is exactly `{claimScope = "All"}` with required expected revision; owner identity comes from the authenticated sender. Clients cannot submit amount, rate, clock, wallet, source or operation identity.
+
+Same-revision submissions find the original receipt before stale-revision validation, even with a different network request ID or a fresh server. Audit eviction makes an older revision stale; it never makes it a new claim. Network replay caching is an additional guard. The exact accepted checkpoint candidate/GUID survives failures before or after write, delayed reconciliation, clean leave and lease takeover. Class A Vault readback reconciles unknown claims before publishing a confirmed wallet. Client acknowledgements/timeouts cannot change Energy or infer success. A Busy command plus a fresh readback permits a new attempt; missing receipts during an in-flight/unknown write alone never prove failure.
+
+The existing Vault manager now shows saved Energy and a native selectable Claim Production button. Wallet and compact claim receipt accompany the bounded owner assignment projection. Row ID/slot text is reduced from 300 to 240 bytes to retain the reliable 4 KiB budget. Pending claims disable another submit and slot changes; receipt-matched authoritative readback confirms the amount.
+
+| Gate | Status | Evidence |
+|---|---|---|
+| Production ready -> claim -> wallet -> save/rejoin | PASS | T15.economy.claim.readyClaimSaveRejoin; real native mouse claim revision 6 -> 7, Energy 0 -> 5, 500 milli remainder; exact collection/assignments preserved. |
+| Whole units, fractions, wallet full/partial and over-cap buffer | PASS | T15.economy.claim.numericRemainders; native ModuleScript repetition, including the exact 1e12-unit/1e15-milli bounds. No remainder is dropped. |
+| Retry/duplicate/new request ID/reconnect | PASS | Registered duplicate/race and rejoin tests; real gateway duplicate returns the original outcome; fresh server keeps Energy 9 and adds only 14,600 offline milli to the saved 8,400 buffer. The old revision-6 claim consumes none of that output. |
+| Before/after-write failure, transform replay and delayed retry | PASS | T15.economy.claim.uncertainCutPoints; real DEV adapter cut-point probes retain OutcomeUnknown, one GUID, original boundary and one revision. |
+| Real client lost result and Class A recovery | PASS | Fresh-server mouse claim with an injected lost UpdateAsync result keeps the button disabled and Energy 9 visible. Resync commits/confirms exactly revision 13 -> 14, Energy 32 with 300 milli remaining. |
+| Concurrent claim/assignment and capacity loss | PASS | T15.economy.claim.duplicateAndRace; native real writer returns Busy. Settlement precedes capacity loss, all exact creatures become Held without variant/lock loss, and saved output remains claimable. |
+| Unknown-result disconnect and fresh composition | PASS | T15.economy.claim.unknownDisconnect; real unknown 17-unit claim releases after reconciliation. A third Play server using shipped ProfileRuntimeService restores Energy 49, preserves exact Held ownership and returns AlreadyCommitted for that original GUID with no value effect. |
+| Protected load and unbound sources | PASS | T15.economy.claim.protectedLoadsAndPrimitive; native isolated DataStore loads for commercial production grant, missing epoch, invalid Energy and unbound deferred grant return ProtectedLoadFailure and preserve stored values. |
+| Bounded audit and authoritative UI | PASS | T15.economy.claim.boundedAudit and authoritativeReadback; 32-record retention, stale retry after eviction, strict hostile payloads, worst-length wire bound, Busy recovery and missing-receipt/in-flight protection. |
+
+All eight new registered C0 tests passed on the final candidate's native Studio ModuleScripts as well as Lune. Native isolation preserved the normal player's collection/economy byte-for-value during the probe. The normal profile receives only the authorized one-time wallet initialization through the shipped load path. A redundant empty same-name Vault folder found during initial inspection was removed; no authored source was discarded. Studio finishes in Edit with **69/69 authored scripts** matching normalized length/Adler-32, no duplicate paths, no temporary probes/remotes and all four authored world objects intact. The pre-existing avatar-animation permission warning remains; no gameplay/gateway diagnostic failure occurred.
+
+Validation: **139/139 fast Lune tests**, **8/8 native Studio C0 tests**, **28/28 Python checker tests**; StyLua, Selene (0 errors/0 warnings), architecture dependencies, repository integrity, Rojo build/sourcemap and luau-lsp with zero type errors. Luau analysis retains the existing missing Roblox engine-definition warning; native Studio covers the engine paths. No new remote, runtime package, progression, live grant binding or release promotion is introduced.
+
+**IMP-9 remains OPEN. Next dependency: progression quotes, atomic purchases and persistent unlocks.** Progression and IMP-10 have not started. External grant/deferred reconciliation remains protected until its owning system supplies verified authority. AD-249 / VS1-19 and its before-IMP-10-COMPLETE deadline remain unchanged.

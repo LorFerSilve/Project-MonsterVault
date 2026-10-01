@@ -3545,3 +3545,27 @@ Pending save candidates survive before-write/lost-after-write results. Retry che
 ### Evidence and consequence
 
 [IMP-9 evidence](../implementation/IMP9_IMPLEMENTATION_EVIDENCE.md) records registered C0 tests and native UI/gateway/DEV DataStore/fresh Play server/protected-load/race evidence. The assignment/production/offline dependency closes with that evidence and CI. IMP-9 remains OPEN for Energy wallet/claim and progression transactions; this slice starts neither Energy/progression nor IMP-10. AD-249 and release gates remain unchanged.
+
+---
+
+## AD-252 — Register IMP-9 Energy Wallet and Exact-Once Production Claim
+
+**Date:** 2026-10-01
+
+**Status:** Accepted — implementation of the owner-requested GDS-7/8 and TA-8 dependency
+
+**Owning TA phase:** TA-17; affected contracts TA-3/4/8/12/15
+
+### Decision
+
+Enable reserved Class C Vault.ClaimProduction with the exact payload `{claimScope = "All"}` and required positive exact expectedRevision. Owner comes from the authenticated sender. Keep server-generated operation GUIDs and the existing ProfileSession P2 checkpoint, write queue, lease fences and operation markers. Bind each accepted claim's receipt to its original aggregate revision. Find retained receipts before stale validation; audit eviction leaves old revisions stale. Network request IDs remain correlation only. Thus transport retries, changed request IDs, cache expiry and fresh-server reconnect cannot claim a later production interval as the original outcome.
+
+EnergyService owns the whole-unit 1e12 wallet ceiling and the only bound reason-coded Energy mutation primitive. Profile generation stays 1 with economy-domain version 1. Empty reserved state initializes to zero; valid legacy DEV energyUnits is preserved. Invalid versions/numerics, valuable unversioned state and unbound Energy/grant authority fail protected. Keep 32 recent audit records containing operation GUID, timestamp, reason, delta, resulting wallet, source, expected revision, content snapshot and result class. Existing TA-4 operation markers remain independent of audit retention.
+
+ProductionClaimUseCase settles the staged candidate once at an authoritative boundary, preserves capacity/Overflow-Held rules, transfers `min(floor(bufferMilli / 1000), wallet headroom)` and commits wallet, buffer, receipt and operation marker together. Fractional and wallet-limit remainder stays in the buffer. Zero/full-wallet claims persist their settlement and zero receipt rather than allowing an old intent to claim a later interval. Retain the exact accepted candidate across unknown write results; existing reconciliation, release and takeover recover durable value without another reward.
+
+Reuse the native Vault manager and owner-only vaultAssignments projection. Add saved Energy and compact last-claim revision/units, reducing row text bound from 300 to 240 bytes under the existing reliable wire limit. A correlated receipt confirms client intent; acknowledgements/timeouts cannot mutate the wallet. Busy admission plus fresh readback permits a fresh attempt, while a missing receipt during an in-flight/unknown write alone cannot prove failure. No new transport/package is added. Production is the sole bound source; no external grants, spend/progression routes, milestones or deferred-grant effects are inferred.
+
+### Gate consequence
+
+[IMP-9 evidence](../implementation/IMP9_IMPLEMENTATION_EVIDENCE.md) closes Energy/Production Claim with registered C0 tests, real GUI/gateway/DEV DataStore fault probes, save/rejoin and a fresh shipped composition recovering an unknown-result disconnect. IMP-9 remains OPEN for progression quotes, atomic purchases and persistent unlocks. Progression and IMP-10 have not started. AD-249, grant-owner boundaries and release gates remain unchanged.

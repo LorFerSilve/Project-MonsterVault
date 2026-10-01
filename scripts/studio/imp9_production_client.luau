@@ -94,4 +94,39 @@ local function finish(): any
 	state = nil
 	return { restored = true }
 end
-return { setup = setup, negative = negative, finish = finish }
+local function claimNegative(revision: number): any
+	assert(state ~= nil, "client probe setup")
+	local function send(payload: any, expected: number?): string
+		state.serial += 1
+		local request = "probe-claim-negative-" .. state.serial
+		state.root.Command:FireServer({
+			protocolVersion = 1,
+			routeId = "Vault.ClaimProduction",
+			requestId = request,
+			expectedRevision = expected,
+			payload = payload,
+		})
+		globals.task.wait(1.1)
+		return state.networking.gateway.resultFor(request)
+	end
+	local results = {
+		forged = send(
+			{ claimScope = "All", energyUnits = 10000, ownerUserId = 1, now = 9999999 },
+			revision
+		),
+		missingRevision = send({ claimScope = "All" }, nil),
+		invalidScope = send({ claimScope = "Visitor" }, revision),
+		stale = send({ claimScope = "All" }, 1),
+		duplicate = send({ claimScope = "All" }, revision),
+	}
+	assert(
+		results.forged == "REJECT_VALIDATION_PAYLOAD"
+			and results.missingRevision == "REJECT_VALIDATION_PAYLOAD"
+			and results.invalidScope == "REJECT_VALIDATION_PAYLOAD"
+			and results.stale == "REJECT_STATE_VAULT_STALE_REVISION"
+			and results.duplicate == "OK_VAULT_PRODUCTION_CLAIMED",
+		"real claim gateway preserves authority/retry"
+	)
+	return results
+end
+return { setup = setup, negative = negative, claimNegative = claimNegative, finish = finish }

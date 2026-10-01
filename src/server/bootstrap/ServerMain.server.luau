@@ -68,6 +68,8 @@ local composition = ServerComposition.new({
 				capacity = if profileRuntime then profileRuntime.capacity else nil,
 				production = if profileRuntime then profileRuntime.production else nil,
 				assignments = if profileRuntime then profileRuntime.assignments else nil,
+				energy = if profileRuntime then profileRuntime.energy else nil,
+				claims = if profileRuntime then profileRuntime.claims else nil,
 				diagnostics = diagnostics,
 			})
 		)

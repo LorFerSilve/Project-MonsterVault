@@ -25,6 +25,7 @@ function VaultAssignmentController.new(options: {
 				and selected ~= nil
 				and pending == nil
 				and options.sessionReady(),
+			canClaim = snapshot ~= nil and pending == nil and options.sessionReady(),
 			message = if options.sessionReady() then message else "Checking saved Vault...",
 		}
 	end
@@ -105,17 +106,35 @@ function VaultAssignmentController.new(options: {
 			return "Stale"
 		end
 		if pending ~= nil then
-			local present = false
-			for _, row in envelope.payload.state.creatures do
-				if row.creatureInstanceId == pending.creatureInstanceId then
-					present = true
+			if pending.kind == "claim" then
+				if envelope.payload.state.claimExpectedRevision ~= pending.expectedRevision then
+					if
+						envelope.correlationId ~= pageRequest
+						or options.gateway.resultFor(pending.requestId) ~= "PENDING_VAULT_CLAIM"
+					then
+						return "Unconfirmed"
+					end
+					-- Busy proves this intent was not admitted. Readback refreshes its
+					-- saved state; a read while another write yields cannot disprove
+					-- an accepted/unknown claim just because its receipt is absent.
+					message = "Claim not applied. Saved Energy refreshed."
+				else
+					message =
+						string.format("Claim saved: +%d Energy.", envelope.payload.state.claimUnits)
 				end
+			else
+				local present = false
+				for _, row in envelope.payload.state.creatures do
+					if row.creatureInstanceId == pending.creatureInstanceId then
+						present = true
+					end
+				end
+				if not present then
+					return "MissingRow"
+				end -- Absence from a page never proves an assignment.
+				message = "Saved Vault refreshed."
 			end
-			if not present then
-				return "MissingRow"
-			end -- Absence from a page never proves an assignment.
 			pending = nil
-			message = "Saved Vault refreshed."
 		end
 		snapshot = envelope.payload
 		if pending == nil and message == "Loading Vault assignments..." then
@@ -131,8 +150,13 @@ function VaultAssignmentController.new(options: {
 		if pending ~= nil then
 			local code = options.gateway.resultFor(pending.requestId)
 			if code ~= nil and string.sub(code, 1, 7) == "REJECT_" then
+				local wasClaim = pending.kind == "claim"
 				pending, selected, message =
-					nil, nil, "Assignment rejected. Refresh and select again."
+					nil,
+					nil,
+					if wasClaim
+						then "Claim rejected. Refresh and try again."
+						else "Assignment rejected. Refresh and select again."
 				refresh(afterId)
 			end
 		end
@@ -142,6 +166,22 @@ function VaultAssignmentController.new(options: {
 		changed()
 	end
 	return {
+		claim = function(): string?
+			if not view().canClaim then
+				return nil
+			end
+			pageRequest = nil
+			local revision = snapshot.revision
+			local request = options.gateway.send(
+				options.routes.commands.vaultClaimProduction,
+				{ claimScope = "All" },
+				revision
+			)
+			pending = { requestId = request, kind = "claim", expectedRevision = revision }
+			message, nextRefresh = "Waiting for saved Energy claim...", options.clock() + 5
+			changed()
+			return request
+		end,
 		view = view,
 		selectCreature = selectCreature,
 		assign = assign,

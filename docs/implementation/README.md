@@ -1,6 +1,6 @@
 # Implementation Documentation
 
-> **Status:** OPEN — IMP-1 through IMP-7 complete; IMP-8 next
+> **Status:** OPEN — IMP-1 through IMP-8 complete under AD-249; IMP-9 active
 > **Opened by:** TA-17 Implementation Locked — PASS (2026-09-24)
 
 This directory is the authoritative implementation handoff and phase-evidence layer.
@@ -39,9 +39,9 @@ This directory is the authoritative implementation handoff and phase-evidence la
 
 ## Active dependency
 
-> **IMP-8 — VS-1 Closure**
+> **IMP-9 — Vault / Economy / Progression**
 
-IMP-7 is **COMPLETE — local and connected DEV Studio PASS** ([evidence](IMP7_IMPLEMENTATION_EVIDENCE.md)). IMP-8 has [partial closure evidence](IMP8_IMPLEMENTATION_EVIDENCE.md): durable rejoin projection, hostile interaction context, streaming and client timeout reconciliation have DEV evidence; the locked VS-1 matrix remains open for native gamepad input, L1/real-client performance and a trusted capture correlation log.
+IMP-8 is **COMPLETE with deferred validation under AD-249** ([evidence](IMP8_IMPLEMENTATION_EVIDENCE.md)). VS1-19 remains DEFERRED and must pass before IMP-10 COMPLETE. IMP-9 capacity, reconciliation, Overflow-Held resolution, assignments, production/offline settlement and Energy/Production Claim have [local and connected DEV Studio evidence](IMP9_IMPLEMENTATION_EVIDENCE.md). Progression quotes/purchases/unlocks are next and have not started; IMP-9 remains OPEN and IMP-10 has not started.
 
 Roadmap: [IMPLEMENTATION_ROADMAP.md](IMPLEMENTATION_ROADMAP.md)  
 First vertical slice: [FIRST_VERTICAL_SLICE.md](FIRST_VERTICAL_SLICE.md)
