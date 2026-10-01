@@ -16,8 +16,19 @@ end
 local function id(value: any, maximum: number): boolean
 	return type(value) == "string" and #value > 0 and #value <= maximum
 end
-function EnergyService.new(boundSinks: { [string]: boolean }?)
+function EnergyService.new(boundSinks: { [string]: any }?)
 	local sinks = table.clone(boundSinks or {})
+	local function sinkReason(sink: string): string?
+		local reason = sinks[sink]
+		if reason == true then
+			return "vault-upgrade-purchase"
+		end
+		return if reason == "vault-upgrade-purchase"
+				or reason == "capture-capability-purchase"
+				or reason == "access-unlock-purchase"
+			then reason
+			else nil
+	end
 	local function authorized(operation: any): boolean
 		return (
 			operation.reasonCode == "production-claim"
@@ -25,8 +36,8 @@ function EnergyService.new(boundSinks: { [string]: boolean }?)
 			and integer(operation.deltaUnits, MAX_UNITS)
 		)
 			or (
-				operation.reasonCode == "vault-upgrade-purchase"
-				and sinks[operation.sourceOrSinkId] == true
+				operation.reasonCode == sinkReason(operation.sourceOrSinkId)
+				and sinkReason(operation.sourceOrSinkId) ~= nil
 				and integer(-operation.deltaUnits, MAX_UNITS)
 			)
 	end
@@ -70,7 +81,7 @@ function EnergyService.new(boundSinks: { [string]: boolean }?)
 			then
 				return "INVALID_ENERGY_AUDIT"
 			end
-			if record.reasonCode == "vault-upgrade-purchase" then
+			if record.reasonCode ~= "production-claim" then
 				local receipts = profile.progression.purchasesByUnlockId or {}
 				if type(receipts) ~= "table" then
 					return "INVALID_ENERGY_AUDIT"
@@ -129,8 +140,8 @@ function EnergyService.new(boundSinks: { [string]: boolean }?)
 		if
 			operation.reasonCode ~= "production-claim"
 			and (
-				operation.reasonCode ~= "vault-upgrade-purchase"
-				or sinks[operation.sourceOrSinkId] ~= true
+				operation.reasonCode ~= sinkReason(operation.sourceOrSinkId)
+				or sinkReason(operation.sourceOrSinkId) == nil
 			)
 		then
 			return { status = "Protected", reason = "ENERGY_AUTHORITY_UNBOUND" }

@@ -62,7 +62,7 @@ function NetworkingRuntimeService.new(options: {
 				envelope.expectedRevision
 			)
 			if outcome.status == "Committed" or outcome.status == "AlreadyCommitted" then
-				publishProgression(player, envelope.requestId)
+				publishProgression(player, envelope.requestId, envelope.payload.unlockId)
 				return "OK_PROGRESSION_PURCHASED"
 			end
 			if outcome.status == "Rejected" then
@@ -359,9 +359,12 @@ function NetworkingRuntimeService.new(options: {
 		})
 		return "OK_VAULT_ASSIGNMENTS_SNAPSHOT"
 	end
-	publishProgression = function(player: any, requestId: string): string
+	publishProgression = function(player: any, requestId: string, unlockId: string?): string
 		if options.purchases == nil or options.progression == nil or options.vault == nil then
 			return "UNAVAILABLE_PROGRESSION"
+		end
+		if options.progression.definition(unlockId) == nil then
+			return "REJECT_STATE_PROGRESSION_INVALID_UNLOCK"
 		end
 		local active = options.profileCoordinator.get(player.UserId)
 		options.purchases.reconcile(active)
@@ -389,7 +392,7 @@ function NetworkingRuntimeService.new(options: {
 		if not ready then
 			return "PROTECTED_PROGRESSION_UNAVAILABLE"
 		end
-		local quoted = options.purchases.quote(active)
+		local quoted = options.purchases.quote(active, unlockId)
 		if quoted.status ~= "Quoted" and quoted.status ~= "Rejected" then
 			return "PROTECTED_PROGRESSION_UNAVAILABLE"
 		end
@@ -397,7 +400,8 @@ function NetworkingRuntimeService.new(options: {
 			active.snapshot(),
 			options.progression,
 			options.vault,
-			quoted.quote
+			quoted.quote,
+			unlockId
 		)
 		assert(
 			ProgressionProjectionV1.validSnapshot(payload) and WireValidation.payload(payload),

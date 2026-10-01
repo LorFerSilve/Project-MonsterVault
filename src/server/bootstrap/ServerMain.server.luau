@@ -47,6 +47,7 @@ local composition = ServerComposition.new({
 				worldRuntime = worldRuntime,
 				profileCoordinator = profileRuntime.coordinator,
 				vault = profileRuntime.vault,
+				progression = profileRuntime.progression,
 				players = game:GetService("Players"),
 				workspace = game:GetService("Workspace"),
 				event = remotes.Event,

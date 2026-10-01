@@ -1,0 +1,2685 @@
+{
+  "testId": "T15.progression.Studio.catalogCompletion",
+  "verificationClass": "V4",
+  "criticality": "C0",
+  "environment": "DEV",
+  "capturedUtc": "2026-10-01 21:17:57 UTC",
+  "baseline": {
+    "pr": 52,
+    "mergeCommit": "ec1b3fdce51288792d8acf864d2818bde6447fdb",
+    "matchedSources": 76,
+    "studioId": "510b1800-f548-4a53-8b9e-116acccf6346"
+  },
+  "candidateSources": [
+    {
+      "file": "src/shared/config/ProgressionFixture.luau",
+      "path": "ReplicatedStorage.MonsterVault.Shared.config.ProgressionFixture",
+      "kind": "ModuleScript",
+      "length": 3512,
+      "adler32": 209608657,
+      "sha256": "d27f3bbb1d507d68a281be13454390b89d9dd014a8e9aee1d70bfa60e112b07b"
+    },
+    {
+      "file": "src/shared/config/VaultCapacityFixture.luau",
+      "path": "ReplicatedStorage.MonsterVault.Shared.config.VaultCapacityFixture",
+      "kind": "ModuleScript",
+      "length": 994,
+      "adler32": 3518712484,
+      "sha256": "1e84d72832f1385cf439ea83c3a53b8d86e1e0b842c14378459bacbcfaa3b7ba"
+    },
+    {
+      "file": "src/shared/config/VaultProductionFixture.luau",
+      "path": "ReplicatedStorage.MonsterVault.Shared.config.VaultProductionFixture",
+      "kind": "ModuleScript",
+      "length": 1608,
+      "adler32": 1640628796,
+      "sha256": "94c7682df6daf9f875ec1e45c938b7b86ca5767959c5e95a97ecf1c6cc4aaff4"
+    },
+    {
+      "file": "src/shared/contracts/CaptureProjectionV1.luau",
+      "path": "ReplicatedStorage.MonsterVault.Shared.contracts.CaptureProjectionV1",
+      "kind": "ModuleScript",
+      "length": 2014,
+      "adler32": 368549946,
+      "sha256": "43b16d1f2e4fed9699f4b8013ecc78a9323da9a6a58e480b92f762c83809b708"
+    },
+    {
+      "file": "src/shared/contracts/ProgressionProjectionV1.luau",
+      "path": "ReplicatedStorage.MonsterVault.Shared.contracts.ProgressionProjectionV1",
+      "kind": "ModuleScript",
+      "length": 3684,
+      "adler32": 1116181215,
+      "sha256": "8b66e6397cdf3140650f6fa2e26784df176919e0f335ecc52f11fd3f452ecee9"
+    },
+    {
+      "file": "src/shared/contracts/ProjectionV1.luau",
+      "path": "ReplicatedStorage.MonsterVault.Shared.contracts.ProjectionV1",
+      "kind": "ModuleScript",
+      "length": 1752,
+      "adler32": 3364174407,
+      "sha256": "e0c524382ad38e3579a703c5d60ee8668bb7cd6be95f63b47a3657b761cb1d22"
+    },
+    {
+      "file": "src/shared/contracts/ProtocolV1.luau",
+      "path": "ReplicatedStorage.MonsterVault.Shared.contracts.ProtocolV1",
+      "kind": "ModuleScript",
+      "length": 752,
+      "adler32": 4281205792,
+      "sha256": "5543ded452d216f86ae7302f1b628a6edd533fbc63d647330d805216cf5970a3"
+    },
+    {
+      "file": "src/shared/contracts/ResultCodes.luau",
+      "path": "ReplicatedStorage.MonsterVault.Shared.contracts.ResultCodes",
+      "kind": "ModuleScript",
+      "length": 1783,
+      "adler32": 125316399,
+      "sha256": "b3d6c7a2cd5e0eff5a44f8e8061ce1d4d519e0cac55f3a86175aaeae380fbbdf"
+    },
+    {
+      "file": "src/shared/contracts/RouteIds.luau",
+      "path": "ReplicatedStorage.MonsterVault.Shared.contracts.RouteIds",
+      "kind": "ModuleScript",
+      "length": 4011,
+      "adler32": 1158379146,
+      "sha256": "661b6d73a37e3cdd2f5de441ccb725a21ab2bb3cc2bb877af6f3238395c8f13f"
+    },
+    {
+      "file": "src/shared/contracts/SecuredCollectionProjectionV1.luau",
+      "path": "ReplicatedStorage.MonsterVault.Shared.contracts.SecuredCollectionProjectionV1",
+      "kind": "ModuleScript",
+      "length": 2041,
+      "adler32": 2054202377,
+      "sha256": "0ab8d95693d50b85f6fe27160f4c7933d58a458c34ed7f4dae6b46c37eba1740"
+    },
+    {
+      "file": "src/shared/contracts/VaultAssignmentProjectionV1.luau",
+      "path": "ReplicatedStorage.MonsterVault.Shared.contracts.VaultAssignmentProjectionV1",
+      "kind": "ModuleScript",
+      "length": 3511,
+      "adler32": 561077293,
+      "sha256": "4762e14fa7635c2b117be56e2875e001777559c5279be8cb6cfd7263c4c0731c"
+    },
+    {
+      "file": "src/shared/contracts/VaultProjectionV1.luau",
+      "path": "ReplicatedStorage.MonsterVault.Shared.contracts.VaultProjectionV1",
+      "kind": "ModuleScript",
+      "length": 2747,
+      "adler32": 375554366,
+      "sha256": "3f75b2618dc3f0950a98ee8f39adb85f5630a548e7b3dec85348ab09f35428d3"
+    },
+    {
+      "file": "src/shared/contracts/WireValidation.luau",
+      "path": "ReplicatedStorage.MonsterVault.Shared.contracts.WireValidation",
+      "kind": "ModuleScript",
+      "length": 3313,
+      "adler32": 2778277361,
+      "sha256": "b6a99c3f9b83b56b5c2881f28054b4f201f78c47b8017c4bcacce9a3d50bad1e"
+    },
+    {
+      "file": "src/shared/contracts/WorldProjectionV1.luau",
+      "path": "ReplicatedStorage.MonsterVault.Shared.contracts.WorldProjectionV1",
+      "kind": "ModuleScript",
+      "length": 1251,
+      "adler32": 1203872300,
+      "sha256": "319ca3ae38d13a41a172d9986a68a7481739aa80cf07b6f2fdb9846b4f04683e"
+    },
+    {
+      "file": "src/shared/types/Ids.luau",
+      "path": "ReplicatedStorage.MonsterVault.Shared.types.Ids",
+      "kind": "ModuleScript",
+      "length": 1935,
+      "adler32": 2489101334,
+      "sha256": "0d95471d6c66cb9baa4245f7fd0755e3e334d5a608787477f0368bc700b21cd4"
+    },
+    {
+      "file": "src/shared/util/StartupPlan.luau",
+      "path": "ReplicatedStorage.MonsterVault.Shared.util.StartupPlan",
+      "kind": "ModuleScript",
+      "length": 2664,
+      "adler32": 897013494,
+      "sha256": "feea980a3c0e61eebafacb4fa3975d34e34a22b3ffa3dc0a3631eb10798e50f0"
+    },
+    {
+      "file": "src/shared/util/StructuredDiagnostics.luau",
+      "path": "ReplicatedStorage.MonsterVault.Shared.util.StructuredDiagnostics",
+      "kind": "ModuleScript",
+      "length": 2131,
+      "adler32": 1560651008,
+      "sha256": "bdd58852e86548217f7b7efed3f24241053f955ab0b581f0775ffb00119a994d"
+    },
+    {
+      "file": "src/server/adapters/RobloxProfileRepository.luau",
+      "path": "ServerScriptService.MonsterVaultServer.adapters.RobloxProfileRepository",
+      "kind": "ModuleScript",
+      "length": 1907,
+      "adler32": 1875932335,
+      "sha256": "70fd63a9bb943f79b02cfe33bb849dd4113ec5d845da6f045ccead05c0dc5a8e"
+    },
+    {
+      "file": "src/server/application/CaptureFinalizationUseCase.luau",
+      "path": "ServerScriptService.MonsterVaultServer.application.CaptureFinalizationUseCase",
+      "kind": "ModuleScript",
+      "length": 3590,
+      "adler32": 3455040318,
+      "sha256": "40c35373cfcedb4f690e3d7f71fc1c2eef2d95fa0fb38de64b9e741c542e483e"
+    },
+    {
+      "file": "src/server/application/NetworkingGateway.luau",
+      "path": "ServerScriptService.MonsterVaultServer.application.NetworkingGateway",
+      "kind": "ModuleScript",
+      "length": 7546,
+      "adler32": 528129357,
+      "sha256": "fd413f707a2dc7574d2e7603a6e8f174194d649e45186214c3a22ae5368fc37e"
+    },
+    {
+      "file": "src/server/application/NetworkRateLimiter.luau",
+      "path": "ServerScriptService.MonsterVaultServer.application.NetworkRateLimiter",
+      "kind": "ModuleScript",
+      "length": 1836,
+      "adler32": 1640061411,
+      "sha256": "a04e3175334977635ff1edfae9a168bef41f05ede09c468561534c011134cff8"
+    },
+    {
+      "file": "src/server/application/ProductionClaimUseCase.luau",
+      "path": "ServerScriptService.MonsterVaultServer.application.ProductionClaimUseCase",
+      "kind": "ModuleScript",
+      "length": 3405,
+      "adler32": 3122817754,
+      "sha256": "d666b99a346c1b0009f2e836103fada3a85b9385da4c13e4009ddfd432c29647"
+    },
+    {
+      "file": "src/server/application/ProgressionProjection.luau",
+      "path": "ServerScriptService.MonsterVaultServer.application.ProgressionProjection",
+      "kind": "ModuleScript",
+      "length": 1112,
+      "adler32": 2297854644,
+      "sha256": "5e507b58f4fd9dea8cc76f402f5a82f75123371aca9c430647d978477b37f43b"
+    },
+    {
+      "file": "src/server/application/ProgressionPurchaseUseCase.luau",
+      "path": "ServerScriptService.MonsterVaultServer.application.ProgressionPurchaseUseCase",
+      "kind": "ModuleScript",
+      "length": 7974,
+      "adler32": 3187037366,
+      "sha256": "c77f37daf94087f1740c8bfb6e13389650ae290ccaddf1900734e5e8d0ed47f0"
+    },
+    {
+      "file": "src/server/application/ProjectionPublisher.luau",
+      "path": "ServerScriptService.MonsterVaultServer.application.ProjectionPublisher",
+      "kind": "ModuleScript",
+      "length": 1985,
+      "adler32": 92902742,
+      "sha256": "7588fcec6c97199e7a54dba42d031ce516e3565bcb05f6a24583a362cc11994e"
+    },
+    {
+      "file": "src/server/application/ReplayWindow.luau",
+      "path": "ServerScriptService.MonsterVaultServer.application.ReplayWindow",
+      "kind": "ModuleScript",
+      "length": 1719,
+      "adler32": 2437950171,
+      "sha256": "8fbb8bfae7e50b902e779d99a041a7682ad65c5116a72c6e7c6635bfd55ad4b6"
+    },
+    {
+      "file": "src/server/application/RouteRegistry.luau",
+      "path": "ServerScriptService.MonsterVaultServer.application.RouteRegistry",
+      "kind": "ModuleScript",
+      "length": 3426,
+      "adler32": 3006681550,
+      "sha256": "17204b430436d08c7b4abb66a83110513db5f90c4a37b03163e02a6068bf1321"
+    },
+    {
+      "file": "src/server/application/SecuredCollectionProjection.luau",
+      "path": "ServerScriptService.MonsterVaultServer.application.SecuredCollectionProjection",
+      "kind": "ModuleScript",
+      "length": 1238,
+      "adler32": 1659607245,
+      "sha256": "231c086d6265a9a5745caf258baa5434721489846e68b5abb128b9b3389b44a4"
+    },
+    {
+      "file": "src/server/application/SessionCoordinator.luau",
+      "path": "ServerScriptService.MonsterVaultServer.application.SessionCoordinator",
+      "kind": "ModuleScript",
+      "length": 5545,
+      "adler32": 3663204724,
+      "sha256": "765917d27f0a897bffcd6435ad8d1d3dd8df99a34fbadcaa342ab0526b910a3e"
+    },
+    {
+      "file": "src/server/application/VaultAssignmentProjection.luau",
+      "path": "ServerScriptService.MonsterVaultServer.application.VaultAssignmentProjection",
+      "kind": "ModuleScript",
+      "length": 1923,
+      "adler32": 3794107432,
+      "sha256": "6ad7c222c6fec977e295dc34694ed816fc33bc9cb591abf42880c70130e7e8bd"
+    },
+    {
+      "file": "src/server/application/VaultCapacityProjection.luau",
+      "path": "ServerScriptService.MonsterVaultServer.application.VaultCapacityProjection",
+      "kind": "ModuleScript",
+      "length": 990,
+      "adler32": 1856457492,
+      "sha256": "2d595d65ac73d642cb4c15f55d088fae17a24d3baaf495a1ca66e393ccf5266b"
+    },
+    {
+      "file": "src/server/application/VaultCapacityUseCase.luau",
+      "path": "ServerScriptService.MonsterVaultServer.application.VaultCapacityUseCase",
+      "kind": "ModuleScript",
+      "length": 3108,
+      "adler32": 4123009632,
+      "sha256": "8a007a90f3c2de5d698bfd8b67e09e15dd371ebfffc6bb80817baac67f42e82f"
+    },
+    {
+      "file": "src/server/application/VaultProductionUseCase.luau",
+      "path": "ServerScriptService.MonsterVaultServer.application.VaultProductionUseCase",
+      "kind": "ModuleScript",
+      "length": 3968,
+      "adler32": 3283303051,
+      "sha256": "07e70a69857b38fe583ae08e7bee6999f0b37aa7943a3c17534a55ae8990f0f8"
+    },
+    {
+      "file": "src/server/bootstrap/CaptureRuntimeService.luau",
+      "path": "ServerScriptService.MonsterVaultServer.bootstrap.CaptureRuntimeService",
+      "kind": "ModuleScript",
+      "length": 12844,
+      "adler32": 3374226633,
+      "sha256": "8c01b0f18219d71784928aa80afe9a95a173339a3443bf9e598d8e524144505d"
+    },
+    {
+      "file": "src/server/bootstrap/NetworkingRuntimeService.luau",
+      "path": "ServerScriptService.MonsterVaultServer.bootstrap.NetworkingRuntimeService",
+      "kind": "ModuleScript",
+      "length": 16302,
+      "adler32": 1110974033,
+      "sha256": "4bff3a99f16ba454f175d83d8e7920cc70a3a441759431e682319f04e68168eb"
+    },
+    {
+      "file": "src/server/bootstrap/ProfileBinding.luau",
+      "path": "ServerScriptService.MonsterVaultServer.bootstrap.ProfileBinding",
+      "kind": "ModuleScript",
+      "length": 323,
+      "adler32": 3312282673,
+      "sha256": "a6568070be25030d53e090bb6bbd5b35033322f83a373c1c2782ad442cd3531f"
+    },
+    {
+      "file": "src/server/bootstrap/ProfileRuntimeService.luau",
+      "path": "ServerScriptService.MonsterVaultServer.bootstrap.ProfileRuntimeService",
+      "kind": "ModuleScript",
+      "length": 8033,
+      "adler32": 1528732801,
+      "sha256": "2f4d434944c5685fcfe851ad6ca5fb8b1262bbcf525566f12dcc98658b128c76"
+    },
+    {
+      "file": "src/server/bootstrap/ServerComposition.luau",
+      "path": "ServerScriptService.MonsterVaultServer.bootstrap.ServerComposition",
+      "kind": "ModuleScript",
+      "length": 2754,
+      "adler32": 3368400636,
+      "sha256": "d115ce151f3d70adec2e578d4f76306962a8e506ece22a89d0ffac24912df46c"
+    },
+    {
+      "file": "src/server/bootstrap/ServerMain.server.luau",
+      "path": "ServerScriptService.MonsterVaultServer.bootstrap.ServerMain",
+      "kind": "Script",
+      "length": 3314,
+      "adler32": 3673650406,
+      "sha256": "92a3c2e571cc496f9287e8fb061f9ab5cb64154ad564022eb607d04b44a6e719"
+    },
+    {
+      "file": "src/server/bootstrap/ShutdownCoordinator.luau",
+      "path": "ServerScriptService.MonsterVaultServer.bootstrap.ShutdownCoordinator",
+      "kind": "ModuleScript",
+      "length": 1754,
+      "adler32": 1050622505,
+      "sha256": "0d5db72a3bf82128bca827212df0aabff4074af18c416f578ee236050de3999c"
+    },
+    {
+      "file": "src/server/bootstrap/StartupValidator.luau",
+      "path": "ServerScriptService.MonsterVaultServer.bootstrap.StartupValidator",
+      "kind": "ModuleScript",
+      "length": 1597,
+      "adler32": 1624707939,
+      "sha256": "4632462504a8afa26b4e40a2d4845cd4edceb3b1023b557eba688e112b1387af"
+    },
+    {
+      "file": "src/server/bootstrap/WorldRuntimeService.luau",
+      "path": "ServerScriptService.MonsterVaultServer.bootstrap.WorldRuntimeService",
+      "kind": "ModuleScript",
+      "length": 5233,
+      "adler32": 337825068,
+      "sha256": "7e14786382412734dc29acd77836b5d5c0933b9c82f5d3b2c933f670f941372c"
+    },
+    {
+      "file": "src/server/domains/capture/CaptureService.luau",
+      "path": "ServerScriptService.MonsterVaultServer.domains.capture.CaptureService",
+      "kind": "ModuleScript",
+      "length": 15238,
+      "adler32": 2344259203,
+      "sha256": "532c687fd14d3d516f0b4bb5f436016852881746eb543494073869d3bf84be0b"
+    },
+    {
+      "file": "src/server/domains/capture/VariantIdentity.luau",
+      "path": "ServerScriptService.MonsterVaultServer.domains.capture.VariantIdentity",
+      "kind": "ModuleScript",
+      "length": 1366,
+      "adler32": 1152634414,
+      "sha256": "638675e4894c33ca5488eaf23ea92a4568981e95193ff6ee843c90e1f0795adc"
+    },
+    {
+      "file": "src/server/domains/economy/EnergyService.luau",
+      "path": "ServerScriptService.MonsterVaultServer.domains.economy.EnergyService",
+      "kind": "ModuleScript",
+      "length": 6757,
+      "adler32": 1695259017,
+      "sha256": "d1b5efa27f0d414a209e42738a6d5d08b7f1610f35d46182eddb025eb18d245c"
+    },
+    {
+      "file": "src/server/domains/progression/ProgressionService.luau",
+      "path": "ServerScriptService.MonsterVaultServer.domains.progression.ProgressionService",
+      "kind": "ModuleScript",
+      "length": 11181,
+      "adler32": 3848730862,
+      "sha256": "9db693e9c74d6b18bfcfd65e501eede13363c7e50645bbda5a2b8ae3a59196fa"
+    },
+    {
+      "file": "src/server/domains/vault/VaultProductionService.luau",
+      "path": "ServerScriptService.MonsterVaultServer.domains.vault.VaultProductionService",
+      "kind": "ModuleScript",
+      "length": 13701,
+      "adler32": 3465231012,
+      "sha256": "2356bffaf340e7efdde9d4f90b37da3b9cc71f8469030d7195b6dd23caa968b2"
+    },
+    {
+      "file": "src/server/domains/vault/VaultService.luau",
+      "path": "ServerScriptService.MonsterVaultServer.domains.vault.VaultService",
+      "kind": "ModuleScript",
+      "length": 11534,
+      "adler32": 2521666215,
+      "sha256": "b06129ea1c74cd331a1f739161f7ee72922f6e924f3ea96c238fcbaaf6986571"
+    },
+    {
+      "file": "src/server/domains/world/FixtureDefinition.luau",
+      "path": "ServerScriptService.MonsterVaultServer.domains.world.FixtureDefinition",
+      "kind": "ModuleScript",
+      "length": 638,
+      "adler32": 1510004386,
+      "sha256": "c59eac75e28f4ebdb850c7aefcbc1de464b5401ec13a33b230f0b0d084ab6e1f"
+    },
+    {
+      "file": "src/server/domains/world/WorldService.luau",
+      "path": "ServerScriptService.MonsterVaultServer.domains.world.WorldService",
+      "kind": "ModuleScript",
+      "length": 9889,
+      "adler32": 3715743429,
+      "sha256": "2da3659e244fc3a795d245677ac3e0f0fc617e2279334221ede29ef0070f7545"
+    },
+    {
+      "file": "src/server/infrastructure/clock/ClockInterface.luau",
+      "path": "ServerScriptService.MonsterVaultServer.infrastructure.clock.ClockInterface",
+      "kind": "ModuleScript",
+      "length": 393,
+      "adler32": 2841937229,
+      "sha256": "e50b368217f9e8e67c0e9a7d94d82536ae8e3f72c45fa1a0d212679810ef7534"
+    },
+    {
+      "file": "src/server/infrastructure/performance/PerformanceCounters.luau",
+      "path": "ServerScriptService.MonsterVaultServer.infrastructure.performance.PerformanceCounters",
+      "kind": "ModuleScript",
+      "length": 1872,
+      "adler32": 1595761744,
+      "sha256": "b6a01c851a31d4d50d72f1271cc0557d54914bcce74111b6bf681bde508f20fb"
+    },
+    {
+      "file": "src/server/infrastructure/persistence/ProfileRepositoryInterface.luau",
+      "path": "ServerScriptService.MonsterVaultServer.infrastructure.persistence.ProfileRepositoryInterface",
+      "kind": "ModuleScript",
+      "length": 631,
+      "adler32": 2487998524,
+      "sha256": "0f97143f20b8430c702f4015b7571601fb4ab5141d913abfe35602d80fdf5f61"
+    },
+    {
+      "file": "src/server/infrastructure/persistence/ProfileSchemaV1.luau",
+      "path": "ServerScriptService.MonsterVaultServer.infrastructure.persistence.ProfileSchemaV1",
+      "kind": "ModuleScript",
+      "length": 9888,
+      "adler32": 2249967361,
+      "sha256": "6b3fd624ac63a020703b51325562470801115c4651bd3b94fcc534bc70d6d6ce"
+    },
+    {
+      "file": "src/server/infrastructure/persistence/ProfileSession.luau",
+      "path": "ServerScriptService.MonsterVaultServer.infrastructure.persistence.ProfileSession",
+      "kind": "ModuleScript",
+      "length": 18861,
+      "adler32": 656950224,
+      "sha256": "dbd5c63a97cc0031cf42d95694d80f5da5a0873ff3243f183b04c9e4d1ac8ebd"
+    },
+    {
+      "file": "src/server/infrastructure/persistence/RetryPolicy.luau",
+      "path": "ServerScriptService.MonsterVaultServer.infrastructure.persistence.RetryPolicy",
+      "kind": "ModuleScript",
+      "length": 1432,
+      "adler32": 3163077866,
+      "sha256": "76174178e801e0fdf965c906733110643766a146796ca2a66758efbc136aec08"
+    },
+    {
+      "file": "src/server/infrastructure/persistence/SingleWriterQueue.luau",
+      "path": "ServerScriptService.MonsterVaultServer.infrastructure.persistence.SingleWriterQueue",
+      "kind": "ModuleScript",
+      "length": 2284,
+      "adler32": 3531857504,
+      "sha256": "7e5e9591f498c05e501cacce2753f4f3e59930bdfa076d76ce7126ffc5d9c8cc"
+    },
+    {
+      "file": "src/server/infrastructure/rng/RandomSourceInterface.luau",
+      "path": "ServerScriptService.MonsterVaultServer.infrastructure.rng.RandomSourceInterface",
+      "kind": "ModuleScript",
+      "length": 308,
+      "adler32": 4177422321,
+      "sha256": "a26d9636ce029acfd36097f4a20c839da2c62b9198d6da7a90ef56e8b0ac1952"
+    },
+    {
+      "file": "src/client/bootstrap/CaptureRuntimeService.luau",
+      "path": "StarterPlayer.StarterPlayerScripts.MonsterVaultClient.bootstrap.CaptureRuntimeService",
+      "kind": "ModuleScript",
+      "length": 4830,
+      "adler32": 1500002407,
+      "sha256": "bb1b6b2121f8c0c1d81b5b80b7417f5d6648dd30db186bd1ba9c9e6ee9be7e25"
+    },
+    {
+      "file": "src/client/bootstrap/ClientComposition.luau",
+      "path": "StarterPlayer.StarterPlayerScripts.MonsterVaultClient.bootstrap.ClientComposition",
+      "kind": "ModuleScript",
+      "length": 1693,
+      "adler32": 814888708,
+      "sha256": "6a076b90c55a57dc695c548dceba00fd2319c6b8aadb587aeb96514f8b08da97"
+    },
+    {
+      "file": "src/client/bootstrap/ClientMain.client.luau",
+      "path": "StarterPlayer.StarterPlayerScripts.MonsterVaultClient.bootstrap.ClientMain",
+      "kind": "LocalScript",
+      "length": 2130,
+      "adler32": 1085330761,
+      "sha256": "bf3912d9ee0f636830d40615b638f120c159da15fa42d4e202db15d3c0a0bbbb"
+    },
+    {
+      "file": "src/client/bootstrap/NetworkingRuntimeService.luau",
+      "path": "StarterPlayer.StarterPlayerScripts.MonsterVaultClient.bootstrap.NetworkingRuntimeService",
+      "kind": "ModuleScript",
+      "length": 5903,
+      "adler32": 1010541851,
+      "sha256": "867e66ddf647a35bb7b3a9d9a4222aa31ff139df6376125aeefb7d9d5b0bb7c8"
+    },
+    {
+      "file": "src/client/bootstrap/ProgressionRuntimeService.luau",
+      "path": "StarterPlayer.StarterPlayerScripts.MonsterVaultClient.bootstrap.ProgressionRuntimeService",
+      "kind": "ModuleScript",
+      "length": 5863,
+      "adler32": 498356482,
+      "sha256": "c80aec6d4097dabb64b70c81931206c0db456f48ce5e28bdf4a56deaba94d3e9"
+    },
+    {
+      "file": "src/client/bootstrap/VaultAssignmentRuntimeService.luau",
+      "path": "StarterPlayer.StarterPlayerScripts.MonsterVaultClient.bootstrap.VaultAssignmentRuntimeService",
+      "kind": "ModuleScript",
+      "length": 6930,
+      "adler32": 4039620238,
+      "sha256": "a3a653fc5dfa1ba9f54719936e69d42d2f2ff2b26d10ac86f7b9ca31b28cf6f3"
+    },
+    {
+      "file": "src/client/bootstrap/VaultRuntimeService.luau",
+      "path": "StarterPlayer.StarterPlayerScripts.MonsterVaultClient.bootstrap.VaultRuntimeService",
+      "kind": "ModuleScript",
+      "length": 6291,
+      "adler32": 2187589700,
+      "sha256": "2e84d30eebc4d25fcf16050153af7d20e7ec67990fe9f56a4c5b8e6198e1faab"
+    },
+    {
+      "file": "src/client/bootstrap/WorldModelObserver.luau",
+      "path": "StarterPlayer.StarterPlayerScripts.MonsterVaultClient.bootstrap.WorldModelObserver",
+      "kind": "ModuleScript",
+      "length": 1952,
+      "adler32": 4087715024,
+      "sha256": "cc54050d83df0ed5f7dcce8c97bd9e1a086e5defa785464f528c8ee0e8f24e66"
+    },
+    {
+      "file": "src/client/controllers/CaptureController.luau",
+      "path": "StarterPlayer.StarterPlayerScripts.MonsterVaultClient.controllers.CaptureController",
+      "kind": "ModuleScript",
+      "length": 8974,
+      "adler32": 1597522545,
+      "sha256": "debcbf89912245c004125fed7c16fb8a63ce8a20405465feadb167effbe0baae"
+    },
+    {
+      "file": "src/client/controllers/ProgressionController.luau",
+      "path": "StarterPlayer.StarterPlayerScripts.MonsterVaultClient.controllers.ProgressionController",
+      "kind": "ModuleScript",
+      "length": 4448,
+      "adler32": 2486409473,
+      "sha256": "717245ae01100785f2b845acc3f7df0571f3d313ede0f92b45bc9f3b56a5e157"
+    },
+    {
+      "file": "src/client/controllers/VaultAssignmentController.luau",
+      "path": "StarterPlayer.StarterPlayerScripts.MonsterVaultClient.controllers.VaultAssignmentController",
+      "kind": "ModuleScript",
+      "length": 5830,
+      "adler32": 256595650,
+      "sha256": "4d77a2df14cbb4959e7ee279c15108772c0b6b5bf7a23e617ad5bf2bea317edb"
+    },
+    {
+      "file": "src/client/controllers/VaultController.luau",
+      "path": "StarterPlayer.StarterPlayerScripts.MonsterVaultClient.controllers.VaultController",
+      "kind": "ModuleScript",
+      "length": 4247,
+      "adler32": 794391328,
+      "sha256": "f71220af052b239c9be127f8aafc5eeba9fbf10a353be23e4f01aa11e7060056"
+    },
+    {
+      "file": "src/client/input/InputRouter.luau",
+      "path": "StarterPlayer.StarterPlayerScripts.MonsterVaultClient.input.InputRouter",
+      "kind": "ModuleScript",
+      "length": 5978,
+      "adler32": 4100101867,
+      "sha256": "93f41d4e56f3c7046a92393b122d049773d9f5db511290ebab8cbf0ba208ddcf"
+    },
+    {
+      "file": "src/client/networking/ClientGateway.luau",
+      "path": "StarterPlayer.StarterPlayerScripts.MonsterVaultClient.networking.ClientGateway",
+      "kind": "ModuleScript",
+      "length": 7150,
+      "adler32": 137177243,
+      "sha256": "edb416f17a5683c7f674d5af62e2ab6668fde17a8b4cedec7e3525ab3a556c77"
+    },
+    {
+      "file": "src/client/presentation/CaptureView.luau",
+      "path": "StarterPlayer.StarterPlayerScripts.MonsterVaultClient.presentation.CaptureView",
+      "kind": "ModuleScript",
+      "length": 3847,
+      "adler32": 3489459181,
+      "sha256": "43ad25166e5bd473f488b5aa05a3665b64747e0fdf6f6be00ed902cd7e364151"
+    },
+    {
+      "file": "src/client/store/ProjectionStore.luau",
+      "path": "StarterPlayer.StarterPlayerScripts.MonsterVaultClient.store.ProjectionStore",
+      "kind": "ModuleScript",
+      "length": 1143,
+      "adler32": 1034254159,
+      "sha256": "c437b00617b9e3f006005a81e8729ab79398284df1c6a22702a28cd0b49f6708"
+    },
+    {
+      "file": "src/client/store/SecuredCollectionStore.luau",
+      "path": "StarterPlayer.StarterPlayerScripts.MonsterVaultClient.store.SecuredCollectionStore",
+      "kind": "ModuleScript",
+      "length": 862,
+      "adler32": 3440647883,
+      "sha256": "3bfef9a9086fc3adb35f72c4ea123690565393392ec2df851fb01c7a3f3cf2a1"
+    },
+    {
+      "file": "src/client/store/WorldProjectionStore.luau",
+      "path": "StarterPlayer.StarterPlayerScripts.MonsterVaultClient.store.WorldProjectionStore",
+      "kind": "ModuleScript",
+      "length": 2525,
+      "adler32": 2923178345,
+      "sha256": "b3e509b0b49a8df55eaee4342f6b411072fb74e23879cd78b392f54ad88462b6"
+    }
+  ],
+  "nativeTestSources": [
+    {
+      "file": "tests/unit/ProgressionPurchase.luau",
+      "sha256": "e5c19de7f1be71d5d40017baf20f969e29b15726a0d015758367db2ca4bafbfa"
+    },
+    {
+      "file": "tests/unit/ProductionClaim.luau",
+      "sha256": "db7a83ea32aca1dca440411225dc92acde1e5e6cf71d9a0813226c9e4e3d7aa5"
+    },
+    {
+      "file": "tests/unit/VaultProduction.luau",
+      "sha256": "9b0dcc16fe9dba4a4759cb4d2fe719612395fd82895f1d0d4405c683661423ea"
+    },
+    {
+      "file": "tests/unit/VaultReconciliation.luau",
+      "sha256": "c1e853cdbb5fcc3475ee2fd7c8571784d17a1c334e6a65af621acad5ed80fd77"
+    },
+    {
+      "file": "tests/fixtures/FakeProfileRepository.luau",
+      "sha256": "130780ce1b490625d5b04c3ced0282462cf37d125988a9e94c3143dea90d1f7c"
+    },
+    {
+      "file": "tests/fixtures/FakeClock.luau",
+      "sha256": "23343f39be9c0ac7a55cac8c36b72875ec7ec09a98cb382807c9b31a9a5c4f58"
+    }
+  ],
+  "nativeC0": [
+    {
+      "test": "catalogNavigationAndHostility",
+      "suite": "ProgressionPurchase",
+      "passed": true,
+      "reason": ""
+    },
+    {
+      "test": "authoritativeReadback",
+      "suite": "ProgressionPurchase",
+      "passed": true,
+      "reason": ""
+    },
+    {
+      "test": "catalogRoundTrip",
+      "suite": "ProgressionPurchase",
+      "passed": true,
+      "reason": ""
+    },
+    {
+      "test": "duplicateRaceAndClaim",
+      "suite": "ProgressionPurchase",
+      "passed": true,
+      "reason": ""
+    },
+    {
+      "test": "accessProofGates",
+      "suite": "ProgressionPurchase",
+      "passed": true,
+      "reason": ""
+    },
+    {
+      "test": "protectedLoadsAndAuditEviction",
+      "suite": "ProgressionPurchase",
+      "passed": true,
+      "reason": ""
+    },
+    {
+      "test": "quotePurchaseSaveRejoin",
+      "suite": "ProgressionPurchase",
+      "passed": true,
+      "reason": ""
+    },
+    {
+      "test": "uncertainCutPoints",
+      "suite": "ProgressionPurchase",
+      "passed": true,
+      "reason": ""
+    },
+    {
+      "test": "vaultEffectBoundaries",
+      "suite": "ProgressionPurchase",
+      "passed": true,
+      "reason": ""
+    },
+    {
+      "test": "staleTamperAndIsolation",
+      "suite": "ProgressionPurchase",
+      "passed": true,
+      "reason": ""
+    },
+    {
+      "test": "rejectionNoMutation",
+      "suite": "ProgressionPurchase",
+      "passed": true,
+      "reason": ""
+    },
+    {
+      "test": "unknownDisconnectAndTakeover",
+      "suite": "ProgressionPurchase",
+      "passed": true,
+      "reason": ""
+    },
+    {
+      "test": "catalogFaultsAndRejections",
+      "suite": "ProgressionPurchase",
+      "passed": true,
+      "reason": ""
+    },
+    {
+      "test": "captureCapabilityEffect",
+      "suite": "ProgressionPurchase",
+      "passed": true,
+      "reason": ""
+    },
+    {
+      "test": "protectedLoadsAndPrimitive",
+      "suite": "ProductionClaim",
+      "passed": true,
+      "reason": ""
+    },
+    {
+      "test": "numericRemainders",
+      "suite": "ProductionClaim",
+      "passed": true,
+      "reason": ""
+    },
+    {
+      "test": "boundedAudit",
+      "suite": "ProductionClaim",
+      "passed": true,
+      "reason": ""
+    },
+    {
+      "test": "authoritativeReadback",
+      "suite": "ProductionClaim",
+      "passed": true,
+      "reason": ""
+    },
+    {
+      "test": "uncertainCutPoints",
+      "suite": "ProductionClaim",
+      "passed": true,
+      "reason": ""
+    },
+    {
+      "test": "readyClaimSaveRejoin",
+      "suite": "ProductionClaim",
+      "passed": true,
+      "reason": ""
+    },
+    {
+      "test": "unknownDisconnect",
+      "suite": "ProductionClaim",
+      "passed": true,
+      "reason": ""
+    },
+    {
+      "test": "duplicateAndRace",
+      "suite": "ProductionClaim",
+      "passed": true,
+      "reason": ""
+    },
+    {
+      "test": "continuousTimeline",
+      "suite": "VaultProduction",
+      "passed": true,
+      "reason": ""
+    },
+    {
+      "test": "projectionsAndClientReadback",
+      "suite": "VaultProduction",
+      "passed": true,
+      "reason": ""
+    },
+    {
+      "test": "canonicalAssignments",
+      "suite": "VaultProduction",
+      "passed": true,
+      "reason": ""
+    },
+    {
+      "test": "uncertainAssignmentWrites",
+      "suite": "VaultProduction",
+      "passed": true,
+      "reason": ""
+    },
+    {
+      "test": "capacitySettlementAndRaces",
+      "suite": "VaultProduction",
+      "passed": true,
+      "reason": ""
+    },
+    {
+      "test": "protectedLoads",
+      "suite": "VaultProduction",
+      "passed": true,
+      "reason": ""
+    },
+    {
+      "test": "monotonicAuthority",
+      "suite": "VaultProduction",
+      "passed": true,
+      "reason": ""
+    },
+    {
+      "test": "epochAndCapabilityChanges",
+      "suite": "VaultProduction",
+      "passed": true,
+      "reason": ""
+    },
+    {
+      "test": "uncertainSavesAndLeave",
+      "suite": "VaultProduction",
+      "passed": true,
+      "reason": ""
+    },
+    {
+      "test": "boundedOfflineAndCrash",
+      "suite": "VaultProduction",
+      "passed": true,
+      "reason": ""
+    },
+    {
+      "test": "clientIntentOnly",
+      "suite": "VaultReconciliation",
+      "passed": true,
+      "reason": ""
+    },
+    {
+      "test": "authorizedComponents",
+      "suite": "VaultReconciliation",
+      "passed": true,
+      "reason": ""
+    },
+    {
+      "test": "uncertainResults",
+      "suite": "VaultReconciliation",
+      "passed": true,
+      "reason": ""
+    },
+    {
+      "test": "boundedProjections",
+      "suite": "VaultReconciliation",
+      "passed": true,
+      "reason": ""
+    },
+    {
+      "test": "protectedLoad",
+      "suite": "VaultReconciliation",
+      "passed": true,
+      "reason": ""
+    },
+    {
+      "test": "idempotentMigration",
+      "suite": "VaultReconciliation",
+      "passed": true,
+      "reason": ""
+    },
+    {
+      "test": "deterministicReconciliation",
+      "suite": "VaultReconciliation",
+      "passed": true,
+      "reason": ""
+    },
+    {
+      "test": "resolutionExactlyOnce",
+      "suite": "VaultReconciliation",
+      "passed": true,
+      "reason": ""
+    }
+  ],
+  "gui": {
+    "quote": {
+      "unlockId": "vault-upgrade/production-slots/1",
+      "priceUnits": 50,
+      "expectedRevision": 13,
+      "configSnapshotId": "content-snapshot/imp9-progression-dev-v1",
+      "expiresUnixSeconds": 1790888448,
+      "prerequisiteDefinitionId": "vault-upgrade/production-slots/1",
+      "quoteRevision": 1,
+      "expectedLevel": 0,
+      "quoteId": "fe6cf45d-7671-4b0c-a10b-a0d98794ba68"
+    },
+    "unknown": {
+      "message": "Checking saved purchase...",
+      "summary": "Energy 2805 | Collection capacity 14\nProduction slots: 2 to 3",
+      "confirmEnabled": false
+    },
+    "confirmed": {
+      "message": "Upgrade saved: 50 Energy spent.",
+      "summary": "Energy 2755 | Collection capacity 14\nProduction slots: 2 to 3 | Owned",
+      "confirmEnabled": false
+    },
+    "purchase": {
+      "target": "vault-upgrade/production-slots/1",
+      "capabilities": {
+        "epochId": "production-epoch/imp9-dev-v1",
+        "effectiveUnixSeconds": 0,
+        "ratesMilliBySpeciesId": {
+          "species/fixture-orb": 100
+        },
+        "productionSlotCount": 3,
+        "offlineWindowSeconds": 7200,
+        "bufferCapacityMilli": 1440000,
+        "contentSnapshotId": "content-snapshot/imp9-production-dev-v1",
+        "displaySlotCount": 3
+      },
+      "status": "GuiCommitted",
+      "wallet": 2755
+    }
+  },
+  "scopedDataStore": {
+    "masteryProofBoundary": "Injected server-only test owner; no world proofs written; shipped runtime remains unbound until IMP-10.",
+    "universeId": 10766503968,
+    "cleanProfile": {
+      "progression": {
+        "purchasesByUnlockId": {
+          "vault-upgrade/collection-capacity/2": {
+            "configSnapshotId": "content-snapshot/imp9-progression-dev-v1",
+            "operationId": "0266de8f-1d1c-4723-abd4-f4ac29ab31ed",
+            "priceUnits": 50,
+            "expectedRevision": 12,
+            "timestamp": 1790888388,
+            "quoteRevision": 1,
+            "quoteId": "1f566b3c-838f-4623-b495-20aa4de65149"
+          },
+          "access/biome-advanced": {
+            "configSnapshotId": "content-snapshot/imp9-progression-dev-v1",
+            "operationId": "6623181e-327c-4795-a1da-f3775e8ca525",
+            "priceUnits": 200,
+            "quoteRevision": 1,
+            "timestamp": 1790888468,
+            "expectedRevision": 22,
+            "quoteId": "dd8ea098-6ff4-4cd8-9b97-968b144523fb"
+          },
+          "vault-upgrade/production-buffer/1": {
+            "configSnapshotId": "content-snapshot/imp9-progression-dev-v1",
+            "operationId": "0083ddfc-da6a-4b65-bc20-d2dde9a18227",
+            "priceUnits": 75,
+            "quoteRevision": 1,
+            "timestamp": 1790888466,
+            "expectedRevision": 15,
+            "quoteId": "8af3abbf-ba8c-4f09-9382-b6bbcfd4d0b8"
+          },
+          "vault-upgrade/display-slots/1": {
+            "configSnapshotId": "content-snapshot/imp9-progression-dev-v1",
+            "operationId": "abb432f8-e2b4-4fe3-b885-55a895d97c82",
+            "priceUnits": 25,
+            "quoteRevision": 1,
+            "timestamp": 1790888465,
+            "expectedRevision": 14,
+            "quoteId": "c27bc223-1755-449a-a86d-a13f7a563049"
+          },
+          "access/biome-mid-a": {
+            "configSnapshotId": "content-snapshot/imp9-progression-dev-v1",
+            "operationId": "e6800740-eaa2-4ac2-a7f2-757d2021ffb4",
+            "priceUnits": 100,
+            "expectedRevision": 20,
+            "timestamp": 1790888468,
+            "quoteRevision": 1,
+            "quoteId": "2b845ba9-2377-4cc3-95e3-36c85cfe4c31"
+          },
+          "vault-upgrade/offline-window/2": {
+            "configSnapshotId": "content-snapshot/imp9-progression-dev-v1",
+            "operationId": "43793442-56b7-4faa-b5a4-30a03dca170c",
+            "priceUnits": 200,
+            "quoteRevision": 1,
+            "timestamp": 1790888466,
+            "expectedRevision": 17,
+            "quoteId": "a14834fe-ec63-421d-816f-8ebc297b9337"
+          },
+          "vault-upgrade/offline-window/1": {
+            "configSnapshotId": "content-snapshot/imp9-progression-dev-v1",
+            "operationId": "0f77b7de-bed2-4da0-abee-0c409881dd93",
+            "priceUnits": 100,
+            "quoteRevision": 1,
+            "timestamp": 1790888466,
+            "expectedRevision": 16,
+            "quoteId": "b3a84c23-b5b1-477a-bef3-77304c606858"
+          },
+          "vault-upgrade/production-slots/1": {
+            "configSnapshotId": "content-snapshot/imp9-progression-dev-v1",
+            "operationId": "bd59764a-e178-44ed-b47c-a504f61cc72a",
+            "priceUnits": 50,
+            "quoteRevision": 1,
+            "timestamp": 1790888426,
+            "expectedRevision": 13,
+            "quoteId": "fe6cf45d-7671-4b0c-a10b-a0d98794ba68"
+          },
+          "vault-upgrade/offline-window/3": {
+            "configSnapshotId": "content-snapshot/imp9-progression-dev-v1",
+            "operationId": "b03e96cb-ff8f-4f6f-bef2-872c287a6b7d",
+            "priceUnits": 400,
+            "quoteRevision": 1,
+            "timestamp": 1790888467,
+            "expectedRevision": 18,
+            "quoteId": "dcc1b54d-9d49-43d4-acc9-7ef207141c57"
+          },
+          "access/biome-mid-b": {
+            "configSnapshotId": "content-snapshot/imp9-progression-dev-v1",
+            "operationId": "15a81185-9cf2-4ae6-a1b9-508a5587be42",
+            "priceUnits": 100,
+            "expectedRevision": 21,
+            "timestamp": 1790888468,
+            "quoteRevision": 1,
+            "quoteId": "2007c2a8-5b4b-4bc8-9d35-2e86ee69547c"
+          },
+          "capture-capability/1": {
+            "configSnapshotId": "content-snapshot/imp9-progression-dev-v1",
+            "operationId": "dc6e908a-6509-48d0-a50a-d0f85c91ded0",
+            "priceUnits": 50,
+            "expectedRevision": 19,
+            "timestamp": 1790888467,
+            "quoteRevision": 1,
+            "quoteId": "424e9599-8671-401a-a70d-b066d2a606a7"
+          },
+          "vault-upgrade/collection-capacity/1": {
+            "configSnapshotId": "content-snapshot/imp9-progression-dev-v1",
+            "operationId": "45979044-4845-4bf2-8847-ac5cf38cc7e2",
+            "priceUnits": 25,
+            "expectedRevision": 11,
+            "timestamp": 1790888388,
+            "quoteRevision": 1,
+            "quoteId": "566e52f2-a598-48f1-b0f7-98a38f9e3e42"
+          }
+        },
+        "captureCapabilityLevel": 1,
+        "accessUnlocksById": {
+          "access/biome-mid-b": true,
+          "access/biome-advanced": true,
+          "access/biome-mid-a": true
+        },
+        "progressionSchemaVersion": 1
+      },
+      "discovery": {
+        "variantBySignature": {
+          "species/fixture-orb|mutation/fixture-luminous": true
+        },
+        "mutationsById": {
+          "mutation/fixture-luminous": true
+        },
+        "speciesById": {
+          "species/fixture-orb": true
+        }
+      },
+      "profileRevision": 25,
+      "lastSuccessfulSaveAt": 1790888533,
+      "schemaVersion": 1,
+      "trading": [],
+      "vault": {
+        "productionAssignments": {
+          "production/1": "imp9-prod-1-3fe29121-5bdc-4bc8-963c-99d769b7c790",
+          "production/2": "imp9-prod-2-5b14c965-b7c5-495a-8ea1-9f67e6095fa0"
+        },
+        "productionSchemaVersion": 1,
+        "lastPresenceBoundary": "CleanOffline",
+        "productionBufferMilli": 29200,
+        "productionCursorUnixSeconds": 1790888533,
+        "capacitySchemaVersion": 1,
+        "displayAssignments": {
+          "display/1": "imp9-prod-1-3fe29121-5bdc-4bc8-963c-99d769b7c790"
+        },
+        "earnedUpgradeLevels": {
+          "vault-upgrade/production-slots": 1,
+          "vault-upgrade/display-slots": 1,
+          "vault-upgrade/collection-capacity": 2,
+          "vault-upgrade/production-buffer": 1,
+          "vault-upgrade/offline-window": 3
+        },
+        "productionRateEpochId": "production-epoch/imp9-dev-v1"
+      },
+      "createdAt": 1790888384,
+      "settings": [],
+      "economy": {
+        "energySchemaVersion": 1,
+        "energyUnits": 1505,
+        "recentEnergyOperations": [
+          {
+            "sourceOrSinkId": "vault/production",
+            "expectedRevision": 8,
+            "operationId": "fe88ddee-ad84-4856-a2c4-12d103b4aebf",
+            "deltaUnits": 1440,
+            "resultingWallet": 1440,
+            "configSnapshotId": "content-snapshot/imp9-production-dev-v1",
+            "timestamp": 1790888387,
+            "reasonCode": "production-claim",
+            "resultClass": "Applied"
+          },
+          {
+            "sourceOrSinkId": "vault/production",
+            "expectedRevision": 10,
+            "operationId": "f7d97410-b610-40fa-8277-bb03dc252a0a",
+            "deltaUnits": 1440,
+            "resultingWallet": 2880,
+            "configSnapshotId": "content-snapshot/imp9-production-dev-v1",
+            "timestamp": 1790888387,
+            "reasonCode": "production-claim",
+            "resultClass": "Applied"
+          },
+          {
+            "sourceOrSinkId": "vault-upgrade/collection-capacity/1",
+            "expectedRevision": 11,
+            "operationId": "45979044-4845-4bf2-8847-ac5cf38cc7e2",
+            "deltaUnits": -25,
+            "resultingWallet": 2855,
+            "configSnapshotId": "content-snapshot/imp9-progression-dev-v1",
+            "timestamp": 1790888388,
+            "reasonCode": "vault-upgrade-purchase",
+            "resultClass": "Applied"
+          },
+          {
+            "resultingWallet": 2805,
+            "expectedRevision": 12,
+            "operationId": "0266de8f-1d1c-4723-abd4-f4ac29ab31ed",
+            "deltaUnits": -50,
+            "sourceOrSinkId": "vault-upgrade/collection-capacity/2",
+            "configSnapshotId": "content-snapshot/imp9-progression-dev-v1",
+            "timestamp": 1790888388,
+            "reasonCode": "vault-upgrade-purchase",
+            "resultClass": "Applied"
+          },
+          {
+            "sourceOrSinkId": "vault-upgrade/production-slots/1",
+            "expectedRevision": 13,
+            "operationId": "bd59764a-e178-44ed-b47c-a504f61cc72a",
+            "reasonCode": "vault-upgrade-purchase",
+            "resultingWallet": 2755,
+            "configSnapshotId": "content-snapshot/imp9-progression-dev-v1",
+            "timestamp": 1790888426,
+            "deltaUnits": -50,
+            "resultClass": "Applied"
+          },
+          {
+            "resultingWallet": 2730,
+            "resultClass": "Applied",
+            "operationId": "abb432f8-e2b4-4fe3-b885-55a895d97c82",
+            "reasonCode": "vault-upgrade-purchase",
+            "sourceOrSinkId": "vault-upgrade/display-slots/1",
+            "configSnapshotId": "content-snapshot/imp9-progression-dev-v1",
+            "timestamp": 1790888465,
+            "deltaUnits": -25,
+            "expectedRevision": 14
+          },
+          {
+            "resultingWallet": 2655,
+            "resultClass": "Applied",
+            "operationId": "0083ddfc-da6a-4b65-bc20-d2dde9a18227",
+            "reasonCode": "vault-upgrade-purchase",
+            "sourceOrSinkId": "vault-upgrade/production-buffer/1",
+            "configSnapshotId": "content-snapshot/imp9-progression-dev-v1",
+            "timestamp": 1790888466,
+            "deltaUnits": -75,
+            "expectedRevision": 15
+          },
+          {
+            "resultingWallet": 2555,
+            "resultClass": "Applied",
+            "operationId": "0f77b7de-bed2-4da0-abee-0c409881dd93",
+            "reasonCode": "vault-upgrade-purchase",
+            "sourceOrSinkId": "vault-upgrade/offline-window/1",
+            "configSnapshotId": "content-snapshot/imp9-progression-dev-v1",
+            "timestamp": 1790888466,
+            "deltaUnits": -100,
+            "expectedRevision": 16
+          },
+          {
+            "resultingWallet": 2355,
+            "resultClass": "Applied",
+            "operationId": "43793442-56b7-4faa-b5a4-30a03dca170c",
+            "reasonCode": "vault-upgrade-purchase",
+            "sourceOrSinkId": "vault-upgrade/offline-window/2",
+            "configSnapshotId": "content-snapshot/imp9-progression-dev-v1",
+            "timestamp": 1790888466,
+            "deltaUnits": -200,
+            "expectedRevision": 17
+          },
+          {
+            "sourceOrSinkId": "vault-upgrade/offline-window/3",
+            "resultClass": "Applied",
+            "operationId": "b03e96cb-ff8f-4f6f-bef2-872c287a6b7d",
+            "reasonCode": "vault-upgrade-purchase",
+            "resultingWallet": 1955,
+            "configSnapshotId": "content-snapshot/imp9-progression-dev-v1",
+            "timestamp": 1790888467,
+            "deltaUnits": -400,
+            "expectedRevision": 18
+          },
+          {
+            "resultingWallet": 1905,
+            "resultClass": "Applied",
+            "operationId": "dc6e908a-6509-48d0-a50a-d0f85c91ded0",
+            "deltaUnits": -50,
+            "sourceOrSinkId": "capture-capability/1",
+            "configSnapshotId": "content-snapshot/imp9-progression-dev-v1",
+            "timestamp": 1790888467,
+            "reasonCode": "capture-capability-purchase",
+            "expectedRevision": 19
+          },
+          {
+            "sourceOrSinkId": "access/biome-mid-a",
+            "expectedRevision": 20,
+            "operationId": "e6800740-eaa2-4ac2-a7f2-757d2021ffb4",
+            "deltaUnits": -100,
+            "resultingWallet": 1805,
+            "configSnapshotId": "content-snapshot/imp9-progression-dev-v1",
+            "timestamp": 1790888468,
+            "reasonCode": "access-unlock-purchase",
+            "resultClass": "Applied"
+          },
+          {
+            "resultingWallet": 1705,
+            "expectedRevision": 21,
+            "operationId": "15a81185-9cf2-4ae6-a1b9-508a5587be42",
+            "deltaUnits": -100,
+            "sourceOrSinkId": "access/biome-mid-b",
+            "configSnapshotId": "content-snapshot/imp9-progression-dev-v1",
+            "timestamp": 1790888468,
+            "reasonCode": "access-unlock-purchase",
+            "resultClass": "Applied"
+          },
+          {
+            "sourceOrSinkId": "access/biome-advanced",
+            "expectedRevision": 22,
+            "operationId": "6623181e-327c-4795-a1da-f3775e8ca525",
+            "reasonCode": "access-unlock-purchase",
+            "resultingWallet": 1505,
+            "configSnapshotId": "content-snapshot/imp9-progression-dev-v1",
+            "timestamp": 1790888468,
+            "deltaUnits": -200,
+            "resultClass": "Applied"
+          }
+        ]
+      },
+      "collection": {
+        "creaturesById": {
+          "imp9-prod-1-3fe29121-5bdc-4bc8-963c-99d769b7c790": {
+            "speciesId": "species/fixture-orb",
+            "securedAt": 1790888384,
+            "origin": {
+              "spawnContextId": "spawn-context/fixture-clearing",
+              "contentSnapshotId": "content-snapshot/imp5-fixture-v1"
+            },
+            "operationId": "0bf939d1-1af0-4277-a928-21ae0f9fafc4",
+            "overflowHeld": false,
+            "ownerUserId": 1925180832,
+            "securedSequence": 2,
+            "creatureInstanceId": "imp9-prod-1-3fe29121-5bdc-4bc8-963c-99d769b7c790",
+            "variantIdentity": {
+              "speciesRarityId": "rarity/common",
+              "protectedVariantReasons": [],
+              "mutationIdsCanonical": [
+                "mutation/fixture-luminous"
+              ],
+              "spawnContextId": "spawn-context/fixture-clearing",
+              "traitIds": [
+                "trait/fixture-steady"
+              ],
+              "contentSnapshotId": "content-snapshot/imp5-fixture-v1",
+              "variantSignature": "species/fixture-orb|mutation/fixture-luminous"
+            },
+            "locked": false
+          },
+          "imp9-prod-2-5b14c965-b7c5-495a-8ea1-9f67e6095fa0": {
+            "speciesId": "species/fixture-orb",
+            "ownerUserId": 1925180832,
+            "origin": {
+              "spawnContextId": "spawn-context/fixture-clearing",
+              "contentSnapshotId": "content-snapshot/imp5-fixture-v1"
+            },
+            "operationId": "d7936403-7afc-4891-8c40-491ee787a4d0",
+            "overflowHeld": false,
+            "securedSequence": 3,
+            "locked": false,
+            "creatureInstanceId": "imp9-prod-2-5b14c965-b7c5-495a-8ea1-9f67e6095fa0",
+            "variantIdentity": {
+              "mutationIdsCanonical": [
+                "mutation/fixture-luminous"
+              ],
+              "traitIds": [
+                "trait/fixture-steady"
+              ],
+              "protectedVariantReasons": [],
+              "spawnContextId": "spawn-context/fixture-clearing",
+              "speciesRarityId": "rarity/common",
+              "contentSnapshotId": "content-snapshot/imp5-fixture-v1",
+              "variantSignature": "species/fixture-orb|mutation/fixture-luminous"
+            },
+            "securedAt": 1790888385
+          },
+          "imp9-prod-3-c097b4c4-16bf-47b9-a045-e46a10af1e93": {
+            "speciesId": "species/fixture-orb",
+            "securedAt": 1790888385,
+            "origin": {
+              "spawnContextId": "spawn-context/fixture-clearing",
+              "contentSnapshotId": "content-snapshot/imp5-fixture-v1"
+            },
+            "operationId": "d70ee9e5-ffe7-4ffd-a72e-d444a57cb618",
+            "overflowHeld": true,
+            "ownerUserId": 1925180832,
+            "securedSequence": 4,
+            "creatureInstanceId": "imp9-prod-3-c097b4c4-16bf-47b9-a045-e46a10af1e93",
+            "variantIdentity": {
+              "speciesRarityId": "rarity/common",
+              "protectedVariantReasons": [],
+              "mutationIdsCanonical": [
+                "mutation/fixture-luminous"
+              ],
+              "spawnContextId": "spawn-context/fixture-clearing",
+              "traitIds": [
+                "trait/fixture-steady"
+              ],
+              "contentSnapshotId": "content-snapshot/imp5-fixture-v1",
+              "variantSignature": "species/fixture-orb|mutation/fixture-luminous"
+            },
+            "locked": false
+          }
+        }
+      },
+      "recentOperations": {
+        "0f77b7de-bed2-4da0-abee-0c409881dd93": 17,
+        "0083ddfc-da6a-4b65-bc20-d2dde9a18227": 16,
+        "dc6e908a-6509-48d0-a50a-d0f85c91ded0": 20,
+        "66e90b18-c0eb-426a-a206-95b99f6f6447": 6,
+        "15a81185-9cf2-4ae6-a1b9-508a5587be42": 22,
+        "6623181e-327c-4795-a1da-f3775e8ca525": 23,
+        "0bf939d1-1af0-4277-a928-21ae0f9fafc4": 2,
+        "bd59764a-e178-44ed-b47c-a504f61cc72a": 14,
+        "8389060e-ea2c-4e8f-9524-986e104967cc": 5,
+        "b03e96cb-ff8f-4f6f-bef2-872c287a6b7d": 19,
+        "0266de8f-1d1c-4723-abd4-f4ac29ab31ed": 13,
+        "5ab780d7-b366-43f9-a594-18149ef6b74d": 10,
+        "fe88ddee-ad84-4856-a2c4-12d103b4aebf": 9,
+        "d7936403-7afc-4891-8c40-491ee787a4d0": 3,
+        "f7d97410-b610-40fa-8277-bb03dc252a0a": 11,
+        "45979044-4845-4bf2-8847-ac5cf38cc7e2": 12,
+        "abb432f8-e2b4-4fe3-b885-55a895d97c82": 15,
+        "80dbb00e-8270-4a28-92b1-13022e4e72c7": 7,
+        "d70ee9e5-ffe7-4ffd-a72e-d444a57cb618": 4,
+        "89eda27e-fbc6-48ba-babf-817f059e05d5": 8,
+        "43793442-56b7-4faa-b5a4-30a03dca170c": 18,
+        "e6800740-eaa2-4ac2-a7f2-757d2021ffb4": 21
+      },
+      "events": [],
+      "commerce": []
+    },
+    "placeId": 110304961224794,
+    "creatureInstanceIds": [
+      "imp9-prod-1-3fe29121-5bdc-4bc8-963c-99d769b7c790",
+      "imp9-prod-2-5b14c965-b7c5-495a-8ea1-9f67e6095fa0",
+      "imp9-prod-3-c097b4c4-16bf-47b9-a045-e46a10af1e93"
+    ],
+    "gatewayNegatives": [
+      {
+        "protocolVersion": 1,
+        "payload": {
+          "code": "REJECT_VALIDATION_PAYLOAD"
+        },
+        "correlationId": "catalog-forged",
+        "routeId": "Command.Result"
+      },
+      {
+        "protocolVersion": 1,
+        "payload": {
+          "code": "REJECT_VALIDATION_PAYLOAD"
+        },
+        "correlationId": "catalog-missing",
+        "routeId": "Command.Result"
+      },
+      {
+        "protocolVersion": 1,
+        "payload": {
+          "code": "OK_PROGRESSION_PURCHASED"
+        },
+        "correlationId": "catalog-duplicate",
+        "routeId": "Command.Result"
+      },
+      {
+        "protocolVersion": 1,
+        "payload": {
+          "code": "REJECT_STATE_PROGRESSION_ALREADY_OWNED"
+        },
+        "correlationId": "catalog-stale",
+        "routeId": "Command.Result"
+      }
+    ],
+    "diagnostics": [],
+    "normalProgressUnchanged": true,
+    "catalogCases": [
+      {
+        "captureChance": 0.8,
+        "revision": 15,
+        "walletAfter": 2730,
+        "walletBefore": 2755,
+        "operationId": "abb432f8-e2b4-4fe3-b885-55a895d97c82",
+        "outcome": "OutcomeUnknown",
+        "target": "vault-upgrade/display-slots/1",
+        "capabilities": {
+          "epochId": "production-epoch/imp9-dev-v1",
+          "effectiveUnixSeconds": 0,
+          "ratesMilliBySpeciesId": {
+            "species/fixture-orb": 100
+          },
+          "productionSlotCount": 3,
+          "offlineWindowSeconds": 7200,
+          "bufferCapacityMilli": 1440000,
+          "contentSnapshotId": "content-snapshot/imp9-production-dev-v1",
+          "displaySlotCount": 4
+        },
+        "nested": {
+          "purchase": "Busy",
+          "claim": "Busy"
+        },
+        "faultPoint": "Before"
+      },
+      {
+        "captureChance": 0.8,
+        "revision": 16,
+        "walletAfter": 2655,
+        "walletBefore": 2730,
+        "operationId": "0083ddfc-da6a-4b65-bc20-d2dde9a18227",
+        "outcome": "Committed",
+        "target": "vault-upgrade/production-buffer/1",
+        "capabilities": {
+          "epochId": "production-epoch/imp9-dev-v1",
+          "effectiveUnixSeconds": 0,
+          "ratesMilliBySpeciesId": {
+            "species/fixture-orb": 100
+          },
+          "productionSlotCount": 3,
+          "offlineWindowSeconds": 7200,
+          "bufferCapacityMilli": 2880000,
+          "contentSnapshotId": "content-snapshot/imp9-production-dev-v1",
+          "displaySlotCount": 4
+        }
+      },
+      {
+        "captureChance": 0.8,
+        "revision": 17,
+        "walletAfter": 2555,
+        "walletBefore": 2655,
+        "operationId": "0f77b7de-bed2-4da0-abee-0c409881dd93",
+        "outcome": "Committed",
+        "target": "vault-upgrade/offline-window/1",
+        "capabilities": {
+          "epochId": "production-epoch/imp9-dev-v1",
+          "effectiveUnixSeconds": 0,
+          "ratesMilliBySpeciesId": {
+            "species/fixture-orb": 100
+          },
+          "productionSlotCount": 3,
+          "offlineWindowSeconds": 14400,
+          "bufferCapacityMilli": 2880000,
+          "contentSnapshotId": "content-snapshot/imp9-production-dev-v1",
+          "displaySlotCount": 4
+        }
+      },
+      {
+        "captureChance": 0.8,
+        "revision": 18,
+        "walletAfter": 2355,
+        "walletBefore": 2555,
+        "operationId": "43793442-56b7-4faa-b5a4-30a03dca170c",
+        "outcome": "Committed",
+        "target": "vault-upgrade/offline-window/2",
+        "capabilities": {
+          "epochId": "production-epoch/imp9-dev-v1",
+          "effectiveUnixSeconds": 0,
+          "ratesMilliBySpeciesId": {
+            "species/fixture-orb": 100
+          },
+          "productionSlotCount": 3,
+          "offlineWindowSeconds": 28800,
+          "bufferCapacityMilli": 2880000,
+          "contentSnapshotId": "content-snapshot/imp9-production-dev-v1",
+          "displaySlotCount": 4
+        }
+      },
+      {
+        "captureChance": 0.8,
+        "revision": 19,
+        "walletAfter": 1955,
+        "walletBefore": 2355,
+        "operationId": "b03e96cb-ff8f-4f6f-bef2-872c287a6b7d",
+        "outcome": "Committed",
+        "target": "vault-upgrade/offline-window/3",
+        "capabilities": {
+          "epochId": "production-epoch/imp9-dev-v1",
+          "effectiveUnixSeconds": 0,
+          "ratesMilliBySpeciesId": {
+            "species/fixture-orb": 100
+          },
+          "productionSlotCount": 3,
+          "offlineWindowSeconds": 43200,
+          "bufferCapacityMilli": 2880000,
+          "contentSnapshotId": "content-snapshot/imp9-production-dev-v1",
+          "displaySlotCount": 4
+        }
+      },
+      {
+        "captureChance": 0.85,
+        "revision": 20,
+        "walletAfter": 1905,
+        "walletBefore": 1955,
+        "operationId": "dc6e908a-6509-48d0-a50a-d0f85c91ded0",
+        "outcome": "OutcomeUnknown",
+        "target": "capture-capability/1",
+        "capabilities": {
+          "epochId": "production-epoch/imp9-dev-v1",
+          "effectiveUnixSeconds": 0,
+          "ratesMilliBySpeciesId": {
+            "species/fixture-orb": 100
+          },
+          "productionSlotCount": 3,
+          "offlineWindowSeconds": 43200,
+          "bufferCapacityMilli": 2880000,
+          "contentSnapshotId": "content-snapshot/imp9-production-dev-v1",
+          "displaySlotCount": 4
+        },
+        "nested": {
+          "purchase": "Busy",
+          "claim": "Busy"
+        },
+        "faultPoint": "After"
+      },
+      {
+        "captureChance": 0.85,
+        "revision": 21,
+        "walletAfter": 1805,
+        "walletBefore": 1905,
+        "operationId": "e6800740-eaa2-4ac2-a7f2-757d2021ffb4",
+        "outcome": "OutcomeUnknown",
+        "target": "access/biome-mid-a",
+        "capabilities": {
+          "epochId": "production-epoch/imp9-dev-v1",
+          "effectiveUnixSeconds": 0,
+          "ratesMilliBySpeciesId": {
+            "species/fixture-orb": 100
+          },
+          "productionSlotCount": 3,
+          "offlineWindowSeconds": 43200,
+          "bufferCapacityMilli": 2880000,
+          "contentSnapshotId": "content-snapshot/imp9-production-dev-v1",
+          "displaySlotCount": 4
+        },
+        "nested": {
+          "purchase": "Busy",
+          "claim": "Busy"
+        },
+        "faultPoint": "Before"
+      },
+      {
+        "captureChance": 0.85,
+        "revision": 22,
+        "walletAfter": 1705,
+        "walletBefore": 1805,
+        "operationId": "15a81185-9cf2-4ae6-a1b9-508a5587be42",
+        "outcome": "Committed",
+        "target": "access/biome-mid-b",
+        "capabilities": {
+          "epochId": "production-epoch/imp9-dev-v1",
+          "effectiveUnixSeconds": 0,
+          "ratesMilliBySpeciesId": {
+            "species/fixture-orb": 100
+          },
+          "productionSlotCount": 3,
+          "offlineWindowSeconds": 43200,
+          "bufferCapacityMilli": 2880000,
+          "contentSnapshotId": "content-snapshot/imp9-production-dev-v1",
+          "displaySlotCount": 4
+        }
+      },
+      {
+        "captureChance": 0.85,
+        "revision": 23,
+        "walletAfter": 1505,
+        "walletBefore": 1705,
+        "operationId": "6623181e-327c-4795-a1da-f3775e8ca525",
+        "outcome": "OutcomeUnknown",
+        "target": "access/biome-advanced",
+        "capabilities": {
+          "epochId": "production-epoch/imp9-dev-v1",
+          "effectiveUnixSeconds": 0,
+          "ratesMilliBySpeciesId": {
+            "species/fixture-orb": 100
+          },
+          "productionSlotCount": 3,
+          "offlineWindowSeconds": 43200,
+          "bufferCapacityMilli": 2880000,
+          "contentSnapshotId": "content-snapshot/imp9-production-dev-v1",
+          "displaySlotCount": 4
+        },
+        "nested": {
+          "purchase": "Busy",
+          "claim": "Busy"
+        },
+        "faultPoint": "After"
+      }
+    ],
+    "testId": "T15.progression.Studio.catalogCompletion",
+    "criticality": "C0",
+    "studioVersion": "0.741.19.7411056",
+    "initialProfile": {
+      "progression": {
+        "purchasesByUnlockId": [],
+        "captureCapabilityLevel": 0,
+        "accessUnlocksById": [],
+        "progressionSchemaVersion": 1
+      },
+      "discovery": {
+        "variantBySignature": {
+          "species/fixture-orb|mutation/fixture-luminous": true
+        },
+        "mutationsById": {
+          "mutation/fixture-luminous": true
+        },
+        "speciesById": {
+          "species/fixture-orb": true
+        }
+      },
+      "commerce": [],
+      "events": [],
+      "schemaVersion": 1,
+      "trading": [],
+      "vault": {
+        "productionAssignments": [],
+        "productionCursorUnixSeconds": 1790888384,
+        "productionSchemaVersion": 1,
+        "lastPresenceBoundary": "Active",
+        "capacitySchemaVersion": 1,
+        "productionBufferMilli": 0,
+        "displayAssignments": [],
+        "productionRateEpochId": "production-epoch/imp9-dev-v1"
+      },
+      "createdAt": 1790888384,
+      "lastSuccessfulSaveAt": 1790888385,
+      "recentOperations": {
+        "0bf939d1-1af0-4277-a928-21ae0f9fafc4": 2,
+        "d70ee9e5-ffe7-4ffd-a72e-d444a57cb618": 4,
+        "d7936403-7afc-4891-8c40-491ee787a4d0": 3
+      },
+      "collection": {
+        "creaturesById": {
+          "imp9-prod-1-3fe29121-5bdc-4bc8-963c-99d769b7c790": {
+            "speciesId": "species/fixture-orb",
+            "securedAt": 1790888384,
+            "origin": {
+              "spawnContextId": "spawn-context/fixture-clearing",
+              "contentSnapshotId": "content-snapshot/imp5-fixture-v1"
+            },
+            "operationId": "0bf939d1-1af0-4277-a928-21ae0f9fafc4",
+            "overflowHeld": false,
+            "locked": false,
+            "securedSequence": 2,
+            "creatureInstanceId": "imp9-prod-1-3fe29121-5bdc-4bc8-963c-99d769b7c790",
+            "variantIdentity": {
+              "mutationIdsCanonical": [
+                "mutation/fixture-luminous"
+              ],
+              "traitIds": [
+                "trait/fixture-steady"
+              ],
+              "protectedVariantReasons": [],
+              "spawnContextId": "spawn-context/fixture-clearing",
+              "speciesRarityId": "rarity/common",
+              "contentSnapshotId": "content-snapshot/imp5-fixture-v1",
+              "variantSignature": "species/fixture-orb|mutation/fixture-luminous"
+            },
+            "ownerUserId": 1925180832
+          },
+          "imp9-prod-2-5b14c965-b7c5-495a-8ea1-9f67e6095fa0": {
+            "speciesId": "species/fixture-orb",
+            "ownerUserId": 1925180832,
+            "origin": {
+              "spawnContextId": "spawn-context/fixture-clearing",
+              "contentSnapshotId": "content-snapshot/imp5-fixture-v1"
+            },
+            "operationId": "d7936403-7afc-4891-8c40-491ee787a4d0",
+            "overflowHeld": false,
+            "securedAt": 1790888385,
+            "securedSequence": 3,
+            "creatureInstanceId": "imp9-prod-2-5b14c965-b7c5-495a-8ea1-9f67e6095fa0",
+            "variantIdentity": {
+              "protectedVariantReasons": [],
+              "speciesRarityId": "rarity/common",
+              "mutationIdsCanonical": [
+                "mutation/fixture-luminous"
+              ],
+              "spawnContextId": "spawn-context/fixture-clearing",
+              "traitIds": [
+                "trait/fixture-steady"
+              ],
+              "contentSnapshotId": "content-snapshot/imp5-fixture-v1",
+              "variantSignature": "species/fixture-orb|mutation/fixture-luminous"
+            },
+            "locked": false
+          },
+          "imp9-prod-3-c097b4c4-16bf-47b9-a045-e46a10af1e93": {
+            "speciesId": "species/fixture-orb",
+            "securedAt": 1790888385,
+            "origin": {
+              "spawnContextId": "spawn-context/fixture-clearing",
+              "contentSnapshotId": "content-snapshot/imp5-fixture-v1"
+            },
+            "operationId": "d70ee9e5-ffe7-4ffd-a72e-d444a57cb618",
+            "overflowHeld": true,
+            "creatureInstanceId": "imp9-prod-3-c097b4c4-16bf-47b9-a045-e46a10af1e93",
+            "locked": false,
+            "securedSequence": 4,
+            "variantIdentity": {
+              "mutationIdsCanonical": [
+                "mutation/fixture-luminous"
+              ],
+              "traitIds": [
+                "trait/fixture-steady"
+              ],
+              "protectedVariantReasons": [],
+              "spawnContextId": "spawn-context/fixture-clearing",
+              "speciesRarityId": "rarity/common",
+              "contentSnapshotId": "content-snapshot/imp5-fixture-v1",
+              "variantSignature": "species/fixture-orb|mutation/fixture-luminous"
+            },
+            "ownerUserId": 1925180832
+          }
+        }
+      },
+      "economy": {
+        "recentEnergyOperations": [],
+        "energyUnits": 0,
+        "energySchemaVersion": 1
+      },
+      "settings": [],
+      "profileRevision": 4
+    },
+    "purchaseQuote": {
+      "unlockId": "vault-upgrade/production-slots/1",
+      "priceUnits": 50,
+      "expectedRevision": 13,
+      "configSnapshotId": "content-snapshot/imp9-progression-dev-v1",
+      "expiresUnixSeconds": 1790888448,
+      "prerequisiteDefinitionId": "vault-upgrade/production-slots/1",
+      "quoteRevision": 1,
+      "expectedLevel": 0,
+      "quoteId": "fe6cf45d-7671-4b0c-a10b-a0d98794ba68"
+    },
+    "scope": "IMP9Prod-efedc3d7-03bc-43f8-8eda-b87cb4da8c4d",
+    "beforePurchaseProfile": {
+      "progression": {
+        "purchasesByUnlockId": {
+          "vault-upgrade/collection-capacity/1": {
+            "configSnapshotId": "content-snapshot/imp9-progression-dev-v1",
+            "operationId": "45979044-4845-4bf2-8847-ac5cf38cc7e2",
+            "priceUnits": 25,
+            "expectedRevision": 11,
+            "timestamp": 1790888388,
+            "quoteRevision": 1,
+            "quoteId": "566e52f2-a598-48f1-b0f7-98a38f9e3e42"
+          },
+          "vault-upgrade/collection-capacity/2": {
+            "configSnapshotId": "content-snapshot/imp9-progression-dev-v1",
+            "operationId": "0266de8f-1d1c-4723-abd4-f4ac29ab31ed",
+            "priceUnits": 50,
+            "expectedRevision": 12,
+            "timestamp": 1790888388,
+            "quoteRevision": 1,
+            "quoteId": "1f566b3c-838f-4623-b495-20aa4de65149"
+          }
+        },
+        "captureCapabilityLevel": 0,
+        "accessUnlocksById": [],
+        "progressionSchemaVersion": 1
+      },
+      "discovery": {
+        "variantBySignature": {
+          "species/fixture-orb|mutation/fixture-luminous": true
+        },
+        "mutationsById": {
+          "mutation/fixture-luminous": true
+        },
+        "speciesById": {
+          "species/fixture-orb": true
+        }
+      },
+      "profileRevision": 13,
+      "events": [],
+      "schemaVersion": 1,
+      "trading": [],
+      "vault": {
+        "productionRateEpochId": "production-epoch/imp9-dev-v1",
+        "productionSchemaVersion": 1,
+        "lastPresenceBoundary": "Active",
+        "productionBufferMilli": 0,
+        "productionCursorUnixSeconds": 1790888387,
+        "capacitySchemaVersion": 1,
+        "displayAssignments": {
+          "display/1": "imp9-prod-1-3fe29121-5bdc-4bc8-963c-99d769b7c790"
+        },
+        "earnedUpgradeLevels": {
+          "vault-upgrade/collection-capacity": 2
+        },
+        "productionAssignments": {
+          "production/1": "imp9-prod-1-3fe29121-5bdc-4bc8-963c-99d769b7c790",
+          "production/2": "imp9-prod-2-5b14c965-b7c5-495a-8ea1-9f67e6095fa0"
+        }
+      },
+      "createdAt": 1790888384,
+      "lastSuccessfulSaveAt": 1790888388,
+      "economy": {
+        "energySchemaVersion": 1,
+        "energyUnits": 2805,
+        "recentEnergyOperations": [
+          {
+            "resultingWallet": 1440,
+            "resultClass": "Applied",
+            "operationId": "fe88ddee-ad84-4856-a2c4-12d103b4aebf",
+            "reasonCode": "production-claim",
+            "sourceOrSinkId": "vault/production",
+            "deltaUnits": 1440,
+            "timestamp": 1790888387,
+            "configSnapshotId": "content-snapshot/imp9-production-dev-v1",
+            "expectedRevision": 8
+          },
+          {
+            "resultingWallet": 2880,
+            "resultClass": "Applied",
+            "operationId": "f7d97410-b610-40fa-8277-bb03dc252a0a",
+            "reasonCode": "production-claim",
+            "sourceOrSinkId": "vault/production",
+            "deltaUnits": 1440,
+            "timestamp": 1790888387,
+            "configSnapshotId": "content-snapshot/imp9-production-dev-v1",
+            "expectedRevision": 10
+          },
+          {
+            "sourceOrSinkId": "vault-upgrade/collection-capacity/1",
+            "resultClass": "Applied",
+            "operationId": "45979044-4845-4bf2-8847-ac5cf38cc7e2",
+            "reasonCode": "vault-upgrade-purchase",
+            "deltaUnits": -25,
+            "configSnapshotId": "content-snapshot/imp9-progression-dev-v1",
+            "timestamp": 1790888388,
+            "resultingWallet": 2855,
+            "expectedRevision": 11
+          },
+          {
+            "sourceOrSinkId": "vault-upgrade/collection-capacity/2",
+            "resultClass": "Applied",
+            "operationId": "0266de8f-1d1c-4723-abd4-f4ac29ab31ed",
+            "configSnapshotId": "content-snapshot/imp9-progression-dev-v1",
+            "resultingWallet": 2805,
+            "reasonCode": "vault-upgrade-purchase",
+            "timestamp": 1790888388,
+            "deltaUnits": -50,
+            "expectedRevision": 12
+          }
+        ]
+      },
+      "collection": {
+        "creaturesById": {
+          "imp9-prod-1-3fe29121-5bdc-4bc8-963c-99d769b7c790": {
+            "speciesId": "species/fixture-orb",
+            "ownerUserId": 1925180832,
+            "origin": {
+              "spawnContextId": "spawn-context/fixture-clearing",
+              "contentSnapshotId": "content-snapshot/imp5-fixture-v1"
+            },
+            "operationId": "0bf939d1-1af0-4277-a928-21ae0f9fafc4",
+            "overflowHeld": false,
+            "securedAt": 1790888384,
+            "securedSequence": 2,
+            "creatureInstanceId": "imp9-prod-1-3fe29121-5bdc-4bc8-963c-99d769b7c790",
+            "variantIdentity": {
+              "protectedVariantReasons": [],
+              "speciesRarityId": "rarity/common",
+              "mutationIdsCanonical": [
+                "mutation/fixture-luminous"
+              ],
+              "spawnContextId": "spawn-context/fixture-clearing",
+              "traitIds": [
+                "trait/fixture-steady"
+              ],
+              "contentSnapshotId": "content-snapshot/imp5-fixture-v1",
+              "variantSignature": "species/fixture-orb|mutation/fixture-luminous"
+            },
+            "locked": false
+          },
+          "imp9-prod-2-5b14c965-b7c5-495a-8ea1-9f67e6095fa0": {
+            "speciesId": "species/fixture-orb",
+            "securedAt": 1790888385,
+            "origin": {
+              "spawnContextId": "spawn-context/fixture-clearing",
+              "contentSnapshotId": "content-snapshot/imp5-fixture-v1"
+            },
+            "operationId": "d7936403-7afc-4891-8c40-491ee787a4d0",
+            "overflowHeld": false,
+            "locked": false,
+            "securedSequence": 3,
+            "creatureInstanceId": "imp9-prod-2-5b14c965-b7c5-495a-8ea1-9f67e6095fa0",
+            "variantIdentity": {
+              "mutationIdsCanonical": [
+                "mutation/fixture-luminous"
+              ],
+              "traitIds": [
+                "trait/fixture-steady"
+              ],
+              "protectedVariantReasons": [],
+              "spawnContextId": "spawn-context/fixture-clearing",
+              "speciesRarityId": "rarity/common",
+              "contentSnapshotId": "content-snapshot/imp5-fixture-v1",
+              "variantSignature": "species/fixture-orb|mutation/fixture-luminous"
+            },
+            "ownerUserId": 1925180832
+          },
+          "imp9-prod-3-c097b4c4-16bf-47b9-a045-e46a10af1e93": {
+            "speciesId": "species/fixture-orb",
+            "ownerUserId": 1925180832,
+            "origin": {
+              "spawnContextId": "spawn-context/fixture-clearing",
+              "contentSnapshotId": "content-snapshot/imp5-fixture-v1"
+            },
+            "operationId": "d70ee9e5-ffe7-4ffd-a72e-d444a57cb618",
+            "overflowHeld": true,
+            "securedAt": 1790888385,
+            "securedSequence": 4,
+            "creatureInstanceId": "imp9-prod-3-c097b4c4-16bf-47b9-a045-e46a10af1e93",
+            "variantIdentity": {
+              "protectedVariantReasons": [],
+              "speciesRarityId": "rarity/common",
+              "mutationIdsCanonical": [
+                "mutation/fixture-luminous"
+              ],
+              "spawnContextId": "spawn-context/fixture-clearing",
+              "traitIds": [
+                "trait/fixture-steady"
+              ],
+              "contentSnapshotId": "content-snapshot/imp5-fixture-v1",
+              "variantSignature": "species/fixture-orb|mutation/fixture-luminous"
+            },
+            "locked": false
+          }
+        }
+      },
+      "recentOperations": {
+        "0266de8f-1d1c-4723-abd4-f4ac29ab31ed": 13,
+        "d7936403-7afc-4891-8c40-491ee787a4d0": 3,
+        "fe88ddee-ad84-4856-a2c4-12d103b4aebf": 9,
+        "45979044-4845-4bf2-8847-ac5cf38cc7e2": 12,
+        "66e90b18-c0eb-426a-a206-95b99f6f6447": 6,
+        "d70ee9e5-ffe7-4ffd-a72e-d444a57cb618": 4,
+        "80dbb00e-8270-4a28-92b1-13022e4e72c7": 7,
+        "f7d97410-b610-40fa-8277-bb03dc252a0a": 11,
+        "0bf939d1-1af0-4277-a928-21ae0f9fafc4": 2,
+        "89eda27e-fbc6-48ba-babf-817f059e05d5": 8,
+        "5ab780d7-b366-43f9-a594-18149ef6b74d": 10,
+        "8389060e-ea2c-4e8f-9524-986e104967cc": 5
+      },
+      "settings": [],
+      "commerce": []
+    },
+    "catalogQuotes": [
+      {
+        "unlockId": "vault-upgrade/collection-capacity/1",
+        "priceUnits": 25,
+        "expectedRevision": 11,
+        "configSnapshotId": "content-snapshot/imp9-progression-dev-v1",
+        "expiresUnixSeconds": 1790888448,
+        "prerequisiteDefinitionId": "vault-upgrade/collection-capacity/1",
+        "quoteRevision": 1,
+        "expectedLevel": 0,
+        "quoteId": "566e52f2-a598-48f1-b0f7-98a38f9e3e42"
+      },
+      {
+        "unlockId": "vault-upgrade/collection-capacity/2",
+        "priceUnits": 50,
+        "expectedRevision": 12,
+        "configSnapshotId": "content-snapshot/imp9-progression-dev-v1",
+        "expiresUnixSeconds": 1790888448,
+        "prerequisiteDefinitionId": "vault-upgrade/collection-capacity/2",
+        "quoteRevision": 1,
+        "expectedLevel": 1,
+        "quoteId": "1f566b3c-838f-4623-b495-20aa4de65149"
+      },
+      {
+        "unlockId": "vault-upgrade/production-slots/1",
+        "priceUnits": 50,
+        "expectedRevision": 13,
+        "configSnapshotId": "content-snapshot/imp9-progression-dev-v1",
+        "expiresUnixSeconds": 1790888448,
+        "prerequisiteDefinitionId": "vault-upgrade/production-slots/1",
+        "quoteRevision": 1,
+        "expectedLevel": 0,
+        "quoteId": "fe6cf45d-7671-4b0c-a10b-a0d98794ba68"
+      },
+      {
+        "unlockId": "vault-upgrade/display-slots/1",
+        "priceUnits": 25,
+        "expectedRevision": 14,
+        "configSnapshotId": "content-snapshot/imp9-progression-dev-v1",
+        "expiresUnixSeconds": 1790888525,
+        "prerequisiteDefinitionId": "vault-upgrade/display-slots/1",
+        "quoteRevision": 1,
+        "expectedLevel": 0,
+        "quoteId": "c27bc223-1755-449a-a86d-a13f7a563049"
+      },
+      {
+        "unlockId": "vault-upgrade/production-buffer/1",
+        "priceUnits": 75,
+        "expectedRevision": 15,
+        "configSnapshotId": "content-snapshot/imp9-progression-dev-v1",
+        "expiresUnixSeconds": 1790888526,
+        "prerequisiteDefinitionId": "vault-upgrade/production-buffer/1",
+        "quoteRevision": 1,
+        "expectedLevel": 0,
+        "quoteId": "8af3abbf-ba8c-4f09-9382-b6bbcfd4d0b8"
+      },
+      {
+        "unlockId": "vault-upgrade/offline-window/1",
+        "priceUnits": 100,
+        "expectedRevision": 16,
+        "configSnapshotId": "content-snapshot/imp9-progression-dev-v1",
+        "expiresUnixSeconds": 1790888526,
+        "prerequisiteDefinitionId": "vault-upgrade/offline-window/1",
+        "quoteRevision": 1,
+        "expectedLevel": 0,
+        "quoteId": "b3a84c23-b5b1-477a-bef3-77304c606858"
+      },
+      {
+        "unlockId": "vault-upgrade/offline-window/2",
+        "priceUnits": 200,
+        "expectedRevision": 17,
+        "configSnapshotId": "content-snapshot/imp9-progression-dev-v1",
+        "expiresUnixSeconds": 1790888526,
+        "prerequisiteDefinitionId": "vault-upgrade/offline-window/2",
+        "quoteRevision": 1,
+        "expectedLevel": 1,
+        "quoteId": "a14834fe-ec63-421d-816f-8ebc297b9337"
+      },
+      {
+        "unlockId": "vault-upgrade/offline-window/3",
+        "priceUnits": 400,
+        "expectedRevision": 18,
+        "configSnapshotId": "content-snapshot/imp9-progression-dev-v1",
+        "expiresUnixSeconds": 1790888527,
+        "prerequisiteDefinitionId": "vault-upgrade/offline-window/3",
+        "quoteRevision": 1,
+        "expectedLevel": 2,
+        "quoteId": "dcc1b54d-9d49-43d4-acc9-7ef207141c57"
+      },
+      {
+        "unlockId": "capture-capability/1",
+        "priceUnits": 50,
+        "expectedRevision": 19,
+        "configSnapshotId": "content-snapshot/imp9-progression-dev-v1",
+        "expiresUnixSeconds": 1790888527,
+        "prerequisiteDefinitionId": "capture-capability/1",
+        "quoteRevision": 1,
+        "expectedLevel": 0,
+        "quoteId": "424e9599-8671-401a-a70d-b066d2a606a7"
+      },
+      {
+        "unlockId": "access/biome-mid-a",
+        "priceUnits": 100,
+        "expectedRevision": 20,
+        "configSnapshotId": "content-snapshot/imp9-progression-dev-v1",
+        "expiresUnixSeconds": 1790888528,
+        "prerequisiteDefinitionId": "access/biome-mid-a",
+        "quoteRevision": 1,
+        "expectedLevel": 0,
+        "quoteId": "2b845ba9-2377-4cc3-95e3-36c85cfe4c31"
+      },
+      {
+        "unlockId": "access/biome-mid-b",
+        "priceUnits": 100,
+        "expectedRevision": 21,
+        "configSnapshotId": "content-snapshot/imp9-progression-dev-v1",
+        "expiresUnixSeconds": 1790888528,
+        "prerequisiteDefinitionId": "access/biome-mid-b",
+        "quoteRevision": 1,
+        "expectedLevel": 0,
+        "quoteId": "2007c2a8-5b4b-4bc8-9d35-2e86ee69547c"
+      },
+      {
+        "unlockId": "access/biome-advanced",
+        "priceUnits": 200,
+        "expectedRevision": 22,
+        "configSnapshotId": "content-snapshot/imp9-progression-dev-v1",
+        "expiresUnixSeconds": 1790888528,
+        "prerequisiteDefinitionId": "access/biome-advanced",
+        "quoteRevision": 1,
+        "expectedLevel": 0,
+        "quoteId": "dd8ea098-6ff4-4cd8-9b97-968b144523fb"
+      }
+    ],
+    "claimRevision": 10,
+    "fundingClaims": [
+      1440,
+      2880
+    ],
+    "environment": "DEV",
+    "loadAt": 1790888384,
+    "userId": 1925180832,
+    "verificationClass": "V4"
+  },
+  "freshShippedComposition": {
+    "profile": {
+      "progression": {
+        "accessUnlocksById": {
+          "access/biome-mid-b": true,
+          "access/biome-advanced": true,
+          "access/biome-mid-a": true
+        },
+        "captureCapabilityLevel": 1,
+        "purchasesByUnlockId": {
+          "vault-upgrade/collection-capacity/2": {
+            "configSnapshotId": "content-snapshot/imp9-progression-dev-v1",
+            "operationId": "0266de8f-1d1c-4723-abd4-f4ac29ab31ed",
+            "priceUnits": 50,
+            "expectedRevision": 12,
+            "timestamp": 1790888388,
+            "quoteRevision": 1,
+            "quoteId": "1f566b3c-838f-4623-b495-20aa4de65149"
+          },
+          "access/biome-mid-a": {
+            "configSnapshotId": "content-snapshot/imp9-progression-dev-v1",
+            "operationId": "e6800740-eaa2-4ac2-a7f2-757d2021ffb4",
+            "priceUnits": 100,
+            "expectedRevision": 20,
+            "timestamp": 1790888468,
+            "quoteRevision": 1,
+            "quoteId": "2b845ba9-2377-4cc3-95e3-36c85cfe4c31"
+          },
+          "vault-upgrade/production-buffer/1": {
+            "configSnapshotId": "content-snapshot/imp9-progression-dev-v1",
+            "operationId": "0083ddfc-da6a-4b65-bc20-d2dde9a18227",
+            "priceUnits": 75,
+            "expectedRevision": 15,
+            "timestamp": 1790888466,
+            "quoteRevision": 1,
+            "quoteId": "8af3abbf-ba8c-4f09-9382-b6bbcfd4d0b8"
+          },
+          "vault-upgrade/display-slots/1": {
+            "configSnapshotId": "content-snapshot/imp9-progression-dev-v1",
+            "operationId": "abb432f8-e2b4-4fe3-b885-55a895d97c82",
+            "priceUnits": 25,
+            "expectedRevision": 14,
+            "timestamp": 1790888465,
+            "quoteRevision": 1,
+            "quoteId": "c27bc223-1755-449a-a86d-a13f7a563049"
+          },
+          "vault-upgrade/offline-window/1": {
+            "configSnapshotId": "content-snapshot/imp9-progression-dev-v1",
+            "operationId": "0f77b7de-bed2-4da0-abee-0c409881dd93",
+            "priceUnits": 100,
+            "expectedRevision": 16,
+            "timestamp": 1790888466,
+            "quoteRevision": 1,
+            "quoteId": "b3a84c23-b5b1-477a-bef3-77304c606858"
+          },
+          "vault-upgrade/offline-window/2": {
+            "configSnapshotId": "content-snapshot/imp9-progression-dev-v1",
+            "operationId": "43793442-56b7-4faa-b5a4-30a03dca170c",
+            "priceUnits": 200,
+            "expectedRevision": 17,
+            "timestamp": 1790888466,
+            "quoteRevision": 1,
+            "quoteId": "a14834fe-ec63-421d-816f-8ebc297b9337"
+          },
+          "access/biome-advanced": {
+            "configSnapshotId": "content-snapshot/imp9-progression-dev-v1",
+            "operationId": "6623181e-327c-4795-a1da-f3775e8ca525",
+            "priceUnits": 200,
+            "expectedRevision": 22,
+            "timestamp": 1790888468,
+            "quoteRevision": 1,
+            "quoteId": "dd8ea098-6ff4-4cd8-9b97-968b144523fb"
+          },
+          "vault-upgrade/production-slots/1": {
+            "configSnapshotId": "content-snapshot/imp9-progression-dev-v1",
+            "operationId": "bd59764a-e178-44ed-b47c-a504f61cc72a",
+            "priceUnits": 50,
+            "expectedRevision": 13,
+            "timestamp": 1790888426,
+            "quoteRevision": 1,
+            "quoteId": "fe6cf45d-7671-4b0c-a10b-a0d98794ba68"
+          },
+          "vault-upgrade/offline-window/3": {
+            "configSnapshotId": "content-snapshot/imp9-progression-dev-v1",
+            "operationId": "b03e96cb-ff8f-4f6f-bef2-872c287a6b7d",
+            "priceUnits": 400,
+            "expectedRevision": 18,
+            "timestamp": 1790888467,
+            "quoteRevision": 1,
+            "quoteId": "dcc1b54d-9d49-43d4-acc9-7ef207141c57"
+          },
+          "access/biome-mid-b": {
+            "configSnapshotId": "content-snapshot/imp9-progression-dev-v1",
+            "operationId": "15a81185-9cf2-4ae6-a1b9-508a5587be42",
+            "priceUnits": 100,
+            "expectedRevision": 21,
+            "timestamp": 1790888468,
+            "quoteRevision": 1,
+            "quoteId": "2007c2a8-5b4b-4bc8-9d35-2e86ee69547c"
+          },
+          "capture-capability/1": {
+            "configSnapshotId": "content-snapshot/imp9-progression-dev-v1",
+            "operationId": "dc6e908a-6509-48d0-a50a-d0f85c91ded0",
+            "priceUnits": 50,
+            "expectedRevision": 19,
+            "timestamp": 1790888467,
+            "quoteRevision": 1,
+            "quoteId": "424e9599-8671-401a-a70d-b066d2a606a7"
+          },
+          "vault-upgrade/collection-capacity/1": {
+            "configSnapshotId": "content-snapshot/imp9-progression-dev-v1",
+            "operationId": "45979044-4845-4bf2-8847-ac5cf38cc7e2",
+            "priceUnits": 25,
+            "expectedRevision": 11,
+            "timestamp": 1790888388,
+            "quoteRevision": 1,
+            "quoteId": "566e52f2-a598-48f1-b0f7-98a38f9e3e42"
+          }
+        },
+        "progressionSchemaVersion": 1
+      },
+      "profileRevision": 26,
+      "lastSuccessfulSaveAt": 1790888606,
+      "settings": [],
+      "schemaVersion": 1,
+      "trading": [],
+      "vault": {
+        "productionAssignments": {
+          "production/1": "imp9-prod-1-3fe29121-5bdc-4bc8-963c-99d769b7c790",
+          "production/2": "imp9-prod-2-5b14c965-b7c5-495a-8ea1-9f67e6095fa0"
+        },
+        "productionSchemaVersion": 1,
+        "lastPresenceBoundary": "Active",
+        "productionBufferMilli": 43800,
+        "productionCursorUnixSeconds": 1790888606,
+        "productionRateEpochId": "production-epoch/imp9-dev-v1",
+        "capacitySchemaVersion": 1,
+        "lastOfflineSettlement": {
+          "eligibleSeconds": 73,
+          "mode": "CleanOffline",
+          "clockRegressed": false,
+          "creditedMilli": 14600
+        },
+        "displayAssignments": {
+          "display/1": "imp9-prod-1-3fe29121-5bdc-4bc8-963c-99d769b7c790"
+        },
+        "earnedUpgradeLevels": {
+          "vault-upgrade/production-buffer": 1,
+          "vault-upgrade/display-slots": 1,
+          "vault-upgrade/collection-capacity": 2,
+          "vault-upgrade/production-slots": 1,
+          "vault-upgrade/offline-window": 3
+        }
+      },
+      "createdAt": 1790888384,
+      "events": [],
+      "recentOperations": {
+        "0f77b7de-bed2-4da0-abee-0c409881dd93": 17,
+        "0083ddfc-da6a-4b65-bc20-d2dde9a18227": 16,
+        "dc6e908a-6509-48d0-a50a-d0f85c91ded0": 20,
+        "66e90b18-c0eb-426a-a206-95b99f6f6447": 6,
+        "15a81185-9cf2-4ae6-a1b9-508a5587be42": 22,
+        "6623181e-327c-4795-a1da-f3775e8ca525": 23,
+        "0bf939d1-1af0-4277-a928-21ae0f9fafc4": 2,
+        "bd59764a-e178-44ed-b47c-a504f61cc72a": 14,
+        "8389060e-ea2c-4e8f-9524-986e104967cc": 5,
+        "e6800740-eaa2-4ac2-a7f2-757d2021ffb4": 21,
+        "0266de8f-1d1c-4723-abd4-f4ac29ab31ed": 13,
+        "43793442-56b7-4faa-b5a4-30a03dca170c": 18,
+        "fe88ddee-ad84-4856-a2c4-12d103b4aebf": 9,
+        "d7936403-7afc-4891-8c40-491ee787a4d0": 3,
+        "f7d97410-b610-40fa-8277-bb03dc252a0a": 11,
+        "b03e96cb-ff8f-4f6f-bef2-872c287a6b7d": 19,
+        "80dbb00e-8270-4a28-92b1-13022e4e72c7": 7,
+        "abb432f8-e2b4-4fe3-b885-55a895d97c82": 15,
+        "d70ee9e5-ffe7-4ffd-a72e-d444a57cb618": 4,
+        "89eda27e-fbc6-48ba-babf-817f059e05d5": 8,
+        "5ab780d7-b366-43f9-a594-18149ef6b74d": 10,
+        "45979044-4845-4bf2-8847-ac5cf38cc7e2": 12
+      },
+      "collection": {
+        "creaturesById": {
+          "imp9-prod-1-3fe29121-5bdc-4bc8-963c-99d769b7c790": {
+            "creatureInstanceId": "imp9-prod-1-3fe29121-5bdc-4bc8-963c-99d769b7c790",
+            "ownerUserId": 1925180832,
+            "origin": {
+              "contentSnapshotId": "content-snapshot/imp5-fixture-v1",
+              "spawnContextId": "spawn-context/fixture-clearing"
+            },
+            "operationId": "0bf939d1-1af0-4277-a928-21ae0f9fafc4",
+            "overflowHeld": false,
+            "securedAt": 1790888384,
+            "securedSequence": 2,
+            "speciesId": "species/fixture-orb",
+            "variantIdentity": {
+              "mutationIdsCanonical": [
+                "mutation/fixture-luminous"
+              ],
+              "traitIds": [
+                "trait/fixture-steady"
+              ],
+              "protectedVariantReasons": [],
+              "spawnContextId": "spawn-context/fixture-clearing",
+              "speciesRarityId": "rarity/common",
+              "contentSnapshotId": "content-snapshot/imp5-fixture-v1",
+              "variantSignature": "species/fixture-orb|mutation/fixture-luminous"
+            },
+            "locked": false
+          },
+          "imp9-prod-2-5b14c965-b7c5-495a-8ea1-9f67e6095fa0": {
+            "creatureInstanceId": "imp9-prod-2-5b14c965-b7c5-495a-8ea1-9f67e6095fa0",
+            "ownerUserId": 1925180832,
+            "origin": {
+              "contentSnapshotId": "content-snapshot/imp5-fixture-v1",
+              "spawnContextId": "spawn-context/fixture-clearing"
+            },
+            "operationId": "d7936403-7afc-4891-8c40-491ee787a4d0",
+            "overflowHeld": false,
+            "securedAt": 1790888385,
+            "securedSequence": 3,
+            "speciesId": "species/fixture-orb",
+            "variantIdentity": {
+              "mutationIdsCanonical": [
+                "mutation/fixture-luminous"
+              ],
+              "traitIds": [
+                "trait/fixture-steady"
+              ],
+              "protectedVariantReasons": [],
+              "spawnContextId": "spawn-context/fixture-clearing",
+              "speciesRarityId": "rarity/common",
+              "contentSnapshotId": "content-snapshot/imp5-fixture-v1",
+              "variantSignature": "species/fixture-orb|mutation/fixture-luminous"
+            },
+            "locked": false
+          },
+          "imp9-prod-3-c097b4c4-16bf-47b9-a045-e46a10af1e93": {
+            "creatureInstanceId": "imp9-prod-3-c097b4c4-16bf-47b9-a045-e46a10af1e93",
+            "ownerUserId": 1925180832,
+            "origin": {
+              "contentSnapshotId": "content-snapshot/imp5-fixture-v1",
+              "spawnContextId": "spawn-context/fixture-clearing"
+            },
+            "operationId": "d70ee9e5-ffe7-4ffd-a72e-d444a57cb618",
+            "overflowHeld": true,
+            "securedAt": 1790888385,
+            "securedSequence": 4,
+            "speciesId": "species/fixture-orb",
+            "variantIdentity": {
+              "mutationIdsCanonical": [
+                "mutation/fixture-luminous"
+              ],
+              "traitIds": [
+                "trait/fixture-steady"
+              ],
+              "protectedVariantReasons": [],
+              "spawnContextId": "spawn-context/fixture-clearing",
+              "speciesRarityId": "rarity/common",
+              "contentSnapshotId": "content-snapshot/imp5-fixture-v1",
+              "variantSignature": "species/fixture-orb|mutation/fixture-luminous"
+            },
+            "locked": false
+          }
+        }
+      },
+      "economy": {
+        "recentEnergyOperations": [
+          {
+            "sourceOrSinkId": "vault/production",
+            "resultClass": "Applied",
+            "operationId": "fe88ddee-ad84-4856-a2c4-12d103b4aebf",
+            "deltaUnits": 1440,
+            "resultingWallet": 1440,
+            "configSnapshotId": "content-snapshot/imp9-production-dev-v1",
+            "timestamp": 1790888387,
+            "reasonCode": "production-claim",
+            "expectedRevision": 8
+          },
+          {
+            "sourceOrSinkId": "vault/production",
+            "resultClass": "Applied",
+            "operationId": "f7d97410-b610-40fa-8277-bb03dc252a0a",
+            "deltaUnits": 1440,
+            "resultingWallet": 2880,
+            "configSnapshotId": "content-snapshot/imp9-production-dev-v1",
+            "timestamp": 1790888387,
+            "reasonCode": "production-claim",
+            "expectedRevision": 10
+          },
+          {
+            "sourceOrSinkId": "vault-upgrade/collection-capacity/1",
+            "resultClass": "Applied",
+            "operationId": "45979044-4845-4bf2-8847-ac5cf38cc7e2",
+            "deltaUnits": -25,
+            "resultingWallet": 2855,
+            "configSnapshotId": "content-snapshot/imp9-progression-dev-v1",
+            "timestamp": 1790888388,
+            "reasonCode": "vault-upgrade-purchase",
+            "expectedRevision": 11
+          },
+          {
+            "sourceOrSinkId": "vault-upgrade/collection-capacity/2",
+            "resultClass": "Applied",
+            "operationId": "0266de8f-1d1c-4723-abd4-f4ac29ab31ed",
+            "deltaUnits": -50,
+            "resultingWallet": 2805,
+            "configSnapshotId": "content-snapshot/imp9-progression-dev-v1",
+            "timestamp": 1790888388,
+            "reasonCode": "vault-upgrade-purchase",
+            "expectedRevision": 12
+          },
+          {
+            "sourceOrSinkId": "vault-upgrade/production-slots/1",
+            "resultClass": "Applied",
+            "operationId": "bd59764a-e178-44ed-b47c-a504f61cc72a",
+            "deltaUnits": -50,
+            "resultingWallet": 2755,
+            "configSnapshotId": "content-snapshot/imp9-progression-dev-v1",
+            "timestamp": 1790888426,
+            "reasonCode": "vault-upgrade-purchase",
+            "expectedRevision": 13
+          },
+          {
+            "sourceOrSinkId": "vault-upgrade/display-slots/1",
+            "resultClass": "Applied",
+            "operationId": "abb432f8-e2b4-4fe3-b885-55a895d97c82",
+            "deltaUnits": -25,
+            "resultingWallet": 2730,
+            "configSnapshotId": "content-snapshot/imp9-progression-dev-v1",
+            "timestamp": 1790888465,
+            "reasonCode": "vault-upgrade-purchase",
+            "expectedRevision": 14
+          },
+          {
+            "sourceOrSinkId": "vault-upgrade/production-buffer/1",
+            "resultClass": "Applied",
+            "operationId": "0083ddfc-da6a-4b65-bc20-d2dde9a18227",
+            "deltaUnits": -75,
+            "resultingWallet": 2655,
+            "configSnapshotId": "content-snapshot/imp9-progression-dev-v1",
+            "timestamp": 1790888466,
+            "reasonCode": "vault-upgrade-purchase",
+            "expectedRevision": 15
+          },
+          {
+            "sourceOrSinkId": "vault-upgrade/offline-window/1",
+            "resultClass": "Applied",
+            "operationId": "0f77b7de-bed2-4da0-abee-0c409881dd93",
+            "deltaUnits": -100,
+            "resultingWallet": 2555,
+            "configSnapshotId": "content-snapshot/imp9-progression-dev-v1",
+            "timestamp": 1790888466,
+            "reasonCode": "vault-upgrade-purchase",
+            "expectedRevision": 16
+          },
+          {
+            "sourceOrSinkId": "vault-upgrade/offline-window/2",
+            "resultClass": "Applied",
+            "operationId": "43793442-56b7-4faa-b5a4-30a03dca170c",
+            "deltaUnits": -200,
+            "resultingWallet": 2355,
+            "configSnapshotId": "content-snapshot/imp9-progression-dev-v1",
+            "timestamp": 1790888466,
+            "reasonCode": "vault-upgrade-purchase",
+            "expectedRevision": 17
+          },
+          {
+            "sourceOrSinkId": "vault-upgrade/offline-window/3",
+            "resultClass": "Applied",
+            "operationId": "b03e96cb-ff8f-4f6f-bef2-872c287a6b7d",
+            "deltaUnits": -400,
+            "resultingWallet": 1955,
+            "configSnapshotId": "content-snapshot/imp9-progression-dev-v1",
+            "timestamp": 1790888467,
+            "reasonCode": "vault-upgrade-purchase",
+            "expectedRevision": 18
+          },
+          {
+            "sourceOrSinkId": "capture-capability/1",
+            "resultClass": "Applied",
+            "operationId": "dc6e908a-6509-48d0-a50a-d0f85c91ded0",
+            "deltaUnits": -50,
+            "resultingWallet": 1905,
+            "configSnapshotId": "content-snapshot/imp9-progression-dev-v1",
+            "timestamp": 1790888467,
+            "reasonCode": "capture-capability-purchase",
+            "expectedRevision": 19
+          },
+          {
+            "sourceOrSinkId": "access/biome-mid-a",
+            "resultClass": "Applied",
+            "operationId": "e6800740-eaa2-4ac2-a7f2-757d2021ffb4",
+            "deltaUnits": -100,
+            "resultingWallet": 1805,
+            "configSnapshotId": "content-snapshot/imp9-progression-dev-v1",
+            "timestamp": 1790888468,
+            "reasonCode": "access-unlock-purchase",
+            "expectedRevision": 20
+          },
+          {
+            "sourceOrSinkId": "access/biome-mid-b",
+            "resultClass": "Applied",
+            "operationId": "15a81185-9cf2-4ae6-a1b9-508a5587be42",
+            "deltaUnits": -100,
+            "resultingWallet": 1705,
+            "configSnapshotId": "content-snapshot/imp9-progression-dev-v1",
+            "timestamp": 1790888468,
+            "reasonCode": "access-unlock-purchase",
+            "expectedRevision": 21
+          },
+          {
+            "sourceOrSinkId": "access/biome-advanced",
+            "resultClass": "Applied",
+            "operationId": "6623181e-327c-4795-a1da-f3775e8ca525",
+            "deltaUnits": -200,
+            "resultingWallet": 1505,
+            "configSnapshotId": "content-snapshot/imp9-progression-dev-v1",
+            "timestamp": 1790888468,
+            "reasonCode": "access-unlock-purchase",
+            "expectedRevision": 22
+          }
+        ],
+        "energyUnits": 1505,
+        "energySchemaVersion": 1
+      },
+      "discovery": {
+        "variantBySignature": {
+          "species/fixture-orb|mutation/fixture-luminous": true
+        },
+        "mutationsById": {
+          "mutation/fixture-luminous": true
+        },
+        "speciesById": {
+          "species/fixture-orb": true
+        }
+      },
+      "commerce": []
+    },
+    "capabilities": {
+      "epochId": "production-epoch/imp9-dev-v1",
+      "effectiveUnixSeconds": 0,
+      "ratesMilliBySpeciesId": {
+        "species/fixture-orb": 100
+      },
+      "productionSlotCount": 3,
+      "offlineWindowSeconds": 43200,
+      "bufferCapacityMilli": 2880000,
+      "contentSnapshotId": "content-snapshot/imp9-production-dev-v1",
+      "displaySlotCount": 4
+    },
+    "proofOwnerUnbound": true,
+    "scope": "IMP9Prod-efedc3d7-03bc-43f8-8eda-b87cb4da8c4d",
+    "retries": [
+      {
+        "status": "AlreadyCommitted",
+        "unlockId": "vault-upgrade/collection-capacity/1",
+        "operationId": "45979044-4845-4bf2-8847-ac5cf38cc7e2"
+      },
+      {
+        "status": "AlreadyCommitted",
+        "unlockId": "vault-upgrade/collection-capacity/2",
+        "operationId": "0266de8f-1d1c-4723-abd4-f4ac29ab31ed"
+      },
+      {
+        "status": "AlreadyCommitted",
+        "unlockId": "vault-upgrade/production-slots/1",
+        "operationId": "bd59764a-e178-44ed-b47c-a504f61cc72a"
+      },
+      {
+        "status": "AlreadyCommitted",
+        "unlockId": "vault-upgrade/display-slots/1",
+        "operationId": "abb432f8-e2b4-4fe3-b885-55a895d97c82"
+      },
+      {
+        "status": "AlreadyCommitted",
+        "unlockId": "vault-upgrade/production-buffer/1",
+        "operationId": "0083ddfc-da6a-4b65-bc20-d2dde9a18227"
+      },
+      {
+        "status": "AlreadyCommitted",
+        "unlockId": "vault-upgrade/offline-window/1",
+        "operationId": "0f77b7de-bed2-4da0-abee-0c409881dd93"
+      },
+      {
+        "status": "AlreadyCommitted",
+        "unlockId": "vault-upgrade/offline-window/2",
+        "operationId": "43793442-56b7-4faa-b5a4-30a03dca170c"
+      },
+      {
+        "status": "AlreadyCommitted",
+        "unlockId": "vault-upgrade/offline-window/3",
+        "operationId": "b03e96cb-ff8f-4f6f-bef2-872c287a6b7d"
+      },
+      {
+        "status": "AlreadyCommitted",
+        "unlockId": "capture-capability/1",
+        "operationId": "dc6e908a-6509-48d0-a50a-d0f85c91ded0"
+      },
+      {
+        "status": "AlreadyCommitted",
+        "unlockId": "access/biome-mid-a",
+        "operationId": "e6800740-eaa2-4ac2-a7f2-757d2021ffb4"
+      },
+      {
+        "status": "AlreadyCommitted",
+        "unlockId": "access/biome-mid-b",
+        "operationId": "15a81185-9cf2-4ae6-a1b9-508a5587be42"
+      },
+      {
+        "status": "AlreadyCommitted",
+        "unlockId": "access/biome-advanced",
+        "operationId": "6623181e-327c-4795-a1da-f3775e8ca525"
+      }
+    ],
+    "shutdownFailures": [],
+    "collectionCapacity": 22
+  },
+  "finalEditParity": {
+    "total": 76,
+    "errors": [],
+    "temporaryRemotes": false,
+    "world": {
+      "FixtureSecurePoint": {
+        "path": "Workspace.MonsterVaultWorld.FixtureSecurePoint",
+        "class": "Part"
+      },
+      "FixtureGround": {
+        "path": "Workspace.MonsterVaultWorld.FixtureGround",
+        "class": "Part"
+      },
+      "FixtureSpawn": {
+        "path": "Workspace.MonsterVaultWorld.FixtureSpawn",
+        "class": "SpawnLocation"
+      },
+      "FixtureCreatureAnchor": {
+        "path": "Workspace.MonsterVaultWorld.FixtureCreatureAnchor",
+        "class": "Part"
+      }
+    },
+    "matched": 76,
+    "finalCandidateRechecked": true,
+    "temporaryProbes": false
+  },
+  "validation": {
+    "fast": 153,
+    "pythonChecker": 28,
+    "stylua": "PASS",
+    "selene": "0 errors, 0 warnings",
+    "dependencies": "PASS",
+    "integrity": "PASS",
+    "rojoBuild": "PASS",
+    "luauLsp": "0 type errors; existing missing Roblox definitions warning"
+  },
+  "scopeBoundaries": {
+    "mastery": "Only injected server test proof was used in the isolated scope; the shipped composition does not invent or bind world mastery. Owned access survives an unbound proof owner.",
+    "externalGrants": "Commercial/event/temporary/deferred grant owners remain unbound and protected; no grant authority or production buff was enabled.",
+    "performance": "VS1-19 remains DEFERRED under AD-249 and mandatory before IMP-10 COMPLETE."
+  },
+  "probeCorrections": {
+    "discardedScope": "IMP9Prod-f9b6da37-ccdc-4493-9084-8ad480ea37c2",
+    "reason": "Test funding expected an exact full buffer despite a sub-second boundary difference, and the old save probe assumed one producer. Harness now saturates the scoped fixture and sums actual finalized producers. Discarded probe was cleanly released; normal progress was unchanged.",
+    "runtimeChange": false
+  }
+}

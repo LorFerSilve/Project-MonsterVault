@@ -6,6 +6,7 @@ function ProgressionPurchaseUseCase.new(options: {
 	energy: any,
 	vault: any,
 	assignments: any,
+	production: any?,
 	newOperationId: () -> string,
 	monotonicSeconds: () -> number,
 })
@@ -35,23 +36,27 @@ function ProgressionPurchaseUseCase.new(options: {
 			then { status = "Unchanged" }
 			else { status = session.state() }
 	end
-	local function quote(session: any): any
+	local function quote(session: any, unlockId: string?): any
 		local reconciled = reconcile(session)
 		if reconciled.status ~= "Unchanged" then
 			return reconciled
 		end
-		local profile, d = session.snapshot(), options.progression.definition()
+		local profile, d = session.snapshot(), options.progression.definition(unlockId)
+		if d == nil then
+			return { status = "Rejected", reason = "INVALID_UNLOCK" }
+		end
 		local invalid = options.energy.validate(profile) or options.progression.validate(profile)
 		if invalid then
 			return { status = "Protected", reason = invalid }
 		end
-		local reason = options.progression.eligible(profile)
+		local reason = options.progression.eligible(profile, d.unlockId)
 		if reason then
 			return { status = "Rejected", reason = reason }
 		end
 		local current, now = quotes[session], options.monotonicSeconds()
 		if
 			current == nil
+			or current.unlockId ~= d.unlockId
 			or current.deadline <= now
 			or current.expectedRevision ~= profile.profileRevision
 			or current.configSnapshotId ~= d.configSnapshotId
@@ -67,6 +72,8 @@ function ProgressionPurchaseUseCase.new(options: {
 				configSnapshotId = d.configSnapshotId,
 				expectedLevel = d.expectedLevel,
 				requiredMilestoneId = d.requiredMilestoneId,
+				requiredMilestoneIds = table.clone(d.requiredMilestoneIds),
+				requiredUnlockIds = table.clone(d.requiredUnlockIds),
 				expiresUnixSeconds = options.assignments.boundary(nil) + d.quoteLifetimeSeconds,
 				deadline = now + d.quoteLifetimeSeconds,
 			}
@@ -74,6 +81,11 @@ function ProgressionPurchaseUseCase.new(options: {
 		end
 		local visible = table.clone(current)
 		visible.deadline = nil
+		-- The target + immutable config snapshot reference all prerequisite IDs.
+		-- Keep private proof lists out of the conservative reliable wire budget.
+		visible.requiredMilestoneId, visible.requiredMilestoneIds, visible.requiredUnlockIds =
+			nil, nil, nil
+		visible.prerequisiteDefinitionId = d.unlockId
 		return { status = "Quoted", quote = visible }
 	end
 	local function purchase(session: any, payload: any, expectedRevision: number): any
@@ -95,12 +107,12 @@ function ProgressionPurchaseUseCase.new(options: {
 		if reconciled.status ~= "Unchanged" then
 			return reconciled
 		end
-		local profile, d = session.snapshot(), options.progression.definition()
+		local profile, d = session.snapshot(), options.progression.definition(payload.unlockId)
 		local invalid = options.energy.validate(profile) or options.progression.validate(profile)
 		if invalid then
 			return { status = "Protected", reason = invalid }
 		end
-		if payload.unlockId ~= d.unlockId then
+		if d == nil then
 			return { status = "Rejected", reason = "INVALID_UNLOCK" }
 		end
 		local receipt = profile.progression.purchasesByUnlockId[payload.unlockId]
@@ -116,7 +128,7 @@ function ProgressionPurchaseUseCase.new(options: {
 				units = receipt.priceUnits,
 			}
 		end
-		local reason = options.progression.eligible(profile)
+		local reason = options.progression.eligible(profile, d.unlockId)
 		if reason then
 			return { status = "Rejected", reason = reason }
 		end
@@ -145,13 +157,26 @@ function ProgressionPurchaseUseCase.new(options: {
 			if candidate.profileRevision ~= expectedRevision then
 				return { status = "Rejected", reason = "STALE_QUOTE" }
 			end
-			local gate = options.progression.eligible(candidate)
+			local gate = options.progression.eligible(candidate, d.unlockId)
 			if gate then
 				return { status = "Rejected", reason = gate }
 			end
+			if d.kind == "Vault" and d.effectField ~= "collectionCapacity" then
+				if options.production == nil then
+					return { status = "Protected", reason = "PRODUCTION_AUTHORITY_UNBOUND" }
+				end
+				local settled = options.production.settle(candidate, at, "Online")
+				if settled.status ~= "Prepared" then
+					return settled
+				end
+				-- Never retroactively apply an upgraded cap to an unsettled interval.
+				if settled.clockRegressed then
+					return { status = "Rejected", reason = "PRODUCTION_CLOCK_REGRESSION" }
+				end
+			end
 			local applied = options.energy.apply(candidate, {
 				operationId = operation,
-				reasonCode = "vault-upgrade-purchase",
+				reasonCode = d.reasonCode,
 				sourceOrSinkId = q.unlockId,
 				deltaUnits = -q.priceUnits,
 				timestamp = at,
@@ -169,11 +194,17 @@ function ProgressionPurchaseUseCase.new(options: {
 				priceUnits = q.priceUnits,
 				timestamp = at,
 				configSnapshotId = q.configSnapshotId,
-			})
-			-- Capacity expansion never auto-resolves Held creatures or changes production.
+			}, d.unlockId)
+			-- An upgrade never auto-resolves Held creatures or changes their identity.
 			local status, capacityReason = options.vault.collectionStatus(candidate)
 			if status == nil then
 				return { status = "Protected", reason = capacityReason }
+			end
+			if options.production ~= nil then
+				local invalidProduction = options.production.validate(candidate)
+				if invalidProduction then
+					return { status = "Protected", reason = invalidProduction }
+				end
 			end
 			return applied
 		end

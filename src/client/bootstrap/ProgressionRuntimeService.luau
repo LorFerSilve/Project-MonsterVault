@@ -9,6 +9,7 @@ function ProgressionRuntimeService.new(options: { networking: any, player: any, 
 	local globals = getfenv() :: any
 	local screen, panel, summary, message, review, confirm, cancel: any =
 		nil, nil, nil, nil, nil, nil, nil
+	local previous, nextButton: any = nil, nil
 	local running, expanded = false, false
 	local connections, unsubscribe = {}, nil :: any
 	local function enable(button: any, enabled: boolean)
@@ -21,6 +22,9 @@ function ProgressionRuntimeService.new(options: { networking: any, player: any, 
 		gateway = options.networking.gateway,
 		routes = Routes,
 		projection = Projection,
+		catalog = require(
+			game:GetService("ReplicatedStorage").MonsterVault.Shared.config.ProgressionFixture
+		).definitions,
 		clock = os.clock,
 		sessionReady = function()
 			local state = options.networking.store.view()
@@ -36,11 +40,16 @@ function ProgressionRuntimeService.new(options: { networking: any, player: any, 
 					"Energy %d | Collection capacity %d\n%s",
 					s.energyUnits,
 					s.collectionCapacity,
-					if s.owned
-						then "Capacity tier 1 owned"
-						else if s.gateReason == "MISSING_MILESTONE"
-							then "Secure a new Species to unlock this upgrade."
-							else "Collection capacity +6"
+					s.label
+						.. (
+							if s.owned
+								then " | Owned"
+								else if s.gateReason == "INVALID_UNLOCK_LEVEL"
+									then " | Previous tier required"
+									else if s.gateReason ~= ""
+										then " | Active milestone required"
+										else ""
+						)
 				)
 				else "Loading progression..."
 			message.Text = state.message
@@ -50,6 +59,8 @@ function ProgressionRuntimeService.new(options: { networking: any, player: any, 
 			enable(review, state.canReview)
 			enable(confirm, state.canConfirm)
 			enable(cancel, not state.pending)
+			enable(previous, state.canNavigate and s ~= nil and s.catalogIndex > 1)
+			enable(nextButton, state.canNavigate and s ~= nil and s.catalogIndex < s.catalogSize)
 		end,
 	})
 	return {
@@ -64,16 +75,16 @@ function ProgressionRuntimeService.new(options: { networking: any, player: any, 
 			screen.ScreenInsets = Enum.ScreenInsets.CoreUISafeInsets
 			local toggle = Instance.new("TextButton")
 			toggle.Name, toggle.Text, toggle.Size, toggle.Position =
-				"Toggle", "Upgrade Vault", UDim2.fromOffset(150, 36), UDim2.new(1, -162, 0, 12)
+				"Toggle", "Progression", UDim2.fromOffset(150, 36), UDim2.new(1, -162, 0, 12)
 			toggle.Parent = screen
 			panel = Instance.new("Frame")
 			panel.Name, panel.Size, panel.Position =
-				"Panel", UDim2.new(0.7, 0, 0, 290), UDim2.new(1, -12, 0, 52)
+				"Panel", UDim2.new(0.7, 0, 0, 370), UDim2.new(1, -12, 0, 52)
 			panel.AnchorPoint, panel.Visible, panel.Parent =
 				globals.Vector2.new(1, 0), false, screen
 			panel.BackgroundColor3 = globals.Color3.fromRGB(18, 31, 28)
 			local size = Instance.new("UISizeConstraint")
-			size.MaxSize, size.Parent = globals.Vector2.new(320, 290), panel
+			size.MaxSize, size.Parent = globals.Vector2.new(320, 370), panel
 			local layout = Instance.new("UIListLayout")
 			layout.Padding, layout.SortOrder, layout.Parent =
 				globals.UDim.new(0, 6), Enum.SortOrder.LayoutOrder, panel
@@ -92,12 +103,14 @@ function ProgressionRuntimeService.new(options: { networking: any, player: any, 
 				object.Parent = panel
 				return object
 			end
-			summary = item("TextLabel", "Summary", "", 1, 66)
+			summary = item("TextLabel", "Summary", "", 1, 76)
 			message = item("TextLabel", "Message", "", 2, 54)
 			summary.BackgroundTransparency, message.BackgroundTransparency = 1, 1
-			review = item("TextButton", "Review", "Review capacity upgrade", 3, 36)
+			review = item("TextButton", "Review", "Review upgrade", 3, 36)
 			confirm = item("TextButton", "Confirm", "Confirm purchase", 4, 36)
 			cancel = item("TextButton", "Cancel", "Cancel", 5, 36)
+			previous = item("TextButton", "Previous", "Previous upgrade", 6, 30)
+			nextButton = item("TextButton", "Next", "Next upgrade", 7, 30)
 			table.insert(
 				connections,
 				toggle.Activated:Connect(function()
@@ -108,6 +121,8 @@ function ProgressionRuntimeService.new(options: { networking: any, player: any, 
 			table.insert(connections, review.Activated:Connect(controller.review))
 			table.insert(connections, confirm.Activated:Connect(controller.confirm))
 			table.insert(connections, cancel.Activated:Connect(controller.cancel))
+			table.insert(connections, previous.Activated:Connect(controller.previous))
+			table.insert(connections, nextButton.Activated:Connect(controller.next))
 			screen.Parent = options.player:WaitForChild("PlayerGui")
 			unsubscribe = options.networking.subscribeProgression(controller.handleSnapshot)
 			controller.tick()

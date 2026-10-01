@@ -1,6 +1,6 @@
 # MonsterVault Implementation Roadmap
 
-> **Status:** IMP-8 COMPLETE with registered deferred validation; IMP-9 OPEN for DEV implementation
+> **Status:** IMP-8 COMPLETE with registered deferred validation; IMP-9 COMPLETE; IMP-10 OPEN for its next DEV dependency
 > **Locked by:** TA-17
 > **Rule:** Dependency-driven; do not skip phases merely because later UI/content is easier to demo.
 
@@ -123,7 +123,7 @@ VS-1 functional acceptance must be complete before broad feature expansion, with
 
 ## IMP-9 — Vault / Economy / Progression
 
-**Status: OPEN for DEV implementation; capacity, reconciliation, Overflow-Held resolution, assignments, production/offline settlement, Energy/Production Claim and the minimal progression quote/purchase/unlock chain implemented and validated.** Upstream IMP-8 is formally complete under AD-249. [IMP-9 evidence](IMP9_IMPLEMENTATION_EVIDENCE.md) records the current implementation and remaining gates.
+**Status (2026-10-01): COMPLETE.** All phase-owned gates in the [full TA-8 / IMP-9 audit](IMP9_GATE_AUDIT.md) pass: capacity, reconciliation/Overflow-Held, assignments, production/offline settlement, Energy/exact-once Claim and the complete bounded DEV Vault/Capture/Access purchase catalog. Upstream IMP-8 is formally complete under AD-249. [IMP-9 evidence](IMP9_IMPLEMENTATION_EVIDENCE.md) records implementation, current native evidence and explicit downstream owner boundaries.
 
 Collection capacity, assignments, production, offline settlement, Energy and progression transactions.
 
@@ -137,9 +137,13 @@ Completed current dependency (AD-252): versioned server-owned integer Energy wal
 
 Completed current dependency (AD-253): one server quote per session with opaque GUID, 60-second monotonic expiry, price/config epoch, original profile revision, current tier and legitimate Species Discovery prerequisite. Explicit confirm purchases the existing +6 Collection Capacity tier for 25 DEV Energy. Debit, earned tier, permanent unlock receipt and operation marker commit together through P2. Stale/tampered/cross-session quotes, insufficient funds and invalid effects fail without mutation. Duplicate/retry/reconnect/unknown-result recovery survives quote expiry and audit eviction. Native quote/confirm GUI, real DEV before/after-write failures, claim/purchase races and a fresh shipped composition pass; exact ownership, Held state, roles, output and discovery are preserved.
 
-Next dependency: bind the remaining TA-8 progression definitions/effects and audit the complete IMP-9 gate matrix: additional Vault slot/buffer/offline upgrades, Capture Capability and Access Unlock prerequisites. These have no enabled purchase definition in this DEV slice; world topology remains TA-9 ownership. The reusable transaction is closed for its one authored capacity target, not the entire progression catalog. IMP-9 cannot be COMPLETE, and IMP-10 cannot start, until its full gates pass. Actual one-time/event/commercial/temporary reward integrations and deferred grants remain protected until their owning systems bind authoritative sources. AD-249 / VS1-19 remains mandatory before IMP-10 COMPLETE.
+Completed final dependency (AD-254): twelve immutable DEV definitions cover +6 capacity tiers, earned production/display slots, buffer and 4h/8h/12h offline upgrades, bounded persistent Capture Capability and GDS-9 Mid A/Mid B/Advanced access prerequisites. Every purchase reuses the existing server quote/P2 debit/effect/receipt chain. Production-affecting upgrades settle old capabilities first at a fixed boundary and reject clock regression. Access consumes an injected authoritative mastery owner; the shipped composition fails closed while that IMP-10 owner is unbound. Completed access survives save/rejoin and price/owner changes without creating discovery or world-completion proof.
+
+The full gate matrix closes with 153 fast tests, 40 native Studio C0 checks, real DEV GUI/unknown-write/race purchases and a fresh shipped composition restoring all twelve receipts and unchanged ownership/Held state. Actual world mastery/gated actions, one-time/event/commercial/temporary reward integrations, deferred-grant transfer/replay and live config remain with their explicitly routed owners; unbound valuable state remains protected. These are enablement boundaries, not deferred phase-owned validation gates. No world geometry/content or later system was implemented. AD-249 / VS1-19 remains mandatory before IMP-10 COMPLETE.
 
 ## IMP-10 — World Scaling
+
+**Status: OPEN for the next DEV dependency; implementation has not started in the IMP-9 closure change.** First bind TA-9 world/content registries and the GDS-9 active mastery/access-action owner to the completed TA-8 consumer, without inventing topology beyond the locked contracts.
 
 Full biome/content registries, spawn scheduling, travel, mastery/hazards and TA-14 scaling.
 

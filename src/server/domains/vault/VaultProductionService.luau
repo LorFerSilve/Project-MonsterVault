@@ -23,6 +23,44 @@ function VaultProductionService.new(config: any)
 	local productionSlots, displaySlots =
 		table.clone(config.productionSlotIds), table.clone(config.displaySlotIds)
 	local allowance = config.crashRecoveryAllowanceSeconds
+	local upgrades, maximumAdditions = {}, {}
+	local limits = {
+		productionSlotCount = 8,
+		displaySlotCount = 24,
+		bufferCapacityMilli = MAX_BUFFER,
+		offlineWindowSeconds = 43200,
+	}
+	for upgradeId, authored in config.earnedCapabilitiesByUpgradeId or {} do
+		assert(
+			id(upgradeId)
+				and limits[authored.field] ~= nil
+				and maximumAdditions[authored.field] == nil,
+			"unbound earned capability"
+		)
+		local levels = table.clone(authored.byLevel)
+		assert(levels[0] == 0 and #levels <= 8, "invalid capability tiers")
+		local previous = 0
+		for tier = 1, #levels do
+			assert(
+				integer(levels[tier], limits[authored.field]) and levels[tier] >= previous,
+				"nonmonotonic capability tiers"
+			)
+			previous = levels[tier]
+		end
+		for tier in levels do
+			assert(integer(tier, #levels), "invalid capability tier")
+		end
+		upgrades[upgradeId] = { field = authored.field, byLevel = levels }
+		maximumAdditions[authored.field] = previous
+	end
+	local function effective(profile: any, base: any): any
+		local epoch: any = table.clone(base)
+		for upgradeId, upgrade in upgrades do
+			local tier = (profile.vault.earnedUpgradeLevels or {})[upgradeId] or 0
+			epoch[upgrade.field] += upgrade.byLevel[tier]
+		end
+		return epoch
+	end
 	assert(integer(allowance, 180) and allowance == 180, "TA-14 crash allowance required")
 	local function slots(list: any, maximum: number): any
 		assert(#list > 0 and #list <= maximum, "slot registry bound")
@@ -69,6 +107,15 @@ function VaultProductionService.new(config: any)
 				and integer(epoch.offlineWindowSeconds, 43200),
 			"invalid production capabilities"
 		)
+		for field, maximum in limits do
+			local bound = if field == "productionSlotCount"
+				then #productionSlots
+				else if field == "displaySlotCount" then #displaySlots else maximum
+			assert(
+				epoch[field] + (maximumAdditions[field] or 0) <= bound,
+				"earned capability exceeds bound"
+			)
+		end
 		local maximumRate, count = 0, 0
 		for speciesId, rate in epoch.ratesMilliBySpeciesId do
 			count += 1
@@ -82,7 +129,15 @@ function VaultProductionService.new(config: any)
 			maximumRate
 				<= math.floor(
 					MAX_EXACT
-						/ math.max(1, #productionSlots * (epoch.offlineWindowSeconds + allowance))
+						/ math.max(
+							1,
+							#productionSlots
+								* (
+									epoch.offlineWindowSeconds
+									+ (maximumAdditions.offlineWindowSeconds or 0)
+									+ allowance
+								)
+						)
 				),
 			"inexact rate/window product"
 		)
@@ -98,6 +153,12 @@ function VaultProductionService.new(config: any)
 	end
 	local function validate(profile: any): string?
 		local v, owned = profile.vault, profile.collection.creaturesById or {}
+		for upgradeId, upgrade in upgrades do
+			local tier = (v.earnedUpgradeLevels or {})[upgradeId] or 0
+			if not integer(tier, 8) or upgrade.byLevel[tier] == nil then
+				return "INVALID_PRODUCTION_UPGRADE"
+			end
+		end
 		-- Future role and grant owners must explicitly bind their compatibility.
 		for _, value in
 			{
@@ -124,7 +185,7 @@ function VaultProductionService.new(config: any)
 		if index == nil or epochIndexAt(v.productionCursorUnixSeconds) ~= index then
 			return "PRODUCTION_HISTORY_UNAVAILABLE"
 		end
-		local epoch = epochs[index]
+		local epoch = effective(profile, epochs[index])
 		for _, kind in { "production", "display" } do
 			local assignments = v[kind .. "Assignments"]
 			local indices = if kind == "production" then productionIndices else displayIndices
@@ -193,7 +254,7 @@ function VaultProductionService.new(config: any)
 		if mode ~= "Online" then
 			elapsed = math.min(
 				elapsed,
-				epochs[first].offlineWindowSeconds
+				effective(profile, epochs[first]).offlineWindowSeconds
 					+ (if mode == "CrashRecovery" then allowance else 0)
 			)
 		end
@@ -203,7 +264,7 @@ function VaultProductionService.new(config: any)
 		local buffer, before = v.productionBufferMilli, v.productionBufferMilli
 		local assignmentsChanged = false
 		for index = first, last do
-			local epoch = epochs[index]
+			local epoch = effective(profile, epochs[index])
 			for slot in production do
 				if productionIndices[slot] > epoch.productionSlotCount then
 					production[slot] = nil
@@ -316,7 +377,7 @@ function VaultProductionService.new(config: any)
 			return settled
 		end
 		local v, owned = profile.vault, profile.collection.creaturesById or {}
-		local epoch = epochs[byId[v.productionRateEpochId]]
+		local epoch = effective(profile, epochs[byId[v.productionRateEpochId]])
 		local indices = if kind == "production" then productionIndices else displayIndices
 		local count = if kind == "production"
 			then epoch.productionSlotCount
@@ -354,7 +415,7 @@ function VaultProductionService.new(config: any)
 		prepareLoad = prepareLoad,
 		assign = assign,
 		capabilities = function(profile: any): any
-			local epoch = table.clone(epochs[byId[profile.vault.productionRateEpochId]])
+			local epoch = effective(profile, epochs[byId[profile.vault.productionRateEpochId]])
 			epoch.ratesMilliBySpeciesId = table.clone(epoch.ratesMilliBySpeciesId)
 			return epoch
 		end,

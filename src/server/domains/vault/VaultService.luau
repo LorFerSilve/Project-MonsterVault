@@ -21,6 +21,7 @@ end
 function VaultService.new(config: any, authorities: any?)
 	assert(quantity(config.baseCollectionCapacity), "invalid base collection capacity")
 	local tiers = table.clone(config.earnedCollectionCapacityByLevel or { [0] = 0 })
+	local otherTiers = config.otherEarnedUpgradeLevelsById or {}
 	local upgradeId = config.collectionCapacityUpgradeId or "vault-upgrade/collection-capacity"
 	local commercialDefinitions = table.clone(config.commercialCapacityById or {})
 	local temporaryDefinitions = table.clone(config.temporaryCapacityById or {})
@@ -113,9 +114,14 @@ function VaultService.new(config: any, authorities: any?)
 		if type(levels) ~= "table" then
 			return nil, "INVALID_CAPACITY_UPGRADES"
 		end
-		for id in levels do
+		for id, tier in levels do
 			if id ~= upgradeId then
-				return nil, "UNKNOWN_UPGRADE_ID"
+				if otherTiers[id] == nil then
+					return nil, "UNKNOWN_UPGRADE_ID"
+				end
+				if not quantity(tier) or otherTiers[id][tier] ~= true then
+					return nil, "UNKNOWN_UPGRADE_LEVEL"
+				end
 			end
 		end
 		local level = levels[upgradeId]

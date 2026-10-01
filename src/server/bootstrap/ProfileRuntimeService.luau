@@ -57,8 +57,16 @@ function ProfileRuntimeService.new(options: {
 		else options.httpService:GenerateGUID(false)
 	local vault = VaultService.new(VaultCapacityFixture)
 	local production = VaultProductionService.new(VaultProductionFixture)
-	local energy = EnergyService.new({ [ProgressionFixture.unlockId] = true })
 	local progression = ProgressionService.new(ProgressionFixture)
+	for _, d in progression.definitions do
+		if d.kind == "Vault" then
+			local effect = if d.effectField == "collectionCapacity"
+				then VaultCapacityFixture.earnedCollectionCapacityByLevel[d.targetLevel]
+				else VaultProductionFixture.earnedCapabilitiesByUpgradeId[d.upgradeId].byLevel[d.targetLevel]
+			assert(effect == d.effectValue, "progression effect/config mismatch")
+		end
+	end
+	local energy = EnergyService.new(progression.boundSinks)
 	local assignments = VaultProductionUseCase.new({
 		production = production,
 		vault = vault,
@@ -86,6 +94,7 @@ function ProfileRuntimeService.new(options: {
 	})
 	local purchases = ProgressionPurchaseUseCase.new({
 		progression = progression,
+		production = production,
 		energy = energy,
 		vault = vault,
 		assignments = assignments,
