@@ -1,5 +1,7 @@
 # TA-17 Contract-Lock Scenario Validation
 
+The original implementation-lock scenarios below remain historical design evidence. [AD-249](ARCHITECTURE_DECISIONS.md#ad-249--defer-vs1-19-to-the-imp-10-completion-gate), accepted 2026-10-01, changes only VS1-19's execution deadline to before IMP-10 COMPLETE. The runtime validation is DEFERRED for environment limitation; none of these scenario PASS results supplies its missing 30-player L1 or real-client performance evidence.
+
 > **Status:** PASS
 > **Date:** 2026-09-24
 > **Result:** 180 / 180 implementation-lock scenarios PASS

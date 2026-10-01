@@ -22,7 +22,7 @@
 | TA-11 | IMP-13 commerce/receipts/entitlements |
 | TA-12 | IMP-4 projection foundation + IMP-7 client UX + later feature UI |
 | TA-13 | IMP-14 telemetry/config/experiments/live ops |
-| TA-14 | instrumentation from IMP-2 onward; hardening in every phase; full L0-L5 IMP-15 |
+| TA-14 | instrumentation from IMP-2 onward; hardening in every phase; deferred VS1-19 mandatory before IMP-10 COMPLETE under AD-249; full L0-L5 IMP-15 |
 | TA-15 | tests/CI from IMP-1 onward; C0/C1 evidence gates |
 | TA-16 | no reopened blocker; readiness constraints carried into TA-17 |
 | TA-17 | exact implementation contract and dependency order |
@@ -42,7 +42,15 @@
 | client authoritative projection | GDS-14 | TA-3/12 | IMP-4/7 |
 | reconnect reconciliation | GDS-2/4 | TA-4/12 | IMP-3/4/7 |
 | security/fault evidence | GDS-15 | TA-3/15 | IMP-1..8 |
-| performance evidence | GDS-1/14/16 | TA-14/15 | IMP-2..8 |
+| performance evidence | GDS-1/14/16 | TA-14/15/17 | IMP-2..8 partial L0; VS1-19 DEFERRED to before IMP-10 COMPLETE (AD-249) |
+
+## Accepted change-control routing
+
+| Decision / gate | Evidence and current state | Completion dependency |
+|---|---|---|
+| AD-249 / VS1-19 (C1) | [Accepted decision](ARCHITECTURE_DECISIONS.md#ad-249--defer-vs1-19-to-the-imp-10-completion-gate); **DEFERRED — environment limitation**. [IMP-8 evidence](../implementation/IMP8_IMPLEMENTATION_EVIDENCE.md) retains three solo Studio samples and measurement limits. No L1/real-client PASS is claimed. | IMP-8 COMPLETE with deferred validation permits IMP-9 OPEN; full 30-player L1 at MaxPlayers=60 plus supported real-client frame/memory evidence is mandatory **before IMP-10 COMPLETE**. |
+
+This timing change preserves the TA-14 numeric and TA-15 evidence contracts. All other IMP-8 dependencies are closed; [the roadmap](../implementation/IMPLEMENTATION_ROADMAP.md) carries the hard gate into IMP-10's definition of done.
 
 ## Traceability rule
 

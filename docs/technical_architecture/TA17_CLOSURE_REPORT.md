@@ -50,6 +50,8 @@ VS-1 is:
 
 Twenty C0/C1 acceptance rows cover persistence, networking, authority, exact-once finalization, reconnect, accessibility and performance sanity.
 
+Accepted amendment on 2026-10-01: [AD-249](ARCHITECTURE_DECISIONS.md#ad-249--defer-vs1-19-to-the-imp-10-completion-gate) relocks TA-17 performance-evidence timing only. IMP-8 is COMPLETE with VS1-19 **DEFERRED — environment limitation** and IMP-9 is OPEN for DEV work. Full 30-player L1 and supported real-client performance remain a mandatory hard gate before IMP-10 COMPLETE. The original pre-code scenario result below is historical contract evidence, not a runtime performance result.
+
 ## Scenario result
 
 TA17_SCENARIO_VALIDATION.md records:
