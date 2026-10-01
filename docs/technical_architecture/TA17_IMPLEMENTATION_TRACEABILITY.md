@@ -54,6 +54,12 @@ This timing change preserves the TA-14 numeric and TA-15 evidence contracts. All
 
 ## Traceability rule
 
+IMP-9 first-dependency traceability:
+
+| Contract | Implementation / evidence | Remaining dependency |
+|---|---|---|
+| GDS-4/5/7; TA-4/7/8 | VaultService capacity policy, CaptureFinalizationUseCase injection and protected V1 load validation; T15.vault.capacity.instanceAccounting / protectedLoad / captureAuthority; [IMP-9 evidence](../implementation/IMP9_IMPLEMENTATION_EVIDENCE.md) and real DEV Studio capacity-race/gateway evidence. | IMP-9 stays OPEN: authorized additive capacity, P2 reconciliation/Resolve Overflow, assignments, settlement, Energy and progression are still required before IMP-10. |
+
 Every implementation PR names:
 
 - implementation phase;

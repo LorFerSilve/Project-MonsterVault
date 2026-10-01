@@ -185,6 +185,12 @@ function ProfileSchemaV1.validate(profile: any): (boolean, string?)
 			return false, "invalid_domain_bucket"
 		end
 	end
+	-- The legacy DEV capacity scalar is optional, but must never silently fall
+	-- back to base capacity after corrupt or inexact persisted data.
+	local capacity = profile.progression.collectionCapacity
+	if capacity ~= nil and (not finiteInteger(capacity, 0) or capacity > 9_007_199_254_740_991) then
+		return false, "invalid_collection_capacity"
+	end
 	local owned = profile.collection.creaturesById
 	if owned ~= nil then
 		if type(owned) ~= "table" then

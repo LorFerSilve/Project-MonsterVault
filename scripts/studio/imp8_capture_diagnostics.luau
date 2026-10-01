@@ -2,8 +2,9 @@
 
 -- Load as a temporary server ModuleScript through the Studio MCP in Play.
 -- Real DEV UpdateAsync runs in this probe's scope, separate from player progress.
--- This verifies VS1-20; it is not gamepad, load, STG, or full-gateway evidence.
-return function(): any
+-- Optional capacityRace tests IMP-9 using the same native gameplay/cleanup harness.
+-- Neither scenario is gamepad, load, STG, or full-gateway evidence.
+return function(capacityRace: boolean?): any
 	local started = os.clock()
 	local globals = getfenv() :: any
 	local Instance = globals.Instance
@@ -24,16 +25,24 @@ return function(): any
 	local player = assert(Players:GetPlayers()[1], "one joined player required")
 	local character = assert(player.Character, "live character required")
 	local oldPivot = character:GetPivot()
-	local scope = "IMP8Diagnostics20261001"
-	local seedId = "fixture:imp8-diagnostics-v1"
+	local scope = if capacityRace
+		then "IMP9Capacity-" .. HttpService:GenerateGUID(false)
+		else "IMP8Diagnostics20261001"
+	local seedId = if capacityRace
+		then "fixture:imp9-capacity-v1"
+		else "fixture:imp8-diagnostics-v1"
 	local result: any = {
-		testId = "T15.imp8.Studio.captureDiagnostics",
+		testId = if capacityRace
+			then "T15.vault.Studio.capacityRace"
+			else "T15.imp8.Studio.captureDiagnostics",
 		seedId = seedId,
 		environment = "DEV",
 		scope = scope,
 		records = {},
 		failures = {},
-		requirements = { "TA-7", "TA-12", "TA-15", "VS1-20" },
+		requirements = if capacityRace
+			then { "TA-4", "TA-7", "TA-8", "TA-15", "GDS-4", "GDS-7" }
+			else { "TA-7", "TA-12", "TA-15", "VS1-20" },
 		criticality = "C1",
 		studioVersion = globals.version(),
 		placeId = game.PlaceId,
@@ -89,7 +98,13 @@ return function(): any
 		local before = active.snapshot()
 		result.beforeRevision = before.profileRevision
 		assert(
-			require(server.application.CaptureFinalizationUseCase).canInitiate(before),
+			require(server.application.CaptureFinalizationUseCase)
+				.new(
+					require(server.domains.vault.VaultService).new(
+						require(shared.config.VaultCapacityFixture)
+					)
+				)
+				.canInitiate(before),
 			"probe profile is full"
 		)
 		local storage = game:GetService("ServerStorage")
@@ -166,6 +181,12 @@ return function(): any
 			capture.submit(player, payload, "imp8-duplicate") == "OK_CAPTURE_PROVISIONAL",
 			"duplicate submit must be idempotent"
 		)
+		if capacityRace then
+			-- Isolated server fixture mutation after admission; no player upgrade.
+			assert(active.checkpoint("imp9-capacity-race", function(profile: any)
+				profile.progression.collectionCapacity = 0
+			end).status == "Committed", "capacity race checkpoint")
+		end
 		character:PivotTo(CFrame.new(0, 4, 10))
 		capture.secure(player)
 		check(capture.state(creatureId) == "Secured", "capture did not become durably secured")
@@ -204,13 +225,30 @@ return function(): any
 		)
 		local after = active.snapshot()
 		check(
-			after.profileRevision == before.profileRevision + 1,
+			after.profileRevision == before.profileRevision + (if capacityRace then 2 else 1),
 			"duplicate submit applied more than once"
 		)
 		check(
 			after.collection.creaturesById[creatureId].operationId == operationId,
 			"durable operation mismatch"
 		)
+		local vault = require(server.domains.vault.VaultService).new(
+			require(shared.config.VaultCapacityFixture)
+		)
+		if capacityRace then
+			local placed = vault.collectionStatus(after)
+			check(
+				placed.capacity == 0 and placed.ordinaryUsed == 0 and placed.overflowHeldCount == 1,
+				"capacity race placement"
+			)
+			check(not placed.canInitiate, "overflow must block ordinary initiation")
+			check(
+				after.collection.creaturesById[creatureId].overflowHeld,
+				"exact creature must be overflow-held"
+			)
+			check(next(after.economy) == nil, "capture must not grant Energy")
+			result.afterCapacity = placed
+		end
 		result.afterRevision = after.profileRevision
 		assert(active.release(os.clock() + 25).status == "Closed", "probe profile must release")
 		active = newSession()
@@ -226,6 +264,24 @@ return function(): any
 			end
 		end
 		check(count == 1, "rejoin must project the captured creature once")
+		if capacityRace then
+			local restored = active.snapshot()
+			local status = vault.collectionStatus(restored)
+			check(
+				restored.collection.creaturesById[creatureId].overflowHeld,
+				"overflow survives rejoin"
+			)
+			check(
+				not status.canInitiate and status.overflowHeldCount == 1,
+				"rejoin capacity policy"
+			)
+			check(
+				restored.collection.creaturesById[creatureId].variantIdentity.variantSignature
+					== after.collection.creaturesById[creatureId].variantIdentity.variantSignature,
+				"rejoin identity remains stable"
+			)
+			result.rejoinCapacity = status
+		end
 		result.rejoinRevision = snapshot.profileRevision
 		result.rejoinOccurrences = count
 	end)

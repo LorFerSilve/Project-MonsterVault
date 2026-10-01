@@ -123,9 +123,13 @@ VS-1 functional acceptance must be complete before broad feature expansion, with
 
 ## IMP-9 — Vault / Economy / Progression
 
-**Status: OPEN for DEV implementation.** Upstream IMP-8 is formally complete under AD-249; no IMP-9 gameplay implementation is claimed by this status change.
+**Status: OPEN for DEV implementation; first capacity-policy dependency implemented and validated.** Upstream IMP-8 is formally complete under AD-249. [IMP-9 evidence](IMP9_IMPLEMENTATION_EVIDENCE.md) records the current implementation and remaining gates.
 
 Collection capacity, assignments, production, offline settlement, Energy and progression transactions.
+
+Completed first dependency: Vault-owned capacity status consumed by capture admission and P2 placement; invalid persisted capacity fails protected load, and capacity races preserve exact Overflow-Held ownership. Existing DEV fixture balance is retained.
+
+Next dependency: separately authorized, content-bounded capacity components, deterministic non-destructive P2 Capacity Reconciliation and explicit owner-selected Resolve Overflow. Display/production assignments, elapsed-time/offline settlement, Energy claims and progression transactions remain OPEN. IMP-9 cannot be COMPLETE, and IMP-10 cannot start, until the full TA-8 gates pass.
 
 ## IMP-10 — World Scaling
 

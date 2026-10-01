@@ -132,6 +132,8 @@ The active dependency is:
 
 > **IMP-9 — Vault / Economy / Progression (OPEN)**
 
+The first Vault capacity-policy dependency is implemented and validated. [IMP-9 evidence](implementation/IMP9_IMPLEMENTATION_EVIDENCE.md) records the actual Studio results and remaining capacity, assignment, production and economy gates.
+
 All pre-code gates are satisfied. Gameplay implementation is now open under TA-17.
 
 The implementation dependency order is defined in [`implementation/IMPLEMENTATION_ROADMAP.md`](implementation/IMPLEMENTATION_ROADMAP.md), currently at **IMP-9 OPEN**. IMP-8 is COMPLETE with VS1-19 **DEFERRED — environment limitation** under [AD-249](technical_architecture/ARCHITECTURE_DECISIONS.md#ad-249--defer-vs1-19-to-the-imp-10-completion-gate); full 30-player L1 and supported real-client performance must pass before IMP-10 COMPLETE. Production/staging release remains separately gated.

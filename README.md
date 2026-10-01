@@ -680,6 +680,8 @@ TA-17 created the non-gameplay source/test scaffold and locked the implementatio
 
 Proceed with **IMP-9 — Vault / Economy / Progression (OPEN)**.
 
+The first capacity-policy dependency is implemented and validated ([IMP-9 evidence](docs/implementation/IMP9_IMPLEMENTATION_EVIDENCE.md)). Next are authorized capacity components, non-destructive P2 reconciliation and explicit Overflow-Held resolution; the remaining Vault/economy/progression gates keep IMP-9 OPEN.
+
 The first implementation vertical slice is locked as **VS-1 — Trusted Join → One World Creature → Capture → Secure Ownership → Rejoin**. IMP-8 is COMPLETE with the sole registered VS1-19 deferral; [AD-249](docs/technical_architecture/ARCHITECTURE_DECISIONS.md#ad-249--defer-vs1-19-to-the-imp-10-completion-gate) requires the full performance evidence before IMP-10 COMPLETE.
 
 ## License
