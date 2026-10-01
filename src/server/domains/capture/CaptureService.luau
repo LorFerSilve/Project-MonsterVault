@@ -44,6 +44,7 @@ function CaptureService.new(options: {
 	random: any,
 	canInitiate: (any) -> boolean,
 	captureChance: ((any) -> number?)?,
+	canAccess: ((any, any) -> boolean)?,
 	finalize: (any, any) -> any,
 	onChanged: ((number, any, string?) -> ())?,
 	isPlayerConnected: ((number) -> boolean)?,
@@ -56,6 +57,13 @@ function CaptureService.new(options: {
 	local recentUsers: { number } = {}
 	local function connected(userId: number): boolean
 		return options.isPlayerConnected ~= nil and options.isPlayerConnected(userId)
+	end
+	local function access(profile: any, identity: any): boolean
+		if options.canAccess == nil then
+			return true
+		end
+		local ok, allowed = pcall(options.canAccess, profile, identity)
+		return ok and allowed == true
 	end
 	local function touchProjection(userId: number)
 		for index = #recentUsers, 1, -1 do
@@ -140,6 +148,9 @@ function CaptureService.new(options: {
 			terminal(record, "Expired")
 			return { status = "Expired" }
 		end
+		if not access(profile, record.identity) then
+			return { status = "AccessBlocked" }
+		end
 		if not options.world.transition(id, "TransportGrace", "TransportActive") then
 			return { status = "Unavailable" }
 		end
@@ -184,15 +195,18 @@ function CaptureService.new(options: {
 		if available ~= "Available" then
 			return { status = available }
 		end
+		local identity = options.world.identity(creatureId)
+		if identity == nil or identity.variantIdentity == nil then
+			return { status = "Unavailable" }
+		end
+		if not access(profile, identity) then
+			return { status = "AccessBlocked" }
+		end
 		if not options.canInitiate(profile) then
 			return { status = "CapacityBlocked" }
 		end
 		local chance = if options.captureChance then options.captureChance(profile) else 0.8
 		if type(chance) ~= "number" or chance ~= chance or chance < 0 or chance > 1 then
-			return { status = "Unavailable" }
-		end
-		local identity = options.world.identity(creatureId)
-		if identity == nil or identity.variantIdentity == nil then
 			return { status = "Unavailable" }
 		end
 		local claimId = options.newId()
@@ -228,7 +242,8 @@ function CaptureService.new(options: {
 		actionId: string,
 		sequence: number,
 		position: any,
-		generation: number
+		generation: number,
+		profile: any?
 	): any
 		local id = byUser[userId]
 		local record = if id then byCreature[id] else nil
@@ -238,6 +253,9 @@ function CaptureService.new(options: {
 			or record.userId ~= userId
 		then
 			return { status = "Rejected" }
+		end
+		if not access(profile, record.identity) then
+			return { status = "AccessBlocked" }
 		end
 		if record.state == "TransportActive" and sequence == 1 then
 			return { status = "TransportActive", custodyId = record.custodyId }
@@ -338,6 +356,9 @@ function CaptureService.new(options: {
 		end
 		if session == nil or session.state() ~= "Ready" then
 			return { status = "Unavailable" }
+		end
+		if options.canAccess and not access(session.snapshot(), record.identity) then
+			return { status = "AccessBlocked" }
 		end
 		local candidate = frozenCopy({
 			ownerUserId = record.userId,

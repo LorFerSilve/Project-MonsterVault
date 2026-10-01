@@ -143,7 +143,11 @@ The full gate matrix closes with 153 fast tests, 40 native Studio C0 checks, rea
 
 ## IMP-10 — World Scaling
 
-**Status: OPEN for the next DEV dependency; implementation has not started in the IMP-9 closure change.** First bind TA-9 world/content registries and the GDS-9 active mastery/access-action owner to the completed TA-8 consumer, without inventing topology beyond the locked contracts.
+**Status: OPEN.** First dependency COMPLETE under AD-255: immutable server world/content registries, validated authored action index, actual active mastery evidence/P2 owner and TA-8 Mid A/Mid B/Advanced access binding. Existing clearing/IDs remain the DEV Starter binding; no new biome geometry or topology is inferred. Survey, bounded traversal and qualifying Secured provenance produce real history; client fields, bought access and passive value cannot create mastery. Actual capture/world actions fail closed; unknown writes recover via Class A world resync and the existing single writer.
+
+[Evidence](IMP10_IMPLEMENTATION_EVIDENCE.md) includes 161 fast tests, 8 native C0 suites, 7 native authoring checks, real DEV cut points, native client tampering/readback and fresh Play save/rejoin. [Full phase gate matrix](IMP10_GATE_MATRIX.md) remains OPEN for unimplemented phase-owned work. World/event/commercial/deferred rewards remain protected while unbound.
+
+Next dependency: remaining canonical authored biome/content and safe-utility bindings, followed by region-scoped spawn scheduling. Mid mastery recipes/actions need actual authored content; fixture binding tests do not close that gate. Travel/recovery/hazards and full World Scaling validation remain open.
 
 Full biome/content registries, spawn scheduling, travel, mastery/hazards and TA-14 scaling.
 

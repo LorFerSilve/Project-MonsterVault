@@ -16,6 +16,7 @@ function CaptureRuntimeService.new(options: {
 	worldRuntime: any,
 	vault: any?,
 	progression: any?,
+	worldProgression: any?,
 	profileCoordinator: any,
 	players: any,
 	workspace: any,
@@ -26,7 +27,8 @@ function CaptureRuntimeService.new(options: {
 	random: any?,
 })
 	local CaptureFinalizationUseCase = CaptureFinalizationUseCaseFactory.new(
-		options.vault or VaultService.new(VaultCapacityFixture)
+		options.vault or VaultService.new(VaultCapacityFixture),
+		if options.worldProgression then options.worldProgression.secured else nil
 	)
 	local globals = getfenv() :: any
 	local scheduler = options.scheduler or globals.task
@@ -119,7 +121,8 @@ function CaptureRuntimeService.new(options: {
 			payload.actionId,
 			payload.clientSequence,
 			p,
-			generation
+			generation,
+			active.snapshot()
 		)
 		correlations[player.UserId] = nil
 		if result.status == "TransportActive" then
@@ -230,6 +233,20 @@ function CaptureRuntimeService.new(options: {
 			},
 			canInitiate = CaptureFinalizationUseCase.canInitiate,
 			captureChance = if options.progression then options.progression.captureChance else nil,
+			canAccess = if options.worldProgression
+				then function(profile: any, identity: any): boolean
+					local region = options.worldProgression.provenance({
+						speciesId = identity.speciesId,
+						origin = identity,
+					})
+					return region ~= nil
+						and options.worldProgression.canAccess(
+							profile,
+							region,
+							options.progression.hasAccess
+						)
+				end
+				else nil,
 			finalize = CaptureFinalizationUseCase.finalize,
 			isPlayerConnected = function(userId: number): boolean
 				return playerConnections[userId] ~= nil
