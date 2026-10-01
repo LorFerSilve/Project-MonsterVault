@@ -2,6 +2,7 @@
 
 local shared = game:GetService("ReplicatedStorage").MonsterVault.Shared.contracts
 local ProtocolV1 = require(shared.ProtocolV1)
+local VaultProjectionV1 = require(shared.VaultProjectionV1)
 local RouteIds = require(shared.RouteIds)
 local ResultCodes = require(shared.ResultCodes)
 local WireValidation = require(shared.WireValidation)
@@ -30,6 +31,7 @@ function NetworkingRuntimeService.new(options: {
 		wire = WireValidation,
 		store = store,
 		captureProjection = CaptureProjectionV1,
+		vaultProjection = VaultProjectionV1,
 		securedCollectionProjection = SecuredCollectionProjectionV1,
 		securedCollectionStore = securedCollectionStore,
 		sendCommand = function(envelope)
@@ -40,6 +42,7 @@ function NetworkingRuntimeService.new(options: {
 	local scheduler = (getfenv() :: any).task
 	local running = false
 	local captureListener: ((any) -> ())? = nil
+	local vaultListener: ((any) -> ())? = nil
 
 	local function start()
 		assert(not running, "networking already started")
@@ -53,6 +56,9 @@ function NetworkingRuntimeService.new(options: {
 				local ok, outcome = pcall(gateway.handleEvent, envelope)
 				if ok and outcome == "Capture" and captureListener ~= nil then
 					captureListener(envelope)
+				end
+				if ok and outcome == "Vault" and vaultListener ~= nil then
+					vaultListener(envelope)
 				end
 				if not ok or outcome == "Invalid" then
 					options.diagnostics.emit(
@@ -114,6 +120,7 @@ function NetworkingRuntimeService.new(options: {
 		table.clear(connections)
 		gateway.reset()
 		captureListener = nil
+		vaultListener = nil
 		return {}
 	end
 
@@ -125,6 +132,15 @@ function NetworkingRuntimeService.new(options: {
 		gateway = gateway,
 		store = store,
 		securedCollectionStore = securedCollectionStore,
+		subscribeVault = function(listener: (any) -> ())
+			assert(vaultListener == nil, "Vault listener already bound")
+			vaultListener = listener
+			return function()
+				if vaultListener == listener then
+					vaultListener = nil
+				end
+			end
+		end,
 		subscribeCapture = function(listener: (any) -> ())
 			assert(captureListener == nil, "capture listener already bound")
 			captureListener = listener

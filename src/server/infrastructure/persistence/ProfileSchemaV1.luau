@@ -71,6 +71,7 @@ local function validCreature(id: any, record: any): boolean
 		or not finiteInteger(record.securedAt, 0)
 		or type(record.locked) ~= "boolean"
 		or type(record.overflowHeld) ~= "boolean"
+		or (record.securedSequence ~= nil and not finiteInteger(record.securedSequence, 1))
 		or type(record.origin) ~= "table"
 		or not validId(record.origin.spawnContextId)
 		or not validId(record.origin.contentSnapshotId)
@@ -191,12 +192,55 @@ function ProfileSchemaV1.validate(profile: any): (boolean, string?)
 	if capacity ~= nil and (not finiteInteger(capacity, 0) or capacity > 9_007_199_254_740_991) then
 		return false, "invalid_collection_capacity"
 	end
+	local vault = profile.vault
+	if vault.capacitySchemaVersion ~= nil and vault.capacitySchemaVersion ~= 1 then
+		return false, "invalid_capacity_schema"
+	end
+	if vault.capacityBase ~= nil then
+		if
+			type(vault.capacityBase) ~= "table"
+			or vault.capacityBase.sourceId ~= "migration/imp9-dev-capacity-v1"
+			or not finiteInteger(vault.capacityBase.units, 0)
+			or vault.capacityBase.units > 2048
+		then
+			return false, "invalid_capacity_base"
+		end
+		for key in vault.capacityBase do
+			if key ~= "units" and key ~= "sourceId" then
+				return false, "invalid_capacity_base"
+			end
+		end
+	end
+	if capacity ~= nil and (vault.capacityBase ~= nil or vault.capacitySchemaVersion ~= nil) then
+		return false, "conflicting_capacity_sources"
+	end
+	if vault.earnedUpgradeLevels ~= nil then
+		if type(vault.earnedUpgradeLevels) ~= "table" then
+			return false, "invalid_upgrade_levels"
+		end
+		for id, level in vault.earnedUpgradeLevels do
+			if not validId(id) or not finiteInteger(level, 0) or level > 2048 then
+				return false, "invalid_upgrade_levels"
+			end
+		end
+	end
+	if
+		profile.collection.capacityPriority ~= nil
+		and not validIdArray(profile.collection.capacityPriority, 2048, false)
+	then
+		return false, "invalid_capacity_priority"
+	end
 	local owned = profile.collection.creaturesById
 	if owned ~= nil then
 		if type(owned) ~= "table" then
 			return false, "invalid_collection"
 		end
+		local ownedCount = 0
 		for id, record in owned do
+			ownedCount += 1
+			if ownedCount > 2048 then
+				return false, "collection_limit"
+			end
 			if not validCreature(id, record) then
 				return false, "invalid_creature_record"
 			end

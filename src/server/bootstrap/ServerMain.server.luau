@@ -46,6 +46,7 @@ local composition = ServerComposition.new({
 			captureRuntime = CaptureRuntimeService.new({
 				worldRuntime = worldRuntime,
 				profileCoordinator = profileRuntime.coordinator,
+				vault = profileRuntime.vault,
 				players = game:GetService("Players"),
 				workspace = game:GetService("Workspace"),
 				event = remotes.Event,
@@ -63,6 +64,8 @@ local composition = ServerComposition.new({
 				players = game:GetService("Players"),
 				profileCoordinator = if profileRuntime then profileRuntime.coordinator else nil,
 				captureRuntime = captureRuntime,
+				vault = if profileRuntime then profileRuntime.vault else nil,
+				capacity = if profileRuntime then profileRuntime.capacity else nil,
 				diagnostics = diagnostics,
 			})
 		)

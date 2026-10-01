@@ -15,6 +15,9 @@ local NetworkingGateway = require(script.Parent.Parent.application.NetworkingGat
 local SecuredCollectionProjection =
 	require(script.Parent.Parent.application.SecuredCollectionProjection)
 
+local VaultCapacityProjection = require(script.Parent.Parent.application.VaultCapacityProjection)
+local VaultProjectionV1 =
+	require(game:GetService("ReplicatedStorage").MonsterVault.Shared.contracts.VaultProjectionV1)
 local NetworkingRuntimeService = {}
 
 function NetworkingRuntimeService.new(options: {
@@ -25,12 +28,15 @@ function NetworkingRuntimeService.new(options: {
 	profileCoordinator: any?,
 	diagnostics: any,
 	captureRuntime: any?,
+	vault: any?,
+	capacity: any?,
 })
 	local function id(value: any): boolean
 		return type(value) == "string" and #value > 0 and #value <= 96
 	end
 	local schemas = {}
 	local handlers = {}
+	local publishVault: any = nil
 	if options.captureRuntime ~= nil then
 		schemas[RouteIds.commands.interactionPrimaryInteract] = function(
 			payload: any,
@@ -83,6 +89,39 @@ function NetworkingRuntimeService.new(options: {
 			return options.captureRuntime.submit(player, envelope.payload, envelope.requestId)
 		end
 	end
+	if options.vault ~= nil and options.capacity ~= nil then
+		schemas[RouteIds.commands.vaultResolveOverflow] = VaultProjectionV1.validResolve
+		handlers[RouteIds.commands.vaultResolveOverflow] = function(
+			player: any,
+			envelope: any
+		): string
+			local active = options.profileCoordinator.get(player.UserId)
+			local outcome = options.capacity.resolve(
+				active,
+				envelope.payload.creatureInstanceId,
+				envelope.expectedRevision
+			)
+			local publication = publishVault(player, envelope.requestId, nil)
+			if publication == "OK_VAULT_SNAPSHOT" then
+				local saved = active.snapshot()
+				local record = (saved.collection.creaturesById or {})[envelope.payload.creatureInstanceId]
+				if record ~= nil and not record.overflowHeld then
+					return if outcome.status == "AlreadyStored"
+						then "OK_VAULT_ALREADY_STORED"
+						else "OK_VAULT_OVERFLOW_RESOLVED"
+				end
+			end
+			if outcome.status == "Rejected" then
+				return if outcome.reason == "OWNERSHIP"
+					then "REJECT_PERMISSION_VAULT_OWNERSHIP"
+					else "REJECT_STATE_VAULT_" .. (outcome.reason or "INVALID")
+			end
+			return if outcome.status == "OutcomeUnknown"
+					or outcome.status == "PersistenceAtRisk"
+				then "OUTCOME_UNKNOWN_VAULT_RESOLUTION"
+				else "PROTECTED_VAULT_UNAVAILABLE"
+		end
+	end
 	local function getSession(player: any): any
 		if options.profileCoordinator == nil then
 			return { status = "Protected" }
@@ -119,6 +158,46 @@ function NetworkingRuntimeService.new(options: {
 			options.event:FireClient(player, envelope)
 		end,
 	})
+	publishVault = function(player: any, requestId: string, afterId: string?): string
+		if options.capacity == nil or options.vault == nil or options.profileCoordinator == nil then
+			return "UNAVAILABLE_VAULT"
+		end
+		local active = options.profileCoordinator.get(player.UserId)
+		local result = options.capacity.reconcile(active)
+		local ready = active ~= nil
+			and active.state() == "Ready"
+			and (
+				result.status == "Unchanged"
+				or result.status == "Committed"
+				or result.status == "AlreadyCommitted"
+			)
+		projection.snapshot(
+			player,
+			if ready
+				then { status = "Ready", profileRevision = active.snapshot().profileRevision }
+				else { status = "Protected" }
+		)
+		if not ready then
+			return if result.status == "OutcomeUnknown"
+					or result.status == "PersistenceAtRisk"
+				then "OUTCOME_UNKNOWN_VAULT_RESOLUTION"
+				else "PROTECTED_VAULT_UNAVAILABLE"
+		end
+		local payload =
+			VaultCapacityProjection.fromProfile(active.snapshot(), options.vault, afterId)
+		assert(
+			VaultProjectionV1.validSnapshot(payload) and WireValidation.payload(payload),
+			"invalid bounded Vault projection"
+		)
+		options.event:FireClient(player, {
+			protocolVersion = 1,
+			routeId = RouteIds.events.projectionSnapshot,
+			correlationId = requestId,
+			revision = payload.revision,
+			payload = payload,
+		})
+		return "OK_VAULT_SNAPSHOT"
+	end
 	local gateway = NetworkingGateway.new({
 		protocol = ProtocolV1,
 		routes = RouteIds,
@@ -137,6 +216,7 @@ function NetworkingRuntimeService.new(options: {
 			options.unreliableEvent:FireClient(player, envelope)
 		end,
 		routeHandlers = handlers,
+		vaultResync = publishVault,
 		captureResync = if options.captureRuntime ~= nil
 			then options.captureRuntime.resync
 			else nil,

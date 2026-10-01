@@ -5,6 +5,7 @@
 > **Authority:** Final toolchain, repository, module/service graph, runtime namespace, vertical slice, implementation order, verification, branch/release and change-control lock
 > **Depends on:** GDS-17 PASS; TA-0..15 Architecture Complete; TA-16 Architecture Integration Complete — PASS
 > **Change control:** Reopened and relocked on 2026-10-01 by [AD-249](../ARCHITECTURE_DECISIONS.md#ad-249--defer-vs1-19-to-the-imp-10-completion-gate); performance-evidence timing only.
+> **IMP-9 implementation extension:** [AD-250](../ARCHITECTURE_DECISIONS.md#ad-250--register-imp-9-capacity-migration-and-explicit-overflow-resolution) registers the additive V1 overflow route/projection and explicit capacity-domain migration; authority and phase gates remain locked.
 
 ## 1. Purpose
 

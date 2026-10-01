@@ -1,8 +1,13 @@
 --!strict
 
--- Retains the IMP-6 DEV fixture balance. Production/content-backed capacity
--- components and upgrades remain later IMP-9 dependencies (TA-8 / GDS-8).
+-- DEV snapshot retains the base of 10. GDS-8 PE-08 supports +6 capacity
+-- increments. This defines one earned tier; purchasing it is a later dependency.
+-- No commercial/temporary grant is authorized by this fixture.
 return table.freeze({
-	contentSnapshotId = "content-snapshot/imp9-capacity-fixture-v1",
+	contentSnapshotId = "content-snapshot/imp9-capacity-fixture-v2",
 	baseCollectionCapacity = 10,
+	collectionCapacityUpgradeId = "vault-upgrade/collection-capacity",
+	earnedCollectionCapacityByLevel = table.freeze({ [0] = 0, [1] = 6 }),
+	commercialCapacityById = table.freeze({}),
+	temporaryCapacityById = table.freeze({}),
 })

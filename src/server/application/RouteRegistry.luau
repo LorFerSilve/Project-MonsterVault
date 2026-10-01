@@ -23,7 +23,21 @@ local function resyncPayload(payload: any, expectedRevision: any): boolean
 	end
 	for key, value in payload do
 		if key == "domain" then
-			if value ~= "session" and value ~= "capture" and value ~= "securedCollection" then
+			if
+				value ~= "session"
+				and value ~= "capture"
+				and value ~= "securedCollection"
+				and value ~= "vault"
+			then
+				return false
+			end
+		elseif key == "afterCreatureInstanceId" then
+			if
+				payload.domain ~= "vault"
+				or type(value) ~= "string"
+				or #value < 1
+				or #value > 128
+			then
 				return false
 			end
 		elseif key == "knownRevision" then

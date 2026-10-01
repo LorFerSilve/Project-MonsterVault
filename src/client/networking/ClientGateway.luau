@@ -9,6 +9,7 @@ function ClientGateway.new(options: {
 	wire: any,
 	store: any,
 	captureProjection: any?,
+	vaultProjection: any?,
 	securedCollectionProjection: any?,
 	securedCollectionStore: any?,
 	sendCommand: (any) -> (),
@@ -20,7 +21,7 @@ function ClientGateway.new(options: {
 	local outgoing: { [string]: any } = {}
 	local outgoingOrder: { string } = {}
 
-	local function send(routeId: string, payload: any): string
+	local function send(routeId: string, payload: any, expectedRevision: number?): string
 		assert(options.routes.isCommand(routeId), "unknown client command")
 		assert(options.wire.payload(payload), "invalid client payload")
 		nextRequest += 1
@@ -30,6 +31,7 @@ function ClientGateway.new(options: {
 			routeId = routeId,
 			requestId = requestId,
 			payload = options.wire.copy(payload),
+			expectedRevision = expectedRevision,
 		}
 		outgoing[requestId] = envelope
 		table.insert(outgoingOrder, requestId)
@@ -80,6 +82,21 @@ function ClientGateway.new(options: {
 			return "Invalid"
 		end
 		if envelope.routeId == options.routes.events.projectionSnapshot then
+			if envelope.payload.domain == "vault" then
+				if
+					options.vaultProjection == nil
+					or not options.vaultProjection.validSnapshot(envelope.payload)
+					or envelope.revision ~= envelope.payload.revision
+				then
+					return "Invalid"
+				end
+				local session = options.store.view()
+				return if session ~= nil
+						and session.status == "Ready"
+						and session.profileRevision == envelope.revision
+					then "Vault"
+					else "Stale"
+			end
 			if
 				type(envelope.payload) == "table"
 				and envelope.payload.domain == "securedCollection"

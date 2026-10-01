@@ -41,6 +41,7 @@ function ProfileSession.new(options: {
 	jobId: string,
 	repository: any,
 	schema: any,
+	prepareProfile: ((any) -> any)?,
 	queue: any,
 	retry: any,
 	unixSeconds: () -> number,
@@ -143,6 +144,28 @@ function ProfileSession.new(options: {
 								return { kind = "abort", reason = "PROFILE_INVALID" }
 							end
 							candidate = copy(migrated)
+						end
+						if options.prepareProfile ~= nil then
+							local preparedOk, prepared = pcall(options.prepareProfile, candidate)
+							if
+								not preparedOk
+								or type(prepared) ~= "table"
+								or prepared.status ~= "Prepared"
+							then
+								return {
+									kind = "abort",
+									reason = if preparedOk and type(prepared) == "table"
+										then prepared.reason
+										else "PROFILE_PREPARATION_FAILED",
+								}
+							end
+							if prepared.changed and current ~= nil then
+								candidate.profileRevision += 1
+								candidate.lastSuccessfulSaveAt = now
+							end
+							if not validOwnedProfile(candidate) then
+								return { kind = "abort", reason = "PREPARED_PROFILE_INVALID" }
+							end
 						end
 						local nextMetadata = copy(metadata)
 						nextMetadata.mvLease = {
