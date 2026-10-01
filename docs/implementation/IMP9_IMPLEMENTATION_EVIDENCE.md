@@ -1,10 +1,10 @@
 # IMP-9 Implementation Evidence
 
-> **Status:** OPEN — capacity, reconciliation, Overflow-Held resolution, assignments, production/offline settlement, Energy/claim and minimal progression quote/purchase/unlock chain PASS; remaining progression catalog and full phase gates open
+> **Status:** COMPLETE — all phase-owned gates PASS in the [TA-8 / IMP-9 gate audit](IMP9_GATE_AUDIT.md); downstream owners remain explicitly unbound/protected
 >
 > **Date:** 2026-10-01
 >
-> **Contracts:** GDS-4, GDS-5, GDS-7, GDS-8; TA-2, TA-4, TA-7, TA-8, TA-12, TA-14, TA-15, TA-17
+> **Contracts:** GDS-4, GDS-5, GDS-7, GDS-8, GDS-9; TA-2, TA-3, TA-4, TA-7, TA-8, TA-9, TA-12, TA-14, TA-15, TA-17
 
 IMP-8 remains COMPLETE under AD-249. VS1-19 remains DEFERRED for environment limitation, mandatory before IMP-10 COMPLETE. Capacity/reconciliation PR #49 was verified merged as `0d8708edc712b288f9066f1b974c1bd9574c9016`; all 60 authored scripts matched the open Studio project before the assignment/settlement dependency. Earlier capacity evidence below retains its original scope and source identities.
 
@@ -141,7 +141,7 @@ Validation: **139/139 fast Lune tests**, **8/8 native Studio C0 tests**, **28/28
 
 At the PR #51 handoff, IMP-9 remained OPEN for progression quotes, atomic purchases and persistent unlocks. The following AD-253 evidence closes that minimal transaction dependency. External grant/deferred reconciliation remains protected until its owning system supplies verified authority. AD-249 / VS1-19 and its before-IMP-10-COMPLETE deadline remain unchanged.
 
-## Progression quotes, atomic purchase and persistent unlock — current evidence
+## Progression quotes, atomic purchase and persistent unlock — historical PR #52 evidence
 
 PR #51 was verified merged as `3eb4e6f9e66d3f6807cfc710d141b1ec491b9f0a`; all 69 authored scripts matched the connected Edit project before this work. [AD-253](../technical_architecture/ARCHITECTURE_DECISIONS.md#ad-253--register-imp-9-progression-quotes-and-atomic-purchases) binds the minimal dependency. The [native Studio artifact](evidence/IMP9_STUDIO_PROGRESSION_PURCHASE_2026-10-01.json) records final source hashes, sixteen native C0 results, two isolated DEV DataStore scopes, mouse confirmation, gateway request/operation identities, lost-result recovery and a fresh shipped ProfileRuntimeService.
 
@@ -168,3 +168,21 @@ Generation 1 initializes `progression.progressionSchemaVersion = 1` and an empty
 Validation: **147/147 fast Lune**, **16/16 native Studio C0** (eight progression and eight existing claim tests), **28/28 Python checkers**; StyLua, Selene (0 errors/warnings), architecture dependencies, integrity, Rojo build/sourcemap and luau-lsp (zero type errors; existing missing engine-definitions warning). Both real probe scopes preserve the normal player's collection and Energy. Studio finishes in Edit with **76/76** authored sources matching length/Adler-32, four intact authored world objects and no temporary probes/remotes. Native C0 fixtures use the deterministic fake repository; the separately recorded GUI/fault/rejoin scenarios use real isolated DEV DataStores.
 
 **IMP-9 remains OPEN.** Next dependency: bind the remaining Vault slot/buffer/offline, Capture Capability and Access definitions/prerequisites, then audit the full TA-8 phase gates. This selected chain is complete for its one authored target; it is not evidence of a complete catalog or world access integration. Unbound rewards/grants remain protected. **IMP-10 has not started**; AD-249 / VS1-19 and release gates remain unchanged.
+
+## Remaining progression effects and full phase closure — AD-254
+
+PR #52 was verified MERGED at `ec1b3fdce51288792d8acf864d2818bde6447fdb`. Initial Studio Edit parity was 76/76 scripts; the four authored fixture objects were preserved. [AD-254](../technical_architecture/ARCHITECTURE_DECISIONS.md#ad-254--complete-ta-8-progression-effects-and-close-imp-9) closes the final dependency and [twenty phase gates](IMP9_GATE_AUDIT.md). [Current native evidence](evidence/IMP9_STUDIO_PROGRESSION_COMPLETION_2026-10-01.json) records source/test hashes, forty native C0 results, real DEV transactions, GUI pending/confirmed state and a fresh shipped runtime.
+
+The bounded named DEV catalog has twelve targets: two +6 Collection tiers; Production Slots 2→3; Display Slots 3→4; buffer +1440 Energy; offline 2h→4h→8h→12h; Capture Capability 0→1 (server challenge success chance 0.80→0.85); independent Mid A/B access with Starter mastery; Advanced access with both Mid access facts and both active masteries. These are contract-supported DEV tuning, not launch prices or authored world geometry. Starter access has no Energy purchase. All effects reuse the same P2 quote/debit/effect/permanent-receipt chain and existing generation-1 profile.
+
+Production-affecting upgrades settle the old assignment/capability context at one fixed admitted boundary before updating the level; clock regression safely rejects them. Saturated output before a buffer expansion is not retroactively credited. Loaded levels drive existing assignment admission, production saturation and offline bounds. Capability is fixed from the owned profile at capture admission, preserves the baseline action vocabulary and consumes no per-attempt Energy. The test uses real Vault admission and explicit Held resolution; capability cannot bypass capacity/Held or secure ownership.
+
+Quotes and effects remain server-owned. One selected page uses numeric catalog position and an immutable prerequisite-definition reference to fit the existing conservative 4 KiB validator. Selecting another target clears local confirmation and invalidates the previous server quote. Purchase payload stays exactly unlockId/quoteId/quoteRevision with original expectedRevision. Mastery comes only from an injected trusted owner, rechecked before mutation. Shipped runtime remains unbound and rejects unearned Access quotes; tests use an explicitly isolated server-only proof reader and write no world/discovery/mastery progress. Purchased access remains valid after owner unbinding, repricing and rejoin.
+
+The real DEV scope was funded exclusively by two actual Production Claims (1440 each) from an explicitly saturated server elapsed-time fixture. Normal player collection/economy was preserved. A real mouse purchase of Production Slots lost its UpdateAsync result: UI retained Energy 2805 with Confirm disabled, then Class A resync displayed exactly 2755 and Owned. Remaining purchases covered pre-write failure, lost-after-write result, expired/tampered quotes, missing/changed mastery, duplicates, and nested purchase/claim Busy races. All twelve original quotes return AlreadyCommitted after save and a fresh Play server using the shipped ProfileRuntimeService. Restored wallet is 1505; production/display counts are 3/4, buffer cap 2,880,000 milli and offline cap 43,200 seconds; capability is 1, all three Access facts persist, and the exact Held creature remains Held. Scoped base 2 yields capacity 14; shipped base 10 correctly yields 22 with the same earned +12 level. Offline output is credited once. Shipped shutdown returns no failures.
+
+The probe harness initially assumed one producer and exact saturation at a 7200-second boundary. Its isolated discarded scope was cleanly released, with normal progress unchanged. The final harness sums finalized producers and uses a saturated elapsed fixture while retaining buffer value; no runtime correction was needed for that probe error.
+
+Validation: **153/153 fast Lune tests**, **40/40 current native Studio C0 checks** (14 ProgressionPurchase, 8 ProductionClaim, 10 VaultProduction, 8 VaultReconciliation), **28/28 Python checker tests**; StyLua, Selene (zero errors/warnings), dependency/integrity, Rojo build/sourcemap and luau-lsp (zero type errors). The existing missing-engine-definition warning is covered by native checks. Studio finishes in Edit with 76/76 authored source parity, no temporary remotes/probes and all four authored fixture objects intact.
+
+**IMP-9 COMPLETE. IMP-10 may be OPEN; world implementation has not started here.** The full audit distinguishes closed phase guarantees from unbound downstream world/reward/commerce/live-config owners. No external grant or deferred transfer was enabled. **VS1-19 / AD-249 stays DEFERRED and mandatory before IMP-10 COMPLETE.**

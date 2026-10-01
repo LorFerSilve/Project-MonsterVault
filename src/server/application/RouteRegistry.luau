@@ -33,6 +33,15 @@ local function resyncPayload(payload: any, expectedRevision: any): boolean
 			then
 				return false
 			end
+		elseif key == "unlockId" then
+			if
+				payload.domain ~= "progression"
+				or type(value) ~= "string"
+				or #value < 1
+				or #value > 128
+			then
+				return false
+			end
 		elseif key == "afterCreatureInstanceId" then
 			if
 				(payload.domain ~= "vault" and payload.domain ~= "vaultAssignments")

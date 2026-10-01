@@ -7,6 +7,7 @@ function ProgressionController.new(options: {
 	projection: any,
 	sessionReady: () -> boolean,
 	clock: () -> number,
+	catalog: any?,
 	onChanged: ((any) -> ())?,
 })
 	local snapshot: any = nil
@@ -14,12 +15,14 @@ function ProgressionController.new(options: {
 	local pending: any = nil
 	local pageRequest: any = nil
 	local nextRefresh = 0
+	local selectedUnlockId: string? = nil
 	local message = "Loading progression..."
 	local function view(): any
 		return {
 			snapshot = snapshot,
 			reviewed = reviewed,
 			pending = pending ~= nil,
+			canNavigate = snapshot ~= nil and pending == nil and options.sessionReady(),
 			message = message,
 			canReview = snapshot ~= nil
 				and snapshot.state.quote ~= nil
@@ -36,7 +39,7 @@ function ProgressionController.new(options: {
 	local function refresh()
 		pageRequest = options.gateway.send(
 			options.routes.commands.sessionRequestResync,
-			{ domain = "progression" }
+			{ domain = "progression", unlockId = selectedUnlockId }
 		)
 		nextRefresh = options.clock() + 5
 	end
@@ -51,6 +54,9 @@ function ProgressionController.new(options: {
 		if snapshot ~= nil and envelope.revision < snapshot.revision then
 			return "Stale"
 		end
+		if selectedUnlockId ~= nil and envelope.payload.state.unlockId ~= selectedUnlockId then
+			return "Stale"
+		end
 		if
 			envelope.correlationId ~= pageRequest
 			and (pending == nil or envelope.correlationId ~= pending.requestId)
@@ -63,8 +69,7 @@ function ProgressionController.new(options: {
 				s.receiptQuoteId == pending.quoteId
 				and s.receiptExpectedRevision == pending.expectedRevision
 			then
-				message =
-					string.format("Capacity upgrade saved: %d Energy spent.", s.receiptPriceUnits)
+				message = string.format("Upgrade saved: %d Energy spent.", s.receiptPriceUnits)
 			elseif
 				envelope.correlationId == pageRequest
 				and options.gateway.resultFor(pending.requestId)
@@ -77,11 +82,27 @@ function ProgressionController.new(options: {
 			pending, reviewed = nil, nil
 		end
 		snapshot = envelope.payload
+		selectedUnlockId = snapshot.state.unlockId
 		if message == "Loading progression..." then
 			message = "Review the price before confirming."
 		end
 		changed()
 		return "Applied"
+	end
+	local function navigate(offset: number)
+		if not view().canNavigate then
+			return
+		end
+		local target = if options.catalog
+			then options.catalog[snapshot.state.catalogIndex + offset]
+			else nil
+		if target == nil then
+			return
+		end
+		selectedUnlockId, reviewed, snapshot = target.unlockId, nil, nil
+		message = "Loading progression..."
+		refresh()
+		changed()
 	end
 	return {
 		view = view,
@@ -91,7 +112,7 @@ function ProgressionController.new(options: {
 				return
 			end
 			reviewed = table.clone(snapshot.state.quote)
-			message = string.format("Add 6 Collection places for %d Energy?", reviewed.priceUnits)
+			message = string.format("%s for %d Energy?", snapshot.state.label, reviewed.priceUnits)
 			changed()
 		end,
 		confirm = function(): string?
@@ -120,6 +141,12 @@ function ProgressionController.new(options: {
 				message = "Review the price before confirming."
 				changed()
 			end
+		end,
+		next = function()
+			navigate(1)
+		end,
+		previous = function()
+			navigate(-1)
 		end,
 		tick = function()
 			if pending ~= nil then

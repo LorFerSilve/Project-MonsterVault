@@ -31,5 +31,6 @@
 | AD-251 | Register canonical Display/Production assignments, bounded owner pages, versioned production state, epoch settlement and save/rejoin recovery; Energy/progression remains the next IMP-9 dependency. |
 | AD-252 | Bind the versioned Energy wallet and exact-once Production Claim, revision-bound receipts and authoritative readback; progression remains open. |
 | AD-253 | Bind opaque server quotes, strict purchase confirmation, one atomic Energy debit/capacity unlock and permanent receipts through the existing P2 writer; remaining progression catalog and full IMP-9 gates remain open. |
+| AD-254 | Complete the bounded TA-8 Vault/Capture/Access catalog and prospective effects through existing P2 purchases; register compact selected quotes and protected mastery ownership; close the full IMP-9 audit and permit IMP-10 OPEN, retaining VS1-19 before its completion. |
 
 **Decision index result: ACCEPTED.**

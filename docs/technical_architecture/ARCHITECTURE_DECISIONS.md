@@ -3596,4 +3596,26 @@ An admitted unknown checkpoint retains its original price/effect/operation even 
 
 ### Gate consequence
 
-[IMP-9 evidence](../implementation/IMP9_IMPLEMENTATION_EVIDENCE.md) closes the minimal quote/purchase/persistent unlock chain with 147 fast tests, sixteen native C0 repetitions, real GUI/DEV DataStore before/after-write failures, races and fresh shipped composition. IMP-9 remains OPEN for the remaining Vault/Capture Capability/Access definitions and complete TA-8 gate audit. IMP-10 has not started. Unbound external grants and AD-249 / VS1-19 retain their owner/gate boundaries.
+[IMP-9 evidence](../implementation/IMP9_IMPLEMENTATION_EVIDENCE.md) closes the minimal quote/purchase/persistent unlock chain with 147 fast tests, sixteen native C0 repetitions, real GUI/DEV DataStore before/after-write failures, races and fresh shipped composition. At the AD-253 handoff, IMP-9 remained OPEN for the remaining Vault/Capture Capability/Access definitions and complete TA-8 gate audit. IMP-10 had not started. Unbound external grants and AD-249 / VS1-19 retain their owner/gate boundaries.
+
+## AD-254 — Complete TA-8 progression effects and close IMP-9
+
+**Status:** ACCEPTED — 2026-10-01. Runtime binding and phase closure under the existing GDS-5/7/8/9 and TA-3/4/7/8/9/12/15/17 contracts; no semantic design/topology change or validation-timing exception.
+
+### Decision
+
+Extend the existing immutable DEV fixture to twelve supported targets: two +6 Collection tiers, Production Slots 2→3, Display Slots 3→4, buffer +1440 Energy, staged 4h/8h/12h offline windows, Capture Capability level 1 and the GDS-9 Mid A/Mid B/Advanced Access definitions. Preserve the original capacity target/price/config identity and receipts. Prices and bounded capability tuning are named DEV content, not launch balance. Starter access has no purchase. Do not author geometry, objectives, discovery/mastery facts, traversal utility or future encounter classes.
+
+Every target uses the existing server quote and one P2 Energy debit/effect/permanent-receipt checkpoint. Bind `vault-upgrade-purchase`, `capture-capability-purchase` and `access-unlock-purchase` only to their exact enabled sinks. Higher Vault tiers do not invalidate older receipts. New earned effects require receipts; preserve the explicitly migrated AD-250 capacity tier without fabricated payment history. Progression version 1 adds zero-default captureCapabilityLevel and empty accessUnlocksById to previously valid empty/AD-253 state. Unknown, malformed, unreceipted or unbound valuable state fails protected load. Profile generation stays 1.
+
+Production-affecting purchases settle old capabilities at one fixed server boundary before writing the new level. Reject clock regression that could otherwise apply upgraded limits to an unsettled interval. Use those persisted levels in the existing production/assignment/offline arithmetic; do not auto-resolve Held, reassign creatures, retrocredit saturated output or alter ownership/identity/protection. Capture admission fixes the owned server level's bounded success chance (0.80 baseline, 0.85 level 1) for that attempt. Claims, capacity, context, custody and secure P2 finalization remain binding; there is no attempt tax or extra RNG draw on duplicate submission.
+
+Access stores only stable per-definition purchased facts. Mid A/B independently require legitimate Starter mastery and their own fixed Energy cost. Advanced requires both Mid access facts and both finalized active masteries. A server-injected TA-9 proof reader supplies mastery eligibility; Energy and purchases never manufacture or consume proofs. The shipped composition fails closed while the IMP-10 mastery owner is unbound. Explicit server-only native/unit fixture readers test the consumer and its mutations. Historical purchased access remains valid without a current proof reader and after price changes. Actual world proof producers and action gating remain IMP-10 ownership.
+
+Class A progression resync accepts an optional bounded unlockId selector; it has no price/effect authority. One quote per session remains bound to target/revision/config/tier/price and at most 60 monotonic seconds. A selected owner-only page carries label plus numeric catalogIndex/catalogSize, wallet/capacity/owned/gate/receipt and optional quote. The quote exposes prerequisiteDefinitionId equal to the target, referencing all prerequisites in the immutable definition/config; private proof lists and the deadline remain server-only. This supersedes the initial AD-253 single-milestone projection while preserving the strict Class C purchase payload and existing V1 remotes/4 KiB bound. Navigation clears reviewed confirmation and cannot change selection during an unresolved purchase.
+
+### Gate consequence
+
+All twenty phase-owned rows in the [complete TA-8 / IMP-9 audit](../implementation/IMP9_GATE_AUDIT.md) pass. Evidence includes 153 Lune tests, forty native C0 checks, real DEV mouse confirmation/lost-result recovery, pre-/post-write failures, prerequisite/tampering/insufficient/race negatives and twelve exact historic retries after a fresh shipped runtime rejoin. **IMP-9 COMPLETE; IMP-10 may OPEN for its next dependency.** No IMP-10 world implementation starts in this change.
+
+TA-17's later world/reward/event/commerce/live-config owners remain unbound and protected; their enablement/release validation is not represented as PASS here. **VS1-19 remains DEFERRED under AD-249, with unchanged mandatory full L0/L1 and real-client evidence before IMP-10 COMPLETE.**

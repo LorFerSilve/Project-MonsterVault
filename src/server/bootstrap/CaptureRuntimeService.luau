@@ -15,6 +15,7 @@ local CaptureRuntimeService = {}
 function CaptureRuntimeService.new(options: {
 	worldRuntime: any,
 	vault: any?,
+	progression: any?,
 	profileCoordinator: any,
 	players: any,
 	workspace: any,
@@ -228,6 +229,7 @@ function CaptureRuntimeService.new(options: {
 				end,
 			},
 			canInitiate = CaptureFinalizationUseCase.canInitiate,
+			captureChance = if options.progression then options.progression.captureChance else nil,
 			finalize = CaptureFinalizationUseCase.finalize,
 			isPlayerConnected = function(userId: number): boolean
 				return playerConnections[userId] ~= nil

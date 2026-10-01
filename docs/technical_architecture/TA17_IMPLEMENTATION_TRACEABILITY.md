@@ -54,7 +54,7 @@ This timing change preserves the TA-14 numeric and TA-15 evidence contracts. All
 
 ## Traceability rule
 
-IMP-9 first-dependency traceability:
+IMP-9 dependency traceability (earlier rows retain their original handoff scope):
 
 | Contract | Implementation / evidence | Remaining dependency |
 |---|---|---|
@@ -63,6 +63,7 @@ IMP-9 first-dependency traceability:
 | GDS-7/14; TA-3/12/15/17 | AD-250 Vault.ResolveOverflow Class C allowlist/schema, bounded owner-only VaultProjectionV1, native selectable resolution UI, existing Command/Event rate/replay/Ready gates. Real mouse clicks traverse the shipped gateway and persist exactly once. | Existing wire generation/remotes remain V1. Full phase/release performance gates are unchanged. |
 | GDS-7/8; TA-4/8/15/17 | AD-251/252 assignment/production settlement and Energy/Production Claim; epoch/clock/uncertain-write tests, native GUI, DEV DataStore and fresh-server evidence. | Selected dependencies PASS; external grants remain protected until their owners bind authority. |
 | GDS-8; TA-3/4/8/12/15/17 | AD-253 opaque server quote, strict PurchaseUnlock, atomic signed Energy debit/earned tier/permanent receipt, active Discovery gate and explicit confirmation/readback; eight T15.progression.purchase C0 tests, real DEV cut points, mouse confirmation and fresh shipped composition in [IMP-9 evidence](../implementation/IMP9_IMPLEMENTATION_EVIDENCE.md). | Minimal capacity target PASS. Remaining Vault/Capture Capability/Access definitions and full TA-8 gate audit remain open; IMP-10 has not started. |
+| GDS-5/7/8/9; TA-3/4/7/8/9/12/15/17 | AD-254 remaining Vault tiers, settlement-before-effect, persistent bounded Capture Capability and Access mastery/prior-unlock consumer; six additional T15.progression.catalog C0 suites, forty current native C0 checks, real DEV GUI/cut points/rejoin and [full gate audit](../implementation/IMP9_GATE_AUDIT.md). | IMP-9 COMPLETE. IMP-10 may OPEN; actual mastery/world actions belong there. External grants/deferred transfer stay protected until their respective owners bind. VS1-19 remains mandatory before IMP-10 COMPLETE. |
 
 Every implementation PR names:
 

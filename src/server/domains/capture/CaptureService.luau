@@ -43,6 +43,7 @@ function CaptureService.new(options: {
 	newId: () -> string,
 	random: any,
 	canInitiate: (any) -> boolean,
+	captureChance: ((any) -> number?)?,
 	finalize: (any, any) -> any,
 	onChanged: ((number, any, string?) -> ())?,
 	isPlayerConnected: ((number) -> boolean)?,
@@ -186,6 +187,10 @@ function CaptureService.new(options: {
 		if not options.canInitiate(profile) then
 			return { status = "CapacityBlocked" }
 		end
+		local chance = if options.captureChance then options.captureChance(profile) else 0.8
+		if type(chance) ~= "number" or chance ~= chance or chance < 0 or chance > 1 then
+			return { status = "Unavailable" }
+		end
 		local identity = options.world.identity(creatureId)
 		if identity == nil or identity.variantIdentity == nil then
 			return { status = "Unavailable" }
@@ -204,6 +209,7 @@ function CaptureService.new(options: {
 			state = "Claimed",
 			claimExpiresAt = options.clock() + CLAIM_SECONDS,
 			sequence = 0,
+			captureChance = chance, -- Server-owned capability fixed at admission.
 		}
 		byCreature[creatureId] = record
 		terminalStates[creatureId] = nil
@@ -257,7 +263,7 @@ function CaptureService.new(options: {
 			type(roll) == "number" and roll == roll and roll >= 0 and roll < 1,
 			"invalid capture RNG"
 		)
-		if roll >= 0.8 then
+		if roll >= record.captureChance then
 			options.world.transition(id, "AttemptActive", "IdleAvailable")
 			terminal(record, "Failed")
 			return { status = "Failed" }

@@ -19,7 +19,7 @@ function NetworkingGateway.new(options: {
 	captureResync: ((any, string) -> string)?,
 	vaultResync: ((any, string, string?) -> string)?,
 	assignmentsResync: ((any, string, string?) -> string)?,
-	progressionResync: ((any, string) -> string)?,
+	progressionResync: ((any, string, string?) -> string)?,
 })
 	local function event(
 		player: any,
@@ -120,7 +120,11 @@ function NetworkingGateway.new(options: {
 		function(player: any, envelope: any)
 			if envelope.payload.domain == "progression" then
 				return if options.progressionResync ~= nil
-					then options.progressionResync(player, envelope.requestId)
+					then options.progressionResync(
+						player,
+						envelope.requestId,
+						envelope.payload.unlockId
+					)
 					else "UNAVAILABLE_PROGRESSION"
 			end
 			if envelope.payload.domain == "vaultAssignments" then

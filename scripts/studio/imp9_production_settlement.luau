@@ -22,7 +22,12 @@ local function equal(a: any, b: any): boolean
 	end
 	return true
 end
-local function setup(resume: any?, withEnergy: boolean?, withProgression: boolean?): any
+local function setup(
+	resume: any?,
+	withEnergy: boolean?,
+	withProgression: boolean?,
+	withCatalog: boolean?
+): any
 	assert(
 		state == nil
 			and game:GetService("RunService"):IsStudio()
@@ -67,9 +72,22 @@ local function setup(resume: any?, withEnergy: boolean?, withProgression: boolea
 		end,
 	})
 	local price = require(shared.config.ProgressionFixture)
+	local masteryProofs = {}
+	local progression: any = if withProgression
+		then require(server.domains.progression.ProgressionService).new(
+			price,
+			if withCatalog
+				then {
+					mastery = function(_profile: any, milestone: string): boolean
+						return masteryProofs[milestone] == true
+					end,
+				}
+				else nil
+		)
+		else nil
 	local energy: any = if withEnergy
 		then require(server.domains.economy.EnergyService).new(
-			if withProgression then { [price.unlockId] = true } else nil
+			if withProgression then progression.boundSinks else nil
 		)
 		else nil
 	local claims: any = if withEnergy
@@ -83,13 +101,11 @@ local function setup(resume: any?, withEnergy: boolean?, withProgression: boolea
 			end,
 		})
 		else nil
-	local progression: any = if withProgression
-		then require(server.domains.progression.ProgressionService).new(price)
-		else nil
 	local quoteOffset = 0
 	local purchases: any = if withProgression
 		then require(server.application.ProgressionPurchaseUseCase).new({
 			progression = progression,
+			production = production,
 			energy = energy,
 			vault = vault,
 			assignments = assignments,
@@ -227,12 +243,24 @@ local function setup(resume: any?, withEnergy: boolean?, withProgression: boolea
 			"fresh server restores canonical assignments"
 		)
 		local elapsed = math.min(
-			7200,
+			production.capabilities(restored).offlineWindowSeconds,
 			math.max(0, loadAt - resume.cleanProfile.vault.productionCursorUnixSeconds)
 		)
+		local rate = 0
+		for _ in restored.vault.productionAssignments do
+			rate += 100
+		end
 		assert(
 			restored.vault.productionBufferMilli
-				== resume.cleanProfile.vault.productionBufferMilli + elapsed * 100,
+				== resume.cleanProfile.vault.productionBufferMilli
+					+ math.min(
+						math.max(
+							0,
+							production.capabilities(restored).bufferCapacityMilli
+								- resume.cleanProfile.vault.productionBufferMilli
+						),
+						elapsed * rate
+					),
 			"fresh server offline credit exactly once"
 		)
 		if withEnergy then
@@ -259,6 +287,16 @@ local function setup(resume: any?, withEnergy: boolean?, withProgression: boolea
 				).status == "AlreadyCommitted",
 				"fresh server original purchase proof"
 			)
+			for _, previous in resume.catalogQuotes or {} do
+				assert(
+					purchases.purchase(active, {
+						unlockId = previous.unlockId,
+						quoteId = previous.quoteId,
+						quoteRevision = previous.quoteRevision,
+					}, previous.expectedRevision).status == "AlreadyCommitted",
+					"every catalog retry survives fresh Play server"
+				)
+			end
 		end
 	end
 	local root = globals.Instance.new("Folder")
@@ -336,6 +374,7 @@ local function setup(resume: any?, withEnergy: boolean?, withProgression: boolea
 		claims = claims,
 		progression = progression,
 		purchases = purchases,
+		masteryProofs = masteryProofs,
 		setQuoteOffset = function(value: number)
 			quoteOffset = value
 		end,
@@ -607,14 +646,20 @@ local function saveLeave(): any
 	)
 	assert(active.renew().status == "Ready", "production autosave native UpdateAsync")
 	local saved = active.snapshot()
+	local caps, rate = state.production.capabilities(before), 0
+	for _, creatureId in before.vault.productionAssignments do
+		rate += caps.ratesMilliBySpeciesId[before.collection.creaturesById[creatureId].speciesId]
+	end
 	assert(
 		saved.vault.productionBufferMilli
-			== (
+			== before.vault.productionBufferMilli
+				+ math.min(
+					math.max(0, caps.bufferCapacityMilli - before.vault.productionBufferMilli),
+					(
 						saved.vault.productionCursorUnixSeconds
 						- before.vault.productionCursorUnixSeconds
-					)
-					* 100
-				+ before.vault.productionBufferMilli,
+					) * rate
+				),
 		"online elapsed accounting"
 	)
 	assert(active.release(os.clock() + 25).status == "Closed", "clean save/unlock")
@@ -823,7 +868,238 @@ local function faultRaceAndFinish(): any
 	state = nil
 	return result
 end
+local function catalogAssert(value: boolean, message: string?)
+	assert(value, debug.traceback(message or "native catalog invariant", 2))
+end
+local function catalogQuote(target: string): any
+	local quoted = state.purchases.quote(state.active, target)
+	catalogAssert(quoted.status == "Quoted", quoted.reason)
+	return quoted.quote
+end
+local function catalogBuy(q: any): any
+	return state.purchases.purchase(
+		state.active,
+		{ unlockId = q.unlockId, quoteId = q.quoteId, quoteRevision = q.quoteRevision },
+		q.expectedRevision
+	)
+end
+local function prepareCatalog(): any
+	catalogAssert(state ~= nil and state.masteryProofs ~= nil, "isolated catalog setup")
+	local active = state.active
+	local before = active.snapshot()
+	catalogAssert(
+		state.purchases.quote(active, "access/biome-mid-a").reason == "MISSING_MILESTONE",
+		"Energy never creates mastery"
+	)
+	state.masteryProofs["milestone/region-mastery/starter"] = true
+	for _, target in
+		{ "vault-upgrade/production-slots/1", "capture-capability/1", "access/biome-mid-a" }
+	do
+		local q = catalogQuote(target)
+		catalogAssert(
+			catalogBuy(q).reason == "INSUFFICIENT_ENERGY" and equal(before, active.snapshot()),
+			"insufficient catalog purchase is mutation-free"
+		)
+	end
+	catalogAssert(
+		state.assignments.assign(
+			active,
+			"production",
+			"production/1",
+			state.ids[1],
+			active.snapshot().profileRevision
+		).status == "Committed"
+	)
+	catalogAssert(
+		state.assignments.assign(
+			active,
+			"production",
+			"production/2",
+			state.ids[2],
+			active.snapshot().profileRevision
+		).status == "Committed"
+	)
+	catalogAssert(
+		state.assignments.assign(
+			active,
+			"display",
+			"display/1",
+			state.ids[1],
+			active.snapshot().profileRevision
+		).status == "Committed"
+	)
+	state.result.fundingClaims = {}
+	for _ = 1, 2 do
+		catalogAssert(
+			active.checkpoint(game:GetService("HttpService"):GenerateGUID(false), function(p: any)
+				p.vault.productionCursorUnixSeconds = os.time() - 7300 -- Server-only saturated elapsed fixture; retain all buffer value.
+			end).status == "Committed"
+		)
+		local revision = active.snapshot().profileRevision
+		catalogAssert(state.claims.claim(active, revision).status == "Committed")
+		state.result.claimRevision = revision
+		table.insert(state.result.fundingClaims, active.snapshot().economy.energyUnits)
+	end
+	catalogAssert(
+		active.snapshot().economy.energyUnits == 2880,
+		"funded only through real Production Claim"
+	)
+	state.result.catalogQuotes, state.result.catalogCases = {}, {}
+	for _, target in
+		{ "vault-upgrade/collection-capacity/1", "vault-upgrade/collection-capacity/2" }
+	do
+		local q = catalogQuote(target)
+		catalogAssert(catalogBuy(q).status == "Committed")
+		table.insert(state.result.catalogQuotes, q)
+	end
+	local q = catalogQuote("vault-upgrade/production-slots/1")
+	state.result.purchaseQuote = q
+	state.result.beforePurchaseProfile = active.snapshot()
+	state.result.testId = "T15.progression.Studio.catalogCompletion"
+	state.result.masteryProofBoundary =
+		"Injected server-only test owner; no world proofs written; shipped runtime remains unbound until IMP-10."
+	state.masteryProofs["milestone/region-mastery/starter"] = false
+	return { wallet = active.snapshot().economy.energyUnits, quote = q, profile = active.snapshot() }
+end
+local function armCatalogGuiFault(): any
+	local q = catalogQuote("vault-upgrade/production-slots/1")
+	state.result.purchaseQuote, state.result.beforePurchaseProfile = q, state.active.snapshot()
+	state.setFault("After")
+	return q
+end
+local function catalogCase(target: string, faultPoint: string?): any
+	local active = state.active
+	local d = state.progression.definition(target)
+	local existing = active.snapshot().progression.purchasesByUnlockId[target]
+	if existing then
+		local original = state.result.purchaseQuote
+		catalogAssert(
+			original.unlockId == target and catalogBuy(original).status == "AlreadyCommitted"
+		)
+		table.insert(state.result.catalogQuotes, original)
+		local before = state.result.beforePurchaseProfile
+		local after = active.snapshot()
+		catalogAssert(
+			after.economy.energyUnits == before.economy.energyUnits - d.priceUnits,
+			"native GUI spent once"
+		)
+		return {
+			target = target,
+			status = "GuiCommitted",
+			wallet = after.economy.energyUnits,
+			capabilities = state.production.capabilities(after),
+		}
+	end
+	if d.kind == "Access" then
+		state.masteryProofs[d.requiredMilestoneIds[#d.requiredMilestoneIds]] = false
+		local snapshot = active.snapshot()
+		catalogAssert(
+			state.purchases.quote(active, target).status == "Rejected",
+			"unearned native active proof is blocked"
+		)
+		catalogAssert(equal(snapshot, active.snapshot()))
+		state.masteryProofs["milestone/region-mastery/starter"] = true
+		if target == "access/biome-advanced" then
+			state.masteryProofs["milestone/region-mastery/mid-a"] = true
+			catalogAssert(
+				state.purchases.quote(active, target).reason == "MISSING_MILESTONE",
+				"Advanced requires both Mid masteries"
+			)
+			state.masteryProofs["milestone/region-mastery/mid-b"] = true
+		end
+	end
+	local q = catalogQuote(target)
+	local before = active.snapshot()
+	local forged =
+		{ unlockId = target, quoteId = q.quoteId, quoteRevision = q.quoteRevision, priceUnits = 0 }
+	catalogAssert(
+		state.purchases.purchase(active, forged, q.expectedRevision).reason == "INVALID_PURCHASE"
+	)
+	state.setQuoteOffset(61)
+	catalogAssert(
+		catalogBuy(q).reason == "STALE_QUOTE" and equal(before, active.snapshot()),
+		"native stale/tampered quote is mutation-free"
+	)
+	state.setQuoteOffset(0)
+	q = catalogQuote(target)
+	if d.kind == "Access" then
+		local milestone = d.requiredMilestoneIds[#d.requiredMilestoneIds]
+		state.masteryProofs[milestone] = false
+		catalogAssert(
+			catalogBuy(q).reason == "MISSING_MILESTONE" and equal(before, active.snapshot())
+		)
+		state.masteryProofs[milestone] = true
+	end
+	local nested: any = nil
+	if faultPoint then
+		state.setNested(function()
+			nested = {
+				purchase = catalogBuy(q).status,
+				claim = state.claims.claim(active, q.expectedRevision).status,
+			}
+		end)
+		state.setFault(faultPoint)
+	end
+	local outcome = catalogBuy(q)
+	if faultPoint then
+		catalogAssert(
+			outcome.status == "OutcomeUnknown" and equal(before, active.snapshot()),
+			"real store cut point preserves confirmed authority"
+		)
+		catalogAssert(
+			nested.purchase == "Busy" and nested.claim == "Busy",
+			"one profile writer fences races"
+		)
+		state.setQuoteOffset(122)
+		catalogAssert(
+			catalogBuy(q).status == "AlreadyCommitted",
+			"accepted candidate survives expiry and lost result"
+		)
+		state.setQuoteOffset(0)
+	else
+		catalogAssert(outcome.status == "Committed")
+	end
+	local after = active.snapshot()
+	catalogAssert(
+		after.economy.energyUnits == before.economy.energyUnits - d.priceUnits
+			and after.profileRevision == before.profileRevision + 1
+	)
+	catalogAssert(
+		equal(after.collection, before.collection)
+			and equal(after.discovery, before.discovery)
+			and equal(after.world, before.world),
+		"no invented world progress or creature mutation"
+	)
+	catalogAssert(after.collection.creaturesById[state.ids[3]].overflowHeld, "Held stays explicit")
+	catalogAssert(
+		catalogBuy(q).status == "AlreadyCommitted" and equal(after, active.snapshot()),
+		"native duplicate cannot debit"
+	)
+	catalogAssert(
+		state.energy.validate(after) == nil
+			and state.progression.validate(after) == nil
+			and state.production.validate(after) == nil
+	)
+	table.insert(state.result.catalogQuotes, q)
+	local row = {
+		target = target,
+		faultPoint = faultPoint,
+		outcome = outcome.status,
+		operationId = outcome.operationId,
+		walletBefore = before.economy.energyUnits,
+		walletAfter = after.economy.energyUnits,
+		revision = after.profileRevision,
+		nested = nested,
+		capabilities = state.production.capabilities(after),
+		captureChance = state.progression.captureChance(after),
+	}
+	table.insert(state.result.catalogCases, row)
+	return row
+end
 return {
+	prepareCatalog = prepareCatalog,
+	armCatalogGuiFault = armCatalogGuiFault,
+	catalogCase = catalogCase,
 	setup = setup,
 	preparePurchases = preparePurchases,
 	armPurchaseFault = armPurchaseFault,

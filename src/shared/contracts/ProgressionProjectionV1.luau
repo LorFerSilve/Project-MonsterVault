@@ -45,10 +45,15 @@ function ProgressionProjectionV1.validSnapshot(payload: any): boolean
 	local s = payload.state
 	if
 		not id(s.unlockId, 128)
+		or not id(s.label, 160)
+		or not integer(s.catalogIndex, 16)
+		or s.catalogIndex < 1
+		or not integer(s.catalogSize, 16)
+		or s.catalogSize < s.catalogIndex
 		or not integer(s.energyUnits, 1_000_000_000_000)
 		or not integer(s.collectionCapacity, 2048)
 		or type(s.owned) ~= "boolean"
-		or (s.gateReason ~= "" and s.gateReason ~= "MISSING_MILESTONE" and s.gateReason ~= "ALREADY_OWNED")
+		or (s.gateReason ~= "" and s.gateReason ~= "MISSING_MILESTONE" and s.gateReason ~= "ALREADY_OWNED" and s.gateReason ~= "INVALID_UNLOCK_LEVEL" and s.gateReason ~= "MILESTONE_AUTHORITY_UNBOUND" and s.gateReason ~= "MISSING_PREREQUISITE")
 		or type(s.receiptQuoteId) ~= "string"
 		or #s.receiptQuoteId > 96
 		or not integer(s.receiptExpectedRevision, MAX_EXACT)
@@ -82,8 +87,8 @@ function ProgressionProjectionV1.validSnapshot(payload: any): boolean
 			or q.quoteRevision < 1
 			or not integer(q.priceUnits, 1_000_000_000_000)
 			or not id(q.configSnapshotId, 128)
-			or q.expectedLevel ~= 0
-			or not id(q.requiredMilestoneId, 128)
+			or not integer(q.expectedLevel, 8)
+			or q.prerequisiteDefinitionId ~= s.unlockId
 			or not integer(q.expiresUnixSeconds, MAX_EXACT)
 		then
 			return false
@@ -97,7 +102,7 @@ function ProgressionProjectionV1.validSnapshot(payload: any): boolean
 				and key ~= "priceUnits"
 				and key ~= "configSnapshotId"
 				and key ~= "expectedLevel"
-				and key ~= "requiredMilestoneId"
+				and key ~= "prerequisiteDefinitionId"
 				and key ~= "expiresUnixSeconds"
 			then
 				return false
@@ -107,6 +112,9 @@ function ProgressionProjectionV1.validSnapshot(payload: any): boolean
 	for key in s do
 		if
 			key ~= "unlockId"
+			and key ~= "label"
+			and key ~= "catalogIndex"
+			and key ~= "catalogSize"
 			and key ~= "energyUnits"
 			and key ~= "collectionCapacity"
 			and key ~= "owned"
