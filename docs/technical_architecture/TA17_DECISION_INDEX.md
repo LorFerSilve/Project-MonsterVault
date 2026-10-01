@@ -26,5 +26,6 @@
 | AD-246 | Reopen the owning TA/GDS rather than weakening locked semantics when implementation evidence exposes conflict. |
 | AD-247 | Open implementation only after TA-17 closure; external deployment IDs may remain unconfigured without blocking DEV coding. |
 | AD-248 | Close TA-17 and advance the project to IMP-1 — Contracts and Test Harness. |
+| AD-249 | Accept the owner-authorized VS1-19 environment deferral: IMP-8 COMPLETE with deferred validation, IMP-9 OPEN, full 30-player L1 and real-client performance mandatory before IMP-10 COMPLETE. |
 
 **Decision index result: ACCEPTED.**

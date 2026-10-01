@@ -1,0 +1,256 @@
+{
+  "recordedDate": "2026-10-01",
+  "basedOnCommit": "2ab3acdeb2d39aecab6c82f35530eb2290181401",
+  "branch": "codex/imp8-studio-diagnostics",
+  "workingTreeChanges": true,
+  "verificationClass": "V1",
+  "owner": "IMP-8",
+  "loadProfile": "one Studio player; diagnostics evidence only",
+  "deviceProfile": "Studio server",
+  "networkProfile": "direct runtime invocation; captured private owner envelopes",
+  "faultProfile": "none in final run; deterministic capture fixture",
+  "expectedInvariant": "One original submit request and server operation remain correlated through durable finalization; re-acquire projects the captured ID once",
+  "sourceSha256": {
+    "scripts/studio/imp8_capture_diagnostics.luau": "d8d88b1d5494be6c5e4a8a1dce8ead1898b471955a3cad27f0449040a41bec27",
+    "tests/unit/CaptureRuntime.luau": "39504316480523a9bc90180a2dbeafdb2fa36828722cdfdbaa8960f640bf99a6",
+    "src/server/bootstrap/CaptureRuntimeService.luau": "74ba2ebc775b4ce32be414059959745aba9b2f5d4ece35f6fa74582df7b9b9f2"
+  },
+  "verificationScope": "VS1-20 diagnostics; Studio server modules and native DEV UpdateAsync in an isolated DataStore scope. Direct runtime invocation and captured owner events; no shipped command gateway or native touch input.",
+  "reproducedFailure": {
+    "creatureInstanceId": "creature-6dc05c88-7606-4ac3-9eea-2fa962d377a9",
+    "beforeRevision": 1,
+    "scope": "IMP8Diagnostics20261001",
+    "rejoinOccurrences": 1,
+    "rejoinRevision": 2,
+    "operationId": "1ab90a9a-d2d1-4b12-8c60-5bc309273db3",
+    "records": [
+      {
+        "fields": {
+          "component": "world"
+        },
+        "version": 1,
+        "environment": "server",
+        "severity": "info",
+        "code": "WORLD_SPAWNED",
+        "atUnixSeconds": 1790853261,
+        "sequence": 1
+      },
+      {
+        "fields": {
+          "component": "capture",
+          "seedId": "fixture:imp8-diagnostics-v1"
+        },
+        "version": 1,
+        "environment": "server",
+        "severity": "info",
+        "code": "VS1_PROBE",
+        "atUnixSeconds": 1790853261,
+        "sequence": 2
+      },
+      {
+        "fields": {
+          "component": "capture",
+          "detailCode": "Claimed",
+          "requestId": "imp8-claim-6fd9ad73-9b1a-459b-8e03-90f3f8f2da38"
+        },
+        "version": 1,
+        "environment": "server",
+        "severity": "info",
+        "code": "CAPTURE_STATE",
+        "atUnixSeconds": 1790853261,
+        "sequence": 3
+      },
+      {
+        "fields": {
+          "detailCode": "TransportActive",
+          "requestId": "imp8-submit-f5c9a70e-6aeb-4871-aef2-13e2bc4d4b95",
+          "component": "capture",
+          "operationId": "1ab90a9a-d2d1-4b12-8c60-5bc309273db3"
+        },
+        "version": 1,
+        "environment": "server",
+        "severity": "info",
+        "code": "CAPTURE_STATE",
+        "atUnixSeconds": 1790853261,
+        "sequence": 4
+      },
+      {
+        "fields": {
+          "component": "capture",
+          "detailCode": "FinalizationPending",
+          "operationId": "1ab90a9a-d2d1-4b12-8c60-5bc309273db3"
+        },
+        "version": 1,
+        "environment": "server",
+        "severity": "info",
+        "code": "CAPTURE_STATE",
+        "atUnixSeconds": 1790853261,
+        "sequence": 5
+      },
+      {
+        "fields": {
+          "component": "capture",
+          "detailCode": "Secured",
+          "operationId": "1ab90a9a-d2d1-4b12-8c60-5bc309273db3"
+        },
+        "version": 1,
+        "environment": "server",
+        "severity": "info",
+        "code": "CAPTURE_STATE",
+        "atUnixSeconds": 1790853261,
+        "sequence": 6
+      }
+    ],
+    "afterRevision": 2,
+    "seedId": "fixture:imp8-diagnostics-v1",
+    "environment": "DEV",
+    "requestId": "imp8-submit-f5c9a70e-6aeb-4871-aef2-13e2bc4d4b95",
+    "failures": [
+      "FinalizationPending lost the original submit request",
+      "Secured lost the original submit request"
+    ],
+    "result": "FAIL",
+    "testId": "T15.imp8.Studio.captureDiagnostics"
+  },
+  "verifiedRun": {
+    "universeId": 10766503968,
+    "requirements": [
+      "TA-7",
+      "TA-12",
+      "TA-15",
+      "VS1-20"
+    ],
+    "placeId": 110304961224794,
+    "rejoinOccurrences": 1,
+    "invocation": "Studio MCP Server Play; isolated runtime; owner event sink",
+    "result": "PASS",
+    "testId": "T15.imp8.Studio.captureDiagnostics",
+    "criticality": "C1",
+    "creatureInstanceId": "creature-1e61a6da-f485-4ef5-ba6d-31322cb70e01",
+    "scope": "IMP8Diagnostics20261001",
+    "durationMs": 2199.0422999997463,
+    "rejoinRevision": 4,
+    "operationId": "a61276ef-b504-454d-8561-71192e87b143",
+    "records": [
+      {
+        "fields": {
+          "component": "world"
+        },
+        "version": 1,
+        "environment": "server",
+        "severity": "info",
+        "code": "WORLD_SPAWNED",
+        "atUnixSeconds": 1790853591,
+        "sequence": 1
+      },
+      {
+        "fields": {
+          "component": "capture",
+          "seedId": "fixture:imp8-diagnostics-v1"
+        },
+        "version": 1,
+        "environment": "server",
+        "severity": "info",
+        "code": "VS1_PROBE",
+        "atUnixSeconds": 1790853591,
+        "sequence": 2
+      },
+      {
+        "fields": {
+          "component": "capture",
+          "detailCode": "Claimed",
+          "requestId": "imp8-claim-326045f0-320f-47a3-8f77-9055911b7e38"
+        },
+        "version": 1,
+        "environment": "server",
+        "severity": "info",
+        "code": "CAPTURE_STATE",
+        "atUnixSeconds": 1790853591,
+        "sequence": 3
+      },
+      {
+        "fields": {
+          "detailCode": "TransportActive",
+          "operationId": "a61276ef-b504-454d-8561-71192e87b143",
+          "component": "capture",
+          "requestId": "imp8-submit-e45b98b0-375e-4410-ab78-1fcfd86a1239"
+        },
+        "version": 1,
+        "environment": "server",
+        "severity": "info",
+        "code": "CAPTURE_STATE",
+        "atUnixSeconds": 1790853591,
+        "sequence": 4
+      },
+      {
+        "fields": {
+          "detailCode": "FinalizationPending",
+          "operationId": "a61276ef-b504-454d-8561-71192e87b143",
+          "component": "capture",
+          "requestId": "imp8-submit-e45b98b0-375e-4410-ab78-1fcfd86a1239"
+        },
+        "version": 1,
+        "environment": "server",
+        "severity": "info",
+        "code": "CAPTURE_STATE",
+        "atUnixSeconds": 1790853591,
+        "sequence": 5
+      },
+      {
+        "fields": {
+          "detailCode": "Secured",
+          "operationId": "a61276ef-b504-454d-8561-71192e87b143",
+          "component": "capture",
+          "requestId": "imp8-submit-e45b98b0-375e-4410-ab78-1fcfd86a1239"
+        },
+        "version": 1,
+        "environment": "server",
+        "severity": "info",
+        "code": "CAPTURE_STATE",
+        "atUnixSeconds": 1790853591,
+        "sequence": 6
+      }
+    ],
+    "afterRevision": 4,
+    "seedId": "fixture:imp8-diagnostics-v1",
+    "environment": "DEV",
+    "studioVersion": "0.741.19.7411056",
+    "failures": [],
+    "requestId": "imp8-submit-e45b98b0-375e-4410-ab78-1fcfd86a1239",
+    "beforeRevision": 3
+  },
+  "nativeInputAudit": {
+    "userInputType": "Keyboard",
+    "keyCode": "ButtonX"
+  },
+  "cleanup": {
+    "studioMode": "Edit",
+    "sourceParity": true,
+    "probeObjects": 0,
+    "normalProfileRevision": 11,
+    "normalOwnedCount": 10,
+    "gameErrorRecords": 0
+  },
+  "checks": {
+    "fastTests": "110/110 PASS",
+    "checkerTests": "28/28 PASS",
+    "format": "PASS",
+    "selene": "0 errors; 0 warnings",
+    "luauAnalysis": "0 diagnostics; existing missing Roblox engine definitions warning",
+    "rojoBuild": "PASS",
+    "sourcemap": "PASS",
+    "architecture": "PASS",
+    "integrity": "PASS",
+    "remoteCI": "No run for these uncommitted changes"
+  },
+  "remainingBlockers": [
+    {
+      "gate": "VS1-17",
+      "required": "Native gamepad action from a physical controller or supported Controller Emulator input; MCP ButtonX is Keyboard"
+    },
+    {
+      "gate": "VS1-19",
+      "required": "L1 with 30 players at unchanged MaxPlayers=60 plus supported real-client frame/memory evidence"
+    }
+  ]
+}

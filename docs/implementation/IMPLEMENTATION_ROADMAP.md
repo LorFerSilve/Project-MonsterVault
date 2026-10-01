@@ -1,6 +1,6 @@
 # MonsterVault Implementation Roadmap
 
-> **Status:** IMPLEMENTATION OPEN after TA-17 merge chain lands
+> **Status:** IMP-8 COMPLETE with registered deferred validation; IMP-9 OPEN for DEV implementation
 > **Locked by:** TA-17
 > **Rule:** Dependency-driven; do not skip phases merely because later UI/content is easier to demo.
 
@@ -117,15 +117,25 @@ Gate:
 
 Run TA17_VERTICAL_SLICE_ACCEPTANCE_MATRIX.md.
 
-VS-1 must be complete before broad feature expansion.
+VS-1 functional acceptance must be complete before broad feature expansion, with the sole registered performance timing exception [AD-249](../technical_architecture/ARCHITECTURE_DECISIONS.md#ad-249--defer-vs1-19-to-the-imp-10-completion-gate).
+
+**Status (2026-10-01): COMPLETE with deferred validation.** All functional gates are closed, including owner-confirmed native gamepad parity and the trusted VS1-20 Studio capture log. **VS1-19 (C1) is DEFERRED — environment limitation**, not PASS. Its complete L0/L1 and supported real-client performance validation is mandatory **before IMP-10 COMPLETE**. See [IMP-8 evidence](IMP8_IMPLEMENTATION_EVIDENCE.md) and [the amended acceptance matrix](../technical_architecture/TA17_VERTICAL_SLICE_ACCEPTANCE_MATRIX.md).
 
 ## IMP-9 — Vault / Economy / Progression
+
+**Status: OPEN for DEV implementation.** Upstream IMP-8 is formally complete under AD-249; no IMP-9 gameplay implementation is claimed by this status change.
 
 Collection capacity, assignments, production, offline settlement, Energy and progression transactions.
 
 ## IMP-10 — World Scaling
 
 Full biome/content registries, spawn scheduling, travel, mastery/hazards and TA-14 scaling.
+
+Mandatory completion gate inherited from IMP-8 / AD-249:
+
+- **VS1-19 (C1): DEFERRED — environment limitation** until the full TA-14/TA-15 controlled L0/L1 plus supported real-client frame/memory validation is executed and passes for the relevant World Scaling candidate build.
+- L1 is **30 players at configured MaxPlayers=60**; the numeric guardrails, device measurements and repetition rules remain unchanged. Existing solo Studio samples are partial L0 evidence and cannot satisfy this gate.
+- **IMP-10 cannot be COMPLETE and the roadmap cannot advance beyond IMP-10** while VS1-19 is deferred, missing, failed or incomplete. Production release remains separately subject to full TA-15/TA-14 gates.
 
 ## IMP-11 — Social and Events
 
@@ -150,3 +160,5 @@ Full TA-15 V0-V10 evidence, TA-14 L0-L5, security/fault sweeps, staging promotio
 ## Change rule
 
 A phase may be split into smaller PRs. It may not bypass upstream gates or move authority to a more convenient layer.
+
+AD-249 is an explicitly owner-authorized TA-17 amendment to validation timing, with a named gate, owner and hard deadline. It grants no general permission to defer other acceptance rows.

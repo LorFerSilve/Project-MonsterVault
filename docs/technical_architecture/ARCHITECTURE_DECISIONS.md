@@ -3458,3 +3458,33 @@ TA-17 is Implementation Locked — PASS with 180/180 lock scenarios. The project
 ### Consequence
 
 Technical Architecture is complete. Implementation is OPEN at IMP-1. Production release remains gated by TA-15/TA-14 and downstream implementation acceptance.
+
+---
+
+## AD-249 — Defer VS1-19 to the IMP-10 Completion Gate
+
+**Date:** 2026-10-01
+
+**Status:** Accepted — explicitly authorized by the project owner
+
+**Owning TA phase:** TA-17
+
+**GDS constraints:** GDS-1/14/16 performance and supported-device correctness remain binding.
+
+### Context
+
+IMP-8 functional evidence is complete and the project owner confirms the native gamepad gate is proven. VS1-19 remains unperformed: the connected Studio/MCP environment cannot run L1 with 30 players at MaxPlayers=60 or supply supported real-client frame/memory evidence. Three existing five-second solo Studio samples provide partial L0 evidence only; process-wide Studio memory is not a client/server memory budget measurement.
+
+### Decision
+
+Reopen and relock only TA-17's performance-evidence scheduling contract. Register VS1-19 as **DEFERRED — environment limitation**, owned by IMP-10. IMP-8 may be **COMPLETE with deferred validation** and IMP-9 may be **OPEN** when all other IMP-8 gates are satisfied. VS1-19 is never counted as PASS by this decision.
+
+The full TA-14/TA-15 controlled L0/L1 and supported real-client performance validation remains a mandatory C1 hard gate **before IMP-10 — World Scaling can be COMPLETE**. L1 uses ceil(0.5 × configured MaxPlayers), currently 30; lowering MaxPlayers, fake players, solo Studio samples or simulated input are not substitutes. Evidence must identify the relevant World Scaling candidate build, load/device profile, duration, repetitions and raw frame/memory summaries. Existing numeric guardrails and measurement rules remain unchanged.
+
+### Alternatives and consequences
+
+Keeping IMP-9 blocked on an unavailable environment was rejected by the owner in favor of this explicit scheduling change. Waiving the test or inventing substitute evidence is rejected. IMP-9 DEV work may proceed; IMP-10 completion and subsequent phase advancement remain blocked until the deferred validation actually passes. Production performance readiness is not established.
+
+### Affected contracts and change control
+
+Update the TA-17 master contract, acceptance matrix, CI/change-control lock, decision index, traceability, IMP-8 evidence and implementation roadmap together. Retain the original L0 and diagnostic records with their actual scope. This narrow exception does not authorize other deferrals or alter gameplay authority, GDS semantics, protocol V1, profile schema v1, persistence/STG readiness or release gates. No runtime migration is required.

@@ -29,6 +29,7 @@ function CaptureRuntimeService.new(options: {
 	local playerConnections: { [number]: { any } } = {}
 	local generations: { [number]: number } = {}
 	local correlations: { [number]: string } = {}
+	local operationRequests: { [string]: string } = {}
 	local running = false
 	local pulseGeneration = 0
 
@@ -226,16 +227,30 @@ function CaptureRuntimeService.new(options: {
 			end,
 			onChanged = function(userId: number, state: any, operationId: string?)
 				local fields: any = { component = "capture", detailCode = state.status }
-				if correlations[userId] ~= nil then
-					fields.requestId = correlations[userId]
-				end
+				local requestId = correlations[userId]
 				if operationId ~= nil then
+					-- Keep the originating submit through grace/reconciliation,
+					-- without reusing it as a delayed wire correlation.
+					operationRequests[operationId] = operationRequests[operationId] or requestId
+					requestId = operationRequests[operationId]
 					fields.operationId = operationId
+				end
+				if requestId ~= nil then
+					fields.requestId = requestId
 				end
 				options.diagnostics.emit("info", "CAPTURE_STATE", fields)
 				local player = options.players:GetPlayerByUserId(userId)
 				if player ~= nil then
 					emit(player, state, correlations[userId])
+				end
+				-- Interrupted may still be resumable transport grace.
+				if
+					operationId ~= nil
+					and state.status ~= "TransportActive"
+					and state.status ~= "FinalizationPending"
+					and capture.state(state.creatureInstanceId) ~= "TransportGrace"
+				then
+					operationRequests[operationId] = nil
 				end
 			end,
 		})
@@ -357,6 +372,7 @@ function CaptureRuntimeService.new(options: {
 				end
 			end
 		end
+		table.clear(operationRequests)
 		return failures
 	end
 

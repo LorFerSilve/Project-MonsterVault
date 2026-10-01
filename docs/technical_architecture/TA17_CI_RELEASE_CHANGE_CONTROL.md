@@ -100,6 +100,8 @@ No TA reopen when contracts remain intact.
 ### Architecture material change
 Reopen owning TA and append architecture decision.
 
+The owner-authorized [AD-249](ARCHITECTURE_DECISIONS.md#ad-249--defer-vs1-19-to-the-imp-10-completion-gate) reopens and relocks only TA-17 performance-evidence timing: VS1-19 is DEFERRED for environment limitation and must pass before IMP-10 COMPLETE. IMP-8 may close with that registered deferral and IMP-9 DEV work may open. Public CI, simulated load or L0 Studio samples cannot satisfy the deferred gate; TA-14/TA-15 hard budgets and production release requirements remain binding.
+
 ### Gameplay semantic change
 Reopen owning GDS then dependent TA.
 

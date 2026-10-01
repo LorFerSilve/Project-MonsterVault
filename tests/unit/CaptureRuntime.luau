@@ -522,6 +522,12 @@ local function captureResyncRecoversLifecycleAndKeepsRequestCorrelation()
 		h.events[#h.events].envelope.correlationId == "submit-request",
 		"capture attempt is correlated"
 	)
+	h.players.PlayerRemoving:Fire(player)
+	h.players.PlayerAdded:Fire(player)
+	assert(
+		h.runtime.interact(player, "creature-a", "resume-request") == "OK_CAPTURE_RESUMED",
+		"transport grace resumes with a different request"
+	)
 	table.clear(h.events) -- A lost capture event must be reconstructable.
 	h.runtime.resync(player, "recover-transport")
 	local transport = h.events[#h.events].envelope.payload
@@ -564,6 +570,16 @@ local function captureResyncRecoversLifecycleAndKeepsRequestCorrelation()
 	assert(
 		byStatus.FinalizationPending.operationId == byStatus.Secured.operationId,
 		"pending and durable outcomes retain the same operation identity"
+	)
+	assert(
+		byStatus.FinalizationPending.requestId == "submit-request"
+			and byStatus.Secured.requestId == "submit-request",
+		"delayed finalization retains the original operation request"
+	)
+	assert(
+		h.events[#h.events - 1].envelope.correlationId == nil
+			and h.events[#h.events].envelope.correlationId == nil,
+		"diagnostic lineage does not reuse a completed wire request"
 	)
 	table.clear(h.events)
 	h.runtime.resync(player, "recover-secured")

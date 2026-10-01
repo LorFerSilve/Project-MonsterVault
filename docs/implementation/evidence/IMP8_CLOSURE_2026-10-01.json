@@ -1,0 +1,73 @@
+{
+  "recordedDate": "2026-10-01",
+  "changeDecision": "AD-249",
+  "authority": "Explicit project-owner change-control request",
+  "imp8": {
+    "status": "COMPLETE",
+    "qualification": "with deferred validation",
+    "remainingFunctionalDependencies": []
+  },
+  "imp9": {
+    "status": "OPEN",
+    "scope": "DEV implementation; this change does not implement IMP-9 gameplay"
+  },
+  "nativeGamepad": {
+    "gate": "VS1-17",
+    "status": "PASS",
+    "provenance": "Project owner confirmed the native gamepad gate is proven on 2026-10-01",
+    "newMcpMeasurement": false,
+    "separateArtifactSupplied": false
+  },
+  "deferredValidation": {
+    "gate": "VS1-19",
+    "criticality": "C1",
+    "status": "DEFERRED",
+    "reason": "Environment limitation: connected Studio/MCP cannot execute L1 30-player and supported real-client performance measurement",
+    "owner": "IMP-10 — World Scaling",
+    "deadline": "Before IMP-10 COMPLETE",
+    "configuredMaxPlayers": 60,
+    "requiredL1Players": 30,
+    "requiredScope": "Full TA-14/TA-15 controlled L0/L1 plus supported real-client frame/memory evidence on the relevant World Scaling candidate build; numeric guardrails and repetition rules unchanged",
+    "countsAsPass": false,
+    "blocksImp10Completion": true,
+    "blocksAdvancementBeyondImp10": true
+  },
+  "retainedStudioL0Evidence": {
+    "provenance": "Existing three five-second solo Studio samples in IMP8_IMPLEMENTATION_EVIDENCE.md; not rerun or relabelled",
+    "durationSecondsPerSample": 5,
+    "serverHeartbeatP95Ms": [
+      18.02,
+      18.01,
+      18
+    ],
+    "clientHeartbeatP95Ms": [
+      19,
+      18.41,
+      18.44
+    ],
+    "clientRenderCpuFrameTimeMs": [
+      6.9,
+      6.61,
+      6.8
+    ],
+    "studioProcessMemoryApproxMb": 1755,
+    "limitations": "Partial L0 Studio evidence; no 30-player L1 or real-client frame/memory PASS; process-wide memory cannot establish server/client budgets"
+  },
+  "diagnosticEvidence": "IMP8_STUDIO_2026-10-01.json",
+  "studioInspection": {
+    "mode": "Edit",
+    "placeId": 110304961224794,
+    "universeId": 10766503968,
+    "captureSourceMatchesTestedRepository": true
+  },
+  "unchangedContracts": [
+    "GDS semantics",
+    "server authority",
+    "protocol V1",
+    "profile schema v1",
+    "TA-14 numeric guardrails",
+    "TA-15 evidence and repetition rules",
+    "STG adapter readiness",
+    "production release gates"
+  ]
+}
