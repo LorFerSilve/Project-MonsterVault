@@ -58,7 +58,8 @@ Same base envelope but no critical/durable truth and <=768 encoded bytes.
 | World.RequestFastTravel | C | nodeId:string |
 | Creature.SetLock | C | creatureInstanceId:string, locked:boolean |
 | Creature.Release | C | creatureInstanceId:string |
-| Vault.SetProductionAssignment | C | slotId:string, creatureInstanceId:string? |
+| Vault.SetProductionAssignment | C | slotId:string, creatureInstanceId:string?; required envelope expectedRevision:integer |
+| Vault.SetDisplayAssignment | C | slotId:string, creatureInstanceId:string?; required envelope expectedRevision:integer |
 | Vault.ClaimProduction | C | claimScope:enum |
 | Vault.ResolveOverflow | C | creatureInstanceId:string; required envelope expectedRevision:integer |
 | Progression.PurchaseUnlock | C | unlockId:string, quoteRevision:number |
@@ -78,9 +79,15 @@ Same base envelope but no critical/durable truth and <=768 encoded bytes.
 
 Routes are allowlisted registry constants; unknown strings never map dynamically to module paths.
 
-IMP-9 extension under [AD-250](ARCHITECTURE_DECISIONS.md#ad-250--register-imp-9-capacity-migration-and-explicit-overflow-resolution): RequestResync permits domain=vault and optional afterCreatureInstanceId:string (1..128 bytes), exclusively for that domain. ResolveOverflow permits no other payload field or client capacity/owner/quantity. Both preserve the existing envelope, ingress schema/rate/replay and readiness gates. Class A Vault resync may reconcile an uncertain P2 operation before publishing Ready; Class C cannot grant readiness.
+IMP-9 extension under [AD-250](ARCHITECTURE_DECISIONS.md#ad-250--register-imp-9-capacity-migration-and-explicit-overflow-resolution): RequestResync permits domain=vault and optional afterCreatureInstanceId:string (1..128 bytes). ResolveOverflow permits no other payload field or client capacity/owner/quantity. Both preserve the existing envelope, ingress schema/rate/replay and readiness gates. Class A Vault resync may reconcile an uncertain P2 operation before publishing Ready; Class C cannot grant readiness.
 
 The owner-only Vault snapshot has domain=vault, revision=profileRevision and state={capacity, ordinaryUsed, overflowHeldCount, components={base,earned,commercial,temporary}, overflowCreatureInstanceIds, hasMore}. Pages have at most five sorted exact IDs and 480 total ID bytes and must pass the existing reliable wire budget. The session projection with matching profileRevision precedes each Vault snapshot; only a Ready client store at that revision accepts it.
+
+[AD-251](ARCHITECTURE_DECISIONS.md#ad-251--register-imp-9-assignments-and-production-settlement) enables Production Assignment and adds Display Assignment with strict payloads: slotId (1..128 bytes), optional creatureInstanceId (1..128 bytes) and positive exact expectedRevision. No owner, rate, quantity or time field is accepted. Omitted creatureInstanceId clears the slot. Both use the P2 writer; claims remain reserved.
+
+RequestResync adds domain=vaultAssignments with the same cursor, now allowed exclusively for vault/vaultAssignments. The owner snapshot has domain=vaultAssignments, revision=profileRevision and state={bufferMilli,bufferCapacityMilli,productionSlotCount,displaySlotCount,offlineWindowSeconds,offlineCreditedMilli,creatures,hasMore}. Up to two sorted rows contain creatureInstanceId, overflowHeld, locked and optional productionSlotId/displaySlotId. Row string bytes total at most 300; the 4 KiB validator remains binding. A matching Ready session projection precedes the page. Missing rows or Command.Result alone cannot prove assignment outcomes.
+
+Profile generation 1 adds production-domain version 1, canonical relations, integer buffer/cursor, retained epoch ID, Active/CleanOffline boundary and bounded recap. AD-251 locks initialization/protected migration and single-writer settlement at assignment, save, leave and load; no wallet, grant binding or milestone is added.
 
 ## 4. V1 reliable server event routes
 

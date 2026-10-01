@@ -16,6 +16,9 @@ local SecuredCollectionProjection =
 	require(script.Parent.Parent.application.SecuredCollectionProjection)
 
 local VaultCapacityProjection = require(script.Parent.Parent.application.VaultCapacityProjection)
+local VaultAssignmentProjection =
+	require(script.Parent.Parent.application.VaultAssignmentProjection)
+local VaultAssignmentProjectionV1 = require(shared.VaultAssignmentProjectionV1)
 local VaultProjectionV1 =
 	require(game:GetService("ReplicatedStorage").MonsterVault.Shared.contracts.VaultProjectionV1)
 local NetworkingRuntimeService = {}
@@ -30,6 +33,8 @@ function NetworkingRuntimeService.new(options: {
 	captureRuntime: any?,
 	vault: any?,
 	capacity: any?,
+	production: any?,
+	assignments: any?,
 })
 	local function id(value: any): boolean
 		return type(value) == "string" and #value > 0 and #value <= 96
@@ -37,6 +42,41 @@ function NetworkingRuntimeService.new(options: {
 	local schemas = {}
 	local handlers = {}
 	local publishVault: any = nil
+	local publishAssignments: any = nil
+	if options.assignments ~= nil and options.production ~= nil then
+		for route, kind in
+			{
+				[RouteIds.commands.vaultSetProductionAssignment] = "production",
+				[RouteIds.commands.vaultSetDisplayAssignment] = "display",
+			}
+		do
+			schemas[route] = VaultAssignmentProjectionV1.validAssignment
+			handlers[route] = function(player: any, envelope: any): string
+				local active = options.profileCoordinator.get(player.UserId)
+				local outcome = options.assignments.assign(
+					active,
+					kind,
+					envelope.payload.slotId,
+					envelope.payload.creatureInstanceId,
+					envelope.expectedRevision
+				)
+				-- Publish only after the attempted write has a conclusive durable result.
+				if outcome.status == "Committed" or outcome.status == "AlreadyCommitted" then
+					publishAssignments(player, envelope.requestId, nil)
+					return "OK_VAULT_ASSIGNMENT_SAVED"
+				end
+				if outcome.status == "Rejected" then
+					return if outcome.reason == "OWNERSHIP"
+						then "REJECT_PERMISSION_VAULT_OWNERSHIP"
+						else "REJECT_STATE_VAULT_" .. (outcome.reason or "INVALID")
+				end
+				return if outcome.status == "OutcomeUnknown"
+						or outcome.status == "PersistenceAtRisk"
+					then "OUTCOME_UNKNOWN_VAULT_ASSIGNMENT"
+					else "PROTECTED_VAULT_UNAVAILABLE"
+			end
+		end
+	end
 	if options.captureRuntime ~= nil then
 		schemas[RouteIds.commands.interactionPrimaryInteract] = function(
 			payload: any,
@@ -163,6 +203,9 @@ function NetworkingRuntimeService.new(options: {
 			return "UNAVAILABLE_VAULT"
 		end
 		local active = options.profileCoordinator.get(player.UserId)
+		if options.assignments ~= nil then
+			options.assignments.reconcile(active)
+		end
 		local result = options.capacity.reconcile(active)
 		local ready = active ~= nil
 			and active.state() == "Ready"
@@ -198,6 +241,51 @@ function NetworkingRuntimeService.new(options: {
 		})
 		return "OK_VAULT_SNAPSHOT"
 	end
+	publishAssignments = function(player: any, requestId: string, afterId: string?): string
+		if
+			options.assignments == nil
+			or options.production == nil
+			or options.profileCoordinator == nil
+		then
+			return "UNAVAILABLE_VAULT_ASSIGNMENTS"
+		end
+		local active = options.profileCoordinator.get(player.UserId)
+		options.assignments.reconcile(active)
+		local capacityResult = if options.capacity ~= nil
+			then options.capacity.reconcile(active)
+			else { status = "Unchanged" }
+		local ready = active ~= nil
+			and active.state() == "Ready"
+			and options.production.validate(active.snapshot()) == nil
+			and (
+				capacityResult.status == "Unchanged"
+				or capacityResult.status == "Committed"
+				or capacityResult.status == "AlreadyCommitted"
+			)
+		projection.snapshot(
+			player,
+			if ready
+				then { status = "Ready", profileRevision = active.snapshot().profileRevision }
+				else { status = "Protected" }
+		)
+		if not ready then
+			return "PROTECTED_VAULT_UNAVAILABLE"
+		end
+		local payload =
+			VaultAssignmentProjection.fromProfile(active.snapshot(), options.production, afterId)
+		assert(
+			VaultAssignmentProjectionV1.validSnapshot(payload) and WireValidation.payload(payload),
+			"invalid bounded assignment projection"
+		)
+		options.event:FireClient(player, {
+			protocolVersion = 1,
+			routeId = RouteIds.events.projectionSnapshot,
+			correlationId = requestId,
+			revision = payload.revision,
+			payload = payload,
+		})
+		return "OK_VAULT_ASSIGNMENTS_SNAPSHOT"
+	end
 	local gateway = NetworkingGateway.new({
 		protocol = ProtocolV1,
 		routes = RouteIds,
@@ -217,6 +305,7 @@ function NetworkingRuntimeService.new(options: {
 		end,
 		routeHandlers = handlers,
 		vaultResync = publishVault,
+		assignmentsResync = publishAssignments,
 		captureResync = if options.captureRuntime ~= nil
 			then options.captureRuntime.resync
 			else nil,

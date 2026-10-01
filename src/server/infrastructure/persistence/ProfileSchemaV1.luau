@@ -193,6 +193,48 @@ function ProfileSchemaV1.validate(profile: any): (boolean, string?)
 		return false, "invalid_collection_capacity"
 	end
 	local vault = profile.vault
+	if vault.productionSchemaVersion ~= nil then
+		if
+			vault.productionSchemaVersion ~= 1
+			or not finiteInteger(vault.productionBufferMilli, 0)
+			or vault.productionBufferMilli > 1_000_000_000_000_000
+			or not finiteInteger(vault.productionCursorUnixSeconds, 0)
+			or vault.productionCursorUnixSeconds > 9_007_199_254_740_991
+			or not validId(vault.productionRateEpochId)
+			or (
+				vault.lastPresenceBoundary ~= "Active"
+				and vault.lastPresenceBoundary ~= "CleanOffline"
+			)
+		then
+			return false, "invalid_production_state"
+		end
+		for _, assignments in { vault.productionAssignments, vault.displayAssignments } do
+			if type(assignments) ~= "table" then
+				return false, "invalid_assignments"
+			end
+			local count = 0
+			for slot, creatureId in assignments do
+				count += 1
+				if count > 24 or not validId(slot) or not validId(creatureId) then
+					return false, "invalid_assignments"
+				end
+			end
+		end
+		if vault.lastOfflineSettlement ~= nil then
+			local recap = vault.lastOfflineSettlement
+			if
+				type(recap) ~= "table"
+				or not finiteInteger(recap.creditedMilli, 0)
+				or recap.creditedMilli > 1_000_000_000_000_000
+				or not finiteInteger(recap.eligibleSeconds, 0)
+				or recap.eligibleSeconds > 43380
+				or (recap.mode ~= "CleanOffline" and recap.mode ~= "CrashRecovery")
+				or type(recap.clockRegressed) ~= "boolean"
+			then
+				return false, "invalid_production_recap"
+			end
+		end
+	end
 	if vault.capacitySchemaVersion ~= nil and vault.capacitySchemaVersion ~= 1 then
 		return false, "invalid_capacity_schema"
 	end

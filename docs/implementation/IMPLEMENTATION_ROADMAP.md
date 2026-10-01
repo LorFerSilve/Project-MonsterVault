@@ -123,15 +123,17 @@ VS-1 functional acceptance must be complete before broad feature expansion, with
 
 ## IMP-9 — Vault / Economy / Progression
 
-**Status: OPEN for DEV implementation; capacity policy, authorized components, non-destructive reconciliation and explicit Overflow-Held resolution implemented and validated.** Upstream IMP-8 is formally complete under AD-249. [IMP-9 evidence](IMP9_IMPLEMENTATION_EVIDENCE.md) records the current implementation and remaining gates.
+**Status: OPEN for DEV implementation; capacity, reconciliation, Overflow-Held resolution, assignments and production/offline settlement implemented and validated.** Upstream IMP-8 is formally complete under AD-249. [IMP-9 evidence](IMP9_IMPLEMENTATION_EVIDENCE.md) records the current implementation and remaining gates.
 
 Collection capacity, assignments, production, offline settlement, Energy and progression transactions.
 
 Completed first dependency: Vault-owned capacity status consumed by capture admission and P2 placement; invalid persisted capacity fails protected load, and capacity races preserve exact Overflow-Held ownership. Existing DEV fixture balance is retained.
 
-Completed next dependency (AD-250): separately identifiable server-authorized capacity components; explicit versioned legacy/sequence migration before Ready; deterministic ownership-preserving P2 reconciliation; native owner-selected exact-instance Resolve Overflow with bounded projection and uncertain-write recovery. Commercial/temporary readers remain unbound in DEV and cannot grant capacity from persisted client-like claims; their real integrations belong to their owning later systems. Production-bearing state stays protected until actual settlement is bound.
+Completed next dependency (AD-250): separately identifiable server-authorized capacity components; explicit versioned legacy/sequence migration before Ready; deterministic ownership-preserving P2 reconciliation; native owner-selected exact-instance Resolve Overflow with bounded projection and uncertain-write recovery. Commercial/temporary readers remain unbound in DEV and cannot grant capacity from persisted client-like claims; their real integrations belong to their owning later systems.
 
-Next dependency: canonical Display/Production assignment validation and coherent production settlement (integer buffer, rate epochs, clocks and online/offline accrual), then Energy/claim and progression transactions. IMP-9 cannot be COMPLETE, and IMP-10 cannot start, until the full TA-8 gates pass.
+Completed current dependency (AD-251): server-owned Display/Production assignments, strict revision/ownership/role/slot validation, integer buffer and historical epochs, monotonic online settlement, bounded clean-offline/crash recovery and coherent save/leave/rejoin/uncertain-write recovery. Capacity loss settles before clearing roles; grants remain protected while unbound. Native UI/gateway/DEV DataStore/fresh Play server and negative/race evidence is linked from IMP-9 evidence.
+
+Next dependency: Energy wallet/transaction primitive and exact-once Production Claim, followed by progression quotes/purchases/unlocks. This slice does not start Energy/progression. IMP-9 cannot be COMPLETE, and IMP-10 cannot start, until the full TA-8 gates pass.
 
 ## IMP-10 — World Scaling
 

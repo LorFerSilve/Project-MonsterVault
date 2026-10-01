@@ -35,6 +35,26 @@ local function validLease(lease: any): boolean
 		and lease.expiresAt < math.huge
 end
 
+local function equal(a: any, b: any): boolean
+	if type(a) ~= type(b) then
+		return false
+	end
+	if type(a) ~= "table" then
+		return a == b
+	end
+	for key, value in a do
+		if not equal(value, b[key]) then
+			return false
+		end
+	end
+	for key in b do
+		if a[key] == nil then
+			return false
+		end
+	end
+	return true
+end
+
 function ProfileSession.new(options: {
 	userId: number,
 	lockId: string,
@@ -42,6 +62,7 @@ function ProfileSession.new(options: {
 	repository: any,
 	schema: any,
 	prepareProfile: ((any) -> any)?,
+	prepareSave: ((any, boolean, number) -> any)?,
 	queue: any,
 	retry: any,
 	unixSeconds: () -> number,
@@ -68,6 +89,8 @@ function ProfileSession.new(options: {
 	local mutating = false
 	local closingRequested = false
 	local pendingCheckpoint: any = nil
+	local pendingSave: any = nil
+	local closingBoundary: number? = nil
 
 	local function validOwnedProfile(candidate: any): boolean
 		if not options.schema.validate(candidate) then
@@ -210,23 +233,65 @@ function ProfileSession.new(options: {
 			state = "PersistenceAtRisk"
 			return { status = "PersistenceAtRisk", reason = "PENDING_CHECKPOINT" }
 		end
-		local now = options.unixSeconds()
-		local expectedRevision = persistedRevision :: number
-		local candidate = copy(profile)
-		if dirty then
-			candidate.profileRevision = expectedRevision + 1
-			candidate.lastSuccessfulSaveAt = now
+		local saveRecord = pendingSave
+		if saveRecord == nil then
+			local now = options.unixSeconds()
+			local expectedRevision = persistedRevision :: number
+			local candidate = copy(profile)
+			local preparedChanged = false
+			if options.prepareSave ~= nil then
+				local ok, prepared = pcall(
+					options.prepareSave,
+					candidate,
+					release,
+					closingBoundary or options.monotonicSeconds()
+				)
+				if not ok or type(prepared) ~= "table" or prepared.status ~= "Prepared" then
+					state = "PersistenceAtRisk"
+					return { status = state, reason = "SAVE_PREPARATION_FAILED" }
+				end
+				preparedChanged = prepared.changed == true
+			end
+			if dirty or preparedChanged then
+				candidate.profileRevision = expectedRevision + 1
+				candidate.lastSuccessfulSaveAt = now
+			end
+			saveRecord = {
+				candidate = candidate,
+				expectedRevision = expectedRevision,
+				release = release,
+			}
 		end
+		local expectedRevision, candidate = saveRecord.expectedRevision, saveRecord.candidate
+		local now = options.unixSeconds() -- Refresh the lease on retry; retain the value candidate.
 		local valid = validOwnedProfile(candidate)
 		if not valid then
 			state = "PersistenceAtRisk"
 			return { status = state, reason = "INVALID_BUFFER" }
 		end
+		pendingSave = saveRecord -- Retain the exact cursor/buffer candidate across lost results.
 		local result = queued(if isCritical then "critical" else "routine", function()
 			return options.retry.run(function()
 				return options.repository.update(
 					key,
 					function(current: any, metadata: { [string]: any }): any
+						-- A result lost after a save/unlock must replay the same candidate,
+						-- including the original leave boundary, without settling time again.
+						if
+							equal(current, candidate)
+							and (
+								ownLease(metadata)
+								or (saveRecord.release and metadata.mvLease == nil)
+							)
+						then
+							local nextMetadata = copy(metadata)
+							if saveRecord.release then
+								nextMetadata.mvLease = nil
+							else
+								nextMetadata.mvLease.expiresAt = now + LEASE_SECONDS
+							end
+							return { kind = "write", value = candidate, metadata = nextMetadata }
+						end
 						if not ownLease(metadata) then
 							return { kind = "abort", reason = "OWNERSHIP_LOST" }
 						end
@@ -237,7 +302,7 @@ function ProfileSession.new(options: {
 							return { kind = "abort", reason = "REVISION_MISMATCH" }
 						end
 						local nextMetadata = copy(metadata)
-						if release then
+						if saveRecord.release then
 							nextMetadata.mvLease = nil
 						else
 							nextMetadata.mvLease.expiresAt = now + LEASE_SECONDS
@@ -249,18 +314,25 @@ function ProfileSession.new(options: {
 		end)
 		if result.status ~= "ok" then
 			classifyFailure(result)
+			state = if result.status == "aborted" and result.reason == "OWNERSHIP_LOST"
+				then "OwnershipLost"
+				else "PersistenceAtRisk"
 			return { status = state, reason = result.reason }
 		end
 		profile = copy(result.value)
 		persistedRevision = profile.profileRevision
 		dirty = false
-		if release then
+		pendingSave = nil
+		if saveRecord.release then
 			state = "Closed"
 			profile = nil
 			leaseEpoch = nil
 		else
 			leaseExpiresAt = now + LEASE_SECONDS
 			state = "Ready"
+		end
+		if release and not saveRecord.release then
+			return save(true, true, absoluteDeadline)
 		end
 		return { status = state, profileRevision = persistedRevision }
 	end
@@ -507,6 +579,9 @@ function ProfileSession.new(options: {
 			return serialized(renew)
 		end,
 		release = function(absoluteDeadline: number)
+			if closingBoundary == nil then
+				closingBoundary = options.monotonicSeconds()
+			end
 			closingRequested = true
 			return serialized(function()
 				return release(absoluteDeadline)

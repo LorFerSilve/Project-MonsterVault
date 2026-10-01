@@ -203,6 +203,26 @@ function VaultService.new(config: any, authorities: any?)
 				return { status = "Protected", reason = "INVALID_DISPLAY_REFERENCE" }
 			end
 		end
+		local hasProduction = next(production) ~= nil
+			or nonempty(vault.productionRateEpochId)
+			or (vault.productionBufferMilli ~= nil and vault.productionBufferMilli ~= 0)
+			or vault.productionCursorUnixSeconds ~= nil
+		local changed = false
+		if hasProduction then
+			if settleProduction == nil then
+				return { status = "Protected", reason = "PRODUCTION_SETTLEMENT_REQUIRED" }
+			end
+			if status.ordinaryUsed > status.capacity or vault.capacitySchemaVersion == nil then
+				local settled, productionChanged = settleProduction(profile)
+				if not settled then
+					return { status = "Protected", reason = "PRODUCTION_SETTLEMENT_REQUIRED" }
+				end
+				changed = productionChanged == true
+				-- Settlement may replace relations or end slots at an epoch boundary.
+				production, display =
+					vault.productionAssignments or {}, vault.displayAssignments or {}
+			end
+		end
 		local priority = if profile.collection.capacityPriority == nil
 			then {}
 			else profile.collection.capacityPriority
@@ -259,21 +279,6 @@ function VaultService.new(config: any, authorities: any?)
 		end)
 		for _, item in remaining do
 			table.insert(ordered, item.id)
-		end
-		local hasProduction = next(production) ~= nil
-			or nonempty(vault.productionRateEpochId)
-			or (vault.productionBufferMilli ~= nil and vault.productionBufferMilli ~= 0)
-			or vault.productionCursorUnixSeconds ~= nil
-		local changed = false
-		if hasProduction then
-			if settleProduction == nil then
-				return { status = "Protected", reason = "PRODUCTION_SETTLEMENT_REQUIRED" }
-			end
-			local settled, productionChanged = settleProduction(profile)
-			if not settled then
-				return { status = "Protected", reason = "PRODUCTION_SETTLEMENT_REQUIRED" }
-			end
-			changed = productionChanged == true
 		end
 		if vault.capacitySchemaVersion == nil then
 			vault.capacitySchemaVersion = 1

@@ -18,6 +18,7 @@ function NetworkingGateway.new(options: {
 	routeHandlers: { [string]: any }?,
 	captureResync: ((any, string) -> string)?,
 	vaultResync: ((any, string, string?) -> string)?,
+	assignmentsResync: ((any, string, string?) -> string)?,
 })
 	local function event(
 		player: any,
@@ -116,6 +117,15 @@ function NetworkingGateway.new(options: {
 	options.registry.bind(
 		options.routes.commands.sessionRequestResync,
 		function(player: any, envelope: any)
+			if envelope.payload.domain == "vaultAssignments" then
+				return if options.assignmentsResync ~= nil
+					then options.assignmentsResync(
+						player,
+						envelope.requestId,
+						envelope.payload.afterCreatureInstanceId
+					)
+					else "UNAVAILABLE_VAULT_ASSIGNMENTS"
+			end
 			if envelope.payload.domain == "vault" then
 				return if options.vaultResync ~= nil
 					then options.vaultResync(

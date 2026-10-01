@@ -3515,3 +3515,33 @@ ProfileSession remains the sole profile writer. Capture keeps its lifecycle/fina
 ### Evidence and consequence
 
 [IMP-9 evidence](../implementation/IMP9_IMPLEMENTATION_EVIDENCE.md) records deterministic/fault/security tests and native UI -> real client/server gateway -> DEV UpdateAsync -> rejoin evidence. IMP-9 remains OPEN for assignments, production/offline settlement, wallet/claims and progression transactions. IMP-10 does not start. AD-249 / VS1-19 remains DEFERRED, mandatory before IMP-10 COMPLETE; no other gate is waived.
+
+---
+
+## AD-251 — Register IMP-9 Assignments and Production Settlement
+
+**Date:** 2026-10-01
+
+**Status:** Accepted — local implementation of the owner-requested GDS-7 / TA-8 dependency
+
+**Owning TA phase:** TA-17; affected contracts TA-3/4/8/12/15
+
+### Decision
+
+Enable reserved Class C `Vault.SetProductionAssignment` and add Class C `Vault.SetDisplayAssignment`, accepting only `slotId` and optional `creatureInstanceId` with required envelope `expectedRevision`. Omission removes the assignment; identity comes from OnServerEvent. Display reuses the existing P2 checkpoint as a stronger guarantee than baseline P1, avoiding another mutation path. Relations reference secured instances: lock permits benign assignment; Overflow-Held and unbound active roles cannot produce; display cannot mint output.
+
+Class A RequestResync adds `domain = vaultAssignments` with the existing optional bounded `afterCreatureInstanceId`. Owner-only Projection.Snapshot pages contain at most two sorted creature rows, current slot counts, saved buffer/cap, offline window and finalized offline credit. Row identity/slot text totals at most 300 bytes and the existing 4 KiB wire validator remains binding. A matching Ready session projection precedes the page. Client results/timeouts never finalize assignment state; fresh correlated authoritative rows do. V1 remotes and existing schemas stay compatible.
+
+Profile generation remains 1 with explicit `vault.productionSchemaVersion = 1`. Empty reserved state initializes at the load boundary; unversioned valuable production/display state stays protected. Persist canonical relations, exact integer milli-output, cursor Unix seconds, historical epoch ID, Active/CleanOffline marker and bounded recap. Immutable DEV content supplies two Production/three Display slots, a two-hour offline window, 180-second TA-14 crash allowance and fixture Species rate 100 milli-units/second. Buffer capacity 1,440,000 milli represents two hours of two fixture producers. This is DEV tuning, not launch balance.
+
+Retained epochs carry authored Species rates, slot counts/caps and content snapshot references. Settlement segments prospective boundaries, preserves over-cap output and permanently ends reduced slots before any later expansion. Missing required history, unknown production definitions and unbound commercial/temporary production/display grants or active roles fail protected. Rarity, mutation, protection, provenance and commercial status add no implicit multiplier. ConfigService/live-ops and real grant bindings remain with their later owners.
+
+### Persistence and clock gates
+
+ProfileSession remains the sole writer. Assignment changes settle old membership and store buffer/relation/cursor together under one P2 operation. Load settlement prepares the staged lease-acquisition candidate before Ready with one sampled load time, including transform replay. Renewal settles online output; clean release settles at the first leave request and saves/unlocks coherently. Online time uses the existing server monotonic clock anchored to server Unix time. Regression credits zero without rewinding the cursor; clean absence is capped at the finalized window, stale Active recovery at that window plus 180 seconds. Saturation/cursor advancement prevent replay. Settlement grants no Energy or milestone.
+
+Pending save candidates survive before-write/lost-after-write results. Retry checks the exact candidate and lease, retains the original leave cursor, refreshes lease expiry separately and refuses another owner's lease. Reconciliation refreshes assignment references after settlement, preventing old table aliases from retaining Overflow-Held producers. Owner projection polling causes no periodic DataStore writes.
+
+### Evidence and consequence
+
+[IMP-9 evidence](../implementation/IMP9_IMPLEMENTATION_EVIDENCE.md) records registered C0 tests and native UI/gateway/DEV DataStore/fresh Play server/protected-load/race evidence. The assignment/production/offline dependency closes with that evidence and CI. IMP-9 remains OPEN for Energy wallet/claim and progression transactions; this slice starts neither Energy/progression nor IMP-10. AD-249 and release gates remain unchanged.
