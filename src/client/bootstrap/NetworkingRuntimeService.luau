@@ -3,6 +3,7 @@
 local shared = game:GetService("ReplicatedStorage").MonsterVault.Shared.contracts
 local ProtocolV1 = require(shared.ProtocolV1)
 local VaultProjectionV1 = require(shared.VaultProjectionV1)
+local VaultAssignmentProjectionV1 = require(shared.VaultAssignmentProjectionV1)
 local RouteIds = require(shared.RouteIds)
 local ResultCodes = require(shared.ResultCodes)
 local WireValidation = require(shared.WireValidation)
@@ -32,6 +33,7 @@ function NetworkingRuntimeService.new(options: {
 		store = store,
 		captureProjection = CaptureProjectionV1,
 		vaultProjection = VaultProjectionV1,
+		assignmentProjection = VaultAssignmentProjectionV1,
 		securedCollectionProjection = SecuredCollectionProjectionV1,
 		securedCollectionStore = securedCollectionStore,
 		sendCommand = function(envelope)
@@ -43,6 +45,7 @@ function NetworkingRuntimeService.new(options: {
 	local running = false
 	local captureListener: ((any) -> ())? = nil
 	local vaultListener: ((any) -> ())? = nil
+	local assignmentListener: ((any) -> ())? = nil
 
 	local function start()
 		assert(not running, "networking already started")
@@ -59,6 +62,9 @@ function NetworkingRuntimeService.new(options: {
 				end
 				if ok and outcome == "Vault" and vaultListener ~= nil then
 					vaultListener(envelope)
+				end
+				if ok and outcome == "Assignments" and assignmentListener ~= nil then
+					assignmentListener(envelope)
 				end
 				if not ok or outcome == "Invalid" then
 					options.diagnostics.emit(
@@ -121,6 +127,7 @@ function NetworkingRuntimeService.new(options: {
 		gateway.reset()
 		captureListener = nil
 		vaultListener = nil
+		assignmentListener = nil
 		return {}
 	end
 
@@ -132,6 +139,15 @@ function NetworkingRuntimeService.new(options: {
 		gateway = gateway,
 		store = store,
 		securedCollectionStore = securedCollectionStore,
+		subscribeAssignments = function(listener: (any) -> ())
+			assert(assignmentListener == nil, "assignment listener already bound")
+			assignmentListener = listener
+			return function()
+				if assignmentListener == listener then
+					assignmentListener = nil
+				end
+			end
+		end,
 		subscribeVault = function(listener: (any) -> ())
 			assert(vaultListener == nil, "Vault listener already bound")
 			vaultListener = listener

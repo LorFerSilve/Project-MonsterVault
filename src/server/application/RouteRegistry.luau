@@ -28,12 +28,13 @@ local function resyncPayload(payload: any, expectedRevision: any): boolean
 				and value ~= "capture"
 				and value ~= "securedCollection"
 				and value ~= "vault"
+				and value ~= "vaultAssignments"
 			then
 				return false
 			end
 		elseif key == "afterCreatureInstanceId" then
 			if
-				payload.domain ~= "vault"
+				(payload.domain ~= "vault" and payload.domain ~= "vaultAssignments")
 				or type(value) ~= "string"
 				or #value < 1
 				or #value > 128

@@ -28,5 +28,6 @@
 | AD-248 | Close TA-17 and advance the project to IMP-1 — Contracts and Test Harness. |
 | AD-249 | Accept the owner-authorized VS1-19 environment deferral: IMP-8 COMPLETE with deferred validation, IMP-9 OPEN, full 30-player L1 and real-client performance mandatory before IMP-10 COMPLETE. |
 | AD-250 | Register the additive V1 Vault.ResolveOverflow route, bounded Vault projection and explicit capacity-domain migration; retain server authority, P2 recovery and protected production settlement. |
+| AD-251 | Register canonical Display/Production assignments, bounded owner pages, versioned production state, epoch settlement and save/rejoin recovery; Energy/progression remains the next IMP-9 dependency. |
 
 **Decision index result: ACCEPTED.**

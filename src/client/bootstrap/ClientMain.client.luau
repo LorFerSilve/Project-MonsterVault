@@ -6,6 +6,7 @@ local NetworkingRuntimeService = require(script.Parent.NetworkingRuntimeService)
 local WorldModelObserver = require(script.Parent.WorldModelObserver)
 local CaptureRuntimeService = require(script.Parent.CaptureRuntimeService)
 local VaultRuntimeService = require(script.Parent.VaultRuntimeService)
+local VaultAssignmentRuntimeService = require(script.Parent.VaultAssignmentRuntimeService)
 
 local composition = ClientComposition.new({
 	sink = function(record)
@@ -28,6 +29,11 @@ local composition = ClientComposition.new({
 			diagnostics = diagnostics,
 		})
 		return {
+			VaultAssignmentRuntimeService.new({
+				networking = networking,
+				player = game:GetService("Players").LocalPlayer,
+				guiService = game:GetService("GuiService"),
+			}),
 			VaultRuntimeService.new({
 				networking = networking,
 				player = game:GetService("Players").LocalPlayer,

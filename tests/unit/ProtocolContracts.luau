@@ -41,6 +41,7 @@ local function run()
 		"Creature.SetLock",
 		"Creature.Release",
 		"Vault.SetProductionAssignment",
+		"Vault.SetDisplayAssignment",
 		"Vault.ClaimProduction",
 		"Vault.ResolveOverflow",
 		"Progression.PurchaseUnlock",

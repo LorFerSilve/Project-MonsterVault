@@ -66,6 +66,8 @@ local composition = ServerComposition.new({
 				captureRuntime = captureRuntime,
 				vault = if profileRuntime then profileRuntime.vault else nil,
 				capacity = if profileRuntime then profileRuntime.capacity else nil,
+				production = if profileRuntime then profileRuntime.production else nil,
+				assignments = if profileRuntime then profileRuntime.assignments else nil,
 				diagnostics = diagnostics,
 			})
 		)

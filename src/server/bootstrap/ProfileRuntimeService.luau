@@ -9,6 +9,10 @@ local RobloxProfileRepository = require(script.Parent.Parent.adapters.RobloxProf
 
 local VaultService = require(script.Parent.Parent.domains.vault.VaultService)
 local VaultCapacityUseCase = require(script.Parent.Parent.application.VaultCapacityUseCase)
+local VaultProductionService = require(script.Parent.Parent.domains.vault.VaultProductionService)
+local VaultProductionUseCase = require(script.Parent.Parent.application.VaultProductionUseCase)
+local VaultProductionFixture =
+	require(game:GetService("ReplicatedStorage").MonsterVault.Shared.config.VaultProductionFixture)
 local VaultCapacityFixture =
 	require(game:GetService("ReplicatedStorage").MonsterVault.Shared.config.VaultCapacityFixture)
 
@@ -45,14 +49,26 @@ function ProfileRuntimeService.new(options: {
 		then options.gameJobId
 		else options.httpService:GenerateGUID(false)
 	local vault = VaultService.new(VaultCapacityFixture)
+	local production = VaultProductionService.new(VaultProductionFixture)
+	local assignments = VaultProductionUseCase.new({
+		production = production,
+		vault = vault,
+		unixSeconds = os.time,
+		monotonicSeconds = os.clock,
+		newOperationId = function()
+			return "assignment-" .. options.httpService:GenerateGUID(false)
+		end,
+	})
 	local capacity = VaultCapacityUseCase.new({
 		vault = vault,
+		settleProduction = assignments.settleProfile,
 		newOperationId = function()
 			return "vault-" .. options.httpService:GenerateGUID(false)
 		end,
 	})
 	local coordinator = SessionCoordinator.new({
 		createSession = function(userId: number)
+			local loadTime = os.time() -- Fixed across UpdateAsync transform replay.
 			local queue = SingleWriterQueue.new(os.clock, scheduler.wait, 25)
 			local retry = RetryPolicy.new(os.clock, scheduler.wait, function()
 				return random:NextNumber()
@@ -63,7 +79,10 @@ function ProfileRuntimeService.new(options: {
 				jobId = jobId,
 				repository = repository,
 				schema = ProfileSchemaV1,
-				prepareProfile = vault.prepare,
+				prepareProfile = function(profile: any)
+					return assignments.prepareProfile(profile, loadTime)
+				end,
+				prepareSave = assignments.prepareSave,
 				queue = queue,
 				retry = retry,
 				unixSeconds = os.time,
@@ -96,7 +115,21 @@ function ProfileRuntimeService.new(options: {
 		scheduled[player] = true
 		scheduler.spawn(function()
 			if not departed[player] then
-				logOutcome("PROFILE_ACQUIRE_RESULT", coordinator.open(player.UserId))
+				local outcome = coordinator.open(player.UserId)
+				logOutcome("PROFILE_ACQUIRE_RESULT", outcome)
+				if outcome.status == "Ready" then
+					local recap =
+						coordinator.get(player.UserId).snapshot().vault.lastOfflineSettlement
+					if recap ~= nil then
+						options.diagnostics.emit(
+							if recap.clockRegressed then "warn" else "info",
+							if recap.clockRegressed
+								then "PRODUCTION_CLOCK_REGRESSION"
+								else "PRODUCTION_LOAD_SETTLED",
+							{ component = "profiles", detailCode = recap.mode }
+						)
+					end
+				end
 			end
 		end)
 	end
@@ -142,6 +175,8 @@ function ProfileRuntimeService.new(options: {
 		coordinator = coordinator,
 		vault = vault,
 		capacity = capacity,
+		production = production,
+		assignments = assignments,
 	}
 end
 

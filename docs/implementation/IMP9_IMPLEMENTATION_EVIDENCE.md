@@ -1,12 +1,12 @@
 # IMP-9 Implementation Evidence
 
-> **Status:** OPEN — capacity policy/components, non-destructive reconciliation and explicit Overflow-Held resolution PASS; phase incomplete
+> **Status:** OPEN — capacity, reconciliation, Overflow-Held resolution, assignments and production/offline settlement PASS; Energy/claim and progression remain open
 >
 > **Date:** 2026-10-01
 >
-> **Contracts:** GDS-4, GDS-5, GDS-7; TA-2, TA-4, TA-7, TA-8, TA-15, TA-17
+> **Contracts:** GDS-4, GDS-5, GDS-7, GDS-8; TA-2, TA-4, TA-7, TA-8, TA-12, TA-14, TA-15, TA-17
 
-IMP-8 remains COMPLETE under AD-249. VS1-19 remains DEFERRED for environment limitation, mandatory before IMP-10 COMPLETE. The capacity-policy foundation was merged in PR #48 as `a1e3489d4e067d69f36ed292fd394f1701b12776`; all 55 authored scripts matched the open Studio project before the current dependency.
+IMP-8 remains COMPLETE under AD-249. VS1-19 remains DEFERRED for environment limitation, mandatory before IMP-10 COMPLETE. Capacity/reconciliation PR #49 was verified merged as `0d8708edc712b288f9066f1b974c1bd9574c9016`; all 60 authored scripts matched the open Studio project before the assignment/settlement dependency. Earlier capacity evidence below retains its original scope and source identities.
 
 ## Capacity-policy foundation — historical PR #48 evidence
 
@@ -25,8 +25,8 @@ Ordinary use counts each non-overflow CreatureInstanceId once, regardless of dis
 | Invalid persisted capacity | PASS | T15.vault.capacity.protectedLoad; protected load preserves the stored profile. |
 | P2 capacity race, duplicate and identity preservation | PASS | T15.vault.capacity.captureAuthority; existing capture fault suite; native Studio scenario below. |
 | Full collection through shipped gateway | PASS | Scripted real-client Command RemoteEvent receives REJECT_STATE_CAPTURE_CAPACITYBLOCKED from the live server. |
-| Authorized additive capacity policy, deterministic reconciliation and Resolve Overflow | PASS — current dependency below | TA-8 sections 21–24; content-bounded verified source boundary, protected migration, deterministic P2 preservation and native exact-instance resolution. Actual external grant integrations remain with their later owners. |
-| Display/production assignments, settlement and offline accrual | OPEN | TA-8 assignment, elapsed-time, epoch, buffer and clock gates remain required. |
+| Authorized additive capacity policy, deterministic reconciliation and Resolve Overflow | PASS — PR #49 evidence below | TA-8 sections 21–24; content-bounded verified source boundary, protected migration, deterministic P2 preservation and native exact-instance resolution. Actual external grant integrations remain with their later owners. |
+| Display/production assignments, settlement and offline accrual | PASS — AD-251 evidence below | Canonical assignments, integer buffer, immutable epoch history, server clocks, bounded offline/crash settlement and uncertain-write recovery. |
 | Energy, claims, quotes and progression transactions | OPEN | TA-8 exact-once atomic wallet/effect, overflow and prospective config gates remain required. |
 
 These PASS rows close the selected policy dependency, not IMP-9 as a whole. IMP-10 cannot start until the remaining IMP-9 gates pass.
@@ -47,7 +47,7 @@ Validation: **113/113 fast Lune tests**, including three new registered capacity
 
 This is a local implementation change under TA-17: the valid V1 profile shape and public wire generation/routes remain compatible; only an internal application construction API now requires the Vault authority. No new package, remote, gameplay reward, upgrade tier, capacity purchase or live-config integration is introduced.
 
-## Authorized capacity, reconciliation and explicit resolution — current evidence
+## Authorized capacity, reconciliation and explicit resolution — historical PR #49 evidence
 
 The selected dependency is complete under [AD-250](../technical_architecture/ARCHITECTURE_DECISIONS.md#ad-250--register-imp-9-capacity-migration-and-explicit-overflow-resolution). The raw [Studio evidence](evidence/IMP9_STUDIO_RECONCILIATION_2026-10-01.json) identifies this candidate's sources, real DEV scopes, exact creatures/operations, native UI input, client/server envelopes and durable results. Historical PR #48 evidence above is retained with its original scope/hashes.
 
@@ -76,4 +76,36 @@ Validation: **121/121 fast Lune tests**, including eight new registered C0 depen
 
 The final structure check also found two obsolete same-name VaultService/VaultCapacityFixture ModuleScripts retained from the foundation. Only copies exactly matching the inspected old baseline Source were removed. The tested new instances were retained; the final 60-script source check rejects duplicate names and matches every file by normalized byte length and Adler-32, with SHA-256 source identities in the raw artifact.
 
-Next: canonical Display/Production assignment validation and coherent production settlement (integer buffer, rate epochs, clocks and online/offline accrual), followed by Energy/claim and progression transactions. IMP-9 remains OPEN until those TA-8 gates pass; IMP-10 has not started. The external VS1-19 gate and its before-IMP-10-COMPLETE deadline are unchanged.
+PR #49 completed the capacity dependency. The assignment/settlement dependency that followed is recorded below. The external VS1-19 gate and its before-IMP-10-COMPLETE deadline are unchanged.
+
+## Display/Production assignments and production/offline settlement — current evidence
+
+The selected dependency is complete under [AD-251](../technical_architecture/ARCHITECTURE_DECISIONS.md#ad-251--register-imp-9-assignments-and-production-settlement). The [raw native Studio evidence](evidence/IMP9_STUDIO_PRODUCTION_2026-10-01.json) records all 67 runtime source identities, exact instance/operation/request IDs, real gateway envelopes, isolated DEV DataStore results, fresh-server rejoin and final Edit parity. The reusable probes are [imp9_production_settlement.luau](../../scripts/studio/imp9_production_settlement.luau) and [imp9_production_client.luau](../../scripts/studio/imp9_production_client.luau).
+
+Assignments use the existing ProfileSession single writer and P2 checkpoints. Both strict Class C routes require an expected revision and server-authored slot ID; the only optional intent is the exact CreatureInstanceId (omission clears the slot). The authenticated owner's ordinary Stored/Active creature can occupy one Display and one Production slot simultaneously. Duplicate slots of the same kind, foreign IDs, Overflow-Held creatures, incompatible roles and unknown rates are rejected. Lock alone does not prohibit these non-transfer roles. No client timestamp, rate, capacity or owner assertion is accepted. Unknown results retain one server operation until Class A resync confirms durable state. The native minimal manager uses Roblox GUI controls and bounded owner-only assignment pages (two IDs, at most 300 cumulative ID/slot characters); a result or timeout alone never assigns a creature on the client.
+
+VaultProductionService owns deterministic integer milli-output arithmetic. An immutable, named DEV fixture supplies two Production and three Display slots, a 1,440,000 milli-output buffer, a 7,200-second offline window and the fixture species' 100 milli-output/second rate. These values are a development snapshot, not launch balance or a live-config/commercial integration. Every retained epoch identifies its effective time, content snapshot, rates and capabilities. Settlement segments across the retained history before changing assignments/capabilities; missing history/rates fail protected load. Capability loss stops affected slots without resurrecting them on a later expansion. A buffer reduction preserves already saved over-cap output and pauses accrual until headroom exists.
+
+The server samples Unix time at acquisition and anchors online progress to the existing monotonic clock. Settlement advances the cursor and buffer together on the staged durable candidate, preserving fractional elapsed time across checkpoints. Clean leave freezes its original boundary, saves CleanOffline and releases the lease. Fresh acquisition settles offline exactly once before Ready. An Active marker bounds crash recovery to the eligible offline window plus TA-14's 180 seconds; clock regression grants zero, retains the cursor and records diagnostics. Huge elapsed intervals saturate safely before multiplication. No Energy wallet/reward is issued by this dependency.
+
+ProfileSession now retains the exact renewal/save/unlock candidate across a lost result, acknowledges an already stored identical candidate under the lease fence, and renews lease metadata using retry time while preserving the original value/leave cursor. Release first reconciles an uncertain renewal and then writes the original clean leave boundary. These changes close the root cause that previously could turn a successful save with a lost response into a revision mismatch or resettle the leave interval. Capacity reconciliation invokes real production settlement before role invalidation and rereads the settled assignment maps, avoiding stale references after a map replacement. Identity, provenance, lock and buffer survive a capacity drop. Nonempty commercial/temporary production or Display-capacity claims and unbound role authority protect the profile instead of granting effects or deleting progress.
+
+| Current gate | Status | Evidence |
+|---|---|---|
+| Canonical server assignments / ownership / Overflow-Held / revision | PASS | T15.vault.assignment.authority; real client foreign, duplicate, held, stale and forged clock/rate/owner commands receive distinct rejection codes. |
+| Continuous integer timeline / assignment boundaries | PASS | T15.vault.production.continuousTimeline; old assignment settles before replacement/removal, repeated boundaries grant zero, fractional elapsed time survives checkpoints. |
+| Epoch history / prospective capabilities / over-cap preservation | PASS | T15.vault.production.epochCapabilities; multi-epoch rates/windows/caps, lost slots remain cleared on later growth, existing output is never truncated. |
+| Clean offline / bounded crash / huge intervals | PASS | T15.vault.production.offlineCrashBounds; 7,200-second clean window, 7,380-second crash bound and safe online saturation. |
+| Clock authority / regression / wall-clock manipulation | PASS | T15.vault.production.clockAuthority; online progress follows the server monotonic clock, regression adds zero and preserves the cursor. |
+| Protected persisted grants / roles / unavailable history | PASS | T15.vault.production.protectedLoad; real DEV DataStore commercial-grant and missing-epoch loads return ProtectedLoadFailure with the stored profile unchanged. |
+| Assignment lost response before/after write / transform replay | PASS | T15.vault.assignment.uncertainWrites; the real adapter fault probe retains OutcomeUnknown and reconciles exactly one revision. |
+| Renewal, clean leave and unlock lost results / delayed retry | PASS | T15.vault.production.uncertainSaveLeave; original cursor/candidate persists, successful unknown unlock reconciles once, a 200-second delayed renewal refreshes the lease without extra value. |
+| Capacity loss settlement / concurrent writers | PASS | T15.vault.production.capacityRace; real nested writer receives Busy, all exact owned creatures become Held at zero capacity, both assignments clear after settlement with output preserved. |
+| Bounded projection / authoritative client readback | PASS | T15.vault.assignment.authoritativeReadback; worst-length pages fit WireValidation, stale/gap/ack-only responses cannot infer assignment. |
+| Native UI -> gateway -> DEV save/leave -> fresh Play server -> offline readback | PASS | Real mouse assignment revision 4 -> 5 -> 6; renewal/clean release -> 8; fresh-server offline load -> 9. Saved buffer 900 + exactly 19,800 offline milli-output = 20,700; recap 198 eligible seconds. The client restores the exact ID in production/1 and display/1. |
+
+All ten new registered C0 tests also passed on native Studio ModuleScripts using the existing test modules. The full native probe was rerun after correcting its UI-hide prefix length; the final client has exactly one isolated assignment screen and the restored output/roles were visually inspected. The isolated scope preserves the normal player's collection and economy byte-for-value: ten original creatures remain unchanged. Temporary modules/remotes were removed, the fixture lease was released and Studio ends in Edit. All 67 authored scripts match local normalized byte length/Adler-32, SHA-256 identities are recorded, duplicate paths are absent and all four authored world objects remain. The existing avatar-animation permission warning remains; no runtime script or gateway failure occurred.
+
+Validation: **131/131 fast Lune tests**, including the ten new registered tests; **28/28 Python checker tests**; StyLua, Selene (0 errors/0 warnings), architecture dependencies, Rojo build/sourcemap and luau-lsp with zero type errors. Luau analysis retains the existing missing Roblox engine-definition warning; native Studio validates the engine paths. Repository integrity is checked with the final evidence/contract updates. Protocol V1 and profile schema generation 1 remain explicit under AD-251; production has its own version-1 initialization and no new runtime transport/package.
+
+**Next dependency:** Energy wallet/transaction primitive and exact-once Production Claim, then progression quotes/purchases/unlocks. These have not started. **IMP-9 remains OPEN** until the full TA-8 economy/progression gates pass; **IMP-10 has not started**. This dependency does not close the deferred VS1-19 performance gate.
