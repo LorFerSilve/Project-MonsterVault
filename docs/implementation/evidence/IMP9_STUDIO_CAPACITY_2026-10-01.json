@@ -1,0 +1,208 @@
+{
+  "phase": "IMP-9",
+  "phaseStatus": "OPEN",
+  "dependency": "Vault authority for the existing DEV capture capacity",
+  "date": "2026-10-01",
+  "baseMainCommit": "2ee3f8b0492c978e30ee6de2bb93ef2f292a8e83",
+  "basePullRequest": {
+    "number": 47,
+    "status": "MERGED",
+    "mergedAt": "2026-10-01T12:47:04Z"
+  },
+  "studio": {
+    "studioId": "510b1800-f548-4a53-8b9e-116acccf6346",
+    "placeId": 110304961224794,
+    "finalMode": "Edit",
+    "sourceParity": true,
+    "scriptCount": 55,
+    "worldChildren": 4,
+    "probeRemaining": false
+  },
+  "sourceSha256": {
+    "src/shared/config/VaultCapacityFixture.luau": "1e8ee59dcee505c1fef9d23a8877f667491a82da56c2b3443543d32fd3cd053f",
+    "src/server/domains/vault/VaultService.luau": "4fa77870aedbf7d0a509dd703844134372fa2c3b1143c40c911ec41aa16b545a",
+    "src/server/application/CaptureFinalizationUseCase.luau": "8988bc40d0f1519de0e9d600f3f6d34701b5043f85ba10a4ff42ebfa3bbaa205",
+    "src/server/bootstrap/CaptureRuntimeService.luau": "571d03e5161e47168821ffe6f4a54e1c75324107227bd8ecce0de1847b7eae88",
+    "src/server/infrastructure/persistence/ProfileSchemaV1.luau": "db4c79a7fa95bc12366f6a0cedc41b93c195d17cfa0740e0db5b083715ebcca8",
+    "scripts/studio/imp8_capture_diagnostics.luau": "4f7b2b323ce2c60d8755b170a241d6578e008622b1fcaa44eb0261257dc5446f"
+  },
+  "capacityRace": {
+    "universeId": 10766503968,
+    "requirements": [
+      "TA-4",
+      "TA-7",
+      "TA-8",
+      "TA-15",
+      "GDS-4",
+      "GDS-7"
+    ],
+    "placeId": 110304961224794,
+    "rejoinOccurrences": 1,
+    "invocation": "Studio MCP Server Play; isolated runtime; owner event sink",
+    "result": "PASS",
+    "testId": "T15.vault.Studio.capacityRace",
+    "criticality": "C1",
+    "creatureInstanceId": "creature-f8fcd006-6cab-4e3d-a3ab-ec5c40c12289",
+    "durationMs": 2143.6680000006163,
+    "afterCapacity": {
+      "capacity": 0,
+      "canInitiate": false,
+      "ordinaryUsed": 0,
+      "overflowHeldCount": 1
+    },
+    "scope": "IMP9Capacity-cfc93866-374d-4ccc-ab0e-29ec99e352af",
+    "rejoinRevision": 3,
+    "rejoinCapacity": {
+      "capacity": 0,
+      "canInitiate": false,
+      "ordinaryUsed": 0,
+      "overflowHeldCount": 1
+    },
+    "operationId": "c77c7a1b-a54c-4f3c-ab9f-3d40254d1707",
+    "records": [
+      {
+        "fields": {
+          "component": "world"
+        },
+        "version": 1,
+        "environment": "server",
+        "severity": "info",
+        "code": "WORLD_SPAWNED",
+        "atUnixSeconds": 1790860473,
+        "sequence": 1
+      },
+      {
+        "fields": {
+          "component": "capture",
+          "seedId": "fixture:imp9-capacity-v1"
+        },
+        "version": 1,
+        "environment": "server",
+        "severity": "info",
+        "code": "VS1_PROBE",
+        "atUnixSeconds": 1790860473,
+        "sequence": 2
+      },
+      {
+        "fields": {
+          "component": "capture",
+          "detailCode": "Claimed",
+          "requestId": "imp8-claim-723b85c2-4f9c-4c45-9455-75162a70a0bd"
+        },
+        "version": 1,
+        "environment": "server",
+        "severity": "info",
+        "code": "CAPTURE_STATE",
+        "atUnixSeconds": 1790860473,
+        "sequence": 3
+      },
+      {
+        "fields": {
+          "detailCode": "TransportActive",
+          "operationId": "c77c7a1b-a54c-4f3c-ab9f-3d40254d1707",
+          "component": "capture",
+          "requestId": "imp8-submit-33cd7c7a-1a0b-4986-9fa2-f5f26985e809"
+        },
+        "version": 1,
+        "environment": "server",
+        "severity": "info",
+        "code": "CAPTURE_STATE",
+        "atUnixSeconds": 1790860473,
+        "sequence": 4
+      },
+      {
+        "fields": {
+          "detailCode": "FinalizationPending",
+          "operationId": "c77c7a1b-a54c-4f3c-ab9f-3d40254d1707",
+          "component": "capture",
+          "requestId": "imp8-submit-33cd7c7a-1a0b-4986-9fa2-f5f26985e809"
+        },
+        "version": 1,
+        "environment": "server",
+        "severity": "info",
+        "code": "CAPTURE_STATE",
+        "atUnixSeconds": 1790860473,
+        "sequence": 5
+      },
+      {
+        "fields": {
+          "detailCode": "Secured",
+          "operationId": "c77c7a1b-a54c-4f3c-ab9f-3d40254d1707",
+          "component": "capture",
+          "requestId": "imp8-submit-33cd7c7a-1a0b-4986-9fa2-f5f26985e809"
+        },
+        "version": 1,
+        "environment": "server",
+        "severity": "info",
+        "code": "CAPTURE_STATE",
+        "atUnixSeconds": 1790860473,
+        "sequence": 6
+      }
+    ],
+    "afterRevision": 3,
+    "seedId": "fixture:imp9-capacity-v1",
+    "environment": "DEV",
+    "studioVersion": "0.741.19.7411056",
+    "failures": [],
+    "requestId": "imp8-submit-33cd7c7a-1a0b-4986-9fa2-f5f26985e809",
+    "beforeRevision": 1,
+    "probe": "scripts/studio/imp8_capture_diagnostics.luau",
+    "invocationArgument": true,
+    "scopeIsolation": "Real MV_DEV_PlayerProfile_v1 UpdateAsync under a unique IMP9Capacity scope. No normal-profile reset or capacity bypass."
+  },
+  "fullCollectionGateway": {
+    "testId": "T15.vault.Studio.fullCollectionGateway",
+    "result": "PASS",
+    "criticality": "C1",
+    "verificationClass": "V4",
+    "method": "Scripted real client Command RemoteEvent; shipped gateway and live world; native input tools produced no command",
+    "events": [
+      {
+        "routeId": "Command.Result",
+        "correlationId": "imp9-capacity-495055fe-1d6f-4489-a3e0-c74f8b5aee99",
+        "protocolVersion": 1,
+        "payload": {
+          "code": "REJECT_STATE_CAPTURE_CAPACITYBLOCKED"
+        }
+      }
+    ],
+    "requestId": "imp9-capacity-495055fe-1d6f-4489-a3e0-c74f8b5aee99"
+  },
+  "nativeInputAttempt": {
+    "result": "NO_COMMAND_OBSERVED",
+    "passClaimed": false,
+    "detail": "MCP E down/up and GUI click returned Success but yielded no capture command. Capacity gateway evidence uses a scripted real-client RemoteEvent instead."
+  },
+  "normalProfile": {
+    "before": {
+      "ordinaryUsed": 10,
+      "revision": 11,
+      "overflowHeldCount": 0,
+      "capacity": 10,
+      "canInitiate": false
+    },
+    "after": {
+      "ordinaryUsed": 10,
+      "revision": 11,
+      "overflowHeldCount": 0,
+      "capacity": 10,
+      "probeRemaining": false,
+      "canInitiate": false
+    },
+    "normalProgressUnchanged": true
+  },
+  "limitations": [
+    "DEV fixture base remains 10; no launch balance or new upgrade tiers introduced.",
+    "Legacy optional progression.collectionCapacity retained for compatible DEV fixtures; authorized additive sources and reconciliation are pending IMP-9.",
+    "Capacity race is native server gameplay with an isolated owner event sink; full-collection rejection traversed the shipped Command/Event gateway.",
+    "No real-client performance, L1 load, STG/PROD or new physical-input PASS is claimed."
+  ],
+  "deferredGate": {
+    "id": "VS1-19",
+    "decision": "AD-249",
+    "status": "DEFERRED — environment limitation",
+    "deadline": "before IMP-10 COMPLETE",
+    "mandatory": true
+  },
+  "nextDependency": "Authorized capacity components plus deterministic P2 reconciliation and explicit owner-selected Overflow-Held resolution; then assignments, settlement, Energy and progression."
+}

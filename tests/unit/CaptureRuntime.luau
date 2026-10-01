@@ -5,6 +5,8 @@ local luauModuleName = "@lune/luau"
 local fs = require(fsModuleName) :: any
 local luau = require(luauModuleName) :: any
 local CaptureProjectionV1 = require("../../src/shared/contracts/CaptureProjectionV1")
+local VaultService = require("../../src/server/domains/vault/VaultService")
+local VaultCapacityFixture = require("../../src/shared/config/VaultCapacityFixture")
 local CaptureService = require("../../src/server/domains/capture/CaptureService")
 local StructuredDiagnostics = require("../../src/shared/util/StructuredDiagnostics")
 
@@ -146,6 +148,7 @@ local function harness(useRealCapture: boolean?): any
 		end,
 	}
 	local captureToken, finalizationToken, routesToken, projectionToken = {}, {}, {}, {}
+	local vaultToken, capacityToken = {}, {}
 	local moduleMap: { [any]: any } = {
 		[captureToken] = {
 			new = function(_options: any)
@@ -156,13 +159,19 @@ local function harness(useRealCapture: boolean?): any
 			end,
 		},
 		[finalizationToken] = {
-			canInitiate = function()
-				return true
-			end,
-			finalize = function()
-				return { status = "Secured", profileRevision = 2 }
+			new = function(_vault: any)
+				return {
+					canInitiate = function()
+						return true
+					end,
+					finalize = function()
+						return { status = "Secured", profileRevision = 2 }
+					end,
+				}
 			end,
 		},
+		[vaultToken] = VaultService,
+		[capacityToken] = VaultCapacityFixture,
 		[routesToken] = { events = { captureStateChanged = "capture-state" } },
 		[projectionToken] = CaptureProjectionV1,
 	}
@@ -175,7 +184,10 @@ local function harness(useRealCapture: boolean?): any
 				script = {
 					Parent = {
 						Parent = {
-							domains = { capture = { CaptureService = captureToken } },
+							domains = {
+								capture = { CaptureService = captureToken },
+								vault = { VaultService = vaultToken },
+							},
 							application = { CaptureFinalizationUseCase = finalizationToken },
 						},
 					},
@@ -186,6 +198,7 @@ local function harness(useRealCapture: boolean?): any
 						return {
 							MonsterVault = {
 								Shared = {
+									config = { VaultCapacityFixture = capacityToken },
 									contracts = {
 										RouteIds = routesToken,
 										CaptureProjectionV1 = projectionToken,

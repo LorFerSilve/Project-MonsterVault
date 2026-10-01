@@ -6,7 +6,7 @@ local Schema = require("../../src/server/infrastructure/persistence/ProfileSchem
 local ProfileSession = require("../../src/server/infrastructure/persistence/ProfileSession")
 local Queue = require("../../src/server/infrastructure/persistence/SingleWriterQueue")
 local Retry = require("../../src/server/infrastructure/persistence/RetryPolicy")
-local Finalization = require("../../src/server/application/CaptureFinalizationUseCase")
+local Finalization = require("../fixtures/CaptureFinalization")
 local VariantIdentity = require("../../src/server/domains/capture/VariantIdentity")
 local Fixture = require("../../src/server/domains/world/FixtureDefinition")
 

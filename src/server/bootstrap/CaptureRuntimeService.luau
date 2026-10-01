@@ -1,8 +1,12 @@
 --!strict
 
 local CaptureService = require(script.Parent.Parent.domains.capture.CaptureService)
-local CaptureFinalizationUseCase =
-	require(script.Parent.Parent.application.CaptureFinalizationUseCase)
+local VaultService = require(script.Parent.Parent.domains.vault.VaultService)
+local VaultCapacityFixture =
+	require(game:GetService("ReplicatedStorage").MonsterVault.Shared.config.VaultCapacityFixture)
+local CaptureFinalizationUseCase = require(
+	script.Parent.Parent.application.CaptureFinalizationUseCase
+).new(VaultService.new(VaultCapacityFixture))
 local RouteIds =
 	require(game:GetService("ReplicatedStorage").MonsterVault.Shared.contracts.RouteIds)
 local CaptureProjectionV1 =
