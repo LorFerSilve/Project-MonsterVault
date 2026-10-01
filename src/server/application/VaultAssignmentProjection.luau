@@ -35,7 +35,13 @@ function VaultAssignmentProjection.fromProfile(profile: any, production: any, af
 	end
 	local caps = production.capabilities(profile)
 	local audit = profile.economy.recentEnergyOperations or {}
-	local claim = audit[#audit]
+	local claim = nil
+	for index = #audit, 1, -1 do
+		if audit[index].reasonCode == "production-claim" then
+			claim = audit[index]
+			break
+		end
+	end
 	return {
 		domain = "vaultAssignments",
 		revision = profile.profileRevision,

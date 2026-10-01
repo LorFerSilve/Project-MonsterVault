@@ -3569,3 +3569,31 @@ Reuse the native Vault manager and owner-only vaultAssignments projection. Add s
 ### Gate consequence
 
 [IMP-9 evidence](../implementation/IMP9_IMPLEMENTATION_EVIDENCE.md) closes Energy/Production Claim with registered C0 tests, real GUI/gateway/DEV DataStore fault probes, save/rejoin and a fresh shipped composition recovering an unknown-result disconnect. IMP-9 remains OPEN for progression quotes, atomic purchases and persistent unlocks. Progression and IMP-10 have not started. AD-249, grant-owner boundaries and release gates remain unchanged.
+
+---
+
+## AD-253 — Register IMP-9 Progression Quotes and Atomic Purchases
+
+**Date:** 2026-10-01
+
+**Status:** Accepted — owner-requested minimal GDS-8 / TA-8 dependency
+
+**Owning TA phase:** TA-17; affected contracts TA-3/4/8/12/15
+
+### Decision
+
+Bind the existing +6 Collection Capacity tier as the sole DEV progression purchase: unlockId `vault-upgrade/collection-capacity/1`, level 0 -> 1, 25 Energy, named immutable config/price revision. Require a legitimate secured Species Discovery; do not create or consume discoveries/milestones. This fixture does not authorize a launch price, unbound world access, paid/temporary reward or additional upgrade catalog.
+
+Enable reserved Class C Progression.PurchaseUnlock with exactly `{unlockId, quoteId, quoteRevision}` and required positive exact envelope expectedRevision. Add opaque quoteId to the reserved contract. Owner identity comes from OnServerEvent; no price, amount, proof, effect, clock or operation ID is a client input. Existing Class A Session.RequestResync gains domain=progression and emits a bounded owner-only quote/wallet/owned/receipt snapshot after a matching Ready session projection. No new remote or protocol generation is introduced.
+
+Retain one live server quote per session: opaque server GUID, target, expected level/revision, price, active-proof reference, config/price epoch and 60-second monotonic deadline. Unix expiry is display metadata. Reuse a still-current quote during confirmation; expire/requote unadmitted stale/config-changed intents without silently changing their reviewed cost. Require explicit Review then Confirm. Pure quote/readback does not write a profile.
+
+Use the existing ProfileSession P2 single writer, queue, lease fence, operation markers and exact-candidate reconciliation. One checkpoint atomically commits the bound reason-coded negative Energy delta, earned tier and permanent per-unlock receipt. Validate both price affordability and capacity effect on a disposable candidate; rejection cannot persist a partial spend. Preserve every creature, lock, Held flag, discovery, assignment and buffer. Capacity expansion never auto-resolves Overflow-Held.
+
+Profile generation stays 1 with explicit progression-domain version 1 and bounded purchasesByUnlockId (one enabled target). Initialize empty reserved state only after capacity migration; invalid/valuable unknown state remains protected. Existing authorized earned levels retain ownership without fabricated historical payment records. The permanent receipt retains quote ID, original expected revision, price revision, GUID, paid amount, config and timestamp; match it before stale/expiry checks. Completed ownership survives reconnect, price changes and eviction from the 32-entry Energy audit. Signed audits are accepted only for the explicitly bound sink; Production Claim projection selects production reason rather than the latest arbitrary Energy operation.
+
+An admitted unknown checkpoint retains its original price/effect/operation even after quote expiry. Reconcile that candidate before value readback or lease release; a fresh server identifies a stored purchase through the permanent receipt. Pre-write process loss leaves both wallet and effect untouched and requires a fresh quote; commit-before-loss cannot be charged twice. Client acknowledgements/timeouts and missing in-flight receipts never create wallet/unlock truth. Busy plus fresh authoritative readback permits a new review.
+
+### Gate consequence
+
+[IMP-9 evidence](../implementation/IMP9_IMPLEMENTATION_EVIDENCE.md) closes the minimal quote/purchase/persistent unlock chain with 147 fast tests, sixteen native C0 repetitions, real GUI/DEV DataStore before/after-write failures, races and fresh shipped composition. IMP-9 remains OPEN for the remaining Vault/Capture Capability/Access definitions and complete TA-8 gate audit. IMP-10 has not started. Unbound external grants and AD-249 / VS1-19 retain their owner/gate boundaries.

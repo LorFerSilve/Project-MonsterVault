@@ -41,7 +41,7 @@ This directory is the authoritative implementation handoff and phase-evidence la
 
 > **IMP-9 — Vault / Economy / Progression**
 
-IMP-8 is **COMPLETE with deferred validation under AD-249** ([evidence](IMP8_IMPLEMENTATION_EVIDENCE.md)). VS1-19 remains DEFERRED and must pass before IMP-10 COMPLETE. IMP-9 capacity, reconciliation, Overflow-Held resolution, assignments, production/offline settlement and Energy/Production Claim have [local and connected DEV Studio evidence](IMP9_IMPLEMENTATION_EVIDENCE.md). Progression quotes/purchases/unlocks are next and have not started; IMP-9 remains OPEN and IMP-10 has not started.
+IMP-8 is **COMPLETE with deferred validation under AD-249** ([evidence](IMP8_IMPLEMENTATION_EVIDENCE.md)). VS1-19 remains DEFERRED and must pass before IMP-10 COMPLETE. IMP-9 capacity, reconciliation, Overflow-Held resolution, assignments, production/offline settlement, Energy/Production Claim and the minimal progression quote/atomic purchase/persistent unlock chain have [local and connected DEV Studio evidence](IMP9_IMPLEMENTATION_EVIDENCE.md). The existing +6 capacity tier is the sole bound DEV purchase; remaining Vault/Capture Capability/Access definitions and the complete TA-8 gate audit are next. IMP-9 remains OPEN and IMP-10 has not started.
 
 Roadmap: [IMPLEMENTATION_ROADMAP.md](IMPLEMENTATION_ROADMAP.md)  
 First vertical slice: [FIRST_VERTICAL_SLICE.md](FIRST_VERTICAL_SLICE.md)

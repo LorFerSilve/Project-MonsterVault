@@ -29,6 +29,7 @@ local function resyncPayload(payload: any, expectedRevision: any): boolean
 				and value ~= "securedCollection"
 				and value ~= "vault"
 				and value ~= "vaultAssignments"
+				and value ~= "progression"
 			then
 				return false
 			end

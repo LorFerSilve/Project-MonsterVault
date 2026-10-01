@@ -2,7 +2,7 @@
 
 local globals = getfenv() :: any
 local state: any = nil
-local function setup(): any
+local function setup(withProgression: boolean?): any
 	assert(
 		state == nil
 			and game:GetService("RunService"):IsStudio()
@@ -25,7 +25,12 @@ local function setup(): any
 		unreliableEvent = root.UnreliableEvent,
 		diagnostics = { emit = function() end },
 	})
-	local runtime = require(client.bootstrap.VaultAssignmentRuntimeService).new({
+	local runtimeFactory: any = (
+		if withProgression
+			then require(client.bootstrap.ProgressionRuntimeService)
+			else require(client.bootstrap.VaultAssignmentRuntimeService)
+	)
+	local runtime = runtimeFactory.new({
 		networking = networking,
 		player = player,
 		guiService = gui,
@@ -33,12 +38,16 @@ local function setup(): any
 	networking.start()
 	runtime.start()
 	for _, screen in player.PlayerGui:GetChildren() do
-		if screen.Name == "MonsterVaultAssignments" and hidden[screen] == nil then
-			screen.Name = "IMP9ProductionAssignments"
+		if
+			screen.Name
+				== (if withProgression then "MonsterVaultProgression" else "MonsterVaultAssignments")
+			and hidden[screen] == nil
+		then
+			screen.Name = if withProgression then "IMP9Progression" else "IMP9ProductionAssignments"
 		end
 	end
 	state = { networking = networking, runtime = runtime, hidden = hidden, root = root, serial = 0 }
-	return { guiName = "IMP9ProductionAssignments" }
+	return { guiName = if withProgression then "IMP9Progression" else "IMP9ProductionAssignments" }
 end
 local function negative(id: string, held: string): any
 	assert(state ~= nil, "client probe setup")

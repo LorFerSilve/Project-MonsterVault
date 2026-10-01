@@ -62,7 +62,7 @@ Same base envelope but no critical/durable truth and <=768 encoded bytes.
 | Vault.SetDisplayAssignment | C | slotId:string, creatureInstanceId:string?; required envelope expectedRevision:integer |
 | Vault.ClaimProduction | C | claimScope:All; required envelope expectedRevision:integer |
 | Vault.ResolveOverflow | C | creatureInstanceId:string; required envelope expectedRevision:integer |
-| Progression.PurchaseUnlock | C | unlockId:string, quoteRevision:number |
+| Progression.PurchaseUnlock | C | unlockId:string, quoteId:string, quoteRevision:integer; required envelope expectedRevision:integer |
 | Social.PartyInvite | B | targetUserId:number |
 | Social.PartyRespond | B | invitationId:string, accept:boolean |
 | Social.PartyLeave | B | partyId:string |
@@ -193,3 +193,15 @@ Implementation registry modules:
 External Roblox product/place/universe IDs are environment binding data and are never guessed.
 
 **Runtime namespace lock: PASS.**
+
+## IMP-9 progression binding — AD-253
+
+[AD-253](ARCHITECTURE_DECISIONS.md#ad-253--register-imp-9-progression-quotes-and-atomic-purchases) enables the reserved PurchaseUnlock route with exactly unlockId (1..128 bytes), opaque server quoteId (1..96 bytes), quoteRevision (positive exact integer) and required positive exact envelope expectedRevision. No additional client payload key is accepted. Quote IDs and operation GUIDs are server-generated; network request IDs only correlate/replay transport results.
+
+Class A RequestResync adds domain=progression without a cursor or other new fields. The owner-only snapshot is `{domain="progression",revision=profileRevision,state={unlockId,energyUnits,collectionCapacity,owned,gateReason,receiptQuoteId,receiptExpectedRevision,receiptPriceUnits,quote?}}`. Empty receipt uses empty quote ID and zero revision/units. Quote is `{quoteId,unlockId,quoteRevision,expectedRevision,priceUnits,configSnapshotId,expectedLevel,requiredMilestoneId,expiresUnixSeconds}`; the authoritative monotonic deadline remains private to the server. Each snapshot must pass ProgressionProjectionV1 and the existing reliable 4 KiB validator, preceded by matching Ready session/profile revision. Failed capacity reconciliation cannot publish Ready progression.
+
+One quote per session lasts at most 60 monotonic seconds and is retained while the expected aggregate/tier/price epoch stays current. Config/price changes require fresh confirmation. Class C purchase uses the existing P2 writer and cannot grant readiness. Busy is non-admission; an unknown accepted candidate must reconcile even after quote expiry. OK/result/timeout alone cannot finalize client state; a correlated permanent receipt supplies authoritative confirmation.
+
+Profile generation remains 1. progression-domain version 1 stores purchasesByUnlockId keyed by the one bound DEV unlock `vault-upgrade/collection-capacity/1`; its receipt contains quoteId, quoteRevision, expectedRevision, operationId, priceUnits, timestamp and configSnapshotId. The same checkpoint writes `vault.earnedUpgradeLevels["vault-upgrade/collection-capacity"] = 1`, negative reason-coded Energy delta and existing operation marker. The receipt outlives bounded Energy audit retention and matches original retries before stale/expiry/config validation. Initialization follows capacity migration; invalid/unbound valuable progression and external grants remain protected. Existing authorized earned levels do not receive fabricated purchase receipts.
+
+Energy version 1 now binds signed `vault-upgrade-purchase` deltas only for this authored sink alongside nonnegative `production-claim`. Retained purchase audits must agree with permanent receipts. Latest claim projection explicitly selects the production reason, preserving prior claim semantics. The DEV fixture is +6 Collection places at 25 Energy with a legitimate persisted secured Species Discovery prerequisite. No additional Vault, Capture Capability or Access definition, commercial/temporary/deferred grant or world topology is inferred.

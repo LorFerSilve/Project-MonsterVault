@@ -29,5 +29,7 @@
 | AD-249 | Accept the owner-authorized VS1-19 environment deferral: IMP-8 COMPLETE with deferred validation, IMP-9 OPEN, full 30-player L1 and real-client performance mandatory before IMP-10 COMPLETE. |
 | AD-250 | Register the additive V1 Vault.ResolveOverflow route, bounded Vault projection and explicit capacity-domain migration; retain server authority, P2 recovery and protected production settlement. |
 | AD-251 | Register canonical Display/Production assignments, bounded owner pages, versioned production state, epoch settlement and save/rejoin recovery; Energy/progression remains the next IMP-9 dependency. |
+| AD-252 | Bind the versioned Energy wallet and exact-once Production Claim, revision-bound receipts and authoritative readback; progression remains open. |
+| AD-253 | Bind opaque server quotes, strict purchase confirmation, one atomic Energy debit/capacity unlock and permanent receipts through the existing P2 writer; remaining progression catalog and full IMP-9 gates remain open. |
 
 **Decision index result: ACCEPTED.**

@@ -11,6 +11,7 @@ function ClientGateway.new(options: {
 	captureProjection: any?,
 	vaultProjection: any?,
 	assignmentProjection: any?,
+	progressionProjection: any?,
 	securedCollectionProjection: any?,
 	securedCollectionStore: any?,
 	sendCommand: (any) -> (),
@@ -96,6 +97,21 @@ function ClientGateway.new(options: {
 						and session.status == "Ready"
 						and session.profileRevision == envelope.revision
 					then "Assignments"
+					else "Stale"
+			end
+			if envelope.payload.domain == "progression" then
+				if
+					options.progressionProjection == nil
+					or not options.progressionProjection.validSnapshot(envelope.payload)
+					or envelope.revision ~= envelope.payload.revision
+				then
+					return "Invalid"
+				end
+				local session = options.store.view()
+				return if session ~= nil
+						and session.status == "Ready"
+						and session.profileRevision == envelope.revision
+					then "Progression"
 					else "Stale"
 			end
 			if envelope.payload.domain == "vault" then
