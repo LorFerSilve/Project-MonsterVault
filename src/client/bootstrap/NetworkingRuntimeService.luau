@@ -4,6 +4,7 @@ local shared = game:GetService("ReplicatedStorage").MonsterVault.Shared.contract
 local ProtocolV1 = require(shared.ProtocolV1)
 local VaultProjectionV1 = require(shared.VaultProjectionV1)
 local VaultAssignmentProjectionV1 = require(shared.VaultAssignmentProjectionV1)
+local ProgressionProjectionV1 = require(shared.ProgressionProjectionV1)
 local RouteIds = require(shared.RouteIds)
 local ResultCodes = require(shared.ResultCodes)
 local WireValidation = require(shared.WireValidation)
@@ -34,6 +35,7 @@ function NetworkingRuntimeService.new(options: {
 		captureProjection = CaptureProjectionV1,
 		vaultProjection = VaultProjectionV1,
 		assignmentProjection = VaultAssignmentProjectionV1,
+		progressionProjection = ProgressionProjectionV1,
 		securedCollectionProjection = SecuredCollectionProjectionV1,
 		securedCollectionStore = securedCollectionStore,
 		sendCommand = function(envelope)
@@ -46,6 +48,7 @@ function NetworkingRuntimeService.new(options: {
 	local captureListener: ((any) -> ())? = nil
 	local vaultListener: ((any) -> ())? = nil
 	local assignmentListener: ((any) -> ())? = nil
+	local progressionListener: ((any) -> ())? = nil
 
 	local function start()
 		assert(not running, "networking already started")
@@ -65,6 +68,9 @@ function NetworkingRuntimeService.new(options: {
 				end
 				if ok and outcome == "Assignments" and assignmentListener ~= nil then
 					assignmentListener(envelope)
+				end
+				if ok and outcome == "Progression" and progressionListener ~= nil then
+					progressionListener(envelope)
 				end
 				if not ok or outcome == "Invalid" then
 					options.diagnostics.emit(
@@ -128,6 +134,7 @@ function NetworkingRuntimeService.new(options: {
 		captureListener = nil
 		vaultListener = nil
 		assignmentListener = nil
+		progressionListener = nil
 		return {}
 	end
 
@@ -139,6 +146,15 @@ function NetworkingRuntimeService.new(options: {
 		gateway = gateway,
 		store = store,
 		securedCollectionStore = securedCollectionStore,
+		subscribeProgression = function(listener: (any) -> ())
+			assert(progressionListener == nil, "progression listener already bound")
+			progressionListener = listener
+			return function()
+				if progressionListener == listener then
+					progressionListener = nil
+				end
+			end
+		end,
 		subscribeAssignments = function(listener: (any) -> ())
 			assert(assignmentListener == nil, "assignment listener already bound")
 			assignmentListener = listener

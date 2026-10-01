@@ -22,7 +22,7 @@ local function equal(a: any, b: any): boolean
 	end
 	return true
 end
-local function setup(resume: any?, withEnergy: boolean?): any
+local function setup(resume: any?, withEnergy: boolean?, withProgression: boolean?): any
 	assert(
 		state == nil
 			and game:GetService("RunService"):IsStudio()
@@ -66,8 +66,11 @@ local function setup(resume: any?, withEnergy: boolean?): any
 			return http:GenerateGUID(false)
 		end,
 	})
+	local price = require(shared.config.ProgressionFixture)
 	local energy: any = if withEnergy
-		then require(server.domains.economy.EnergyService).new()
+		then require(server.domains.economy.EnergyService).new(
+			if withProgression then { [price.unlockId] = true } else nil
+		)
 		else nil
 	local claims: any = if withEnergy
 		then require(server.application.ProductionClaimUseCase).new({
@@ -75,6 +78,24 @@ local function setup(resume: any?, withEnergy: boolean?): any
 			production = production,
 			vault = vault,
 			assignments = assignments,
+			newOperationId = function()
+				return http:GenerateGUID(false)
+			end,
+		})
+		else nil
+	local progression: any = if withProgression
+		then require(server.domains.progression.ProgressionService).new(price)
+		else nil
+	local quoteOffset = 0
+	local purchases: any = if withProgression
+		then require(server.application.ProgressionPurchaseUseCase).new({
+			progression = progression,
+			energy = energy,
+			vault = vault,
+			assignments = assignments,
+			monotonicSeconds = function()
+				return os.clock() + quoteOffset
+			end,
 			newOperationId = function()
 				return http:GenerateGUID(false)
 			end,
@@ -122,9 +143,29 @@ local function setup(resume: any?, withEnergy: boolean?): any
 					return wallet
 				end
 			end
-			return assignments.prepareProfile(p, loadAt)
+			local prepared = assignments.prepareProfile(p, loadAt)
+			if prepared.status ~= "Prepared" then
+				return prepared
+			end
+			if progression then
+				local unlocks = progression.prepare(p)
+				if unlocks.status ~= "Prepared" then
+					return unlocks
+				end
+				prepared.changed = prepared.changed or unlocks.changed
+			end
+			return prepared
 		end,
-		prepareSave = assignments.prepareSave,
+		prepareSave = function(p: any, release: boolean, atMono: number): any
+			local invalid = if energy then energy.validate(p) else nil
+			if progression then
+				invalid = invalid or progression.validate(p)
+			end
+			if invalid then
+				return { status = "Protected", reason = invalid }
+			end
+			return assignments.prepareSave(p, release, atMono)
+		end,
 		queue = require(server.infrastructure.persistence.SingleWriterQueue).new(
 			os.clock,
 			globals.task.wait,
@@ -204,6 +245,21 @@ local function setup(resume: any?, withEnergy: boolean?): any
 				"rejoin retry keeps original claim"
 			)
 		end
+		if withProgression then
+			assert(
+				equal(restored.progression, resume.cleanProfile.progression),
+				"fresh server exact persistent unlock"
+			)
+			local q = resume.purchaseQuote
+			assert(
+				purchases.purchase(
+					active,
+					{ unlockId = q.unlockId, quoteId = q.quoteId, quoteRevision = q.quoteRevision },
+					q.expectedRevision
+				).status == "AlreadyCommitted",
+				"fresh server original purchase proof"
+			)
+		end
 	end
 	local root = globals.Instance.new("Folder")
 	root.Name, root.Parent = "IMP9ProductionProbeRemotes", game:GetService("ReplicatedStorage")
@@ -250,6 +306,8 @@ local function setup(resume: any?, withEnergy: boolean?): any
 		capacity = capacity,
 		energy = energy,
 		claims = claims,
+		progression = progression,
+		purchases = purchases,
 		profileCoordinator = {
 			get = function(userId: number)
 				return if userId == player.UserId then active else nil
@@ -276,6 +334,11 @@ local function setup(resume: any?, withEnergy: boolean?): any
 		production = production,
 		energy = energy,
 		claims = claims,
+		progression = progression,
+		purchases = purchases,
+		setQuoteOffset = function(value: number)
+			quoteOffset = value
+		end,
 		setFault = function(value: string)
 			fault = value
 		end,
@@ -284,6 +347,152 @@ local function setup(resume: any?, withEnergy: boolean?): any
 		end,
 	}
 	return result
+end
+local function preparePurchases(): any
+	assert(state ~= nil and state.purchases ~= nil, "progression probe setup")
+	local active, app = state.active, state.purchases
+	local q = app.quote(active).quote
+	local payload = { unlockId = q.unlockId, quoteId = q.quoteId, quoteRevision = q.quoteRevision }
+	local before = active.snapshot()
+	assert(
+		app.purchase(active, payload, q.expectedRevision).reason == "INSUFFICIENT_ENERGY",
+		"native insufficient wallet"
+	)
+	local forged: any = table.clone(payload)
+	forged.priceUnits = 0
+	assert(
+		app.purchase(active, forged, q.expectedRevision).reason == "INVALID_PURCHASE",
+		"native price tamper"
+	)
+	forged = table.clone(payload)
+	forged.unlockId = "access/unbound"
+	assert(
+		app.purchase(active, forged, q.expectedRevision).reason == "INVALID_UNLOCK",
+		"native unbound target"
+	)
+	forged = table.clone(payload)
+	forged.quoteId = "forged"
+	assert(
+		app.purchase(active, forged, q.expectedRevision).reason == "STALE_QUOTE",
+		"native token tamper"
+	)
+	state.setQuoteOffset(61)
+	assert(
+		app.purchase(active, payload, q.expectedRevision).reason == "STALE_QUOTE",
+		"native expired quote"
+	)
+	assert(equal(before, active.snapshot()), "all native negative purchases preserve exact profile")
+	state.result.purchaseNegatives = {
+		insufficient = true,
+		priceTamper = true,
+		invalidUnlock = true,
+		tokenTamper = true,
+		expired = true,
+		preserved = true,
+	}
+	-- Isolated DEV producer fixture: 300 elapsed seconds, followed by real claim.
+	local id = state.ids[1]
+	assert(
+		state.assignments.assign(
+			active,
+			"production",
+			"production/1",
+			id,
+			active.snapshot().profileRevision
+		).status == "Committed",
+		"native producer"
+	)
+	assert(
+		state.assignments.assign(
+			active,
+			"display",
+			"display/1",
+			id,
+			active.snapshot().profileRevision
+		).status == "Committed",
+		"native display"
+	)
+	assert(active.checkpoint(game:GetService("HttpService"):GenerateGUID(false), function(p: any)
+		p.vault.productionCursorUnixSeconds = os.time() - 300
+	end).status == "Committed", "isolated elapsed production fixture")
+	state.result.claimRevision = active.snapshot().profileRevision
+	assert(
+		state.claims.claim(active, state.result.claimRevision).status == "Committed",
+		"production is the only native wallet source"
+	)
+	state.result.beforePurchaseProfile = active.snapshot()
+	state.result.purchaseQuote = app.quote(active).quote
+	return state.result
+end
+local function armPurchaseFault(point: string): any
+	assert(state ~= nil and state.purchases ~= nil, "progression probe setup")
+	state.result.beforePurchaseProfile = state.active.snapshot()
+	state.result.purchaseQuote = state.purchases.quote(state.active).quote
+	state.setFault(point)
+	return {
+		point = point,
+		before = state.result.beforePurchaseProfile,
+		quote = state.result.purchaseQuote,
+	}
+end
+local function purchaseCases(point: string?): any
+	assert(state ~= nil and state.purchases ~= nil, "progression probe setup")
+	local active, app = state.active, state.purchases
+	local q, before = state.result.purchaseQuote, state.result.beforePurchaseProfile
+	local payload = { unlockId = q.unlockId, quoteId = q.quoteId, quoteRevision = q.quoteRevision }
+	if point then
+		local nestedPurchase, nestedClaim: any = nil, nil
+		state.setNested(function()
+			nestedPurchase = app.purchase(active, payload, q.expectedRevision)
+			nestedClaim = state.claims.claim(active, q.expectedRevision)
+		end)
+		state.setFault(point)
+		local outcome = app.purchase(active, payload, q.expectedRevision)
+		assert(
+			outcome.status == "OutcomeUnknown" and equal(before, active.snapshot()),
+			"native unknown purchase preserves confirmed snapshot"
+		)
+		assert(
+			nestedPurchase.status == "Busy" and nestedClaim.status == "Busy",
+			"native race serialized"
+		)
+		state.result.purchaseFault = {
+			point = point,
+			outcome = outcome,
+			nestedPurchase = nestedPurchase,
+			nestedClaim = nestedClaim,
+		}
+		state.setQuoteOffset(122)
+	end
+	local duplicate = app.purchase(active, payload, q.expectedRevision)
+	assert(duplicate.status == "AlreadyCommitted", "native original intent exact once")
+	local p = active.snapshot()
+	assert(
+		p.economy.energyUnits == before.economy.energyUnits - q.priceUnits,
+		"native one Energy debit"
+	)
+	assert(p.profileRevision == before.profileRevision + 1, "native one purchase revision")
+	assert(state.vault.collectionStatus(p).capacity == 8, "native capacity effect +6")
+	assert(
+		equal(p.collection, before.collection) and equal(p.discovery, before.discovery),
+		"native exact ownership Held locks discovery preserved"
+	)
+	assert(
+		equal(p.vault.productionAssignments, before.vault.productionAssignments)
+			and equal(p.vault.displayAssignments, before.vault.displayAssignments),
+		"native roles preserved"
+	)
+	assert(
+		p.vault.productionBufferMilli == before.vault.productionBufferMilli,
+		"purchase cannot consume production buffer"
+	)
+	assert(
+		state.energy.validate(p) == nil and state.progression.validate(p) == nil,
+		"native audit and unlock valid"
+	)
+	state.result.purchaseConfirmedProfile = p
+	state.result.purchaseDuplicate = duplicate
+	return state.result
 end
 local function prepareClaims(): any
 	assert(state ~= nil and state.claims ~= nil, "Energy probe setup")
@@ -417,6 +626,18 @@ local function saveLeave(): any
 		"durable clean offline boundary"
 	)
 	state.result.cleanProfile = stored.value
+	if state.purchases then
+		local normal = state.normalStore:GetAsync(state.key)
+		assert(
+			equal(normal.collection, state.result.normalCollectionBefore)
+				and equal(normal.economy, state.result.normalEconomyBefore),
+			"normal collection and wallet unchanged"
+		)
+		state.result.normalProgressUnchanged = true
+		for _, diagnostic in state.result.diagnostics do
+			assert(diagnostic.severity ~= "error", "native diagnostics clean")
+		end
+	end
 	state.networking.stop()
 	state.root:Destroy()
 	return state.result
@@ -604,6 +825,9 @@ local function faultRaceAndFinish(): any
 end
 return {
 	setup = setup,
+	preparePurchases = preparePurchases,
+	armPurchaseFault = armPurchaseFault,
+	purchaseCases = purchaseCases,
 	inspect = inspect,
 	saveLeave = saveLeave,
 	prepareClaims = prepareClaims,

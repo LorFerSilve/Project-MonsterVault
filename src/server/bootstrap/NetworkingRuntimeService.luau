@@ -19,6 +19,8 @@ local VaultCapacityProjection = require(script.Parent.Parent.application.VaultCa
 local VaultAssignmentProjection =
 	require(script.Parent.Parent.application.VaultAssignmentProjection)
 local VaultAssignmentProjectionV1 = require(shared.VaultAssignmentProjectionV1)
+local ProgressionProjectionV1 = require(shared.ProgressionProjectionV1)
+local ProgressionProjection = require(script.Parent.Parent.application.ProgressionProjection)
 local VaultProjectionV1 =
 	require(game:GetService("ReplicatedStorage").MonsterVault.Shared.contracts.VaultProjectionV1)
 local NetworkingRuntimeService = {}
@@ -37,6 +39,8 @@ function NetworkingRuntimeService.new(options: {
 	assignments: any?,
 	energy: any?,
 	claims: any?,
+	progression: any?,
+	purchases: any?,
 })
 	local function id(value: any): boolean
 		return type(value) == "string" and #value > 0 and #value <= 96
@@ -45,6 +49,34 @@ function NetworkingRuntimeService.new(options: {
 	local handlers = {}
 	local publishVault: any = nil
 	local publishAssignments: any = nil
+	local publishProgression: any = nil
+	if options.purchases ~= nil then
+		schemas[RouteIds.commands.progressionPurchaseUnlock] = ProgressionProjectionV1.validPurchase
+		handlers[RouteIds.commands.progressionPurchaseUnlock] = function(
+			player: any,
+			envelope: any
+		): string
+			local outcome = options.purchases.purchase(
+				options.profileCoordinator.get(player.UserId),
+				envelope.payload,
+				envelope.expectedRevision
+			)
+			if outcome.status == "Committed" or outcome.status == "AlreadyCommitted" then
+				publishProgression(player, envelope.requestId)
+				return "OK_PROGRESSION_PURCHASED"
+			end
+			if outcome.status == "Rejected" then
+				return "REJECT_STATE_PROGRESSION_" .. (outcome.reason or "INVALID")
+			end
+			if outcome.status == "Busy" then
+				return "PENDING_PROGRESSION_PURCHASE"
+			end
+			return if outcome.status == "OutcomeUnknown"
+					or outcome.status == "PersistenceAtRisk"
+				then "OUTCOME_UNKNOWN_PROGRESSION_PURCHASE"
+				else "PROTECTED_PROGRESSION_UNAVAILABLE"
+		end
+	end
 	if options.claims ~= nil then
 		schemas[RouteIds.commands.vaultClaimProduction] = VaultAssignmentProjectionV1.validClaim
 		handlers[RouteIds.commands.vaultClaimProduction] = function(
@@ -231,6 +263,9 @@ function NetworkingRuntimeService.new(options: {
 			return "UNAVAILABLE_VAULT"
 		end
 		local active = options.profileCoordinator.get(player.UserId)
+		if options.purchases ~= nil then
+			options.purchases.reconcile(active)
+		end
 		if options.claims ~= nil then
 			options.claims.reconcile(active)
 		end
@@ -281,6 +316,9 @@ function NetworkingRuntimeService.new(options: {
 			return "UNAVAILABLE_VAULT_ASSIGNMENTS"
 		end
 		local active = options.profileCoordinator.get(player.UserId)
+		if options.purchases ~= nil then
+			options.purchases.reconcile(active)
+		end
 		if options.claims ~= nil then
 			options.claims.reconcile(active)
 		end
@@ -321,6 +359,59 @@ function NetworkingRuntimeService.new(options: {
 		})
 		return "OK_VAULT_ASSIGNMENTS_SNAPSHOT"
 	end
+	publishProgression = function(player: any, requestId: string): string
+		if options.purchases == nil or options.progression == nil or options.vault == nil then
+			return "UNAVAILABLE_PROGRESSION"
+		end
+		local active = options.profileCoordinator.get(player.UserId)
+		options.purchases.reconcile(active)
+		if options.claims ~= nil then
+			options.claims.reconcile(active)
+		end
+		if options.assignments ~= nil then
+			options.assignments.reconcile(active)
+		end
+		local capacityResult = if options.capacity ~= nil
+			then options.capacity.reconcile(active)
+			else { status = "Unchanged" }
+		local ready = active ~= nil
+			and active.state() == "Ready"
+			and options.energy.validate(active.snapshot()) == nil
+			and options.progression.validate(active.snapshot()) == nil
+			and (capacityResult.status == "Unchanged" or capacityResult.status == "Committed" or capacityResult.status == "AlreadyCommitted")
+			and options.vault.collectionStatus(active.snapshot()) ~= nil
+		projection.snapshot(
+			player,
+			if ready
+				then { status = "Ready", profileRevision = active.snapshot().profileRevision }
+				else { status = "Protected" }
+		)
+		if not ready then
+			return "PROTECTED_PROGRESSION_UNAVAILABLE"
+		end
+		local quoted = options.purchases.quote(active)
+		if quoted.status ~= "Quoted" and quoted.status ~= "Rejected" then
+			return "PROTECTED_PROGRESSION_UNAVAILABLE"
+		end
+		local payload = ProgressionProjection.fromProfile(
+			active.snapshot(),
+			options.progression,
+			options.vault,
+			quoted.quote
+		)
+		assert(
+			ProgressionProjectionV1.validSnapshot(payload) and WireValidation.payload(payload),
+			"invalid bounded progression projection"
+		)
+		options.event:FireClient(player, {
+			protocolVersion = 1,
+			routeId = RouteIds.events.projectionSnapshot,
+			correlationId = requestId,
+			revision = payload.revision,
+			payload = payload,
+		})
+		return "OK_PROGRESSION_SNAPSHOT"
+	end
 	local gateway = NetworkingGateway.new({
 		protocol = ProtocolV1,
 		routes = RouteIds,
@@ -341,6 +432,7 @@ function NetworkingRuntimeService.new(options: {
 		routeHandlers = handlers,
 		vaultResync = publishVault,
 		assignmentsResync = publishAssignments,
+		progressionResync = publishProgression,
 		captureResync = if options.captureRuntime ~= nil
 			then options.captureRuntime.resync
 			else nil,

@@ -123,7 +123,7 @@ VS-1 functional acceptance must be complete before broad feature expansion, with
 
 ## IMP-9 — Vault / Economy / Progression
 
-**Status: OPEN for DEV implementation; capacity, reconciliation, Overflow-Held resolution, assignments, production/offline settlement and Energy/Production Claim implemented and validated.** Upstream IMP-8 is formally complete under AD-249. [IMP-9 evidence](IMP9_IMPLEMENTATION_EVIDENCE.md) records the current implementation and remaining gates.
+**Status: OPEN for DEV implementation; capacity, reconciliation, Overflow-Held resolution, assignments, production/offline settlement, Energy/Production Claim and the minimal progression quote/purchase/unlock chain implemented and validated.** Upstream IMP-8 is formally complete under AD-249. [IMP-9 evidence](IMP9_IMPLEMENTATION_EVIDENCE.md) records the current implementation and remaining gates.
 
 Collection capacity, assignments, production, offline settlement, Energy and progression transactions.
 
@@ -135,7 +135,9 @@ Completed current dependency (AD-251): server-owned Display/Production assignmen
 
 Completed current dependency (AD-252): versioned server-owned integer Energy wallet, one bound reason-coded transaction primitive and exact-once Production Claim through the existing P2 writer. Settlement, whole-unit wallet transfer, buffer remainder and revision-bound claim receipt commit together. Duplicate/retry/reconnect, both uncertain-write cut points, client Class A resync, Busy/races, numeric ceilings, unbound grants and fresh-server save/rejoin are validated. Capacity, assignments, exact ownership and Overflow-Held semantics are preserved.
 
-Next dependency: progression quotes, atomic purchases and persistent unlocks. Progression has not started in this slice. IMP-9 cannot be COMPLETE, and IMP-10 cannot start, until the full TA-8 gates pass. Actual one-time/event/commercial/temporary reward integrations and deferred grants remain protected until their owning systems bind authoritative sources.
+Completed current dependency (AD-253): one server quote per session with opaque GUID, 60-second monotonic expiry, price/config epoch, original profile revision, current tier and legitimate Species Discovery prerequisite. Explicit confirm purchases the existing +6 Collection Capacity tier for 25 DEV Energy. Debit, earned tier, permanent unlock receipt and operation marker commit together through P2. Stale/tampered/cross-session quotes, insufficient funds and invalid effects fail without mutation. Duplicate/retry/reconnect/unknown-result recovery survives quote expiry and audit eviction. Native quote/confirm GUI, real DEV before/after-write failures, claim/purchase races and a fresh shipped composition pass; exact ownership, Held state, roles, output and discovery are preserved.
+
+Next dependency: bind the remaining TA-8 progression definitions/effects and audit the complete IMP-9 gate matrix: additional Vault slot/buffer/offline upgrades, Capture Capability and Access Unlock prerequisites. These have no enabled purchase definition in this DEV slice; world topology remains TA-9 ownership. The reusable transaction is closed for its one authored capacity target, not the entire progression catalog. IMP-9 cannot be COMPLETE, and IMP-10 cannot start, until its full gates pass. Actual one-time/event/commercial/temporary reward integrations and deferred grants remain protected until their owning systems bind authoritative sources. AD-249 / VS1-19 remains mandatory before IMP-10 COMPLETE.
 
 ## IMP-10 — World Scaling
 

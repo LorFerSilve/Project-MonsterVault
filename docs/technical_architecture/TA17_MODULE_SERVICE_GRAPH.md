@@ -191,3 +191,5 @@ VS-1 may not begin capture gameplay until these exist:
 - minimal capture client controller/presentation.
 
 **Module/service graph result: PASS.**
+
+AD-253 binds progression.ProgressionService through application.ProgressionPurchaseUseCase, injecting EnergyService, VaultService and the existing server boundary. ProgressionProjection builds bounded owner readback; bootstrap composes these services. Client ProgressionController/ProgressionRuntimeService consume ProgressionProjectionV1 through the existing gateway and require explicit confirmation. Cross-domain imports/mutations remain in application orchestration; no new runtime root, package or transport is added.
