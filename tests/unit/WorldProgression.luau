@@ -59,36 +59,9 @@ local function equal(a: any, b: any): boolean
 	return true
 end
 
--- Contract-supported isolated content for all role bindings; no shipped map.
+-- Exercise the shipped canonical definitions with the actual P2 owner.
 local function catalog(): any
-	local d = copy(Definitions)
-	for index, slug in { [3] = "mid-a", [4] = "mid-b" } do
-		local r = d.regions[index]
-		local a, b = "landmark/" .. slug .. "-entry", "landmark/" .. slug .. "-field"
-		local o = "field-objective/" .. slug .. "-route"
-		local h, c = "habitat/" .. slug, "spawn-context/" .. slug
-		table.insert(d.landmarks, { id = a, regionId = r.id, radius = 8 })
-		table.insert(d.landmarks, { id = b, regionId = r.id, radius = 6 })
-		table.insert(
-			d.objectives,
-			{ id = o, regionId = r.id, kind = "TraversalSequence", landmarkIds = { a, b, a } }
-		)
-		table.insert(d.habitats, { id = h, regionId = r.id })
-		table.insert(d.spawnContexts, {
-			id = c,
-			habitatId = h,
-			speciesIds = copy(d.spawnContexts[1].speciesIds),
-			contentSnapshotIds = { d.contentSnapshotId },
-		})
-		r.mastery = {
-			milestoneId = "milestone/region-mastery/" .. slug,
-			landmarkIds = { a, b },
-			coreSpeciesIds = copy(d.regions[2].mastery.coreSpeciesIds),
-			coreSpeciesThreshold = 1,
-			objectiveIds = { o },
-		}
-	end
-	return d
+	return copy(Definitions)
 end
 local function harness(options: any?): any
 	local o = options or {}
@@ -269,7 +242,11 @@ local function registryContracts()
 				d.objectives[1].landmarkIds = { entry, entry }
 			end,
 			function(d: any)
-				d.landmarks[2].regionId = "region/biome-mid-a"
+				for _, l in d.landmarks do
+					if l.id == clearing then
+						l.regionId = "region/biome-mid-a"
+					end
+				end
 			end,
 			function(d: any)
 				table.insert(d.landmarks, copy(d.landmarks[1]))
@@ -279,6 +256,45 @@ local function registryContracts()
 		local d = copy(Definitions)
 		mutate(d)
 		check(not pcall(Registry.new, d), "invalid registry admitted")
+	end
+end
+local function authoredContracts()
+	local r = Registry.new(Definitions)
+	for _, role in { "Starter", "MidA", "MidB", "Advanced" } do
+		local region = r.regions[r.roles[role]]
+		check(region.mastery ~= nil and r.safeOutposts[region.entryOutpostId] ~= nil)
+	end
+	for _, mutate in
+		{
+			function(d: any)
+				d.regions[3].neighborIds = { "region/biome-mid-b" }
+			end,
+			function(d: any)
+				d.regions[4].mastery = nil
+			end,
+			function(d: any)
+				d.safeOutposts[3].securePointId = "secure-point/fixture-spawn"
+			end,
+			function(d: any)
+				d.travelNodes[4].recoveryAnchorId = "recovery-anchor/mid-a"
+			end,
+			function(d: any)
+				d.securePoints[2].regionId = "region/missing"
+			end,
+			function(d: any)
+				d.habitats[4].regionId = "region/biome-mid-b"
+			end,
+			function(d: any)
+				d.vaultAccessPoints = {}
+			end,
+			function(d: any)
+				d.securePoints[3].radius = nil
+			end,
+		}
+	do
+		local d = copy(Definitions)
+		mutate(d)
+		check(not pcall(Registry.new, d), "invalid canonical content admitted")
 	end
 end
 local function masteryRequiresActiveEvidence()
@@ -453,11 +469,25 @@ local function protectedStateAndHistoricalMastery()
 			},
 		},
 	}
-	local blocked = harness({ seed = unbound, config = Definitions })
+	local noRecipe = copy(Definitions)
+	noRecipe.authoringVersion = nil
+	noRecipe.regions[3].mastery = nil
+	local blocked = harness({ seed = unbound, config = noRecipe })
 	check(blocked.load.status == "ProtectedLoadFailure", "unbound mastery cannot grant authority")
 	check(
 		equal(blocked.repository.read("player/42").value.world, unbound.world),
 		"unbound mastery value preserved"
+	)
+	unbound.world.mastery["milestone/region-mastery/mid-a"].contentSnapshotId =
+		"content-snapshot/imp10-world-dev-v1"
+	local oldUnbound = harness({ seed = unbound, config = Definitions })
+	check(
+		oldUnbound.load.status == "ProtectedLoadFailure",
+		"new content cannot reinterpret previously unbound mastery"
+	)
+	check(
+		equal(oldUnbound.repository.read("player/42").value.world, unbound.world),
+		"unbound historical value preserved"
 	)
 	local invalidStates: { any } = {
 		{ mastery = true },
@@ -474,6 +504,13 @@ local function protectedStateAndHistoricalMastery()
 	local h = harness()
 	starter(h)
 	local p = h.session.snapshot()
+	local historical = copy(p)
+	historical.world.mastery["milestone/region-mastery/starter"].contentSnapshotId =
+		"content-snapshot/imp10-world-dev-v1"
+	check(
+		h.world.mastery(historical, "milestone/region-mastery/starter"),
+		"authorized historic Starter mastery remains valid"
+	)
 	local expanded = catalog()
 	local l = "landmark/starter-addition"
 	table.insert(expanded.landmarks, { id = l, regionId = Fixture.regionId, radius = 6 })
@@ -583,6 +620,7 @@ local function captureActionsFailClosed()
 	)
 end
 return {
+	authoredContracts = authoredContracts,
 	registryContracts = registryContracts,
 	masteryRequiresActiveEvidence = masteryRequiresActiveEvidence,
 	regionalProvenanceAndHeld = regionalProvenanceAndHeld,

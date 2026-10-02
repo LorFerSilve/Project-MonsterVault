@@ -69,8 +69,11 @@ function WorldProgressionService.new(registry: any): any
 		then
 			return "INVALID_WORLD_FACT"
 		end
-		for milestone in w.mastery do
-			if registry.regions[registry.milestones[milestone]].mastery == nil then
+		for milestone, proof in w.mastery do
+			local recipe = registry.regions[registry.milestones[milestone]].mastery
+			if
+				recipe == nil or not table.find(recipe.contentSnapshotIds, proof.contentSnapshotId)
+			then
 				return "UNBOUND_MASTERY_FACT"
 			end
 		end

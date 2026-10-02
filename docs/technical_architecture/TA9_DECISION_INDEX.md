@@ -90,3 +90,7 @@
 ## TA9-D15 — Close TA-9 and Advance to TA-10
 
 **Decision:** TA-9 is Architecture Complete — PASS with 240/240 scenarios and zero blocking questions. TA-10 becomes NEXT; gameplay implementation remains blocked until TA-17.
+
+## AD-256 implementation binding
+
+[AD-256](ARCHITECTURE_DECISIONS.md#ad-256--bind-canonical-authored-dev-biomes-and-safe-utilities) binds the existing five-role graph, field habitats/recipes, immutable native authoring and exact Secure/Vault action targets. Travel/Recovery destinations are static only. [Native evidence and remaining IMP-10 gates](../implementation/IMP10_AUTHORED_CONTENT_EVIDENCE.md) preserve region-scoped scheduling and VS1-19 ownership.

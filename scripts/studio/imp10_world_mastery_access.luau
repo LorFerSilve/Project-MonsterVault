@@ -97,7 +97,7 @@ local function setup(): any
 	)
 	local energy = require(server.domains.economy.EnergyService).new(progression.boundSinks)
 	local capacity = table.clone(require(shared.config.VaultCapacityFixture))
-	capacity.baseCollectionCapacity = 2
+	capacity.baseCollectionCapacity = 10
 	local vault = require(server.domains.vault.VaultService).new(capacity)
 	local production = require(server.domains.vault.VaultProductionService).new(
 		require(shared.config.VaultProductionFixture)
@@ -214,7 +214,7 @@ local function setup(): any
 		local remote = globals.Instance.new(pair[2])
 		remote.Name, remote.Parent = pair[1], remotes
 	end
-	local worldRuntime = require(server.bootstrap.WorldRuntimeService).new({
+	local worldOptions: any = {
 		workspace = root,
 		collectionService = collectionService,
 		httpService = http,
@@ -223,7 +223,8 @@ local function setup(): any
 		worldActions = actions,
 		event = remotes.Event,
 		profileCoordinator = coordinator,
-	})
+	}
+	local worldRuntime = require(server.bootstrap.WorldRuntimeService).new(worldOptions)
 	worldRuntime.start()
 	local captureStates = {}
 	local captureEvents = {
@@ -234,7 +235,7 @@ local function setup(): any
 			remotes.Event:FireClient(target, packet)
 		end,
 	}
-	local captureRuntime = require(server.bootstrap.CaptureRuntimeService).new({
+	local captureOptions: any = {
 		worldRuntime = worldRuntime,
 		vault = vault,
 		progression = progression,
@@ -257,9 +258,10 @@ local function setup(): any
 				return 0
 			end,
 		},
-	})
+	}
+	local captureRuntime = require(server.bootstrap.CaptureRuntimeService).new(captureOptions)
 	captureRuntime.start()
-	local network = require(server.bootstrap.NetworkingRuntimeService).new({
+	local networkOptions: any = {
 		command = remotes.Command,
 		event = remotes.Event,
 		unreliableEvent = remotes.UnreliableEvent,
@@ -268,7 +270,11 @@ local function setup(): any
 		captureRuntime = captureRuntime,
 		worldRuntime = worldRuntime,
 		vault = vault,
-		capacity = nil,
+		capacity = require(server.application.VaultCapacityUseCase).new({
+			vault = vault,
+			settleProduction = assignments.settleProfile,
+			newOperationId = operation,
+		}),
 		production = production,
 		assignments = assignments,
 		energy = energy,
@@ -276,7 +282,8 @@ local function setup(): any
 		progression = progression,
 		purchases = purchases,
 		diagnostics = diagnostics,
-	})
+	}
+	local network = require(server.bootstrap.NetworkingRuntimeService).new(networkOptions)
 	network.start()
 	state = {
 		scope = scope,
@@ -299,6 +306,39 @@ local function setup(): any
 		actions = actions,
 		energy = energy,
 		receipts = {},
+		switchEncounter = function(contextId: string)
+			network.stop()
+			check(#captureRuntime.stop() == 0, "prior encounter drained")
+			worldRuntime.stop()
+			local definition = world.registry.spawnContexts[contextId]
+			local anchor: any = nil
+			for _, part in authored:GetChildren() do
+				if part:GetAttribute("SpawnContextId") == contextId then
+					anchor = part
+				end
+			end
+			check(anchor ~= nil, "actual authored context")
+			local fixture = table.clone(require(server.domains.world.FixtureDefinition))
+			fixture.spawnContextId, fixture.habitatId = contextId, definition.habitatId
+			fixture.regionId = world.registry.habitats[definition.habitatId].regionId
+			fixture.speciesId = anchor:GetAttribute("SpeciesId")
+			fixture.rarityId = world.registry.species[fixture.speciesId].rarityId
+			fixture.contentSnapshotId = world.registry.contentSnapshotId
+			local pos = anchor.Position
+			fixture.position = { x = pos.X, y = pos.Y, z = pos.Z }
+			worldOptions.fixture = fixture
+			worldRuntime = require(server.bootstrap.WorldRuntimeService).new(worldOptions)
+			worldRuntime.start()
+			captureOptions.worldRuntime = worldRuntime
+			captureRuntime = require(server.bootstrap.CaptureRuntimeService).new(captureOptions)
+			captureRuntime.start()
+			networkOptions.worldRuntime, networkOptions.captureRuntime =
+				worldRuntime, captureRuntime
+			network = require(server.bootstrap.NetworkingRuntimeService).new(networkOptions)
+			network.start()
+			state.worldRuntime, state.captureRuntime, state.network =
+				worldRuntime, captureRuntime, network
+		end,
 		captureStates = captureStates,
 		setFault = function(value: string?)
 			fault = value
@@ -560,7 +600,8 @@ local function rejoin(resume: any): any
 	check(equal(resume.profile.world, p.world), "all native world history persisted")
 	check(equal(resume.profile.collection, p.collection), "exact ownership preserved")
 	check(
-		equal(resume.profile.progression, p.progression) and p.economy.energyUnits == 520,
+		equal(resume.profile.progression, p.progression)
+			and p.economy.energyUnits == (resume.expectedEnergy or 520),
 		"access and exact wallet persisted"
 	)
 	check(
@@ -578,14 +619,174 @@ local function rejoin(resume: any): any
 			"fresh native exact retry"
 		)
 	end
-	check(
-		runtime.purchases.quote(session, "access/biome-advanced").status == "Rejected",
-		"fresh native Advanced fails closed"
-	)
+	if resume.expectedEnergy then
+		for _, role in { "MidA", "MidB", "Advanced" } do
+			local r =
+				runtime.worldProgression.registry.regions[runtime.worldProgression.registry.roles[role]]
+			check(
+				runtime.worldProgression.mastery(p, r.mastery.milestoneId),
+				"fresh native authored mastery"
+			)
+		end
+	else
+		check(
+			runtime.purchases.quote(session, "access/biome-advanced").status == "Rejected",
+			"fresh native Advanced fails closed"
+		)
+	end
 	check(#runtime.stop() == 0, "fresh shipped profile drain")
 	return { passed = true, profile = p, exactRetries = #resume.receipts }
 end
+local function contentNegatives(): any
+	local s = state
+	local before = s.session.snapshot()
+	move(s.authored.MidASecurePoint)
+	check(
+		interact("landmark/mid-a-entry") == "REJECT_STATE_WORLD_ACCESS_BLOCKED",
+		"locked real Mid survey"
+	)
+	check(
+		s.worldRuntime.secureDestination(s.player, "secure-point/mid-a") == nil,
+		"locked extraction destination"
+	)
+	check(
+		s.worldRuntime.secureDestination(s.player, "secure-point/unknown") == nil,
+		"unknown utility"
+	)
+	check(
+		interact("vault-access-point/home-hub") == "REJECT_STATE_WORLD_UTILITY",
+		"distant Vault utility"
+	)
+	check(equal(before, s.session.snapshot()), "negative world actions unchanged")
+	return {
+		passed = true,
+		lockedSurvey = true,
+		lockedUtility = true,
+		unknownUtility = true,
+		remoteVault = true,
+	}
+end
+local function authoredBiomesAndUtilities(): any
+	local s = state
+	local results = {}
+	move(s.authored.HomeHubVault)
+	local before = s.session.snapshot()
+	check(
+		interact("vault-access-point/home-hub", { position = { x = 12, y = 0, z = 128 } })
+			== "REJECT_VALIDATION_PAYLOAD",
+		"forged utility position"
+	)
+	check(
+		interact("vault-access-point/home-hub") == "OK_VAULT_SNAPSHOT",
+		"real utility delegates owner readback"
+	)
+	check(equal(before, s.session.snapshot()), "Vault utility grants no value")
+	local vault = s.authored.HomeHubVault
+	local parent = vault.Parent
+	vault.Parent = nil
+	check(
+		interact("vault-access-point/home-hub") == "REJECT_STATE_WORLD_UTILITY",
+		"missing utility fails closed"
+	)
+	vault.Parent = parent
+	for _, spec in { { "MidA", "mid-a" }, { "MidB", "mid-b" }, { "Advanced", "advanced" } } do
+		local role, slug = spec[1], spec[2]
+		if role == "Advanced" then
+			local q = s.purchases.quote(s.session, "access/biome-advanced")
+			check(q.status == "Quoted", "both actual Mid masteries authorize Advanced")
+			local payload = {
+				unlockId = q.quote.unlockId,
+				quoteId = q.quote.quoteId,
+				quoteRevision = q.quote.quoteRevision,
+			}
+			check(
+				s.purchases.purchase(s.session, payload, q.quote.expectedRevision).status
+					== "Committed",
+				"native Advanced purchase"
+			)
+			table.insert(
+				s.receipts,
+				{ payload = payload, expectedRevision = q.quote.expectedRevision }
+			)
+		end
+		s.switchEncounter("spawn-context/" .. slug)
+		local entry, field = s.authored[role .. "SecurePoint"], s.authored[role .. "FieldAnchor"]
+		move(entry)
+		check(interact("landmark/" .. slug .. "-entry") == "OK_WORLD_VISITED", "authored entry")
+		before = s.session.snapshot()
+		check(
+			interact("landmark/" .. slug .. "-entry") == "OK_WORLD_VISITED"
+				and equal(before, s.session.snapshot()),
+			"duplicate route cannot advance"
+		)
+		move(field)
+		check(interact("landmark/" .. slug .. "-field") == "OK_WORLD_VISITED", "authored field")
+		local creature = s.worldRuntime.world().currentId()
+		check(
+			s.captureRuntime.interact(s.player, creature, "authored-capture")
+				== "OK_CAPTURE_CLAIMED",
+			"actual regional encounter capture"
+		)
+		local claim = s.captureStates[s.userId]
+		check(s.captureRuntime.submit(s.player, {
+			captureSessionId = claim.captureSessionId,
+			actionId = "capture",
+			clientSequence = 1,
+		}, "authored-submit") == "OK_CAPTURE_PROVISIONAL", "actual capture attempt")
+		move(s.authored[role .. "Recovery"])
+		-- Reaching another co-located role grants no ownership by itself.
+		check(
+			s.worldRuntime.secureDestination(s.player, "recovery-anchor/" .. slug) == nil,
+			"recovery identity is not extraction"
+		)
+		move(entry)
+		s.captureRuntime.secure(s.player, "secure-point/" .. slug)
+		local deadline = os.clock() + 10
+		local record: any = nil
+		repeat
+			record = (s.session.snapshot().collection.creaturesById or {})[creature]
+			if record == nil then
+				globals.task.wait(0.1)
+			end
+		until record ~= nil or os.clock() >= deadline
+		check(record ~= nil, "authored extraction committed")
+		local r = s.world.registry.regions[s.world.registry.roles[role]]
+		check(
+			s.session.snapshot().world.regionalSpecies[r.id][record.speciesId] ~= nil,
+			"actual qualified regional history"
+		)
+		check(
+			not s.world.mastery(s.session.snapshot(), r.mastery.milestoneId),
+			"collection cannot replace active return"
+		)
+		check(interact("landmark/" .. slug .. "-entry") == "OK_WORLD_VISITED", "active return")
+		check(s.world.mastery(s.session.snapshot(), r.mastery.milestoneId), "authored mastery")
+		before = s.session.snapshot()
+		check(
+			interact("landmark/" .. slug .. "-entry") == "OK_WORLD_VISITED"
+				and equal(before, s.session.snapshot()),
+			"mastery duplicate unchanged"
+		)
+		table.insert(results, {
+			role = role,
+			creatureId = creature,
+			provenance = record.origin,
+			mastery = true,
+			profileRevision = before.profileRevision,
+		})
+	end
+	return {
+		passed = true,
+		cases = results,
+		profile = s.session.snapshot(),
+		noUtilityGrant = true,
+		missingUtilityClosed = true,
+	}
+end
+
 return {
+	contentNegatives = contentNegatives,
+	authoredBiomesAndUtilities = authoredBiomesAndUtilities,
 	setup = setup,
 	surveyAndCapture = surveyAndCapture,
 	productionAndAccess = productionAndAccess,

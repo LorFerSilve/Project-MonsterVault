@@ -59,6 +59,12 @@ function WorldActionUseCase.new(
 		end
 		return committed
 	end
-	return { visit = visit, reconcile = reconcile }
+	return {
+		visit = visit,
+		reconcile = reconcile,
+		canAccess = function(profile: any, regionId: string): boolean
+			return options.world.canAccess(profile, regionId, options.progression.hasAccess)
+		end,
+	}
 end
 return WorldActionUseCase

@@ -229,3 +229,25 @@ Server-only DEV registries use stable Region/Species/Habitat/Spawn Context/Landm
 Class A `Session.RequestResync` additionally accepts `{domain="world"}`; its existing strict optional-field rules permit no unlock/capture/pagination selector for this domain. It reconciles the exact owned pending WorldActionUseCase checkpoint even when PersistenceAtRisk blocks Class B admission. `World.StateChanged` is a reliable owner-only V1 event with `{profileRevision, masteryMilestoneIds}`; revision is the authoritative committed integer and the array is sorted, unique, contains only registered milestone IDs and has at most 4 entries. Private world evidence, reward tables and operation IDs are omitted. This fixed bounded projection fits the existing 4 KiB reliable limit; no new remote or client authority is introduced.
 
 Mastery binds TA-8's existing consumer; purchased access remains governed by permanent receipts. All new world evidence/mastery shares existing profile writer/queue/candidate/idempotency rules. World rewards/deferred/event/commercial/temporary grants remain unbound and protected. Full remaining IMP-10 content/action/performance gates remain open, including mandatory VS1-19 / AD-249 before COMPLETE.
+
+## AD-256 canonical authoring and utility bindings
+
+WorldDefinitions content-snapshot/imp10-world-dev-v2 binds the same Region/access/milestone IDs. Definitions add authoringVersion=1, exact neighborIds, field entryOutpostId and mastery.contentSnapshotIds. Approved mastery history is world-dev-v1/v2 for Starter and world-dev-v2 for Mid A/B/Advanced. World Profile/schema generation remains 1; no persistent grant or client state field is added.
+
+Native tags / required semantic ID attributes:
+
+| Tag | ID attribute |
+| --- | --- |
+| MonsterVaultRegion | RegionId |
+| MonsterVaultHabitat | HabitatId |
+| MonsterVaultLandmark | LandmarkId |
+| MonsterVaultSpawnAnchor | SpawnContextId |
+| MonsterVaultSafeOutpost | SafeOutpostId |
+| MonsterVaultSecurePoint | SecurePointId |
+| MonsterVaultRecoveryAnchor | RecoveryAnchorId |
+| MonsterVaultVaultAccessPoint | VaultAccessPointId |
+| MonsterVaultTravelNode | TravelNodeId |
+
+All parts are anchored with matching RegionId. Spawn anchors also require HabitatId and an eligible public SpeciesId. IDs use existing lowercase slash/slug grammar; names are presentation. SafeOutpost binds same-region SecurePoint/RecoveryAnchor; TravelNode binds same-region RecoveryAnchor. Immutable membership/transforms/volumes, definition-owned radii, required IDs, unique utilities, region/survey overlap and encounter/outpost separation validate before Ready. Unbound hazard tags reject. Utilities are bounded to four outposts and at most eight entries of each remaining utility kind.
+
+Interaction.PrimaryInteract retains its strict sole interactionId payload and now also resolves known VaultAccessPoint IDs. Native prompts invoke that same server action. The existing owner Projection.Snapshot/readback is the result; transforms/access/mastery cannot be submitted by the client. Capture extraction consumes a server-resolved exact point with target access/presence validated first. Travel/Recovery IDs remain static bindings and Fast Travel stays disabled. Protocol/remotes/world readback remain unchanged.

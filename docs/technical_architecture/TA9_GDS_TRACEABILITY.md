@@ -127,3 +127,7 @@ Downstream TA-9 dependencies without an owner: **0**.
 ## Verdict
 
 **TA-9 GDS / UPSTREAM TA TRACEABILITY: PASS.**
+
+## AD-256 runtime evidence
+
+GDS-9 §§4–14 → WorldDefinitions / Rojo authored map / WorldAuthoringIndex; GDS-9 mastery and WA/SP/VA authority → existing WorldProgressionService / WorldActionUseCase / CaptureRuntime / Vault owner readback. [AD-256 evidence](../implementation/IMP10_AUTHORED_CONTENT_EVIDENCE.md) proves native regional recipes, access, utility negatives and rejoin. Static Travel/Recovery targets do not replace their action gates. Spawn scaling, hazards/rewards and VS1-19 remain OPEN/DEFERRED in the phase matrix.

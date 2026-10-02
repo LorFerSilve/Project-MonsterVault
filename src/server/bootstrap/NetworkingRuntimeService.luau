@@ -183,6 +183,16 @@ function NetworkingRuntimeService.new(options: {
 			then
 				return options.worldRuntime.discover(player, envelope.payload.interactionId)
 			end
+			if
+				options.worldRuntime ~= nil
+				and options.worldRuntime.isUtility(envelope.payload.interactionId)
+			then
+				return options.worldRuntime.useUtility(
+					player,
+					envelope.payload.interactionId,
+					envelope.requestId
+				)
+			end
 			return options.captureRuntime.interact(
 				player,
 				envelope.payload.interactionId,
@@ -452,6 +462,11 @@ function NetworkingRuntimeService.new(options: {
 	local connections = {}
 
 	local function start()
+		if options.worldRuntime ~= nil then
+			options.worldRuntime.bindVaultAccess(function(player: any, requestId: string): string
+				return publishVault(player, requestId, nil)
+			end)
+		end
 		assert(options.command:IsA("RemoteEvent"), "invalid command remote")
 		assert(options.event:IsA("RemoteEvent"), "invalid event remote")
 		assert(options.unreliableEvent:IsA("UnreliableRemoteEvent"), "invalid unreliable remote")
@@ -477,6 +492,9 @@ function NetworkingRuntimeService.new(options: {
 	end
 
 	local function stop()
+		if options.worldRuntime ~= nil then
+			options.worldRuntime.bindVaultAccess(nil)
+		end
 		for _, connection in connections do
 			connection:Disconnect()
 		end
