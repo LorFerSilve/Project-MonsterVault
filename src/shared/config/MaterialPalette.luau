@@ -10,6 +10,8 @@ local styles: { [string]: { material: any, color: any } } = {
 	SecondaryMetal = { material = Enum.Material.Metal, color = Color3.fromRGB(153, 172, 187) },
 	PanelPlastic = { material = Enum.Material.SmoothPlastic, color = Color3.fromRGB(19, 25, 33) },
 	EnergyGreen = { material = Enum.Material.Neon, color = Color3.fromRGB(76, 255, 110) },
+	-- Reused IMP-5 DEV encounter body; the four Energy Core groups stay unchanged.
+	FixtureCreature = { material = Enum.Material.Neon, color = Color3.fromRGB(77, 205, 255) },
 }
 
 for _, style in styles do

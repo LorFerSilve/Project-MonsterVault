@@ -27,7 +27,7 @@ local function equal(a: any, b: any): boolean
 	end
 	return true
 end
-local function setup(): any
+local function setup(regional: boolean?): any
 	check(
 		state == nil
 			and game:GetService("RunService"):IsStudio()
@@ -56,20 +56,23 @@ local function setup(): any
 	local realRepository =
 		require(server.adapters.RobloxProfileRepository).new(storeAdapter, true, "DEV")
 	local fault: string? = nil
+	local faultCuts = { Before = 0, After = 0 }
 	local repository = {
 		update = function(key: string, transform: any): any
 			if fault == "Before" then
+				faultCuts.Before += 1
 				return { status = "error", reason = "PROBE_BEFORE", retryable = true }
 			end
 			local result = realRepository.update(key, transform)
 			if fault == "After" and result.status == "ok" then
+				faultCuts.After += 1
 				fault = nil
 				return { status = "error", reason = "PROBE_LOST_RESULT", retryable = true }
 			end
 			return result
 		end,
 	}
-	local wall, mono = os.time() - 7200, 0
+	local wall, mono, worldMono = os.time() - 7200, 0, 0
 	local clock: any = {
 		wallClock = {
 			unixSeconds = function()
@@ -84,6 +87,9 @@ local function setup(): any
 		advance = function(seconds: number)
 			wall += seconds
 			mono += seconds
+		end,
+		advanceWorld = function(seconds: number)
+			worldMono += seconds
 		end,
 	}
 	local world = require(server.domains.world.WorldProgressionService).new(
@@ -214,8 +220,30 @@ local function setup(): any
 		local remote = globals.Instance.new(pair[2])
 		remote.Name, remote.Parent = pair[1], remotes
 	end
+	local callbacks = {}
 	local worldOptions: any = {
 		workspace = root,
+		fixture = if regional then nil else require(server.domains.world.FixtureDefinition),
+		players = players,
+		clock = if regional
+			then function()
+				return worldMono
+			end
+			else nil,
+		scheduler = if regional
+			then {
+				delay = function(_seconds: number, callback: () -> ())
+					table.insert(callbacks, callback)
+				end,
+			}
+			else nil,
+		random = if regional
+			then {
+				NextNumber = function()
+					return 0.75
+				end,
+			}
+			else nil,
 		collectionService = collectionService,
 		httpService = http,
 		diagnostics = diagnostics,
@@ -299,6 +327,7 @@ local function setup(): any
 		remotes = remotes,
 		authored = authored,
 		clock = clock,
+		worldCallbacks = callbacks,
 		assignments = assignments,
 		claims = claims,
 		purchases = purchases,
@@ -343,6 +372,7 @@ local function setup(): any
 		setFault = function(value: string?)
 			fault = value
 		end,
+		faultCuts = faultCuts,
 	}
 	return {
 		scope = scope,
@@ -572,7 +602,7 @@ local function faultCases(): any
 	return { passed = true, cases = results }
 end
 
-local function rejoin(resume: any): any
+local function rejoin(resume: any, inspectRuntime: ((any, any) -> ())?): any
 	local server: any = game:GetService("ServerScriptService").MonsterVaultServer
 	local players = game:GetService("Players")
 	local http = game:GetService("HttpService")
@@ -612,12 +642,14 @@ local function rejoin(resume: any): any
 		runtime.worldProgression.canAccess(p, "region/biome-mid-a", runtime.progression.hasAccess),
 		"shipped access owner after rejoin"
 	)
+	local exactRetries = 0
 	for _, receipt in resume.receipts do
 		check(
 			runtime.purchases.purchase(session, receipt.payload, receipt.expectedRevision).status
 				== "AlreadyCommitted",
 			"fresh native exact retry"
 		)
+		exactRetries += 1
 	end
 	if resume.expectedEnergy then
 		for _, role in { "MidA", "MidB", "Advanced" } do
@@ -634,8 +666,11 @@ local function rejoin(resume: any): any
 			"fresh native Advanced fails closed"
 		)
 	end
+	if inspectRuntime then
+		inspectRuntime(runtime, session)
+	end
 	check(#runtime.stop() == 0, "fresh shipped profile drain")
-	return { passed = true, profile = p, exactRetries = #resume.receipts }
+	return { passed = true, profile = p, exactRetries = exactRetries }
 end
 local function contentNegatives(): any
 	local s = state
@@ -785,6 +820,13 @@ local function authoredBiomesAndUtilities(): any
 end
 
 return {
+	scopeState = function(): any
+		check(
+			game:GetService("RunService"):IsStudio() and game:GetService("RunService"):IsServer(),
+			"Studio server probe only"
+		)
+		return state
+	end,
 	contentNegatives = contentNegatives,
 	authoredBiomesAndUtilities = authoredBiomesAndUtilities,
 	setup = setup,

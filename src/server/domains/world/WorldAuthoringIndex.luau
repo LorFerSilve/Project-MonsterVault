@@ -128,6 +128,9 @@ function WorldAuthoringIndex.new(registry: any, authored: any, collection: any):
 		anchors[id] = table.freeze({
 			part = part,
 			position = part.Position,
+			cframe = part.CFrame,
+			size = part.Size,
+			root = authored,
 			regionId = habitat.regionId,
 			habitatId = d.habitatId,
 			speciesId = part:GetAttribute("SpeciesId"),

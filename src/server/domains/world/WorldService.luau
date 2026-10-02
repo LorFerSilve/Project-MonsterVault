@@ -27,6 +27,14 @@ end
 
 function WorldService.new(options: {
 	fixture: any,
+	buckets: { any }?,
+	maxBucketsPerStep: number?,
+	stepSeconds: number?,
+	isBucketActive: ((any) -> boolean)?,
+	canMaterialize: ((any) -> boolean)?,
+	isProjectionAlive: ((any, any) -> boolean)?,
+	selectCandidate: ((any) -> any)?,
+	onBucketError: ((string) -> ())?,
 	clock: () -> number,
 	newId: () -> string,
 	materialize: (any) -> any,
@@ -35,33 +43,69 @@ function WorldService.new(options: {
 	generateVariant: ((any) -> any)?,
 	updateProjection: ((any, any) -> ())?,
 })
-	local fixture = options.fixture
-	assert(validPosition(fixture.position), "invalid fixture position")
-	assert(finite(fixture.cellSize) and fixture.cellSize > 0, "invalid cell size")
-	assert(
-		finite(fixture.interactionRadius) and fixture.interactionRadius > 0,
-		"invalid interaction radius"
-	)
-	assert(finite(fixture.lifetimeSeconds) and fixture.lifetimeSeconds > 0, "invalid lifetime")
-	assert(finite(fixture.retrySeconds) and fixture.retrySeconds > 0, "invalid retry delay")
-	assert(finite(fixture.refillSeconds) and fixture.refillSeconds > 0, "invalid refill delay")
-	assert(
-		type(fixture.maxMaterializationAttempts) == "number"
-			and fixture.maxMaterializationAttempts >= 1
-			and fixture.maxMaterializationAttempts % 1 == 0,
-		"invalid attempt limit"
-	)
-	for _, key in
-		{ "regionId", "habitatId", "spawnContextId", "contentSnapshotId", "speciesId", "rarityId" }
-	do
-		assert(type(fixture[key]) == "string" and fixture[key] ~= "", "invalid fixture identity")
+	local baseFixture = options.fixture
+	local function validateFixture(fixture: any)
+		assert(validPosition(fixture.position), "invalid fixture position")
+		assert(finite(fixture.cellSize) and fixture.cellSize > 0, "invalid cell size")
+		assert(
+			finite(fixture.interactionRadius) and fixture.interactionRadius > 0,
+			"invalid interaction radius"
+		)
+		assert(finite(fixture.lifetimeSeconds) and fixture.lifetimeSeconds > 0, "invalid lifetime")
+		assert(finite(fixture.retrySeconds) and fixture.retrySeconds > 0, "invalid retry delay")
+		assert(finite(fixture.refillSeconds) and fixture.refillSeconds > 0, "invalid refill delay")
+		assert(
+			type(fixture.maxMaterializationAttempts) == "number"
+				and fixture.maxMaterializationAttempts >= 1
+				and fixture.maxMaterializationAttempts % 1 == 0,
+			"invalid attempt limit"
+		)
+		for _, key in
+			{
+				"regionId",
+				"habitatId",
+				"spawnContextId",
+				"contentSnapshotId",
+				"speciesId",
+				"rarityId",
+			}
+		do
+			assert(
+				type(fixture[key]) == "string" and fixture[key] ~= "",
+				"invalid fixture identity"
+			)
+		end
 	end
+	local definitions: { any } = options.buckets or { baseFixture }
+	assert(#definitions > 0 and #definitions <= 8, "unbounded spawn buckets")
+	local buckets: { any } = {}
+	local seen = {}
+	for _, definition in definitions do
+		validateFixture(definition)
+		assert(not seen[definition.spawnContextId], "duplicate spawn bucket")
+		assert(definition.cellSize == baseFixture.cellSize, "inconsistent spatial cells")
+		seen[definition.spawnContextId] = true
+		table.insert(
+			buckets,
+			{ definition = definition, currentId = nil, nextSpawnAt = 0, paused = false }
+		)
+	end
+	local workLimit = options.maxBucketsPerStep or 1
+	assert(workLimit % 1 == 0 and workLimit >= 1 and workLimit <= #buckets, "invalid work bound")
+	assert(
+		options.stepSeconds == nil or (finite(options.stepSeconds) and options.stepSeconds > 0),
+		"invalid step cadence"
+	)
 
 	local records: { [string]: any } = {}
 	local usedIds: { [string]: boolean } = {}
 	local cells: { [string]: { [string]: boolean } } = {}
-	local currentId: string? = nil
-	local nextSpawnAt = 0
+	local cursor = 1
+	local nextStepAt = 0
+	local lastStepAt = -math.huge
+	local stepping = false
+	local idPrefix: string? = nil
+	local allocation = 0
 	local running = false
 	local generation = 0
 
@@ -78,7 +122,7 @@ function WorldService.new(options: {
 	end
 
 	local function unindex(record: any)
-		local key = cellKey(record.position, fixture.cellSize)
+		local key = cellKey(record.position, baseFixture.cellSize)
 		local bucket = cells[key]
 		if bucket ~= nil then
 			bucket[record.id] = nil
@@ -100,19 +144,28 @@ function WorldService.new(options: {
 			record.projection = nil
 		end
 		records[record.id] = nil
-		if currentId == record.id then
-			currentId = nil
+		if record.bucket.currentId == record.id then
+			record.bucket.currentId = nil
 		end
-		nextSpawnAt = now + fixture.refillSeconds
+		record.bucket.nextSpawnAt = now + record.bucket.definition.refillSeconds
 		return true
 	end
 
-	local function reserve(now: number): any
-		local id = options.newId()
+	local function reserve(bucket: any, now: number): any
+		local fixture = bucket.definition
+		allocation += 1
+		assert(allocation < 2 ^ 53, "exhausted world identity sequence")
+		local id = if idPrefix
+			then idPrefix .. "-" .. string.format("%.0f", allocation)
+			else options.newId()
 		assert(type(id) == "string" and id ~= "" and not usedIds[id], "reused creature ID")
-		usedIds[id] = true
+		-- Regional IDs are namespace + monotonic sequence; no lifetime-sized ID set.
+		if idPrefix == nil then
+			usedIds[id] = true
+		end
 		local record = {
 			id = id,
+			bucket = bucket,
 			regionId = fixture.regionId,
 			habitatId = fixture.habitatId,
 			spawnContextId = fixture.spawnContextId,
@@ -129,6 +182,21 @@ function WorldService.new(options: {
 			projection = nil,
 			variantIdentity = nil,
 		}
+		records[id] = record
+		bucket.currentId = id -- Pending selection/placement consumes capacity immediately.
+		if options.selectCandidate then
+			local candidate = options.selectCandidate(fixture)
+			assert(
+				type(candidate.speciesId) == "string" and type(candidate.rarityId) == "string",
+				"invalid selected species"
+			)
+			assert(
+				fixture.speciesIds == nil or table.find(fixture.speciesIds, candidate.speciesId),
+				"species outside authored bucket"
+			)
+			assert(candidate.rarityId == fixture.rarityId, "unbound selected rarity")
+			record.speciesId, record.rarityId = candidate.speciesId, candidate.rarityId
+		end
 		if options.generateVariant ~= nil then
 			record.variantIdentity = options.generateVariant({
 				creatureInstanceId = id,
@@ -138,29 +206,52 @@ function WorldService.new(options: {
 				spawnContextId = record.spawnContextId,
 			})
 		end
-		records[id] = record
-		currentId = id -- A reservation already consumes the one-creature budget.
 		return record
 	end
 
 	local function tryMaterialize(record: any, now: number)
+		local expectedGeneration, expectedRevision = generation, record.revision
+		local function current(): boolean
+			return running
+				and generation == expectedGeneration
+				and records[record.id] == record
+				and record.state == "Reserved"
+				and record.revision == expectedRevision
+		end
 		record.attempts += 1
-		local ok, handle = pcall(options.materialize, public(record))
+		local fixture = record.bucket.definition
+		local placed, valid = true, true
+		if options.canMaterialize then
+			placed, valid = pcall(options.canMaterialize, fixture)
+		end
+		local ok, handle = false, nil
+		if placed and valid == true and current() then
+			ok, handle = pcall(options.materialize, public(record))
+		end
+		if not current() then
+			if ok and handle ~= nil then
+				pcall(options.destroyProjection, handle)
+			end
+			return
+		end
 		if ok and handle ~= nil then
 			local projected = public(record)
 			projected.availability = "IdleAvailable"
 			projected.runtimeRevision = record.revision + 1
 			local activated = pcall(options.activate, handle, projected)
-			if activated then
+			if activated and current() then
 				record.projection = handle
 				record.state = "IdleAvailable"
 				record.revision += 1
-				local key = cellKey(record.position, fixture.cellSize)
+				local key = cellKey(record.position, baseFixture.cellSize)
 				cells[key] = cells[key] or {}
 				cells[key][record.id] = true
 				return
 			end
 			pcall(options.destroyProjection, handle)
+		end
+		if not current() then
+			return
 		end
 		if record.attempts >= fixture.maxMaterializationAttempts then
 			terminate(record, now)
@@ -173,23 +264,44 @@ function WorldService.new(options: {
 		assert(not running and generation == 0, "world service already started")
 		running = true
 		generation += 1
-		nextSpawnAt = options.clock()
+		local now = options.clock()
+		assert(finite(now), "invalid world clock")
+		for _, bucket in buckets do
+			bucket.nextSpawnAt = now
+		end
+		if options.buckets then
+			idPrefix = options.newId()
+			assert(type(idPrefix) == "string" and idPrefix ~= "", "invalid world namespace")
+		end
 		return generation
 	end
 
-	local function step(expectedGeneration: number): string
+	local function stepBucket(bucket: any, now: number, expectedGeneration: number): string
+		local record = if bucket.currentId ~= nil then records[bucket.currentId] else nil
+		local active = options.isBucketActive == nil
+			or options.isBucketActive(bucket.definition) == true
 		if not running or expectedGeneration ~= generation then
 			return "Stale"
 		end
-		local now = options.clock()
-		assert(finite(now), "invalid world clock")
-		local record = if currentId ~= nil then records[currentId] else nil
+		if record ~= nil and record.state == "Reserved" and not active then
+			terminate(record, now)
+			return "Expired"
+		end
+		if
+			record ~= nil
+			and record.state == "IdleAvailable"
+			and options.isProjectionAlive
+			and not options.isProjectionAlive(record.projection, public(record))
+		then
+			terminate(record, now)
+			return "Expired"
+		end
 		if record ~= nil and record.state == "IdleAvailable" and now >= record.expiresAt then
 			terminate(record, now)
 			return "Expired"
 		end
-		if record == nil and now >= nextSpawnAt then
-			record = reserve(now)
+		if record == nil and active and now >= bucket.nextSpawnAt then
+			record = reserve(bucket, now)
 		end
 		if record ~= nil and record.state == "Reserved" and now >= record.nextAttemptAt then
 			tryMaterialize(record, now)
@@ -197,6 +309,51 @@ function WorldService.new(options: {
 			return if live ~= nil and live.state == "IdleAvailable" then "Spawned" else "Pending"
 		end
 		return "Idle"
+	end
+
+	local function step(expectedGeneration: number): string
+		if not running or expectedGeneration ~= generation then
+			return "Stale"
+		end
+		if stepping then
+			return "Busy"
+		end
+		local now = options.clock()
+		assert(finite(now) and now >= lastStepAt, "invalid/regressing world clock")
+		if now < nextStepAt then
+			return "NotDue"
+		end
+		lastStepAt = now
+		nextStepAt = now + (options.stepSeconds or 0)
+		stepping = true
+		local outcome = "Idle"
+		for _ = 1, workLimit do
+			if not running or expectedGeneration ~= generation then
+				break
+			end
+			local bucket = buckets[cursor]
+			cursor = cursor % #buckets + 1
+			if not bucket.paused then
+				local ok, result = pcall(stepBucket, bucket, now, expectedGeneration)
+				if not ok then
+					bucket.paused = true
+					local record = if bucket.currentId then records[bucket.currentId] else nil
+					if
+						record and (record.state == "Reserved" or record.state == "IdleAvailable")
+					then
+						terminate(record, now)
+					end
+					if options.onBucketError then
+						pcall(options.onBucketError, bucket.definition.spawnContextId)
+					end
+					outcome = "BucketPaused"
+				elseif result ~= "Idle" then
+					outcome = result
+				end
+			end
+		end
+		stepping = false
+		return outcome
 	end
 
 	local function expireIfCurrent(id: string, expectedRevision: number): boolean
@@ -226,7 +383,7 @@ function WorldService.new(options: {
 		local dx = position.x - record.position.x
 		local dy = position.y - record.position.y
 		local dz = position.z - record.position.z
-		if dx * dx + dy * dy + dz * dz > fixture.interactionRadius ^ 2 then
+		if dx * dx + dy * dy + dz * dz > record.bucket.definition.interactionRadius ^ 2 then
 			return "OutOfRange", nil
 		end
 		return "Available", public(record)
@@ -264,10 +421,10 @@ function WorldService.new(options: {
 			return {}
 		end
 		local result = {}
-		local minX = math.floor((position.x - radius) / fixture.cellSize)
-		local maxX = math.floor((position.x + radius) / fixture.cellSize)
-		local minZ = math.floor((position.z - radius) / fixture.cellSize)
-		local maxZ = math.floor((position.z + radius) / fixture.cellSize)
+		local minX = math.floor((position.x - radius) / baseFixture.cellSize)
+		local maxX = math.floor((position.x + radius) / baseFixture.cellSize)
+		local minZ = math.floor((position.z - radius) / baseFixture.cellSize)
+		local maxZ = math.floor((position.z + radius) / baseFixture.cellSize)
 		for x = minX, maxX do
 			for z = minZ, maxZ do
 				local bucket = cells[tostring(x) .. ":" .. tostring(z)]
@@ -298,8 +455,7 @@ function WorldService.new(options: {
 		end
 		running = false
 		generation += 1
-		local record = if currentId ~= nil then records[currentId] else nil
-		if record ~= nil then
+		for _, record in records do
 			terminate(record, options.clock())
 		end
 	end
@@ -309,14 +465,32 @@ function WorldService.new(options: {
 		step = step,
 		stop = stop,
 		currentId = function(): string?
-			return currentId
+			return buckets[1].currentId
 		end,
 		get = function(id: string): any
 			local record = records[id]
 			return if record ~= nil and record.state == "IdleAvailable" then public(record) else nil
 		end,
 		populationCount = function(): number
-			return if currentId == nil then 0 else 1
+			local count = 0
+			for _ in records do
+				count += 1
+			end
+			return count
+		end,
+		bucketStatus = function(): { any }
+			local result = {}
+			for _, bucket in buckets do
+				table.insert(result, {
+					spawnContextId = bucket.definition.spawnContextId,
+					regionId = bucket.definition.regionId,
+					habitatId = bucket.definition.habitatId,
+					count = if bucket.currentId then 1 else 0,
+					paused = bucket.paused,
+					creatureInstanceId = bucket.currentId,
+				})
+			end
+			return result
 		end,
 		nearby = nearby,
 		interaction = interaction,
