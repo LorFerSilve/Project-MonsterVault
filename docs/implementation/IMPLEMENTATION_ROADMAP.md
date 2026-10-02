@@ -147,7 +147,9 @@ The full gate matrix closes with 153 fast tests, 40 native Studio C0 checks, rea
 
 [Evidence](IMP10_IMPLEMENTATION_EVIDENCE.md) includes 161 fast tests, 8 native C0 suites, 7 native authoring checks, real DEV cut points, native client tampering/readback and fresh Play save/rejoin. [Full phase gate matrix](IMP10_GATE_MATRIX.md) remains OPEN for unimplemented phase-owned work. World/event/commercial/deferred rewards remain protected while unbound.
 
-Next dependency: remaining canonical authored biome/content and safe-utility bindings, followed by region-scoped spawn scheduling. Mid mastery recipes/actions need actual authored content; fixture binding tests do not close that gate. Travel/recovery/hazards and full World Scaling validation remain open.
+Second dependency COMPLETE under AD-256: [canonical authored DEV content and safe utilities](IMP10_AUTHORED_CONTENT_EVIDENCE.md). Five fixed roles, eight habitats/context anchors, distinct Mid pools/routes, complete active field recipes and safe outpost/utility bindings now validate before Ready. Capture uses exact validated Secure Points and actual target access; the Home Vault terminal delegates owner readback. Approved mastery epochs preserve Starter history and protect previously unbound Mid/Advanced value. All four mastery paths, three purchases, unknown-result recovery and fresh Play/rejoin passed in scoped native Studio probes; 163 fast tests, 9 native C0 suites and 19 authoring cases pass.
+
+Next dependency: **region-scoped spawn scheduling** over the authored index. Regional capture probes reuse the existing one-encounter owner through server-only composition; shipped ordinary spawning retains the Starter fixture. Actual travel/discovery/recovery, hazards, authorized world rewards and full security/scaling/performance gates remain open. Static travel/recovery bindings do not enable their actions.
 
 Full biome/content registries, spawn scheduling, travel, mastery/hazards and TA-14 scaling.
 

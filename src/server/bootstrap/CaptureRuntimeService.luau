@@ -34,7 +34,7 @@ function CaptureRuntimeService.new(options: {
 	local scheduler = options.scheduler or globals.task
 	local random = options.random or globals.Random.new()
 	local capture: any = nil
-	local securePoint: any = nil
+	local securePoints: any = nil
 	local connections = {}
 	local playerConnections: { [number]: { any } } = {}
 	local generations: { [number]: number } = {}
@@ -139,8 +139,8 @@ function CaptureRuntimeService.new(options: {
 		return "REJECT_STATE_CAPTURE_" .. string.upper(result.status)
 	end
 
-	local function secure(player: any)
-		if not running or capture == nil or securePoint == nil then
+	local function secure(player: any, pointId: string?)
+		if not running or capture == nil or securePoints == nil then
 			return
 		end
 		local p, generation = position(player)
@@ -148,7 +148,10 @@ function CaptureRuntimeService.new(options: {
 		if p == nil or generation == nil or active == nil then
 			return
 		end
-		local s = securePoint.Position
+		local s = options.worldRuntime.secureDestination(player, pointId)
+		if s == nil then
+			return
+		end
 		capture.secure(player.UserId, p, { x = s.X, y = s.Y, z = s.Z }, generation, active)
 	end
 
@@ -208,13 +211,9 @@ function CaptureRuntimeService.new(options: {
 
 	local function start()
 		assert(not running and capture == nil, "capture runtime already started")
-		local authored = options.workspace:FindFirstChild("MonsterVaultWorld")
-		securePoint = if authored then authored:FindFirstChild("FixtureSecurePoint") else nil
-		assert(securePoint ~= nil and securePoint:IsA("BasePart"), "missing fixture secure point")
-		assert(
-			securePoint:GetAttribute("SecurePointId") == "secure-point/fixture-spawn",
-			"secure point mismatch"
-		)
+		local index = options.worldRuntime.authoring()
+		assert(index ~= nil and next(index.securePoints) ~= nil, "unbound secure points")
+		securePoints = index.securePoints
 		local world = options.worldRuntime.world()
 		assert(world ~= nil, "world runtime unavailable")
 		capture = CaptureService.new({
@@ -340,20 +339,22 @@ function CaptureRuntimeService.new(options: {
 				capture.playerLeft(player.UserId)
 			end)
 		)
-		table.insert(
-			connections,
-			securePoint.Touched:Connect(function(part)
-				local character = part:FindFirstAncestorOfClass("Model")
-				local player = if character
-					then options.players:GetPlayerFromCharacter(character)
-					else nil
-				if player ~= nil then
-					scheduler.spawn(function()
-						secure(player)
-					end)
-				end
-			end)
-		)
+		for id, bound in securePoints do
+			table.insert(
+				connections,
+				bound.part.Touched:Connect(function(part)
+					local character = part:FindFirstAncestorOfClass("Model")
+					local player = if character
+						then options.players:GetPlayerFromCharacter(character)
+						else nil
+					if player ~= nil then
+						scheduler.spawn(function()
+							secure(player, id)
+						end)
+					end
+				end)
+			)
+		end
 		pulse(pulseGeneration)
 	end
 

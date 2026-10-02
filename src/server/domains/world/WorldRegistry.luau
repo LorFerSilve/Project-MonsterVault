@@ -64,6 +64,11 @@ function WorldRegistry.new(config: any): any
 	local contexts = index(config.spawnContexts, "spawn-context", 64)
 	local landmarks = index(config.landmarks, "landmark", 64)
 	local objectives = index(config.objectives, "field-objective", 32)
+	local safeOutposts = index(config.safeOutposts or {}, "safe-outpost", 4)
+	local securePoints = index(config.securePoints or {}, "secure-point", 8)
+	local recoveryAnchors = index(config.recoveryAnchors or {}, "recovery-anchor", 8)
+	local vaultAccessPoints = index(config.vaultAccessPoints or {}, "vault-access-point", 8)
+	local travelNodes = index(config.travelNodes or {}, "travel-node", 8)
 	local roles, milestones = {}, {}
 	local roleAccess = {
 		HomeHub = false,
@@ -136,6 +141,26 @@ function WorldRegistry.new(config: any): any
 		local m = r.mastery
 		if m ~= nil then
 			assert(m.milestoneId == roleMilestone[r.role], "invalid mastery binding")
+			assert(
+				type(m.contentSnapshotIds) == "table"
+					and #m.contentSnapshotIds > 0
+					and #m.contentSnapshotIds <= 8,
+				"invalid mastery epochs"
+			)
+			local seenEpochs = {}
+			for key, epoch in m.contentSnapshotIds do
+				assert(
+					type(key) == "number"
+						and key % 1 == 0
+						and key >= 1
+						and key <= #m.contentSnapshotIds
+						and id(epoch, "content-snapshot")
+						and not seenEpochs[epoch],
+					"invalid mastery epoch"
+				)
+				seenEpochs[epoch] = true
+			end
+			assert(seenEpochs[config.contentSnapshotId], "unbound current mastery recipe")
 			references(m.landmarkIds, landmarks, 64)
 			references(m.coreSpeciesIds, species, 64)
 			references(m.objectiveIds, objectives, 32)
@@ -168,6 +193,99 @@ function WorldRegistry.new(config: any): any
 			end
 		end
 	end
+	local topology = {
+		HomeHub = { Starter = true },
+		Starter = { HomeHub = true, MidA = true, MidB = true },
+		MidA = { Starter = true, Advanced = true },
+		MidB = { Starter = true, Advanced = true },
+		Advanced = { MidA = true, MidB = true },
+	}
+	if config.authoringVersion ~= nil then
+		assert(config.authoringVersion == 1, "unsupported authoring version")
+		for _, r in regions do
+			references(r.neighborIds, regions, 3)
+			local expected = topology[r.role]
+			local count = 0
+			for _ in expected do
+				count += 1
+			end
+			assert(#r.neighborIds == count, "invalid launch topology")
+			for _, neighbor in r.neighborIds do
+				assert(expected[regions[neighbor].role], "invalid launch edge")
+			end
+			if r.role ~= "HomeHub" then
+				assert(
+					r.mastery ~= nil and safeOutposts[r.entryOutpostId] ~= nil,
+					"missing field entry/mastery"
+				)
+				assert(safeOutposts[r.entryOutpostId].regionId == r.id, "wrong entry region")
+				local countHabitats = 0
+				for _, h in habitats do
+					if h.regionId == r.id then
+						countHabitats += 1
+					end
+				end
+				assert(countHabitats >= 2, "missing habitat choice")
+			end
+		end
+	end
+	for _, utilities in
+		{ safeOutposts, securePoints, recoveryAnchors, vaultAccessPoints, travelNodes }
+	do
+		for _, d in utilities do
+			assert(regions[d.regionId] ~= nil, "orphan utility")
+			if d.radius ~= nil then
+				assert(
+					type(d.radius) == "number" and d.radius > 0 and d.radius <= 16,
+					"invalid utility radius"
+				)
+			end
+			if d.outpostId ~= nil then
+				assert(
+					safeOutposts[d.outpostId] ~= nil
+						and safeOutposts[d.outpostId].regionId == d.regionId,
+					"orphan field utility"
+				)
+			end
+		end
+	end
+	for _, utilities in { safeOutposts, securePoints, vaultAccessPoints } do
+		for _, d in utilities do
+			assert(
+				type(d.radius) == "number" and d.radius > 0 and d.radius <= 16,
+				"missing utility radius"
+			)
+		end
+	end
+	for _, o in safeOutposts do
+		assert(regions[o.regionId].role ~= "HomeHub", "invalid field outpost")
+		assert(
+			securePoints[o.securePointId] ~= nil and securePoints[o.securePointId].outpostId == o.id,
+			"missing outpost extraction"
+		)
+		assert(
+			recoveryAnchors[o.recoveryAnchorId] ~= nil
+				and recoveryAnchors[o.recoveryAnchorId].outpostId == o.id,
+			"missing outpost recovery"
+		)
+	end
+	for _, t in travelNodes do
+		assert(
+			recoveryAnchors[t.recoveryAnchorId] ~= nil
+				and recoveryAnchors[t.recoveryAnchorId].regionId == t.regionId,
+			"unsafe travel binding"
+		)
+	end
+	if config.authoringVersion ~= nil then
+		local home = roles.HomeHub
+		for _, map in { securePoints, recoveryAnchors, vaultAccessPoints, travelNodes } do
+			local found = false
+			for _, d in map do
+				found = found or d.regionId == home
+			end
+			assert(found, "missing Home Hub utility")
+		end
+	end
 	return table.freeze({
 		contentSnapshotId = config.contentSnapshotId,
 		regions = regions,
@@ -178,6 +296,12 @@ function WorldRegistry.new(config: any): any
 		spawnContexts = contexts,
 		landmarks = landmarks,
 		objectives = objectives,
+		authoringVersion = config.authoringVersion,
+		safeOutposts = safeOutposts,
+		securePoints = securePoints,
+		recoveryAnchors = recoveryAnchors,
+		vaultAccessPoints = vaultAccessPoints,
+		travelNodes = travelNodes,
 	})
 end
 return WorldRegistry

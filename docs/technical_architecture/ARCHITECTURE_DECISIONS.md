@@ -3647,3 +3647,25 @@ World Energy rewards and deferred/event/commercial/temporary sources remain unbo
 ### Gate consequence
 
 First dependency PASS with [evidence and full open gate matrix](../implementation/IMP10_IMPLEMENTATION_EVIDENCE.md). **IMP-10 remains OPEN.** Full authored biome/utility content, remaining spawn/travel/mastery/hazard/reward scaling and phase validation are not replaced by the fixture. **VS1-19 / AD-249 full 30-player L1 at MaxPlayers=60 and supported real-client performance remain mandatory before IMP-10 COMPLETE.**
+
+## AD-256 — Bind canonical authored DEV biomes and safe utilities
+
+**Date:** 2026-10-02
+**Status:** Accepted — selected dependency PASS; IMP-10 OPEN
+**Authority:** GDS-9 §§4–14; TA-5 static identity; TA-9 §§4–13, 26–30; TA-7/8 P2 owners; TA-17 runtime bindings.
+
+### Content and authority
+
+WorldDefinitions v2 and the Rojo map author the existing five-role graph in one place. Starter IDs/positions/history survive. Each field has two habitats, explicit context anchors, Common Core membership below full-pool mastery, a survey/active return route and safe entry outpost. Mid A/B have different route shape/elevation and registered pools. Home Hub owns primary Secure/Vault/Recovery/Travel points. Geometry/pools are DEV content tuning; no topology, biome rule, hazard or premium mechanic is added.
+
+WorldAuthoringIndex snapshots semantic region/habitat/landmark/outpost/utility/context bindings before Ready. Missing/unknown/duplicate/mismatched/unsafe metadata fails closed; object names are not IDs, and private weights/rewards are absent from attributes. Recovery/Travel destinations are static bindings, with their actions still disabled/unimplemented.
+
+CaptureRuntime resolves validated Secure Points with current target access and alive server presence before unchanged TA-7 extraction. Source access and admitted P2/custody/retry semantics remain authoritative. The Home Vault prompt/sole-ID interaction delegates existing owner readback after spatial/Ready/access checks. Missing/moved/retagged bindings reject; another utility role cannot extract or grant value.
+
+Field mastery reuses World V1 facts/P2 evaluation. Recipes approve historical mastery epochs: Starter v1/v2, new Mid/Advanced v2. A protected v1 Mid/Advanced fact cannot become authority merely because a recipe is newly bound. Legitimate mastery remains historical without ownership/discovery backfill. World/event/commercial/temporary/deferred grants stay protected while unbound.
+
+### Gate consequence
+
+[Evidence](../implementation/IMP10_AUTHORED_CONTENT_EVIDENCE.md): 163 fast tests, 9 native C0 suites, 19 native authoring cases, actual regional capture/routes/purchases, real DEV unknown writes, native client tampering/projection-loss readback and fresh Play/rejoin. Studio ends in Edit with 81 sources and 54 parts matching Rojo.
+
+Regional capture probes reuse the bounded encounter owner via server-only composition at actual authored anchors. Shipped ordinary spawning retains the Starter fixture. Next: region-scoped spawn scheduling; no additional scheduler is introduced. Travel/recovery, hazards, rewards and full security/scaling remain open. VS1-19 / AD-249 30-player L1 and supported real-client performance are unsatisfied mandatory gates before IMP-10 COMPLETE; IMP-11 cannot start.

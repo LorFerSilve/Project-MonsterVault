@@ -34,6 +34,6 @@ The native spatial probe moves the actual Studio avatar under server control and
 
 ## Remaining ownership
 
-Next dependency: author the remaining canonical biome/content and safe-utility bindings, then region-scoped spawn scheduling; travel/recovery/hazards and full scaling remain phase work. Mid mastery recipes and actions stay unavailable until their actual content is authored and validated. Existing topology and non-premium/active progression rules constrain that work.
+At AD-255 closure the next dependency was remaining authored biome/content and safe utilities. [AD-256 evidence](IMP10_AUTHORED_CONTENT_EVIDENCE.md) now closes that dependency, including actual Mid/Advanced recipes/targets. Next: region-scoped spawn scheduling; travel/recovery/hazards/rewards and full scaling remain phase work. Validation above remains historical evidence for the first dependency.
 
 **VS1-19 / AD-249 remains DEFERRED — environment limitation. Full controlled L0/L1, L1 30 players at MaxPlayers=60, repetitions and supported real-client frame/memory evidence must actually run and pass before IMP-10 COMPLETE.** IMP-11 cannot start while IMP-10 remains open.

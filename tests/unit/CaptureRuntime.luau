@@ -216,8 +216,17 @@ local function harness(useRealCapture: boolean?): any
 			injectGlobals = true,
 		})()
 	local worldState = "IdleAvailable"
+	local allowPoint = true
 	local runtime = runtimeModule.new({
 		worldRuntime = {
+			authoring = function()
+				return { securePoints = { ["secure-point/fixture-spawn"] = { part = securePoint } } }
+			end,
+			secureDestination = function(_player: any, id: string?)
+				return if allowPoint and (id == nil or id == "secure-point/fixture-spawn")
+					then securePoint.Position
+					else nil
+			end,
 			world = function()
 				return {
 					interaction = function()
@@ -311,6 +320,9 @@ local function harness(useRealCapture: boolean?): any
 		playersById = playersById,
 		profiles = profiles,
 		securePoint = securePoint,
+		setPointAccess = function(value: boolean)
+			allowPoint = value
+		end,
 		pending = pending,
 		custodies = custodies,
 		calls = calls,
@@ -345,6 +357,21 @@ local function harness(useRealCapture: boolean?): any
 			end
 		end,
 	}
+end
+
+local function extractionRequiresBoundUtility()
+	local h = harness()
+	local player = h.addPlayer(42)
+	h.runtime.start()
+	h.runtime.secure(player, "recovery-anchor/starter")
+	assert(#h.callsFor("secure") == 0, "non-extraction role cannot secure")
+	h.setPointAccess(false)
+	h.runtime.secure(player, "secure-point/fixture-spawn")
+	assert(#h.callsFor("secure") == 0, "world target authority is required")
+	h.setPointAccess(true)
+	h.runtime.secure(player, "secure-point/fixture-spawn")
+	assert(#h.callsFor("secure") == 1, "valid target delegates exact TA-7 finalization")
+	h.runtime.stop()
 end
 
 local function shutdownRequiresLiveMatchingCharacter()
@@ -605,6 +632,7 @@ local function captureResyncRecoversLifecycleAndKeepsRequestCorrelation()
 end
 
 return {
+	extractionRequiresBoundUtility = extractionRequiresBoundUtility,
 	shutdownRequiresLiveMatchingCharacter = shutdownRequiresLiveMatchingCharacter,
 	pendingPulseReconcilesWithoutSpatialProof = pendingPulseReconcilesWithoutSpatialProof,
 	shutdownReconcilesPendingWithoutPlayer = shutdownReconcilesPendingWithoutPlayer,

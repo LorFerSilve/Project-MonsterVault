@@ -4,23 +4,27 @@ local FixtureDefinition = require(script.Parent.Parent.domains.world.FixtureDefi
 local WorldService = require(script.Parent.Parent.domains.world.WorldService)
 local WorldRegistry = require(script.Parent.Parent.domains.world.WorldRegistry)
 local WorldDefinitions = require(script.Parent.Parent.domains.world.WorldDefinitions)
+local WorldAuthoringIndex = require(script.Parent.Parent.domains.world.WorldAuthoringIndex)
 local VariantIdentity = require(script.Parent.Parent.domains.capture.VariantIdentity)
 
 local WorldRuntimeService = {}
 
-function WorldRuntimeService.new(options: {
-	workspace: any,
-	collectionService: any,
-	httpService: any,
-	diagnostics: any,
-	worldProgression: any?,
-	worldActions: any?,
-	profileCoordinator: any?,
-	event: any?,
-	clock: (() -> number)?,
-	scheduler: any?,
-	random: any?,
-})
+function WorldRuntimeService.new(
+	options: {
+		workspace: any,
+		collectionService: any,
+		httpService: any,
+		diagnostics: any,
+		worldProgression: any?,
+		worldActions: any?,
+		profileCoordinator: any?,
+		event: any?,
+		fixture: any?, -- Server composition/test injection; never a wire field.
+		clock: (() -> number)?,
+		scheduler: any?,
+		random: any?,
+	}
+)
 	local globals = getfenv() :: any
 	local Instance = globals.Instance
 	local Vector3 = globals.Vector3
@@ -37,7 +41,10 @@ function WorldRuntimeService.new(options: {
 	local registry = if options.worldProgression
 		then options.worldProgression.registry
 		else WorldRegistry.new(WorldDefinitions)
+	local fixture = options.fixture or FixtureDefinition
+	local authoringIndex: any = nil
 	local landmarkIndex: any = nil
+	local vaultAccessHandler: any = nil
 	local landmarkConnections = {}
 	local prompts = {}
 	local function resync(player: any, requestId: string): string
@@ -101,6 +108,13 @@ function WorldRuntimeService.new(options: {
 			return root ~= nil
 				and humanoid ~= nil
 				and humanoid.Health > 0
+				and bound.part.Parent ~= nil
+				and bound.part:IsDescendantOf(bound.root)
+				and bound.part:HasTag(bound.tag)
+				and bound.part.Anchored
+				and bound.part.Position == bound.position
+				and bound.part:GetAttribute("LandmarkId") == landmarkId
+				and bound.part:GetAttribute("RegionId") == bound.regionId
 				and (root.Position - bound.position).Magnitude <= bound.radius
 		end)
 		if result.status == "Committed" or result.status == "AlreadyCommitted" then
@@ -114,65 +128,79 @@ function WorldRuntimeService.new(options: {
 
 	local function validateAuthoring()
 		local authored = options.workspace:FindFirstChild("MonsterVaultWorld")
-		assert(authored ~= nil and authored:IsA("Folder"), "missing authored world folder")
-		local anchor = authored:FindFirstChild("FixtureCreatureAnchor")
-		assert(anchor ~= nil and anchor:IsA("BasePart"), "missing fixture creature anchor")
+		authoringIndex = WorldAuthoringIndex.new(registry, authored, options.collectionService)
+		landmarkIndex = authoringIndex.landmarks
+		local anchor =
+			assert(authoringIndex.spawnAnchors[fixture.spawnContextId], "unknown encounter anchor")
+		local context = registry.spawnContexts[fixture.spawnContextId]
 		assert(
-			anchor:GetAttribute("SpawnContextId") == FixtureDefinition.spawnContextId,
-			"fixture spawn context mismatch"
+			anchor.regionId == fixture.regionId
+				and anchor.habitatId == fixture.habitatId
+				and table.find(context.speciesIds, fixture.speciesId)
+				and registry.species[fixture.speciesId].rarityId == fixture.rarityId
+				and table.find(context.contentSnapshotIds, fixture.contentSnapshotId),
+			"encounter provenance mismatch"
 		)
+		local p = fixture.position
 		assert(
-			anchor:GetAttribute("SpeciesId") == FixtureDefinition.speciesId,
-			"fixture species mismatch"
+			(anchor.position - Vector3.new(p.x, p.y, p.z)).Magnitude < 0.01,
+			"encounter anchor position mismatch"
 		)
-		local expected = FixtureDefinition.position
-		assert(
-			(anchor.Position - Vector3.new(expected.x, expected.y, expected.z)).Magnitude < 0.01,
-			"fixture anchor position mismatch"
-		)
-		local context = assert(
-			registry.spawnContexts[FixtureDefinition.spawnContextId],
-			"unknown fixture context"
-		)
-		assert(
-			registry.habitats[context.habitatId].regionId == FixtureDefinition.regionId
-				and context.habitatId == FixtureDefinition.habitatId,
-			"fixture registry region mismatch"
-		)
-		assert(
-			table.find(context.speciesIds, FixtureDefinition.speciesId) ~= nil
-				and table.find(context.contentSnapshotIds, FixtureDefinition.contentSnapshotId)
-					~= nil,
-			"fixture registry provenance mismatch"
-		)
-		local index = {}
-		for _, part in options.collectionService:GetTagged("MonsterVaultLandmark") do
-			local landmarkId = part:GetAttribute("LandmarkId")
-			local d = registry.landmarks[landmarkId]
-			assert(
-				d ~= nil
-					and index[landmarkId] == nil
-					and part:IsA("BasePart")
-					and part:IsDescendantOf(authored)
-					and part.Anchored,
-				"invalid authored landmark"
-			)
-			assert(part:GetAttribute("RegionId") == d.regionId, "landmark region mismatch")
-			index[landmarkId] =
-				table.freeze({ position = part.Position, radius = d.radius, part = part })
+	end
+	local function liveBinding(bound: any): boolean
+		local part = bound.part
+		return part.Parent ~= nil
+			and part:IsDescendantOf(bound.root)
+			and part:HasTag(bound.tag)
+			and part.Anchored
+			and part.Position == bound.position
+			and part:GetAttribute(bound.attribute) == bound.id
+			and part:GetAttribute("RegionId") == bound.regionId
+	end
+	local function eligible(player: any, bound: any): boolean
+		if
+			not running
+			or bound == nil
+			or not liveBinding(bound)
+			or options.worldProgression == nil
+			or options.profileCoordinator == nil
+		then
+			return false
 		end
-		for landmarkId in registry.landmarks do
-			assert(index[landmarkId] ~= nil, "missing authored landmark")
+		local session = options.profileCoordinator.get(player.UserId)
+		if session == nil or session.state() ~= "Ready" then
+			return false
 		end
-		for a, va in index do
-			for b, vb in index do
-				assert(
-					a == b or (va.position - vb.position).Magnitude > va.radius + vb.radius,
-					"overlapping route points"
-				)
+		local character = player.Character
+		local root = if character then character:FindFirstChild("HumanoidRootPart") else nil
+		local humanoid = if character then character:FindFirstChildOfClass("Humanoid") else nil
+		return root ~= nil
+			and humanoid ~= nil
+			and humanoid.Health > 0
+			and (root.Position - bound.position).Magnitude <= bound.radius
+			and options.worldActions ~= nil
+			and options.worldActions.canAccess(session.snapshot(), bound.regionId)
+	end
+	local function useUtility(player: any, id: string, requestId: string): string
+		local bound = if authoringIndex then authoringIndex.vaultAccessPoints[id] else nil
+		if not eligible(player, bound) then
+			return "REJECT_STATE_WORLD_UTILITY"
+		end
+		if vaultAccessHandler == nil then
+			return "UNAVAILABLE_WORLD_VAULT"
+		end
+		return vaultAccessHandler(player, requestId)
+	end
+	local function secureDestination(player: any, pointId: string?): any
+		if authoringIndex == nil then
+			return nil
+		end
+		for id, bound in authoringIndex.securePoints do
+			if (pointId == nil or pointId == id) and eligible(player, bound) then
+				return bound.position
 			end
 		end
-		landmarkIndex = table.freeze(index)
+		return nil
 	end
 
 	local function materialize(projection: any): any
@@ -251,7 +279,7 @@ function WorldRuntimeService.new(options: {
 		runtimeRoot = root
 		creatures = creatureFolder
 		world = WorldService.new({
-			fixture = FixtureDefinition,
+			fixture = fixture,
 			clock = clock,
 			newId = function()
 				return "creature-" .. options.httpService:GenerateGUID(false)
@@ -280,9 +308,7 @@ function WorldRuntimeService.new(options: {
 				local prompt = Instance.new("ProximityPrompt")
 				prompt.Name = "MonsterVaultSurvey"
 				prompt.ActionText = "Survey"
-				prompt.ObjectText = if landmarkId == "landmark/fixture-entry"
-					then "Entry landmark"
-					else "Clearing landmark"
+				prompt.ObjectText = registry.landmarks[landmarkId].label or "Survey landmark"
 				prompt.MaxActivationDistance = bound.radius
 				prompt.RequiresLineOfSight = false
 				prompt.Parent = bound.part
@@ -294,6 +320,21 @@ function WorldRuntimeService.new(options: {
 					end)
 				)
 			end
+		end
+		for id, bound in authoringIndex.vaultAccessPoints do
+			local prompt = Instance.new("ProximityPrompt")
+			prompt.Name, prompt.ActionText, prompt.ObjectText =
+				"MonsterVaultVault", "View Vault", "Vault terminal"
+			prompt.MaxActivationDistance = bound.radius
+			prompt.RequiresLineOfSight = false
+			prompt.Parent = bound.part
+			table.insert(prompts, prompt)
+			table.insert(
+				landmarkConnections,
+				prompt.Triggered:Connect(function(player)
+					useUtility(player, id, options.httpService:GenerateGUID(false))
+				end)
+			)
 		end
 		pulse(generation)
 	end
@@ -334,6 +375,17 @@ function WorldRuntimeService.new(options: {
 			return registry.landmarks[id] ~= nil
 		end,
 		registry = registry,
+		authoring = function(): any
+			return authoringIndex
+		end,
+		secureDestination = secureDestination,
+		useUtility = useUtility,
+		bindVaultAccess = function(handler: any)
+			vaultAccessHandler = handler
+		end,
+		isUtility = function(id: string): boolean
+			return registry.vaultAccessPoints[id] ~= nil
+		end,
 	}
 end
 
