@@ -442,10 +442,11 @@ local function pendingFinalizationReconcilesAfterResetAndDisconnect()
 	repository.loseNextResultAfterWrite()
 	check(capture.secure(42, SECURE, SECURE, 1, session).status == "OutcomeUnknown")
 	check(capture.state(id) == "FinalizationPending" and session.state() == "PersistenceAtRisk")
+	check(capture.hasAcquisition(42), "pending finalization blocks travel")
 	check(admitted.operationId == custody.operationId and admitted.securedAt == 1_700_000_000)
 	check(table.isfrozen(admitted) and table.isfrozen(admitted.variantIdentity))
 	check(table.isfrozen(admitted.origin), "nested operation context is immutable")
-	capture.interrupt(42)
+	capture.interrupt(42, true)
 	capture.disconnect(42)
 	clock.advance(45)
 	capture.tick()
@@ -459,10 +460,27 @@ local function pendingFinalizationReconcilesAfterResetAndDisconnect()
 	check(stored.profileRevision == 2 and calls == 2, "lost result reconciles exactly once")
 	check(stored.collection.creaturesById[id].securedAt == admitted.securedAt)
 	check(capture.state(id) == "Secured" and capture.recordCounts().active == 0)
+	check(not capture.hasAcquisition(42), "reconciled ownership releases travel block")
 	check(#capture.pendingFinalizations() == 0 and world.populationCount() == 0)
 	world.stop()
 end
 
+local function recoveryAbortsGraceWithoutOwnership()
+	local capture, world, _, _, writes = captureHarness()
+	local id = check(world.currentId())
+	claimAndCapture(capture, id)
+	capture.disconnect(42)
+	check(capture.hasAcquisition(42) and capture.state(id) == "TransportGrace")
+	capture.interrupt(42, true)
+	check(capture.state(id) == "Interrupted" and not capture.hasAcquisition(42))
+	check(capture.resume(42, 2, {}).status == "Rejected" and writes() == 0)
+	capture.interrupt(42, true)
+	check(
+		world.populationCount() == 0 and writes() == 0,
+		"recovery is idempotent, never extraction"
+	)
+	world.stop()
+end
 local function pendingFinalizationRetriesUnchangedAfterThrownOutcome()
 	local admitted: any = nil
 	local capture: any = nil
@@ -570,6 +588,7 @@ return {
 	capacityRaceKeepsExactCreatureInOverflow = capacityRaceKeepsExactCreatureInOverflow,
 	transportGraceResumesSameIdentityAndExpires = transportGraceResumesSameIdentityAndExpires,
 	resetInterruptsClaimsAndCustodyWithoutOwnership = resetInterruptsClaimsAndCustodyWithoutOwnership,
+	recoveryAbortsGraceWithoutOwnership = recoveryAbortsGraceWithoutOwnership,
 	controlledShutdownUsesExistingOperationOnly = controlledShutdownUsesExistingOperationOnly,
 	pendingFinalizationReconcilesAfterResetAndDisconnect = pendingFinalizationReconcilesAfterResetAndDisconnect,
 	pendingFinalizationRetriesUnchangedAfterThrownOutcome = pendingFinalizationRetriesUnchangedAfterThrownOutcome,

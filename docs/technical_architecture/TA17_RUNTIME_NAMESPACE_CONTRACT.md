@@ -55,7 +55,7 @@ Same base envelope but no critical/durable truth and <=768 encoded bytes.
 | Session.RequestResync | A | domain:enum, knownRevision:number? |
 | Interaction.PrimaryInteract | B | interactionId:string |
 | Capture.SubmitAction | C | captureSessionId:string, actionId:string, clientSequence:number |
-| World.RequestFastTravel | C | nodeId:string |
+| World.RequestFastTravel | C | nodeId:string, characterGeneration:integer |
 | Creature.SetLock | C | creatureInstanceId:string, locked:boolean |
 | Creature.Release | C | creatureInstanceId:string |
 | Vault.SetProductionAssignment | C | slotId:string, creatureInstanceId:string?; required envelope expectedRevision:integer |
@@ -251,3 +251,11 @@ Native tags / required semantic ID attributes:
 All parts are anchored with matching RegionId. Spawn anchors also require HabitatId and an eligible public SpeciesId. IDs use existing lowercase slash/slug grammar; names are presentation. SafeOutpost binds same-region SecurePoint/RecoveryAnchor; TravelNode binds same-region RecoveryAnchor. Immutable membership/transforms/volumes, definition-owned radii, required IDs, unique utilities, region/survey overlap and encounter/outpost separation validate before Ready. Unbound hazard tags reject. Utilities are bounded to four outposts and at most eight entries of each remaining utility kind.
 
 Interaction.PrimaryInteract retains its strict sole interactionId payload and now also resolves known VaultAccessPoint IDs. Native prompts invoke that same server action. The existing owner Projection.Snapshot/readback is the result; transforms/access/mastery cannot be submitted by the client. Capture extraction consumes a server-resolved exact point with target access/presence validated first. Travel/Recovery IDs remain static bindings and Fast Travel stays disabled. Protocol/remotes/world readback remain unchanged.
+
+## AD-259 authored travel and recovery
+
+`World.RequestFastTravel` is the reserved Class C route with strict `{nodeId, characterGeneration}`. nodeId is 1..96 bytes; generation is an integer in `[1, 2^53)`. Extra fields and expectedRevision reject. The generation is a hint compared with private server presence, never read back from a client-set attribute. Ready/source/context/access/discovery/acquisition/arrival validation precedes native movement. Codes include OK_WORLD_TRAVELLED; REJECT_STATE_TRAVEL_CONTEXT/STALE/BUSY/DESTINATION/ACCESS/UNDISCOVERED/ACQUISITION/SOURCE/ROUTE/ARRIVAL; REJECT_RATE_LIMIT and UNAVAILABLE_TRAVEL_ARRIVAL. Existing Class C caching returns known duplicate results; a failed relocation deactivates presence for bounded recovery, never request replay.
+
+World schema 1 optionally accepts `travelNodes` for legacy compatibility; preparation adds an empty map to valid existing state. At most five known IDs map to the same permanent proof shape `{operationId, revision, contentSnapshotId}`. Each node definition explicitly approves discovery epochs, including the current snapshot. Unknown facts/epochs/fields stay protected. Only observed, ready, alive, spatially valid and access-authorized native actions produce proofs through existing P2, without other progress/value effects.
+
+`World.StateChanged` owner readback adds `discoveredTravelNodeIds` (sorted/unique/registered, at most 5) and optional `characterGeneration` (current native positive integer hint) to profileRevision/masteryMilestoneIds. It omits operation IDs/private facts. Reliable 4 KiB and existing Class A recovery contracts remain intact. Native prompt destination IDs are server bindings. No new remote, client authority, persisted ordinary population/cycle/position or reward source is introduced.

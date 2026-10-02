@@ -43,7 +43,7 @@ function CaptureRuntimeService.new(options: {
 	local running = false
 	local pulseGeneration = 0
 
-	local function position(player: any): (any?, number?)
+	local function position(player: any, draining: boolean?): (any?, number?)
 		local character = player.Character
 		if character == nil then
 			return nil, nil
@@ -54,6 +54,13 @@ function CaptureRuntimeService.new(options: {
 			return nil, nil
 		end
 		local p = root.Position
+		if
+			not draining
+			and options.worldRuntime.presenceReady
+			and not options.worldRuntime.presenceReady(player, generations[player.UserId] or 0)
+		then
+			return nil, nil
+		end
 		return { x = p.X, y = p.Y, z = p.Z }, generations[player.UserId] or 0
 	end
 
@@ -204,6 +211,7 @@ function CaptureRuntimeService.new(options: {
 				capture.interrupt(player.UserId)
 			end
 		end
+
 		scheduler.delay(1, function()
 			pulse(generation)
 		end)
@@ -299,6 +307,12 @@ function CaptureRuntimeService.new(options: {
 			local function characterReady(character: any)
 				capture.interrupt(player.UserId)
 				generations[player.UserId] = (generations[player.UserId] or 0) + 1
+				if player.SetAttribute then
+					player:SetAttribute(
+						"MonsterVaultCharacterGeneration",
+						generations[player.UserId]
+					)
+				end
 				if deathConnection ~= nil then
 					deathConnection:Disconnect()
 				end
@@ -339,6 +353,57 @@ function CaptureRuntimeService.new(options: {
 				capture.playerLeft(player.UserId)
 			end)
 		)
+		if options.worldRuntime.bindCaptureLifecycle then
+			options.worldRuntime.bindCaptureLifecycle({
+				presence = function(player: any): any
+					if
+						not running
+						or options.players:GetPlayerByUserId(player.UserId) ~= player
+					then
+						return nil
+					end
+					local character = player.Character
+					local root = if character
+						then character:FindFirstChild("HumanoidRootPart")
+						else nil
+					local humanoid = if character
+						then character:FindFirstChildOfClass("Humanoid")
+						else nil
+					if
+						character == nil
+						or character.Parent == nil
+						or root == nil
+						or not root:IsDescendantOf(character)
+						or humanoid == nil
+						or not humanoid:IsDescendantOf(character)
+						or humanoid.Health <= 0
+					then
+						return nil
+					end
+					return {
+						character = character,
+						root = root,
+						humanoid = humanoid,
+						generation = generations[player.UserId],
+					}
+				end,
+				blocked = function(player: any): boolean
+					return capture.hasAcquisition(player.UserId)
+				end,
+				recover = function(player: any, generation: number): boolean
+					if not running or generations[player.UserId] ~= generation then
+						return false
+					end
+					capture.interrupt(player.UserId, true)
+					generations[player.UserId] += 1
+					player:SetAttribute(
+						"MonsterVaultCharacterGeneration",
+						generations[player.UserId]
+					)
+					return true
+				end,
+			})
+		end
 		for id, bound in securePoints do
 			table.insert(
 				connections,
@@ -364,6 +429,9 @@ function CaptureRuntimeService.new(options: {
 		end
 		running = false
 		pulseGeneration += 1
+		if options.worldRuntime.bindCaptureLifecycle then
+			options.worldRuntime.bindCaptureLifecycle(nil)
+		end
 		for _, connection in connections do
 			connection:Disconnect()
 		end
@@ -389,7 +457,7 @@ function CaptureRuntimeService.new(options: {
 				local p: any = nil
 				local generation: number? = nil
 				if player ~= nil then
-					p, generation = position(player)
+					p, generation = position(player, true) -- Existing trusted shutdown policy; not a live world action.
 				end
 				if player ~= nil and p ~= nil and generation == custody.generation then
 					local result = capture.finalizeForShutdown(custody.userId, active)

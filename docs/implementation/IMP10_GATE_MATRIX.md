@@ -1,6 +1,6 @@
 # IMP-10 gate matrix
 
-Date: 2026-10-02. **IMP-10 OPEN.** Evidence: [AD-255 registry/mastery/access](IMP10_IMPLEMENTATION_EVIDENCE.md), [AD-256 authored content/utilities](IMP10_AUTHORED_CONTENT_EVIDENCE.md), [AD-257 regional scheduling](IMP10_SPAWN_SCHEDULING_EVIDENCE.md), [AD-258 World Cycle/context](IMP10_WORLD_CYCLE_EVIDENCE.md).
+Date: 2026-10-02. **IMP-10 OPEN.** Evidence: [AD-255 registry/mastery/access](IMP10_IMPLEMENTATION_EVIDENCE.md), [AD-256 authored content/utilities](IMP10_AUTHORED_CONTENT_EVIDENCE.md), [AD-257 regional scheduling](IMP10_SPAWN_SCHEDULING_EVIDENCE.md), [AD-258 World Cycle/context](IMP10_WORLD_CYCLE_EVIDENCE.md), [AD-259 travel/discovery/recovery](IMP10_TRAVEL_RECOVERY_EVIDENCE.md).
 
 | Gate | Status | Evidence / required next work |
 | --- | --- | --- |
@@ -12,14 +12,14 @@ Date: 2026-10-02. **IMP-10 OPEN.** Evidence: [AD-255 registry/mastery/access](IM
 | TA-8 access purchase/mastery binding | PASS | Actual world owner; Mid A/B either order; Advanced requires both Mid masteries and prior unlocks; exact retries/rejoin/stale/insufficient tests |
 | TA-9 actual valuable action access authority | PASS, implemented actions | Capture source/exact extraction target, survey/objective/Vault terminal; locked/unknown/missing/corrupt fail closed; admitted P2 recovery retained |
 | TA-4 retry/race/unknown-result/save/rejoin | PASS, first dependency | Existing queue/candidate/idempotency; C0 races/cut points; real DEV Class A recovery before/after write and fresh Play composition |
-| TA-3 owner-only world readback | PASS | Strict Class A world selector; existing V1 remotes; at most four sorted public mastery IDs; actual client negative/readback evidence |
-| TA-7/8 capacity/economy/production/ownership regressions | PASS | 179 fast tests; native capture across transitions, same original P2/history, all four masteries, three purchases/retries and wallet 320/rejoin; unbound rewards protected |
+| TA-3 owner-only world readback | PASS | Strict Class A world selector; at most four mastery and five discovered node IDs plus generation hint; private proofs/authority omitted; actual client negatives/readback |
+| TA-7/8 capacity/economy/production/ownership regressions | PASS | 187 fast tests; native capture/recovery/transition retains original P2/history, all masteries, three purchases/retries and wallet 320/rejoin; unbound rewards protected |
 | Canonical biome geometry/content/core pools/utility topology | PASS, authored DEV | Fixed graph, two habitats per field, distinct Mid pools/routes, safe utilities; 231 native ground samples. Launch/scaling audit remains below |
 | Mid/Advanced authored active mastery paths | PASS, actual scheduled encounters | Real authored routes and shared regional pool captures produce mastery/access without fixture switching |
 | Spawn reservations/region-habitat budgets/central scheduler | PASS, current authored DEV slice | Eight bounded habitats; 2 buckets/sec; pending/custody counts; weighted pools; ground/binding checks; expiry/refill; stale/yielded/duplicate fencing; native caps/capture/engine streaming/fault/rejoin evidence |
 | Ordinary World Cycle/prospective context binding | PASS, authored DEV | Single fixed-epoch/versioned server clock in existing pulse; explicit phase-independent bindings; exact boundaries, pinned reservations/custody, invalid-clock admission stop, native captures/streaming/tampering/fresh Play; no profile/history rewrites |
 | Protected content lifetime classes | OPEN, protected while unbound | Current scheduled content is Common; later rare/protected classes require concrete approved content/lifetime bindings and capture-fairness validation; cycle PASS does not enable them |
-| Travel/discovery/safe arrival/recovery authority | OPEN | Destinations authored/validated; discovery/relocation and recovery lifecycle still require access/presence/custody authority |
+| Travel/discovery/safe arrival/recovery authority | PASS, authored DEV | Existing hub ↔ discovered/unlocked field nodes; strict Class C/source/access/acquisition checks, bounded P0/generation fences, validated R15/R6 arrival, exact-once P2 discovery, actual streaming/client races/faults/fresh Play/respawn; recovery cannot extract |
 | Hazards/locked-presence correction and transport fairness | OPEN | TA-9 server hazard/arrival/correction semantics preserving custody and Secured ownership |
 | Authorized bounded world rewards and objective dedupe | OPEN, protected while unbound | Bind concrete reward source definitions/amounts through TA-8 primitive when that dependency is implemented; no speculative grant enabled here |
 | Full TA-14/15 World Scaling/security/performance audit | OPEN | Full candidate content and budgets, controlled workload and platform measurements |

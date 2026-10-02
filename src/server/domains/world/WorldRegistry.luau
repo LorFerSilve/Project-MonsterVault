@@ -136,7 +136,7 @@ function WorldRegistry.new(config: any): any
 	local securePoints = index(config.securePoints or {}, "secure-point", 8)
 	local recoveryAnchors = index(config.recoveryAnchors or {}, "recovery-anchor", 8)
 	local vaultAccessPoints = index(config.vaultAccessPoints or {}, "vault-access-point", 8)
-	local travelNodes = index(config.travelNodes or {}, "travel-node", 8)
+	local travelNodes = index(config.travelNodes or {}, "travel-node", 5)
 	local roles, milestones = {}, {}
 	local roleAccess = {
 		HomeHub = false,
@@ -325,7 +325,7 @@ function WorldRegistry.new(config: any): any
 			end
 		end
 	end
-	for _, utilities in { safeOutposts, securePoints, vaultAccessPoints } do
+	for _, utilities in { safeOutposts, securePoints, vaultAccessPoints, travelNodes } do
 		for _, d in utilities do
 			assert(
 				type(d.radius) == "number" and d.radius > 0 and d.radius <= 16,
@@ -346,6 +346,29 @@ function WorldRegistry.new(config: any): any
 		)
 	end
 	for _, t in travelNodes do
+		assert(
+			type(t.discoveryContentSnapshotIds) == "table"
+				and #t.discoveryContentSnapshotIds >= 1
+				and #t.discoveryContentSnapshotIds <= 8,
+			"unbound travel discovery epochs"
+		)
+		local count, seen = 0, {}
+		for key, epoch in t.discoveryContentSnapshotIds do
+			count += 1
+			assert(
+				type(key) == "number"
+					and key % 1 == 0
+					and key >= 1
+					and key <= #t.discoveryContentSnapshotIds,
+				"invalid travel epoch array"
+			)
+			assert(id(epoch, "content-snapshot") and not seen[epoch], "invalid travel epoch")
+			seen[epoch] = true
+		end
+		assert(
+			count == #t.discoveryContentSnapshotIds and seen[config.contentSnapshotId],
+			"unbound current travel epoch"
+		)
 		assert(
 			recoveryAnchors[t.recoveryAnchorId] ~= nil
 				and recoveryAnchors[t.recoveryAnchorId].regionId == t.regionId,

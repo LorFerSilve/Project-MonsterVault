@@ -3,6 +3,7 @@
 local FixtureDefinition = require(script.Parent.Parent.domains.world.FixtureDefinition)
 local WorldService = require(script.Parent.Parent.domains.world.WorldService)
 local WorldCycle = require(script.Parent.Parent.domains.world.WorldCycle)
+local WorldTravelService = require(script.Parent.Parent.domains.world.WorldTravelService)
 local WorldRegistry = require(script.Parent.Parent.domains.world.WorldRegistry)
 local WorldDefinitions = require(script.Parent.Parent.domains.world.WorldDefinitions)
 local WorldAuthoringIndex = require(script.Parent.Parent.domains.world.WorldAuthoringIndex)
@@ -92,6 +93,8 @@ function WorldRuntimeService.new(
 	local vaultAccessHandler: any = nil
 	local landmarkConnections = {}
 	local prompts = {}
+	local captureLifecycle: any = nil
+	local travelOwner: any = nil
 	local function resync(player: any, requestId: string): string
 		if
 			not running
@@ -118,6 +121,14 @@ function WorldRuntimeService.new(
 				end
 			end
 			table.sort(milestones)
+			local discovered = {}
+			for id in registry.travelNodes do
+				if options.worldProgression.travelDiscovered(p, id) then
+					table.insert(discovered, id)
+				end
+			end
+			table.sort(discovered)
+			local presence = if captureLifecycle then captureLifecycle.presence(player) else nil
 			-- At most four registry-backed IDs; no private evidence or operation IDs.
 			options.event:FireClient(player, {
 				protocolVersion = 1,
@@ -126,6 +137,8 @@ function WorldRuntimeService.new(
 				payload = {
 					profileRevision = p.profileRevision,
 					masteryMilestoneIds = milestones,
+					discoveredTravelNodeIds = discovered,
+					characterGeneration = if presence then presence.generation else nil,
 				},
 			})
 		end
@@ -147,6 +160,14 @@ function WorldRuntimeService.new(
 		end
 		local session = options.profileCoordinator.get(player.UserId)
 		local result = options.worldActions.visit(session, landmarkId, function(): boolean
+			local presence = if captureLifecycle then captureLifecycle.presence(player) else nil
+			if
+				presence == nil
+				or travelOwner == nil
+				or not travelOwner.ready(player, presence.generation)
+			then
+				return false
+			end
 			local character = player.Character
 			local root = if character then character:FindFirstChild("HumanoidRootPart") else nil
 			local humanoid = if character then character:FindFirstChildOfClass("Humanoid") else nil
@@ -227,6 +248,7 @@ function WorldRuntimeService.new(
 		end
 		local players = options.players or game:GetService("Players")
 		for _, player in players:GetPlayers() do
+			local presence = if captureLifecycle then captureLifecycle.presence(player) else nil
 			local session = options.profileCoordinator.get(player.UserId)
 			local character = player.Character
 			local root = if character then character:FindFirstChild("HumanoidRootPart") else nil
@@ -234,6 +256,9 @@ function WorldRuntimeService.new(
 			if
 				session
 				and session.state() == "Ready"
+				and presence ~= nil
+				and travelOwner ~= nil
+				and travelOwner.ready(player, presence.generation)
 				and root
 				and humanoid
 				and humanoid.Health > 0
@@ -306,6 +331,14 @@ function WorldRuntimeService.new(
 		if session == nil or session.state() ~= "Ready" then
 			return false
 		end
+		local presence = if captureLifecycle then captureLifecycle.presence(player) else nil
+		if
+			presence == nil
+			or travelOwner == nil
+			or not travelOwner.ready(player, presence.generation)
+		then
+			return false
+		end
 		local character = player.Character
 		local root = if character then character:FindFirstChild("HumanoidRootPart") else nil
 		local humanoid = if character then character:FindFirstChildOfClass("Humanoid") else nil
@@ -336,6 +369,244 @@ function WorldRuntimeService.new(
 			end
 		end
 		return nil
+	end
+
+	local function regionAt(position: any): string?
+		if
+			position.X ~= position.X
+			or position.Y ~= position.Y
+			or position.Z ~= position.Z
+			or math.abs(position.X) >= math.huge
+			or math.abs(position.Y) >= math.huge
+			or math.abs(position.Z) >= math.huge
+		then
+			return nil
+		end
+		for id, bound in authoringIndex.regions do
+			local p = bound.cframe:PointToObjectSpace(position)
+			if
+				math.abs(p.X) <= bound.size.X / 2
+				and math.abs(p.Y) <= bound.size.Y / 2
+				and math.abs(p.Z) <= bound.size.Z / 2
+			then
+				return id
+			end
+		end
+		return nil
+	end
+	local function travelContext(player: any): any
+		if
+			not running
+			or captureLifecycle == nil
+			or options.profileCoordinator == nil
+			or options.worldActions == nil
+		then
+			return nil
+		end
+		local session = options.profileCoordinator.get(player.UserId)
+		local p = captureLifecycle.presence(player)
+		if
+			session == nil
+			or session.state() ~= "Ready"
+			or p == nil
+			or type(p.generation) ~= "number"
+		then
+			return nil
+		end
+		local profile = session.snapshot()
+		local regionId = regionAt(p.root.Position)
+		local v = p.root.Position
+		local finite = v.X == v.X
+			and v.Y == v.Y
+			and v.Z == v.Z
+			and math.abs(v.X) < math.huge
+			and math.abs(v.Y) < math.huge
+			and math.abs(v.Z) < math.huge
+		local ground: any = nil
+		if finite then
+			local ray = globals.RaycastParams.new()
+			ray.FilterType, ray.FilterDescendantsInstances, ray.RespectCanCollide =
+				Enum.RaycastFilterType.Include,
+				{ authoringIndex.regions[registry.roles.HomeHub].root },
+				true
+			ground = spatialWorkspace:Raycast(v + Vector3.new(0, 3, 0), Vector3.new(0, -24, 0), ray)
+		end
+		p.session, p.profile, p.player, p.regionId = session, profile, player, regionId
+		-- Authored connectors remain walkable even outside a region volume.
+		p.validPosition = ground ~= nil
+			and ground.Normal.Y >= 0.5
+			and (
+				regionId == nil
+				or (
+					liveBinding(authoringIndex.regions[regionId])
+					and options.worldActions.canAccess(profile, regionId)
+				)
+			)
+		return p
+	end
+	local function nodeAt(context: any): string?
+		for id, bound in authoringIndex.travelNodes do
+			if
+				context.regionId == bound.regionId
+				and liveBinding(bound)
+				and (context.root.Position - bound.position).Magnitude <= bound.radius
+			then
+				return id
+			end
+		end
+		return nil
+	end
+	local function safeTarget(context: any, anchorId: string): any
+		local d, bound =
+			registry.recoveryAnchors[anchorId], authoringIndex.recoveryAnchors[anchorId]
+		if
+			d == nil
+			or bound == nil
+			or not liveBinding(bound)
+			or not liveBinding(authoringIndex.regions[d.regionId])
+			or not options.worldActions.canAccess(context.profile, d.regionId)
+		then
+			return nil
+		end
+		if d.outpostId and not liveBinding(authoringIndex.safeOutposts[d.outpostId]) then
+			return nil
+		end
+		local ray = globals.RaycastParams.new()
+		ray.FilterType, ray.FilterDescendantsInstances, ray.RespectCanCollide =
+			Enum.RaycastFilterType.Include, { bound.root }, true
+		local ground: any = nil
+		for _, offset in
+			{
+				Vector3.zero,
+				Vector3.new(1.8, 0, 1.8),
+				Vector3.new(-1.8, 0, 1.8),
+				Vector3.new(1.8, 0, -1.8),
+				Vector3.new(-1.8, 0, -1.8),
+			}
+		do
+			local hit = spatialWorkspace:Raycast(
+				bound.position + offset + Vector3.new(0, 12, 0),
+				Vector3.new(0, -24, 0),
+				ray
+			)
+			if
+				hit == nil
+				or not hit.Instance.CanCollide
+				or hit.Normal.Y < 0.5
+				or hit.Position.Y > bound.position.Y + 0.01
+				or bound.position.Y - hit.Position.Y > 4
+			then
+				return nil
+			end
+			if ground and math.abs(hit.Position.Y - ground) > 0.25 then
+				return nil
+			end
+			ground = hit.Position.Y
+		end
+		local hip = context.humanoid.HipHeight
+		if hip ~= hip or hip < 0 or hip > 16 or context.root.Size.Y > 16 then
+			return nil
+		end
+		-- R6 standing height also includes its leg; R15 encodes it in HipHeight.
+		if context.humanoid.RigType == Enum.HumanoidRigType.R6 then
+			local leg = context.character:FindFirstChild("Left Leg")
+			if leg == nil or not leg:IsA("BasePart") or leg.Size.Y > 16 then
+				return nil
+			end
+			hip += leg.Size.Y
+		end
+		local position = Vector3.new(
+			bound.position.X,
+			ground + hip + context.root.Size.Y / 2 + 0.1,
+			bound.position.Z
+		)
+		if regionAt(position) ~= d.regionId then
+			return nil
+		end
+		local overlap = globals.OverlapParams.new()
+		overlap.FilterType, overlap.FilterDescendantsInstances, overlap.MaxParts =
+			Enum.RaycastFilterType.Include, { bound.root }, 1
+		overlap.RespectCanCollide = true
+		local height = math.max(4, hip + context.root.Size.Y + 2)
+		for _, part in
+			spatialWorkspace:GetPartBoundsInBox(
+				globals.CFrame.new(Vector3.new(position.X, ground + height / 2 + 0.2, position.Z)),
+				Vector3.new(4, height, 4),
+				overlap
+			)
+		do
+			if part.CanCollide then
+				return nil
+			end
+		end
+		return {
+			anchorId = anchorId,
+			regionId = d.regionId,
+			cframe = globals.CFrame.new(position) * bound.cframe.Rotation,
+		}
+	end
+	local function observeNode(player: any, context: any): string
+		local id = nodeAt(context)
+		if id == nil or not context.validPosition or cycle.sample() == nil then
+			return "REJECT_STATE_TRAVEL_DISCOVERY_CONTEXT"
+		end
+		local result = options.worldActions.discoverTravel(context.session, id, function(): boolean
+			local live = travelContext(player)
+			return live ~= nil
+				and live.character == context.character
+				and live.generation == context.generation
+				and live.validPosition
+				and nodeAt(live) == id
+				and cycle.sample() ~= nil
+		end)
+		if result.status == "Committed" or result.status == "AlreadyCommitted" then
+			return "OK_WORLD_TRAVEL_DISCOVERED"
+		end
+		return if result.status == "OutcomeUnknown"
+			then "OUTCOME_UNKNOWN_WORLD_WRITE"
+			else "PROTECTED_WORLD_UNAVAILABLE"
+	end
+	local function destination(context: any, nodeId: string): (any, string)
+		local d, bound = registry.travelNodes[nodeId], authoringIndex.travelNodes[nodeId]
+		if d == nil or bound == nil or not liveBinding(bound) then
+			return nil, "DESTINATION"
+		end
+		if not context.validPosition or cycle.sample() == nil then
+			return nil, "CONTEXT"
+		end
+		if not options.worldActions.canAccess(context.profile, d.regionId) then
+			return nil, "ACCESS"
+		end
+		if not options.worldProgression.travelDiscovered(context.profile, nodeId) then
+			return nil, "UNDISCOVERED"
+		end
+		if captureLifecycle.blocked(context.player) then
+			return nil, "ACQUISITION"
+		end
+		local source = nodeAt(context)
+		if
+			source == nil or not options.worldProgression.travelDiscovered(context.profile, source)
+		then
+			return nil, "SOURCE"
+		end
+		local home = registry.roles.HomeHub
+		if registry.travelNodes[source].regionId ~= home and d.regionId ~= home then
+			return nil, "ROUTE"
+		end
+		if source == nodeId then
+			return nil, "ROUTE"
+		end
+		local target = safeTarget(context, d.recoveryAnchorId)
+		if target == nil then
+			return nil, "ARRIVAL"
+		end
+		target.nodeId = nodeId
+		return target, "OK"
+	end
+	local function stepTravel()
+		if travelOwner then
+			travelOwner.step((options.players or game:GetService("Players")):GetPlayers())
+		end
 	end
 
 	local function materialize(projection: any): any
@@ -376,6 +647,10 @@ function WorldRuntimeService.new(
 		end
 		pulseTicket += 1
 		publishCycle()
+		if not running or expectedGeneration ~= generation then
+			return
+		end
+		stepTravel()
 		if not running or expectedGeneration ~= generation then
 			return
 		end
@@ -505,7 +780,124 @@ function WorldRuntimeService.new(
 		})
 		generation = world.start()
 		running = true
+		travelOwner = WorldTravelService.new({
+			clock = clock,
+			context = travelContext,
+			destination = destination,
+			observe = observeNode,
+			recovery = function(context: any, lastRegion: string?): any
+				local preferred = if context.validPosition and lastRegion
+					then context.regionId
+					else lastRegion
+				for _, role in { "Starter", "MidA", "MidB", "Advanced" } do
+					local id = registry.roles[role]
+					if id == preferred then
+						local anchor =
+							registry.safeOutposts[registry.regions[id].entryOutpostId].recoveryAnchorId
+						local target = safeTarget(context, anchor)
+						if target then
+							return target
+						end
+					end
+				end
+				return safeTarget(context, "recovery-anchor/home-hub")
+			end,
+			relocate = function(
+				player: any,
+				context: any,
+				target: any,
+				recovery: boolean,
+				current: () -> boolean
+			): boolean
+				if not current() then
+					return false
+				end
+				local fresh = travelContext(player)
+				if fresh == nil then
+					return false
+				end
+				if not recovery then
+					local valid = destination(fresh, target.nodeId)
+					if valid == nil then
+						return false
+					end
+				end
+				local liveTarget = safeTarget(fresh, target.anchorId)
+				if liveTarget == nil or liveTarget.cframe ~= target.cframe then
+					return false
+				end
+				if recovery and not captureLifecycle.recover(player, context.generation) then
+					return false
+				end
+				if player.Character ~= context.character or context.session.state() ~= "Ready" then
+					return false
+				end
+				pcall(function()
+					context.root:SetNetworkOwner(nil)
+				end)
+				context.character:PivotTo(
+					liveTarget.cframe * context.root.CFrame:Inverse() * context.character:GetPivot()
+				)
+				context.root.AssemblyLinearVelocity, context.root.AssemblyAngularVelocity =
+					Vector3.zero, Vector3.zero
+				pcall(function()
+					context.root:SetNetworkOwnershipAuto()
+				end)
+				return regionAt(context.root.Position) == target.regionId
+					and (context.root.Position - target.cframe.Position).Magnitude < 0.1
+			end,
+		})
 		if options.worldActions then
+			for _, role in { "Starter", "MidA", "MidB", "Advanced", "HomeHub" } do
+				local nodeId = if role == "HomeHub"
+					then "travel-node/home-hub"
+					elseif role == "Starter" then "travel-node/starter"
+					elseif role == "MidA" then "travel-node/mid-a"
+					elseif role == "MidB" then "travel-node/mid-b"
+					else "travel-node/advanced"
+				local bound = authoringIndex.travelNodes[nodeId]
+				local destinations: { string } = if role == "HomeHub"
+					then {
+						"travel-node/starter",
+						"travel-node/mid-a",
+						"travel-node/mid-b",
+						"travel-node/advanced",
+					}
+					else { "travel-node/home-hub" }
+				for n, targetId in destinations do
+					local prompt = Instance.new("ProximityPrompt")
+					prompt.Name, prompt.ActionText = "MonsterVaultTravel", "Travel"
+					prompt.ObjectText = if targetId == "travel-node/home-hub"
+						then "Home Hub"
+						else registry.regions[registry.travelNodes[targetId].regionId].role
+					prompt.MaxActivationDistance, prompt.RequiresLineOfSight = bound.radius, false
+					prompt.KeyboardKeyCode = ({
+						Enum.KeyCode.E,
+						Enum.KeyCode.F,
+						Enum.KeyCode.R,
+						Enum.KeyCode.T,
+					})[n]
+					prompt.GamepadKeyCode = ({
+						Enum.KeyCode.ButtonX,
+						Enum.KeyCode.ButtonY,
+						Enum.KeyCode.ButtonL1,
+						Enum.KeyCode.ButtonR1,
+					})[n]
+					prompt.Exclusivity = Enum.ProximityPromptExclusivity.OnePerButton
+					prompt.UIOffset = globals.Vector2.new(0, (n - 1) * 60)
+					prompt.Parent = bound.part
+					table.insert(prompts, prompt)
+					table.insert(
+						landmarkConnections,
+						prompt.Triggered:Connect(function(player)
+							local context = travelContext(player)
+							if context then
+								travelOwner.travel(player, targetId, context.generation)
+							end
+						end)
+					)
+				end
+			end
 			for landmarkId, bound in landmarkIndex do
 				local prompt = Instance.new("ProximityPrompt")
 				prompt.Name = "MonsterVaultSurvey"
@@ -544,6 +936,10 @@ function WorldRuntimeService.new(
 	local function stop(): { string }
 		running = false
 		generation += 1
+		if travelOwner then
+			travelOwner.stop()
+		end
+		captureLifecycle = nil
 		for _, connection in landmarkConnections do
 			connection:Disconnect()
 		end
@@ -577,6 +973,31 @@ function WorldRuntimeService.new(
 			return registry.landmarks[id] ~= nil
 		end,
 		registry = registry,
+		travel = function(player: any, nodeId: string, characterGeneration: number): string
+			return if travelOwner
+				then travelOwner.travel(player, nodeId, characterGeneration)
+				else "UNAVAILABLE_WORLD"
+		end,
+		presenceReady = function(player: any, characterGeneration: number): boolean
+			return travelOwner ~= nil and travelOwner.ready(player, characterGeneration)
+		end,
+		bindCaptureLifecycle = function(owner: any)
+			captureLifecycle = owner
+			if owner then
+				stepTravel()
+			end
+		end,
+		isTravelNode = function(id: string): boolean
+			return registry.travelNodes[id] ~= nil
+		end,
+		discoverTravel = function(player: any, id: string): string
+			local context = travelContext(player)
+			return if context
+					and nodeAt(context) == id
+					and travelOwner.ready(player, context.generation)
+				then observeNode(player, context)
+				else "REJECT_STATE_TRAVEL_DISCOVERY_CONTEXT"
+		end,
 		cycleState = function(): any
 			return if running then cycle.sample() else nil
 		end,

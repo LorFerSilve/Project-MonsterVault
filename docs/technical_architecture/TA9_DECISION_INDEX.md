@@ -98,3 +98,7 @@
 ## AD-258 implementation binding
 
 [AD-258](ARCHITECTURE_DECISIONS.md#ad-258--bind-the-ordinary-world-cycle-prospectively-to-regional-reservations) binds the fixed-epoch/versioned ordinary clock and immutable prospective context in the existing regional scheduler. Current DEV content remains phase-independent; captures/history and server authority are retained. [Native cycle evidence](../implementation/IMP10_WORLD_CYCLE_EVIDENCE.md) closes this slice, with travel/recovery and mandatory VS1-19 still open.
+
+## AD-259 implementation binding
+
+[AD-259](ARCHITECTURE_DECISIONS.md#ad-259--bind-authored-travel-persistent-discovery-and-safe-recovery) closes authored travel/discovery/safe arrival/recovery through existing server authority, TA-7 interruption and P2 candidate recovery. [Native evidence](../implementation/IMP10_TRAVEL_RECOVERY_EVIDENCE.md) records actual routes, clients, streaming, faults and fresh Play/respawn. Hazards/transport fairness, rewards, protected lifetimes/full audit and mandatory VS1-19 remain open.

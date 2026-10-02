@@ -71,6 +71,8 @@ AD-257: GDS-9 and TA-3/4/5/6/7/8/9/14/15/17 bind bounded regional reservations/w
 
 AD-258: GDS-9 WC-01..03 and TA-3/5/6/7/9/14/15/17 bind a fixed-epoch/versioned ordinary clock, immutable habitat/context eligibility and prospective reservation provenance through the existing pulse. Eight T15.world.cycle C0 suites, actual captures across phase changes, native engine streaming/tampering, unchanged transactional history and fresh Play/rejoin are recorded in [cycle evidence](../implementation/IMP10_WORLD_CYCLE_EVIDENCE.md). Selected slice PASS; travel/discovery/safe arrival/recovery is next. IMP-10 remains OPEN; VS1-19 stays mandatory.
 
+AD-259: GDS-9 RA-01..03/TR-01..04 and TA-3/4/5/6/7/8/9/14/15/17 → immutable authored node/anchor bindings, WorldTravelService P0 presence/transition fencing, native WorldRuntime arrival/access/source authority, TA-7 acquisition/interruption bridge and WorldActionUseCase P2 discovery. Eight new grouped fast tests, ten native C0 cases and real client/engine/scoped DEV/fresh Play evidence are in [travel evidence](../implementation/IMP10_TRAVEL_RECOVERY_EVIDENCE.md). Slice PASS; hazards/locked-presence correction/transport fairness are next. IMP-10 remains OPEN, with mandatory VS1-19 / AD-249 retained.
+
 Every implementation PR names:
 
 - implementation phase;
