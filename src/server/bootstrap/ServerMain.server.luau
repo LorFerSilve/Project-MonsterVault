@@ -37,6 +37,7 @@ local composition = ServerComposition.new({
 		local worldRuntime = WorldRuntimeService.new({
 			workspace = game:GetService("Workspace"),
 			collectionService = game:GetService("CollectionService"),
+			players = game:GetService("Players"),
 			httpService = HttpService,
 			diagnostics = diagnostics,
 			worldProgression = if profileRuntime then profileRuntime.worldProgression else nil,

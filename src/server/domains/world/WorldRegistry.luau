@@ -288,6 +288,7 @@ function WorldRegistry.new(config: any): any
 	end
 	return table.freeze({
 		contentSnapshotId = config.contentSnapshotId,
+		spawnPolicy = freeze(config.spawnPolicy),
 		regions = regions,
 		roles = table.freeze(roles),
 		milestones = table.freeze(milestones),

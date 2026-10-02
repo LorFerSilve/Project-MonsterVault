@@ -67,6 +67,8 @@ IMP-9 dependency traceability (earlier rows retain their original handoff scope)
 
 AD-255: GDS-5/8/9 and TA-3/4/5/7/8/9/12/15/17 bind immutable registries, an authored index, actual mastery history, same-P2 regional Secured evidence and TA-8 access checks/recovery. Eight T15.world.progression C0 suites, native authoring/client/DEV cut points and fresh-server persistence are recorded in [IMP-10 evidence](../implementation/IMP10_IMPLEMENTATION_EVIDENCE.md). First dependency PASS; [remaining phase gates](../implementation/IMP10_GATE_MATRIX.md), including VS1-19, remain open. IMP-9 stays COMPLETE.
 
+AD-257: GDS-9 and TA-3/4/5/6/7/8/9/14/15/17 bind bounded regional reservations/weighted pools, one central scheduler, current presence/access, native placement and capture-safe cleanup through the existing world/capture owners. Eight T15.world.spawn C0 suites and actual native caps, regional captures/mastery, engine streaming, P2 fault recovery and fresh Play/rejoin are recorded in [scheduling evidence](../implementation/IMP10_SPAWN_SCHEDULING_EVIDENCE.md). Selected slice PASS; ordinary World Cycle and the remaining IMP-10/VS1-19 gates stay OPEN.
+
 Every implementation PR names:
 
 - implementation phase;

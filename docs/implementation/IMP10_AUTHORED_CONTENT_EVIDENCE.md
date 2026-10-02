@@ -36,6 +36,6 @@ Local projection loss is an explicit native client simulation after an engine st
 
 ## Remaining gates
 
-Next: **region-scoped spawn scheduling** over this index, preserving reservation identity/budgets, custody and protected variants. Travel discovery/relocation, safe arrival/recovery lifecycle, hazards/correction, bounded authorized world rewards and full security/scaling remain phase work.
+The next dependency, [region-scoped spawn scheduling](IMP10_SPAWN_SCHEDULING_EVIDENCE.md), is now closed under AD-257. The fixture-composition results above remain the historical AD-256 evidence; shipped regional opportunities and their actual pool/capture/streaming/rejoin proof are in AD-257. Ordinary World Cycle binding, travel discovery/relocation, safe arrival/recovery lifecycle, hazards/correction, bounded authorized world rewards and full security/scaling remain phase work.
 
 **VS1-19 / AD-249 remains DEFERRED — environment limitation. Full controlled L0/L1, L1 30 players at MaxPlayers=60, repetitions and supported real-client frame/memory must actually pass before IMP-10 COMPLETE. IMP-11 cannot start.**

@@ -1,0 +1,1778 @@
+{
+  "date": "2026-10-02",
+  "decision": "AD-257",
+  "dependency": "region-scoped spawn scheduling",
+  "status": "PASS",
+  "phaseStatus": "IMP-10 OPEN",
+  "baseMain": "6dff14ced92c8f683fc1c2231e0d81bbbee94626",
+  "housekeeping": {
+    "pr": 56,
+    "url": "https://github.com/LorFerSilve/Project-MonsterVault/pull/56",
+    "mergedAfterGreenCI": true
+  },
+  "studio": {
+    "studioId": "510b1800-f548-4a53-8b9e-116acccf6346",
+    "universeId": 10766503968,
+    "placeId": 110304961224794
+  },
+  "policy": {
+    "maxPopulationIncludingReservationsAndCustody": 8,
+    "maxPerHabitat": 1,
+    "maxPerFieldRegion": 2,
+    "bucketsPerPass": 2,
+    "stepSeconds": 1,
+    "retrySeconds": 2,
+    "maxAttempts": 3,
+    "refillSeconds": 5,
+    "idleLifetimeSeconds": 180
+  },
+  "tests": {
+    "fast": {
+      "passed": 171,
+      "total": 171
+    },
+    "nativeC0": {
+      "passed": true,
+      "cases": {
+        "1": "authoredBoundsAndPools",
+        "2": "captureProtectionRetirementAndReplenishment",
+        "3": "clockAndSelectionFailClosed",
+        "4": "destroyedProjectionsAndPlacementExhaustion",
+        "5": "longRunBoundsAndFreshSessionIdentity",
+        "6": "reservationsRetriesAndFaultIsolation",
+        "7": "staggeredCapsDormancyAndDuplicates",
+        "8": "yieldedMaterializationCannotResurrect"
+      },
+      "count": 8
+    },
+    "pythonCI": {
+      "passed": 28,
+      "total": 28
+    },
+    "static": "StyLua/Selene/dependency/integrity/Rojo/Luau PASS; existing missing Roblox definitions warning"
+  },
+  "nativeFlows": {
+    "initial": {
+      "passed": true,
+      "starter": {
+        "creatureInstanceId": "creature-9c1ca3a4-1619-45ce-9f2b-43cf22464056-2",
+        "spawnContextId": "spawn-context/starter-field",
+        "speciesId": "species/fixture-companion",
+        "variantIdentity": {
+          "protectedVariantReasons": [],
+          "speciesRarityId": "rarity/common",
+          "mutationIdsCanonical": [],
+          "spawnContextId": "spawn-context/starter-field",
+          "traitIds": [],
+          "contentSnapshotId": "content-snapshot/imp10-world-dev-v2",
+          "variantSignature": "species/fixture-companion|"
+        },
+        "contentSnapshotId": "content-snapshot/imp10-world-dev-v2"
+      },
+      "duplicateTickets": true,
+      "lockedClosed": true
+    },
+    "midB": {
+      "ownership": {
+        "spawnContextId": "spawn-context/mid-b",
+        "contentSnapshotId": "content-snapshot/imp10-world-dev-v2"
+      },
+      "role": "MidB",
+      "mastery": true,
+      "replenished": true,
+      "identity": {
+        "creatureInstanceId": "creature-9c1ca3a4-1619-45ce-9f2b-43cf22464056-7",
+        "spawnContextId": "spawn-context/mid-b",
+        "speciesId": "species/field-leaf",
+        "variantIdentity": {
+          "protectedVariantReasons": [],
+          "speciesRarityId": "rarity/common",
+          "mutationIdsCanonical": [],
+          "spawnContextId": "spawn-context/mid-b",
+          "traitIds": [],
+          "contentSnapshotId": "content-snapshot/imp10-world-dev-v2",
+          "variantSignature": "species/field-leaf|"
+        },
+        "contentSnapshotId": "content-snapshot/imp10-world-dev-v2"
+      },
+      "passed": true
+    },
+    "midA": {
+      "ownership": {
+        "spawnContextId": "spawn-context/mid-a",
+        "contentSnapshotId": "content-snapshot/imp10-world-dev-v2"
+      },
+      "role": "MidA",
+      "mastery": true,
+      "replenished": true,
+      "identity": {
+        "creatureInstanceId": "creature-9c1ca3a4-1619-45ce-9f2b-43cf22464056-4",
+        "spawnContextId": "spawn-context/mid-a",
+        "speciesId": "species/field-pebble",
+        "variantIdentity": {
+          "protectedVariantReasons": [],
+          "speciesRarityId": "rarity/common",
+          "mutationIdsCanonical": [],
+          "spawnContextId": "spawn-context/mid-a",
+          "traitIds": [],
+          "contentSnapshotId": "content-snapshot/imp10-world-dev-v2",
+          "variantSignature": "species/field-pebble|"
+        },
+        "contentSnapshotId": "content-snapshot/imp10-world-dev-v2"
+      },
+      "passed": true
+    },
+    "starter": {
+      "realMidAccess": true,
+      "capturedId": "creature-9c1ca3a4-1619-45ce-9f2b-43cf22464056-1",
+      "passed": true,
+      "replacement": "creature-9c1ca3a4-1619-45ce-9f2b-43cf22464056-3",
+      "energy": 520
+    },
+    "lifecycle": {
+      "nativeCap": 8,
+      "destroyedReplaced": true,
+      "invalidBindingClosed": true,
+      "energy": 320,
+      "duplicateTickets": true,
+      "passed": true,
+      "idleRefill": true
+    },
+    "advanced": {
+      "ownership": {
+        "spawnContextId": "spawn-context/advanced",
+        "contentSnapshotId": "content-snapshot/imp10-world-dev-v2"
+      },
+      "role": "Advanced",
+      "mastery": true,
+      "replenished": true,
+      "identity": {
+        "creatureInstanceId": "creature-9c1ca3a4-1619-45ce-9f2b-43cf22464056-11",
+        "spawnContextId": "spawn-context/advanced",
+        "speciesId": "species/field-leaf",
+        "variantIdentity": {
+          "protectedVariantReasons": [],
+          "speciesRarityId": "rarity/common",
+          "mutationIdsCanonical": [],
+          "spawnContextId": "spawn-context/advanced",
+          "traitIds": [],
+          "contentSnapshotId": "content-snapshot/imp10-world-dev-v2",
+          "variantSignature": "species/field-leaf|"
+        },
+        "contentSnapshotId": "content-snapshot/imp10-world-dev-v2"
+      },
+      "passed": true
+    }
+  },
+  "nativeFaultCuts": {
+    "before": {
+      "retryExact": true,
+      "passed": true,
+      "creatureId": "creature-7af3c76a-8bd2-446c-ae27-0301b9b3c11e-1",
+      "scope": "IMP10World-6e276979-c891-4f55-be69-5a7eaba16a55",
+      "mode": "Before",
+      "replenished": true,
+      "pendingObserved": true
+    },
+    "after": {
+      "retryExact": true,
+      "passed": true,
+      "creatureId": "creature-6af038f0-76db-4ba8-acb6-39c157ea02b1-1",
+      "scope": "IMP10World-a25205c9-c568-4fc6-9cf2-359950e0bc9b",
+      "mode": "After",
+      "replenished": true,
+      "pendingObserved": true
+    }
+  },
+  "streaming": {
+    "begin": {
+      "streamIn": true,
+      "creatureInstanceId": "creature-9c1ca3a4-1619-45ce-9f2b-43cf22464056-16",
+      "streamingEnabled": true
+    },
+    "eviction": {
+      "engineEvicted": true,
+      "creatureInstanceId": "creature-9c1ca3a4-1619-45ce-9f2b-43cf22464056-16"
+    },
+    "restore": {
+      "sameIdentity": "creature-9c1ca3a4-1619-45ce-9f2b-43cf22464056-16",
+      "engineRestored": true,
+      "tampering": "REJECT_VALIDATION_PAYLOAD",
+      "passed": true,
+      "simulatedLossRestored": true
+    },
+    "serverVerification": {
+      "passed": true,
+      "identity": {
+        "creatureInstanceId": "creature-9c1ca3a4-1619-45ce-9f2b-43cf22464056-16",
+        "spawnContextId": "spawn-context/advanced",
+        "speciesId": "species/field-leaf",
+        "variantIdentity": {
+          "protectedVariantReasons": [],
+          "speciesRarityId": "rarity/common",
+          "mutationIdsCanonical": [],
+          "spawnContextId": "spawn-context/advanced",
+          "traitIds": [],
+          "contentSnapshotId": "content-snapshot/imp10-world-dev-v2",
+          "variantSignature": "species/field-leaf|"
+        },
+        "contentSnapshotId": "content-snapshot/imp10-world-dev-v2"
+      },
+      "wallet": 320
+    },
+    "realClientPerformance": false
+  },
+  "release": {
+    "profile": {
+      "progression": {
+        "purchasesByUnlockId": {
+          "access/biome-mid-b": {
+            "configSnapshotId": "content-snapshot/imp9-progression-dev-v1",
+            "quoteId": "bb47f6be-5c0f-4fd6-be39-69f5ee9170d6",
+            "priceUnits": 100,
+            "quoteRevision": 1,
+            "timestamp": 1790932575,
+            "expectedRevision": 7,
+            "operationId": "247615d4-26d3-4c26-ae85-5f3cd302b815"
+          },
+          "access/biome-advanced": {
+            "configSnapshotId": "content-snapshot/imp9-progression-dev-v1",
+            "quoteId": "aa4cf6df-d2df-4962-9689-d3e3913ef26d",
+            "priceUnits": 200,
+            "quoteRevision": 1,
+            "timestamp": 1790932575,
+            "expectedRevision": 17,
+            "operationId": "d242e4ba-c631-4865-acc2-2d0bc8574a01"
+          },
+          "access/biome-mid-a": {
+            "configSnapshotId": "content-snapshot/imp9-progression-dev-v1",
+            "quoteId": "59bb3faa-f22b-4037-a074-0293e9573ae0",
+            "priceUnits": 100,
+            "quoteRevision": 1,
+            "timestamp": 1790932575,
+            "expectedRevision": 8,
+            "operationId": "93fdaf5d-f810-41a2-8593-fdcce572eec3"
+          }
+        },
+        "captureCapabilityLevel": 0,
+        "accessUnlocksById": {
+          "access/biome-mid-b": true,
+          "access/biome-advanced": true,
+          "access/biome-mid-a": true
+        },
+        "progressionSchemaVersion": 1
+      },
+      "profileRevision": 23,
+      "commerce": [],
+      "lastSuccessfulSaveAt": 1790932575,
+      "economy": {
+        "energySchemaVersion": 1,
+        "energyUnits": 320,
+        "recentEnergyOperations": {
+          "1": {
+            "sourceOrSinkId": "vault/production",
+            "resultClass": "Applied",
+            "operationId": "f5b1b12a-50a6-4ff9-963f-829aa3e1bb7e",
+            "configSnapshotId": "content-snapshot/imp9-production-dev-v1",
+            "expectedRevision": 6,
+            "deltaUnits": 720,
+            "timestamp": 1790932575,
+            "reasonCode": "production-claim",
+            "resultingWallet": 720
+          },
+          "2": {
+            "sourceOrSinkId": "access/biome-mid-b",
+            "resultClass": "Applied",
+            "operationId": "247615d4-26d3-4c26-ae85-5f3cd302b815",
+            "configSnapshotId": "content-snapshot/imp9-progression-dev-v1",
+            "expectedRevision": 7,
+            "deltaUnits": -100,
+            "timestamp": 1790932575,
+            "reasonCode": "access-unlock-purchase",
+            "resultingWallet": 620
+          },
+          "3": {
+            "sourceOrSinkId": "access/biome-mid-a",
+            "resultClass": "Applied",
+            "operationId": "93fdaf5d-f810-41a2-8593-fdcce572eec3",
+            "configSnapshotId": "content-snapshot/imp9-progression-dev-v1",
+            "expectedRevision": 8,
+            "deltaUnits": -100,
+            "timestamp": 1790932575,
+            "reasonCode": "access-unlock-purchase",
+            "resultingWallet": 520
+          },
+          "4": {
+            "sourceOrSinkId": "access/biome-advanced",
+            "resultClass": "Applied",
+            "operationId": "d242e4ba-c631-4865-acc2-2d0bc8574a01",
+            "configSnapshotId": "content-snapshot/imp9-progression-dev-v1",
+            "expectedRevision": 17,
+            "deltaUnits": -200,
+            "timestamp": 1790932575,
+            "reasonCode": "access-unlock-purchase",
+            "resultingWallet": 320
+          }
+        }
+      },
+      "schemaVersion": 1,
+      "trading": [],
+      "vault": {
+        "productionAssignments": {
+          "production/1": "creature-9c1ca3a4-1619-45ce-9f2b-43cf22464056-1"
+        },
+        "productionCursorUnixSeconds": 1790932575,
+        "productionSchemaVersion": 1,
+        "lastPresenceBoundary": "CleanOffline",
+        "capacitySchemaVersion": 1,
+        "productionBufferMilli": 0,
+        "displayAssignments": [],
+        "productionRateEpochId": "production-epoch/imp9-dev-v1"
+      },
+      "createdAt": 1790925375,
+      "settings": [],
+      "events": [],
+      "collection": {
+        "creaturesById": {
+          "creature-9c1ca3a4-1619-45ce-9f2b-43cf22464056-4": {
+            "speciesId": "species/field-pebble",
+            "securedAt": 1790932579,
+            "origin": {
+              "spawnContextId": "spawn-context/mid-a",
+              "contentSnapshotId": "content-snapshot/imp10-world-dev-v2"
+            },
+            "operationId": "5034898f-40c4-4546-adcf-ae38b92eb3af",
+            "overflowHeld": false,
+            "ownerUserId": 1925180832,
+            "securedSequence": 12,
+            "creatureInstanceId": "creature-9c1ca3a4-1619-45ce-9f2b-43cf22464056-4",
+            "variantIdentity": {
+              "mutationIdsCanonical": [],
+              "traitIds": [],
+              "protectedVariantReasons": [],
+              "spawnContextId": "spawn-context/mid-a",
+              "speciesRarityId": "rarity/common",
+              "contentSnapshotId": "content-snapshot/imp10-world-dev-v2",
+              "variantSignature": "species/field-pebble|"
+            },
+            "locked": false
+          },
+          "creature-9c1ca3a4-1619-45ce-9f2b-43cf22464056-7": {
+            "speciesId": "species/field-leaf",
+            "securedAt": 1790932581,
+            "origin": {
+              "spawnContextId": "spawn-context/mid-b",
+              "contentSnapshotId": "content-snapshot/imp10-world-dev-v2"
+            },
+            "operationId": "28613e05-75cc-4961-82f3-63a3b2df0cba",
+            "overflowHeld": false,
+            "ownerUserId": 1925180832,
+            "securedSequence": 16,
+            "creatureInstanceId": "creature-9c1ca3a4-1619-45ce-9f2b-43cf22464056-7",
+            "variantIdentity": {
+              "mutationIdsCanonical": [],
+              "traitIds": [],
+              "protectedVariantReasons": [],
+              "spawnContextId": "spawn-context/mid-b",
+              "speciesRarityId": "rarity/common",
+              "contentSnapshotId": "content-snapshot/imp10-world-dev-v2",
+              "variantSignature": "species/field-leaf|"
+            },
+            "locked": false
+          },
+          "creature-9c1ca3a4-1619-45ce-9f2b-43cf22464056-1": {
+            "speciesId": "species/fixture-orb",
+            "securedAt": 1790932576,
+            "origin": {
+              "spawnContextId": "spawn-context/fixture-clearing",
+              "contentSnapshotId": "content-snapshot/imp5-fixture-v1"
+            },
+            "operationId": "8fdf0829-d7d3-4e89-b8f4-cd1037ce7781",
+            "overflowHeld": false,
+            "ownerUserId": 1925180832,
+            "securedSequence": 4,
+            "creatureInstanceId": "creature-9c1ca3a4-1619-45ce-9f2b-43cf22464056-1",
+            "variantIdentity": {
+              "mutationIdsCanonical": [],
+              "traitIds": [],
+              "protectedVariantReasons": [],
+              "spawnContextId": "spawn-context/fixture-clearing",
+              "speciesRarityId": "rarity/common",
+              "contentSnapshotId": "content-snapshot/imp5-fixture-v1",
+              "variantSignature": "species/fixture-orb|"
+            },
+            "locked": false
+          },
+          "creature-9c1ca3a4-1619-45ce-9f2b-43cf22464056-11": {
+            "speciesId": "species/field-leaf",
+            "securedAt": 1790932583,
+            "origin": {
+              "spawnContextId": "spawn-context/advanced",
+              "contentSnapshotId": "content-snapshot/imp10-world-dev-v2"
+            },
+            "operationId": "e8c743b3-f68b-4b8e-8226-8c10e98b98f1",
+            "overflowHeld": false,
+            "securedSequence": 21,
+            "locked": false,
+            "creatureInstanceId": "creature-9c1ca3a4-1619-45ce-9f2b-43cf22464056-11",
+            "variantIdentity": {
+              "protectedVariantReasons": [],
+              "speciesRarityId": "rarity/common",
+              "mutationIdsCanonical": [],
+              "spawnContextId": "spawn-context/advanced",
+              "traitIds": [],
+              "contentSnapshotId": "content-snapshot/imp10-world-dev-v2",
+              "variantSignature": "species/field-leaf|"
+            },
+            "ownerUserId": 1925180832
+          }
+        }
+      },
+      "recentOperations": {
+        "28613e05-75cc-4961-82f3-63a3b2df0cba": 16,
+        "975e197e-9711-4dc5-8852-fed32af27390": 5,
+        "f6e70f49-e7d7-4747-9cd2-93d0ce343bf6": 3,
+        "72dfd2de-82c9-483c-b01a-83015415dd3c": 20,
+        "bbdad6fd-f04a-43bc-b781-eed9a2c31851": 22,
+        "2dcac804-d734-4963-9ab2-814d98c8a361": 17,
+        "7c69d104-6b92-461b-ace6-d8800105ba08": 11,
+        "5034898f-40c4-4546-adcf-ae38b92eb3af": 12,
+        "f5b1b12a-50a6-4ff9-963f-829aa3e1bb7e": 7,
+        "93fdaf5d-f810-41a2-8593-fdcce572eec3": 9,
+        "5a15da97-6a1f-4130-b818-3b9dfe7a278c": 14,
+        "31b3d130-560f-4629-b709-189a8b37c5b7": 19,
+        "b1b60fb2-00b2-4ed1-b48e-5dbad615dca4": 10,
+        "8fdf0829-d7d3-4e89-b8f4-cd1037ce7781": 4,
+        "4be23d93-ef6d-4db6-acdc-28be809a1bba": 6,
+        "d242e4ba-c631-4865-acc2-2d0bc8574a01": 18,
+        "15c23a80-4f34-42a3-a6f2-0cff5d3f4c73": 15,
+        "f5e9c630-75e0-4655-ac11-b412b784139d": 13,
+        "e8c743b3-f68b-4b8e-8226-8c10e98b98f1": 21,
+        "049f3a71-4fb0-4f9f-bd5c-717c8e25186e": 2,
+        "247615d4-26d3-4c26-ae85-5f3cd302b815": 8
+      },
+      "discovery": {
+        "variantBySignature": {
+          "species/field-leaf|": true,
+          "species/fixture-orb|": true,
+          "species/field-pebble|": true
+        },
+        "mutationsById": [],
+        "speciesById": {
+          "species/field-leaf": true,
+          "species/fixture-orb": true,
+          "species/field-pebble": true
+        }
+      },
+      "world": {
+        "regionalSpecies": {
+          "region/fixture-clearing": {
+            "species/fixture-orb": {
+              "revision": 4,
+              "contentSnapshotId": "content-snapshot/imp10-world-dev-v2",
+              "operationId": "8fdf0829-d7d3-4e89-b8f4-cd1037ce7781"
+            }
+          },
+          "region/biome-mid-a": {
+            "species/field-pebble": {
+              "revision": 12,
+              "contentSnapshotId": "content-snapshot/imp10-world-dev-v2",
+              "operationId": "5034898f-40c4-4546-adcf-ae38b92eb3af"
+            }
+          },
+          "region/biome-advanced": {
+            "species/field-leaf": {
+              "revision": 21,
+              "contentSnapshotId": "content-snapshot/imp10-world-dev-v2",
+              "operationId": "e8c743b3-f68b-4b8e-8226-8c10e98b98f1"
+            }
+          },
+          "region/biome-mid-b": {
+            "species/field-leaf": {
+              "revision": 16,
+              "contentSnapshotId": "content-snapshot/imp10-world-dev-v2",
+              "operationId": "28613e05-75cc-4961-82f3-63a3b2df0cba"
+            }
+          }
+        },
+        "landmarks": {
+          "landmark/mid-b-field": {
+            "revision": 15,
+            "contentSnapshotId": "content-snapshot/imp10-world-dev-v2",
+            "operationId": "15c23a80-4f34-42a3-a6f2-0cff5d3f4c73"
+          },
+          "landmark/mid-b-entry": {
+            "revision": 14,
+            "contentSnapshotId": "content-snapshot/imp10-world-dev-v2",
+            "operationId": "5a15da97-6a1f-4130-b818-3b9dfe7a278c"
+          },
+          "landmark/advanced-entry": {
+            "revision": 19,
+            "contentSnapshotId": "content-snapshot/imp10-world-dev-v2",
+            "operationId": "31b3d130-560f-4629-b709-189a8b37c5b7"
+          },
+          "landmark/mid-a-field": {
+            "revision": 11,
+            "contentSnapshotId": "content-snapshot/imp10-world-dev-v2",
+            "operationId": "7c69d104-6b92-461b-ace6-d8800105ba08"
+          },
+          "landmark/advanced-field": {
+            "revision": 20,
+            "contentSnapshotId": "content-snapshot/imp10-world-dev-v2",
+            "operationId": "72dfd2de-82c9-483c-b01a-83015415dd3c"
+          },
+          "landmark/fixture-entry": {
+            "revision": 2,
+            "contentSnapshotId": "content-snapshot/imp10-world-dev-v2",
+            "operationId": "049f3a71-4fb0-4f9f-bd5c-717c8e25186e"
+          },
+          "landmark/fixture-clearing": {
+            "revision": 3,
+            "contentSnapshotId": "content-snapshot/imp10-world-dev-v2",
+            "operationId": "f6e70f49-e7d7-4747-9cd2-93d0ce343bf6"
+          },
+          "landmark/mid-a-entry": {
+            "revision": 10,
+            "contentSnapshotId": "content-snapshot/imp10-world-dev-v2",
+            "operationId": "b1b60fb2-00b2-4ed1-b48e-5dbad615dca4"
+          }
+        },
+        "mastery": {
+          "milestone/region-mastery/mid-a": {
+            "revision": 13,
+            "contentSnapshotId": "content-snapshot/imp10-world-dev-v2",
+            "operationId": "f5e9c630-75e0-4655-ac11-b412b784139d"
+          },
+          "milestone/region-mastery/mid-b": {
+            "revision": 17,
+            "contentSnapshotId": "content-snapshot/imp10-world-dev-v2",
+            "operationId": "2dcac804-d734-4963-9ab2-814d98c8a361"
+          },
+          "milestone/region-mastery/advanced": {
+            "revision": 22,
+            "contentSnapshotId": "content-snapshot/imp10-world-dev-v2",
+            "operationId": "bbdad6fd-f04a-43bc-b781-eed9a2c31851"
+          },
+          "milestone/region-mastery/starter": {
+            "revision": 5,
+            "contentSnapshotId": "content-snapshot/imp10-world-dev-v2",
+            "operationId": "975e197e-9711-4dc5-8852-fed32af27390"
+          }
+        },
+        "schemaVersion": 1,
+        "objectives": {
+          "field-objective/mid-a-route": 3,
+          "field-objective/fixture-return-route": 3,
+          "field-objective/advanced-route": 3,
+          "field-objective/mid-b-route": 3
+        }
+      }
+    },
+    "expectedEnergy": 320,
+    "scope": "IMP10World-1f0ebe9b-6492-444f-9d7b-9c51668a7395",
+    "userId": 1925180832,
+    "receipts": {
+      "1": {
+        "expectedRevision": 7,
+        "payload": {
+          "quoteRevision": 1,
+          "unlockId": "access/biome-mid-b",
+          "quoteId": "bb47f6be-5c0f-4fd6-be39-69f5ee9170d6"
+        }
+      },
+      "2": {
+        "expectedRevision": 8,
+        "payload": {
+          "quoteRevision": 1,
+          "unlockId": "access/biome-mid-a",
+          "quoteId": "59bb3faa-f22b-4037-a074-0293e9573ae0"
+        }
+      },
+      "3": {
+        "expectedRevision": 17,
+        "payload": {
+          "quoteRevision": 1,
+          "unlockId": "access/biome-advanced",
+          "quoteId": "aa4cf6df-d2df-4962-9689-d3e3913ef26d"
+        }
+      }
+    }
+  },
+  "freshPlayRejoin": {
+    "profile": {
+      "progression": {
+        "accessUnlocksById": {
+          "access/biome-mid-b": true,
+          "access/biome-mid-a": true,
+          "access/biome-advanced": true
+        },
+        "captureCapabilityLevel": 0,
+        "purchasesByUnlockId": {
+          "access/biome-mid-b": {
+            "configSnapshotId": "content-snapshot/imp9-progression-dev-v1",
+            "quoteId": "bb47f6be-5c0f-4fd6-be39-69f5ee9170d6",
+            "priceUnits": 100,
+            "expectedRevision": 7,
+            "timestamp": 1790932575,
+            "quoteRevision": 1,
+            "operationId": "247615d4-26d3-4c26-ae85-5f3cd302b815"
+          },
+          "access/biome-mid-a": {
+            "configSnapshotId": "content-snapshot/imp9-progression-dev-v1",
+            "quoteId": "59bb3faa-f22b-4037-a074-0293e9573ae0",
+            "priceUnits": 100,
+            "expectedRevision": 8,
+            "timestamp": 1790932575,
+            "quoteRevision": 1,
+            "operationId": "93fdaf5d-f810-41a2-8593-fdcce572eec3"
+          },
+          "access/biome-advanced": {
+            "configSnapshotId": "content-snapshot/imp9-progression-dev-v1",
+            "quoteId": "aa4cf6df-d2df-4962-9689-d3e3913ef26d",
+            "priceUnits": 200,
+            "expectedRevision": 17,
+            "timestamp": 1790932575,
+            "quoteRevision": 1,
+            "operationId": "d242e4ba-c631-4865-acc2-2d0bc8574a01"
+          }
+        },
+        "progressionSchemaVersion": 1
+      },
+      "discovery": {
+        "variantBySignature": {
+          "species/field-pebble|": true,
+          "species/fixture-orb|": true,
+          "species/field-leaf|": true
+        },
+        "mutationsById": [],
+        "speciesById": {
+          "species/field-leaf": true,
+          "species/fixture-orb": true,
+          "species/field-pebble": true
+        }
+      },
+      "profileRevision": 26,
+      "lastSuccessfulSaveAt": 1790932834,
+      "recentOperations": {
+        "15c23a80-4f34-42a3-a6f2-0cff5d3f4c73": 15,
+        "975e197e-9711-4dc5-8852-fed32af27390": 5,
+        "f6e70f49-e7d7-4747-9cd2-93d0ce343bf6": 3,
+        "72dfd2de-82c9-483c-b01a-83015415dd3c": 20,
+        "bbdad6fd-f04a-43bc-b781-eed9a2c31851": 22,
+        "2dcac804-d734-4963-9ab2-814d98c8a361": 17,
+        "7c69d104-6b92-461b-ace6-d8800105ba08": 11,
+        "5034898f-40c4-4546-adcf-ae38b92eb3af": 12,
+        "f5b1b12a-50a6-4ff9-963f-829aa3e1bb7e": 7,
+        "93fdaf5d-f810-41a2-8593-fdcce572eec3": 9,
+        "5a15da97-6a1f-4130-b818-3b9dfe7a278c": 14,
+        "31b3d130-560f-4629-b709-189a8b37c5b7": 19,
+        "b1b60fb2-00b2-4ed1-b48e-5dbad615dca4": 10,
+        "8fdf0829-d7d3-4e89-b8f4-cd1037ce7781": 4,
+        "28613e05-75cc-4961-82f3-63a3b2df0cba": 16,
+        "d242e4ba-c631-4865-acc2-2d0bc8574a01": 18,
+        "4be23d93-ef6d-4db6-acdc-28be809a1bba": 6,
+        "f5e9c630-75e0-4655-ac11-b412b784139d": 13,
+        "e8c743b3-f68b-4b8e-8226-8c10e98b98f1": 21,
+        "049f3a71-4fb0-4f9f-bd5c-717c8e25186e": 2,
+        "247615d4-26d3-4c26-ae85-5f3cd302b815": 8
+      },
+      "schemaVersion": 1,
+      "trading": [],
+      "vault": {
+        "productionAssignments": {
+          "production/1": "creature-9c1ca3a4-1619-45ce-9f2b-43cf22464056-1"
+        },
+        "productionSchemaVersion": 1,
+        "lastPresenceBoundary": "Active",
+        "productionBufferMilli": 25900,
+        "productionCursorUnixSeconds": 1790932834,
+        "capacitySchemaVersion": 1,
+        "lastOfflineSettlement": {
+          "eligibleSeconds": 153,
+          "mode": "CleanOffline",
+          "clockRegressed": false,
+          "creditedMilli": 15300
+        },
+        "displayAssignments": [],
+        "productionRateEpochId": "production-epoch/imp9-dev-v1"
+      },
+      "createdAt": 1790925375,
+      "settings": [],
+      "events": [],
+      "collection": {
+        "creaturesById": {
+          "creature-9c1ca3a4-1619-45ce-9f2b-43cf22464056-4": {
+            "creatureInstanceId": "creature-9c1ca3a4-1619-45ce-9f2b-43cf22464056-4",
+            "ownerUserId": 1925180832,
+            "origin": {
+              "contentSnapshotId": "content-snapshot/imp10-world-dev-v2",
+              "spawnContextId": "spawn-context/mid-a"
+            },
+            "operationId": "5034898f-40c4-4546-adcf-ae38b92eb3af",
+            "overflowHeld": false,
+            "speciesId": "species/field-pebble",
+            "securedSequence": 12,
+            "securedAt": 1790932579,
+            "variantIdentity": {
+              "mutationIdsCanonical": [],
+              "traitIds": [],
+              "protectedVariantReasons": [],
+              "spawnContextId": "spawn-context/mid-a",
+              "speciesRarityId": "rarity/common",
+              "contentSnapshotId": "content-snapshot/imp10-world-dev-v2",
+              "variantSignature": "species/field-pebble|"
+            },
+            "locked": false
+          },
+          "creature-9c1ca3a4-1619-45ce-9f2b-43cf22464056-7": {
+            "creatureInstanceId": "creature-9c1ca3a4-1619-45ce-9f2b-43cf22464056-7",
+            "ownerUserId": 1925180832,
+            "origin": {
+              "contentSnapshotId": "content-snapshot/imp10-world-dev-v2",
+              "spawnContextId": "spawn-context/mid-b"
+            },
+            "operationId": "28613e05-75cc-4961-82f3-63a3b2df0cba",
+            "overflowHeld": false,
+            "speciesId": "species/field-leaf",
+            "securedSequence": 16,
+            "securedAt": 1790932581,
+            "variantIdentity": {
+              "mutationIdsCanonical": [],
+              "traitIds": [],
+              "protectedVariantReasons": [],
+              "spawnContextId": "spawn-context/mid-b",
+              "speciesRarityId": "rarity/common",
+              "contentSnapshotId": "content-snapshot/imp10-world-dev-v2",
+              "variantSignature": "species/field-leaf|"
+            },
+            "locked": false
+          },
+          "creature-9c1ca3a4-1619-45ce-9f2b-43cf22464056-1": {
+            "creatureInstanceId": "creature-9c1ca3a4-1619-45ce-9f2b-43cf22464056-1",
+            "ownerUserId": 1925180832,
+            "origin": {
+              "contentSnapshotId": "content-snapshot/imp5-fixture-v1",
+              "spawnContextId": "spawn-context/fixture-clearing"
+            },
+            "operationId": "8fdf0829-d7d3-4e89-b8f4-cd1037ce7781",
+            "overflowHeld": false,
+            "speciesId": "species/fixture-orb",
+            "securedSequence": 4,
+            "securedAt": 1790932576,
+            "variantIdentity": {
+              "mutationIdsCanonical": [],
+              "traitIds": [],
+              "protectedVariantReasons": [],
+              "spawnContextId": "spawn-context/fixture-clearing",
+              "speciesRarityId": "rarity/common",
+              "contentSnapshotId": "content-snapshot/imp5-fixture-v1",
+              "variantSignature": "species/fixture-orb|"
+            },
+            "locked": false
+          },
+          "creature-9c1ca3a4-1619-45ce-9f2b-43cf22464056-11": {
+            "creatureInstanceId": "creature-9c1ca3a4-1619-45ce-9f2b-43cf22464056-11",
+            "ownerUserId": 1925180832,
+            "origin": {
+              "contentSnapshotId": "content-snapshot/imp10-world-dev-v2",
+              "spawnContextId": "spawn-context/advanced"
+            },
+            "operationId": "e8c743b3-f68b-4b8e-8226-8c10e98b98f1",
+            "overflowHeld": false,
+            "speciesId": "species/field-leaf",
+            "securedSequence": 21,
+            "securedAt": 1790932583,
+            "variantIdentity": {
+              "mutationIdsCanonical": [],
+              "traitIds": [],
+              "protectedVariantReasons": [],
+              "spawnContextId": "spawn-context/advanced",
+              "speciesRarityId": "rarity/common",
+              "contentSnapshotId": "content-snapshot/imp10-world-dev-v2",
+              "variantSignature": "species/field-leaf|"
+            },
+            "locked": false
+          }
+        }
+      },
+      "economy": {
+        "recentEnergyOperations": {
+          "1": {
+            "sourceOrSinkId": "vault/production",
+            "expectedRevision": 6,
+            "operationId": "f5b1b12a-50a6-4ff9-963f-829aa3e1bb7e",
+            "configSnapshotId": "content-snapshot/imp9-production-dev-v1",
+            "resultClass": "Applied",
+            "deltaUnits": 720,
+            "timestamp": 1790932575,
+            "reasonCode": "production-claim",
+            "resultingWallet": 720
+          },
+          "2": {
+            "sourceOrSinkId": "access/biome-mid-b",
+            "expectedRevision": 7,
+            "operationId": "247615d4-26d3-4c26-ae85-5f3cd302b815",
+            "configSnapshotId": "content-snapshot/imp9-progression-dev-v1",
+            "resultClass": "Applied",
+            "deltaUnits": -100,
+            "timestamp": 1790932575,
+            "reasonCode": "access-unlock-purchase",
+            "resultingWallet": 620
+          },
+          "3": {
+            "sourceOrSinkId": "access/biome-mid-a",
+            "expectedRevision": 8,
+            "operationId": "93fdaf5d-f810-41a2-8593-fdcce572eec3",
+            "configSnapshotId": "content-snapshot/imp9-progression-dev-v1",
+            "resultClass": "Applied",
+            "deltaUnits": -100,
+            "timestamp": 1790932575,
+            "reasonCode": "access-unlock-purchase",
+            "resultingWallet": 520
+          },
+          "4": {
+            "sourceOrSinkId": "access/biome-advanced",
+            "expectedRevision": 17,
+            "operationId": "d242e4ba-c631-4865-acc2-2d0bc8574a01",
+            "configSnapshotId": "content-snapshot/imp9-progression-dev-v1",
+            "resultClass": "Applied",
+            "deltaUnits": -200,
+            "timestamp": 1790932575,
+            "reasonCode": "access-unlock-purchase",
+            "resultingWallet": 320
+          }
+        },
+        "energyUnits": 320,
+        "energySchemaVersion": 1
+      },
+      "commerce": [],
+      "world": {
+        "regionalSpecies": {
+          "region/biome-advanced": {
+            "species/field-leaf": {
+              "revision": 21,
+              "contentSnapshotId": "content-snapshot/imp10-world-dev-v2",
+              "operationId": "e8c743b3-f68b-4b8e-8226-8c10e98b98f1"
+            }
+          },
+          "region/biome-mid-b": {
+            "species/field-leaf": {
+              "revision": 16,
+              "contentSnapshotId": "content-snapshot/imp10-world-dev-v2",
+              "operationId": "28613e05-75cc-4961-82f3-63a3b2df0cba"
+            }
+          },
+          "region/fixture-clearing": {
+            "species/fixture-orb": {
+              "revision": 4,
+              "contentSnapshotId": "content-snapshot/imp10-world-dev-v2",
+              "operationId": "8fdf0829-d7d3-4e89-b8f4-cd1037ce7781"
+            }
+          },
+          "region/biome-mid-a": {
+            "species/field-pebble": {
+              "revision": 12,
+              "contentSnapshotId": "content-snapshot/imp10-world-dev-v2",
+              "operationId": "5034898f-40c4-4546-adcf-ae38b92eb3af"
+            }
+          }
+        },
+        "landmarks": {
+          "landmark/mid-b-field": {
+            "revision": 15,
+            "contentSnapshotId": "content-snapshot/imp10-world-dev-v2",
+            "operationId": "15c23a80-4f34-42a3-a6f2-0cff5d3f4c73"
+          },
+          "landmark/advanced-entry": {
+            "revision": 19,
+            "contentSnapshotId": "content-snapshot/imp10-world-dev-v2",
+            "operationId": "31b3d130-560f-4629-b709-189a8b37c5b7"
+          },
+          "landmark/mid-b-entry": {
+            "revision": 14,
+            "contentSnapshotId": "content-snapshot/imp10-world-dev-v2",
+            "operationId": "5a15da97-6a1f-4130-b818-3b9dfe7a278c"
+          },
+          "landmark/fixture-clearing": {
+            "revision": 3,
+            "contentSnapshotId": "content-snapshot/imp10-world-dev-v2",
+            "operationId": "f6e70f49-e7d7-4747-9cd2-93d0ce343bf6"
+          },
+          "landmark/advanced-field": {
+            "revision": 20,
+            "contentSnapshotId": "content-snapshot/imp10-world-dev-v2",
+            "operationId": "72dfd2de-82c9-483c-b01a-83015415dd3c"
+          },
+          "landmark/fixture-entry": {
+            "revision": 2,
+            "contentSnapshotId": "content-snapshot/imp10-world-dev-v2",
+            "operationId": "049f3a71-4fb0-4f9f-bd5c-717c8e25186e"
+          },
+          "landmark/mid-a-field": {
+            "revision": 11,
+            "contentSnapshotId": "content-snapshot/imp10-world-dev-v2",
+            "operationId": "7c69d104-6b92-461b-ace6-d8800105ba08"
+          },
+          "landmark/mid-a-entry": {
+            "revision": 10,
+            "contentSnapshotId": "content-snapshot/imp10-world-dev-v2",
+            "operationId": "b1b60fb2-00b2-4ed1-b48e-5dbad615dca4"
+          }
+        },
+        "mastery": {
+          "milestone/region-mastery/mid-a": {
+            "revision": 13,
+            "contentSnapshotId": "content-snapshot/imp10-world-dev-v2",
+            "operationId": "f5e9c630-75e0-4655-ac11-b412b784139d"
+          },
+          "milestone/region-mastery/mid-b": {
+            "revision": 17,
+            "contentSnapshotId": "content-snapshot/imp10-world-dev-v2",
+            "operationId": "2dcac804-d734-4963-9ab2-814d98c8a361"
+          },
+          "milestone/region-mastery/advanced": {
+            "revision": 22,
+            "contentSnapshotId": "content-snapshot/imp10-world-dev-v2",
+            "operationId": "bbdad6fd-f04a-43bc-b781-eed9a2c31851"
+          },
+          "milestone/region-mastery/starter": {
+            "revision": 5,
+            "contentSnapshotId": "content-snapshot/imp10-world-dev-v2",
+            "operationId": "975e197e-9711-4dc5-8852-fed32af27390"
+          }
+        },
+        "schemaVersion": 1,
+        "objectives": {
+          "field-objective/fixture-return-route": 3,
+          "field-objective/mid-b-route": 3,
+          "field-objective/advanced-route": 3,
+          "field-objective/mid-a-route": 3
+        }
+      }
+    },
+    "exactRetries": 3,
+    "passed": true,
+    "spawn": {
+      "freshIds": {
+        "1": "creature-102ff70c-cdbf-48e9-b7b8-7efd4e1be8df-1",
+        "2": "creature-102ff70c-cdbf-48e9-b7b8-7efd4e1be8df-2",
+        "3": "creature-102ff70c-cdbf-48e9-b7b8-7efd4e1be8df-3"
+      },
+      "energy": 320,
+      "accessRestored": true
+    }
+  },
+  "finalStudio": {
+    "sourceParity": {
+      "differences": [],
+      "count": 83,
+      "mode": "Edit"
+    },
+    "validation": {
+      "worldBindingsUnchanged": {
+        "MonsterVaultSpawnAnchor": 8,
+        "MonsterVaultLandmark": 12,
+        "MonsterVaultHabitat": 8,
+        "MonsterVaultRegion": 5
+      },
+      "meshes": {
+        "1": {
+          "path": "Workspace.EnergyCoreGenerator_Source.EnergyCoreGenerator.EC_DarkMetal.EC_DarkMetal_Mesh",
+          "group": "DarkMetal",
+          "meshId": "rbxassetid://82608047802888",
+          "textureId": "",
+          "pivotOffset": {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 1,
+            "5": 0,
+            "6": 0,
+            "7": 0,
+            "8": 1,
+            "9": 0,
+            "10": 0,
+            "11": 0,
+            "12": 1
+          },
+          "size": {
+            "1": 4.000000476837158,
+            "2": 5.949999809265137,
+            "3": 4.000000476837158
+          },
+          "cframe": {
+            "1": -9.13223648071289,
+            "2": 2.9749999046325684,
+            "3": 33.04500198364258,
+            "4": 1,
+            "5": 0,
+            "6": 0,
+            "7": 0,
+            "8": 1,
+            "9": 0,
+            "10": 0,
+            "11": 0,
+            "12": 1
+          },
+          "color": {
+            "1": 50,
+            "2": 63,
+            "3": 76
+          },
+          "material": "Metal",
+          "anchored": false,
+          "materialVariant": ""
+        },
+        "2": {
+          "path": "Workspace.EnergyCoreGenerator_Source.EnergyCoreGenerator.EC_EnergyGreen.EC_EnergyGreen_Mesh",
+          "group": "EnergyGreen",
+          "meshId": "rbxassetid://111406198103853",
+          "textureId": "",
+          "pivotOffset": {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 1,
+            "5": 0,
+            "6": 0,
+            "7": 0,
+            "8": 1,
+            "9": 0,
+            "10": 0,
+            "11": 0,
+            "12": 1
+          },
+          "size": {
+            "1": 3.174999952316284,
+            "2": 4.769000053405762,
+            "3": 2.7709999084472656
+          },
+          "cframe": {
+            "1": -9.13223648071289,
+            "2": 3.2895002365112305,
+            "3": 32.43950271606445,
+            "4": 1,
+            "5": 0,
+            "6": 0,
+            "7": 0,
+            "8": 1,
+            "9": 0,
+            "10": 0,
+            "11": 0,
+            "12": 1
+          },
+          "color": {
+            "1": 76,
+            "2": 255,
+            "3": 110
+          },
+          "material": "Neon",
+          "anchored": false,
+          "materialVariant": ""
+        },
+        "3": {
+          "path": "Workspace.EnergyCoreGenerator_Source.EnergyCoreGenerator.EC_PanelPlastic.EC_PanelPlastic_Mesh",
+          "group": "PanelPlastic",
+          "meshId": "rbxassetid://138888023376661",
+          "textureId": "",
+          "pivotOffset": {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 1,
+            "5": 0,
+            "6": 0,
+            "7": 0,
+            "8": 1,
+            "9": 0,
+            "10": 0,
+            "11": 0,
+            "12": 1
+          },
+          "size": {
+            "1": 3.429999828338623,
+            "2": 5.125,
+            "3": 2.8575000762939453
+          },
+          "cframe": {
+            "1": -9.172237396240234,
+            "2": 3.4074997901916504,
+            "3": 32.496253967285156,
+            "4": 1,
+            "5": 0,
+            "6": 0,
+            "7": 0,
+            "8": 1,
+            "9": 0,
+            "10": 0,
+            "11": 0,
+            "12": 1
+          },
+          "color": {
+            "1": 19,
+            "2": 25,
+            "3": 33
+          },
+          "material": "SmoothPlastic",
+          "anchored": false,
+          "materialVariant": ""
+        },
+        "4": {
+          "path": "Workspace.EnergyCoreGenerator_Source.EnergyCoreGenerator.EC_SecondaryMetal.EC_SecondaryMetal_Mesh",
+          "group": "SecondaryMetal",
+          "meshId": "rbxassetid://140395381153946",
+          "textureId": "",
+          "pivotOffset": {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 1,
+            "5": 0,
+            "6": 0,
+            "7": 0,
+            "8": 1,
+            "9": 0,
+            "10": 0,
+            "11": 0,
+            "12": 1
+          },
+          "size": {
+            "1": 3.820000171661377,
+            "2": 5.579999923706055,
+            "3": 3.820000171661377
+          },
+          "cframe": {
+            "1": -9.13223648071289,
+            "2": 3.2100000381469727,
+            "3": 33.04500198364258,
+            "4": 1,
+            "5": 0,
+            "6": 0,
+            "7": 0,
+            "8": 1,
+            "9": 0,
+            "10": 0,
+            "11": 0,
+            "12": 1
+          },
+          "color": {
+            "1": 153,
+            "2": 172,
+            "3": 187
+          },
+          "material": "Metal",
+          "anchored": false,
+          "materialVariant": ""
+        }
+      },
+      "authoredParts": 54,
+      "pivotsScaleUnchanged": true,
+      "streamingEnabled": true,
+      "energyCoreUnchanged": true,
+      "transientClean": true,
+      "maxPlayers": 60
+    },
+    "energyCoreVisualCheck": "Connected Studio current Lighting screenshot inspected; unchanged appearance"
+  },
+  "sourceParityRows": [
+    {
+      "path": "game.ReplicatedStorage.MonsterVault.Shared.config.MaterialPalette",
+      "file": "src/shared/config/MaterialPalette.luau",
+      "hash": 20269462,
+      "length": 993
+    },
+    {
+      "path": "game.ReplicatedStorage.MonsterVault.Shared.config.ProgressionFixture",
+      "file": "src/shared/config/ProgressionFixture.luau",
+      "hash": 209608657,
+      "length": 3512
+    },
+    {
+      "path": "game.ReplicatedStorage.MonsterVault.Shared.config.VaultCapacityFixture",
+      "file": "src/shared/config/VaultCapacityFixture.luau",
+      "hash": 3518712484,
+      "length": 994
+    },
+    {
+      "path": "game.ReplicatedStorage.MonsterVault.Shared.config.VaultProductionFixture",
+      "file": "src/shared/config/VaultProductionFixture.luau",
+      "hash": 1640628796,
+      "length": 1608
+    },
+    {
+      "path": "game.ReplicatedStorage.MonsterVault.Shared.contracts.CaptureProjectionV1",
+      "file": "src/shared/contracts/CaptureProjectionV1.luau",
+      "hash": 368549946,
+      "length": 2014
+    },
+    {
+      "path": "game.ReplicatedStorage.MonsterVault.Shared.contracts.ProgressionProjectionV1",
+      "file": "src/shared/contracts/ProgressionProjectionV1.luau",
+      "hash": 1116181215,
+      "length": 3684
+    },
+    {
+      "path": "game.ReplicatedStorage.MonsterVault.Shared.contracts.ProjectionV1",
+      "file": "src/shared/contracts/ProjectionV1.luau",
+      "hash": 3364174407,
+      "length": 1752
+    },
+    {
+      "path": "game.ReplicatedStorage.MonsterVault.Shared.contracts.ProtocolV1",
+      "file": "src/shared/contracts/ProtocolV1.luau",
+      "hash": 4281205792,
+      "length": 752
+    },
+    {
+      "path": "game.ReplicatedStorage.MonsterVault.Shared.contracts.ResultCodes",
+      "file": "src/shared/contracts/ResultCodes.luau",
+      "hash": 125316399,
+      "length": 1783
+    },
+    {
+      "path": "game.ReplicatedStorage.MonsterVault.Shared.contracts.RouteIds",
+      "file": "src/shared/contracts/RouteIds.luau",
+      "hash": 1158379146,
+      "length": 4011
+    },
+    {
+      "path": "game.ReplicatedStorage.MonsterVault.Shared.contracts.SecuredCollectionProjectionV1",
+      "file": "src/shared/contracts/SecuredCollectionProjectionV1.luau",
+      "hash": 2054202377,
+      "length": 2041
+    },
+    {
+      "path": "game.ReplicatedStorage.MonsterVault.Shared.contracts.VaultAssignmentProjectionV1",
+      "file": "src/shared/contracts/VaultAssignmentProjectionV1.luau",
+      "hash": 561077293,
+      "length": 3511
+    },
+    {
+      "path": "game.ReplicatedStorage.MonsterVault.Shared.contracts.VaultProjectionV1",
+      "file": "src/shared/contracts/VaultProjectionV1.luau",
+      "hash": 375554366,
+      "length": 2747
+    },
+    {
+      "path": "game.ReplicatedStorage.MonsterVault.Shared.contracts.WireValidation",
+      "file": "src/shared/contracts/WireValidation.luau",
+      "hash": 2778277361,
+      "length": 3313
+    },
+    {
+      "path": "game.ReplicatedStorage.MonsterVault.Shared.contracts.WorldProjectionV1",
+      "file": "src/shared/contracts/WorldProjectionV1.luau",
+      "hash": 1203872300,
+      "length": 1251
+    },
+    {
+      "path": "game.ReplicatedStorage.MonsterVault.Shared.types.Ids",
+      "file": "src/shared/types/Ids.luau",
+      "hash": 2489101334,
+      "length": 1935
+    },
+    {
+      "path": "game.ReplicatedStorage.MonsterVault.Shared.util.StartupPlan",
+      "file": "src/shared/util/StartupPlan.luau",
+      "hash": 897013494,
+      "length": 2664
+    },
+    {
+      "path": "game.ReplicatedStorage.MonsterVault.Shared.util.StructuredDiagnostics",
+      "file": "src/shared/util/StructuredDiagnostics.luau",
+      "hash": 1560651008,
+      "length": 2131
+    },
+    {
+      "path": "game.ServerScriptService.MonsterVaultServer.adapters.RobloxProfileRepository",
+      "file": "src/server/adapters/RobloxProfileRepository.luau",
+      "hash": 1875932335,
+      "length": 1907
+    },
+    {
+      "path": "game.ServerScriptService.MonsterVaultServer.application.CaptureFinalizationUseCase",
+      "file": "src/server/application/CaptureFinalizationUseCase.luau",
+      "hash": 1349053925,
+      "length": 3744
+    },
+    {
+      "path": "game.ServerScriptService.MonsterVaultServer.application.NetworkRateLimiter",
+      "file": "src/server/application/NetworkRateLimiter.luau",
+      "hash": 1640061411,
+      "length": 1836
+    },
+    {
+      "path": "game.ServerScriptService.MonsterVaultServer.application.NetworkingGateway",
+      "file": "src/server/application/NetworkingGateway.luau",
+      "hash": 1310057115,
+      "length": 7763
+    },
+    {
+      "path": "game.ServerScriptService.MonsterVaultServer.application.ProductionClaimUseCase",
+      "file": "src/server/application/ProductionClaimUseCase.luau",
+      "hash": 3122817754,
+      "length": 3405
+    },
+    {
+      "path": "game.ServerScriptService.MonsterVaultServer.application.ProgressionProjection",
+      "file": "src/server/application/ProgressionProjection.luau",
+      "hash": 2297854644,
+      "length": 1112
+    },
+    {
+      "path": "game.ServerScriptService.MonsterVaultServer.application.ProgressionPurchaseUseCase",
+      "file": "src/server/application/ProgressionPurchaseUseCase.luau",
+      "hash": 3187037366,
+      "length": 7974
+    },
+    {
+      "path": "game.ServerScriptService.MonsterVaultServer.application.ProjectionPublisher",
+      "file": "src/server/application/ProjectionPublisher.luau",
+      "hash": 92902742,
+      "length": 1985
+    },
+    {
+      "path": "game.ServerScriptService.MonsterVaultServer.application.ReplayWindow",
+      "file": "src/server/application/ReplayWindow.luau",
+      "hash": 2437950171,
+      "length": 1719
+    },
+    {
+      "path": "game.ServerScriptService.MonsterVaultServer.application.RouteRegistry",
+      "file": "src/server/application/RouteRegistry.luau",
+      "hash": 2400671955,
+      "length": 3451
+    },
+    {
+      "path": "game.ServerScriptService.MonsterVaultServer.application.SecuredCollectionProjection",
+      "file": "src/server/application/SecuredCollectionProjection.luau",
+      "hash": 1659607245,
+      "length": 1238
+    },
+    {
+      "path": "game.ServerScriptService.MonsterVaultServer.application.SessionCoordinator",
+      "file": "src/server/application/SessionCoordinator.luau",
+      "hash": 3663204724,
+      "length": 5545
+    },
+    {
+      "path": "game.ServerScriptService.MonsterVaultServer.application.VaultAssignmentProjection",
+      "file": "src/server/application/VaultAssignmentProjection.luau",
+      "hash": 3794107432,
+      "length": 1923
+    },
+    {
+      "path": "game.ServerScriptService.MonsterVaultServer.application.VaultCapacityProjection",
+      "file": "src/server/application/VaultCapacityProjection.luau",
+      "hash": 1856457492,
+      "length": 990
+    },
+    {
+      "path": "game.ServerScriptService.MonsterVaultServer.application.VaultCapacityUseCase",
+      "file": "src/server/application/VaultCapacityUseCase.luau",
+      "hash": 4123009632,
+      "length": 3108
+    },
+    {
+      "path": "game.ServerScriptService.MonsterVaultServer.application.VaultProductionUseCase",
+      "file": "src/server/application/VaultProductionUseCase.luau",
+      "hash": 3283303051,
+      "length": 3968
+    },
+    {
+      "path": "game.ServerScriptService.MonsterVaultServer.application.WorldActionUseCase",
+      "file": "src/server/application/WorldActionUseCase.luau",
+      "hash": 2330072248,
+      "length": 2361
+    },
+    {
+      "path": "game.ServerScriptService.MonsterVaultServer.bootstrap.CaptureRuntimeService",
+      "file": "src/server/bootstrap/CaptureRuntimeService.luau",
+      "hash": 246163712,
+      "length": 13311
+    },
+    {
+      "path": "game.ServerScriptService.MonsterVaultServer.bootstrap.NetworkingRuntimeService",
+      "file": "src/server/bootstrap/NetworkingRuntimeService.luau",
+      "hash": 3102029991,
+      "length": 17131
+    },
+    {
+      "path": "game.ServerScriptService.MonsterVaultServer.bootstrap.ProfileBinding",
+      "file": "src/server/bootstrap/ProfileBinding.luau",
+      "hash": 3312282673,
+      "length": 323
+    },
+    {
+      "path": "game.ServerScriptService.MonsterVaultServer.bootstrap.ProfileRuntimeService",
+      "file": "src/server/bootstrap/ProfileRuntimeService.luau",
+      "hash": 1483404416,
+      "length": 9020
+    },
+    {
+      "path": "game.ServerScriptService.MonsterVaultServer.bootstrap.ServerComposition",
+      "file": "src/server/bootstrap/ServerComposition.luau",
+      "hash": 3368400636,
+      "length": 2754
+    },
+    {
+      "path": "game.ServerScriptService.MonsterVaultServer.bootstrap.ServerMain",
+      "file": "src/server/bootstrap/ServerMain.server.luau",
+      "hash": 3603367180,
+      "length": 3720
+    },
+    {
+      "path": "game.ServerScriptService.MonsterVaultServer.bootstrap.ShutdownCoordinator",
+      "file": "src/server/bootstrap/ShutdownCoordinator.luau",
+      "hash": 1050622505,
+      "length": 1754
+    },
+    {
+      "path": "game.ServerScriptService.MonsterVaultServer.bootstrap.StartupValidator",
+      "file": "src/server/bootstrap/StartupValidator.luau",
+      "hash": 1624707939,
+      "length": 1597
+    },
+    {
+      "path": "game.ServerScriptService.MonsterVaultServer.bootstrap.WorldRuntimeService",
+      "file": "src/server/bootstrap/WorldRuntimeService.luau",
+      "hash": 1538450245,
+      "length": 17686
+    },
+    {
+      "path": "game.ServerScriptService.MonsterVaultServer.domains.capture.CaptureService",
+      "file": "src/server/domains/capture/CaptureService.luau",
+      "hash": 3314051961,
+      "length": 15907
+    },
+    {
+      "path": "game.ServerScriptService.MonsterVaultServer.domains.capture.VariantIdentity",
+      "file": "src/server/domains/capture/VariantIdentity.luau",
+      "hash": 1152634414,
+      "length": 1366
+    },
+    {
+      "path": "game.ServerScriptService.MonsterVaultServer.domains.economy.EnergyService",
+      "file": "src/server/domains/economy/EnergyService.luau",
+      "hash": 1695259017,
+      "length": 6757
+    },
+    {
+      "path": "game.ServerScriptService.MonsterVaultServer.domains.progression.ProgressionService",
+      "file": "src/server/domains/progression/ProgressionService.luau",
+      "hash": 3848730862,
+      "length": 11181
+    },
+    {
+      "path": "game.ServerScriptService.MonsterVaultServer.domains.vault.VaultProductionService",
+      "file": "src/server/domains/vault/VaultProductionService.luau",
+      "hash": 3465231012,
+      "length": 13701
+    },
+    {
+      "path": "game.ServerScriptService.MonsterVaultServer.domains.vault.VaultService",
+      "file": "src/server/domains/vault/VaultService.luau",
+      "hash": 2521666215,
+      "length": 11534
+    },
+    {
+      "path": "game.ServerScriptService.MonsterVaultServer.domains.world.FixtureDefinition",
+      "file": "src/server/domains/world/FixtureDefinition.luau",
+      "hash": 1510004386,
+      "length": 638
+    },
+    {
+      "path": "game.ServerScriptService.MonsterVaultServer.domains.world.SpawnPlan",
+      "file": "src/server/domains/world/SpawnPlan.luau",
+      "hash": 1870720071,
+      "length": 5211
+    },
+    {
+      "path": "game.ServerScriptService.MonsterVaultServer.domains.world.WorldAuthoringIndex",
+      "file": "src/server/domains/world/WorldAuthoringIndex.luau",
+      "hash": 2093649732,
+      "length": 5158
+    },
+    {
+      "path": "game.ServerScriptService.MonsterVaultServer.domains.world.WorldDefinitions",
+      "file": "src/server/domains/world/WorldDefinitions.luau",
+      "hash": 2596867818,
+      "length": 11705
+    },
+    {
+      "path": "game.ServerScriptService.MonsterVaultServer.domains.world.WorldProgressionService",
+      "file": "src/server/domains/world/WorldProgressionService.luau",
+      "hash": 3829448091,
+      "length": 6992
+    },
+    {
+      "path": "game.ServerScriptService.MonsterVaultServer.domains.world.WorldRegistry",
+      "file": "src/server/domains/world/WorldRegistry.luau",
+      "hash": 2381215689,
+      "length": 9906
+    },
+    {
+      "path": "game.ServerScriptService.MonsterVaultServer.domains.world.WorldService",
+      "file": "src/server/domains/world/WorldService.luau",
+      "hash": 110855392,
+      "length": 15260
+    },
+    {
+      "path": "game.ServerScriptService.MonsterVaultServer.infrastructure.clock.ClockInterface",
+      "file": "src/server/infrastructure/clock/ClockInterface.luau",
+      "hash": 2841937229,
+      "length": 393
+    },
+    {
+      "path": "game.ServerScriptService.MonsterVaultServer.infrastructure.performance.PerformanceCounters",
+      "file": "src/server/infrastructure/performance/PerformanceCounters.luau",
+      "hash": 1595761744,
+      "length": 1872
+    },
+    {
+      "path": "game.ServerScriptService.MonsterVaultServer.infrastructure.persistence.ProfileRepositoryInterface",
+      "file": "src/server/infrastructure/persistence/ProfileRepositoryInterface.luau",
+      "hash": 2487998524,
+      "length": 631
+    },
+    {
+      "path": "game.ServerScriptService.MonsterVaultServer.infrastructure.persistence.ProfileSchemaV1",
+      "file": "src/server/infrastructure/persistence/ProfileSchemaV1.luau",
+      "hash": 854591836,
+      "length": 10084
+    },
+    {
+      "path": "game.ServerScriptService.MonsterVaultServer.infrastructure.persistence.ProfileSession",
+      "file": "src/server/infrastructure/persistence/ProfileSession.luau",
+      "hash": 656950224,
+      "length": 18861
+    },
+    {
+      "path": "game.ServerScriptService.MonsterVaultServer.infrastructure.persistence.RetryPolicy",
+      "file": "src/server/infrastructure/persistence/RetryPolicy.luau",
+      "hash": 3163077866,
+      "length": 1432
+    },
+    {
+      "path": "game.ServerScriptService.MonsterVaultServer.infrastructure.persistence.SingleWriterQueue",
+      "file": "src/server/infrastructure/persistence/SingleWriterQueue.luau",
+      "hash": 3531857504,
+      "length": 2284
+    },
+    {
+      "path": "game.ServerScriptService.MonsterVaultServer.infrastructure.rng.RandomSourceInterface",
+      "file": "src/server/infrastructure/rng/RandomSourceInterface.luau",
+      "hash": 4177422321,
+      "length": 308
+    },
+    {
+      "path": "game.StarterPlayer.StarterPlayerScripts.MonsterVaultClient.bootstrap.CaptureRuntimeService",
+      "file": "src/client/bootstrap/CaptureRuntimeService.luau",
+      "hash": 1500002407,
+      "length": 4830
+    },
+    {
+      "path": "game.StarterPlayer.StarterPlayerScripts.MonsterVaultClient.bootstrap.ClientComposition",
+      "file": "src/client/bootstrap/ClientComposition.luau",
+      "hash": 814888708,
+      "length": 1693
+    },
+    {
+      "path": "game.StarterPlayer.StarterPlayerScripts.MonsterVaultClient.bootstrap.ClientMain",
+      "file": "src/client/bootstrap/ClientMain.client.luau",
+      "hash": 1085330761,
+      "length": 2130
+    },
+    {
+      "path": "game.StarterPlayer.StarterPlayerScripts.MonsterVaultClient.bootstrap.NetworkingRuntimeService",
+      "file": "src/client/bootstrap/NetworkingRuntimeService.luau",
+      "hash": 1010541851,
+      "length": 5903
+    },
+    {
+      "path": "game.StarterPlayer.StarterPlayerScripts.MonsterVaultClient.bootstrap.ProgressionRuntimeService",
+      "file": "src/client/bootstrap/ProgressionRuntimeService.luau",
+      "hash": 498356482,
+      "length": 5863
+    },
+    {
+      "path": "game.StarterPlayer.StarterPlayerScripts.MonsterVaultClient.bootstrap.VaultAssignmentRuntimeService",
+      "file": "src/client/bootstrap/VaultAssignmentRuntimeService.luau",
+      "hash": 4039620238,
+      "length": 6930
+    },
+    {
+      "path": "game.StarterPlayer.StarterPlayerScripts.MonsterVaultClient.bootstrap.VaultRuntimeService",
+      "file": "src/client/bootstrap/VaultRuntimeService.luau",
+      "hash": 2187589700,
+      "length": 6291
+    },
+    {
+      "path": "game.StarterPlayer.StarterPlayerScripts.MonsterVaultClient.bootstrap.WorldModelObserver",
+      "file": "src/client/bootstrap/WorldModelObserver.luau",
+      "hash": 4087715024,
+      "length": 1952
+    },
+    {
+      "path": "game.StarterPlayer.StarterPlayerScripts.MonsterVaultClient.controllers.CaptureController",
+      "file": "src/client/controllers/CaptureController.luau",
+      "hash": 1597522545,
+      "length": 8974
+    },
+    {
+      "path": "game.StarterPlayer.StarterPlayerScripts.MonsterVaultClient.controllers.ProgressionController",
+      "file": "src/client/controllers/ProgressionController.luau",
+      "hash": 2486409473,
+      "length": 4448
+    },
+    {
+      "path": "game.StarterPlayer.StarterPlayerScripts.MonsterVaultClient.controllers.VaultAssignmentController",
+      "file": "src/client/controllers/VaultAssignmentController.luau",
+      "hash": 256595650,
+      "length": 5830
+    },
+    {
+      "path": "game.StarterPlayer.StarterPlayerScripts.MonsterVaultClient.controllers.VaultController",
+      "file": "src/client/controllers/VaultController.luau",
+      "hash": 794391328,
+      "length": 4247
+    },
+    {
+      "path": "game.StarterPlayer.StarterPlayerScripts.MonsterVaultClient.input.InputRouter",
+      "file": "src/client/input/InputRouter.luau",
+      "hash": 4100101867,
+      "length": 5978
+    },
+    {
+      "path": "game.StarterPlayer.StarterPlayerScripts.MonsterVaultClient.networking.ClientGateway",
+      "file": "src/client/networking/ClientGateway.luau",
+      "hash": 137177243,
+      "length": 7150
+    },
+    {
+      "path": "game.StarterPlayer.StarterPlayerScripts.MonsterVaultClient.presentation.CaptureView",
+      "file": "src/client/presentation/CaptureView.luau",
+      "hash": 3489459181,
+      "length": 3847
+    },
+    {
+      "path": "game.StarterPlayer.StarterPlayerScripts.MonsterVaultClient.store.ProjectionStore",
+      "file": "src/client/store/ProjectionStore.luau",
+      "hash": 1034254159,
+      "length": 1143
+    },
+    {
+      "path": "game.StarterPlayer.StarterPlayerScripts.MonsterVaultClient.store.SecuredCollectionStore",
+      "file": "src/client/store/SecuredCollectionStore.luau",
+      "hash": 3440647883,
+      "length": 862
+    },
+    {
+      "path": "game.StarterPlayer.StarterPlayerScripts.MonsterVaultClient.store.WorldProjectionStore",
+      "file": "src/client/store/WorldProjectionStore.luau",
+      "hash": 2923178345,
+      "length": 2525
+    }
+  ],
+  "remaining": {
+    "nextDependency": "ordinary World Cycle clock and prospective context binding",
+    "worldCycle": "OPEN",
+    "travelRecoveryHazardsRewardsScaling": "OPEN",
+    "VS119_AD249": "DEFERRED; real 30-player L1 at MaxPlayers=60 and supported real-client performance mandatory"
+  },
+  "sourceSha256": {
+    "assets/blender/energy_core_generator.blend": "5619aa5816d0160ff1c249fd589a3c22111d3d63f476d4a5b3e37f7b00e6bb35",
+    "assets/exported/energy_core_generator.glb": "f018d4dfd28fe54f0d4108e74af65ce844c23ba6c639148b8673791d56e26b75",
+    "default.project.json": "4598d0afc33d7d8f9dd10a37f2d2cf9b37fd03592e9f81b2d30d4325774a7432",
+    "scripts/studio/imp10_spawn_client.luau": "20da1748b9f8efc27ad4a5352b91773782fafcf8935ad58a62b1356f8b0553a1",
+    "scripts/studio/imp10_spawn_scheduling.luau": "4c111cd7fb4b38350e4db5f8dfb5a558924b1067c57ebea39be18c3386c01474",
+    "scripts/studio/imp10_world_mastery_access.luau": "693fc197a0f6bb07bc3fa95add4354292f101b0aa8ad283c48af460b4b88af2d",
+    "src/client/bootstrap/CaptureRuntimeService.luau": "bb1b6b2121f8c0c1d81b5b80b7417f5d6648dd30db186bd1ba9c9e6ee9be7e25",
+    "src/client/bootstrap/ClientComposition.luau": "6a076b90c55a57dc695c548dceba00fd2319c6b8aadb587aeb96514f8b08da97",
+    "src/client/bootstrap/ClientMain.client.luau": "bf3912d9ee0f636830d40615b638f120c159da15fa42d4e202db15d3c0a0bbbb",
+    "src/client/bootstrap/NetworkingRuntimeService.luau": "867e66ddf647a35bb7b3a9d9a4222aa31ff139df6376125aeefb7d9d5b0bb7c8",
+    "src/client/bootstrap/ProgressionRuntimeService.luau": "c80aec6d4097dabb64b70c81931206c0db456f48ce5e28bdf4a56deaba94d3e9",
+    "src/client/bootstrap/VaultAssignmentRuntimeService.luau": "a3a653fc5dfa1ba9f54719936e69d42d2f2ff2b26d10ac86f7b9ca31b28cf6f3",
+    "src/client/bootstrap/VaultRuntimeService.luau": "2e84d30eebc4d25fcf16050153af7d20e7ec67990fe9f56a4c5b8e6198e1faab",
+    "src/client/bootstrap/WorldModelObserver.luau": "cc54050d83df0ed5f7dcce8c97bd9e1a086e5defa785464f528c8ee0e8f24e66",
+    "src/client/controllers/CaptureController.luau": "debcbf89912245c004125fed7c16fb8a63ce8a20405465feadb167effbe0baae",
+    "src/client/controllers/ProgressionController.luau": "717245ae01100785f2b845acc3f7df0571f3d313ede0f92b45bc9f3b56a5e157",
+    "src/client/controllers/VaultAssignmentController.luau": "4d77a2df14cbb4959e7ee279c15108772c0b6b5bf7a23e617ad5bf2bea317edb",
+    "src/client/controllers/VaultController.luau": "f71220af052b239c9be127f8aafc5eeba9fbf10a353be23e4f01aa11e7060056",
+    "src/client/input/InputRouter.luau": "93f41d4e56f3c7046a92393b122d049773d9f5db511290ebab8cbf0ba208ddcf",
+    "src/client/networking/ClientGateway.luau": "edb416f17a5683c7f674d5af62e2ab6668fde17a8b4cedec7e3525ab3a556c77",
+    "src/client/presentation/CaptureView.luau": "43ad25166e5bd473f488b5aa05a3665b64747e0fdf6f6be00ed902cd7e364151",
+    "src/client/store/ProjectionStore.luau": "c437b00617b9e3f006005a81e8729ab79398284df1c6a22702a28cd0b49f6708",
+    "src/client/store/SecuredCollectionStore.luau": "3bfef9a9086fc3adb35f72c4ea123690565393392ec2df851fb01c7a3f3cf2a1",
+    "src/client/store/WorldProjectionStore.luau": "b3e509b0b49a8df55eaee4342f6b411072fb74e23879cd78b392f54ad88462b6",
+    "src/server/adapters/RobloxProfileRepository.luau": "70fd63a9bb943f79b02cfe33bb849dd4113ec5d845da6f045ccead05c0dc5a8e",
+    "src/server/application/CaptureFinalizationUseCase.luau": "9dc4f90c267e415a56408416db5aa934b3eeb61fd5a18630e1cf2f9313094e5b",
+    "src/server/application/NetworkRateLimiter.luau": "a04e3175334977635ff1edfae9a168bef41f05ede09c468561534c011134cff8",
+    "src/server/application/NetworkingGateway.luau": "6f445fea4ff879e9ddf4c056448ce893c254b7824b26be95c9069b56116cf9cb",
+    "src/server/application/ProductionClaimUseCase.luau": "d666b99a346c1b0009f2e836103fada3a85b9385da4c13e4009ddfd432c29647",
+    "src/server/application/ProgressionProjection.luau": "5e507b58f4fd9dea8cc76f402f5a82f75123371aca9c430647d978477b37f43b",
+    "src/server/application/ProgressionPurchaseUseCase.luau": "c77f37daf94087f1740c8bfb6e13389650ae290ccaddf1900734e5e8d0ed47f0",
+    "src/server/application/ProjectionPublisher.luau": "7588fcec6c97199e7a54dba42d031ce516e3565bcb05f6a24583a362cc11994e",
+    "src/server/application/ReplayWindow.luau": "8fbb8bfae7e50b902e779d99a041a7682ad65c5116a72c6e7c6635bfd55ad4b6",
+    "src/server/application/RouteRegistry.luau": "2e3fd7e8284433d9cb77ddaefcc71ae08d0524b97d1aaba3435f4209395d06bb",
+    "src/server/application/SecuredCollectionProjection.luau": "231c086d6265a9a5745caf258baa5434721489846e68b5abb128b9b3389b44a4",
+    "src/server/application/SessionCoordinator.luau": "765917d27f0a897bffcd6435ad8d1d3dd8df99a34fbadcaa342ab0526b910a3e",
+    "src/server/application/VaultAssignmentProjection.luau": "6ad7c222c6fec977e295dc34694ed816fc33bc9cb591abf42880c70130e7e8bd",
+    "src/server/application/VaultCapacityProjection.luau": "2d595d65ac73d642cb4c15f55d088fae17a24d3baaf495a1ca66e393ccf5266b",
+    "src/server/application/VaultCapacityUseCase.luau": "8a007a90f3c2de5d698bfd8b67e09e15dd371ebfffc6bb80817baac67f42e82f",
+    "src/server/application/VaultProductionUseCase.luau": "07e70a69857b38fe583ae08e7bee6999f0b37aa7943a3c17534a55ae8990f0f8",
+    "src/server/application/WorldActionUseCase.luau": "57c8f8f442267c5400f3868f42e7ac4ee8ba51428a4f5a13074843486982cd16",
+    "src/server/bootstrap/CaptureRuntimeService.luau": "4b45888f658d16f967710e88b38e76823f0471fb47f73fa3527443107c2924a5",
+    "src/server/bootstrap/NetworkingRuntimeService.luau": "4976376650352b52e9d3a985cc5a345ec36c016d92baca45565dd92e3eddc4d2",
+    "src/server/bootstrap/ProfileBinding.luau": "a6568070be25030d53e090bb6bbd5b35033322f83a373c1c2782ad442cd3531f",
+    "src/server/bootstrap/ProfileRuntimeService.luau": "cac34f20befd2fff575fdfcb6752fe739658e11414ae0744a8b26fa4c79dc82e",
+    "src/server/bootstrap/ServerComposition.luau": "d115ce151f3d70adec2e578d4f76306962a8e506ece22a89d0ffac24912df46c",
+    "src/server/bootstrap/ServerMain.server.luau": "8c19fb1f80fd99a104e7f5b019e0fe540b58dfb516f969b2350ae13464a82280",
+    "src/server/bootstrap/ShutdownCoordinator.luau": "0d5db72a3bf82128bca827212df0aabff4074af18c416f578ee236050de3999c",
+    "src/server/bootstrap/StartupValidator.luau": "4632462504a8afa26b4e40a2d4845cd4edceb3b1023b557eba688e112b1387af",
+    "src/server/bootstrap/WorldRuntimeService.luau": "97d10f0448405f6fc104a0b3f0151fca4e3e0e49a47c5f1b6ac9a52c902b52ca",
+    "src/server/domains/capture/CaptureService.luau": "ee08d4f9b885841495d2525e0ea892277742dd1b4099f3d637107ccec0a7e0aa",
+    "src/server/domains/capture/VariantIdentity.luau": "638675e4894c33ca5488eaf23ea92a4568981e95193ff6ee843c90e1f0795adc",
+    "src/server/domains/economy/EnergyService.luau": "d1b5efa27f0d414a209e42738a6d5d08b7f1610f35d46182eddb025eb18d245c",
+    "src/server/domains/progression/ProgressionService.luau": "9db693e9c74d6b18bfcfd65e501eede13363c7e50645bbda5a2b8ae3a59196fa",
+    "src/server/domains/vault/VaultProductionService.luau": "2356bffaf340e7efdde9d4f90b37da3b9cc71f8469030d7195b6dd23caa968b2",
+    "src/server/domains/vault/VaultService.luau": "b06129ea1c74cd331a1f739161f7ee72922f6e924f3ea96c238fcbaaf6986571",
+    "src/server/domains/world/FixtureDefinition.luau": "c59eac75e28f4ebdb850c7aefcbc1de464b5401ec13a33b230f0b0d084ab6e1f",
+    "src/server/domains/world/SpawnPlan.luau": "9f82c59782f4c89cccfe5d80dfad3f1289547f0611e29d308d428684f414a004",
+    "src/server/domains/world/WorldAuthoringIndex.luau": "3aa0c952e5870b70bbf1f3470b86e9cb45981af1baede6d371a089c9092d92fa",
+    "src/server/domains/world/WorldDefinitions.luau": "4fd6d99304ef822025098a497333722396c3977fc21948e8f50d772b7748793f",
+    "src/server/domains/world/WorldProgressionService.luau": "4c33bfcf8503793311ecb2bbc4d76640a4f6b95efb5b8cbf06d96fb7055fc3df",
+    "src/server/domains/world/WorldRegistry.luau": "49b7b9104dd765661aa69c202136a1409a6470eb5383cbca7b5e7dc7ab1ff2b4",
+    "src/server/domains/world/WorldService.luau": "8c3560b506f3a8914d9fa6178e8f587543e85c220897e117e450709ad10485fb",
+    "src/server/infrastructure/clock/ClockInterface.luau": "e50b368217f9e8e67c0e9a7d94d82536ae8e3f72c45fa1a0d212679810ef7534",
+    "src/server/infrastructure/performance/PerformanceCounters.luau": "b6a01c851a31d4d50d72f1271cc0557d54914bcce74111b6bf681bde508f20fb",
+    "src/server/infrastructure/persistence/ProfileRepositoryInterface.luau": "0f97143f20b8430c702f4015b7571601fb4ab5141d913abfe35602d80fdf5f61",
+    "src/server/infrastructure/persistence/ProfileSchemaV1.luau": "8fcd008aa4557a9fa098494aebd4197521324816dae9914c84c8247e40f893c0",
+    "src/server/infrastructure/persistence/ProfileSession.luau": "dbd5c63a97cc0031cf42d95694d80f5da5a0873ff3243f183b04c9e4d1ac8ebd",
+    "src/server/infrastructure/persistence/RetryPolicy.luau": "76174178e801e0fdf965c906733110643766a146796ca2a66758efbc136aec08",
+    "src/server/infrastructure/persistence/SingleWriterQueue.luau": "7e5e9591f498c05e501cacce2753f4f3e59930bdfa076d76ce7126ffc5d9c8cc",
+    "src/server/infrastructure/rng/RandomSourceInterface.luau": "a26d9636ce029acfd36097f4a20c839da2c62b9198d6da7a90ef56e8b0ac1952",
+    "src/shared/config/MaterialPalette.luau": "d9ccb880a8080792acae892691b5f55aa3f638b2e81aeaa67603f5a2e67fa427",
+    "src/shared/config/ProgressionFixture.luau": "d27f3bbb1d507d68a281be13454390b89d9dd014a8e9aee1d70bfa60e112b07b",
+    "src/shared/config/VaultCapacityFixture.luau": "1e84d72832f1385cf439ea83c3a53b8d86e1e0b842c14378459bacbcfaa3b7ba",
+    "src/shared/config/VaultProductionFixture.luau": "94c7682df6daf9f875ec1e45c938b7b86ca5767959c5e95a97ecf1c6cc4aaff4",
+    "src/shared/contracts/CaptureProjectionV1.luau": "43b16d1f2e4fed9699f4b8013ecc78a9323da9a6a58e480b92f762c83809b708",
+    "src/shared/contracts/ProgressionProjectionV1.luau": "8b66e6397cdf3140650f6fa2e26784df176919e0f335ecc52f11fd3f452ecee9",
+    "src/shared/contracts/ProjectionV1.luau": "e0c524382ad38e3579a703c5d60ee8668bb7cd6be95f63b47a3657b761cb1d22",
+    "src/shared/contracts/ProtocolV1.luau": "5543ded452d216f86ae7302f1b628a6edd533fbc63d647330d805216cf5970a3",
+    "src/shared/contracts/ResultCodes.luau": "b3d6c7a2cd5e0eff5a44f8e8061ce1d4d519e0cac55f3a86175aaeae380fbbdf",
+    "src/shared/contracts/RouteIds.luau": "661b6d73a37e3cdd2f5de441ccb725a21ab2bb3cc2bb877af6f3238395c8f13f",
+    "src/shared/contracts/SecuredCollectionProjectionV1.luau": "0ab8d95693d50b85f6fe27160f4c7933d58a458c34ed7f4dae6b46c37eba1740",
+    "src/shared/contracts/VaultAssignmentProjectionV1.luau": "4762e14fa7635c2b117be56e2875e001777559c5279be8cb6cfd7263c4c0731c",
+    "src/shared/contracts/VaultProjectionV1.luau": "3f75b2618dc3f0950a98ee8f39adb85f5630a548e7b3dec85348ab09f35428d3",
+    "src/shared/contracts/WireValidation.luau": "b6a99c3f9b83b56b5c2881f28054b4f201f78c47b8017c4bcacce9a3d50bad1e",
+    "src/shared/contracts/WorldProjectionV1.luau": "319ca3ae38d13a41a172d9986a68a7481739aa80cf07b6f2fdb9846b4f04683e",
+    "src/shared/types/Ids.luau": "0d95471d6c66cb9baa4245f7fd0755e3e334d5a608787477f0368bc700b21cd4",
+    "src/shared/util/StartupPlan.luau": "feea980a3c0e61eebafacb4fa3975d34e34a22b3ffa3dc0a3631eb10798e50f0",
+    "src/shared/util/StructuredDiagnostics.luau": "bdd58852e86548217f7b7efed3f24241053f955ab0b581f0775ffb00119a994d",
+    "tests/manifest.luau": "c25a927549779a12582841f743096b6e4431ea89e824894509cb9e980477a375",
+    "tests/unit/SpawnScheduling.luau": "e5a43e964e027455d3d8446da30c0389440b191fd12f44f712001bc5157c2409",
+    "tools/roblox/energy_core_appearance.luau": "ab01ef6128a3b1514e31ecef7268eb993671830638a276e70bfdabdbd11736b6"
+  },
+  "energySourcesGitUnchanged": true
+}

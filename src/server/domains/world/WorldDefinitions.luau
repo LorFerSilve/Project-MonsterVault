@@ -1,9 +1,9 @@
 --!strict
 
 -- AD-256: canonical DEV authored roles, pools, active routes and safe utilities.
--- Historic Starter IDs/provenance remain valid. Travel/recovery actions and scaled
--- encounter scheduling stay with their later owners; no world reward is bound.
-return {
+-- Historic Starter IDs/provenance remain valid. Travel/recovery and ordinary
+-- cycle actions stay with their later owners; no world reward is bound.
+local config = {
 	contentSnapshotId = "content-snapshot/imp10-world-dev-v2",
 	authoringVersion = 1,
 	regions = {
@@ -426,3 +426,22 @@ return {
 		},
 	},
 }
+
+-- AD-257: small DEV envelope, one reservation/live encounter per authored anchor.
+-- Existing Common pools have explicit equal weights; no rarity-label formula.
+config.spawnPolicy = {
+	stepSeconds = 1,
+	maxBucketsPerStep = 2,
+	maxBuckets = 8,
+	cellSize = 32,
+	interactionRadius = 12,
+	lifetimeSeconds = 180,
+	retrySeconds = 2,
+	refillSeconds = 5,
+	maxMaterializationAttempts = 3,
+	protectedFixtureContextId = "spawn-context/fixture-clearing",
+}
+for _, context in config.spawnContexts do
+	context.speciesWeights = table.create(#context.speciesIds, 1)
+end
+return config

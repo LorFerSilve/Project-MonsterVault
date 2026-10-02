@@ -5,7 +5,10 @@ local WorldService = require(script.Parent.Parent.domains.world.WorldService)
 local WorldRegistry = require(script.Parent.Parent.domains.world.WorldRegistry)
 local WorldDefinitions = require(script.Parent.Parent.domains.world.WorldDefinitions)
 local WorldAuthoringIndex = require(script.Parent.Parent.domains.world.WorldAuthoringIndex)
+local SpawnPlan = require(script.Parent.Parent.domains.world.SpawnPlan)
 local VariantIdentity = require(script.Parent.Parent.domains.capture.VariantIdentity)
+local MaterialPalette =
+	require(game:GetService("ReplicatedStorage").MonsterVault.Shared.config.MaterialPalette)
 
 local WorldRuntimeService = {}
 
@@ -13,6 +16,7 @@ function WorldRuntimeService.new(
 	options: {
 		workspace: any,
 		collectionService: any,
+		players: any?,
 		httpService: any,
 		diagnostics: any,
 		worldProgression: any?,
@@ -28,16 +32,18 @@ function WorldRuntimeService.new(
 	local globals = getfenv() :: any
 	local Instance = globals.Instance
 	local Vector3 = globals.Vector3
-	local Color3 = globals.Color3
 	local Enum = globals.Enum
 	local clock = options.clock or os.clock
 	local scheduler = options.scheduler or globals.task
 	local random = options.random or globals.Random.new()
+	local spatialWorkspace = game:GetService("Workspace")
 	local world: any = nil
 	local runtimeRoot: any = nil
 	local creatures: any = nil
 	local running = false
 	local generation = 0
+	local pulseTicket = 0
+	local activeRegions: { [string]: number } = {}
 	local registry = if options.worldProgression
 		then options.worldProgression.registry
 		else WorldRegistry.new(WorldDefinitions)
@@ -154,8 +160,98 @@ function WorldRuntimeService.new(
 			and part:HasTag(bound.tag)
 			and part.Anchored
 			and part.Position == bound.position
+			and part.CFrame == bound.cframe
+			and part.Size == bound.size
 			and part:GetAttribute(bound.attribute) == bound.id
 			and part:GetAttribute("RegionId") == bound.regionId
+	end
+	local function liveSpawn(bucket: any): boolean
+		local anchor = authoringIndex.spawnAnchors[bucket.spawnContextId]
+		return anchor ~= nil
+			and anchor.part.Parent ~= nil
+			and anchor.part:IsDescendantOf(anchor.root)
+			and anchor.part.Anchored
+			and anchor.part:HasTag("MonsterVaultSpawnAnchor")
+			and anchor.part.CFrame == anchor.cframe
+			and anchor.part.Size == anchor.size
+			and anchor.part:GetAttribute("SpawnContextId") == bucket.spawnContextId
+			and anchor.part:GetAttribute("RegionId") == bucket.regionId
+			and anchor.part:GetAttribute("HabitatId") == bucket.habitatId
+			and anchor.part:GetAttribute("SpeciesId") == anchor.speciesId
+			and liveBinding(authoringIndex.regions[bucket.regionId])
+			and liveBinding(authoringIndex.habitats[bucket.habitatId])
+	end
+	local function countEligiblePresence()
+		table.clear(activeRegions)
+		if options.profileCoordinator == nil or options.worldActions == nil then
+			return
+		end
+		local players = options.players or game:GetService("Players")
+		for _, player in players:GetPlayers() do
+			local session = options.profileCoordinator.get(player.UserId)
+			local character = player.Character
+			local root = if character then character:FindFirstChild("HumanoidRootPart") else nil
+			local humanoid = if character then character:FindFirstChildOfClass("Humanoid") else nil
+			if
+				session
+				and session.state() == "Ready"
+				and root
+				and humanoid
+				and humanoid.Health > 0
+			then
+				local profile = session.snapshot()
+				for id, region in authoringIndex.regions do
+					local p = region.cframe:PointToObjectSpace(root.Position)
+					if
+						liveBinding(region)
+						and math.abs(p.X) <= region.size.X / 2
+						and math.abs(p.Y) <= region.size.Y / 2
+						and math.abs(p.Z) <= region.size.Z / 2
+						and options.worldActions.canAccess(profile, id)
+					then
+						activeRegions[id] = (activeRegions[id] or 0) + 1
+					end
+				end
+			end
+		end
+	end
+	local function placementValid(bucket: any): boolean
+		if not liveSpawn(bucket) or creatures == nil or creatures.Parent == nil then
+			return false
+		end
+		local position = authoringIndex.spawnAnchors[bucket.spawnContextId].position
+		local ray = globals.RaycastParams.new()
+		ray.FilterType = Enum.RaycastFilterType.Include
+		ray.FilterDescendantsInstances = { authoringIndex.spawnAnchors[bucket.spawnContextId].root }
+		for _, offset in
+			{
+				Vector3.zero,
+				Vector3.new(1.8, 0, 1.8),
+				Vector3.new(-1.8, 0, 1.8),
+				Vector3.new(1.8, 0, -1.8),
+				Vector3.new(-1.8, 0, -1.8),
+			}
+		do
+			local hit = spatialWorkspace:Raycast(position + offset, Vector3.new(0, -8, 0), ray)
+			if
+				hit == nil
+				or not hit.Instance.CanCollide
+				or hit.Normal.Y < 0.5
+				or position.Y - hit.Position.Y < 2
+				or position.Y - hit.Position.Y > 4
+			then
+				return false
+			end
+		end
+		local overlap = globals.OverlapParams.new()
+		overlap.FilterType = Enum.RaycastFilterType.Include
+		overlap.FilterDescendantsInstances = { creatures }
+		overlap.MaxParts = 1
+		return #spatialWorkspace:GetPartBoundsInBox(
+			globals.CFrame.new(position),
+			Vector3.new(4, 4, 4),
+			overlap
+		) == 0
 	end
 	local function eligible(player: any, bound: any): boolean
 		if
@@ -216,8 +312,9 @@ function WorldRuntimeService.new(
 		body.Anchored = true
 		body.CanCollide = false
 		body.CanTouch = false
-		body.Color = Color3.fromRGB(77, 205, 255)
-		body.Material = Enum.Material.Neon
+		body.Color = MaterialPalette.FixtureCreature.color
+		body.Material = MaterialPalette.FixtureCreature.material
+		body:SetAttribute("MaterialGroup", "FixtureCreature")
 		body.Parent = model
 		model.PrimaryPart = body
 		return model
@@ -234,10 +331,12 @@ function WorldRuntimeService.new(
 		model.Parent = creatures
 	end
 
-	local function pulse(expectedGeneration: number)
-		if not running or expectedGeneration ~= generation then
+	local function pulse(expectedGeneration: number, expectedTicket: number)
+		if not running or expectedGeneration ~= generation or expectedTicket ~= pulseTicket then
 			return
 		end
+		pulseTicket += 1
+		countEligiblePresence()
 		local ok, outcome = pcall(world.step, expectedGeneration)
 		if not ok then
 			running = false
@@ -258,14 +357,24 @@ function WorldRuntimeService.new(
 				{ component = "world" }
 			)
 		end
-		scheduler.delay(1, function()
-			pulse(expectedGeneration)
+		local nextTicket = pulseTicket
+		scheduler.delay(if options.fixture then 1 else registry.spawnPolicy.stepSeconds, function()
+			pulse(expectedGeneration, nextTicket)
 		end)
 	end
 
 	local function start()
 		assert(not running and world == nil, "world service already started")
 		validateAuthoring()
+		local plan: any = nil
+		if options.fixture == nil then
+			local positions = {}
+			for id, anchor in authoringIndex.spawnAnchors do
+				positions[id] =
+					{ x = anchor.position.X, y = anchor.position.Y, z = anchor.position.Z }
+			end
+			plan = SpawnPlan.new(registry, positions, FixtureDefinition)
+		end
 		assert(
 			options.workspace:FindFirstChild("MonsterVaultRuntime") == nil,
 			"runtime container already exists"
@@ -280,6 +389,40 @@ function WorldRuntimeService.new(
 		creatures = creatureFolder
 		world = WorldService.new({
 			fixture = fixture,
+			buckets = if plan then plan.buckets else nil,
+			maxBucketsPerStep = if plan then plan.policy.maxBucketsPerStep else nil,
+			stepSeconds = if plan then plan.policy.stepSeconds else nil,
+			isBucketActive = if plan
+				then function(bucket: any): boolean
+					return liveSpawn(bucket)
+						and (
+							bucket.replenishingFixture
+							or (activeRegions[bucket.regionId] or 0) > 0
+						)
+				end
+				else nil,
+			canMaterialize = if plan then placementValid else nil,
+			isProjectionAlive = function(model: any, projection: any): boolean
+				local anchor = authoringIndex.spawnAnchors[projection.spawnContextId]
+				return model ~= nil
+					and model.Parent ~= nil
+					and model:IsDescendantOf(creatures)
+					and model.PrimaryPart ~= nil
+					and model.PrimaryPart:IsDescendantOf(model)
+					and (plan == nil or (anchor ~= nil and liveSpawn(anchor)))
+			end,
+			selectCandidate = if plan
+				then function(bucket: any): any
+					return SpawnPlan.select(bucket, {
+						nextUnit = function()
+							return random:NextNumber()
+						end,
+					})
+				end
+				else nil,
+			onBucketError = function(_contextId: string)
+				options.diagnostics.emit("error", "WORLD_BUCKET_PAUSED", { component = "world" })
+			end,
 			clock = clock,
 			newId = function()
 				return "creature-" .. options.httpService:GenerateGUID(false)
@@ -336,7 +479,7 @@ function WorldRuntimeService.new(
 				end)
 			)
 		end
-		pulse(generation)
+		pulse(generation, pulseTicket)
 	end
 
 	local function stop(): { string }
