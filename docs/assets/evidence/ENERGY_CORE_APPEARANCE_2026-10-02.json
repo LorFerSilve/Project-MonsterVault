@@ -1,0 +1,651 @@
+{
+  "date": "2026-10-02",
+  "studioId": "510b1800-f548-4a53-8b9e-116acccf6346",
+  "placeId": 110304961224794,
+  "mode": "Edit",
+  "asset": "Workspace.EnergyCoreGenerator_Source",
+  "status": "PASS",
+  "palette": "ReplicatedStorage.MonsterVault.Shared.config.MaterialPalette",
+  "styles": {
+    "DarkMetal": {
+      "material": "Metal",
+      "rgb": [
+        50,
+        63,
+        76
+      ]
+    },
+    "SecondaryMetal": {
+      "material": "Metal",
+      "rgb": [
+        153,
+        172,
+        187
+      ]
+    },
+    "PanelPlastic": {
+      "material": "SmoothPlastic",
+      "rgb": [
+        19,
+        25,
+        33
+      ]
+    },
+    "EnergyGreen": {
+      "material": "Neon",
+      "rgb": [
+        76,
+        255,
+        110
+      ]
+    }
+  },
+  "geometry": {
+    "unchanged": true,
+    "meshCount": 4,
+    "modelCount": 6,
+    "sourcePivot": [
+      -9.13223648071289,
+      0,
+      33.04500198364258,
+      1,
+      0,
+      0,
+      0,
+      1,
+      0,
+      0,
+      0,
+      1
+    ],
+    "boundingBox": {
+      "size": [
+        4.000000476837158,
+        6,
+        4.000000476837158
+      ],
+      "cframe": [
+        -9.13223648071289,
+        3,
+        33.04500198364258,
+        1,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "checks": [
+      "MeshId",
+      "Size",
+      "CFrame",
+      "PivotOffset",
+      "all Model pivots",
+      "scale=1",
+      "Anchored",
+      "CanCollide",
+      "Transparency",
+      "Reflectance",
+      "bounding box"
+    ]
+  },
+  "lighting": {
+    "unchanged": true,
+    "ClockTime": 14.5,
+    "Brightness": 3,
+    "Ambient": [
+      70,
+      70,
+      70
+    ],
+    "OutdoorAmbient": [
+      70,
+      70,
+      70
+    ],
+    "ExposureCompensation": 0,
+    "lightsAdded": 0
+  },
+  "studioChecks": {
+    "originalCoverage": 4,
+    "repeatPass": "PASS",
+    "cloneKeepsNativeAppearance": "PASS",
+    "freshImportNames": "PASS",
+    "metadataSurvivesRenaming": "PASS",
+    "pbrAndTextureCannotOverride": "PASS",
+    "materialMetadataFallback": "PASS",
+    "unknownGroupFailsBeforeMutation": "PASS",
+    "invalidMetadataFailsBeforeMutation": "PASS",
+    "emptyAssetRejected": "PASS",
+    "immutablePalette": "PASS",
+    "mappingSourceParity": "PASS",
+    "geometryParity": "PASS",
+    "frontVisual": "PASS",
+    "rearVisual": "PASS"
+  },
+  "visualEvidence": [
+    "energy_core_front_2026-10-02.jpg",
+    "energy_core_rear_2026-10-02.jpg"
+  ],
+  "sourceAssets": [
+    {
+      "path": "assets/blender/energy_core_generator.blend",
+      "bytes": 137977,
+      "sha256": "5619aa5816d0160ff1c249fd589a3c22111d3d63f476d4a5b3e37f7b00e6bb35"
+    },
+    {
+      "path": "assets/exported/energy_core_generator.glb",
+      "bytes": 205192,
+      "sha256": "f018d4dfd28fe54f0d4108e74af65ce844c23ba6c639148b8673791d56e26b75"
+    }
+  ],
+  "scope": "Appearance authoring only; no gameplay, authority, world topology, physics, geometry or Lighting changes.",
+  "notes": [
+    "The existing uncommitted pass already supplied these colors at initial inspection; this change centralizes and hardens that pass.",
+    "Native source asset remains in the open Studio Edit model. The source BLEND/GLB and mapping scripts are versioned; the full Studio place is not exported or published by this change."
+  ],
+  "nativeSnapshot": [
+    {
+      "path": "Workspace.EnergyCoreGenerator_Source",
+      "parent": "Workspace",
+      "class": "Model",
+      "vectors": [],
+      "name": "EnergyCoreGenerator_Source",
+      "colors": [],
+      "cframes": {
+        "WorldPivot": [
+          -9.13223648071289,
+          0,
+          33.04500198364258,
+          1,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          1
+        ]
+      },
+      "properties": {
+        "Scale": 1,
+        "LevelOfDetail": "Automatic",
+        "ModelStreamingMode": "Default"
+      },
+      "attributes": {
+        "RBX_ReimportId": "b2db21f3-0ea5-46b8-9365-584cf295529e"
+      }
+    },
+    {
+      "path": "Workspace.EnergyCoreGenerator_Source.EnergyCoreGenerator",
+      "parent": "Workspace.EnergyCoreGenerator_Source",
+      "class": "Model",
+      "vectors": [],
+      "name": "EnergyCoreGenerator",
+      "colors": [],
+      "cframes": {
+        "WorldPivot": [
+          -9.13223648071289,
+          0,
+          33.04500198364258,
+          1,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          1
+        ]
+      },
+      "properties": {
+        "Scale": 1,
+        "LevelOfDetail": "Automatic",
+        "ModelStreamingMode": "Default"
+      },
+      "attributes": []
+    },
+    {
+      "path": "Workspace.EnergyCoreGenerator_Source.EnergyCoreGenerator.EC_DarkMetal",
+      "parent": "Workspace.EnergyCoreGenerator_Source.EnergyCoreGenerator",
+      "class": "Model",
+      "vectors": [],
+      "name": "EC_DarkMetal",
+      "colors": [],
+      "cframes": {
+        "WorldPivot": [
+          -9.13223648071289,
+          0,
+          33.04500198364258,
+          1,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          1
+        ]
+      },
+      "properties": {
+        "Scale": 1,
+        "LevelOfDetail": "Automatic",
+        "ModelStreamingMode": "Default"
+      },
+      "attributes": []
+    },
+    {
+      "path": "Workspace.EnergyCoreGenerator_Source.EnergyCoreGenerator.EC_DarkMetal.EC_DarkMetal_Mesh",
+      "parent": "Workspace.EnergyCoreGenerator_Source.EnergyCoreGenerator.EC_DarkMetal",
+      "class": "MeshPart",
+      "vectors": {
+        "Size": [
+          4.000000476837158,
+          5.949999809265137,
+          4.000000476837158
+        ]
+      },
+      "name": "EC_DarkMetal_Mesh",
+      "colors": {
+        "Color": [
+          0.19607843458652496,
+          0.24705882370471954,
+          0.2980392277240753
+        ]
+      },
+      "cframes": {
+        "CFrame": [
+          -9.13223648071289,
+          2.9749999046325684,
+          33.04500198364258,
+          1,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          1
+        ],
+        "PivotOffset": [
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          1
+        ]
+      },
+      "properties": {
+        "CanQuery": true,
+        "TextureID": "",
+        "Massless": false,
+        "CollisionFidelity": "Default",
+        "Material": "Metal",
+        "CanCollide": true,
+        "RootPriority": 0,
+        "MeshId": "rbxassetid://82608047802888",
+        "CanTouch": true,
+        "RenderFidelity": "Automatic",
+        "Transparency": 0,
+        "Reflectance": 0,
+        "Anchored": false,
+        "DoubleSided": false,
+        "CollisionGroup": "Default",
+        "CastShadow": true,
+        "MaterialVariant": ""
+      },
+      "attributes": {
+        "EnergyCoreMaterialGroup": "DarkMetal"
+      }
+    },
+    {
+      "path": "Workspace.EnergyCoreGenerator_Source.EnergyCoreGenerator.EC_EnergyGreen",
+      "parent": "Workspace.EnergyCoreGenerator_Source.EnergyCoreGenerator",
+      "class": "Model",
+      "vectors": [],
+      "name": "EC_EnergyGreen",
+      "colors": [],
+      "cframes": {
+        "WorldPivot": [
+          -9.13223648071289,
+          0,
+          33.04500198364258,
+          1,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          1
+        ]
+      },
+      "properties": {
+        "Scale": 1,
+        "LevelOfDetail": "Automatic",
+        "ModelStreamingMode": "Default"
+      },
+      "attributes": []
+    },
+    {
+      "path": "Workspace.EnergyCoreGenerator_Source.EnergyCoreGenerator.EC_EnergyGreen.EC_EnergyGreen_Mesh",
+      "parent": "Workspace.EnergyCoreGenerator_Source.EnergyCoreGenerator.EC_EnergyGreen",
+      "class": "MeshPart",
+      "vectors": {
+        "Size": [
+          3.174999952316284,
+          4.769000053405762,
+          2.7709999084472656
+        ]
+      },
+      "name": "EC_EnergyGreen_Mesh",
+      "colors": {
+        "Color": [
+          0.2980392277240753,
+          1,
+          0.4313725531101227
+        ]
+      },
+      "cframes": {
+        "CFrame": [
+          -9.13223648071289,
+          3.2895002365112305,
+          32.43950271606445,
+          1,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          1
+        ],
+        "PivotOffset": [
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          1
+        ]
+      },
+      "properties": {
+        "CanQuery": true,
+        "TextureID": "",
+        "Massless": false,
+        "CollisionFidelity": "Default",
+        "Material": "Neon",
+        "CanCollide": true,
+        "RootPriority": 0,
+        "MeshId": "rbxassetid://111406198103853",
+        "CanTouch": true,
+        "RenderFidelity": "Automatic",
+        "Transparency": 0,
+        "Reflectance": 0,
+        "Anchored": false,
+        "DoubleSided": false,
+        "CollisionGroup": "Default",
+        "CastShadow": true,
+        "MaterialVariant": ""
+      },
+      "attributes": {
+        "EnergyCoreMaterialGroup": "EnergyGreen"
+      }
+    },
+    {
+      "path": "Workspace.EnergyCoreGenerator_Source.EnergyCoreGenerator.EC_PanelPlastic",
+      "parent": "Workspace.EnergyCoreGenerator_Source.EnergyCoreGenerator",
+      "class": "Model",
+      "vectors": [],
+      "name": "EC_PanelPlastic",
+      "colors": [],
+      "cframes": {
+        "WorldPivot": [
+          -9.13223648071289,
+          0,
+          33.04500198364258,
+          1,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          1
+        ]
+      },
+      "properties": {
+        "Scale": 1,
+        "LevelOfDetail": "Automatic",
+        "ModelStreamingMode": "Default"
+      },
+      "attributes": []
+    },
+    {
+      "path": "Workspace.EnergyCoreGenerator_Source.EnergyCoreGenerator.EC_PanelPlastic.EC_PanelPlastic_Mesh",
+      "parent": "Workspace.EnergyCoreGenerator_Source.EnergyCoreGenerator.EC_PanelPlastic",
+      "class": "MeshPart",
+      "vectors": {
+        "Size": [
+          3.429999828338623,
+          5.125,
+          2.8575000762939453
+        ]
+      },
+      "name": "EC_PanelPlastic_Mesh",
+      "colors": {
+        "Color": [
+          0.07450980693101883,
+          0.09803921729326248,
+          0.12941177189350128
+        ]
+      },
+      "cframes": {
+        "CFrame": [
+          -9.172237396240234,
+          3.4074997901916504,
+          32.496253967285156,
+          1,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          1
+        ],
+        "PivotOffset": [
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          1
+        ]
+      },
+      "properties": {
+        "CanQuery": true,
+        "TextureID": "",
+        "Massless": false,
+        "CollisionFidelity": "Default",
+        "Material": "SmoothPlastic",
+        "CanCollide": true,
+        "RootPriority": 0,
+        "MeshId": "rbxassetid://138888023376661",
+        "CanTouch": true,
+        "RenderFidelity": "Automatic",
+        "Transparency": 0,
+        "Reflectance": 0,
+        "Anchored": false,
+        "DoubleSided": false,
+        "CollisionGroup": "Default",
+        "CastShadow": true,
+        "MaterialVariant": ""
+      },
+      "attributes": {
+        "EnergyCoreMaterialGroup": "PanelPlastic"
+      }
+    },
+    {
+      "path": "Workspace.EnergyCoreGenerator_Source.EnergyCoreGenerator.EC_SecondaryMetal",
+      "parent": "Workspace.EnergyCoreGenerator_Source.EnergyCoreGenerator",
+      "class": "Model",
+      "vectors": [],
+      "name": "EC_SecondaryMetal",
+      "colors": [],
+      "cframes": {
+        "WorldPivot": [
+          -9.13223648071289,
+          0,
+          33.04500198364258,
+          1,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          1
+        ]
+      },
+      "properties": {
+        "Scale": 1,
+        "LevelOfDetail": "Automatic",
+        "ModelStreamingMode": "Default"
+      },
+      "attributes": []
+    },
+    {
+      "path": "Workspace.EnergyCoreGenerator_Source.EnergyCoreGenerator.EC_SecondaryMetal.EC_SecondaryMetal_Mesh",
+      "parent": "Workspace.EnergyCoreGenerator_Source.EnergyCoreGenerator.EC_SecondaryMetal",
+      "class": "MeshPart",
+      "vectors": {
+        "Size": [
+          3.820000171661377,
+          5.579999923706055,
+          3.820000171661377
+        ]
+      },
+      "name": "EC_SecondaryMetal_Mesh",
+      "colors": {
+        "Color": [
+          0.6000000238418579,
+          0.6745098233222961,
+          0.7333333492279053
+        ]
+      },
+      "cframes": {
+        "CFrame": [
+          -9.13223648071289,
+          3.2100000381469727,
+          33.04500198364258,
+          1,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          1
+        ],
+        "PivotOffset": [
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          1
+        ]
+      },
+      "properties": {
+        "CanQuery": true,
+        "TextureID": "",
+        "Massless": false,
+        "CollisionFidelity": "Default",
+        "Material": "Metal",
+        "CanCollide": true,
+        "RootPriority": 0,
+        "MeshId": "rbxassetid://140395381153946",
+        "CanTouch": true,
+        "RenderFidelity": "Automatic",
+        "Transparency": 0,
+        "Reflectance": 0,
+        "Anchored": false,
+        "DoubleSided": false,
+        "CollisionGroup": "Default",
+        "CastShadow": true,
+        "MaterialVariant": ""
+      },
+      "attributes": {
+        "EnergyCoreMaterialGroup": "SecondaryMetal"
+      }
+    },
+    {
+      "path": "Workspace.EnergyCoreGenerator_Source.ApplyEnergyCoreAppearance",
+      "parent": "Workspace.EnergyCoreGenerator_Source",
+      "class": "Script",
+      "vectors": [],
+      "name": "ApplyEnergyCoreAppearance",
+      "colors": [],
+      "cframes": [],
+      "properties": {
+        "Source": "--!strict\n-- Install beside EnergyCoreAppearance; one pass when the asset enters the game.\n-- Edit-time authoring calls the same module explicitly and saves its properties.\n\nlocal applyAppearance = require(script.Parent:WaitForChild(\"EnergyCoreAppearance\") :: ModuleScript)\napplyAppearance(script.Parent)\n",
+        "RunContext": "Server",
+        "Disabled": false
+      },
+      "attributes": []
+    },
+    {
+      "path": "Workspace.EnergyCoreGenerator_Source.EnergyCoreAppearance",
+      "parent": "Workspace.EnergyCoreGenerator_Source",
+      "class": "ModuleScript",
+      "vectors": [],
+      "name": "EnergyCoreAppearance",
+      "colors": [],
+      "cframes": [],
+      "properties": {
+        "Source": "--!strict\n-- Install as an EnergyCoreAppearance ModuleScript inside the imported asset.\n-- GLB names/metadata identify four groups; no per-component name list is needed.\n-- The palette is shared through the main Rojo project, never copied per asset.\n\nlocal styles =\n\trequire(game:GetService(\"ReplicatedStorage\").MonsterVault.Shared.config.MaterialPalette)\n\nlocal function namedGroup(name: string): string?\n\tlocal group = name:gsub(\"^EC_\", \"\"):gsub(\"_Mesh$\", \"\")\n\treturn if styles[group] then group else nil\nend\n\nlocal function materialGroup(part: MeshPart, asset: Instance): string?\n\tlocal attribute = part:GetAttribute(\"EnergyCoreMaterialGroup\")\n\tif attribute ~= nil then\n\t\treturn if typeof(attribute) == \"string\" and styles[attribute] then attribute else nil\n\tend\n\tlocal current: Instance? = part\n\twhile current and current ~= asset do\n\t\tlocal group = namedGroup(current.Name)\n\t\tif group then\n\t\t\treturn group\n\t\tend\n\t\tcurrent = current.Parent\n\tend\n\tfor _, child in part:GetChildren() do\n\t\tif child:IsA(\"SurfaceAppearance\") then\n\t\t\tlocal group = namedGroup(child.Name)\n\t\t\tif group then\n\t\t\t\treturn group\n\t\t\tend\n\t\tend\n\tend\n\treturn nil\nend\n\nreturn function(asset: Instance): number\n\tlocal targets: { { part: MeshPart, group: string } } = {}\n\tlocal unmapped: { string } = {}\n\tfor _, descendant in asset:GetDescendants() do\n\t\tif descendant:IsA(\"MeshPart\") then\n\t\t\tlocal group = materialGroup(descendant, asset)\n\t\t\tif group then\n\t\t\t\ttable.insert(targets, { part = descendant, group = group })\n\t\t\telse\n\t\t\t\ttable.insert(unmapped, descendant:GetFullName())\n\t\t\tend\n\t\tend\n\tend\n\tassert(#unmapped == 0, \"Unknown Energy Core material groups: \" .. table.concat(unmapped, \", \"))\n\tassert(#targets > 0, \"Energy Core contains no MeshParts\")\n\t-- Validate the whole mapping before changing any appearance properties.\n\tfor _, target in targets do\n\t\tlocal style = styles[target.group]\n\t\t-- Native Material/Color must not be masked by imported texture/PBR maps.\n\t\ttarget.part.TextureID = \"\"\n\t\tfor _, child in target.part:GetChildren() do\n\t\t\tif child:IsA(\"SurfaceAppearance\") then\n\t\t\t\tchild:Destroy()\n\t\t\tend\n\t\tend\n\t\ttarget.part.MaterialVariant = \"\"\n\t\ttarget.part.Material = style.material\n\t\ttarget.part.Color = style.color\n\t\ttarget.part:SetAttribute(\"EnergyCoreMaterialGroup\", target.group)\n\tend\n\treturn #targets\nend\n"
+      },
+      "attributes": []
+    }
+  ]
+}
