@@ -1,8 +1,8 @@
 --!strict
 
 -- AD-256: canonical DEV authored roles, pools, active routes and safe utilities.
--- Historic Starter IDs/provenance remain valid. Travel/recovery and ordinary
--- cycle actions stay with their later owners; no world reward is bound.
+-- Historic Starter IDs/provenance remain valid. Travel/recovery actions stay
+-- with their later owners; no world reward is bound.
 local config = {
 	contentSnapshotId = "content-snapshot/imp10-world-dev-v2",
 	authoringVersion = 1,
@@ -429,6 +429,25 @@ local config = {
 
 -- AD-257: small DEV envelope, one reservation/live encounter per authored anchor.
 -- Existing Common pools have explicit equal weights; no rarity-label formula.
+-- AD-258: explicit DEV timings, phase-independent existing content.
+-- Unix epoch is fixed across servers. No Lighting, weights or biome rules change.
+config.worldCycle = {
+	id = "world-cycle/ordinary-dev-v1",
+	version = 1,
+	epochUnixSeconds = 0,
+	phases = {
+		{ id = "world-phase/day", durationSeconds = 300 },
+		{ id = "world-phase/dusk", durationSeconds = 300 },
+		{ id = "world-phase/night", durationSeconds = 300 },
+	},
+}
+local cycleBindings: { any } = { config.habitats, config.spawnContexts }
+for _, definitions in cycleBindings do
+	for _, definition in definitions do
+		definition.cycleDefinitionId = config.worldCycle.id
+		definition.cyclePhaseIds = { "world-phase/day", "world-phase/dusk", "world-phase/night" }
+	end
+end
 config.spawnPolicy = {
 	stepSeconds = 1,
 	maxBucketsPerStep = 2,

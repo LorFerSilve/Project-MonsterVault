@@ -1,0 +1,1109 @@
+{
+  "date": "2026-10-02",
+  "decision": "AD-258",
+  "slice": "Ordinary World Cycle and prospective context binding",
+  "status": "PASS",
+  "imp10": "OPEN",
+  "base": {
+    "pullRequest": 57,
+    "mergeCommit": "0561997ba2af86f4a819a76a33a95fa4b9f0be0d",
+    "branch": "codex/imp10-world-cycle-context"
+  },
+  "studio": {
+    "id": "510b1800-f548-4a53-8b9e-116acccf6346",
+    "placeId": 110304961224794,
+    "universeId": 10766503968
+  },
+  "definition": {
+    "id": "world-cycle/ordinary-dev-v1",
+    "version": 1,
+    "epochUnixSeconds": 0,
+    "phases": [
+      {
+        "id": "world-phase/day",
+        "durationSeconds": 300
+      },
+      {
+        "id": "world-phase/dusk",
+        "durationSeconds": 300
+      },
+      {
+        "id": "world-phase/night",
+        "durationSeconds": 300
+      }
+    ],
+    "allEightAuthoredContextsRemainPhaseIndependent": true
+  },
+  "nativeC0": {
+    "nativeCases": 8,
+    "passed": true,
+    "cases": {
+      "yieldedStaleContextCannotAllocate": {
+        "passed": true
+      },
+      "absoluteBoundariesAndNoReset": {
+        "passed": true
+      },
+      "captureCustodyAndHistoryAreProspective": {
+        "passed": true
+      },
+      "definitionsAndBindingsFailClosed": {
+        "passed": true
+      },
+      "invalidClockPausesAdmissionAndRecovers": {
+        "passed": true
+      },
+      "pendingReservationsPinContextAcrossTransition": {
+        "passed": true
+      },
+      "prospectiveEligibilityAndFreshIdentity": {
+        "passed": true
+      },
+      "authoredContextsRemainPhaseIndependent": {
+        "passed": true
+      }
+    },
+    "shipped": {
+      "phase": "world-phase/dusk",
+      "definition": "world-cycle/ordinary-dev-v1",
+      "index": 1989929,
+      "contexts": "spawn-context/advanced,spawn-context/advanced-edge,spawn-context/fixture-clearing,spawn-context/mid-a,spawn-context/mid-a-edge,spawn-context/mid-b,spawn-context/mid-b-edge,spawn-context/starter-field"
+    }
+  },
+  "scopedFlows": {
+    "scope": "IMP10World-ba908906-e645-4c5e-9d28-de897190725c",
+    "capture": {
+      "ownership": {
+        "spawnContextId": "spawn-context/fixture-clearing",
+        "contentSnapshotId": "content-snapshot/imp5-fixture-v1"
+      },
+      "passed": true,
+      "energy": 520,
+      "replacement": {
+        "creatureInstanceId": "creature-e511c9ee-adaf-4bbe-baff-84a0e037902f-3",
+        "speciesId": "species/fixture-orb",
+        "spawnContextId": "spawn-context/fixture-clearing",
+        "cycleContext": {
+          "nextTransitionUnixSeconds": 600,
+          "definitionVersion": 1,
+          "definitionId": "world-cycle/ordinary-dev-v1",
+          "phaseId": "world-phase/dusk",
+          "phaseIndex": 2,
+          "cycleIndex": 0,
+          "phaseStartedAtUnixSeconds": 300
+        },
+        "variantIdentity": {
+          "protectedVariantReasons": [],
+          "speciesRarityId": "rarity/common",
+          "mutationIdsCanonical": [],
+          "spawnContextId": "spawn-context/fixture-clearing",
+          "traitIds": [],
+          "contentSnapshotId": "content-snapshot/imp5-fixture-v1",
+          "variantSignature": "species/fixture-orb|"
+        },
+        "contentSnapshotId": "content-snapshot/imp5-fixture-v1"
+      },
+      "captured": {
+        "creatureInstanceId": "creature-e511c9ee-adaf-4bbe-baff-84a0e037902f-1",
+        "speciesId": "species/fixture-orb",
+        "spawnContextId": "spawn-context/fixture-clearing",
+        "cycleContext": {
+          "nextTransitionUnixSeconds": 300,
+          "definitionVersion": 1,
+          "definitionId": "world-cycle/ordinary-dev-v1",
+          "phaseId": "world-phase/day",
+          "phaseIndex": 1,
+          "cycleIndex": 0,
+          "phaseStartedAtUnixSeconds": 0
+        },
+        "variantIdentity": {
+          "protectedVariantReasons": [],
+          "speciesRarityId": "rarity/common",
+          "mutationIdsCanonical": [],
+          "spawnContextId": "spawn-context/fixture-clearing",
+          "traitIds": [],
+          "contentSnapshotId": "content-snapshot/imp5-fixture-v1",
+          "variantSignature": "species/fixture-orb|"
+        },
+        "contentSnapshotId": "content-snapshot/imp5-fixture-v1"
+      }
+    },
+    "regions": {
+      "caps": {
+        "nativeCap": 8,
+        "destroyedReplaced": true,
+        "invalidBindingClosed": true,
+        "energy": 320,
+        "duplicateTickets": true,
+        "passed": true,
+        "idleRefill": true
+      },
+      "midB": {
+        "ownership": {
+          "spawnContextId": "spawn-context/mid-b",
+          "contentSnapshotId": "content-snapshot/imp10-world-dev-v2"
+        },
+        "role": "MidB",
+        "mastery": true,
+        "replenished": true,
+        "identity": {
+          "creatureInstanceId": "creature-e511c9ee-adaf-4bbe-baff-84a0e037902f-7",
+          "speciesId": "species/field-leaf",
+          "spawnContextId": "spawn-context/mid-b",
+          "cycleContext": {
+            "nextTransitionUnixSeconds": 600,
+            "definitionVersion": 1,
+            "definitionId": "world-cycle/ordinary-dev-v1",
+            "phaseId": "world-phase/dusk",
+            "phaseIndex": 2,
+            "cycleIndex": 0,
+            "phaseStartedAtUnixSeconds": 300
+          },
+          "variantIdentity": {
+            "protectedVariantReasons": [],
+            "speciesRarityId": "rarity/common",
+            "mutationIdsCanonical": [],
+            "spawnContextId": "spawn-context/mid-b",
+            "traitIds": [],
+            "contentSnapshotId": "content-snapshot/imp10-world-dev-v2",
+            "variantSignature": "species/field-leaf|"
+          },
+          "contentSnapshotId": "content-snapshot/imp10-world-dev-v2"
+        },
+        "passed": true
+      },
+      "midA": {
+        "ownership": {
+          "spawnContextId": "spawn-context/mid-a",
+          "contentSnapshotId": "content-snapshot/imp10-world-dev-v2"
+        },
+        "role": "MidA",
+        "mastery": true,
+        "replenished": true,
+        "identity": {
+          "creatureInstanceId": "creature-e511c9ee-adaf-4bbe-baff-84a0e037902f-4",
+          "speciesId": "species/field-pebble",
+          "spawnContextId": "spawn-context/mid-a",
+          "cycleContext": {
+            "nextTransitionUnixSeconds": 600,
+            "definitionVersion": 1,
+            "definitionId": "world-cycle/ordinary-dev-v1",
+            "phaseId": "world-phase/dusk",
+            "phaseIndex": 2,
+            "cycleIndex": 0,
+            "phaseStartedAtUnixSeconds": 300
+          },
+          "variantIdentity": {
+            "protectedVariantReasons": [],
+            "speciesRarityId": "rarity/common",
+            "mutationIdsCanonical": [],
+            "spawnContextId": "spawn-context/mid-a",
+            "traitIds": [],
+            "contentSnapshotId": "content-snapshot/imp10-world-dev-v2",
+            "variantSignature": "species/field-pebble|"
+          },
+          "contentSnapshotId": "content-snapshot/imp10-world-dev-v2"
+        },
+        "passed": true
+      },
+      "passed": true,
+      "advanced": {
+        "ownership": {
+          "spawnContextId": "spawn-context/advanced",
+          "contentSnapshotId": "content-snapshot/imp10-world-dev-v2"
+        },
+        "role": "Advanced",
+        "mastery": true,
+        "replenished": true,
+        "identity": {
+          "creatureInstanceId": "creature-e511c9ee-adaf-4bbe-baff-84a0e037902f-11",
+          "speciesId": "species/field-leaf",
+          "spawnContextId": "spawn-context/advanced",
+          "cycleContext": {
+            "nextTransitionUnixSeconds": 900,
+            "definitionVersion": 1,
+            "definitionId": "world-cycle/ordinary-dev-v1",
+            "phaseId": "world-phase/night",
+            "phaseIndex": 3,
+            "cycleIndex": 0,
+            "phaseStartedAtUnixSeconds": 600
+          },
+          "variantIdentity": {
+            "protectedVariantReasons": [],
+            "speciesRarityId": "rarity/common",
+            "mutationIdsCanonical": [],
+            "spawnContextId": "spawn-context/advanced",
+            "traitIds": [],
+            "contentSnapshotId": "content-snapshot/imp10-world-dev-v2",
+            "variantSignature": "species/field-leaf|"
+          },
+          "contentSnapshotId": "content-snapshot/imp10-world-dev-v2"
+        },
+        "passed": true
+      }
+    },
+    "boundaries": {
+      "staleTickets": true,
+      "exactBoundary": {
+        "nextTransitionUnixSeconds": 1200,
+        "definitionVersion": 1,
+        "definitionId": "world-cycle/ordinary-dev-v1",
+        "phaseId": "world-phase/day",
+        "phaseIndex": 1,
+        "cycleIndex": 1,
+        "phaseStartedAtUnixSeconds": 900
+      },
+      "retainedLive": 3,
+      "invalidClock": true,
+      "passed": true,
+      "replacement": "creature-e511c9ee-adaf-4bbe-baff-84a0e037902f-18"
+    },
+    "save": {
+      "energy": 320,
+      "ownedCount": 4,
+      "cycleUnixSeconds": 1200
+    },
+    "freshPlayRejoin": {
+      "passed": true,
+      "exactRetries": 3,
+      "energy": 320,
+      "exactCollectionAndProgressionComparedByProbe": true,
+      "allFourMasteries": true,
+      "spawn": {
+        "freshIds": {
+          "1": "creature-ebd7efef-6b13-4147-8aa7-8f344bc321b7-1",
+          "2": "creature-ebd7efef-6b13-4147-8aa7-8f344bc321b7-2",
+          "3": "creature-ebd7efef-6b13-4147-8aa7-8f344bc321b7-3"
+        },
+        "cycle": {
+          "nextTransitionUnixSeconds": 1500,
+          "definitionVersion": 1,
+          "definitionId": "world-cycle/ordinary-dev-v1",
+          "phaseId": "world-phase/dusk",
+          "phaseIndex": 2,
+          "cycleIndex": 1,
+          "phaseStartedAtUnixSeconds": 1200
+        },
+        "energy": 320,
+        "accessRestored": true
+      }
+    }
+  },
+  "nativeStreaming": {
+    "scope": "IMP10World-57058c5a-43ac-4c72-b4de-76a06ff999ca",
+    "start": {
+      "client": {
+        "serverOwnerHidden": true,
+        "forgedAttributesAreLocal": true,
+        "result": "REJECT_VALIDATION_PAYLOAD",
+        "passed": true,
+        "beforePhase": "world-phase/day"
+      },
+      "stream": {
+        "streamIn": true,
+        "creatureInstanceId": "creature-0238c8e4-92ee-4aa7-8a48-0275fcf54a87-18",
+        "streamingEnabled": true
+      }
+    },
+    "serverAuthority": {
+      "population": 3,
+      "scope": "IMP10World-57058c5a-43ac-4c72-b4de-76a06ff999ca",
+      "passed": true,
+      "clientTamperingIgnored": true
+    },
+    "eviction": {
+      "engineEvicted": true,
+      "creatureInstanceId": "creature-0238c8e4-92ee-4aa7-8a48-0275fcf54a87-18"
+    },
+    "transition": {
+      "population": 3,
+      "passed": true,
+      "identity": {
+        "creatureInstanceId": "creature-0238c8e4-92ee-4aa7-8a48-0275fcf54a87-18",
+        "speciesId": "species/field-leaf",
+        "spawnContextId": "spawn-context/advanced",
+        "cycleContext": {
+          "nextTransitionUnixSeconds": 1200,
+          "definitionVersion": 1,
+          "definitionId": "world-cycle/ordinary-dev-v1",
+          "phaseId": "world-phase/day",
+          "phaseIndex": 1,
+          "cycleIndex": 1,
+          "phaseStartedAtUnixSeconds": 900
+        },
+        "variantIdentity": {
+          "protectedVariantReasons": [],
+          "speciesRarityId": "rarity/common",
+          "mutationIdsCanonical": [],
+          "spawnContextId": "spawn-context/advanced",
+          "traitIds": [],
+          "contentSnapshotId": "content-snapshot/imp10-world-dev-v2",
+          "variantSignature": "species/field-leaf|"
+        },
+        "contentSnapshotId": "content-snapshot/imp10-world-dev-v2"
+      },
+      "currentCycle": {
+        "nextTransitionUnixSeconds": 1500,
+        "definitionVersion": 1,
+        "definitionId": "world-cycle/ordinary-dev-v1",
+        "phaseId": "world-phase/dusk",
+        "phaseIndex": 2,
+        "cycleIndex": 1,
+        "phaseStartedAtUnixSeconds": 1200
+      }
+    },
+    "restore": {
+      "cycle": {
+        "phase": "world-phase/dusk",
+        "passed": true,
+        "index": 1
+      },
+      "stream": {
+        "sameIdentity": "creature-0238c8e4-92ee-4aa7-8a48-0275fcf54a87-18",
+        "engineRestored": true,
+        "tampering": "REJECT_VALIDATION_PAYLOAD",
+        "passed": true,
+        "simulatedLossRestored": true
+      }
+    },
+    "release": {
+      "scope": "IMP10World-57058c5a-43ac-4c72-b4de-76a06ff999ca",
+      "passed": true,
+      "energy": 320,
+      "cycleUnixSeconds": 1200
+    }
+  },
+  "correctedProbeAssumption": "Local attribute spoof can mask an unchanged replicated value; server eligibility is checked separately, fake requests reject, local mutation is restored for teardown. No runtime authority change was needed.",
+  "static": {
+    "fastTests": 179,
+    "nativeCycleCases": 8,
+    "pythonCiTests": 28,
+    "styLua": "PASS",
+    "selene": "PASS",
+    "architectureIntegrity": "PASS",
+    "rojoBuild": "PASS",
+    "luauTypeErrors": 0,
+    "knownWarning": "CLI Roblox definitions files not supplied"
+  },
+  "finalEdit": {
+    "lightingUnchanged": true,
+    "assets": {
+      "worldBindingsUnchanged": {
+        "MonsterVaultSpawnAnchor": 8,
+        "MonsterVaultLandmark": 12,
+        "MonsterVaultHabitat": 8,
+        "MonsterVaultRegion": 5
+      },
+      "meshes": {
+        "1": {
+          "path": "Workspace.EnergyCoreGenerator_Source.EnergyCoreGenerator.EC_DarkMetal.EC_DarkMetal_Mesh",
+          "group": "DarkMetal",
+          "meshId": "rbxassetid://82608047802888",
+          "textureId": "",
+          "pivotOffset": {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 1,
+            "5": 0,
+            "6": 0,
+            "7": 0,
+            "8": 1,
+            "9": 0,
+            "10": 0,
+            "11": 0,
+            "12": 1
+          },
+          "size": {
+            "1": 4.000000476837158,
+            "2": 5.949999809265137,
+            "3": 4.000000476837158
+          },
+          "cframe": {
+            "1": -9.13223648071289,
+            "2": 2.9749999046325684,
+            "3": 33.04500198364258,
+            "4": 1,
+            "5": 0,
+            "6": 0,
+            "7": 0,
+            "8": 1,
+            "9": 0,
+            "10": 0,
+            "11": 0,
+            "12": 1
+          },
+          "color": {
+            "1": 50,
+            "2": 63,
+            "3": 76
+          },
+          "material": "Metal",
+          "anchored": false,
+          "materialVariant": ""
+        },
+        "2": {
+          "path": "Workspace.EnergyCoreGenerator_Source.EnergyCoreGenerator.EC_EnergyGreen.EC_EnergyGreen_Mesh",
+          "group": "EnergyGreen",
+          "meshId": "rbxassetid://111406198103853",
+          "textureId": "",
+          "pivotOffset": {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 1,
+            "5": 0,
+            "6": 0,
+            "7": 0,
+            "8": 1,
+            "9": 0,
+            "10": 0,
+            "11": 0,
+            "12": 1
+          },
+          "size": {
+            "1": 3.174999952316284,
+            "2": 4.769000053405762,
+            "3": 2.7709999084472656
+          },
+          "cframe": {
+            "1": -9.13223648071289,
+            "2": 3.2895002365112305,
+            "3": 32.43950271606445,
+            "4": 1,
+            "5": 0,
+            "6": 0,
+            "7": 0,
+            "8": 1,
+            "9": 0,
+            "10": 0,
+            "11": 0,
+            "12": 1
+          },
+          "color": {
+            "1": 76,
+            "2": 255,
+            "3": 110
+          },
+          "material": "Neon",
+          "anchored": false,
+          "materialVariant": ""
+        },
+        "3": {
+          "path": "Workspace.EnergyCoreGenerator_Source.EnergyCoreGenerator.EC_PanelPlastic.EC_PanelPlastic_Mesh",
+          "group": "PanelPlastic",
+          "meshId": "rbxassetid://138888023376661",
+          "textureId": "",
+          "pivotOffset": {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 1,
+            "5": 0,
+            "6": 0,
+            "7": 0,
+            "8": 1,
+            "9": 0,
+            "10": 0,
+            "11": 0,
+            "12": 1
+          },
+          "size": {
+            "1": 3.429999828338623,
+            "2": 5.125,
+            "3": 2.8575000762939453
+          },
+          "cframe": {
+            "1": -9.172237396240234,
+            "2": 3.4074997901916504,
+            "3": 32.496253967285156,
+            "4": 1,
+            "5": 0,
+            "6": 0,
+            "7": 0,
+            "8": 1,
+            "9": 0,
+            "10": 0,
+            "11": 0,
+            "12": 1
+          },
+          "color": {
+            "1": 19,
+            "2": 25,
+            "3": 33
+          },
+          "material": "SmoothPlastic",
+          "anchored": false,
+          "materialVariant": ""
+        },
+        "4": {
+          "path": "Workspace.EnergyCoreGenerator_Source.EnergyCoreGenerator.EC_SecondaryMetal.EC_SecondaryMetal_Mesh",
+          "group": "SecondaryMetal",
+          "meshId": "rbxassetid://140395381153946",
+          "textureId": "",
+          "pivotOffset": {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 1,
+            "5": 0,
+            "6": 0,
+            "7": 0,
+            "8": 1,
+            "9": 0,
+            "10": 0,
+            "11": 0,
+            "12": 1
+          },
+          "size": {
+            "1": 3.820000171661377,
+            "2": 5.579999923706055,
+            "3": 3.820000171661377
+          },
+          "cframe": {
+            "1": -9.13223648071289,
+            "2": 3.2100000381469727,
+            "3": 33.04500198364258,
+            "4": 1,
+            "5": 0,
+            "6": 0,
+            "7": 0,
+            "8": 1,
+            "9": 0,
+            "10": 0,
+            "11": 0,
+            "12": 1
+          },
+          "color": {
+            "1": 153,
+            "2": 172,
+            "3": 187
+          },
+          "material": "Metal",
+          "anchored": false,
+          "materialVariant": ""
+        }
+      },
+      "authoredParts": 54,
+      "pivotsScaleUnchanged": true,
+      "streamingEnabled": true,
+      "energyCoreUnchanged": true,
+      "transientClean": true,
+      "maxPlayers": 60
+    },
+    "sourceParity": 84,
+    "passed": true
+  },
+  "sourceParity": [
+    {
+      "path": "game.ReplicatedStorage.MonsterVault.Shared.config.MaterialPalette",
+      "file": "src/shared/config/MaterialPalette.luau",
+      "hash": 20269462,
+      "length": 993
+    },
+    {
+      "path": "game.ReplicatedStorage.MonsterVault.Shared.config.ProgressionFixture",
+      "file": "src/shared/config/ProgressionFixture.luau",
+      "hash": 209608657,
+      "length": 3512
+    },
+    {
+      "path": "game.ReplicatedStorage.MonsterVault.Shared.config.VaultCapacityFixture",
+      "file": "src/shared/config/VaultCapacityFixture.luau",
+      "hash": 3518712484,
+      "length": 994
+    },
+    {
+      "path": "game.ReplicatedStorage.MonsterVault.Shared.config.VaultProductionFixture",
+      "file": "src/shared/config/VaultProductionFixture.luau",
+      "hash": 1640628796,
+      "length": 1608
+    },
+    {
+      "path": "game.ReplicatedStorage.MonsterVault.Shared.contracts.CaptureProjectionV1",
+      "file": "src/shared/contracts/CaptureProjectionV1.luau",
+      "hash": 368549946,
+      "length": 2014
+    },
+    {
+      "path": "game.ReplicatedStorage.MonsterVault.Shared.contracts.ProgressionProjectionV1",
+      "file": "src/shared/contracts/ProgressionProjectionV1.luau",
+      "hash": 1116181215,
+      "length": 3684
+    },
+    {
+      "path": "game.ReplicatedStorage.MonsterVault.Shared.contracts.ProjectionV1",
+      "file": "src/shared/contracts/ProjectionV1.luau",
+      "hash": 3364174407,
+      "length": 1752
+    },
+    {
+      "path": "game.ReplicatedStorage.MonsterVault.Shared.contracts.ProtocolV1",
+      "file": "src/shared/contracts/ProtocolV1.luau",
+      "hash": 4281205792,
+      "length": 752
+    },
+    {
+      "path": "game.ReplicatedStorage.MonsterVault.Shared.contracts.ResultCodes",
+      "file": "src/shared/contracts/ResultCodes.luau",
+      "hash": 125316399,
+      "length": 1783
+    },
+    {
+      "path": "game.ReplicatedStorage.MonsterVault.Shared.contracts.RouteIds",
+      "file": "src/shared/contracts/RouteIds.luau",
+      "hash": 1158379146,
+      "length": 4011
+    },
+    {
+      "path": "game.ReplicatedStorage.MonsterVault.Shared.contracts.SecuredCollectionProjectionV1",
+      "file": "src/shared/contracts/SecuredCollectionProjectionV1.luau",
+      "hash": 2054202377,
+      "length": 2041
+    },
+    {
+      "path": "game.ReplicatedStorage.MonsterVault.Shared.contracts.VaultAssignmentProjectionV1",
+      "file": "src/shared/contracts/VaultAssignmentProjectionV1.luau",
+      "hash": 561077293,
+      "length": 3511
+    },
+    {
+      "path": "game.ReplicatedStorage.MonsterVault.Shared.contracts.VaultProjectionV1",
+      "file": "src/shared/contracts/VaultProjectionV1.luau",
+      "hash": 375554366,
+      "length": 2747
+    },
+    {
+      "path": "game.ReplicatedStorage.MonsterVault.Shared.contracts.WireValidation",
+      "file": "src/shared/contracts/WireValidation.luau",
+      "hash": 2778277361,
+      "length": 3313
+    },
+    {
+      "path": "game.ReplicatedStorage.MonsterVault.Shared.contracts.WorldProjectionV1",
+      "file": "src/shared/contracts/WorldProjectionV1.luau",
+      "hash": 1203872300,
+      "length": 1251
+    },
+    {
+      "path": "game.ReplicatedStorage.MonsterVault.Shared.types.Ids",
+      "file": "src/shared/types/Ids.luau",
+      "hash": 2489101334,
+      "length": 1935
+    },
+    {
+      "path": "game.ReplicatedStorage.MonsterVault.Shared.util.StartupPlan",
+      "file": "src/shared/util/StartupPlan.luau",
+      "hash": 897013494,
+      "length": 2664
+    },
+    {
+      "path": "game.ReplicatedStorage.MonsterVault.Shared.util.StructuredDiagnostics",
+      "file": "src/shared/util/StructuredDiagnostics.luau",
+      "hash": 1560651008,
+      "length": 2131
+    },
+    {
+      "path": "game.ServerScriptService.MonsterVaultServer.adapters.RobloxProfileRepository",
+      "file": "src/server/adapters/RobloxProfileRepository.luau",
+      "hash": 1875932335,
+      "length": 1907
+    },
+    {
+      "path": "game.ServerScriptService.MonsterVaultServer.application.CaptureFinalizationUseCase",
+      "file": "src/server/application/CaptureFinalizationUseCase.luau",
+      "hash": 1349053925,
+      "length": 3744
+    },
+    {
+      "path": "game.ServerScriptService.MonsterVaultServer.application.NetworkRateLimiter",
+      "file": "src/server/application/NetworkRateLimiter.luau",
+      "hash": 1640061411,
+      "length": 1836
+    },
+    {
+      "path": "game.ServerScriptService.MonsterVaultServer.application.NetworkingGateway",
+      "file": "src/server/application/NetworkingGateway.luau",
+      "hash": 1310057115,
+      "length": 7763
+    },
+    {
+      "path": "game.ServerScriptService.MonsterVaultServer.application.ProductionClaimUseCase",
+      "file": "src/server/application/ProductionClaimUseCase.luau",
+      "hash": 3122817754,
+      "length": 3405
+    },
+    {
+      "path": "game.ServerScriptService.MonsterVaultServer.application.ProgressionProjection",
+      "file": "src/server/application/ProgressionProjection.luau",
+      "hash": 2297854644,
+      "length": 1112
+    },
+    {
+      "path": "game.ServerScriptService.MonsterVaultServer.application.ProgressionPurchaseUseCase",
+      "file": "src/server/application/ProgressionPurchaseUseCase.luau",
+      "hash": 3187037366,
+      "length": 7974
+    },
+    {
+      "path": "game.ServerScriptService.MonsterVaultServer.application.ProjectionPublisher",
+      "file": "src/server/application/ProjectionPublisher.luau",
+      "hash": 92902742,
+      "length": 1985
+    },
+    {
+      "path": "game.ServerScriptService.MonsterVaultServer.application.ReplayWindow",
+      "file": "src/server/application/ReplayWindow.luau",
+      "hash": 2437950171,
+      "length": 1719
+    },
+    {
+      "path": "game.ServerScriptService.MonsterVaultServer.application.RouteRegistry",
+      "file": "src/server/application/RouteRegistry.luau",
+      "hash": 2400671955,
+      "length": 3451
+    },
+    {
+      "path": "game.ServerScriptService.MonsterVaultServer.application.SecuredCollectionProjection",
+      "file": "src/server/application/SecuredCollectionProjection.luau",
+      "hash": 1659607245,
+      "length": 1238
+    },
+    {
+      "path": "game.ServerScriptService.MonsterVaultServer.application.SessionCoordinator",
+      "file": "src/server/application/SessionCoordinator.luau",
+      "hash": 3663204724,
+      "length": 5545
+    },
+    {
+      "path": "game.ServerScriptService.MonsterVaultServer.application.VaultAssignmentProjection",
+      "file": "src/server/application/VaultAssignmentProjection.luau",
+      "hash": 3794107432,
+      "length": 1923
+    },
+    {
+      "path": "game.ServerScriptService.MonsterVaultServer.application.VaultCapacityProjection",
+      "file": "src/server/application/VaultCapacityProjection.luau",
+      "hash": 1856457492,
+      "length": 990
+    },
+    {
+      "path": "game.ServerScriptService.MonsterVaultServer.application.VaultCapacityUseCase",
+      "file": "src/server/application/VaultCapacityUseCase.luau",
+      "hash": 4123009632,
+      "length": 3108
+    },
+    {
+      "path": "game.ServerScriptService.MonsterVaultServer.application.VaultProductionUseCase",
+      "file": "src/server/application/VaultProductionUseCase.luau",
+      "hash": 3283303051,
+      "length": 3968
+    },
+    {
+      "path": "game.ServerScriptService.MonsterVaultServer.application.WorldActionUseCase",
+      "file": "src/server/application/WorldActionUseCase.luau",
+      "hash": 2330072248,
+      "length": 2361
+    },
+    {
+      "path": "game.ServerScriptService.MonsterVaultServer.bootstrap.CaptureRuntimeService",
+      "file": "src/server/bootstrap/CaptureRuntimeService.luau",
+      "hash": 246163712,
+      "length": 13311
+    },
+    {
+      "path": "game.ServerScriptService.MonsterVaultServer.bootstrap.NetworkingRuntimeService",
+      "file": "src/server/bootstrap/NetworkingRuntimeService.luau",
+      "hash": 3102029991,
+      "length": 17131
+    },
+    {
+      "path": "game.ServerScriptService.MonsterVaultServer.bootstrap.ProfileBinding",
+      "file": "src/server/bootstrap/ProfileBinding.luau",
+      "hash": 3312282673,
+      "length": 323
+    },
+    {
+      "path": "game.ServerScriptService.MonsterVaultServer.bootstrap.ProfileRuntimeService",
+      "file": "src/server/bootstrap/ProfileRuntimeService.luau",
+      "hash": 1483404416,
+      "length": 9020
+    },
+    {
+      "path": "game.ServerScriptService.MonsterVaultServer.bootstrap.ServerComposition",
+      "file": "src/server/bootstrap/ServerComposition.luau",
+      "hash": 3368400636,
+      "length": 2754
+    },
+    {
+      "path": "game.ServerScriptService.MonsterVaultServer.bootstrap.ServerMain",
+      "file": "src/server/bootstrap/ServerMain.server.luau",
+      "hash": 3603367180,
+      "length": 3720
+    },
+    {
+      "path": "game.ServerScriptService.MonsterVaultServer.bootstrap.ShutdownCoordinator",
+      "file": "src/server/bootstrap/ShutdownCoordinator.luau",
+      "hash": 1050622505,
+      "length": 1754
+    },
+    {
+      "path": "game.ServerScriptService.MonsterVaultServer.bootstrap.StartupValidator",
+      "file": "src/server/bootstrap/StartupValidator.luau",
+      "hash": 1624707939,
+      "length": 1597
+    },
+    {
+      "path": "game.ServerScriptService.MonsterVaultServer.bootstrap.WorldRuntimeService",
+      "file": "src/server/bootstrap/WorldRuntimeService.luau",
+      "hash": 1168560332,
+      "length": 19901
+    },
+    {
+      "path": "game.ServerScriptService.MonsterVaultServer.domains.capture.CaptureService",
+      "file": "src/server/domains/capture/CaptureService.luau",
+      "hash": 3314051961,
+      "length": 15907
+    },
+    {
+      "path": "game.ServerScriptService.MonsterVaultServer.domains.capture.VariantIdentity",
+      "file": "src/server/domains/capture/VariantIdentity.luau",
+      "hash": 1152634414,
+      "length": 1366
+    },
+    {
+      "path": "game.ServerScriptService.MonsterVaultServer.domains.economy.EnergyService",
+      "file": "src/server/domains/economy/EnergyService.luau",
+      "hash": 1695259017,
+      "length": 6757
+    },
+    {
+      "path": "game.ServerScriptService.MonsterVaultServer.domains.progression.ProgressionService",
+      "file": "src/server/domains/progression/ProgressionService.luau",
+      "hash": 3848730862,
+      "length": 11181
+    },
+    {
+      "path": "game.ServerScriptService.MonsterVaultServer.domains.vault.VaultProductionService",
+      "file": "src/server/domains/vault/VaultProductionService.luau",
+      "hash": 3465231012,
+      "length": 13701
+    },
+    {
+      "path": "game.ServerScriptService.MonsterVaultServer.domains.vault.VaultService",
+      "file": "src/server/domains/vault/VaultService.luau",
+      "hash": 2521666215,
+      "length": 11534
+    },
+    {
+      "path": "game.ServerScriptService.MonsterVaultServer.domains.world.FixtureDefinition",
+      "file": "src/server/domains/world/FixtureDefinition.luau",
+      "hash": 1510004386,
+      "length": 638
+    },
+    {
+      "path": "game.ServerScriptService.MonsterVaultServer.domains.world.SpawnPlan",
+      "file": "src/server/domains/world/SpawnPlan.luau",
+      "hash": 1458517323,
+      "length": 5443
+    },
+    {
+      "path": "game.ServerScriptService.MonsterVaultServer.domains.world.WorldAuthoringIndex",
+      "file": "src/server/domains/world/WorldAuthoringIndex.luau",
+      "hash": 2093649732,
+      "length": 5158
+    },
+    {
+      "path": "game.ServerScriptService.MonsterVaultServer.domains.world.WorldDefinitions",
+      "file": "src/server/domains/world/WorldDefinitions.luau",
+      "hash": 2982084117,
+      "length": 12418
+    },
+    {
+      "path": "game.ServerScriptService.MonsterVaultServer.domains.world.WorldProgressionService",
+      "file": "src/server/domains/world/WorldProgressionService.luau",
+      "hash": 3829448091,
+      "length": 6992
+    },
+    {
+      "path": "game.ServerScriptService.MonsterVaultServer.domains.world.WorldRegistry",
+      "file": "src/server/domains/world/WorldRegistry.luau",
+      "hash": 3888538198,
+      "length": 12243
+    },
+    {
+      "path": "game.ServerScriptService.MonsterVaultServer.domains.world.WorldService",
+      "file": "src/server/domains/world/WorldService.luau",
+      "hash": 3867813612,
+      "length": 15743
+    },
+    {
+      "path": "game.ServerScriptService.MonsterVaultServer.infrastructure.clock.ClockInterface",
+      "file": "src/server/infrastructure/clock/ClockInterface.luau",
+      "hash": 2841937229,
+      "length": 393
+    },
+    {
+      "path": "game.ServerScriptService.MonsterVaultServer.infrastructure.performance.PerformanceCounters",
+      "file": "src/server/infrastructure/performance/PerformanceCounters.luau",
+      "hash": 1595761744,
+      "length": 1872
+    },
+    {
+      "path": "game.ServerScriptService.MonsterVaultServer.infrastructure.persistence.ProfileRepositoryInterface",
+      "file": "src/server/infrastructure/persistence/ProfileRepositoryInterface.luau",
+      "hash": 2487998524,
+      "length": 631
+    },
+    {
+      "path": "game.ServerScriptService.MonsterVaultServer.infrastructure.persistence.ProfileSchemaV1",
+      "file": "src/server/infrastructure/persistence/ProfileSchemaV1.luau",
+      "hash": 854591836,
+      "length": 10084
+    },
+    {
+      "path": "game.ServerScriptService.MonsterVaultServer.infrastructure.persistence.ProfileSession",
+      "file": "src/server/infrastructure/persistence/ProfileSession.luau",
+      "hash": 656950224,
+      "length": 18861
+    },
+    {
+      "path": "game.ServerScriptService.MonsterVaultServer.infrastructure.persistence.RetryPolicy",
+      "file": "src/server/infrastructure/persistence/RetryPolicy.luau",
+      "hash": 3163077866,
+      "length": 1432
+    },
+    {
+      "path": "game.ServerScriptService.MonsterVaultServer.infrastructure.persistence.SingleWriterQueue",
+      "file": "src/server/infrastructure/persistence/SingleWriterQueue.luau",
+      "hash": 3531857504,
+      "length": 2284
+    },
+    {
+      "path": "game.ServerScriptService.MonsterVaultServer.infrastructure.rng.RandomSourceInterface",
+      "file": "src/server/infrastructure/rng/RandomSourceInterface.luau",
+      "hash": 4177422321,
+      "length": 308
+    },
+    {
+      "path": "game.StarterPlayer.StarterPlayerScripts.MonsterVaultClient.bootstrap.CaptureRuntimeService",
+      "file": "src/client/bootstrap/CaptureRuntimeService.luau",
+      "hash": 1500002407,
+      "length": 4830
+    },
+    {
+      "path": "game.StarterPlayer.StarterPlayerScripts.MonsterVaultClient.bootstrap.ClientComposition",
+      "file": "src/client/bootstrap/ClientComposition.luau",
+      "hash": 814888708,
+      "length": 1693
+    },
+    {
+      "path": "game.StarterPlayer.StarterPlayerScripts.MonsterVaultClient.bootstrap.ClientMain",
+      "file": "src/client/bootstrap/ClientMain.client.luau",
+      "hash": 1085330761,
+      "length": 2130
+    },
+    {
+      "path": "game.StarterPlayer.StarterPlayerScripts.MonsterVaultClient.bootstrap.NetworkingRuntimeService",
+      "file": "src/client/bootstrap/NetworkingRuntimeService.luau",
+      "hash": 1010541851,
+      "length": 5903
+    },
+    {
+      "path": "game.StarterPlayer.StarterPlayerScripts.MonsterVaultClient.bootstrap.ProgressionRuntimeService",
+      "file": "src/client/bootstrap/ProgressionRuntimeService.luau",
+      "hash": 498356482,
+      "length": 5863
+    },
+    {
+      "path": "game.StarterPlayer.StarterPlayerScripts.MonsterVaultClient.bootstrap.VaultAssignmentRuntimeService",
+      "file": "src/client/bootstrap/VaultAssignmentRuntimeService.luau",
+      "hash": 4039620238,
+      "length": 6930
+    },
+    {
+      "path": "game.StarterPlayer.StarterPlayerScripts.MonsterVaultClient.bootstrap.VaultRuntimeService",
+      "file": "src/client/bootstrap/VaultRuntimeService.luau",
+      "hash": 2187589700,
+      "length": 6291
+    },
+    {
+      "path": "game.StarterPlayer.StarterPlayerScripts.MonsterVaultClient.bootstrap.WorldModelObserver",
+      "file": "src/client/bootstrap/WorldModelObserver.luau",
+      "hash": 4087715024,
+      "length": 1952
+    },
+    {
+      "path": "game.StarterPlayer.StarterPlayerScripts.MonsterVaultClient.controllers.CaptureController",
+      "file": "src/client/controllers/CaptureController.luau",
+      "hash": 1597522545,
+      "length": 8974
+    },
+    {
+      "path": "game.StarterPlayer.StarterPlayerScripts.MonsterVaultClient.controllers.ProgressionController",
+      "file": "src/client/controllers/ProgressionController.luau",
+      "hash": 2486409473,
+      "length": 4448
+    },
+    {
+      "path": "game.StarterPlayer.StarterPlayerScripts.MonsterVaultClient.controllers.VaultAssignmentController",
+      "file": "src/client/controllers/VaultAssignmentController.luau",
+      "hash": 256595650,
+      "length": 5830
+    },
+    {
+      "path": "game.StarterPlayer.StarterPlayerScripts.MonsterVaultClient.controllers.VaultController",
+      "file": "src/client/controllers/VaultController.luau",
+      "hash": 794391328,
+      "length": 4247
+    },
+    {
+      "path": "game.StarterPlayer.StarterPlayerScripts.MonsterVaultClient.input.InputRouter",
+      "file": "src/client/input/InputRouter.luau",
+      "hash": 4100101867,
+      "length": 5978
+    },
+    {
+      "path": "game.StarterPlayer.StarterPlayerScripts.MonsterVaultClient.networking.ClientGateway",
+      "file": "src/client/networking/ClientGateway.luau",
+      "hash": 137177243,
+      "length": 7150
+    },
+    {
+      "path": "game.StarterPlayer.StarterPlayerScripts.MonsterVaultClient.presentation.CaptureView",
+      "file": "src/client/presentation/CaptureView.luau",
+      "hash": 3489459181,
+      "length": 3847
+    },
+    {
+      "path": "game.StarterPlayer.StarterPlayerScripts.MonsterVaultClient.store.ProjectionStore",
+      "file": "src/client/store/ProjectionStore.luau",
+      "hash": 1034254159,
+      "length": 1143
+    },
+    {
+      "path": "game.StarterPlayer.StarterPlayerScripts.MonsterVaultClient.store.SecuredCollectionStore",
+      "file": "src/client/store/SecuredCollectionStore.luau",
+      "hash": 3440647883,
+      "length": 862
+    },
+    {
+      "path": "game.StarterPlayer.StarterPlayerScripts.MonsterVaultClient.store.WorldProjectionStore",
+      "file": "src/client/store/WorldProjectionStore.luau",
+      "hash": 2923178345,
+      "length": 2525
+    },
+    {
+      "path": "game.ServerScriptService.MonsterVaultServer.domains.world.WorldCycle",
+      "file": "src/server/domains/world/WorldCycle.luau",
+      "length": 2171,
+      "hash": 2897990641
+    }
+  ],
+  "console": "{\"fields\":{\"component\":\"world\"},\"version\":1,\"environment\":\"server\",\"severity\":\"info\",\"code\":\"WORLD_SPAWNED\",\"atUnixSeconds\":1790936537,\"sequence\":1}\n{\"fields\":{\"component\":\"server\"},\"version\":1,\"environment\":\"server\",\"severity\":\"info\",\"code\":\"BOOTSTRAP_READY\",\"atUnixSeconds\":1790936537,\"sequence\":2}\n{\"fields\":{\"component\":\"client\"},\"version\":1,\"environment\":\"client\",\"severity\":\"info\",\"code\":\"BOOTSTRAP_READY\",\"atUnixSeconds\":1790936538,\"sequence\":1}\n{\"fields\":{\"component\":\"profiles\",\"detailCode\":\"CleanOffline\"},\"version\":1,\"environment\":\"server\",\"severity\":\"info\",\"code\":\"PRODUCTION_LOAD_SETTLED\",\"atUnixSeconds\":1790936539,\"sequence\":3}",
+  "limitations": [
+    "Solo native Studio is not supported real-client performance proof.",
+    "VS1-19 / AD-249 full controlled L0/L1, L1 30 players at MaxPlayers=60 and real-client frame/memory remain DEFERRED.",
+    "No phase-specific shipped predicates, phase rarity bonuses, Lighting effects, travel, recovery, hazards, rewards or unbound protected lifetime classes enabled."
+  ]
+}
