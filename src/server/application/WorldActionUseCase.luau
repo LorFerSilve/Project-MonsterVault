@@ -60,6 +60,46 @@ function WorldActionUseCase.new(
 		return committed
 	end
 	return {
+		discoverTravel = function(session: any, nodeId: string, inside: () -> boolean): any
+			local result = reconcile(session)
+			if result.status ~= "Unchanged" then
+				return result
+			end
+			local d = options.world.registry.travelNodes[nodeId]
+			local profile = session.snapshot()
+			if
+				d == nil
+				or not options.world.canAccess(profile, d.regionId, options.progression.hasAccess)
+			then
+				return { status = "Rejected", reason = "ACCESS_BLOCKED" }
+			end
+			local ok, present = pcall(inside)
+			if not ok or present ~= true then
+				return { status = "Rejected", reason = "OUT_OF_RANGE" }
+			end
+			if options.world.travelDiscovered(profile, nodeId) then
+				return { status = "AlreadyCommitted" }
+			end
+			local expected, op = profile.profileRevision, options.newOperationId()
+			local committed = session.checkpoint(op, function(candidate: any)
+				assert(
+					candidate.profileRevision == expected and inside(),
+					"travel discovery context changed"
+				)
+				assert(
+					options.world.canAccess(candidate, d.regionId, options.progression.hasAccess),
+					"travel access changed"
+				)
+				assert(
+					options.world.discoverTravel(candidate, nodeId, op),
+					"travel discovery changed"
+				)
+			end)
+			if committed.status == "OutcomeUnknown" then
+				pending[session] = op
+			end
+			return committed
+		end,
 		visit = visit,
 		reconcile = reconcile,
 		canAccess = function(profile: any, regionId: string): boolean

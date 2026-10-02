@@ -51,6 +51,40 @@ function NetworkingRuntimeService.new(options: {
 	local publishVault: any = nil
 	local publishAssignments: any = nil
 	local publishProgression: any = nil
+	if options.worldRuntime ~= nil then
+		schemas[RouteIds.commands.worldRequestFastTravel] = function(
+			payload: any,
+			expected: any
+		): boolean
+			if
+				expected ~= nil
+				or type(payload) ~= "table"
+				or not id(payload.nodeId)
+				or type(payload.characterGeneration) ~= "number"
+				or payload.characterGeneration < 1
+				or payload.characterGeneration >= 2 ^ 53
+				or payload.characterGeneration % 1 ~= 0
+			then
+				return false
+			end
+			for key in payload do
+				if key ~= "nodeId" and key ~= "characterGeneration" then
+					return false
+				end
+			end
+			return true
+		end
+		handlers[RouteIds.commands.worldRequestFastTravel] = function(
+			player: any,
+			envelope: any
+		): string
+			return options.worldRuntime.travel(
+				player,
+				envelope.payload.nodeId,
+				envelope.payload.characterGeneration
+			)
+		end
+	end
 	if options.purchases ~= nil then
 		schemas[RouteIds.commands.progressionPurchaseUnlock] = ProgressionProjectionV1.validPurchase
 		handlers[RouteIds.commands.progressionPurchaseUnlock] = function(
@@ -177,6 +211,13 @@ function NetworkingRuntimeService.new(options: {
 			player: any,
 			envelope: any
 		): string
+			if
+				options.worldRuntime
+				and options.worldRuntime.isTravelNode
+				and options.worldRuntime.isTravelNode(envelope.payload.interactionId)
+			then
+				return options.worldRuntime.discoverTravel(player, envelope.payload.interactionId)
+			end
 			if
 				options.worldRuntime
 				and options.worldRuntime.isLandmark(envelope.payload.interactionId)

@@ -424,6 +424,54 @@ local function unknownWriteCutPoints()
 		check(rejoined.load.status == "Ready" and equal(p.world, rejoined.session.snapshot().world))
 	end
 end
+local function travelDiscoveryCutPointsAndRace()
+	for _, mode in { "before", "after" } do
+		local h = harness()
+		local before = h.session.snapshot()
+		local function discover(inside: boolean?): any
+			return h.actions.discoverTravel(h.session, "travel-node/starter", function()
+				return inside ~= false
+			end)
+		end
+		check(discover(false).reason == "OUT_OF_RANGE")
+		check(equal(before, h.session.snapshot()))
+		h.repository.setReplayTransform(true)
+		if mode == "before" then
+			for _ = 1, 3 do
+				h.repository.failNext({
+					status = "error",
+					reason = "BEFORE_WRITE",
+					retryable = true,
+				})
+			end
+		else
+			h.repository.loseNextResultAfterWrite()
+		end
+		check(discover().status == "OutcomeUnknown")
+		check(discover(false).reason == "OUT_OF_RANGE")
+		local p = h.session.snapshot()
+		check(p.profileRevision == before.profileRevision + 1)
+		check(p.world.travelNodes["travel-node/starter"] ~= nil)
+		check(equal(p.world.mastery, before.world.mastery) and equal(p.economy, before.economy))
+		check(discover().status == "AlreadyCommitted" and equal(p, h.session.snapshot()))
+		check(h.session.release(25).status == "Closed")
+		local rejoined =
+			harness({ repository = h.repository, clock = h.clock, lock = "node-" .. mode })
+		check(rejoined.load.status == "Ready" and equal(p.world, rejoined.session.snapshot().world))
+	end
+	local h = harness()
+	local nested: any = nil
+	h.repository.setBeforeTransform(function()
+		h.repository.setBeforeTransform(nil)
+		nested = h.actions.discoverTravel(h.session, "travel-node/starter", function()
+			return true
+		end)
+	end)
+	check(h.actions.discoverTravel(h.session, "travel-node/starter", function()
+		return true
+	end).status == "Committed")
+	check(nested.status == "Busy")
+end
 local function racesStaleAndInsufficient()
 	local h = harness()
 	local nested: any = nil
@@ -589,6 +637,7 @@ local function captureActionsFailClosed()
 	check(h.buy("access/biome-mid-a").status == "Committed")
 	local claim = capture.begin(42, "gated-creature", f.position, 1, h.session.snapshot())
 	check(claim.status == "Claimed")
+	check(capture.hasAcquisition(42), "engagement must block travel")
 	check(
 		capture.submit(42, claim.captureSessionId, "capture", 1, f.position, 1, {}).status
 				== "AccessBlocked"
@@ -618,6 +667,15 @@ local function captureActionsFailClosed()
 				== "TransportActive"
 			and draws == 1
 	)
+	check(capture.hasAcquisition(42), "transport must block travel")
+	local before = h.session.snapshot()
+	capture.disconnect(42)
+	check(capture.hasAcquisition(42) and capture.state("gated-creature") == "TransportGrace")
+	capture.interrupt(42)
+	check(capture.hasAcquisition(42), "ordinary interruption preserves grace")
+	capture.interrupt(42, true)
+	check(not capture.hasAcquisition(42) and capture.state("gated-creature") == "Interrupted")
+	check(equal(before, h.session.snapshot()), "recovery is not extraction")
 end
 return {
 	authoredContracts = authoredContracts,
@@ -626,6 +684,7 @@ return {
 	regionalProvenanceAndHeld = regionalProvenanceAndHeld,
 	accessBindingsAndRejoin = accessBindingsAndRejoin,
 	unknownWriteCutPoints = unknownWriteCutPoints,
+	travelDiscoveryCutPointsAndRace = travelDiscoveryCutPointsAndRace,
 	racesStaleAndInsufficient = racesStaleAndInsufficient,
 	protectedStateAndHistoricalMastery = protectedStateAndHistoricalMastery,
 	captureActionsFailClosed = captureActionsFailClosed,

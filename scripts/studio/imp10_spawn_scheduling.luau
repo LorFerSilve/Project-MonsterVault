@@ -318,7 +318,11 @@ local function captureFailure(mode: string): any
 		replenished = true,
 	}
 end
-local function rejoin(resume: any, cycleUnixSeconds: (() -> number)?): any
+local function rejoin(
+	resume: any,
+	cycleUnixSeconds: (() -> number)?,
+	inspectWorld: ((any, any, any, any, (number) -> ()) -> any)?
+): any
 	local probe: any = nil
 	local result = base.rejoin(resume, function(runtime: any, session: any)
 		local server: any = game.ServerScriptService.MonsterVaultServer
@@ -361,13 +365,41 @@ local function rejoin(resume: any, cycleUnixSeconds: (() -> number)?): any
 				end,
 			},
 		})
+		world.start()
+		local capture = require(server.bootstrap.CaptureRuntimeService).new({
+			worldRuntime = world,
+			profileCoordinator = runtime.coordinator,
+			vault = runtime.vault,
+			progression = runtime.progression,
+			worldProgression = runtime.worldProgression,
+			players = game:GetService("Players"),
+			workspace = {
+				FindFirstChild = function(_self: any, name: string)
+					return root:FindFirstChild(name)
+				end,
+				GetServerTimeNow = function()
+					return workspace:GetServerTimeNow()
+				end,
+			},
+			event = { FireClient = function() end },
+			httpService = game:GetService("HttpService"),
+			diagnostics = { emit = function() end },
+		})
+		capture.start()
+		assert(
+			(player.Character.HumanoidRootPart.Position - authored.HomeHubRecovery.Position).Magnitude
+				< 4.5,
+			"rejoin placed before actions"
+		)
+		local function step(count: number)
+			for _ = 1, count do
+				mono += 1
+				assert(table.remove(callbacks, 1), "fresh runtime callback")()
+			end
+		end
 		player.Character.HumanoidRootPart.CFrame = authored.AdvancedFieldAnchor.CFrame
 			+ globals.Vector3.new(0, 3, 0)
-		world.start()
-		for _ = 1, 4 do
-			mono += 1
-			assert(table.remove(callbacks, 1), "fresh runtime callback")()
-		end
+		step(4)
 		local ids = {}
 		for _, bucket in world.world().bucketStatus() do
 			if bucket.creatureInstanceId then
@@ -385,6 +417,10 @@ local function rejoin(resume: any, cycleUnixSeconds: (() -> number)?): any
 			energy = session.snapshot().economy.energyUnits,
 			accessRestored = true,
 		}
+		if inspectWorld then
+			probe.travel = inspectWorld(world, player, session, authored, step)
+		end
+		assert(#capture.stop() == 0, "fresh capture drained")
 		world.stop()
 		root:Destroy()
 	end)

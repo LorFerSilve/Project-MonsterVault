@@ -22,6 +22,7 @@ function WorldProgressionService.new(registry: any): any
 			objectives = true,
 			regionalSpecies = true,
 			mastery = true,
+			travelNodes = true,
 		}
 		for key in w do
 			if not allowed[key] then
@@ -66,6 +67,7 @@ function WorldProgressionService.new(registry: any): any
 		if
 			not facts(w.landmarks, registry.landmarks, 64)
 			or not facts(w.mastery, registry.milestones, 4)
+			or (w.travelNodes ~= nil and not facts(w.travelNodes, registry.travelNodes, 5))
 		then
 			return "INVALID_WORLD_FACT"
 		end
@@ -75,6 +77,16 @@ function WorldProgressionService.new(registry: any): any
 				recipe == nil or not table.find(recipe.contentSnapshotIds, proof.contentSnapshotId)
 			then
 				return "UNBOUND_MASTERY_FACT"
+			end
+		end
+		for nodeId, proof in w.travelNodes or {} do
+			if
+				not table.find(
+					registry.travelNodes[nodeId].discoveryContentSnapshotIds,
+					proof.contentSnapshotId
+				)
+			then
+				return "UNBOUND_TRAVEL_FACT"
 			end
 		end
 		if type(w.objectives) ~= "table" or type(w.regionalSpecies) ~= "table" then
@@ -125,11 +137,16 @@ function WorldProgressionService.new(registry: any): any
 				objectives = {},
 				regionalSpecies = {},
 				mastery = {},
+				travelNodes = {},
 			}
 			-- Do not infer exploration/objectives from global discovery or old ownership.
 			return { status = "Prepared", changed = true }
 		end
 		local invalid = validate(profile)
+		if invalid == nil and profile.world.travelNodes == nil then
+			profile.world.travelNodes = {} -- Additive preparation; never backfill discovery.
+			return { status = "Prepared", changed = true }
+		end
 		return if invalid
 			then { status = "Protected", reason = invalid }
 			else { status = "Prepared", changed = false }
@@ -225,6 +242,25 @@ function WorldProgressionService.new(registry: any): any
 		return changed
 	end
 	return {
+		discoverTravel = function(profile: any, nodeId: string, operation: string): boolean
+			assert(
+				validate(profile) == nil and registry.travelNodes[nodeId] ~= nil,
+				"invalid travel discovery"
+			)
+			local w = profile.world
+			w.travelNodes = w.travelNodes or {}
+			if w.travelNodes[nodeId] then
+				return false
+			end
+			w.travelNodes[nodeId] = fact(profile, operation)
+			return true
+		end,
+		travelDiscovered = function(profile: any, nodeId: string): boolean
+			return validate(profile) == nil
+				and registry.travelNodes[nodeId] ~= nil
+				and profile.world.travelNodes ~= nil
+				and profile.world.travelNodes[nodeId] ~= nil
+		end,
 		registry = registry,
 		validate = validate,
 		prepare = prepare,

@@ -1,8 +1,7 @@
 --!strict
 
 -- AD-256: canonical DEV authored roles, pools, active routes and safe utilities.
--- Historic Starter IDs/provenance remain valid. Travel/recovery actions stay
--- with their later owners; no world reward is bound.
+-- Historic Starter IDs/provenance remain valid; no world reward is bound.
 local config = {
 	contentSnapshotId = "content-snapshot/imp10-world-dev-v2",
 	authoringVersion = 1,
@@ -447,6 +446,11 @@ for _, definitions in cycleBindings do
 		definition.cycleDefinitionId = config.worldCycle.id
 		definition.cyclePhaseIds = { "world-phase/day", "world-phase/dusk", "world-phase/night" }
 	end
+end
+-- AD-259: interaction envelopes on the existing five authored nodes only.
+for _, node in config.travelNodes do
+	node.radius = 16
+	node.discoveryContentSnapshotIds = { config.contentSnapshotId }
 end
 config.spawnPolicy = {
 	stepSeconds = 1,

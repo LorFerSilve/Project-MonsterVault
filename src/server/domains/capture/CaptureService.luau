@@ -403,20 +403,24 @@ function CaptureService.new(options: {
 		end
 	end
 
-	local function interrupt(userId: number)
+	local function interrupt(userId: number, recovery: boolean?)
 		local id = byUser[userId]
 		local record = if id then byCreature[id] else nil
 		if
 			record == nil
 			or record.state == "FinalizationPending"
-			or record.state == "TransportGrace"
+			or (record.state == "TransportGrace" and not recovery)
 		then
 			return
 		end
 		if record.state == "Claimed" or record.state == "AttemptActive" then
 			options.world.transition(id, record.state, "IdleAvailable")
 			terminal(record, "Interrupted")
-		elseif record.state == "TransportActive" or record.state == "Provisional" then
+		elseif
+			record.state == "TransportActive"
+			or record.state == "Provisional"
+			or (recovery and record.state == "TransportGrace")
+		then
 			options.world.retire(id)
 			terminal(record, "Interrupted")
 		end
@@ -498,6 +502,10 @@ function CaptureService.new(options: {
 			local id = byUser[userId]
 			local record = if id then byCreature[id] else nil
 			return if record and record.state == "TransportActive" then record else nil
+		end,
+		hasAcquisition = function(userId: number): boolean
+			local id = byUser[userId]
+			return id ~= nil and byCreature[id] ~= nil
 		end,
 		recordCounts = function(): any
 			local active = 0
