@@ -131,3 +131,5 @@ Downstream TA-9 dependencies without an owner: **0**.
 ## AD-256 runtime evidence
 
 GDS-9 §§4–14 → WorldDefinitions / Rojo authored map / WorldAuthoringIndex; GDS-9 mastery and WA/SP/VA authority → existing WorldProgressionService / WorldActionUseCase / CaptureRuntime / Vault owner readback. [AD-256 evidence](../implementation/IMP10_AUTHORED_CONTENT_EVIDENCE.md) proves native regional recipes, access, utility negatives and rejoin. Static Travel/Recovery targets do not replace their action gates. Spawn scaling, hazards/rewards and VS1-19 remain OPEN/DEFERRED in the phase matrix.
+
+AD-258: GDS-9 §19 WC-01..03 → WorldCycle / immutable WorldRegistry bindings / WorldRuntime's existing pulse / prospective WorldService reservation context. [Cycle evidence](../implementation/IMP10_WORLD_CYCLE_EVIDENCE.md) proves exact boundaries, retained history/custody, phase-independent authored content, native streaming/tampering/rejoin. Remaining travel/recovery/hazards/rewards/protected-content and VS1-19 obligations stay open in the [full matrix](../implementation/IMP10_GATE_MATRIX.md).

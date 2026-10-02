@@ -58,6 +58,74 @@ end
 
 function WorldRegistry.new(config: any): any
 	assert(id(config.contentSnapshotId, "content-snapshot"), "invalid world snapshot")
+	local value = config.worldCycle
+	assert(type(value) == "table", "missing cycle definition")
+	for key in value do
+		assert(
+			key == "id" or key == "version" or key == "epochUnixSeconds" or key == "phases",
+			"unknown cycle field"
+		)
+	end
+	assert(
+		type(value.version) == "number"
+			and value.version >= 1
+			and value.version < 2 ^ 53
+			and value.version % 1 == 0,
+		"invalid cycle version"
+	)
+	assert(value.id == "world-cycle/ordinary-dev-v" .. value.version, "invalid versioned cycle ID")
+	assert(
+		type(value.epochUnixSeconds) == "number"
+			and value.epochUnixSeconds >= 0
+			and value.epochUnixSeconds < 2 ^ 53
+			and value.epochUnixSeconds % 1 == 0,
+		"invalid cycle epoch"
+	)
+	assert(type(value.phases) == "table" and #value.phases == 3, "missing ordinary phases")
+	local phaseIds = { "world-phase/day", "world-phase/dusk", "world-phase/night" }
+	local total = 0
+	local phaseCount = 0
+	for key, phase in value.phases do
+		assert(
+			type(key) == "number" and key % 1 == 0 and key >= 1 and key <= 3,
+			"invalid phase array"
+		)
+		assert(
+			type(phase) == "table" and phase.id == phaseIds[key],
+			"invalid ordered ordinary phase"
+		)
+		for field in phase do
+			assert(field == "id" or field == "durationSeconds", "unknown phase field")
+		end
+		assert(
+			type(phase.durationSeconds) == "number"
+				and phase.durationSeconds >= 1
+				and phase.durationSeconds <= 3600
+				and phase.durationSeconds % 1 == 0,
+			"invalid phase duration"
+		)
+		total += phase.durationSeconds
+		phaseCount += 1
+	end
+	assert(phaseCount == 3, "missing ordered phase")
+	local cycle = freeze({
+		id = value.id,
+		version = value.version,
+		epochUnixSeconds = value.epochUnixSeconds,
+		phases = value.phases,
+		durationSeconds = total,
+	})
+	local phases = {}
+	for _, phase in cycle.phases do
+		phases[phase.id] = true
+	end
+	local function cycleBinding(definition: any)
+		assert(definition.cycleDefinitionId == cycle.id, "unbound cycle definition")
+		references(definition.cyclePhaseIds, phases, 3)
+		for n = 1, #definition.cyclePhaseIds do
+			assert(definition.cyclePhaseIds[n] ~= nil, "missing cycle phase binding")
+		end
+	end
 	local regions = index(config.regions, "region", 5)
 	local species = index(config.species, "species", 64)
 	local habitats = index(config.habitats, "habitat", 64)
@@ -106,9 +174,17 @@ function WorldRegistry.new(config: any): any
 	end
 	for _, h in habitats do
 		assert(regions[h.regionId] ~= nil, "orphan habitat")
+		cycleBinding(h)
 	end
 	for _, c in contexts do
 		assert(habitats[c.habitatId] ~= nil, "orphan spawn context")
+		cycleBinding(c)
+		for _, phaseId in c.cyclePhaseIds do
+			assert(
+				table.find(habitats[c.habitatId].cyclePhaseIds, phaseId),
+				"context outside habitat phases"
+			)
+		end
 		references(c.speciesIds, species, 64)
 		assert(
 			#c.contentSnapshotIds > 0 and #c.contentSnapshotIds <= 8,
@@ -288,6 +364,7 @@ function WorldRegistry.new(config: any): any
 	end
 	return table.freeze({
 		contentSnapshotId = config.contentSnapshotId,
+		worldCycle = cycle,
 		spawnPolicy = freeze(config.spawnPolicy),
 		regions = regions,
 		roles = table.freeze(roles),

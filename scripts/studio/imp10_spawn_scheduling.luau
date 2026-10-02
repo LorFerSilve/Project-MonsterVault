@@ -44,8 +44,8 @@ end
 local function visit(id: string)
 	assert(state().worldRuntime.discover(state().player, id) == "OK_WORLD_VISITED", id)
 end
-local function lockedAndStarter(): any
-	base.setup(true)
+local function lockedAndStarter(cycleUnixSeconds: (() -> number)?): any
+	base.setup(true, cycleUnixSeconds)
 	local s = state()
 	move(s.authored.MidAFieldAnchor)
 	tick(8)
@@ -318,7 +318,7 @@ local function captureFailure(mode: string): any
 		replenished = true,
 	}
 end
-local function rejoin(resume: any): any
+local function rejoin(resume: any, cycleUnixSeconds: (() -> number)?): any
 	local probe: any = nil
 	local result = base.rejoin(resume, function(runtime: any, session: any)
 		local server: any = game.ServerScriptService.MonsterVaultServer
@@ -330,6 +330,7 @@ local function rejoin(resume: any): any
 		authored.Parent = root
 		local cs = game:GetService("CollectionService")
 		local world = require(server.bootstrap.WorldRuntimeService).new({
+			cycleUnixSeconds = cycleUnixSeconds,
 			workspace = root,
 			players = game:GetService("Players"),
 			collectionService = {
@@ -379,6 +380,7 @@ local function rejoin(resume: any): any
 		end
 		assert(#ids == 3, "rejoined access activates two Advanced habitats plus protected fixture")
 		probe = {
+			cycle = world.cycleState(),
 			freshIds = ids,
 			energy = session.snapshot().economy.energyUnits,
 			accessRestored = true,
@@ -390,6 +392,8 @@ local function rejoin(resume: any): any
 	return result
 end
 return {
+	tick = tick,
+	idFor = idFor,
 	lockedAndStarter = lockedAndStarter,
 	starterAndUnlocks = starterAndUnlocks,
 	regionalMastery = regionalMastery,

@@ -69,6 +69,8 @@ AD-255: GDS-5/8/9 and TA-3/4/5/7/8/9/12/15/17 bind immutable registries, an auth
 
 AD-257: GDS-9 and TA-3/4/5/6/7/8/9/14/15/17 bind bounded regional reservations/weighted pools, one central scheduler, current presence/access, native placement and capture-safe cleanup through the existing world/capture owners. Eight T15.world.spawn C0 suites and actual native caps, regional captures/mastery, engine streaming, P2 fault recovery and fresh Play/rejoin are recorded in [scheduling evidence](../implementation/IMP10_SPAWN_SCHEDULING_EVIDENCE.md). Selected slice PASS; ordinary World Cycle and the remaining IMP-10/VS1-19 gates stay OPEN.
 
+AD-258: GDS-9 WC-01..03 and TA-3/5/6/7/9/14/15/17 bind a fixed-epoch/versioned ordinary clock, immutable habitat/context eligibility and prospective reservation provenance through the existing pulse. Eight T15.world.cycle C0 suites, actual captures across phase changes, native engine streaming/tampering, unchanged transactional history and fresh Play/rejoin are recorded in [cycle evidence](../implementation/IMP10_WORLD_CYCLE_EVIDENCE.md). Selected slice PASS; travel/discovery/safe arrival/recovery is next. IMP-10 remains OPEN; VS1-19 stays mandatory.
+
 Every implementation PR names:
 
 - implementation phase;

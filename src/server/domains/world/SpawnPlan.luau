@@ -90,6 +90,13 @@ function SpawnPlan.new(registry: any, positions: any, FixtureDefinition: any): a
 			context.speciesIds, context.speciesWeights, total
 		bucket.replenishingFixture = id == policy.protectedFixtureContextId
 		if bucket.replenishingFixture then
+			for _, phase in registry.worldCycle.phases do
+				assert(
+					table.find(habitat.cyclePhaseIds, phase.id)
+						and table.find(context.cyclePhaseIds, phase.id),
+					"Starter fallback must remain phase-independent"
+				)
+			end
 			assert(
 				habitat.regionId == FixtureDefinition.regionId
 					and habitat.id == FixtureDefinition.habitatId,

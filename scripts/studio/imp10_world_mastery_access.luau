@@ -27,7 +27,7 @@ local function equal(a: any, b: any): boolean
 	end
 	return true
 end
-local function setup(regional: boolean?): any
+local function setup(regional: boolean?, cycleUnixSeconds: (() -> number)?): any
 	check(
 		state == nil
 			and game:GetService("RunService"):IsStudio()
@@ -222,6 +222,7 @@ local function setup(regional: boolean?): any
 	end
 	local callbacks = {}
 	local worldOptions: any = {
+		cycleUnixSeconds = cycleUnixSeconds,
 		workspace = root,
 		fixture = if regional then nil else require(server.domains.world.FixtureDefinition),
 		players = players,

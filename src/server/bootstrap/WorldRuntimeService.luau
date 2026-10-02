@@ -2,6 +2,7 @@
 
 local FixtureDefinition = require(script.Parent.Parent.domains.world.FixtureDefinition)
 local WorldService = require(script.Parent.Parent.domains.world.WorldService)
+local WorldCycle = require(script.Parent.Parent.domains.world.WorldCycle)
 local WorldRegistry = require(script.Parent.Parent.domains.world.WorldRegistry)
 local WorldDefinitions = require(script.Parent.Parent.domains.world.WorldDefinitions)
 local WorldAuthoringIndex = require(script.Parent.Parent.domains.world.WorldAuthoringIndex)
@@ -25,6 +26,7 @@ function WorldRuntimeService.new(
 		event: any?,
 		fixture: any?, -- Server composition/test injection; never a wire field.
 		clock: (() -> number)?,
+		cycleUnixSeconds: (() -> number)?, -- Absolute server wall time, separate from lifecycle time.
 		scheduler: any?,
 		random: any?,
 	}
@@ -48,6 +50,43 @@ function WorldRuntimeService.new(
 		then options.worldProgression.registry
 		else WorldRegistry.new(WorldDefinitions)
 	local fixture = options.fixture or FixtureDefinition
+	local cycle = WorldCycle.new(registry.worldCycle, options.cycleUnixSeconds or os.time)
+	local publishedCycle: any = nil
+	local cycleAvailable: boolean? = nil
+	local function publishCycle()
+		local snapshot = cycle.sample()
+		if runtimeRoot == nil then
+			return
+		end
+		local available = snapshot ~= nil
+		if available == cycleAvailable and snapshot == publishedCycle then
+			return
+		end
+		cycleAvailable, publishedCycle = available, snapshot
+		runtimeRoot:SetAttribute("WorldCycleAvailable", available)
+		runtimeRoot:SetAttribute(
+			"WorldCycleDefinitionId",
+			if snapshot then snapshot.definitionId else nil
+		)
+		runtimeRoot:SetAttribute("WorldCyclePhaseId", if snapshot then snapshot.phaseId else nil)
+		runtimeRoot:SetAttribute("WorldCycleIndex", if snapshot then snapshot.cycleIndex else nil)
+		runtimeRoot:SetAttribute(
+			"WorldCyclePhaseStartedAt",
+			if snapshot then snapshot.phaseStartedAtUnixSeconds else nil
+		)
+		runtimeRoot:SetAttribute(
+			"WorldCycleNextTransitionAt",
+			if snapshot then snapshot.nextTransitionUnixSeconds else nil
+		)
+		local eligible = {}
+		for id, context in registry.spawnContexts do
+			if WorldCycle.eligible(registry.habitats[context.habitatId], context, snapshot) then
+				table.insert(eligible, id)
+			end
+		end
+		table.sort(eligible)
+		runtimeRoot:SetAttribute("EligibleSpawnContextIds", table.concat(eligible, ","))
+	end
 	local authoringIndex: any = nil
 	local landmarkIndex: any = nil
 	local vaultAccessHandler: any = nil
@@ -336,8 +375,15 @@ function WorldRuntimeService.new(
 			return
 		end
 		pulseTicket += 1
+		publishCycle()
+		if not running or expectedGeneration ~= generation then
+			return
+		end
 		countEligiblePresence()
 		local ok, outcome = pcall(world.step, expectedGeneration)
+		if not running or expectedGeneration ~= generation then
+			return
+		end
 		if not ok then
 			running = false
 			generation += 1
@@ -388,6 +434,19 @@ function WorldRuntimeService.new(
 		runtimeRoot = root
 		creatures = creatureFolder
 		world = WorldService.new({
+			evaluateContext = function(bucket: any): any
+				-- Only new reservations sample the current server clock. Never read client attributes.
+				local context = registry.spawnContexts[bucket.spawnContextId]
+				local snapshot = cycle.sample()
+				return if context
+						and WorldCycle.eligible(
+							registry.habitats[bucket.habitatId],
+							context,
+							snapshot
+						)
+					then snapshot
+					else nil
+			end,
 			fixture = fixture,
 			buckets = if plan then plan.buckets else nil,
 			maxBucketsPerStep = if plan then plan.policy.maxBucketsPerStep else nil,
@@ -518,6 +577,9 @@ function WorldRuntimeService.new(
 			return registry.landmarks[id] ~= nil
 		end,
 		registry = registry,
+		cycleState = function(): any
+			return if running then cycle.sample() else nil
+		end,
 		authoring = function(): any
 			return authoringIndex
 		end,

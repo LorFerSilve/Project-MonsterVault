@@ -34,6 +34,7 @@ function WorldService.new(options: {
 	canMaterialize: ((any) -> boolean)?,
 	isProjectionAlive: ((any, any) -> boolean)?,
 	selectCandidate: ((any) -> any)?,
+	evaluateContext: ((any) -> any)?,
 	onBucketError: ((string) -> ())?,
 	clock: () -> number,
 	newId: () -> string,
@@ -151,7 +152,7 @@ function WorldService.new(options: {
 		return true
 	end
 
-	local function reserve(bucket: any, now: number): any
+	local function reserve(bucket: any, now: number, cycleContext: any): any
 		local fixture = bucket.definition
 		allocation += 1
 		assert(allocation < 2 ^ 53, "exhausted world identity sequence")
@@ -181,6 +182,7 @@ function WorldService.new(options: {
 			state = "Reserved",
 			projection = nil,
 			variantIdentity = nil,
+			cycleContext = cycleContext,
 		}
 		records[id] = record
 		bucket.currentId = id -- Pending selection/placement consumes capacity immediately.
@@ -301,7 +303,17 @@ function WorldService.new(options: {
 			return "Expired"
 		end
 		if record == nil and active and now >= bucket.nextSpawnAt then
-			record = reserve(bucket, now)
+			local context = if options.evaluateContext
+				then options.evaluateContext(bucket.definition)
+				else nil
+			if not running or expectedGeneration ~= generation then
+				return "Stale"
+			end
+			if options.evaluateContext and context == nil then
+				return "Idle"
+			end
+			-- Resolve wall-clock eligibility only for genuinely new reservations.
+			record = reserve(bucket, now, context)
 		end
 		if record ~= nil and record.state == "Reserved" and now >= record.nextAttemptAt then
 			tryMaterialize(record, now)
@@ -413,6 +425,7 @@ function WorldService.new(options: {
 			spawnContextId = record.spawnContextId,
 			contentSnapshotId = record.contentSnapshotId,
 			variantIdentity = record.variantIdentity,
+			cycleContext = record.cycleContext,
 		}
 	end
 
