@@ -1,6 +1,6 @@
 # IMP-10 gate matrix
 
-Date: 2026-10-04. **IMP-10 OPEN.** Evidence: [AD-255 registry/mastery/access](IMP10_IMPLEMENTATION_EVIDENCE.md), [AD-256 authored content/utilities](IMP10_AUTHORED_CONTENT_EVIDENCE.md), [AD-257 regional scheduling](IMP10_SPAWN_SCHEDULING_EVIDENCE.md), [AD-258 World Cycle/context](IMP10_WORLD_CYCLE_EVIDENCE.md), [AD-259 travel/discovery/recovery](IMP10_TRAVEL_RECOVERY_EVIDENCE.md), [trusted-session presence correction](IMP10_SESSION_PRESENCE_EVIDENCE.md).
+Date: 2026-10-05. **IMP-10 OPEN.** Evidence: [AD-255 registry/mastery/access](IMP10_IMPLEMENTATION_EVIDENCE.md), [AD-256 authored content/utilities](IMP10_AUTHORED_CONTENT_EVIDENCE.md), [AD-257 regional scheduling](IMP10_SPAWN_SCHEDULING_EVIDENCE.md), [AD-258 World Cycle/context](IMP10_WORLD_CYCLE_EVIDENCE.md), [AD-259 travel/discovery/recovery](IMP10_TRAVEL_RECOVERY_EVIDENCE.md), [trusted-session presence correction](IMP10_SESSION_PRESENCE_EVIDENCE.md).
 
 | Gate | Status | Evidence / required next work |
 | --- | --- | --- |
@@ -13,7 +13,7 @@ Date: 2026-10-04. **IMP-10 OPEN.** Evidence: [AD-255 registry/mastery/access](IM
 | TA-9 actual valuable action access authority | PASS, implemented actions | Capture source/exact extraction target, survey/objective/Vault terminal; locked/unknown/missing/corrupt fail closed; admitted P2 recovery retained |
 | TA-4 retry/race/unknown-result/save/rejoin | PASS, first dependency | Existing queue/candidate/idempotency; C0 races/cut points; real DEV Class A recovery before/after write and fresh Play composition |
 | TA-3 owner-only world readback | PASS | Strict Class A world selector; at most four mastery and five discovered node IDs plus generation hint; private proofs/authority omitted; actual client negatives/readback |
-| TA-7/8 capacity/economy/production/ownership regressions | PASS | 187 fast tests; native capture/recovery/transition retains original P2/history, all masteries, three purchases/retries and wallet 320/rejoin; unbound rewards protected |
+| TA-7/8 capacity/economy/production/ownership regressions | PASS | 191 fast tests; native capture/recovery/transition retains original P2/history, all masteries, three purchases/retries and wallet 320/rejoin; unbound rewards protected |
 | Canonical biome geometry/content/core pools/utility topology | PASS, authored DEV | Fixed graph, two habitats per field, distinct Mid pools/routes, safe utilities; 231 native ground samples. Launch/scaling audit remains below |
 | Mid/Advanced authored active mastery paths | PASS, actual scheduled encounters | Real authored routes and shared regional pool captures produce mastery/access without fixture switching |
 | Spawn reservations/region-habitat budgets/central scheduler | PASS, current authored DEV slice | Eight bounded habitats; 2 buckets/sec; pending/custody counts; weighted pools; ground/binding checks; expiry/refill; stale/yielded/duplicate fencing; native caps/capture/engine streaming/fault/rejoin evidence |

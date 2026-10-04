@@ -301,5 +301,153 @@
     "rojoBuild": "PASS",
     "rojoSourcemap": "PASS"
   },
-  "remaining": "Authored hazard and safe-route/transport fairness; VS1-19 / AD-249 remains DEFERRED and mandatory before IMP-10 COMPLETE"
+  "remaining": "Authored hazard and safe-route/transport fairness; VS1-19 / AD-249 remains DEFERRED and mandatory before IMP-10 COMPLETE",
+  "currentMainRevalidation": {
+    "clientDate": "2026-10-05",
+    "timezone": "Europe/Brussels",
+    "mainCommit": "29b85ec785e176f6c7a31e740f9ddae29896e44d",
+    "scope": "Reuse and revalidate PR #60 from current main; trusted-session presence correction only",
+    "fastTests": {
+      "passed": 191,
+      "total": 191
+    },
+    "pythonTests": {
+      "passed": 28,
+      "total": 28
+    },
+    "nativeC0": {
+      "passed": 14,
+      "total": 14,
+      "units": {
+        "count": 10,
+        "cases": {
+          "yieldedShutdownAndMissingAnchorsFailClosed": {
+            "passed": true
+          },
+          "arrivalRecoveryAndNoRepeatedRelocation": {
+            "passed": true
+          },
+          "interruptedRelocationRecoversWithoutReplay": {
+            "passed": true
+          },
+          "replacementSessionWaitsForValidAnchor": {
+            "passed": true
+          },
+          "discoveryPreparationAndProtectedEpochs": {
+            "passed": true
+          },
+          "yieldedPresenceCheckCannotObserveReplacementSession": {
+            "passed": true
+          },
+          "yieldedSessionReplacementCannotCompleteTravel": {
+            "passed": true
+          },
+          "staleGenerationAndBoundedSpam": {
+            "passed": true
+          },
+          "replacementSessionRequiresSafeArrival": {
+            "passed": true
+          },
+          "yieldedRaceAndReplacedCharacterFence": {
+            "passed": true
+          }
+        }
+      },
+      "lockedPresence": {
+        "scope": "IMP10World-38b3acf3-2d91-4d9e-bc72-555eeb4538c5",
+        "noValueChange": true,
+        "passed": true,
+        "knownUnlockedArrival": true
+      },
+      "replacementSession": {
+        "replacementReady": true,
+        "saved": true,
+        "scope": "IMP10World-1f0c6eba-34a0-4fcc-b597-651c8b15b22a",
+        "passed": true,
+        "missingAnchor": true
+      },
+      "transportCorrection": {
+        "scope": "IMP10World-e740df8d-d52c-4fcf-87fe-583fcb91bb39",
+        "noExtraction": true,
+        "passed": true,
+        "creatureId": "creature-ac20239e-3a96-4d83-b939-bffb93fb65fb-1"
+      },
+      "pendingFinalization": {
+        "creatureId": "creature-a7c4231d-c971-4fb3-906b-1c3f518f32df-1",
+        "scope": "IMP10World-9c64b7bb-8d48-42e6-bef3-b2a9103c1062",
+        "exactOnce": true,
+        "passed": true,
+        "originalCandidate": true
+      }
+    },
+    "baselineRegressionsReproduced": [
+      "replacementSessionRequiresSafeArrival",
+      "yieldedPresenceCheckCannotObserveReplacementSession"
+    ],
+    "focusedRegressionsPassed": 4,
+    "parity": {
+      "count": 85,
+      "unexpected": [],
+      "duplicates": [],
+      "expected": 85,
+      "failures": [],
+      "matched": 85
+    },
+    "authoredParts": 54,
+    "meshParts": 5,
+    "contentUnchanged": true,
+    "energyCoreAndLightingPreserved": true,
+    "serverBoot": true,
+    "clientBoot": true,
+    "temporaryProbes": [],
+    "ordinaryServer": {
+      "humanoidAlive": true,
+      "remotes": {
+        "command": true,
+        "event": true,
+        "unreliable": true
+      },
+      "position": [
+        0,
+        3.998046875,
+        128
+      ],
+      "generation": 3
+    },
+    "ordinaryClient": {
+      "clientBoot": true,
+      "player": 1925180832,
+      "characterReady": true,
+      "guis": [
+        {
+          "name": "Freecam",
+          "enabled": true
+        },
+        {
+          "name": "MonsterVaultCapture",
+          "enabled": true
+        },
+        {
+          "name": "MonsterVaultProgression",
+          "enabled": true
+        },
+        {
+          "name": "MonsterVaultAssignments",
+          "enabled": true
+        },
+        {
+          "name": "MonsterVaultOverflow",
+          "enabled": true
+        },
+        {
+          "name": "ProximityPrompts",
+          "enabled": true
+        }
+      ]
+    },
+    "ordinaryBootLogs": "{\"fields\":{\"component\":\"world\"},\"version\":1,\"environment\":\"server\",\"severity\":\"info\",\"code\":\"WORLD_SPAWNED\",\"atUnixSeconds\":1791151197,\"sequence\":1}\n{\"fields\":{\"component\":\"server\"},\"version\":1,\"environment\":\"server\",\"severity\":\"info\",\"code\":\"BOOTSTRAP_READY\",\"atUnixSeconds\":1791151197,\"sequence\":2}\n{\"fields\":{\"component\":\"client\"},\"version\":1,\"environment\":\"client\",\"severity\":\"info\",\"code\":\"BOOTSTRAP_READY\",\"atUnixSeconds\":1791151198,\"sequence\":1}\n{\"fields\":{\"component\":\"profiles\",\"detailCode\":\"CleanOffline\"},\"version\":1,\"environment\":\"server\",\"severity\":\"info\",\"code\":\"PRODUCTION_LOAD_SETTLED\",\"atUnixSeconds\":1791151200,\"sequence\":3}",
+    "finalMode": "Edit",
+    "strictAnalysis": "Zero errors; existing missing Roblox-definition warning remains",
+    "remainingGate": "IMP-10 OPEN; hazards, transport fairness, protected lifetimes, authorized world rewards, full scaling/security/performance, VS1-19 / AD-249 remain open/deferred"
+  }
 }
