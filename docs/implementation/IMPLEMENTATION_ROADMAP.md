@@ -4,6 +4,14 @@
 > **Locked by:** TA-17
 > **Rule:** Dependency-driven; do not skip phases merely because later UI/content is easier to demo.
 
+## Production-quality rule
+
+Owner-authorized roadmap expansion (2026-10-04): a technically complete feature is not automatically release-ready. Player-facing work must converge on **functional + reliable + understandable + performant + visually coherent + appropriately polished** before release.
+
+For visual/design work, Codex/Work must actively evaluate the connected **Blender MCP** pipeline for custom models, environment kits, landmarks, props, creatures, rigs/animations, VFX-support meshes, 3D UI/presentation assets and promotional scenes when that materially improves quality. Preserve editable `.blend` sources and Roblox-compatible exports. Use the **Roblox Studio MCP** for import/integration, material mapping, placement and final in-game visual validation. Prefer existing assets and Roblox-native UI/particles/primitives when they already meet the required quality; do not use Blender merely because it is available.
+
+Once the relevant world/gameplay dependencies are stable, establish one **golden playable vertical slice** at near-production visual quality and use it as the quality bar for later content rollout. Do not postpone all visual validation until release hardening.
+
 ## IMP-1 — Contracts and Test Harness
 
 Deliver:
@@ -181,7 +189,73 @@ Product definitions/bindings, Game Pass reconciliation, Developer Product receip
 
 Telemetry registry/adapters, C2 config snapshots, flags, experiment assignment/exposure and privileged audit boundary.
 
+## Pre-release Production Quality Track
+
+The following ten gates broaden the existing implementation roadmap without changing gameplay authority or bypassing upstream IMP dependencies. They may be delivered incrementally once their underlying systems are stable, but **all applicable PQL-1..PQL-10 gates must be complete before IMP-15 can close and production release can proceed**.
+
+### PQL-1 — World Art & Map Polish
+
+Turn functional regions into authored, attractive spaces with distinct biome identity, terrain composition, paths, landmarks, foliage/props, structures, environmental storytelling, lighting, atmosphere, readable traversal and strong points of interest. Important regions should be recognizable from screenshots alone. Use Blender MCP for modular environment kits, architecture, hero landmarks and props where custom modelling adds value; validate final appearance in Studio.
+
+Gate: the representative/golden region reads as an intentional production environment with the HUD hidden, and the established quality bar is reproducible across later regions.
+
+### PQL-2 — Creature & Asset Quality
+
+Bring creatures, collectibles and gameplay props to a consistent visual standard: silhouettes, rarity readability, materials, animation-ready topology where needed, idle presentation, Vault/display presentation and performant geometry/LOD strategy where applicable. Use Blender MCP for creature/hero models, riggable meshes, machines and display assets.
+
+Gate: no important gameplay object remains an engineering placeholder, and common/rare/exceptional content is visually distinguishable without relying only on text.
+
+### PQL-3 — UI/UX & Presentation Polish
+
+Polish HUD, navigation, Vault, collection, discovery, progression/mastery, travel, notifications, objectives, rewards, commerce surfaces, settings, mobile layouts, controller navigation and accessibility states. Establish consistent typography, spacing, hierarchy, iconography, panel language, rarity treatment, interaction/loading/error/empty states and restrained motion. Keep actual interface behavior Roblox-native; use Blender MCP only for visual assets or 3D presentation where it clearly improves the result.
+
+Gate: every primary gameplay loop is understandable and fully usable without developer/debug knowledge across supported inputs.
+
+### PQL-4 — Animation, VFX, SFX & Game Feel
+
+Add coherent feedback for movement/interactions, creature states, capture, spawn/despawn, discoveries, rarity, rewards, unlocks, travel, hazards, world transitions and UI actions. Use Roblox-native particles/beams/trails/audio where sufficient; use Blender MCP for rigs, animated props, custom effect geometry and animation-support assets when required.
+
+Gate: repeated core actions remain responsive, legible and satisfying without obscuring gameplay state.
+
+### PQL-5 — Onboarding & First-Session Experience
+
+Polish the gameplay-first path from spawn to first goal, exploration, encounter, capture, reward, Vault interaction, progression and next objective. Prefer contextual teaching over tutorial walls; include recovery from mistakes and clear cross-input guidance.
+
+Gate: a new player with no outside explanation can understand what MonsterVault is, what to do next, how capture works, why creatures matter and what progression to pursue.
+
+### PQL-6 — Retention & Progression Presentation
+
+Make existing progression motivating and legible through mastery/discovery presentation, region and collection completion, rarity, upgrades, quests/objectives, milestones, achievements, unlock previews and meaningful reward moments. Do not invent grind solely to increase session time.
+
+Gate: players can identify what they just achieved and have clear short-, medium- and longer-term goals.
+
+### PQL-7 — Live Events & Seasonal Content
+
+Exercise the live-ops architecture through polished player-facing events: seasonal creatures/content, temporary world states or spawn changes, event objectives/community goals, limited rewards, countdown/status UI and update messaging. Reuse existing systems instead of creating event-only parallel frameworks. Use Blender MCP for event-specific props, decorations, landmarks, creatures and reward models when useful.
+
+Gate: at least one representative event can run through the production live-ops/config path with correct start/end/recovery behavior.
+
+### PQL-8 — Social Presentation & Multiplayer Polish
+
+Ensure other players improve the experience through readable player presence, cooperative moments, ping/party/challenge/visitor presentation, creature showcasing/inspection and trading presentation when the underlying systems exist. Avoid adding social mechanics that do not support MonsterVault's actual loop.
+
+Gate: multiplayer feels intentionally social rather than like isolated single-player sessions sharing one server.
+
+### PQL-9 — Commerce Presentation
+
+Integrate passes/products/entitlements into MonsterVault's visual language with clear previews, value communication, ownership state and purchase confirmation/recovery. Avoid intrusive spam, deceptive scarcity, confusing currencies and pay-to-win shortcuts that undermine collection/progression. Blender MCP may produce high-quality 3D product/reward previews where appropriate.
+
+Gate: commerce is coherent with the game, receipt/entitlement behavior is reliable, and presentation does not degrade the core player experience.
+
+### PQL-10 — Launch & Promotional Polish
+
+Finish loading/title/menu/startup transitions, reconnect/recovery messaging, update/event banners and final visual consistency. Prepare production-quality Roblox icon, thumbnails, screenshots, key art, store copy, update artwork and trailer/promotional scenes where applicable. Promotional imagery must represent the actual game honestly. Blender MCP may be used to stage/render hero assets and poses; Roblox Studio remains the final authority for in-game appearance.
+
+Gate: no obvious placeholder/debug presentation remains, core screenshots represent actual polished gameplay, and map/creatures/UI/VFX/animation/audio/progression/social/commerce/event presentation pass a final consistency audit.
+
 ## IMP-15 — Release Hardening
+
+Begins only after the underlying implementation dependencies and applicable PQL-1..PQL-10 production-quality gates are satisfied. Release hardening is for verification and launch readiness, **not** for creating major missing art/UI/game-feel systems.
 
 Full TA-15 V0-V10 evidence, TA-14 L0-L5, security/fault sweeps, staging promotion, current policy/API revalidation and release checklist.
 
