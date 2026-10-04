@@ -262,6 +262,104 @@ local function yieldedShutdownAndMissingAnchorsFailClosed()
 	check(coroutine.resume(thread))
 	check(outcome == "REJECT_STATE_TRAVEL_STALE" and not h.owner.ready(h.player, 2))
 end
+local function replacementSessionRequiresSafeArrival()
+	local h = harness()
+	h.step()
+	check(h.owner.travel(h.player, "field", 2) == "OK_WORLD_TRAVELLED")
+	local replacement = table.clone(h.context)
+	replacement.session = {}
+	h.setContext(replacement)
+	local before = h.stats()
+	check(not h.owner.ready(h.player, 2), "replacement session inherited safe arrival")
+	check(h.owner.travel(h.player, "field", 2) == "REJECT_STATE_TRAVEL_STALE")
+	check(h.stats().moves == before.moves and h.stats().observed == before.observed)
+	h.advance()
+	h.step()
+	check(
+		replacement.regionId == "home" and h.owner.ready(h.player, 3),
+		"replacement session inherited previous recovery region"
+	)
+	h.step()
+	check(h.stats().moves == before.moves + 1, "replacement session recovered repeatedly")
+	h.setContext(nil) -- A temporary trust pause is not a replacement session.
+	h.step()
+	check(not h.owner.ready(h.player, 3))
+	h.setContext(replacement)
+	h.step()
+	check(h.owner.ready(h.player, 3) and h.stats().moves == before.moves + 1)
+end
+local function replacementSessionWaitsForValidAnchor()
+	local available = true
+	local h = harness({
+		recovery = function(_c: any, last: string?): any
+			return if available then { regionId = last or "home" } else nil
+		end,
+	})
+	h.step()
+	check(h.owner.travel(h.player, "field", 2) == "OK_WORLD_TRAVELLED")
+	local replacement = table.clone(h.context)
+	replacement.session = {}
+	h.setContext(replacement)
+	available = false
+	local before = h.stats()
+	h.advance()
+	h.step()
+	check(not h.owner.ready(h.player, 2), "missing new-session arrival stays actionable")
+	check(h.stats().moves == before.moves and h.stats().observed == before.observed)
+	available = true
+	h.step()
+	check(h.stats().moves == before.moves, "anchor retry ignored cooldown")
+	h.advance()
+	h.step()
+	check(replacement.regionId == "home" and h.owner.ready(h.player, 3))
+end
+local function yieldedSessionReplacementCannotCompleteTravel()
+	local h = harness()
+	h.step()
+	local moves = 0
+	h.options.relocate = function(_p: any, _c: any, _t: any, _r: boolean, current: () -> boolean)
+		coroutine.yield()
+		if not current() then
+			return false
+		end
+		moves += 1
+		return true
+	end
+	local outcome: any = nil
+	local thread = coroutine.create(function()
+		outcome = h.owner.travel(h.player, "field", 2)
+	end)
+	check(coroutine.resume(thread))
+	local replacement = table.clone(h.context)
+	replacement.session = {}
+	h.setContext(replacement)
+	check(coroutine.resume(thread))
+	check(moves == 0 and outcome == "UNAVAILABLE_TRAVEL_ARRIVAL")
+	check(not h.owner.ready(h.player, 2), "yielded travel activated replacement session")
+end
+local function yieldedPresenceCheckCannotObserveReplacementSession()
+	local h = harness()
+	h.step()
+	local readContext, reads = h.options.context, 0
+	h.options.context = function()
+		reads += 1
+		if reads == 2 then
+			coroutine.yield()
+		end
+		return readContext()
+	end
+	local before = h.stats()
+	local thread = coroutine.create(h.step)
+	check(coroutine.resume(thread))
+	local replacement = table.clone(h.context)
+	replacement.session = {}
+	h.setContext(replacement)
+	check(coroutine.resume(thread))
+	check(h.stats().observed == before.observed, "unplaced replacement session observed")
+	check(not h.owner.ready(h.player, 2))
+	h.step()
+	check(h.owner.ready(h.player, 3) and h.stats().observed == before.observed + 1)
+end
 return {
 	discoveryPreparationAndProtectedEpochs = discoveryPreparationAndProtectedEpochs,
 	arrivalRecoveryAndNoRepeatedRelocation = arrivalRecoveryAndNoRepeatedRelocation,
@@ -269,4 +367,8 @@ return {
 	interruptedRelocationRecoversWithoutReplay = interruptedRelocationRecoversWithoutReplay,
 	yieldedRaceAndReplacedCharacterFence = yieldedRaceAndReplacedCharacterFence,
 	yieldedShutdownAndMissingAnchorsFailClosed = yieldedShutdownAndMissingAnchorsFailClosed,
+	replacementSessionRequiresSafeArrival = replacementSessionRequiresSafeArrival,
+	replacementSessionWaitsForValidAnchor = replacementSessionWaitsForValidAnchor,
+	yieldedSessionReplacementCannotCompleteTravel = yieldedSessionReplacementCannotCompleteTravel,
+	yieldedPresenceCheckCannotObserveReplacementSession = yieldedPresenceCheckCannotObserveReplacementSession,
 }
