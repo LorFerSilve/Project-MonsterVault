@@ -9,6 +9,14 @@ visual output. Its use is not limited to environmental props.
 - Use Blender for game models, map modules, buildings, terrain meshes, props and
   other 3D visuals. UI visuals can also use Blender-generated models, icons,
   illustrations or renders when appropriate.
+- When the connected **Blender MCP** is available, Codex/Work should actively use
+  it as the preferred interactive production path for visual/design work where
+  custom modelling, rigging, animation or render output materially improves the
+  game. Keep the local Blender CLI / Python `bpy` workflow reproducible as the
+  source-backed fallback rather than creating an MCP-only asset process.
+- Use the connected **Roblox Studio MCP** for final import/integration, placement,
+  material mapping and visual validation where available. A visual asset is not
+  production-ready merely because it looks correct in Blender or exports cleanly.
 - Generate assets through the local Blender CLI and Python `bpy` API; keep the
   workflow reproducible and determine repository paths from `__file__`.
 - Keep editable `.blend` sources in `assets/blender`, exports in
