@@ -319,6 +319,7 @@ local function setup(regional: boolean?, cycleUnixSeconds: (() -> number)?): any
 		userId = player.UserId,
 		player = player,
 		storeAdapter = storeAdapter,
+		coordinator = coordinator,
 		session = session,
 		world = world,
 		worldRuntime = worldRuntime,

@@ -1,6 +1,6 @@
 # IMP-10 gate matrix
 
-Date: 2026-10-02. **IMP-10 OPEN.** Evidence: [AD-255 registry/mastery/access](IMP10_IMPLEMENTATION_EVIDENCE.md), [AD-256 authored content/utilities](IMP10_AUTHORED_CONTENT_EVIDENCE.md), [AD-257 regional scheduling](IMP10_SPAWN_SCHEDULING_EVIDENCE.md), [AD-258 World Cycle/context](IMP10_WORLD_CYCLE_EVIDENCE.md), [AD-259 travel/discovery/recovery](IMP10_TRAVEL_RECOVERY_EVIDENCE.md).
+Date: 2026-10-04. **IMP-10 OPEN.** Evidence: [AD-255 registry/mastery/access](IMP10_IMPLEMENTATION_EVIDENCE.md), [AD-256 authored content/utilities](IMP10_AUTHORED_CONTENT_EVIDENCE.md), [AD-257 regional scheduling](IMP10_SPAWN_SCHEDULING_EVIDENCE.md), [AD-258 World Cycle/context](IMP10_WORLD_CYCLE_EVIDENCE.md), [AD-259 travel/discovery/recovery](IMP10_TRAVEL_RECOVERY_EVIDENCE.md), [trusted-session presence correction](IMP10_SESSION_PRESENCE_EVIDENCE.md).
 
 | Gate | Status | Evidence / required next work |
 | --- | --- | --- |
@@ -20,7 +20,8 @@ Date: 2026-10-02. **IMP-10 OPEN.** Evidence: [AD-255 registry/mastery/access](IM
 | Ordinary World Cycle/prospective context binding | PASS, authored DEV | Single fixed-epoch/versioned server clock in existing pulse; explicit phase-independent bindings; exact boundaries, pinned reservations/custody, invalid-clock admission stop, native captures/streaming/tampering/fresh Play; no profile/history rewrites |
 | Protected content lifetime classes | OPEN, protected while unbound | Current scheduled content is Common; later rare/protected classes require concrete approved content/lifetime bindings and capture-fairness validation; cycle PASS does not enable them |
 | Travel/discovery/safe arrival/recovery authority | PASS, authored DEV | Existing hub ↔ discovered/unlocked field nodes; strict Class C/source/access/acquisition checks, bounded P0/generation fences, validated R15/R6 arrival, exact-once P2 discovery, actual streaming/client races/faults/fresh Play/respawn; recovery cannot extract |
-| Hazards/locked-presence correction and transport fairness | OPEN | TA-9 server hazard/arrival/correction semantics preserving custody and Secured ownership |
+| Trusted-session presence / locked-presence correction | PASS, current authored DEV | 191 fast / 14 native C0 cases; replacement Ready session requires its own safe arrival, missing-anchor inactivity, locked action rejection/correction, provisional interruption and original admitted P2 preservation; 85-source parity |
+| Hazards and transport fairness | OPEN | Bind one concrete authored hazard and validate safe-route/TA-7 interruption/recovery fairness; existing correction evidence does not implement hazards or close this gate |
 | Authorized bounded world rewards and objective dedupe | OPEN, protected while unbound | Bind concrete reward source definitions/amounts through TA-8 primitive when that dependency is implemented; no speculative grant enabled here |
 | Full TA-14/15 World Scaling/security/performance audit | OPEN | Full candidate content and budgets, controlled workload and platform measurements |
 | VS1-19 / AD-249 | DEFERRED — environment limitation | Mandatory full controlled L0/L1; **L1 30 players at MaxPlayers=60** plus supported real-client frame/memory and required repetitions; no solo substitute |

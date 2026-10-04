@@ -10,6 +10,7 @@ function WorldTravelService.new(options: any): any
 		local r = records[player.UserId]
 		if r == nil then
 			r = {
+				session = nil,
 				generation = nil,
 				character = nil,
 				busy = false,
@@ -55,7 +56,8 @@ function WorldTravelService.new(options: any): any
 			r.retryAt = options.clock() + 1
 			return "UNAVAILABLE_TRAVEL_ARRIVAL"
 		end
-		r.generation, r.character, r.lastRegion = live.generation, live.character, target.regionId
+		r.session, r.generation, r.character, r.lastRegion =
+			live.session, live.generation, live.character, target.regionId
 		return if recovery then "OK_WORLD_RECOVERED" else "OK_WORLD_TRAVELLED"
 	end
 	local function step(players: { any })
@@ -68,8 +70,13 @@ function WorldTravelService.new(options: any): any
 			local context = options.context(player)
 			local r = record(player)
 			if context ~= nil and not r.busy then
+				if r.session ~= context.session then
+					-- A new trusted session must establish its own safe arrival.
+					r.lastRegion = nil
+				end
 				if
-					r.generation ~= context.generation
+					r.session ~= context.session
+					or r.generation ~= context.generation
 					or r.character ~= context.character
 					or not context.validPosition
 				then
@@ -88,6 +95,7 @@ function WorldTravelService.new(options: any): any
 				local live = options.context(player)
 				if
 					live
+					and live.session == r.session
 					and live.generation == r.generation
 					and live.character == r.character
 					and live.validPosition
@@ -113,6 +121,7 @@ function WorldTravelService.new(options: any): any
 				and context.generation == generation
 				and r ~= nil
 				and not r.busy
+				and r.session == context.session
 				and r.generation == generation
 				and r.character == player.Character
 		end,
@@ -126,7 +135,8 @@ function WorldTravelService.new(options: any): any
 				return "REJECT_STATE_TRAVEL_BUSY"
 			end
 			if
-				generation ~= context.generation
+				r.session ~= context.session
+				or generation ~= context.generation
 				or r.generation ~= generation
 				or r.character ~= context.character
 			then
