@@ -1,0 +1,305 @@
+{
+  "clientDate": "2026-10-04",
+  "timezone": "Europe/Brussels",
+  "baseCommit": "4681325070e98b2949bada1b55dd36fd6fe2bc44",
+  "phase": "IMP-10 OPEN",
+  "scope": "AD-259 follow-up: trusted-session presence and locked recovery",
+  "studio": {
+    "placeId": 110304961224794,
+    "universeId": 10766503968,
+    "studioId": "6289091c-cab1-4c59-91d5-f6e3e6146eb7",
+    "native": {
+      "unitCases": 10,
+      "cases": {
+        "yieldedShutdownAndMissingAnchorsFailClosed": {
+          "passed": true
+        },
+        "staleGenerationAndBoundedSpam": {
+          "passed": true
+        },
+        "pendingFinalization": {
+          "creatureId": "creature-08482d2d-324a-4479-ad03-7e0f1738524b-1",
+          "scope": "IMP10World-d3ac7af1-5983-46dd-856d-a56dc71762a8",
+          "exactOnce": true,
+          "passed": true,
+          "originalCandidate": true
+        },
+        "arrivalRecoveryAndNoRepeatedRelocation": {
+          "passed": true
+        },
+        "replacementSession": {
+          "replacementReady": true,
+          "saved": true,
+          "scope": "IMP10World-c85bde22-211f-4388-8b20-a2c0a59fe3e3",
+          "passed": true,
+          "missingAnchor": true
+        },
+        "yieldedRaceAndReplacedCharacterFence": {
+          "passed": true
+        },
+        "interruptedRelocationRecoversWithoutReplay": {
+          "passed": true
+        },
+        "replacementSessionWaitsForValidAnchor": {
+          "passed": true
+        },
+        "discoveryPreparationAndProtectedEpochs": {
+          "passed": true
+        },
+        "yieldedPresenceCheckCannotObserveReplacementSession": {
+          "passed": true
+        },
+        "yieldedSessionReplacementCannotCompleteTravel": {
+          "passed": true
+        },
+        "transportCorrection": {
+          "scope": "IMP10World-762515f4-a8de-4e94-9ab0-41e52be7efbf",
+          "noExtraction": true,
+          "passed": true,
+          "creatureId": "creature-01977541-29da-436e-8267-de1fc0510339-1"
+        },
+        "replacementSessionRequiresSafeArrival": {
+          "passed": true
+        },
+        "lockedPresence": {
+          "scope": "IMP10World-f89dbaa7-9a76-4a1a-98b7-eb7b531dc3d1",
+          "noValueChange": true,
+          "passed": true,
+          "knownUnlockedArrival": true
+        }
+      },
+      "runtimeCases": 4
+    },
+    "ordinaryServer": {
+      "position": "0, 4.098025321960449, 128",
+      "profileRemotes": true,
+      "characterGeneration": 3,
+      "runtimePresent": true,
+      "cyclePhase": "world-phase/day"
+    },
+    "ordinaryClient": {
+      "worldPresent": true,
+      "generation": 3,
+      "clientPresent": true,
+      "gui": [
+        "Freecam",
+        "MonsterVaultAssignments",
+        "MonsterVaultCapture",
+        "MonsterVaultCaptureInput",
+        "MonsterVaultOverflow",
+        "MonsterVaultProgression",
+        "ProximityPrompts"
+      ]
+    },
+    "ordinaryConsole": [
+      {
+        "fields": {
+          "component": "world"
+        },
+        "version": 1,
+        "environment": "server",
+        "severity": "info",
+        "code": "WORLD_SPAWNED",
+        "atUnixSeconds": 1791147617,
+        "sequence": 1
+      },
+      {
+        "fields": {
+          "component": "server"
+        },
+        "version": 1,
+        "environment": "server",
+        "severity": "info",
+        "code": "BOOTSTRAP_READY",
+        "atUnixSeconds": 1791147617,
+        "sequence": 2
+      },
+      {
+        "fields": {
+          "component": "client"
+        },
+        "version": 1,
+        "environment": "client",
+        "severity": "info",
+        "code": "BOOTSTRAP_READY",
+        "atUnixSeconds": 1791147617,
+        "sequence": 1
+      },
+      {
+        "fields": {
+          "component": "profiles",
+          "detailCode": "CleanOffline"
+        },
+        "version": 1,
+        "environment": "server",
+        "severity": "info",
+        "code": "PRODUCTION_LOAD_SETTLED",
+        "atUnixSeconds": 1791147620,
+        "sequence": 3
+      }
+    ],
+    "finalMode": "Edit",
+    "sourceParity": {
+      "clientDisabled": false,
+      "total": 85,
+      "probes": [],
+      "serverDisabled": false,
+      "duplicates": [],
+      "failures": [],
+      "actual": 85,
+      "matched": 85
+    },
+    "assetsPreserved": true,
+    "assets": {
+      "core": [
+        {
+          "path": "Workspace.EnergyCoreGenerator_Source.EnergyCoreGenerator.EC_DarkMetal.EC_DarkMetal_Mesh",
+          "material": "Metal",
+          "color": [
+            0.19607843458652496,
+            0.24705882370471954,
+            0.2980392277240753
+          ],
+          "cframe": [
+            -9.13223648071289,
+            2.9749999046325684,
+            33.04500198364258,
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ],
+          "mesh": "rbxassetid://82608047802888",
+          "size": [
+            4.000000476837158,
+            5.949999809265137,
+            4.000000476837158
+          ]
+        },
+        {
+          "path": "Workspace.EnergyCoreGenerator_Source.EnergyCoreGenerator.EC_EnergyGreen.EC_EnergyGreen_Mesh",
+          "material": "Neon",
+          "color": [
+            0.2980392277240753,
+            1,
+            0.4313725531101227
+          ],
+          "cframe": [
+            -9.13223648071289,
+            3.2895002365112305,
+            32.43950271606445,
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ],
+          "mesh": "rbxassetid://111406198103853",
+          "size": [
+            3.174999952316284,
+            4.769000053405762,
+            2.7709999084472656
+          ]
+        },
+        {
+          "path": "Workspace.EnergyCoreGenerator_Source.EnergyCoreGenerator.EC_PanelPlastic.EC_PanelPlastic_Mesh",
+          "material": "SmoothPlastic",
+          "color": [
+            0.07450980693101883,
+            0.09803921729326248,
+            0.12941177189350128
+          ],
+          "cframe": [
+            -9.172237396240234,
+            3.4074997901916504,
+            32.496253967285156,
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ],
+          "mesh": "rbxassetid://138888023376661",
+          "size": [
+            3.429999828338623,
+            5.125,
+            2.8575000762939453
+          ]
+        },
+        {
+          "path": "Workspace.EnergyCoreGenerator_Source.EnergyCoreGenerator.EC_SecondaryMetal.EC_SecondaryMetal_Mesh",
+          "material": "Metal",
+          "color": [
+            0.6000000238418579,
+            0.6745098233222961,
+            0.7333333492279053
+          ],
+          "cframe": [
+            -9.13223648071289,
+            3.2100000381469727,
+            33.04500198364258,
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ],
+          "mesh": "rbxassetid://140395381153946",
+          "size": [
+            3.820000171661377,
+            5.579999923706055,
+            3.820000171661377
+          ]
+        }
+      ],
+      "streaming": true,
+      "lighting": [
+        14.5,
+        3,
+        0,
+        "0.27451, 0.27451, 0.27451",
+        "0.27451, 0.27451, 0.27451"
+      ],
+      "worldParts": 54,
+      "maxPlayers": 60
+    }
+  },
+  "local": {
+    "fastTests": {
+      "passed": 191,
+      "total": 191
+    },
+    "pythonCiTests": {
+      "passed": 28,
+      "total": 28
+    },
+    "formatting": "PASS",
+    "lint": {
+      "errors": 0,
+      "warnings": 0
+    },
+    "strictAnalysis": "PASS: zero errors; existing missing Roblox definition warning",
+    "architectureDependencies": "PASS",
+    "repositoryIntegrity": "PASS",
+    "rojoBuild": "PASS",
+    "rojoSourcemap": "PASS"
+  },
+  "remaining": "Authored hazard and safe-route/transport fairness; VS1-19 / AD-249 remains DEFERRED and mandatory before IMP-10 COMPLETE"
+}
