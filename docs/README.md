@@ -9,6 +9,11 @@ This directory is the authoritative documentation space for Project MonsterVault
 
 The owner-authorized first-release seasonal direction is **Halloween 2026**. Implementation and production-quality work must use the permanent-base-plus-removable-seasonal-layer rule in [`implementation/HALLOWEEN_2026_LAUNCH_THEME.md`](implementation/HALLOWEEN_2026_LAUNCH_THEME.md), with concrete phase bindings in [`implementation/IMPLEMENTATION_ROADMAP.md`](implementation/IMPLEMENTATION_ROADMAP.md). Halloween presentation may begin in the Golden Slice; event authority, commerce and live-ops remain with their existing owning phases.
 
+
+## Golden Slice Production Package
+
+The implementation-facing production baseline is indexed at [`implementation/production/README.md`](implementation/production/README.md). It defines the visual bible, asset manifest, Blender/Roblox production rules, UI/UX system, Halloween routing matrix, authoring performance budgets, acceptance evidence and Work handoff for the first Golden Playable Vertical Slice.
+
 The project follows a specification-first discipline: gameplay is designed first, Technical Architecture is derived from the approved design, and implementation begins only after both layers pass their formal completion gates.
 
 ## Documentation Layers
@@ -132,11 +137,15 @@ TA-17 latest evidence:
 - [`technical_architecture/TA17_SCENARIO_VALIDATION.md`](technical_architecture/TA17_SCENARIO_VALIDATION.md) — 180 / 180 PASS;
 - [`technical_architecture/TA17_CLOSURE_REPORT.md`](technical_architecture/TA17_CLOSURE_REPORT.md) — IMPLEMENTATION OPEN.
 
-The active dependency is:
+The active implementation state is:
 
-> **IMP-10 — World Scaling (FUNCTIONALLY COMPLETE under AD-260)**
+> **IMP-11 — Social and Events: OPEN**
 
-IMP-9 Vault / Economy / Progression is COMPLETE. IMP-10 has closed registry/mastery/access, authored content, regional scheduling, World Cycle, travel/discovery/recovery, trusted-session presence, hazards/transport fairness and bounded world rewards. Protected DEV lifetimes and capture-fairness/fault-recovery evidence now close the final functional gate ([evidence](implementation/IMP10_PROTECTED_LIFETIME_EVIDENCE.md)). Next is IMP-11 server-local Party/invite/membership authority; VS1-19 remains DEFERRED to Scale Readiness.
+Party, Social Ping, Friendly Challenge and representative Showcase/Visitor dependencies are complete. Shared Objectives/Collaboration Rewards, event identity/lifecycle/spawn/reward work and cross-server occurrence hints remain open.
+
+The **Golden Playable Vertical Slice / first production-quality visual pass is ready to begin** on the stable underlying systems. Halloween 2026 is the owner-authorized launch theme, using the permanent-base-plus-removable-seasonal-layer rule. The implementation-facing production package is [`implementation/production/README.md`](implementation/production/README.md).
+
+VS1-19 remains **DEFERRED — environment limitation** under AD-260 as a future Scale Readiness Gate, not a passing result and not a blocker for the representative Golden visual pass.
 
 All pre-code gates are satisfied. Gameplay implementation remains open under TA-17.
 
