@@ -274,9 +274,9 @@ MonsterVault intentionally uses multiple complementary revenue surfaces rather t
 
 These are authorized product/operations classes. Their implementation order remains dependency- and evidence-driven.
 
-### CS2-01 — No persistent paid gameplay multipliers at baseline
+### CS3-01 — No persistent paid gameplay multipliers at baseline
 
-Commercial Strategy v2 does **not** authorize:
+Commercial Strategy v3 does **not** authorize:
 
 - permanent 2×/3× Energy income;
 - permanent Passive Production-rate multipliers;
@@ -287,25 +287,25 @@ Commercial Strategy v2 does **not** authorize:
 
 The sole baseline exception is the bounded **2× Return Overcharge** in §10: it is a one-return commercial bonus over a server-authored eligible offline-return amount, not a persistent rate or world/progression multiplier. A 3× variant is not baseline-authorized and requires explicit GDS-13 change control plus economy evidence.
 
-### CS2-02 — No paid streak restoration at baseline
+### CS3-02 — No paid streak restoration at baseline
 
 Because GDS-16 intentionally has no attendance streak that destroys or multiplies value, there is no Robux "restore your daily streak" product at baseline.
 
 Monetization should sell desirable identity, presentation and bounded convenience rather than relief from attendance pressure invented by the game.
 
-### CS2-03 — Offer placement follows gameplay, not frustration
+### CS3-03 — Offer placement follows gameplay, not frustration
 
 The first session is gameplay-first. Commercial surfaces may become visible after the player understands the capture/Vault fantasy, but cannot be triggered as a rescue immediately after a failed capture, missed rare opportunity, hazard recovery or insufficient-Energy rejection.
 
-### CS2-04 — Seasonal commerce follows truthful availability
+### CS3-04 — Seasonal commerce follows truthful availability
 
 Seasonal cosmetic bundles may use genuine event/season windows. Their timing must be real, disclosed and independent from the player's losses, inactivity or purchase reluctance.
 
-### CS2-05 — Subscription remains a later option, not launch scope
+### CS3-05 — Subscription remains a later option, not launch scope
 
 A cosmetic/convenience-focused subscription may be reconsidered after real retention and payer data exists. It requires explicit GDS-13/GDS-15 change control and may not introduce paid luck, production multipliers, mainline access or attendance punishment.
 
-### CS2-06 — Revenue optimization is measured against product-health guardrails
+### CS3-06 — Revenue optimization is measured against product-health guardrails
 
 Conversion, ARPPU/revenue-per-player and product attach rate may be measured, but an offer is not successful if it materially worsens retention, player trust, payer/non-payer progression fairness, refund/regret signals or first-session comprehension.
 
