@@ -17,10 +17,52 @@ function WorldTravelService.new(options: any): any
 				retryAt = 0,
 				nextTravelAt = 0,
 				lastRegion = nil,
+				hazard = nil,
+				recoveryObservationNodeId = nil,
+				position = nil,
 			}
 			records[player.UserId] = r
 		end
 		return r
+	end
+	local function observedContext(context: any, r: any): any
+		if
+			context
+			and r
+			and context.finitePosition ~= false
+			and r.session == context.session
+			and r.character == context.character
+			and r.generation == context.generation
+			and r.position ~= nil
+			and context.position ~= nil
+			and options.hazardBetween
+		then
+			local hazard = options.hazardBetween(context, r.position)
+			if hazard then
+				context.hazardId, context.validPosition = hazard, false
+			end
+		end
+		if context and r then
+			local h = r.hazard
+			local same = h
+				and h.session == context.session
+				and h.character == context.character
+				and h.generation == context.generation
+			if context.hazardId and not same then
+				r.hazard = {
+					session = context.session,
+					character = context.character,
+					generation = context.generation,
+					id = context.hazardId,
+					interrupted = false,
+				}
+				h, same = r.hazard, true
+			end
+			if same then
+				context.hazardId, context.validPosition = h.id, false
+			end
+		end
+		return context
 	end
 	local function current(player: any, context: any): boolean
 		local live = options.context(player)
@@ -37,7 +79,8 @@ function WorldTravelService.new(options: any): any
 		end
 		r.busy = true
 		local ok, moved = pcall(options.relocate, player, context, target, recovery, function()
-			return current(player, context)
+			local live = observedContext(options.context(player), r)
+			return current(player, context) and (recovery or (live ~= nil and live.validPosition))
 		end)
 		r.busy = false
 		if not running then
@@ -50,6 +93,7 @@ function WorldTravelService.new(options: any): any
 			or live == nil
 			or live.character ~= context.character
 			or live.session ~= context.session
+			or not live.validPosition
 			or (not recovery and live.generation ~= context.generation)
 		then
 			r.generation = nil -- Next central pass performs recovery, never repeats a travel request.
@@ -58,7 +102,39 @@ function WorldTravelService.new(options: any): any
 		end
 		r.session, r.generation, r.character, r.lastRegion =
 			live.session, live.generation, live.character, target.regionId
+		r.hazard = nil
+		r.recoveryObservationNodeId = if recovery then target.recoveryObservationNodeId else nil
+		r.position = live.position -- Authorized relocation starts a new observation segment.
 		return if recovery then "OK_WORLD_RECOVERED" else "OK_WORLD_TRAVELLED"
+	end
+	local function interruptHazard(player: any, context: any, r: any): boolean
+		local h = r.hazard
+		local same = h
+			and h.session == context.session
+			and h.character == context.character
+			and h.generation == context.generation
+		if (same and h.interrupted) or (not same and context.hazardId == nil) then
+			return true
+		end
+		-- Latch an observed consequence even if interruption fails and the player leaves.
+		r.hazard = {
+			session = context.session,
+			character = context.character,
+			generation = context.generation,
+			id = context.hazardId,
+			interrupted = false,
+		}
+		r.busy = true
+		local ok, interrupted = pcall(options.interrupt, player, context, function()
+			return current(player, context)
+		end)
+		r.busy = false
+		if not ok or interrupted ~= true or not current(player, context) then
+			r.retryAt = options.clock() + 1
+			return false
+		end
+		r.hazard.interrupted = true
+		return true
 	end
 	local function step(players: { any })
 		if not running then
@@ -67,8 +143,8 @@ function WorldTravelService.new(options: any): any
 		local present = {}
 		for _, player in players do
 			present[player.UserId] = true
-			local context = options.context(player)
 			local r = record(player)
+			local context = observedContext(options.context(player), r)
 			if context ~= nil and not r.busy then
 				if r.session ~= context.session then
 					-- A new trusted session must establish its own safe arrival.
@@ -81,7 +157,7 @@ function WorldTravelService.new(options: any): any
 					or not context.validPosition
 				then
 					r.generation = nil
-					if options.clock() >= r.retryAt then
+					if options.clock() >= r.retryAt and interruptHazard(player, context, r) then
 						local target = options.recovery(context, r.lastRegion)
 						if target ~= nil then
 							transition(player, context, target, true)
@@ -100,7 +176,13 @@ function WorldTravelService.new(options: any): any
 					and live.character == r.character
 					and live.validPosition
 				then
-					options.observe(player, live)
+					r.position = live.position
+					if live.nodeId ~= r.recoveryObservationNodeId then
+						r.recoveryObservationNodeId = nil
+					end
+					if r.recoveryObservationNodeId == nil then
+						options.observe(player, live)
+					end
 				end
 			end
 		end
@@ -114,7 +196,7 @@ function WorldTravelService.new(options: any): any
 		step = step,
 		ready = function(player: any, generation: number): boolean
 			local r = records[player.UserId]
-			local context = if running then options.context(player) else nil
+			local context = if running then observedContext(options.context(player), r) else nil
 			return running
 				and context ~= nil
 				and context.validPosition
@@ -126,11 +208,14 @@ function WorldTravelService.new(options: any): any
 				and r.character == player.Character
 		end,
 		travel = function(player: any, nodeId: string, generation: number): string
-			local context = options.context(player)
-			if not running or context == nil then
+			if not running then
 				return "REJECT_STATE_TRAVEL_CONTEXT"
 			end
 			local r = record(player)
+			local context = observedContext(options.context(player), r)
+			if context == nil then
+				return "REJECT_STATE_TRAVEL_CONTEXT"
+			end
 			if r.busy then
 				return "REJECT_STATE_TRAVEL_BUSY"
 			end

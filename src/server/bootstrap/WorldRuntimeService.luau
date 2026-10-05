@@ -394,6 +394,73 @@ function WorldRuntimeService.new(
 		end
 		return nil
 	end
+	local function hazardAt(position: any, clearance: any?, previous: any?): (string?, boolean)
+		local found, available = nil, true
+		for id, bound in authoringIndex.hazards do
+			local marker, warning, label = bound.marker, bound.warning, bound.label
+			available = available
+				and liveBinding(bound)
+				and marker.Parent == bound.part
+				and warning.Parent == bound.part
+				and warning.Enabled
+				and label.Parent == warning
+				and label.Text == registry.hazards[id].warningText
+			for _, visual in bound.visuals do
+				local part, style = visual.part, MaterialPalette[visual.materialGroup]
+				available = available
+					and part.Parent == visual.parent
+					and part.Anchored
+					and part.CFrame == visual.cframe
+					and part.Size == visual.size
+					and part.Transparency == 0
+					and not part.CanCollide
+					and not part.CanTouch
+					and style ~= nil
+					and part:GetAttribute("MaterialGroup") == visual.materialGroup
+					and part.Material == style.material
+					and part.Color == style.color
+			end
+			local p, m = bound.cframe:PointToObjectSpace(position), clearance or Vector3.zero
+			local intersects = math.abs(p.X) <= bound.size.X / 2 + m.X
+				and math.abs(p.Y) <= bound.size.Y / 2 + m.Y
+				and math.abs(p.Z) <= bound.size.Z / 2 + m.Z
+			if previous and not intersects then
+				local a, half = bound.cframe:PointToObjectSpace(previous), bound.size / 2
+				local enter, leave = 0, 1
+				for _, axis in { "X", "Y", "Z" } do
+					local delta = p[axis] - a[axis]
+					if delta == 0 then
+						if math.abs(a[axis]) > half[axis] then
+							leave = -1
+						end
+					else
+						local first, last =
+							(-half[axis] - a[axis]) / delta, (half[axis] - a[axis]) / delta
+						enter, leave =
+							math.max(enter, math.min(first, last)),
+							math.min(leave, math.max(first, last))
+					end
+				end
+				intersects = enter <= leave
+			end
+			if intersects then
+				found = id
+			end
+		end
+		return found, available
+	end
+	local function nodeAt(context: any, includeUnavailable: boolean?): string?
+		for id, bound in authoringIndex.travelNodes do
+			if
+				context.regionId == bound.regionId
+				and (includeUnavailable or liveBinding(bound))
+				and (context.root.Position - bound.position).Magnitude <= bound.radius
+			then
+				return id
+			end
+		end
+		return nil
+	end
 	local function travelContext(player: any): any
 		if
 			not running
@@ -432,8 +499,14 @@ function WorldRuntimeService.new(
 			ground = spatialWorkspace:Raycast(v + Vector3.new(0, 3, 0), Vector3.new(0, -24, 0), ray)
 		end
 		p.session, p.profile, p.player, p.regionId = session, profile, player, regionId
+		p.position = v
+		p.finitePosition = finite
+		local hazard, hazardsAvailable = hazardAt(v)
+		p.hazardId = hazard
 		-- Authored connectors remain walkable even outside a region volume.
 		p.validPosition = ground ~= nil
+			and hazardsAvailable
+			and hazard == nil
 			and ground.Normal.Y >= 0.5
 			and (
 				regionId == nil
@@ -442,19 +515,9 @@ function WorldRuntimeService.new(
 					and options.worldActions.canAccess(profile, regionId)
 				)
 			)
+		-- A missing/corrupt node is not an observed departure from its authored location.
+		p.nodeId = nodeAt(p, true)
 		return p
-	end
-	local function nodeAt(context: any): string?
-		for id, bound in authoringIndex.travelNodes do
-			if
-				context.regionId == bound.regionId
-				and liveBinding(bound)
-				and (context.root.Position - bound.position).Magnitude <= bound.radius
-			then
-				return id
-			end
-		end
-		return nil
 	end
 	local function safeTarget(context: any, anchorId: string): any
 		local d, bound =
@@ -523,6 +586,10 @@ function WorldRuntimeService.new(
 		if regionAt(position) ~= d.regionId then
 			return nil
 		end
+		local hazard, hazardsAvailable = hazardAt(position, Vector3.new(2, 0, 2))
+		if hazard or not hazardsAvailable then
+			return nil
+		end
 		local overlap = globals.OverlapParams.new()
 		overlap.FilterType, overlap.FilterDescendantsInstances, overlap.MaxParts =
 			Enum.RaycastFilterType.Include, { bound.root }, 1
@@ -539,7 +606,14 @@ function WorldRuntimeService.new(
 				return nil
 			end
 		end
+		local recoveryObservationNodeId: string? = nil
+		for nodeId, node in registry.travelNodes do
+			if node.recoveryAnchorId == anchorId and node.regionId ~= registry.roles.HomeHub then
+				recoveryObservationNodeId = nodeId
+			end
+		end
 		return {
+			recoveryObservationNodeId = recoveryObservationNodeId,
 			anchorId = anchorId,
 			regionId = d.regionId,
 			cframe = globals.CFrame.new(position) * bound.cframe.Rotation,
@@ -687,6 +761,22 @@ function WorldRuntimeService.new(
 	local function start()
 		assert(not running and world == nil, "world service already started")
 		validateAuthoring()
+		-- The same central palette maps every part of this native authored asset.
+		local targets = {}
+		for _, bound in authoringIndex.hazards do
+			local parts = bound.part:GetDescendants()
+			table.insert(parts, bound.part)
+			for _, part in parts do
+				if part:IsA("BasePart") then
+					local style = MaterialPalette[part:GetAttribute("MaterialGroup")]
+					assert(style, "unmapped hazard material group")
+					table.insert(targets, { part = part, style = style })
+				end
+			end
+		end
+		for _, target in targets do
+			target.part.Material, target.part.Color = target.style.material, target.style.color
+		end
 		local plan: any = nil
 		if options.fixture == nil then
 			local positions = {}
@@ -783,8 +873,14 @@ function WorldRuntimeService.new(
 		travelOwner = WorldTravelService.new({
 			clock = clock,
 			context = travelContext,
+			hazardBetween = function(context: any, previous: any): string?
+				return (hazardAt(context.position, nil, previous))
+			end,
 			destination = destination,
 			observe = observeNode,
+			interrupt = function(player: any, context: any, current: () -> boolean): boolean
+				return current() and captureLifecycle.interrupt(player, context.generation)
+			end,
 			recovery = function(context: any, lastRegion: string?): any
 				local preferred = if context.validPosition and lastRegion
 					then context.regionId

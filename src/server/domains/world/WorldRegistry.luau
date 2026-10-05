@@ -137,6 +137,8 @@ function WorldRegistry.new(config: any): any
 	local recoveryAnchors = index(config.recoveryAnchors or {}, "recovery-anchor", 8)
 	local vaultAccessPoints = index(config.vaultAccessPoints or {}, "vault-access-point", 8)
 	local travelNodes = index(config.travelNodes or {}, "travel-node", 5)
+	local hazards = index(config.hazards, "hazard", 1)
+	assert(#config.hazards == 1, "missing DEV hazard")
 	local roles, milestones = {}, {}
 	local roleAccess = {
 		HomeHub = false,
@@ -161,6 +163,19 @@ function WorldRegistry.new(config: any): any
 	end
 	for role in roleAccess do
 		assert(roles[role] ~= nil, "missing GDS-9 role")
+	end
+	for _, h in hazards do
+		assert(
+			h.id == "hazard/starter-corrosive-dev-v1"
+				and h.regionId == roles.Starter
+				and h.consequence == "Recovery"
+				and type(h.warningText) == "string"
+				and #h.warningText > 0
+				and #h.warningText <= 160,
+			"unbound DEV hazard"
+		)
+		cycleBinding(h)
+		assert(#h.cyclePhaseIds == 3, "DEV hazard must remain phase independent")
 	end
 	for _, s in species do
 		assert(
@@ -403,6 +418,7 @@ function WorldRegistry.new(config: any): any
 		recoveryAnchors = recoveryAnchors,
 		vaultAccessPoints = vaultAccessPoints,
 		travelNodes = travelNodes,
+		hazards = hazards,
 	})
 end
 return WorldRegistry

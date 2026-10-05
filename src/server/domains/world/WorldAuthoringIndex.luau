@@ -140,8 +140,87 @@ function WorldAuthoringIndex.new(registry: any, authored: any, collection: any):
 	for id in registry.spawnContexts do
 		assert(anchors[id] ~= nil, "orphan spawn context")
 	end
-	-- No hazard mechanic has been bound yet; unknown hazard roles cannot overlap utilities.
-	assert(#collection:GetTagged("MonsterVaultHazard") == 0, "unbound authored hazard")
+	local hazards = {}
+	for id, bound in bind("MonsterVaultHazard", "HazardId", registry.hazards) do
+		local region = regions[bound.regionId]
+		assert(
+			bound.cframe.Rotation == getfenv().CFrame.identity
+				and bound.size.X >= 8
+				and bound.size.X <= 32
+				and bound.size.Z >= 8
+				and bound.size.Z <= 32
+				and bound.size.Y == region.size.Y
+				and inside(region, bound.position, bound.size / 2)
+				and not bound.part.CanCollide
+				and not bound.part.CanTouch,
+			"invalid DEV hazard volume"
+		)
+		for _, points in { outposts, secure, recovery, vault, travel, landmarks, anchors } do
+			for _, point in points do
+				local dx =
+					math.max(math.abs(point.position.X - bound.position.X) - bound.size.X / 2, 0)
+				local dz =
+					math.max(math.abs(point.position.Z - bound.position.Z) - bound.size.Z / 2, 0)
+				assert(
+					dx * dx + dz * dz > ((point.radius or 12) + 2) ^ 2,
+					"hazard overlaps safe utility or required encounter"
+				)
+			end
+		end
+		local marker = bound.part:FindFirstChild("Marker")
+		local warning = bound.part:FindFirstChild("Warning")
+		local label = if warning then warning:FindFirstChild("Text") else nil
+		assert(
+			marker
+				and marker:IsA("BasePart")
+				and marker.Anchored
+				and not marker.CanCollide
+				and not marker.CanTouch
+				and marker.Transparency == 0
+				and marker.CFrame.Rotation == bound.cframe.Rotation
+				and marker.Position.X == bound.position.X
+				and marker.Position.Z == bound.position.Z
+				and marker.Size.X == bound.size.X
+				and marker.Size.Z == bound.size.Z
+				and inside(bound, marker.Position)
+				and warning
+				and warning:IsA("BillboardGui")
+				and warning.Enabled
+				and label
+				and label:IsA("TextLabel")
+				and label.Text == registry.hazards[id].warningText,
+			"hazard needs its visible marker and warning"
+		)
+		local h = table.clone(bound)
+		h.marker = marker
+		local visuals = {}
+		for _, part in { marker, marker:FindFirstChild("CrossA"), marker:FindFirstChild("CrossB") } do
+			assert(
+				part
+					and part:IsA("BasePart")
+					and part.Anchored
+					and not part.CanCollide
+					and not part.CanTouch
+					and part.Transparency == 0
+					and inside(bound, part.Position),
+				"missing visible hazard cross"
+			)
+			table.insert(
+				visuals,
+				table.freeze({
+					part = part,
+					parent = part.Parent,
+					cframe = part.CFrame,
+					size = part.Size,
+					materialGroup = part:GetAttribute("MaterialGroup"),
+				})
+			)
+		end
+		assert(#visuals == 3, "missing visible hazard cross")
+		h.visuals = table.freeze(visuals)
+		h.warning, h.label = warning, label
+		hazards[id] = table.freeze(h)
+	end
 	return table.freeze({
 		regions = regions,
 		habitats = habitats,
@@ -152,6 +231,7 @@ function WorldAuthoringIndex.new(registry: any, authored: any, collection: any):
 		vaultAccessPoints = vault,
 		travelNodes = travel,
 		spawnAnchors = table.freeze(anchors),
+		hazards = table.freeze(hazards),
 	})
 end
 return WorldAuthoringIndex
