@@ -4,7 +4,7 @@
 
 ## Project Status
 
-**Game Design Specification — DESIGN COMPLETE / Technical Architecture TA-0..17 COMPLETE / IMPLEMENTATION OPEN — IMP-1 through IMP-8 complete; VS1-19 deferred before IMP-10 COMPLETE (AD-249); IMP-9 OPEN.**
+**Game Design Specification — DESIGN COMPLETE with Monetization/Retention Strategy v2 / Technical Architecture TA-0..17 COMPLETE / IMPLEMENTATION OPEN — IMP-10 OPEN; VS1-19 deferred as a future Scale Readiness Gate under AD-260.**
 
 MonsterVault has completed the specification and Technical Architecture gates. **Implementation is now OPEN under the TA-17 locked contracts**; production release remains gated by TA-15 verification and the implementation roadmap.
 
@@ -58,7 +58,7 @@ No gameplay system should be implemented merely because an idea appears promisin
 - **TA-15 — Testing, Diagnostics, Security Validation, and CI Architecture: ARCHITECTURE COMPLETE — PASS**
 - **TA-16 — Architecture Integration and Implementation-Readiness Audit: INTEGRATION COMPLETE — PASS**
 - **TA-17 — Implementation Roadmap, Vertical Slice, Contract Locking, and Change Control: IMPLEMENTATION LOCKED — PASS**
-- **Gameplay implementation: OPEN — IMP-1 through IMP-8 complete; IMP-9 OPEN; VS1-19 deferred before IMP-10 COMPLETE (AD-249)**
+- **Gameplay implementation: OPEN — IMP-9 COMPLETE; IMP-10 OPEN; VS1-19 remains DEFERRED but is a future Scale Readiness Gate under AD-260, not an IMP-10 functional blocker**
 - Production release: blocked until applicable TA-15/TA-14/staging/release gates pass
 
 GDS-17 final evidence is recorded in [`17_cross_system_consistency_and_design_complete_audit.md`](docs/game_design/audit/17_cross_system_consistency_and_design_complete_audit.md), [`GDS17_AUTHORITY_NAMESPACE_AUDIT.md`](docs/game_design/GDS17_AUTHORITY_NAMESPACE_AUDIT.md), [`GDS17_MATURITY_OPEN_QUESTION_AUDIT.md`](docs/game_design/GDS17_MATURITY_OPEN_QUESTION_AUDIT.md), [`GDS17_COMPOUND_SCENARIO_VALIDATION.md`](docs/game_design/GDS17_COMPOUND_SCENARIO_VALIDATION.md), [`GDS17_DECISION_INDEX.md`](docs/game_design/GDS17_DECISION_INDEX.md), and [`GDS17_CLOSURE_REPORT.md`](docs/game_design/GDS17_CLOSURE_REPORT.md).
@@ -454,7 +454,7 @@ Key documents include:
 
 [`docs/technical_architecture/`](docs/technical_architecture/) is **COMPLETE — TA-17 IMPLEMENTATION LOCKED / IMPLEMENTATION OPEN**.
 
-TA-0 established governance/traceability, TA-1 locked the Roblox environment/toolchain, TA-2 locked structural boundaries, TA-3 locked networking trust, TA-4 locked persistence/session durability, TA-5 locked identity/content registries, TA-6 locked runtime lifecycle, TA-7 locked capture/ownership resolution, TA-8 locked collection/Vault/economy semantics, and TA-9 locked world/spawn/streaming authority. TA-10 locked transient social coordination, global event occurrence/cooldown semantics, cross-server notification/durability boundaries, exact-once event rewards and recoverable multi-profile creature trading. TA-11 locked commercial product identity, MarketplaceService ownership/receipt authority, exact-once grants, entitlement reconciliation and runtime price boundaries. TA-12 locked revision-aware client projection, semantic cross-device input, modal/focus safety, responsive/safe-area UI, accessibility preferences, authoritative feedback, camera/audio/caption and localization boundaries. TA-13 locked non-authoritative versioned telemetry, privacy/cardinality rules, ConfigService-backed validated C2 snapshots, feature rollout/rollback, experiment assignment/exposure/provenance, emergency disable semantics and external least-privilege live-operations audit. TA-14 locked measurable compute, memory, streaming, network, persistence, cross-server, world, client and live-ops budgets with conservative load shedding. TA-15 locked deterministic/static/engine/fault/security/performance verification, public-repository CI trust boundaries and merge/release evidence gates. TA-16 completed the cross-system authority/dependency/risk/readiness audit with zero implementation-critical architecture questions. TA-17 has now locked the toolchain, source/module graph, V1 runtime namespaces, CI/change-control contract, implementation sequence and VS-1 vertical slice; IMP-1 through IMP-8 are complete under AD-249 with VS1-19 deferred before IMP-10 COMPLETE; IMP-9 is OPEN.
+TA-0 established governance/traceability, TA-1 locked the Roblox environment/toolchain, TA-2 locked structural boundaries, TA-3 locked networking trust, TA-4 locked persistence/session durability, TA-5 locked identity/content registries, TA-6 locked runtime lifecycle, TA-7 locked capture/ownership resolution, TA-8 locked collection/Vault/economy semantics, and TA-9 locked world/spawn/streaming authority. TA-10 locked transient social coordination, global event occurrence/cooldown semantics, cross-server notification/durability boundaries, exact-once event rewards and recoverable multi-profile creature trading. TA-11 locked commercial product identity, MarketplaceService ownership/receipt authority, exact-once grants, entitlement reconciliation and runtime price boundaries. TA-12 locked revision-aware client projection, semantic cross-device input, modal/focus safety, responsive/safe-area UI, accessibility preferences, authoritative feedback, camera/audio/caption and localization boundaries. TA-13 locked non-authoritative versioned telemetry, privacy/cardinality rules, ConfigService-backed validated C2 snapshots, feature rollout/rollback, experiment assignment/exposure/provenance, emergency disable semantics and external least-privilege live-operations audit. TA-14 locked measurable compute, memory, streaming, network, persistence, cross-server, world, client and live-ops budgets with conservative load shedding. TA-15 locked deterministic/static/engine/fault/security/performance verification, public-repository CI trust boundaries and merge/release evidence gates. TA-16 completed the cross-system authority/dependency/risk/readiness audit with zero implementation-critical architecture questions. TA-17 has now locked the toolchain, source/module graph, V1 runtime namespaces, CI/change-control contract, implementation sequence and VS-1 vertical slice; IMP-9 is complete and IMP-10 is active. AD-260 supersedes AD-249's old deadline: VS1-19 remains deferred as a future Scale Readiness Gate rather than blocking IMP-10 functional completion.
 
 TA-0 closure evidence:
 
@@ -627,7 +627,7 @@ TA-17 closure evidence:
 
 [`docs/implementation/`](docs/implementation/) is **OPEN** under the TA-17 implementation lock.
 
-IMP-6 completed the capture and durable ownership backend fixture ([evidence](docs/implementation/IMP6_IMPLEMENTATION_EVIDENCE.md)). IMP-7 completed the capture client experience ([evidence](docs/implementation/IMP7_IMPLEMENTATION_EVIDENCE.md)). **IMP-8 — VS-1 Closure is COMPLETE with deferred validation** ([current evidence](docs/implementation/IMP8_IMPLEMENTATION_EVIDENCE.md)): AD-249 registers VS1-19 as DEFERRED for environment limitation, with full 30-player L1 and supported real-client performance mandatory before IMP-10 COMPLETE. **IMP-9 — Vault / Economy / Progression is OPEN** for DEV work. Production release remains gated by the downstream implementation phases and TA-15/TA-14 evidence.
+IMP-6 completed the capture and durable ownership backend fixture ([evidence](docs/implementation/IMP6_IMPLEMENTATION_EVIDENCE.md)). IMP-7 completed the capture client experience ([evidence](docs/implementation/IMP7_IMPLEMENTATION_EVIDENCE.md)). **IMP-8 — VS-1 Closure is COMPLETE with deferred validation** ([current evidence](docs/implementation/IMP8_IMPLEMENTATION_EVIDENCE.md)). VS1-19 remains DEFERRED for environment limitation; AD-260 reclassifies its full L0/L1 and supported real-client performance validation as a future Scale Readiness Gate. **IMP-9 — Vault / Economy / Progression is COMPLETE; IMP-10 — World Scaling is OPEN.** Production release remains gated by the downstream implementation phases and TA-15/TA-14 evidence.
 
 ## Repository Structure
 
@@ -674,7 +674,7 @@ Project-MonsterVault/
 └── scripts/                     # developer/CI/release tooling only
 ```
 
-TA-17 created the non-gameplay source/test scaffold and locked the implementation graph. IMP-1 added the contracts and test harness, IMP-2 added composition and diagnostics, IMP-3 added the profile session foundation, IMP-4 added networking and client projection, IMP-5 added the minimal runtime world, IMP-6 added capture and durable ownership, and IMP-7 added the client capture experience. IMP-8 completed VS-1 functional closure with VS1-19 explicitly deferred under AD-249. Development continues in IMP-9.
+TA-17 created the non-gameplay source/test scaffold and locked the implementation graph. IMP-1 added the contracts and test harness, IMP-2 added composition and diagnostics, IMP-3 added the profile session foundation, IMP-4 added networking and client projection, IMP-5 added the minimal runtime world, IMP-6 added capture and durable ownership, and IMP-7 added the client capture experience. IMP-8 completed VS-1 functional closure with VS1-19 explicitly deferred under AD-249. Development continues in IMP-10.
 
 ## Current Next Step
 
@@ -682,8 +682,15 @@ Proceed with **IMP-9 — Vault / Economy / Progression (OPEN)**.
 
 The first capacity-policy dependency is implemented and validated ([IMP-9 evidence](docs/implementation/IMP9_IMPLEMENTATION_EVIDENCE.md)). Next are authorized capacity components, non-destructive P2 reconciliation and explicit Overflow-Held resolution; the remaining Vault/economy/progression gates keep IMP-9 OPEN.
 
-The first implementation vertical slice is locked as **VS-1 — Trusted Join → One World Creature → Capture → Secure Ownership → Rejoin**. IMP-8 is COMPLETE with the sole registered VS1-19 deferral; [AD-249](docs/technical_architecture/ARCHITECTURE_DECISIONS.md#ad-249--defer-vs1-19-to-the-imp-10-completion-gate) requires the full performance evidence before IMP-10 COMPLETE.
+The first implementation vertical slice is locked as **VS-1 — Trusted Join → One World Creature → Capture → Secure Ownership → Rejoin**. IMP-8 is COMPLETE with VS1-19 explicitly deferred. [AD-260](docs/technical_architecture/ARCHITECTURE_DECISIONS.md#ad-260--reclassify-vs1-19-as-a-scale-readiness-gate) keeps the full performance evidence required for future scale readiness without blocking IMP-10 functional completion.
 
 ## License
 
 No open-source license is currently granted. All rights are reserved unless explicitly stated otherwise.
+
+
+## Commercial and Retention Strategy v2
+
+Owner-authorized on 2026-10-05. GDS-13 now defines a concrete launch commercial portfolio centered on deterministic cosmetics, bounded Collection/Display Capacity, a one-time Starter Value Bundle, a durable Supporter/Style Pass and seasonal cosmetic bundles. Paid luck, production multipliers, capture power, mainline access bypass and paid attendance-streak repair remain outside the baseline.
+
+GDS-16 now authorizes optional activity-based Daily Expeditions and Weekly Objectives alongside Return Brief, Next Aspirations, rotating world/event opportunities and existing bounded Offline Production. MonsterVault still has no attendance-only login reward, no login streak and no missed-day punishment.
