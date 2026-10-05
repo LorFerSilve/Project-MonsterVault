@@ -190,11 +190,11 @@ Trade session/revision/reservations, durable journal, transaction-fenced partici
 
 ## IMP-13 — Commerce
 
-Product definitions/bindings, Game Pass reconciliation, Developer Product receipt journal, Starter grant and commercial UI.
+Implement the GDS-13 Commercial Strategy v2 portfolio: deterministic cosmetic shop surfaces, bounded Collection/Display Capacity products, one-time Starter Value Bundle, durable Supporter/Style Pass, seasonal cosmetic bundles and the required product/entitlement/receipt reconciliation. No baseline paid luck, capture power, production multiplier, event reward multiplier, mainline access bypass or paid streak restoration.
 
 ## IMP-14 — Live Ops / Analytics / Experimentation
 
-Telemetry registry/adapters, C2 config snapshots, flags, experiment assignment/exposure and privileged audit boundary.
+Telemetry registry/adapters, C2 config snapshots, flags, experiment assignment/exposure and privileged audit boundary. Bind the GDS-16 Retention Strategy v2 return loops where their owning systems are ready: Return Brief, Next Aspirations, optional activity-based Daily Expeditions / Weekly Objectives, rotating genuine opportunities and the metrics/guardrails needed to tune them without login-streak pressure.
 
 ## Pre-release Production Quality Track
 
@@ -232,9 +232,9 @@ Gate: a new player with no outside explanation can understand what MonsterVault 
 
 ### PQL-6 — Retention & Progression Presentation
 
-Make existing progression motivating and legible through mastery/discovery presentation, region and collection completion, rarity, upgrades, quests/objectives, milestones, achievements, unlock previews and meaningful reward moments. Do not invent grind solely to increase session time.
+Make existing progression motivating and legible through mastery/discovery presentation, region and collection completion, rarity, upgrades, quests/objectives, milestones, achievements, unlock previews and meaningful reward moments. Implement the approved Retention Strategy v2 presentation: concise Return Brief, Next Aspirations, optional Daily Expeditions and Weekly Objectives, with no login streak, attendance-only reward or missed-day punishment. Do not invent grind solely to increase session time.
 
-Gate: players can identify what they just achieved and have clear short-, medium- and longer-term goals.
+Gate: players can identify what they just achieved, what is worth doing now and what longer-term aspiration should bring them back.
 
 ### PQL-7 — Live Events & Seasonal Content
 
@@ -250,9 +250,9 @@ Gate: multiplayer feels intentionally social rather than like isolated single-pl
 
 ### PQL-9 — Commerce Presentation
 
-Integrate passes/products/entitlements into MonsterVault's visual language with clear previews, value communication, ownership state and purchase confirmation/recovery. Avoid intrusive spam, deceptive scarcity, confusing currencies and pay-to-win shortcuts that undermine collection/progression. Blender MCP may produce high-quality 3D product/reward previews where appropriate.
+Integrate the approved Commercial Strategy v2 into MonsterVault's visual language: cosmetic shop, Starter Value Bundle, Supporter/Style Pass, bounded Collection/Display Capacity and seasonal cosmetic bundles. Provide clear previews, value communication, ownership state and purchase confirmation/recovery. Avoid intrusive spam, deceptive scarcity, confusing currencies, paid streak repair and pay-to-win shortcuts. Blender MCP may produce high-quality 3D product/reward previews where appropriate.
 
-Gate: commerce is coherent with the game, receipt/entitlement behavior is reliable, and presentation does not degrade the core player experience.
+Gate: commerce is coherent with the game, receipt/entitlement behavior is reliable, the intended launch portfolio is understandable, and presentation does not degrade the core player experience.
 
 ### PQL-10 — Launch & Promotional Polish
 
