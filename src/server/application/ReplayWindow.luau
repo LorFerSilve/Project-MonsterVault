@@ -10,7 +10,8 @@ function ReplayWindow.new(monotonicSeconds: () -> number, WireValidation: any)
 		requestId: string,
 		routeId: string,
 		payload: any,
-		expectedRevision: number?
+		expectedRevision: number?,
+		sessionIdentity: any?
 	): (string, any?)
 		local now = monotonicSeconds()
 		local user = byUser[userId]
@@ -21,7 +22,8 @@ function ReplayWindow.new(monotonicSeconds: () -> number, WireValidation: any)
 		local entry = user.entries[requestId]
 		if entry ~= nil and now - entry.at <= 120 then
 			if
-				entry.routeId ~= routeId
+				entry.sessionIdentity ~= sessionIdentity
+				or entry.routeId ~= routeId
 				or entry.expectedRevision ~= expectedRevision
 				or not WireValidation.equal(entry.payload, payload)
 			then
@@ -48,6 +50,7 @@ function ReplayWindow.new(monotonicSeconds: () -> number, WireValidation: any)
 			routeId = routeId,
 			payload = WireValidation.copy(payload),
 			expectedRevision = expectedRevision,
+			sessionIdentity = sessionIdentity,
 			result = nil,
 		}
 		table.insert(user.order, requestId)

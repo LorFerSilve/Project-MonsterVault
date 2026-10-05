@@ -1,0 +1,981 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-05",
+  "phase": "IMP-11",
+  "scope": "TA-10 first server-local Party dependency",
+  "baseCommit": "c9b4fc0c4edf2b23df6a4724cbd0715f5af266ef",
+  "branch": "codex/imp11-party",
+  "environment": {
+    "studioId": "6289091c-cab1-4c59-91d5-f6e3e6146eb7",
+    "placeName": "project_monstervault",
+    "placeId": 110304961224794,
+    "universeId": 10766503968,
+    "actualNativeClients": 1,
+    "profileOwner": "real ProfileSession",
+    "scopedStorage": "existing FakeProfileRepository, in-memory",
+    "timerPeer": "adapter UserId 6000000001; not a native Player or second client",
+    "finalMode": "Edit"
+  },
+  "result": {
+    "focusedNativeChecks": {
+      "passed": 29,
+      "total": 29
+    },
+    "sourceParity": {
+      "checked": 91,
+      "failures": []
+    },
+    "editPreservation": {
+      "bootEnabled": true,
+      "partsPreserved": 64,
+      "temporaryProbeRoots": 0,
+      "lightingPreserved": true,
+      "mode": "Edit"
+    }
+  },
+  "checks": [
+    {
+      "id": "create_server_owned_party",
+      "status": "PASS",
+      "route": "Social.PartyCreate",
+      "result": "OK_PARTY_CREATED",
+      "evidence": "native_startup_composition_and_client"
+    },
+    {
+      "id": "reject_forged_owner",
+      "status": "PASS",
+      "route": "Social.PartyCreate",
+      "result": "REJECT_VALIDATION_PAYLOAD",
+      "evidence": "native_startup_composition_and_client"
+    },
+    {
+      "id": "reject_self_invite",
+      "status": "PASS",
+      "route": "Social.PartyInvite",
+      "result": "REJECT_STATE_PARTY_TARGET",
+      "evidence": "native_startup_composition_and_client"
+    },
+    {
+      "id": "reject_absent_target",
+      "status": "PASS",
+      "route": "Social.PartyInvite",
+      "result": "REJECT_STATE_PARTY_TARGET",
+      "evidence": "native_startup_composition_and_client"
+    },
+    {
+      "id": "reject_forged_inviter",
+      "status": "PASS",
+      "route": "Social.PartyInvite",
+      "result": "REJECT_VALIDATION_PAYLOAD",
+      "evidence": "native_startup_composition_and_client"
+    },
+    {
+      "id": "reject_forged_revision",
+      "status": "PASS",
+      "route": "Social.PartyInvite",
+      "result": "REJECT_STATE_PARTY_REVISION",
+      "evidence": "native_startup_composition_and_client"
+    },
+    {
+      "id": "reject_client_expiry",
+      "status": "PASS",
+      "route": "Social.PartyInvite",
+      "result": "REJECT_VALIDATION_PAYLOAD",
+      "evidence": "native_startup_composition_and_client"
+    },
+    {
+      "id": "reject_unknown_or_foreign_invite",
+      "status": "PASS",
+      "route": "Social.PartyRespond",
+      "result": "REJECT_PERMISSION_PARTY_INVITE",
+      "evidence": "native_startup_composition_and_client"
+    },
+    {
+      "id": "reject_forged_member",
+      "status": "PASS",
+      "route": "Social.PartyRemove",
+      "result": "REJECT_STATE_PARTY_MEMBER",
+      "evidence": "native_startup_composition_and_client"
+    },
+    {
+      "id": "reject_forged_party",
+      "status": "PASS",
+      "route": "Social.PartyLeave",
+      "result": "REJECT_STATE_PARTY_REVISION",
+      "evidence": "native_startup_composition_and_client"
+    },
+    {
+      "id": "reject_client_session_identity",
+      "status": "PASS",
+      "route": "Social.PartyCreate",
+      "result": "REJECT_VALIDATION_PAYLOAD",
+      "evidence": "native_startup_composition_and_client"
+    },
+    {
+      "id": "explicit_invite_audience_opt_in",
+      "status": "PASS",
+      "route": "Social.PartySetInvitePolicy",
+      "result": "OK_PARTY_INVITE_POLICY",
+      "evidence": "native_startup_composition_and_client"
+    },
+    {
+      "id": "leave_and_clear_membership",
+      "status": "PASS",
+      "route": "Social.PartyLeave",
+      "result": "OK_PARTY_LEFT",
+      "evidence": "native_startup_composition_and_client"
+    },
+    {
+      "id": "recreate_with_distinct_identity",
+      "status": "PASS",
+      "route": "Social.PartyCreate",
+      "result": "OK_PARTY_CREATED",
+      "evidence": "native_startup_composition_and_client"
+    },
+    {
+      "id": "handshake_none_and_no_party",
+      "status": "PASS",
+      "evidence": "real_client_handshake",
+      "observed": {
+        "domain": "party",
+        "revision": 1,
+        "state": {
+          "allowInvites": false,
+          "incoming": []
+        }
+      }
+    },
+    {
+      "id": "duplicate_create_no_duplicate_party",
+      "status": "PASS",
+      "evidence": "native_startup_composition_and_client",
+      "observed": {
+        "duplicateCreate": true
+      }
+    },
+    {
+      "id": "physical_remote_oversize_rejected",
+      "status": "PASS",
+      "evidence": "native_startup_composition_and_client",
+      "observed": {
+        "oversizedRemote": true
+      }
+    },
+    {
+      "id": "projection_does_not_steal_focus",
+      "status": "PASS",
+      "evidence": "native_startup_composition_and_client",
+      "observed": {
+        "focusPreserved": true
+      }
+    },
+    {
+      "id": "party_does_not_write_or_mutate_profile",
+      "status": "PASS",
+      "evidence": "profile_value_unchanged",
+      "observed": {
+        "storageCalls": 1,
+        "profileUnchanged": true,
+        "counts": {
+          "parties": 1,
+          "memberships": 1,
+          "invites": 0,
+          "liveUsers": 1
+        }
+      }
+    },
+    {
+      "id": "actual_profilesession_replacement_invalidates_authority",
+      "status": "PASS",
+      "evidence": "native_profile_replacement",
+      "observed": {
+        "projection": {
+          "state": {
+            "incoming": [],
+            "allowInvites": false
+          },
+          "revision": 7,
+          "domain": "party"
+        },
+        "replaced": true,
+        "oldState": "Closed"
+      }
+    },
+    {
+      "id": "cached_request_rejected_after_session_replacement",
+      "status": "PASS",
+      "evidence": "real_client_replacement_replay",
+      "observed": {
+        "projection": {
+          "state": {
+            "allowInvites": false,
+            "incoming": [],
+            "party": {
+              "partyId": "ee4f815b-62dd-4f2c-866f-b42367a33dc9",
+              "leaderUserId": 1925180832,
+              "members": {
+                "1": {
+                  "userId": 1925180832,
+                  "present": true
+                }
+              },
+              "revision": 1
+            }
+          },
+          "revision": 8,
+          "domain": "party"
+        },
+        "oldRequest": "REJECT_VALIDATION_REQUEST_REUSE"
+      }
+    },
+    {
+      "id": "real_deadline_callback_expires_invite",
+      "status": "PASS",
+      "evidence": "native_expiry_and_callback_shutdown_fences",
+      "observed": {
+        "nativeExpiry": true,
+        "elapsedSeconds": 61.87966629999573,
+        "peakTimers": 1
+      }
+    },
+    {
+      "id": "consumed_callback_cannot_touch_rearmed_invite",
+      "status": "PASS",
+      "evidence": "native_expiry_and_callback_shutdown_fences",
+      "observed": {
+        "rearmedCallbackFence": true
+      }
+    },
+    {
+      "id": "shutdown_cancels_timer_and_fences_old_callbacks",
+      "status": "PASS",
+      "evidence": "native_expiry_and_callback_shutdown_fences",
+      "observed": {
+        "shutdownCallbackFence": true,
+        "counts": {
+          "parties": 0,
+          "memberships": 0,
+          "invites": 0,
+          "liveUsers": 0
+        }
+      }
+    },
+    {
+      "id": "actual_avatar_reset_preserves_party_identity",
+      "status": "PASS",
+      "evidence": "actual_avatar_reset_retains_P0_membership",
+      "observed": {
+        "profile": {
+          "storageCalls": 1,
+          "profileUnchanged": true,
+          "counts": {
+            "parties": 1,
+            "memberships": 1,
+            "invites": 0,
+            "liveUsers": 1
+          }
+        },
+        "newCharacter": true
+      }
+    },
+    {
+      "id": "actual_playerremoving_settled_cleanup",
+      "status": "PASS",
+      "evidence": "final_native_console",
+      "observed": {
+        "reason": "Enum.PlayerExitReason.CreatorKick",
+        "settledBeforeCompositionShutdown": true,
+        "counts": {
+          "parties": 0,
+          "memberships": 0,
+          "invites": 0,
+          "liveUsers": 0
+        }
+      }
+    },
+    {
+      "id": "native_composition_start_and_ordered_shutdown",
+      "status": "PASS",
+      "evidence": "final_native_console",
+      "observed": {
+        "startup": "BOOTSTRAP_READY",
+        "shutdown": "SHUTDOWN_COMPLETE",
+        "failures": [],
+        "counts": {
+          "parties": 0,
+          "memberships": 0,
+          "invites": 0,
+          "liveUsers": 0
+        }
+      }
+    },
+    {
+      "id": "fresh_play_has_no_party_restoration",
+      "status": "PASS",
+      "evidence": "fresh_Play_no_party_restore",
+      "observed": {
+        "storageCalls": 1,
+        "profileState": "Ready",
+        "userId": 1925180832,
+        "counts": {
+          "parties": 0,
+          "memberships": 0,
+          "invites": 0,
+          "liveUsers": 0
+        }
+      }
+    },
+    {
+      "id": "clean_shipped_boot_readback_and_collapsed_diagnostic",
+      "status": "PASS",
+      "evidence": "clean_shipped_boot_no_P0_restoration",
+      "observed": {
+        "resetOnSpawn": false,
+        "snapshot": {
+          "state": {
+            "allowInvites": false,
+            "incoming": []
+          },
+          "revision": 1,
+          "domain": "party"
+        },
+        "nativeClients": 1,
+        "diagnosticCollapsed": true
+      }
+    }
+  ],
+  "records": [
+    {
+      "case": "native_ready_profile_and_empty_P0",
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "{\"storageCalls\":1,\"profileState\":\"Ready\",\"userId\":1925180832,\"counts\":{\"parties\":0,\"memberships\":0,\"invites\":0,\"liveUsers\":0}}"
+          }
+        ],
+        "isError": false
+      }
+    },
+    {
+      "case": "real_client_handshake",
+      "result": {
+        "domain": "party",
+        "revision": 1,
+        "state": {
+          "allowInvites": false,
+          "incoming": []
+        }
+      }
+    },
+    {
+      "case": "real_client_party_wire",
+      "result": {
+        "focusPreserved": true,
+        "oversizedRemote": true,
+        "duplicateCreate": true,
+        "cases": [
+          {
+            "route": "Social.PartyCreate",
+            "result": "OK_PARTY_CREATED"
+          },
+          {
+            "route": "Social.PartyCreate",
+            "result": "REJECT_VALIDATION_PAYLOAD"
+          },
+          {
+            "route": "Social.PartyInvite",
+            "result": "REJECT_STATE_PARTY_TARGET"
+          },
+          {
+            "route": "Social.PartyInvite",
+            "result": "REJECT_STATE_PARTY_TARGET"
+          },
+          {
+            "route": "Social.PartyInvite",
+            "result": "REJECT_VALIDATION_PAYLOAD"
+          },
+          {
+            "route": "Social.PartyInvite",
+            "result": "REJECT_STATE_PARTY_REVISION"
+          },
+          {
+            "route": "Social.PartyInvite",
+            "result": "REJECT_VALIDATION_PAYLOAD"
+          },
+          {
+            "route": "Social.PartyRespond",
+            "result": "REJECT_PERMISSION_PARTY_INVITE"
+          },
+          {
+            "route": "Social.PartyRemove",
+            "result": "REJECT_STATE_PARTY_MEMBER"
+          },
+          {
+            "route": "Social.PartyLeave",
+            "result": "REJECT_STATE_PARTY_REVISION"
+          },
+          {
+            "route": "Social.PartyCreate",
+            "result": "REJECT_VALIDATION_PAYLOAD"
+          },
+          {
+            "route": "Social.PartySetInvitePolicy",
+            "result": "OK_PARTY_INVITE_POLICY"
+          },
+          {
+            "route": "Social.PartyLeave",
+            "result": "OK_PARTY_LEFT"
+          },
+          {
+            "route": "Social.PartyCreate",
+            "result": "OK_PARTY_CREATED"
+          }
+        ],
+        "partyId": "5931c7fb-f57c-4f7e-86f0-1cddd22dd6c5",
+        "partyRevision": 1,
+        "projectionRevision": 5
+      }
+    },
+    {
+      "case": "profile_value_unchanged",
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "{\"storageCalls\":1,\"profileUnchanged\":true,\"counts\":{\"parties\":1,\"memberships\":1,\"invites\":0,\"liveUsers\":1}}"
+          }
+        ],
+        "isError": false
+      }
+    },
+    {
+      "case": "native_profile_replacement",
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "{\"projection\":{\"state\":{\"incoming\":[],\"allowInvites\":false},\"revision\":7,\"domain\":\"party\"},\"replaced\":true,\"oldState\":\"Closed\"}"
+          }
+        ],
+        "isError": false
+      }
+    },
+    {
+      "case": "real_client_replacement_replay",
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "{\"projection\":{\"state\":{\"allowInvites\":false,\"incoming\":[],\"party\":{\"partyId\":\"ee4f815b-62dd-4f2c-866f-b42367a33dc9\",\"leaderUserId\":1925180832,\"members\":{\"1\":{\"userId\":1925180832,\"present\":true}},\"revision\":1}},\"revision\":8,\"domain\":\"party\"},\"oldRequest\":\"REJECT_VALIDATION_REQUEST_REUSE\"}"
+          }
+        ],
+        "isError": false
+      }
+    },
+    {
+      "case": "native_timer_begin_with_adapter_peer",
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "{\"timerCount\":1,\"nativePeerClients\":0,\"expirySeconds\":30}"
+          }
+        ],
+        "isError": false
+      }
+    },
+    {
+      "case": "native_expiry_and_callback_shutdown_fences",
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "{\"peakTimers\":1,\"rearmedCallbackFence\":true,\"elapsed\":61.87966629999573,\"nativeExpiry\":true,\"counts\":{\"parties\":0,\"memberships\":0,\"invites\":0,\"liveUsers\":0},\"shutdownCallbackFence\":true}"
+          }
+        ],
+        "isError": false
+      }
+    },
+    {
+      "case": "replacement_profile_value_unchanged",
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "{\"storageCalls\":3,\"profileUnchanged\":true,\"counts\":{\"parties\":1,\"memberships\":1,\"invites\":0,\"liveUsers\":1}}"
+          }
+        ],
+        "isError": false
+      }
+    },
+    {
+      "case": "native_runtime_cleanup",
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "{\"parties\":0,\"memberships\":0,\"invites\":0,\"liveUsers\":0}"
+          }
+        ],
+        "isError": false
+      }
+    },
+    {
+      "case": "fresh_Play_no_party_restore",
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "{\"storageCalls\":1,\"profileState\":\"Ready\",\"userId\":1925180832,\"counts\":{\"parties\":0,\"memberships\":0,\"invites\":0,\"liveUsers\":0}}"
+          }
+        ],
+        "isError": false
+      }
+    },
+    {
+      "case": "real_client_wire_repeat_fresh_Play",
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "{\"focusPreserved\":true,\"oversizedRemote\":true,\"duplicateCreate\":true,\"cases\":{\"1\":{\"route\":\"Social.PartyCreate\",\"result\":\"OK_PARTY_CREATED\"},\"3\":{\"route\":\"Social.PartyInvite\",\"result\":\"REJECT_STATE_PARTY_TARGET\"},\"2\":{\"route\":\"Social.PartyCreate\",\"result\":\"REJECT_VALIDATION_PAYLOAD\"},\"5\":{\"route\":\"Social.PartyInvite\",\"result\":\"REJECT_VALIDATION_PAYLOAD\"},\"4\":{\"route\":\"Social.PartyInvite\",\"result\":\"REJECT_STATE_PARTY_TARGET\"},\"7\":{\"route\":\"Social.PartyInvite\",\"result\":\"REJECT_VALIDATION_PAYLOAD\"},\"6\":{\"route\":\"Social.PartyInvite\",\"result\":\"REJECT_STATE_PARTY_REVISION\"},\"9\":{\"route\":\"Social.PartyRemove\",\"result\":\"REJECT_STATE_PARTY_MEMBER\"},\"8\":{\"route\":\"Social.PartyRespond\",\"result\":\"REJECT_PERMISSION_PARTY_INVITE\"},\"14\":{\"route\":\"Social.PartyCreate\",\"result\":\"OK_PARTY_CREATED\"},\"13\":{\"route\":\"Social.PartyLeave\",\"result\":\"OK_PARTY_LEFT\"},\"12\":{\"route\":\"Social.PartySetInvitePolicy\",\"result\":\"OK_PARTY_INVITE_POLICY\"},\"11\":{\"route\":\"Social.PartyCreate\",\"result\":\"REJECT_VALIDATION_PAYLOAD\"},\"10\":{\"route\":\"Social.PartyLeave\",\"result\":\"REJECT_STATE_PARTY_REVISION\"}},\"projection\":{\"state\":{\"allowInvites\":true,\"incoming\":[],\"party\":{\"partyId\":\"6d8ef757-d3d4-46b5-9de4-2224b7e3a470\",\"leaderUserId\":1925180832,\"members\":{\"1\":{\"userId\":1925180832,\"present\":true}},\"revision\":1}},\"revision\":5,\"domain\":\"party\"}}"
+          }
+        ],
+        "isError": false
+      }
+    },
+    {
+      "case": "actual_avatar_reset_retains_P0_membership",
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "{\"profile\":{\"storageCalls\":1,\"profileUnchanged\":true,\"counts\":{\"parties\":1,\"memberships\":1,\"invites\":0,\"liveUsers\":1}},\"newCharacter\":true}"
+          }
+        ],
+        "isError": false
+      }
+    },
+    {
+      "case": "native_startup_composition_and_client",
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "{\"focusPreserved\":true,\"oversizedRemote\":true,\"duplicateCreate\":true,\"cases\":{\"1\":{\"route\":\"Social.PartyCreate\",\"result\":\"OK_PARTY_CREATED\"},\"3\":{\"route\":\"Social.PartyInvite\",\"result\":\"REJECT_STATE_PARTY_TARGET\"},\"2\":{\"route\":\"Social.PartyCreate\",\"result\":\"REJECT_VALIDATION_PAYLOAD\"},\"5\":{\"route\":\"Social.PartyInvite\",\"result\":\"REJECT_VALIDATION_PAYLOAD\"},\"4\":{\"route\":\"Social.PartyInvite\",\"result\":\"REJECT_STATE_PARTY_TARGET\"},\"7\":{\"route\":\"Social.PartyInvite\",\"result\":\"REJECT_VALIDATION_PAYLOAD\"},\"6\":{\"route\":\"Social.PartyInvite\",\"result\":\"REJECT_STATE_PARTY_REVISION\"},\"9\":{\"route\":\"Social.PartyRemove\",\"result\":\"REJECT_STATE_PARTY_MEMBER\"},\"8\":{\"route\":\"Social.PartyRespond\",\"result\":\"REJECT_PERMISSION_PARTY_INVITE\"},\"14\":{\"route\":\"Social.PartyCreate\",\"result\":\"OK_PARTY_CREATED\"},\"13\":{\"route\":\"Social.PartyLeave\",\"result\":\"OK_PARTY_LEFT\"},\"12\":{\"route\":\"Social.PartySetInvitePolicy\",\"result\":\"OK_PARTY_INVITE_POLICY\"},\"11\":{\"route\":\"Social.PartyCreate\",\"result\":\"REJECT_VALIDATION_PAYLOAD\"},\"10\":{\"route\":\"Social.PartyLeave\",\"result\":\"REJECT_STATE_PARTY_REVISION\"}},\"projection\":{\"state\":{\"allowInvites\":true,\"incoming\":[],\"party\":{\"partyId\":\"64d33d1b-1903-4b8a-9515-b75a4d40ac1d\",\"leaderUserId\":1925180832,\"members\":{\"1\":{\"userId\":1925180832,\"present\":true}},\"revision\":1}},\"revision\":5,\"domain\":\"party\"}}"
+          }
+        ],
+        "isError": false
+      }
+    },
+    {
+      "case": "clean_shipped_boot_no_P0_restoration",
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "{\"resetOnSpawn\":false,\"snapshot\":{\"state\":{\"allowInvites\":false,\"incoming\":[]},\"revision\":1,\"domain\":\"party\"},\"nativeClients\":1,\"diagnosticCollapsed\":true}"
+          }
+        ],
+        "isError": false
+      }
+    },
+    {
+      "case": "final_native_console",
+      "console": "IMP11_COMPOSITION {\"fields\":{\"component\":\"server\"},\"version\":1,\"environment\":\"server\",\"severity\":\"info\",\"code\":\"BOOTSTRAP_READY\",\"atUnixSeconds\":1791197927,\"sequence\":1}\nServer Kick Message: IMP11 native lifecycle probe complete; Metadata: \nIMP11_NATIVE_PLAYER_REMOVING {\"counts\":{\"parties\":1,\"memberships\":1,\"invites\":0,\"liveUsers\":1},\"reason\":\"Enum.PlayerExitReason.CreatorKick\"}\nIMP11_NATIVE_DEPARTURE_SETTLED {\"settledCounts\":{\"parties\":0,\"memberships\":0,\"invites\":0,\"liveUsers\":0},\"counts\":{\"parties\":1,\"memberships\":1,\"invites\":0,\"liveUsers\":1},\"reason\":\"Enum.PlayerExitReason.CreatorKick\"}\nIMP11_COMPOSITION {\"fields\":{\"component\":\"server\"},\"version\":1,\"environment\":\"server\",\"severity\":\"info\",\"code\":\"SHUTDOWN_COMPLETE\",\"atUnixSeconds\":1791197931,\"sequence\":2}\nIMP11_NATIVE_SHUTDOWN {\"counts\":{\"parties\":0,\"memberships\":0,\"invites\":0,\"liveUsers\":0},\"failures\":[]}"
+    },
+    {
+      "case": "clean_shipped_console",
+      "console": "{\"fields\":{\"component\":\"world\"},\"version\":1,\"environment\":\"server\",\"severity\":\"info\",\"code\":\"WORLD_SPAWNED\",\"atUnixSeconds\":1791198127,\"sequence\":1}\n{\"fields\":{\"component\":\"server\"},\"version\":1,\"environment\":\"server\",\"severity\":\"info\",\"code\":\"BOOTSTRAP_READY\",\"atUnixSeconds\":1791198127,\"sequence\":2}\n{\"fields\":{\"component\":\"client\"},\"version\":1,\"environment\":\"client\",\"severity\":\"info\",\"code\":\"BOOTSTRAP_READY\",\"atUnixSeconds\":1791198127,\"sequence\":1}\n{\"fields\":{\"component\":\"profiles\",\"detailCode\":\"CleanOffline\"},\"version\":1,\"environment\":\"server\",\"severity\":\"info\",\"code\":\"PRODUCTION_LOAD_SETTLED\",\"atUnixSeconds\":1791198129,\"sequence\":3}"
+    }
+  ],
+  "probeRepairs": [
+    {
+      "attempt": "native_timer_begin",
+      "limitation": "Studio MCP cannot construct a Player instance (WritePlayer capability). The timer-only fixture was changed to an explicit adapter peer, never counted as a second native client."
+    },
+    {
+      "attempt": "actual_PlayerRemoving_creator_kick_cleanup / settled_cleanup",
+      "limitation": "A listener may observe the owner before the Party listener executes; solo CreatorKick ends Play. The repaired probe records settled all-zero counts in BindToClose before composition shutdown, alongside the early observation. Earlier failed observations are not passing checks."
+    }
+  ],
+  "practicalLimits": [
+    "One actual client; no two-real-client invitation/physical same-live-server reconnect proof.",
+    "Native timer observation at 61.87966629999573 seconds proves the 30-second callback had expired; it is not exact latency evidence.",
+    "Scoped ProfileSession storage is in-memory; no new DataStore durability claim.",
+    "Full platform social restriction/audience integration, final PQL presentation and broader multiplayer/release validation remain open.",
+    "VS1-19 and high-concurrency scale/release remain deferred under AD-260.",
+    "Local Luau-LSP lacks Roblox API definition files; zero configured errors is not a full API type pass."
+  ],
+  "sourceHashes": {
+    "algorithm": "SHA256",
+    "encoding": "raw host file bytes; parity normalizes line endings",
+    "files": [
+      {
+        "path": "src/shared/util/StructuredDiagnostics.luau",
+        "sha256": "bdd58852e86548217f7b7efed3f24241053f955ab0b581f0775ffb00119a994d"
+      },
+      {
+        "path": "src/shared/util/StartupPlan.luau",
+        "sha256": "feea980a3c0e61eebafacb4fa3975d34e34a22b3ffa3dc0a3631eb10798e50f0"
+      },
+      {
+        "path": "src/shared/types/Ids.luau",
+        "sha256": "0d95471d6c66cb9baa4245f7fd0755e3e334d5a608787477f0368bc700b21cd4"
+      },
+      {
+        "path": "src/shared/contracts/WorldProjectionV1.luau",
+        "sha256": "5b9d1daffa2fa7f14a4e8fd6425528974b928c6781f669ca1b5ff528015f97ba"
+      },
+      {
+        "path": "src/shared/contracts/WireValidation.luau",
+        "sha256": "b6a99c3f9b83b56b5c2881f28054b4f201f78c47b8017c4bcacce9a3d50bad1e"
+      },
+      {
+        "path": "src/shared/contracts/VaultProjectionV1.luau",
+        "sha256": "3f75b2618dc3f0950a98ee8f39adb85f5630a548e7b3dec85348ab09f35428d3"
+      },
+      {
+        "path": "src/shared/contracts/VaultAssignmentProjectionV1.luau",
+        "sha256": "4762e14fa7635c2b117be56e2875e001777559c5279be8cb6cfd7263c4c0731c"
+      },
+      {
+        "path": "src/shared/contracts/SecuredCollectionProjectionV1.luau",
+        "sha256": "0ab8d95693d50b85f6fe27160f4c7933d58a458c34ed7f4dae6b46c37eba1740"
+      },
+      {
+        "path": "src/shared/contracts/RouteIds.luau",
+        "sha256": "01deaf5085748821030c6dbf51d4fa02a9012569eda4235bbc0afee5c1ae390a"
+      },
+      {
+        "path": "src/shared/contracts/ResultCodes.luau",
+        "sha256": "b3d6c7a2cd5e0eff5a44f8e8061ce1d4d519e0cac55f3a86175aaeae380fbbdf"
+      },
+      {
+        "path": "src/shared/contracts/ProtocolV1.luau",
+        "sha256": "5543ded452d216f86ae7302f1b628a6edd533fbc63d647330d805216cf5970a3"
+      },
+      {
+        "path": "src/shared/contracts/ProjectionV1.luau",
+        "sha256": "e0c524382ad38e3579a703c5d60ee8668bb7cd6be95f63b47a3657b761cb1d22"
+      },
+      {
+        "path": "src/shared/contracts/ProgressionProjectionV1.luau",
+        "sha256": "7afc30f529e6a87a472a052cb20b5de74653b9c423f610cefb718958db8affde"
+      },
+      {
+        "path": "src/shared/contracts/PartyProjectionV1.luau",
+        "sha256": "4bfa4383e3aebecc5884a835fe98dab996bca9df0cce27f841bc6fc615a0f67d"
+      },
+      {
+        "path": "src/shared/contracts/CaptureProjectionV1.luau",
+        "sha256": "43b16d1f2e4fed9699f4b8013ecc78a9323da9a6a58e480b92f762c83809b708"
+      },
+      {
+        "path": "src/shared/config/VaultProductionFixture.luau",
+        "sha256": "94c7682df6daf9f875ec1e45c938b7b86ca5767959c5e95a97ecf1c6cc4aaff4"
+      },
+      {
+        "path": "src/shared/config/VaultCapacityFixture.luau",
+        "sha256": "1e84d72832f1385cf439ea83c3a53b8d86e1e0b842c14378459bacbcfaa3b7ba"
+      },
+      {
+        "path": "src/shared/config/ProgressionFixture.luau",
+        "sha256": "d27f3bbb1d507d68a281be13454390b89d9dd014a8e9aee1d70bfa60e112b07b"
+      },
+      {
+        "path": "src/shared/config/PartyPolicy.luau",
+        "sha256": "bc1d0984b9b9b50441c8203c7d6919f7cbc3a779749a42d2ced30cd47bee6946"
+      },
+      {
+        "path": "src/shared/config/MaterialPalette.luau",
+        "sha256": "d9ccb880a8080792acae892691b5f55aa3f638b2e81aeaa67603f5a2e67fa427"
+      },
+      {
+        "path": "src/server/infrastructure/rng/RandomSourceInterface.luau",
+        "sha256": "a26d9636ce029acfd36097f4a20c839da2c62b9198d6da7a90ef56e8b0ac1952"
+      },
+      {
+        "path": "src/client/store/WorldProjectionStore.luau",
+        "sha256": "066582a26125ff5236538af4e80a0d131df9e0b691f55db062a979e04253cc68"
+      },
+      {
+        "path": "src/client/store/SecuredCollectionStore.luau",
+        "sha256": "3bfef9a9086fc3adb35f72c4ea123690565393392ec2df851fb01c7a3f3cf2a1"
+      },
+      {
+        "path": "src/client/store/ProjectionStore.luau",
+        "sha256": "c437b00617b9e3f006005a81e8729ab79398284df1c6a22702a28cd0b49f6708"
+      },
+      {
+        "path": "src/client/store/PartyProjectionStore.luau",
+        "sha256": "f37dab106d6c4ce1264e0e5ecb898adf1a3611f2afd3141615321a471ba0a75a"
+      },
+      {
+        "path": "src/client/controllers/VaultController.luau",
+        "sha256": "f71220af052b239c9be127f8aafc5eeba9fbf10a353be23e4f01aa11e7060056"
+      },
+      {
+        "path": "src/client/controllers/VaultAssignmentController.luau",
+        "sha256": "4d77a2df14cbb4959e7ee279c15108772c0b6b5bf7a23e617ad5bf2bea317edb"
+      },
+      {
+        "path": "src/client/controllers/ProgressionController.luau",
+        "sha256": "717245ae01100785f2b845acc3f7df0571f3d313ede0f92b45bc9f3b56a5e157"
+      },
+      {
+        "path": "src/client/controllers/CaptureController.luau",
+        "sha256": "debcbf89912245c004125fed7c16fb8a63ce8a20405465feadb167effbe0baae"
+      },
+      {
+        "path": "src/client/presentation/CaptureView.luau",
+        "sha256": "43ad25166e5bd473f488b5aa05a3665b64747e0fdf6f6be00ed902cd7e364151"
+      },
+      {
+        "path": "src/server/infrastructure/persistence/SingleWriterQueue.luau",
+        "sha256": "7e5e9591f498c05e501cacce2753f4f3e59930bdfa076d76ce7126ffc5d9c8cc"
+      },
+      {
+        "path": "src/server/infrastructure/persistence/RetryPolicy.luau",
+        "sha256": "76174178e801e0fdf965c906733110643766a146796ca2a66758efbc136aec08"
+      },
+      {
+        "path": "src/server/infrastructure/persistence/ProfileSession.luau",
+        "sha256": "dbd5c63a97cc0031cf42d95694d80f5da5a0873ff3243f183b04c9e4d1ac8ebd"
+      },
+      {
+        "path": "src/server/infrastructure/persistence/ProfileSchemaV1.luau",
+        "sha256": "8fcd008aa4557a9fa098494aebd4197521324816dae9914c84c8247e40f893c0"
+      },
+      {
+        "path": "src/server/infrastructure/persistence/ProfileRepositoryInterface.luau",
+        "sha256": "0f97143f20b8430c702f4015b7571601fb4ab5141d913abfe35602d80fdf5f61"
+      },
+      {
+        "path": "src/client/networking/ClientGateway.luau",
+        "sha256": "e0afb04863d83f394f35beb0bcd9c375edb8b907d02ae8aeb62ccd767e3c6ee1"
+      },
+      {
+        "path": "src/server/infrastructure/performance/PerformanceCounters.luau",
+        "sha256": "b6a01c851a31d4d50d72f1271cc0557d54914bcce74111b6bf681bde508f20fb"
+      },
+      {
+        "path": "src/client/bootstrap/WorldModelObserver.luau",
+        "sha256": "cc54050d83df0ed5f7dcce8c97bd9e1a086e5defa785464f528c8ee0e8f24e66"
+      },
+      {
+        "path": "src/client/bootstrap/VaultRuntimeService.luau",
+        "sha256": "2e84d30eebc4d25fcf16050153af7d20e7ec67990fe9f56a4c5b8e6198e1faab"
+      },
+      {
+        "path": "src/client/bootstrap/VaultAssignmentRuntimeService.luau",
+        "sha256": "a3a653fc5dfa1ba9f54719936e69d42d2f2ff2b26d10ac86f7b9ca31b28cf6f3"
+      },
+      {
+        "path": "src/client/bootstrap/ProgressionRuntimeService.luau",
+        "sha256": "c4c30a8754cd9fb77e80327c6f8523a70272799848c37a204f4048e0037afe2a"
+      },
+      {
+        "path": "src/client/bootstrap/PartyRuntimeService.luau",
+        "sha256": "a30956e1b47c550615b06cf9b4926f58e335d84a4c4c297831adab3c35dd31c4"
+      },
+      {
+        "path": "src/client/bootstrap/NetworkingRuntimeService.luau",
+        "sha256": "8a672a8093f5df455869a01bf3445e96e28cf79410076e5df2a68b6eaa93d3bb"
+      },
+      {
+        "path": "src/client/bootstrap/ClientMain.client.luau",
+        "sha256": "6aa446240569855d0542742e054ad9bac997503796e81186b93acf35ce6e274e"
+      },
+      {
+        "path": "src/client/bootstrap/ClientComposition.luau",
+        "sha256": "6a076b90c55a57dc695c548dceba00fd2319c6b8aadb587aeb96514f8b08da97"
+      },
+      {
+        "path": "src/client/bootstrap/CaptureRuntimeService.luau",
+        "sha256": "bb1b6b2121f8c0c1d81b5b80b7417f5d6648dd30db186bd1ba9c9e6ee9be7e25"
+      },
+      {
+        "path": "src/server/infrastructure/clock/ClockInterface.luau",
+        "sha256": "e50b368217f9e8e67c0e9a7d94d82536ae8e3f72c45fa1a0d212679810ef7534"
+      },
+      {
+        "path": "src/client/input/InputRouter.luau",
+        "sha256": "93f41d4e56f3c7046a92393b122d049773d9f5db511290ebab8cbf0ba208ddcf"
+      },
+      {
+        "path": "src/server/bootstrap/WorldRuntimeService.luau",
+        "sha256": "15f917020c76e4c7e02c2a4615ca3f46226110a4ed1685e49663a9c814103cd5"
+      },
+      {
+        "path": "src/server/bootstrap/StartupValidator.luau",
+        "sha256": "4632462504a8afa26b4e40a2d4845cd4edceb3b1023b557eba688e112b1387af"
+      },
+      {
+        "path": "src/server/bootstrap/ShutdownCoordinator.luau",
+        "sha256": "0d5db72a3bf82128bca827212df0aabff4074af18c416f578ee236050de3999c"
+      },
+      {
+        "path": "src/server/bootstrap/ServerMain.server.luau",
+        "sha256": "bf09f4777bedb3c646a91db6b2547e11d353424c6d995a588e661491f158ad0a"
+      },
+      {
+        "path": "src/server/bootstrap/ServerComposition.luau",
+        "sha256": "d115ce151f3d70adec2e578d4f76306962a8e506ece22a89d0ffac24912df46c"
+      },
+      {
+        "path": "src/server/bootstrap/ProfileRuntimeService.luau",
+        "sha256": "84226de23267dcb90e6f5597c932247c06a83322dac5d36897f1aee13a4c1ac5"
+      },
+      {
+        "path": "src/server/bootstrap/ProfileBinding.luau",
+        "sha256": "a6568070be25030d53e090bb6bbd5b35033322f83a373c1c2782ad442cd3531f"
+      },
+      {
+        "path": "src/server/bootstrap/PartyRuntimeService.luau",
+        "sha256": "064c692d547f9dd387fbb0c9ffc208670927d526157c03117ccddcb4a5bb7e5c"
+      },
+      {
+        "path": "src/server/bootstrap/NetworkingRuntimeService.luau",
+        "sha256": "86a481401d618284d99b10814ad93f5ec1f29ffe97fdf5cab7445d42f83acf48"
+      },
+      {
+        "path": "src/server/bootstrap/CaptureRuntimeService.luau",
+        "sha256": "d89f6e5182f6573484eae6a6b216342e7bbff30c01991756aa6ed649ccd78bfb"
+      },
+      {
+        "path": "src/server/domains/world/WorldTravelService.luau",
+        "sha256": "182fda92fed051fe4e8336991dae0035ec2ac034cd2b316783f1175471b4c69f"
+      },
+      {
+        "path": "src/server/application/WorldActionUseCase.luau",
+        "sha256": "d7e9020f1744108b79156886821fad12a504e5ce8ae66e402ffb8ad727279d8a"
+      },
+      {
+        "path": "src/server/domains/world/WorldService.luau",
+        "sha256": "c0591fda2a02851dc2ca2cf6af56a5ce62527b97a2946a6dae2c856e909d0ddb"
+      },
+      {
+        "path": "src/server/application/VaultProductionUseCase.luau",
+        "sha256": "07e70a69857b38fe583ae08e7bee6999f0b37aa7943a3c17534a55ae8990f0f8"
+      },
+      {
+        "path": "src/server/application/VaultCapacityUseCase.luau",
+        "sha256": "8a007a90f3c2de5d698bfd8b67e09e15dd371ebfffc6bb80817baac67f42e82f"
+      },
+      {
+        "path": "src/server/application/VaultCapacityProjection.luau",
+        "sha256": "2d595d65ac73d642cb4c15f55d088fae17a24d3baaf495a1ca66e393ccf5266b"
+      },
+      {
+        "path": "src/server/application/VaultAssignmentProjection.luau",
+        "sha256": "6ad7c222c6fec977e295dc34694ed816fc33bc9cb591abf42880c70130e7e8bd"
+      },
+      {
+        "path": "src/server/application/SessionCoordinator.luau",
+        "sha256": "765917d27f0a897bffcd6435ad8d1d3dd8df99a34fbadcaa342ab0526b910a3e"
+      },
+      {
+        "path": "src/server/domains/world/WorldRegistry.luau",
+        "sha256": "0496cdd7e8686a75d108131fd2fe7fac18e84f13e1f2e66dbdf94de5793a3144"
+      },
+      {
+        "path": "src/server/application/SecuredCollectionProjection.luau",
+        "sha256": "231c086d6265a9a5745caf258baa5434721489846e68b5abb128b9b3389b44a4"
+      },
+      {
+        "path": "src/server/application/RouteRegistry.luau",
+        "sha256": "bada991d6442583c9d7619701c2c1dd2c29d29029ecf40392d8026e4585e49a4"
+      },
+      {
+        "path": "src/server/application/ReplayWindow.luau",
+        "sha256": "db06ccd18d396a8f5ad5f8ea7c6f71280e2c87aa06a7780677de9e162dfd3c5b"
+      },
+      {
+        "path": "src/server/application/ProjectionPublisher.luau",
+        "sha256": "7588fcec6c97199e7a54dba42d031ce516e3565bcb05f6a24583a362cc11994e"
+      },
+      {
+        "path": "src/server/application/ProgressionPurchaseUseCase.luau",
+        "sha256": "c77f37daf94087f1740c8bfb6e13389650ae290ccaddf1900734e5e8d0ed47f0"
+      },
+      {
+        "path": "src/server/domains/world/WorldProgressionService.luau",
+        "sha256": "a531c42373bfa38d77f4f5cfe8414d4d125f2485ef1600a22240f29385f1784a"
+      },
+      {
+        "path": "src/server/application/ProgressionProjection.luau",
+        "sha256": "822bdd8be65f24cdafa930f710ed5a820f3bbb74b9ca3e0d3329f078e56d6b98"
+      },
+      {
+        "path": "src/server/domains/world/WorldDefinitions.luau",
+        "sha256": "9017f477cc71a896aa4f6e0e8c4a6d1dd01c3c735c7822a138b073ba1e9e0fd8"
+      },
+      {
+        "path": "src/server/application/ProductionClaimUseCase.luau",
+        "sha256": "d666b99a346c1b0009f2e836103fada3a85b9385da4c13e4009ddfd432c29647"
+      },
+      {
+        "path": "src/server/domains/world/WorldCycle.luau",
+        "sha256": "ca89a63b4f3bb4dd991fa016991e1390aeacd5ebeac4c6d71b8df7783117f812"
+      },
+      {
+        "path": "src/server/application/NetworkRateLimiter.luau",
+        "sha256": "a04e3175334977635ff1edfae9a168bef41f05ede09c468561534c011134cff8"
+      },
+      {
+        "path": "src/server/domains/world/WorldAuthoringIndex.luau",
+        "sha256": "4d7c59d7b281bae4c74caf00ca64a6fe70340a1a830e8814f939ca57eb8eb14c"
+      },
+      {
+        "path": "src/server/application/NetworkingGateway.luau",
+        "sha256": "aa568ef2f2e07757c5aadec66ccfc359cdfe8cff9a7d8d309ddbf4090e4a4c26"
+      },
+      {
+        "path": "src/server/domains/world/SpawnPlan.luau",
+        "sha256": "6b4e805b20e4098d551dcfb3ce25d258c7fc5214e657056b6fb7b215afdeba70"
+      },
+      {
+        "path": "src/server/application/CaptureFinalizationUseCase.luau",
+        "sha256": "9dc4f90c267e415a56408416db5aa934b3eeb61fd5a18630e1cf2f9313094e5b"
+      },
+      {
+        "path": "src/server/domains/world/FixtureDefinition.luau",
+        "sha256": "c59eac75e28f4ebdb850c7aefcbc1de464b5401ec13a33b230f0b0d084ab6e1f"
+      },
+      {
+        "path": "src/server/domains/progression/ProgressionService.luau",
+        "sha256": "9db693e9c74d6b18bfcfd65e501eede13363c7e50645bbda5a2b8ae3a59196fa"
+      },
+      {
+        "path": "src/server/domains/vault/VaultService.luau",
+        "sha256": "b06129ea1c74cd331a1f739161f7ee72922f6e924f3ea96c238fcbaaf6986571"
+      },
+      {
+        "path": "src/server/domains/vault/VaultProductionService.luau",
+        "sha256": "2356bffaf340e7efdde9d4f90b37da3b9cc71f8469030d7195b6dd23caa968b2"
+      },
+      {
+        "path": "src/server/domains/economy/EnergyService.luau",
+        "sha256": "d8f2d5558c2177bbb53e221946c9235c024df9fde48286e2b6589b7799016693"
+      },
+      {
+        "path": "src/server/adapters/RobloxProfileRepository.luau",
+        "sha256": "70fd63a9bb943f79b02cfe33bb849dd4113ec5d845da6f045ccead05c0dc5a8e"
+      },
+      {
+        "path": "src/server/domains/social/PartyService.luau",
+        "sha256": "a20cab766f6a8d1b099df96a5192bdf29072a3dd852750f980e720ba7984260a"
+      },
+      {
+        "path": "src/server/domains/capture/VariantIdentity.luau",
+        "sha256": "b8d4fe0c456f5d1bfc8cecaad1de4a58ec844b27cef20b819690bb5a9de5544e"
+      },
+      {
+        "path": "src/server/domains/capture/CaptureService.luau",
+        "sha256": "0522c46e90ec9681a728f77aecb2dde304d3eeec15d11850b8527c6166c760ea"
+      }
+    ]
+  }
+}

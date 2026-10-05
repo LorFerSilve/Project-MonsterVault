@@ -34,6 +34,7 @@ function NetworkingRuntimeService.new(options: {
 	diagnostics: any,
 	captureRuntime: any?,
 	worldRuntime: any?,
+	partyRuntime: any?,
 	worldActions: any?,
 	vault: any?,
 	capacity: any?,
@@ -49,6 +50,14 @@ function NetworkingRuntimeService.new(options: {
 	end
 	local schemas = {}
 	local handlers = {}
+	if options.partyRuntime then
+		for routeId, schema in options.partyRuntime.schemas do
+			schemas[routeId] = schema
+		end
+		for routeId, handler in options.partyRuntime.handlers do
+			handlers[routeId] = handler
+		end
+	end
 	local publishVault: any = nil
 	local publishAssignments: any = nil
 	local publishProgression: any = nil
@@ -296,6 +305,7 @@ function NetworkingRuntimeService.new(options: {
 				return {
 					status = "Ready",
 					profileRevision = snapshot.profileRevision,
+					identity = session, -- private replay fence; never included in a wire projection.
 					securedCollection = function()
 						return SecuredCollectionProjection.fromProfile(snapshot, player.UserId)
 					end,
@@ -500,6 +510,7 @@ function NetworkingRuntimeService.new(options: {
 		assignmentsResync = publishAssignments,
 		progressionResync = publishProgression,
 		worldResync = if options.worldRuntime then options.worldRuntime.resync else nil,
+		partyResync = if options.partyRuntime then options.partyRuntime.resync else nil,
 		captureResync = if options.captureRuntime ~= nil
 			then options.captureRuntime.resync
 			else nil,
@@ -547,11 +558,15 @@ function NetworkingRuntimeService.new(options: {
 		return {}
 	end
 
+	local dependencies = if options.captureRuntime ~= nil
+		then { "capture" }
+		else if options.profileCoordinator == nil then {} else { "profiles" }
+	if options.partyRuntime ~= nil then
+		table.insert(dependencies, "social")
+	end
 	return {
 		id = "networking",
-		dependencies = if options.captureRuntime ~= nil
-			then { "capture" }
-			else if options.profileCoordinator == nil then {} else { "profiles" },
+		dependencies = dependencies,
 		start = start,
 		stop = stop,
 		gateway = gateway,

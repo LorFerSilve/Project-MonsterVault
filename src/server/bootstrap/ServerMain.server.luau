@@ -7,6 +7,7 @@ local ProfileRuntimeService = require(script.Parent.ProfileRuntimeService)
 local NetworkingRuntimeService = require(script.Parent.NetworkingRuntimeService)
 local WorldRuntimeService = require(script.Parent.WorldRuntimeService)
 local CaptureRuntimeService = require(script.Parent.CaptureRuntimeService)
+local PartyRuntimeService = require(script.Parent.PartyRuntimeService)
 
 local composition = ServerComposition.new({
 	sink = function(record)
@@ -62,6 +63,16 @@ local composition = ServerComposition.new({
 			})
 			table.insert(services, captureRuntime)
 		end
+		local partyRuntime = nil
+		if profileRuntime ~= nil then
+			partyRuntime = PartyRuntimeService.new({
+				players = game:GetService("Players"),
+				profileCoordinator = profileRuntime.coordinator,
+				httpService = HttpService,
+				event = remotes.Event,
+			})
+			table.insert(services, partyRuntime)
+		end
 		table.insert(
 			services,
 			NetworkingRuntimeService.new({
@@ -72,6 +83,7 @@ local composition = ServerComposition.new({
 				profileCoordinator = if profileRuntime then profileRuntime.coordinator else nil,
 				captureRuntime = captureRuntime,
 				worldRuntime = worldRuntime,
+				partyRuntime = partyRuntime,
 				worldActions = if profileRuntime then profileRuntime.worldActions else nil,
 				vault = if profileRuntime then profileRuntime.vault else nil,
 				capacity = if profileRuntime then profileRuntime.capacity else nil,

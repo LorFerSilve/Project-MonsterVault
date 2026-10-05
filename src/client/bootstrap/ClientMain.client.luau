@@ -8,6 +8,7 @@ local CaptureRuntimeService = require(script.Parent.CaptureRuntimeService)
 local VaultRuntimeService = require(script.Parent.VaultRuntimeService)
 local VaultAssignmentRuntimeService = require(script.Parent.VaultAssignmentRuntimeService)
 local ProgressionRuntimeService = require(script.Parent.ProgressionRuntimeService)
+local PartyRuntimeService = require(script.Parent.PartyRuntimeService)
 
 local composition = ClientComposition.new({
 	sink = function(record)
@@ -30,6 +31,10 @@ local composition = ClientComposition.new({
 			diagnostics = diagnostics,
 		})
 		return {
+			PartyRuntimeService.new({
+				networking = networking,
+				player = game:GetService("Players").LocalPlayer,
+			}),
 			ProgressionRuntimeService.new({
 				networking = networking,
 				player = game:GetService("Players").LocalPlayer,

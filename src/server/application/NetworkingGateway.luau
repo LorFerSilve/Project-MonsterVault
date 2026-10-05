@@ -21,6 +21,7 @@ function NetworkingGateway.new(options: {
 	assignmentsResync: ((any, string, string?) -> string)?,
 	progressionResync: ((any, string, string?) -> string)?,
 	worldResync: ((any, string) -> string)?,
+	partyResync: ((any, string) -> string)?,
 })
 	local function event(
 		player: any,
@@ -107,6 +108,9 @@ function NetworkingGateway.new(options: {
 				)
 			end
 		end
+		if code == "OK_SESSION_READY" and options.partyResync then
+			options.partyResync(player, requestId)
+		end
 		return code
 	end
 
@@ -119,6 +123,11 @@ function NetworkingGateway.new(options: {
 	options.registry.bind(
 		options.routes.commands.sessionRequestResync,
 		function(player: any, envelope: any)
+			if envelope.payload.domain == "party" then
+				return if options.partyResync
+					then options.partyResync(player, envelope.requestId)
+					else "UNAVAILABLE_PARTY"
+			end
 			if envelope.payload.domain == "world" then
 				return if options.worldResync
 					then options.worldResync(player, envelope.requestId)
@@ -209,7 +218,8 @@ function NetworkingGateway.new(options: {
 			envelope.requestId,
 			envelope.routeId,
 			envelope.payload,
-			envelope.expectedRevision
+			envelope.expectedRevision,
+			if contract.class ~= "A" then options.getSession(player).identity else nil
 		)
 		if replayState == "Misuse" then
 			return result(player, envelope.requestId, "REJECT_VALIDATION_REQUEST_REUSE")
