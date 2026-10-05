@@ -190,7 +190,7 @@ Trade session/revision/reservations, durable journal, transaction-fenced partici
 
 ## IMP-13 — Commerce
 
-Implement the GDS-13 Commercial Strategy v2 portfolio: deterministic cosmetic shop surfaces, bounded Collection/Display Capacity products, one-time Starter Value Bundle, durable Supporter/Style Pass, seasonal cosmetic bundles and the required product/entitlement/receipt reconciliation. No baseline paid luck, capture power, production multiplier, event reward multiplier, mainline access bypass or paid streak restoration.
+Implement the GDS-13 Commercial Strategy v2 portfolio: deterministic cosmetic shop surfaces, bounded Collection/Display Capacity products, one-time Starter Value Bundle, durable Supporter/Style Pass, seasonal cosmetic bundles, a bounded permanent Offline Window Extension and the capped 2× Return Overcharge Developer Product. Reuse TA-8 production/Energy and TA-11 receipt/entitlement ownership; the Overcharge must freeze one server-authored eligible return and reconcile exactly once. No baseline paid luck, capture power, persistent production-rate multiplier, 3× return boost, event reward multiplier, mainline access bypass or paid streak restoration.
 
 ## IMP-14 — Live Ops / Analytics / Experimentation
 
@@ -250,7 +250,7 @@ Gate: multiplayer feels intentionally social rather than like isolated single-pl
 
 ### PQL-9 — Commerce Presentation
 
-Integrate the approved Commercial Strategy v2 into MonsterVault's visual language: cosmetic shop, Starter Value Bundle, Supporter/Style Pass, bounded Collection/Display Capacity and seasonal cosmetic bundles. Provide clear previews, value communication, ownership state and purchase confirmation/recovery. Avoid intrusive spam, deceptive scarcity, confusing currencies, paid streak repair and pay-to-win shortcuts. Blender MCP may produce high-quality 3D product/reward previews where appropriate.
+Integrate the approved Commercial Strategy v2 into MonsterVault's visual language: cosmetic shop, Starter Value Bundle, Supporter/Style Pass, bounded Collection/Display Capacity, permanent Offline Window Extension, capped 2× Return Overcharge and seasonal cosmetic bundles. Provide clear previews, value communication, ownership state and purchase confirmation/recovery. Avoid intrusive spam, deceptive scarcity, confusing currencies, paid streak repair and pay-to-win shortcuts. Blender MCP may produce high-quality 3D product/reward previews where appropriate.
 
 Gate: commerce is coherent with the game, receipt/entitlement behavior is reliable, the intended launch portfolio is understandable, and presentation does not degrade the core player experience.
 

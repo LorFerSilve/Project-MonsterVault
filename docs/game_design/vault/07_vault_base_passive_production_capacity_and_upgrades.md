@@ -270,7 +270,9 @@ The baseline system must not make AFK connection strictly superior solely becaus
 GDS-7 accepts bounded offline production for valid persistent Production Assignments. It is not a live-world simulation and creates no world claims, creature spawns, visitor presence, or event participation.
 
 ### OP-02 — Offline Production Window limits elapsed time
-After Active Presence ends, passive production continues only up to the configured Offline Production Window or until the Production Buffer fills, whichever occurs first.
+After Active Presence ends, passive production continues only up to the player's effective Offline Production Window or until the Production Buffer fills, whichever occurs first.
+
+The effective window may combine an earned baseline/upgraded component with the separately authorized bounded commercial Offline Window Extension from GDS-13. The server owns both components and enforces a hard total bound.
 
 ### OP-03 — Offline cap does not restart through server hopping
 Reconnect, device change, or joining a different server does not create a fresh offline interval for the same absence period.
@@ -284,10 +286,29 @@ Server Events, world spawns, contest rewards, live captures, and other active-se
 ### OP-06 — Offline production produces no individualized hidden rate changes
 Rates/caps cannot secretly change based on spending history, purchase reluctance, loss-chasing signals, or inferred willingness to pay.
 
-### OP-07 — Offline recap is informational, not a second reward
+### OP-07 — Offline recap has one authoritative eligible-return snapshot
 On return, the game may summarize elapsed production. Closing/reopening the recap cannot claim the same output twice.
 
-### OP-08 — Clock anomalies cannot create unlimited value
+When the GDS-13 Return Overcharge product is offered, the server may also expose a bounded **eligible offline-return amount** and an opaque return identity for commercial processing. That snapshot is derived from already-valid offline settlement and cannot be chosen or increased by the client.
+
+### OP-08 — Paid Return Overcharge does not rewrite production
+A verified Return Overcharge may add a commercial Energy bonus equal to the eligible offline-return amount, subject to the GDS-13 hard bonus cap and one-use-per-return identity.
+
+It does not:
+
+- change Production Profile rates;
+- advance the production cursor;
+- extend elapsed time;
+- increase Production Slots or Buffer capacity;
+- replay settlement;
+- create world/event/mastery/discovery value.
+
+The ordinary base output remains available regardless of purchase outcome.
+
+### OP-09 — Commercial Offline Window Extension is additive and bounded
+A verified durable entitlement may add a bounded duration to the earned Offline Production Window. The free/earned window remains independently viable. Loss/revocation of the entitlement affects only future eligible elapsed time and cannot delete already finalized output.
+
+### OP-10 — Clock anomalies cannot create unlimited value
 Player-facing semantics require bounded accrual by authoritative elapsed time and caps. Technical detection/clock sources belong to Technical Architecture.
 
 ## 12. Production Claim Semantics

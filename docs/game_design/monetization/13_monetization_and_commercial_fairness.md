@@ -189,11 +189,12 @@ It may **not** directly grant:
 
 - Production Slots;
 - Production Buffer capacity;
-- Offline Production Window;
-- Passive Production multiplier;
+- a permanent Passive Production rate multiplier;
 - extra active Transport Custody;
 - claim priority;
 - rare spawn odds.
+
+A dedicated bounded **Offline Window Extension** is authorized separately under §10; it is not an implicit property of ordinary Collection/Display Capacity products.
 
 ### 6.3 Starter Value Bundle — AUTHORIZED, ONE-TIME
 
@@ -246,22 +247,23 @@ Priority order:
 3. **Supporter / Style Pass** — durable one-time pass focused on status, cosmetics, Vault presentation and bounded collection/display convenience.
 4. **Commercial Capacity** — clearly bounded Collection Capacity, Display Capacity and presentation presets for players who want larger collections/showcases.
 5. **Seasonal Cosmetic Bundles** — event-themed deterministic cosmetics tied to genuine seasonal presentation, never event gameplay priority or hidden collectible odds.
-6. **Optional cosmetic consumables/presentation products** — only when deterministic, clearly disclosed and non-gameplay-authoritative.
+6. **Paid Offline Convenience** — one bounded permanent Offline Window Extension plus an optional capped 2× Return Overcharge on an already-authorized offline-production return.
+7. **Optional cosmetic consumables/presentation products** — only when deterministic, clearly disclosed and non-gameplay-authoritative.
 
 These products are the default monetization surfaces to implement before considering stronger acceleration mechanics.
 
-### CS2-01 — No paid gameplay multipliers at baseline
+### CS2-01 — No persistent paid gameplay multipliers at baseline
 
 Commercial Strategy v2 does **not** authorize:
 
-- 2x/3x Energy income;
-- Passive Production multipliers;
+- permanent 2×/3× Energy income;
+- permanent Passive Production-rate multipliers;
 - paid spawn/rarity/Mutation luck;
 - paid capture-success boosts;
 - paid event reward multipliers;
 - paid mastery/progression multipliers.
 
-Any proposal for those mechanics requires explicit GDS-13 change control rather than being inferred from revenue goals.
+The sole baseline exception is the bounded **2× Return Overcharge** in §10: it is a one-return commercial bonus over a server-authored eligible offline-return amount, not a persistent rate or world/progression multiplier. A 3× variant is not baseline-authorized and requires explicit GDS-13 change control plus economy evidence.
 
 ### CS2-02 — No paid streak restoration at baseline
 
@@ -402,21 +404,56 @@ Different players are not secretly offered stronger Energy grants for the same a
 
 Production Slots remain earned through ordinary progression.
 
-### PM-02 — No paid Passive Production multiplier
+### PM-02 — No permanent paid Passive Production-rate multiplier
 
-No commercial entitlement multiplies Production Profile rates.
+No durable entitlement multiplies Production Profile rates. Active and offline base production continue to use the same ordinary authoritative rate semantics.
 
-### PM-03 — No paid Production Buffer capacity
+### PM-03 — No paid Production Buffer capacity at baseline
 
 Production Buffer progression remains non-premium baseline.
 
-### PM-04 — No paid Offline Production Window extension
+### PM-04 — Bounded paid Offline Window Extension — AUTHORIZED
 
-Offline Production Window remains earned through ordinary progression.
+A durable commercial entitlement may add a fixed, disclosed amount to the player's otherwise-valid Offline Production Window.
 
-### PM-05 — No pay-to-idle loop
+Requirements:
 
-Payment cannot make AFK/offline Energy generation the dominant progression strategy.
+- the free/earned Offline Production Window remains viable and continues to progress normally;
+- the paid component is additive convenience, not a replacement for earned upgrades;
+- the commercial delta and total effective window have hard server-side bounds;
+- the entitlement changes elapsed-time capacity only, not Production Slots, rates, Buffer size, spawn/capture/world authority or active progression milestones;
+- entitlement loss/reconciliation cannot delete already accrued finalized production or create Energy debt;
+- pricing and exact hour delta are tuneable downstream values.
+
+Launch-oriented reference: a modest permanent extension such as **+4 hours**, producing an illustrative 8h -> 12h effective window for a player at an 8h earned baseline. This is tuning guidance, not a fixed semantic constant.
+
+### PM-05 — Capped 2× Return Overcharge — AUTHORIZED
+
+A repeatable commercial product may be offered only after the server has established a legitimate bounded offline-production return for the current return interval.
+
+The product grants a deterministic **bonus equal to the eligible offline-return amount**, creating a 2× total return, subject to a hard absolute bonus cap.
+
+Requirements:
+
+- the base offline reward is always claimable without purchase;
+- the offer cannot reduce, lock, delay or threaten the free base reward;
+- the eligible base amount is server-authored and frozen before purchase; the client cannot submit amount, multiplier, elapsed time or interval identity;
+- the commercial bonus applies at most once to one eligible return interval;
+- duplicate receipts, reconnects, server hops, lost responses and retries cannot repeat the bonus;
+- a hard server-side maximum bonus prevents very long absences/high-output accounts from turning one small purchase into unbounded Energy;
+- the paid bonus does not create creatures, mastery, discovery, event credit, access or other active-play proof;
+- no 3× option is authorized at baseline;
+- exact Robux price and Energy bonus cap are tuneable and must be reviewed against GDS-8 economy health.
+
+Launch-oriented reference band: **29–49 Robux** for a Return Overcharge, subject to actual economy/conversion testing.
+
+### PM-06 — Return Overcharge is a commercial grant, not retroactive production
+
+The bonus does not rewrite production history, rates, cursor time, Offline Production Window, Production Buffer or assignment state. It is a verified commercial Energy grant whose amount is derived once from the immutable eligible return snapshot.
+
+### PM-07 — No pay-to-idle loop
+
+Paid offline convenience must not make absence the dominant progression strategy. Active play remains required for discovery, mastery, access, capture/collection progression and other gameplay proofs, and economy tuning must keep passive/paid output subordinate to the broader progression model.
 
 ## 11. Capture, Spawn, Rarity and Variant Monetization
 
@@ -568,6 +605,8 @@ Reference launch-oriented price bands are tuneable commercial defaults, not sema
 | Cosmetic bundle / Vault theme | 149–399 Robux |
 | Starter Value Bundle | 99–199 Robux |
 | Durable Supporter/Style + bounded convenience pass | 299–499 Robux |
+| Permanent Offline Window Extension | 149–249 Robux |
+| Capped 2× Return Overcharge | 29–49 Robux |
 
 ### PR-01 — Price is explicit before confirmation
 
@@ -644,6 +683,8 @@ Duplicate receipts, retries, reconnects or repeated callbacks cannot duplicate:
 - Starter Value Bundle;
 - Energy grant;
 - capacity expansion;
+- Offline Window Extension;
+- Return Overcharge for the same eligible interval;
 - cosmetic grant.
 
 ### CF-03 — Pending purchase does not block ordinary safe play indefinitely
