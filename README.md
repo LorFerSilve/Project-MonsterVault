@@ -4,9 +4,11 @@
 
 ## Project Status
 
-**Game Design Specification — DESIGN COMPLETE with Commercial Strategy v3, Retention Strategy v2 and Sensory/Game-Feel Strategy v1 / Technical Architecture TA-0..17 COMPLETE / IMPLEMENTATION OPEN — IMP-10 FUNCTIONALLY COMPLETE under AD-260; IMP-11 next; VS1-19 deferred as a future Scale Readiness Gate under AD-260.**
+**Game Design Specification — DESIGN COMPLETE with Commercial Strategy v3, Retention Strategy v2 and Sensory/Game-Feel Strategy v1 / Technical Architecture TA-0..17 COMPLETE / IMPLEMENTATION OPEN — IMP-10 FUNCTIONALLY COMPLETE under AD-260; IMP-11 OPEN; Golden Playable Vertical Slice ready; Halloween 2026 is the owner-authorized launch theme; VS1-19 deferred as a future Scale Readiness Gate under AD-260.**
 
 MonsterVault has completed the specification and Technical Architecture gates. **Implementation is now OPEN under the TA-17 locked contracts**; production release remains gated by TA-15 verification and the implementation roadmap.
+
+Launch-season production work follows [`docs/implementation/HALLOWEEN_2026_LAUNCH_THEME.md`](docs/implementation/HALLOWEEN_2026_LAUNCH_THEME.md): build a permanent production-quality MonsterVault base first, with a removable/configurable Halloween 2026 presentation layer and later event/commerce/live-ops behavior routed through their existing owners.
 
 ```text
 Game Design Specification (GDS)
