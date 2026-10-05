@@ -3830,3 +3830,90 @@ The mechanic exists to add a short satisfying reward moment after meaningful pla
 ### Implementation consequence
 
 Implementation must reuse authoritative reward/Energy owners and exact-once persistence. Client state cannot choose eligibility, seed, reward or weights. Telemetry should measure qualification, spin completion, reward distribution and subsequent meaningful-session behavior without turning analytics into reward authority.
+
+
+---
+
+## AD-263 — Adopt Commercial Strategy v3 Revenue Portfolio
+
+**Date:** 2026-10-05
+
+**Status:** Accepted — explicitly authorized by the project owner
+
+**Owning phases:** GDS-13 / GDS-16 / GDS-15 policy boundary; implementation owners IMP-13/14
+
+### Decision
+
+MonsterVault expands the previously authorized Commercial Strategy to include every owner-selected monetization proposal rated at least 8/10:
+
+- deterministic Cosmetic Shop;
+- Starter Value Bundle;
+- bounded Offline Window Extension;
+- capped 2× Return Overcharge;
+- Supporter/Style Pass;
+- seasonal cosmetic bundles;
+- Rewarded Video Ads with guaranteed rewards;
+- MonsterVault avatar/UGC commerce;
+- Vault Club recurring subscription;
+- Seasonal Collection Pass with free + premium deterministic tracks;
+- Managed/Regional Pricing;
+- data-gated Price Optimization;
+- Roblox Plus integration.
+
+Existing bounded Collection/Display Capacity remains part of the portfolio.
+
+### Sequencing
+
+These products are not all launch blockers. Core deterministic commerce and receipt/entitlement recovery ship first. Subscription/pass/ad/UGC/platform-integration work follows when its upstream systems and content cadence are stable. Price Optimization is activated only after sufficient real transaction volume exists under then-current platform guidance.
+
+### Platform boundary
+
+Rewarded ads, subscriptions, avatar/UGC items, Roblox Plus, Managed Pricing and price optimization are conditional on current Roblox eligibility, APIs, disclosures, regional constraints and policy at implementation/release time. Platform unavailability disables the optional surface rather than blocking ordinary gameplay.
+
+### Guardrails
+
+AD-263 does not authorize paid rarity/luck, capture power, claim priority, persistent Production-rate multipliers, 3× Return Overcharge, required world/mastery bypass, paid Daily Wheel spins, paid safety/accessibility or deceptive urgency.
+
+---
+
+## AD-264 — Adopt Sensory / Game-Feel Strategy v1
+
+**Date:** 2026-10-05
+
+**Status:** Accepted — explicitly authorized by the project owner
+
+**Owning phase:** GDS-14 presentation; implementation quality owner PQL-4 with contributing gameplay/client domains
+
+### Decision
+
+MonsterVault adopts the complete owner-selected >=8/10 sensory/game-feel portfolio as a production-quality requirement:
+
+- capture feedback arc;
+- rare/exceptional reveal;
+- Vault machinery ASMR/ambient character;
+- Energy Claim hero sequence;
+- progression unlock payoff;
+- collection completion/lock-in;
+- tactile UI;
+- material-specific interaction audio;
+- layered rarity sounds;
+- biome ambient soundscapes;
+- creature personality sounds;
+- movement/value trails;
+- haptics;
+- environmental micro-animation;
+- satisfying non-deceptive Daily Wheel animation;
+- Photo/Showcase Mode;
+- idle Vault satisfaction.
+
+### Quality boundary
+
+The goal is satisfying, legible feedback and emotional polish, not deceptive near-miss logic, hidden odds manipulation or sensory overload. Authoritative state remains readable without sound, haptics or large motion.
+
+### Accessibility/performance
+
+Reduced Motion, camera-shake controls, audio categories, semantic visual/text equivalents and bounded haptic/effects intensity remain mandatory. Runtime implementation must be pooled/bounded and cannot introduce per-entity heartbeat/task sprawl.
+
+### Production workflow
+
+Roblox-native UI, audio, particles, beams, trails and haptics are preferred where sufficient. Blender MCP is actively used for custom creatures, rigs/animation, machinery, showcase assets or custom effect geometry when it materially improves the production result, followed by Studio validation.
