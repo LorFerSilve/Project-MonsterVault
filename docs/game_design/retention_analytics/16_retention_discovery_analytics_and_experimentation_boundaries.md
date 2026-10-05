@@ -229,6 +229,16 @@ Only context-sensitive reminders are used where relevant.
 
 Commercial offers remain lower priority than restoring gameplay context.
 
+### RF-05 — Offline Return Overcharge is optional secondary presentation
+
+When a player has a legitimate eligible offline-production return, the Return Brief may show:
+
+- the ordinary free base amount;
+- the effective Offline Production Window;
+- a clearly separated optional capped 2× Return Overcharge offer when eligible.
+
+The free claim/action must remain immediately available and at least as legible as the paid option. The offer cannot imply that the player will lose the base reward, cannot use a fake countdown and cannot be targeted from inferred vulnerability or previous purchase refusal.
+
 ## 8. Session Satisfaction Model
 
 Every healthy session should reasonably support one or more of:
@@ -965,6 +975,8 @@ Persistent unfinished aspiration
         +
 bounded Offline Production / Vault state
         +
+optional paid offline convenience with free base preserved
+        +
 optional Daily Expeditions / Weekly Objectives
         +
 rotating genuine world/event opportunities
@@ -988,8 +1000,10 @@ This loop intentionally does **not** require:
 - attendance-only daily claim chest;
 - mandatory recurring checklist;
 - expiring mainline progression;
-- paid rescue;
+- paid rescue from loss/failure;
 - artificial energy exhaustion.
+
+A capped Return Overcharge is not treated as "paid rescue" because the ordinary earned offline return remains fully preserved and claimable without payment.
 
 Daily Expeditions and Weekly Objectives are optional activity-based reasons to return, not attendance penalties.
 
