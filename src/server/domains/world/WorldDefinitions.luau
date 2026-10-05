@@ -3,8 +3,14 @@
 -- AD-256: canonical DEV authored roles, pools, active routes and safe utilities.
 -- Historic Starter IDs/provenance remain valid; one fixed active objective reward.
 local config = {
-	contentSnapshotId = "content-snapshot/imp10-world-dev-v2",
+	contentSnapshotId = "content-snapshot/imp10-world-dev-v3",
 	authoringVersion = 1,
+	-- Optional Legendary DEV case (GDS-6), not part of any mastery recipe.
+	protectedEncounter = {
+		speciesId = "species/stability-orb-dev",
+		spawnContextId = "spawn-context/starter-field",
+		stabilitySeconds = 300,
+	},
 	worldReward = {
 		id = "world-reward/starter-return-dev-v1",
 		objectiveId = "field-objective/fixture-return-route",
@@ -112,6 +118,10 @@ local config = {
 			id = "species/field-leaf",
 			rarityId = "rarity/common",
 		},
+		{
+			id = "species/stability-orb-dev",
+			rarityId = "rarity/legendary",
+		},
 	},
 	habitats = {
 		{
@@ -161,7 +171,11 @@ local config = {
 		{
 			id = "spawn-context/starter-field",
 			habitatId = "habitat/starter-field",
-			speciesIds = { "species/fixture-orb", "species/fixture-companion" },
+			speciesIds = {
+				"species/fixture-orb",
+				"species/fixture-companion",
+				"species/stability-orb-dev",
+			},
 			contentSnapshotIds = { "content-snapshot/imp10-world-dev-v2" },
 		},
 		{
@@ -466,7 +480,17 @@ end
 -- AD-259: interaction envelopes on the existing five authored nodes only.
 for _, node in config.travelNodes do
 	node.radius = 16
-	node.discoveryContentSnapshotIds = { config.contentSnapshotId }
+	node.discoveryContentSnapshotIds = {
+		"content-snapshot/imp10-world-dev-v2",
+		config.contentSnapshotId,
+	}
+end
+-- New content epoch; retain existing secured/mastery/discovery provenance.
+for _, region in config.regions do
+	local epochs = if region.mastery then region.mastery.contentSnapshotIds else nil
+	if epochs then
+		table.insert(epochs, config.contentSnapshotId)
+	end
 end
 config.spawnPolicy = {
 	stepSeconds = 1,
@@ -481,6 +505,10 @@ config.spawnPolicy = {
 	protectedFixtureContextId = "spawn-context/fixture-clearing",
 }
 for _, context in config.spawnContexts do
+	table.insert(context.contentSnapshotIds, config.contentSnapshotId)
 	context.speciesWeights = table.create(#context.speciesIds, 1)
+	if context.id == config.protectedEncounter.spawnContextId then
+		context.speciesWeights = { 100, 100, 1 } -- Explicit DEV weight; no rarity formula.
+	end
 end
 return config

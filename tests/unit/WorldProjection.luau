@@ -110,7 +110,55 @@ local function captureAvailabilityAndStreamOutKeepIdentity()
 	)
 end
 
+local function lifetimeProjectionRetainsDistinctStates()
+	local store = WorldProjectionStore.new(WorldProjectionV1)
+	local model = {}
+	for n, state in
+		{
+			"IdleAvailable",
+			"Claimed",
+			"AttemptActive",
+			"Provisional",
+			"TransportActive",
+			"TransportGrace",
+			"FinalizationPending",
+			"Secured",
+		}
+	do
+		local a = attributes("protected-1", n)
+		a.LifetimeClass, a.AvailableAt, a.IdleExpiresAt, a.Availability =
+			"ProtectedVariant", 3, 303, state
+		assert(store.streamIn(model, a) == "Applied", "lifetime presentation accepted")
+		local view = store.view("protected-1")
+		assert(
+			view.lifetimeClass == "ProtectedVariant"
+				and view.availableAt == 3
+				and view.idleExpiresAt == 303
+				and view.availability == state,
+			"distinct lifecycle and original deadline retained"
+		)
+	end
+	store.streamOut(model)
+	assert(
+		store.view("protected-1").idleExpiresAt == 303 and not store.view("protected-1").present,
+		"streaming preserves lifetime presentation"
+	)
+	local invalidTimes: { any } = { -1, 0 / 0, math.huge, "303" }
+	for _, invalid in invalidTimes do
+		local a = attributes("bad-lifetime", 1)
+		a.IdleExpiresAt = invalid
+		assert(not WorldProjectionV1.valid(a), "invalid lifetime hint rejected")
+	end
+	local a = attributes("bad-lifetime", 1)
+	a.LifetimeClass = "Immortal"
+	assert(not WorldProjectionV1.valid(a), "invented lifetime class rejected")
+	a.LifetimeClass, a.AvailableAt, a.IdleExpiresAt = "Ordinary", 3, 2
+	assert(not WorldProjectionV1.valid(a), "regressing lifetime hint rejected")
+	assert(WorldProjectionV1.valid(attributes("legacy", 1)), "legacy projection remains readable")
+end
+
 return {
+	lifetimeProjectionRetainsDistinctStates = lifetimeProjectionRetainsDistinctStates,
 	captureAvailabilityAndStreamOutKeepIdentity = captureAvailabilityAndStreamOutKeepIdentity,
 	streamOutDoesNotClaimTerminalLifecycle = streamOutDoesNotClaimTerminalLifecycle,
 	lateStreamInReconstructsByStableId = lateStreamInReconstructsByStableId,

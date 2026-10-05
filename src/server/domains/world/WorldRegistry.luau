@@ -215,6 +215,30 @@ function WorldRegistry.new(config: any): any
 			seen[epoch] = true
 		end
 	end
+	local protectedEncounter = freeze(config.protectedEncounter)
+	assert(
+		type(protectedEncounter) == "table"
+			and protectedEncounter.speciesId == "species/stability-orb-dev"
+			and species[protectedEncounter.speciesId] ~= nil
+			and species[protectedEncounter.speciesId].rarityId == "rarity/legendary"
+			and protectedEncounter.spawnContextId == "spawn-context/starter-field"
+			and contexts[protectedEncounter.spawnContextId] ~= nil
+			and table.find(
+				contexts[protectedEncounter.spawnContextId].speciesIds,
+				protectedEncounter.speciesId
+			)
+			and type(protectedEncounter.stabilitySeconds) == "number"
+			and protectedEncounter.stabilitySeconds >= 180
+			and protectedEncounter.stabilitySeconds <= 3600
+			and protectedEncounter.stabilitySeconds % 1 == 0,
+		"unbound protected DEV encounter"
+	)
+	for key in protectedEncounter do
+		assert(
+			key == "speciesId" or key == "spawnContextId" or key == "stabilitySeconds",
+			"unknown protected binding field"
+		)
+	end
 	for _, l in landmarks do
 		assert(regions[l.regionId] ~= nil, "orphan landmark")
 		assert(type(l.radius) == "number" and l.radius > 0 and l.radius <= 12, "invalid radius")
@@ -426,6 +450,7 @@ function WorldRegistry.new(config: any): any
 		contentSnapshotId = config.contentSnapshotId,
 		worldCycle = cycle,
 		spawnPolicy = freeze(config.spawnPolicy),
+		protectedEncounter = protectedEncounter,
 		regions = regions,
 		roles = table.freeze(roles),
 		milestones = table.freeze(milestones),

@@ -708,7 +708,37 @@ function WorldRuntimeService.new(
 		body:SetAttribute("MaterialGroup", "FixtureCreature")
 		body.Parent = model
 		model.PrimaryPart = body
+		if projection.lifetimeClass == "ProtectedVariant" then
+			-- Persistent diagnostic cue only; native body/material are reused.
+			local cue = Instance.new("BillboardGui")
+			cue.Name = "ProtectedEncounterCue"
+			cue.Size = globals.UDim2.fromOffset(240, 64)
+			cue.StudsOffset = Vector3.new(0, 4, 0)
+			cue.MaxDistance = 80
+			cue.Adornee = body
+			local label = Instance.new("TextLabel")
+			label.Name = "State"
+			label.Size = globals.UDim2.fromScale(1, 1)
+			label.BackgroundTransparency = 0.25
+			label.TextColor3 = globals.Color3.new(1, 1, 1)
+			label.TextSize = 14
+			label.TextWrapped = true
+			label.Text = "Legendary DEV — protected encounter"
+			label.Parent = cue
+			cue.Parent = model
+		end
 		return model
+	end
+	local function updateProjection(model: any, projection: any)
+		model:SetAttribute("Availability", projection.availability)
+		model:SetAttribute("RuntimeRevision", projection.runtimeRevision)
+		model:SetAttribute("LifetimeClass", projection.lifetimeClass)
+		model:SetAttribute("AvailableAt", projection.availableAt)
+		model:SetAttribute("IdleExpiresAt", projection.idleExpiresAt)
+		local cue = model:FindFirstChild("ProtectedEncounterCue")
+		if cue then
+			cue.State.Text = "Legendary DEV — protected encounter\n" .. projection.availability
+		end
 	end
 
 	local function activate(model: any, projection: any)
@@ -716,8 +746,7 @@ function WorldRuntimeService.new(
 		model:SetAttribute("SpeciesId", projection.speciesId)
 		model:SetAttribute("RarityId", projection.rarityId)
 		model:SetAttribute("SpawnContextId", projection.spawnContextId)
-		model:SetAttribute("RuntimeRevision", projection.runtimeRevision)
-		model:SetAttribute("Availability", projection.availability)
+		updateProjection(model, projection)
 		options.collectionService:AddTag(model, "MonsterVaultWorldCreature")
 		model.Parent = creatures
 	end
@@ -867,10 +896,7 @@ function WorldRuntimeService.new(
 			end,
 			materialize = materialize,
 			activate = activate,
-			updateProjection = function(model, projection)
-				model:SetAttribute("Availability", projection.availability)
-				model:SetAttribute("RuntimeRevision", projection.runtimeRevision)
-			end,
+			updateProjection = updateProjection,
 			destroyProjection = function(model)
 				model:Destroy()
 			end,

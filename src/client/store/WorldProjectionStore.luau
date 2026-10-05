@@ -34,6 +34,9 @@ function WorldProjectionStore.new(contract: any)
 			spawnContextId = attributes.SpawnContextId,
 			revision = attributes.RuntimeRevision,
 			availability = attributes.Availability,
+			lifetimeClass = attributes.LifetimeClass,
+			availableAt = attributes.AvailableAt,
+			idleExpiresAt = attributes.IdleExpiresAt,
 			model = model,
 		}
 		while #order > 256 do
@@ -74,6 +77,9 @@ function WorldProjectionStore.new(contract: any)
 			spawnContextId = entry.spawnContextId,
 			runtimeRevision = entry.revision,
 			availability = entry.availability,
+			lifetimeClass = entry.lifetimeClass,
+			availableAt = entry.availableAt,
+			idleExpiresAt = entry.idleExpiresAt,
 			present = entry.model ~= nil,
 		}
 	end

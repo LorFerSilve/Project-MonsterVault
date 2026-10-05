@@ -37,7 +37,11 @@ function VariantIdentity.generate(candidate: any, random: any): any
 		variantSignature = signature,
 		contentSnapshotId = candidate.contentSnapshotId,
 		spawnContextId = candidate.spawnContextId,
-		protectedVariantReasons = table.freeze({}),
+		protectedVariantReasons = table.freeze(
+			if candidate.rarityId == "rarity/legendary"
+				then { "protected-variant/legendary-species" }
+				else {}
+		),
 	})
 end
 

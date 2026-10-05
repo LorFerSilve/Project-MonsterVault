@@ -5,6 +5,8 @@ local Plan = require("../../src/server/domains/world/SpawnPlan")
 local Registry = require("../../src/server/domains/world/WorldRegistry")
 local Definitions = require("../../src/server/domains/world/WorldDefinitions")
 local Fixture = require("../../src/server/domains/world/FixtureDefinition")
+local Variant = require("../../src/server/domains/capture/VariantIdentity")
+local Capture = require("../../src/server/domains/capture/CaptureService")
 local function check(value: any, message: string?)
 	assert(value, message or "spawn invariant")
 end
@@ -81,6 +83,9 @@ local function harness(extra: any?): any
 		generation = generation,
 		options = options,
 		plan = p,
+		clock = function(): number
+			return now
+		end,
 		advance = function(seconds: number?)
 			now += seconds or 1
 		end,
@@ -116,7 +121,8 @@ local function authoredBoundsAndPools()
 			})
 			check(
 				table.find(bucket.speciesIds, selected.speciesId)
-					and selected.rarityId == "rarity/common"
+					and selected.rarityId
+						== bucket.speciesDefinitions[selected.speciesId].rarityId
 			)
 		end
 	end
@@ -396,7 +402,339 @@ local function longRunBoundsAndFreshSessionIdentity()
 	fresh.world.stop()
 end
 
+local function protectedHarness(extra: any?): any
+	local options: any = {
+		selectCandidate = function(bucket: any)
+			return Plan.select(bucket, {
+				nextUnit = function()
+					return 0.999999
+				end,
+			})
+		end,
+		generateVariant = function(candidate: any)
+			return Variant.generate(candidate, {
+				nextUnit = function()
+					return 0.75
+				end,
+			})
+		end,
+	}
+	for key, value in extra or {} do
+		options[key] = value
+	end
+	return harness(options)
+end
+local function protectedId(h: any): string
+	for _ = 1, 4 do
+		h.step()
+		h.advance()
+	end
+	for _, bucket in h.world.bucketStatus() do
+		if bucket.spawnContextId == Definitions.protectedEncounter.spawnContextId then
+			return assert(bucket.creatureInstanceId, "protected bucket reserved")
+		end
+	end
+	error("missing protected authored bucket")
+end
+local function captureFor(h: any): any
+	local ids = 0
+	return Capture.new({
+		world = h.world,
+		clock = h.clock,
+		unixSeconds = h.clock,
+		newId = function()
+			ids += 1
+			return "protected-claim-" .. ids
+		end,
+		random = {
+			nextUnit = function()
+				return h.captureDraw or 0
+			end,
+		},
+		canInitiate = function()
+			return true
+		end,
+		finalize = function()
+			return { status = "OutcomeUnknown" }
+		end,
+	})
+end
+local function protectedBindingAndClassification()
+	for _, mutate in
+		{
+			function(c: any)
+				c.protectedEncounter = nil
+			end,
+			function(c: any)
+				c.protectedEncounter.speciesId = "species/unknown"
+			end,
+			function(c: any)
+				c.protectedEncounter.spawnContextId = "spawn-context/fixture-clearing"
+			end,
+			function(c: any)
+				c.protectedEncounter.stabilitySeconds = 179
+			end,
+			function(c: any)
+				c.protectedEncounter.stabilitySeconds = 3601
+			end,
+			function(c: any)
+				c.protectedEncounter.stabilitySeconds = 0 / 0
+			end,
+			function(c: any)
+				c.protectedEncounter.stabilitySeconds = math.huge
+			end,
+			function(c: any)
+				c.protectedEncounter.stabilitySeconds = 300.5
+			end,
+			function(c: any)
+				table.insert(c.spawnContexts[3].speciesIds, c.protectedEncounter.speciesId)
+				table.insert(c.spawnContexts[3].speciesWeights, 1)
+			end,
+			function(c: any)
+				c.species[5].rarityId = "rarity/rare"
+			end,
+		}
+	do
+		local config = clone(Definitions)
+		mutate(config)
+		check(not pcall(plan, config), "unbound protected lifetime accepted")
+	end
+	local h = protectedHarness()
+	local id = protectedId(h)
+	local variant = h.world.identity(id).variantIdentity
+	check(variant.speciesRarityId == "rarity/legendary" and #variant.protectedVariantReasons == 1)
+	check(variant.protectedVariantReasons[1] == "protected-variant/legendary-species")
+	check(#h.world.identity(h.world.currentId()).variantIdentity.protectedVariantReasons == 0)
+	h.world.stop()
+end
+local function protectedIdleWindowAndCycleReplan()
+	local phase: any = { phaseId = "world-phase/day", cycleIndex = 0 }
+	local h = protectedHarness({
+		evaluateContext = function()
+			return phase
+		end,
+	})
+	local id = protectedId(h)
+	local record, identity = h.world.get(id), h.world.identity(id)
+	check(
+		record.lifetimeClass == "ProtectedVariant"
+			and record.idleExpiresAt == record.availableAt + 300
+	)
+	local ordinary = assert(h.world.currentId())
+	local forged = h.world.get(id)
+	forged.idleExpiresAt, forged.lifetimeClass, forged.position.x = 0, "Ordinary", 999
+	check(h.world.get(id).idleExpiresAt == record.idleExpiresAt, "projection became authority")
+	h.setTime(181)
+	check(
+		h.world.expireIfCurrent(ordinary, h.world.get(ordinary).runtimeRevision),
+		"ordinary expiry"
+	)
+	phase = nil -- New cycle/context no longer permits any fresh reservation.
+	h.setActive(false)
+	for _ = 1, 4 do
+		h.step()
+		h.advance()
+	end
+	check(
+		h.world.identity(id).cycleContext == identity.cycleContext,
+		"cycle rewrote encounter context"
+	)
+	check(not h.world.expireIfCurrent(id, record.runtimeRevision), "protected window shortened")
+	h.setTime(record.idleExpiresAt)
+	check(h.world.expireIfCurrent(id, record.runtimeRevision), "legitimate protected idle expiry")
+	check(not h.world.expireIfCurrent(id, record.runtimeRevision), "duplicate termination")
+	for _ = 1, 12 do
+		h.advance()
+		h.step()
+	end
+	check(h.world.populationCount() == 0, "ineligible replan replenished content")
+	h.world.stop()
+end
+local function protectedWindowStartsAfterActivation()
+	local delayed = false
+	local h: any = nil
+	h = protectedHarness({
+		activate = function(_handle: any, record: any)
+			if record.spawnContextId == Definitions.protectedEncounter.spawnContextId then
+				delayed = true
+				coroutine.yield("activation pending")
+			end
+		end,
+	})
+	local job = coroutine.create(function()
+		protectedId(h)
+	end)
+	check(coroutine.resume(job))
+	check(delayed and h.step() == "Busy")
+	h.setTime(200)
+	check(coroutine.resume(job))
+	local id: any = nil
+	for _, bucket in h.world.bucketStatus() do
+		if bucket.spawnContextId == Definitions.protectedEncounter.spawnContextId then
+			id = bucket.creatureInstanceId
+		end
+	end
+	local record = h.world.get(id)
+	check(
+		record.availableAt == 200 and record.idleExpiresAt == 500,
+		"reservation consumed stability"
+	)
+	h.setTime(499)
+	check(not h.world.expireIfCurrent(id, record.runtimeRevision))
+	h.setTime(500)
+	check(h.world.expireIfCurrent(id, record.runtimeRevision))
+	h.world.stop()
+end
+local function yieldedProjectionCheckCannotKillClaim()
+	for _, callback in { "isProjectionAlive", "isBucketActive" } do
+		local block = false
+		local h = protectedHarness({
+			[callback] = function(_handle: any, record: any)
+				local context = if callback == "isBucketActive"
+					then _handle.spawnContextId
+					else record.spawnContextId
+				if block and context == Definitions.protectedEncounter.spawnContextId then
+					coroutine.yield("checking old idle generation")
+					return false
+				end
+				return true
+			end,
+		})
+		local id = protectedId(h)
+		local revision = h.world.get(id).runtimeRevision
+		h.setTime(h.world.get(id).idleExpiresAt - 5)
+		block = true
+		local job = coroutine.create(function()
+			for _ = 1, 4 do
+				h.step()
+				h.advance()
+			end
+		end)
+		check(coroutine.resume(job))
+		local capture = captureFor(h)
+		check(capture.begin(42, id, h.world.get(id).position, 1, {}).status == "Claimed")
+		check(coroutine.resume(job))
+		check(h.world.identity(id) ~= nil, "stale observation killed claimed opportunity")
+		check(not h.world.expireIfCurrent(id, revision))
+		h.world.stop()
+	end
+end
+local function acquisitionReleaseDoesNotRestartWindow()
+	for _, outcome in { "timeout", "failure", "generation", "disconnect" } do
+		local h = protectedHarness()
+		local id = protectedId(h)
+		local p, original = h.world.get(id).position, h.world.get(id)
+		local capture = captureFor(h)
+		h.setTime(original.idleExpiresAt - 1)
+		local claim = capture.begin(42, id, p, 1, {})
+		check(claim.status == "Claimed")
+		check(capture.begin(43, id, p, 1, {}).status ~= "Claimed", "finite opportunity multi-claim")
+		h.setTime(original.idleExpiresAt + 1)
+		for _ = 1, 4 do
+			h.step()
+			h.advance()
+		end
+		check(h.world.identity(id) ~= nil and h.world.populationCount() <= 8)
+		if outcome == "timeout" then
+			h.advance(21)
+			capture.tick()
+		elseif outcome == "failure" then
+			h.captureDraw = 0.999999
+			check(capture.submit(42, claim.captureSessionId, "capture", 1, p, 1).status == "Failed")
+		elseif outcome == "generation" then
+			check(
+				capture.submit(42, claim.captureSessionId, "capture", 1, p, 2).status
+					== "Invalidated"
+			)
+		else
+			capture.disconnect(42)
+		end
+		local released = assert(h.world.get(id), "claim release did not preserve same opportunity")
+		check(released.idleExpiresAt == original.idleExpiresAt, "release renewed stability")
+		check(
+			capture.begin(42, id, p, 2, {}).status ~= "Claimed",
+			"expired opportunity re-claimed before scheduler cleanup"
+		)
+		check(
+			not h.world.expireIfCurrent(id, original.runtimeRevision),
+			"old idle callback gained authority"
+		)
+		check(
+			h.world.expireIfCurrent(id, released.runtimeRevision),
+			"released expired content immortal"
+		)
+		for _ = 1, 12 do
+			h.advance()
+			h.step()
+		end
+		check(h.world.identity(id) == nil and h.world.populationCount() <= 8)
+		check(capture.submit(42, claim.captureSessionId, "capture", 1, p, 1).status == "Rejected")
+		h.world.stop()
+	end
+end
+local function custodyGracePendingAndShutdownLifetime()
+	for _, outcome in { "grace", "interrupt", "pending" } do
+		local h = protectedHarness()
+		local id = protectedId(h)
+		local p = h.world.get(id).position
+		local capture = captureFor(h)
+		local claim = capture.begin(42, id, p, 1, {})
+		check(
+			capture.submit(42, claim.captureSessionId, "capture", 1, p, 1).status
+				== "TransportActive"
+		)
+		local custody = capture.custody(42)
+		h.setTime(600)
+		for _ = 1, 4 do
+			h.step()
+			h.advance()
+		end
+		check(
+			h.world.identity(id) ~= nil and capture.custody(42).operationId == custody.operationId
+		)
+		if outcome == "grace" then
+			capture.disconnect(42)
+			check(capture.state(id) == "TransportGrace")
+			for _ = 1, 4 do
+				h.step()
+				h.advance()
+			end
+			check(capture.resume(42, 2, {}).status == "TransportActive")
+			check(capture.custody(42).operationId == custody.operationId)
+			capture.disconnect(42)
+			h.advance(30)
+			capture.tick()
+			check(capture.resume(42, 3, {}).status == "Rejected" and h.world.identity(id) == nil)
+		elseif outcome == "interrupt" then
+			capture.interrupt(42, true)
+			check(h.world.identity(id) == nil and capture.custody(42) == nil)
+		else
+			local session = {
+				state = function()
+					return "Ready"
+				end,
+			}
+			check(capture.secure(42, p, p, 1, session).status == "OutcomeUnknown")
+			capture.interrupt(42, true)
+			h.advance(600)
+			for _ = 1, 4 do
+				h.step()
+				h.advance()
+			end
+			check(capture.state(id) == "FinalizationPending" and h.world.identity(id) ~= nil)
+		end
+		h.world.stop()
+		check(h.world.populationCount() == 0 and h.step() == "Stale")
+	end
+end
+
 return {
+	protectedBindingAndClassification = protectedBindingAndClassification,
+	protectedIdleWindowAndCycleReplan = protectedIdleWindowAndCycleReplan,
+	protectedWindowStartsAfterActivation = protectedWindowStartsAfterActivation,
+	yieldedProjectionCheckCannotKillClaim = yieldedProjectionCheckCannotKillClaim,
+	acquisitionReleaseDoesNotRestartWindow = acquisitionReleaseDoesNotRestartWindow,
+	custodyGracePendingAndShutdownLifetime = custodyGracePendingAndShutdownLifetime,
 	authoredBoundsAndPools = authoredBoundsAndPools,
 	staggeredCapsDormancyAndDuplicates = staggeredCapsDormancyAndDuplicates,
 	reservationsRetriesAndFaultIsolation = reservationsRetriesAndFaultIsolation,
