@@ -190,11 +190,35 @@ Trade session/revision/reservations, durable journal, transaction-fenced partici
 
 ## IMP-13 — Commerce
 
-Implement the GDS-13 Commercial Strategy v2 portfolio: deterministic cosmetic shop surfaces, bounded Collection/Display Capacity products, one-time Starter Value Bundle, durable Supporter/Style Pass, seasonal cosmetic bundles, a bounded permanent Offline Window Extension and the capped 2× Return Overcharge Developer Product. Reuse TA-8 production/Energy and TA-11 receipt/entitlement ownership; the Overcharge must freeze one server-authored eligible return and reconcile exactly once. No baseline paid luck, capture power, persistent production-rate multiplier, 3× return boost, event reward multiplier, mainline access bypass or paid streak restoration.
+Implement the **GDS-13 Commercial Strategy v3** in dependency order.
+
+Core commerce:
+- deterministic cosmetic shop;
+- bounded Collection/Display Capacity;
+- one-time Starter Value Bundle;
+- durable Supporter/Style Pass;
+- seasonal cosmetic bundles;
+- permanent bounded Offline Window Extension;
+- capped 2× Return Overcharge with one immutable server-authored eligible return and exact-once receipt reconciliation.
+
+Second-wave commerce after core purchase/reconciliation UX is stable:
+- Vault Club subscription with deterministic recurring cosmetic/status value and bounded presentation convenience;
+- Seasonal Collection Pass with free + premium deterministic reward tracks;
+- Rewarded Video Ads at natural safe breaks with guaranteed non-random rewards and current platform eligibility checks;
+- MonsterVault avatar/UGC items through supported Marketplace/in-experience commerce;
+- Roblox Plus integration in a non-intrusive commercial context.
+
+Commercial operations:
+- Managed/Regional Pricing where supported, using runtime platform prices rather than hard-coded custom UI prices;
+- Price Optimization only after sufficient real transaction volume/data quality exists.
+
+Reuse TA-8 production/Energy and TA-11 commerce/receipt/entitlement owners. No baseline paid luck, capture power, persistent production-rate multiplier, 3× return boost, event reward multiplier, mainline access bypass, paid extra Daily Wheel spins or paid streak restoration.
 
 ## IMP-14 — Live Ops / Analytics / Experimentation
 
-Telemetry registry/adapters, C2 config snapshots, flags, experiment assignment/exposure and privileged audit boundary. Bind the GDS-16 Retention Strategy v2 return loops where their owning systems are ready: Return Brief, Next Aspirations, optional activity-based Daily Expeditions / Weekly Objectives, one activity-earned free Daily Activity Wheel, rotating genuine opportunities and the metrics/guardrails needed to tune them without login-streak pressure. The wheel uses versioned server-owned odds/exact-once daily identity; no paid extra spins are baseline-authorized.
+Telemetry registry/adapters, C2 config snapshots, flags, experiment assignment/exposure and privileged audit boundary. Bind the GDS-16 retention loops where their owning systems are ready: Return Brief, Next Aspirations, optional Daily Expeditions / Weekly Objectives, Seasonal Collection Pass progression, one activity-earned free Daily Activity Wheel, rotating genuine opportunities and the metrics/guardrails needed to tune them without login-streak pressure.
+
+Measure retention and monetization together: pass activation/completion, shop funnel, subscription retention, rewarded-ad usage, UGC/store attachment, Return Overcharge conversion, payer/non-payer progression fairness, refund/regret/support signals and sensory/game-feel interaction where useful. Analytics remains observational and cannot grant value.
 
 ## Pre-release Production Quality Track
 
@@ -218,11 +242,31 @@ Polish HUD, navigation, Vault, collection, discovery, progression/mastery, trave
 
 Gate: every primary gameplay loop is understandable and fully usable without developer/debug knowledge across supported inputs.
 
-### PQL-4 — Animation, VFX, SFX & Game Feel
+### PQL-4 — Animation, VFX, SFX & Sensory Game Feel
 
-Add coherent feedback for movement/interactions, creature states, capture, spawn/despawn, discoveries, rarity, rewards, unlocks, travel, hazards, world transitions and UI actions. Use Roblox-native particles/beams/trails/audio where sufficient; use Blender MCP for rigs, animated props, custom effect geometry and animation-support assets when required.
+Implement the GDS-14 **Sensory / Game-Feel Strategy v1** across the golden slice and then production rollout:
 
-Gate: repeated core actions remain responsive, legible and satisfying without obscuring gameplay state.
+- complete capture feedback arc;
+- layered rare/exceptional reveal;
+- Vault machinery ASMR/ambient mechanical character;
+- hero Energy Claim transfer/count-up moment;
+- progression unlock payoff;
+- collection lock-in/completion feedback;
+- tactile UI response;
+- material-specific interaction audio;
+- layered rarity audio language;
+- distinct biome ambient soundscapes;
+- creature personality/idle audio;
+- beams/trails for high-value motion;
+- optional bounded haptics;
+- environmental micro-animation;
+- satisfying but non-deceptive Daily Wheel animation;
+- Photo/Showcase Mode;
+- satisfying idle Vault motion/audio.
+
+Use Roblox-native particles/beams/trails/audio/haptics where sufficient; use Blender MCP for rigs, animated props, creatures, mechanical assets, custom effect geometry and showcase assets when custom work materially improves quality. All sensory systems obey Reduced Motion/audio/haptic controls and bounded performance budgets.
+
+Gate: capture, reward, progression, collection and Vault interactions feel intentionally satisfying and recognizable, while state remains legible with motion/audio/haptics reduced or disabled.
 
 ### PQL-5 — Onboarding & First-Session Experience
 
@@ -250,9 +294,11 @@ Gate: multiplayer feels intentionally social rather than like isolated single-pl
 
 ### PQL-9 — Commerce Presentation
 
-Integrate the approved Commercial Strategy v2 into MonsterVault's visual language: cosmetic shop, Starter Value Bundle, Supporter/Style Pass, bounded Collection/Display Capacity, permanent Offline Window Extension, capped 2× Return Overcharge and seasonal cosmetic bundles. Provide clear previews, value communication, ownership state and purchase confirmation/recovery. Avoid intrusive spam, deceptive scarcity, confusing currencies, paid streak repair and pay-to-win shortcuts. Blender MCP may produce high-quality 3D product/reward previews where appropriate.
+Integrate **Commercial Strategy v3** into MonsterVault's visual language: cosmetic shop, Starter Value Bundle, Supporter/Style Pass, bounded Collection/Display Capacity, Offline Window Extension, capped 2× Return Overcharge, seasonal cosmetic bundles, Vault Club subscription, Seasonal Collection Pass, Rewarded Video placements, MonsterVault avatar/UGC commerce and Roblox Plus surfaces where eligible.
 
-Gate: commerce is coherent with the game, receipt/entitlement behavior is reliable, the intended launch portfolio is understandable, and presentation does not degrade the core player experience.
+Prices shown in custom UI must reflect the current platform price/Managed Pricing. Subscription renewal/value, rewarded-ad reward, pass-track value and UGC ownership are explicit. Avoid intrusive spam, deceptive scarcity, confusing currencies, paid streak repair, paid random Daily Wheel spins and pay-to-win shortcuts. Blender MCP may produce high-quality 3D product/UGC/reward previews where appropriate.
+
+Gate: the full applicable commerce portfolio is coherent with the game, receipt/entitlement/subscription/ad behavior is reliable, current platform eligibility/policy is respected, and presentation does not degrade the core experience.
 
 ### PQL-10 — Launch & Promotional Polish
 
