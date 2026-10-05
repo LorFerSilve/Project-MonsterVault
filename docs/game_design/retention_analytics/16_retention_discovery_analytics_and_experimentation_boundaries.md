@@ -1,6 +1,6 @@
 # Retention, Discovery, Analytics, and Experimentation Boundaries
 
-> **Status:** Design Complete  
+> **Status:** Design Complete — owner-authorized Retention Strategy v2 amendment (2026-10-05)  
 > **Owning GDS phase:** GDS-16 — Retention, Discovery, Analytics, and Experimentation Boundaries  
 > **Authority:** First-session/return-session funnels, session satisfaction, retention philosophy, goal surfacing, return loops, live-content cadence philosophy, notification boundaries, discovery packaging, analytics taxonomy, cohorting, experiment governance, metric hierarchy, value-affecting experiment constraints, catch-up philosophy, and anti-manipulation guardrails  
 > **Depends on:** ../00_design_authority.md, ../01_game_overview.md, ../product/success_criteria_and_product_gates.md, ../product/session_shape_and_experience_promise.md, ../global_rules/02_global_game_rules_and_session_model.md, ../player/03_player_character_interaction_and_onboarding.md, ../creatures/04_creatures_collection_and_ownership.md, ../capture/05_capture_contesting_transport_and_extraction.md, ../rarity_mutations/06_rarity_mutations_traits_and_variant_value.md, ../vault/07_vault_base_passive_production_capacity_and_upgrades.md, ../economy_progression/08_economy_progression_unlocks_and_pacing.md, ../world/09_world_biomes_exploration_spawning_and_hazards.md, ../social/10_social_play_cooperation_competition_and_pvp_boundaries.md, ../events_liveops/11_server_events_dynamic_encounters_and_live_content.md, ../trading/12_trading_and_player_economy.md, ../monetization/13_monetization_and_commercial_fairness.md, ../presentation/14_presentation_ui_ux_feedback_and_accessibility.md, ../platform_safety/15_roblox_platform_social_safety_and_moderation_constraints.md, ../GLOSSARY.md
@@ -70,7 +70,7 @@ GDS-16 does **not** define:
 - a login streak;
 - a new daily currency;
 - a new quest currency;
-- new gameplay rewards not already authorized by upstream owning phases.
+- reward sources outside the bounded Daily Expedition / Weekly Objective amendment below or other upstream-authorized systems.
 
 ## 4. Canonical Terminology
 
@@ -314,17 +314,48 @@ Absence does not:
 - reduce future base rewards;
 - close mainline progression.
 
-### DW-04 — Daily/weekly checklist is not required
+### DW-04 — Daily/weekly checklist is optional, never required
 
-The game remains worthwhile without completing a recurring mandatory task list.
+The game remains worthwhile without completing recurring objectives. Ignoring them creates no loss, streak reset, reduced base reward or mainline-progression lock.
 
 ### DW-05 — Rotating opportunities may exist through GDS-11
 
 Events/rotations may create reasons to return, but ordinary progression cannot require attendance at every occurrence.
 
-### DW-06 — Future recurring quest system requires change control
+### DW-06 — Daily Expeditions are authorized
 
-A reward-bearing daily/weekly quest layer is not silently introduced by GDS-16; its reward source/economy impact must be validated against GDS-8/GDS-11/GDS-13/GDS-16.
+MonsterVault may offer a small rotating set of **Daily Expeditions** that reward actual meaningful play rather than login.
+
+Examples may draw from already-authorized actions such as:
+
+- capture or secure a bounded number of creatures;
+- complete an accessible regional/world objective;
+- make meaningful collection/Vault progress;
+- participate in an eligible event or other approved active-play objective.
+
+Completion rewards must use an owning GDS-8/GDS-11 reward source, be bounded, server-authoritative and exact-once. Daily Expeditions create no new currency by default.
+
+### DW-07 — Weekly Objectives are authorized
+
+A broader **Weekly Objective** layer may provide longer-horizon collection, exploration, Vault or event goals. Weekly progress is additive and forgiving: missing one day never resets the week or destroys earned progress.
+
+Rewards must remain bounded and cannot be required for ordinary Region Mastery or baseline access.
+
+### DW-08 — No attendance-only qualification
+
+Opening the experience, AFK time or maintaining consecutive login days cannot by itself qualify for Daily Expedition / Weekly Objective rewards.
+
+### DW-09 — No paid streak repair
+
+There is no baseline attendance streak to repair. Robux cannot restore a missed-day multiplier or protect an attendance chain.
+
+### DW-10 — Rotation favors variety over forced repetition
+
+The objective pool should rotate among meaningful collection, exploration, Vault and event behaviors. It must avoid encouraging exploitative repetition, invitation spam, low-value clicking or intentionally inefficient play.
+
+### DW-11 — Reward/economy tuning remains controlled
+
+Exact objective counts, Energy/reward amounts and cadence are tuneable content/economy values. They must be validated against GDS-8 source/sink health and cannot silently become the dominant Energy source or replace the core capture/progression loop.
 
 ## 11. Live-Content Cadence Philosophy
 
@@ -934,6 +965,8 @@ Persistent unfinished aspiration
         +
 bounded Offline Production / Vault state
         +
+optional Daily Expeditions / Weekly Objectives
+        +
 rotating genuine world/event opportunities
         +
 social/collection goals
@@ -952,11 +985,13 @@ new or deeper aspiration
 This loop intentionally does **not** require:
 
 - login streak;
-- daily claim chest;
-- mandatory checklist;
+- attendance-only daily claim chest;
+- mandatory recurring checklist;
 - expiring mainline progression;
 - paid rescue;
 - artificial energy exhaustion.
+
+Daily Expeditions and Weekly Objectives are optional activity-based reasons to return, not attendance penalties.
 
 ## 35. Discovery-to-Retention Integrity
 
