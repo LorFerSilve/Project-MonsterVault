@@ -1,6 +1,6 @@
 # Monetization and Commercial Fairness
 
-> **Status:** Design Complete — owner-authorized Commercial Strategy v2 amendment (2026-10-05)  
+> **Status:** Design Complete — owner-authorized Commercial Strategy v3 amendment (2026-10-05)  
 > **Owning GDS phase:** GDS-13 — Monetization and Commercial Fairness  
 > **Authority:** Monetization philosophy, authorized paid product classes, prohibited paid advantages, deterministic purchase semantics, commercial capacity/convenience, bounded starter acceleration, cosmetic/status products, event/trading/commercial boundaries, offer presentation, spending-pressure limits, refund/reversal-facing safety, pricing bands, and commercial fairness constraints  
 > **Depends on:** ../00_design_authority.md, ../01_game_overview.md, ../global_rules/02_global_game_rules_and_session_model.md, ../player/03_player_character_interaction_and_onboarding.md, ../creatures/04_creatures_collection_and_ownership.md, ../capture/05_capture_contesting_transport_and_extraction.md, ../rarity_mutations/06_rarity_mutations_traits_and_variant_value.md, ../vault/07_vault_base_passive_production_capacity_and_upgrades.md, ../economy_progression/08_economy_progression_unlocks_and_pacing.md, ../world/09_world_biomes_exploration_spawning_and_hazards.md, ../social/10_social_play_cooperation_competition_and_pvp_boundaries.md, ../events_liveops/11_server_events_dynamic_encounters_and_live_content.md, ../trading/12_trading_and_player_economy.md, ../GLOSSARY.md
@@ -217,11 +217,21 @@ A durable one-time pass may bundle:
 
 It cannot grant forbidden gameplay advantages.
 
-### 6.5 Recurring Subscription — NOT BASELINE AUTHORIZED
+### 6.5 Vault Club Subscription — AUTHORIZED, POST-CORE-COMMERCE
 
-A recurring paid subscription is not part of GDS-13 baseline.
+A recurring **Vault Club** subscription is authorized once the core shop, receipt/entitlement recovery and retention presentation are stable.
 
-Future subscription proposals require GDS-13 change control plus GDS-15 review of recurring-billing/platform safety.
+Authorized benefits are primarily recurring identity/presentation and bounded convenience, for example:
+
+- a monthly deterministic cosmetic/style item or cosmetic allowance;
+- subscriber title/frame/badge presentation;
+- additional saved Vault/showcase presets;
+- bounded Display Capacity or other non-production presentation convenience;
+- subscriber-only cosmetic shop presentation/discount bundles where platform rules permit.
+
+It may not grant paid rarity/luck, capture power, claim priority, required access/mastery, permanent Production-rate multipliers, paid safety, or confiscate previously earned gameplay value when it lapses.
+
+The subscription must state renewal terms and current platform price clearly. Benefits that are not inherently durable may stop prospectively when the subscription ends; already finalized owned cosmetics remain governed by their grant semantics.
 
 ### 6.6 Server-Wide Gameplay Boost — NOT BASELINE AUTHORIZED
 
@@ -236,25 +246,37 @@ GDS-13 authorizes no paid server-wide gameplay modifier to:
 
 Purely cosmetic server-wide celebration presentation may be proposed downstream if it creates no gameplay/economy effect.
 
-### 6.7 Commercial Strategy v2 — AUTHORIZED LAUNCH PORTFOLIO
+### 6.7 Commercial Strategy v3 — AUTHORIZED REVENUE PORTFOLIO
 
-The launch commercial strategy is intentionally broader and more concrete than a generic future shop while preserving every fairness invariant above.
+MonsterVault intentionally uses multiple complementary revenue surfaces rather than relying on one high-pressure product.
 
-Priority order:
+**Core launch / first commercial wave**
 
-1. **Cosmetic Shop** — rotating and evergreen deterministic cosmetics such as Vault themes, capture-tool skins, trails/effects, emotes, profile/nameplate treatments and presentation accessories.
+1. **Cosmetic Shop** — rotating and evergreen deterministic Vault themes, capture-tool skins, trails/effects, emotes, profile/nameplate treatments and presentation accessories.
 2. **Starter Value Bundle** — one-time low-friction first-purchase offer with disclosed cosmetic value, a small fixed Energy grant and a small bounded convenience component.
 3. **Supporter / Style Pass** — durable one-time pass focused on status, cosmetics, Vault presentation and bounded collection/display convenience.
-4. **Commercial Capacity** — clearly bounded Collection Capacity, Display Capacity and presentation presets for players who want larger collections/showcases.
-5. **Seasonal Cosmetic Bundles** — event-themed deterministic cosmetics tied to genuine seasonal presentation, never event gameplay priority or hidden collectible odds.
-6. **Paid Offline Convenience** — one bounded permanent Offline Window Extension plus an optional capped 2× Return Overcharge on an already-authorized offline-production return.
-7. **Optional cosmetic consumables/presentation products** — only when deterministic, clearly disclosed and non-gameplay-authoritative.
+4. **Commercial Capacity** — bounded Collection Capacity, Display Capacity and presentation presets.
+5. **Seasonal Cosmetic Bundles** — deterministic event/season presentation products with truthful availability.
+6. **Paid Offline Convenience** — bounded permanent Offline Window Extension plus the capped 2× Return Overcharge.
 
-These products are the default monetization surfaces to implement before considering stronger acceleration mechanics.
+**Second commercial wave once core commerce/retention is stable**
 
-### CS2-01 — No persistent paid gameplay multipliers at baseline
+7. **Vault Club Subscription** — recurring cosmetics/status and bounded presentation convenience under §24.
+8. **Seasonal Collection Pass** — a time-bounded free + premium progression track driven by ordinary meaningful play, with deterministic disclosed rewards and no required mainline progression.
+9. **Rewarded Video Ads** — optional platform-provided ads at natural safe breaks in exchange for a guaranteed deterministic reward.
+10. **MonsterVault Avatar / UGC Items** — branded avatar accessories/clothing/body-adjacent items sold through supported Marketplace/in-experience surfaces when creator/platform eligibility is satisfied.
+11. **Roblox Plus integration** — use platform-funded purchase discounts and optionally surface a non-intrusive Roblox Plus subscription prompt in an appropriate commercial context; MonsterVault does not create hidden gameplay advantages for Plus users.
 
-Commercial Strategy v2 does **not** authorize:
+**Revenue optimization / scale tools**
+
+12. **Managed / Regional Pricing** — enable supported regional price management for eligible products and always render the current runtime/platform price rather than hard-coded custom UI prices.
+13. **Price Optimization** — run platform price experiments only after sufficient real transaction volume and data quality exists; recommendations are not a launch prerequisite.
+
+These are authorized product/operations classes. Their implementation order remains dependency- and evidence-driven.
+
+### CS3-01 — No persistent paid gameplay multipliers at baseline
+
+Commercial Strategy v3 does **not** authorize:
 
 - permanent 2×/3× Energy income;
 - permanent Passive Production-rate multipliers;
@@ -265,25 +287,25 @@ Commercial Strategy v2 does **not** authorize:
 
 The sole baseline exception is the bounded **2× Return Overcharge** in §10: it is a one-return commercial bonus over a server-authored eligible offline-return amount, not a persistent rate or world/progression multiplier. A 3× variant is not baseline-authorized and requires explicit GDS-13 change control plus economy evidence.
 
-### CS2-02 — No paid streak restoration at baseline
+### CS3-02 — No paid streak restoration at baseline
 
 Because GDS-16 intentionally has no attendance streak that destroys or multiplies value, there is no Robux "restore your daily streak" product at baseline.
 
 Monetization should sell desirable identity, presentation and bounded convenience rather than relief from attendance pressure invented by the game.
 
-### CS2-03 — Offer placement follows gameplay, not frustration
+### CS3-03 — Offer placement follows gameplay, not frustration
 
 The first session is gameplay-first. Commercial surfaces may become visible after the player understands the capture/Vault fantasy, but cannot be triggered as a rescue immediately after a failed capture, missed rare opportunity, hazard recovery or insufficient-Energy rejection.
 
-### CS2-04 — Seasonal commerce follows truthful availability
+### CS3-04 — Seasonal commerce follows truthful availability
 
 Seasonal cosmetic bundles may use genuine event/season windows. Their timing must be real, disclosed and independent from the player's losses, inactivity or purchase reluctance.
 
-### CS2-05 — Subscription remains a later option, not launch scope
+### CS3-05 — Subscription remains a later option, not launch scope
 
 A cosmetic/convenience-focused subscription may be reconsidered after real retention and payer data exists. It requires explicit GDS-13/GDS-15 change control and may not introduce paid luck, production multipliers, mainline access or attendance punishment.
 
-### CS2-06 — Revenue optimization is measured against product-health guardrails
+### CS3-06 — Revenue optimization is measured against product-health guardrails
 
 Conversion, ARPPU/revenue-per-player and product attach rate may be measured, but an offer is not successful if it materially worsens retention, player trust, payer/non-payer progression fairness, refund/regret signals or first-session comprehension.
 
@@ -825,17 +847,99 @@ It additionally requires GDS-6 probability review and GDS-15 platform/compliance
 
 ## 24. Subscriptions and Recurring Billing Boundary
 
-### SU-01 — No baseline recurring subscription
+### SU-01 — Vault Club is authorized after core commerce stability
 
-Launch monetization does not depend on recurring billing.
+MonsterVault may launch the Vault Club subscription after exact-once purchase/reconciliation, core storefront UX and ongoing cosmetic-content delivery are proven stable.
 
-### SU-02 — Durable pass preferred to recurring convenience
+### SU-02 — Recurring value must be clear
 
-If the desired benefit can be expressed as a bounded permanent cosmetic/convenience entitlement, baseline uses a durable pass rather than recurring loss of functionality.
+The subscription must provide understandable recurring value rather than merely converting an existing permanent feature into rent.
 
-### SU-03 — Future subscription cannot ransom owned gameplay
+### SU-03 — Subscription cannot ransom owned gameplay
 
-A future subscription cannot make Secured Creatures, earned access, Creature Locks or ordinary Vault functionality disappear when payment stops.
+Vault Club cannot make Secured Creatures, earned access, Creature Locks or ordinary Vault functionality disappear when payment stops.
+
+### SU-04 — Durable grants stay durable
+
+A monthly cosmetic or other explicitly durable finalized grant remains owned after the month/subscription ends. Ongoing presentation privileges/presets may stop prospectively if that is clearly disclosed.
+
+### SU-05 — Subscription content cadence must be sustainable
+
+Do not launch Vault Club until the team can reliably deliver the promised recurring value without degrading core game updates.
+
+## 24A. Seasonal Collection Pass
+
+### SCP-01 — Free + premium track, not mandatory progression
+
+MonsterVault may run a time-bounded **Seasonal Collection Pass** with a free track and a paid premium track. Progress comes from already-authorized meaningful gameplay such as capture, collection, exploration, Vault activity and event participation.
+
+The pass may not be required for Region Mastery, baseline access, Trade Access or ordinary collection viability.
+
+### SCP-02 — Rewards are deterministic and disclosed
+
+Track levels show their exact reward before purchase/progression. Premium rewards prioritize cosmetics, profile/Vault presentation, bounded convenience and other approved deterministic grants.
+
+No paid random creature/variant outcome, paid rarity odds or hidden reward roll is introduced by the pass.
+
+### SCP-03 — No paid level-skip baseline
+
+Baseline Seasonal Collection Pass design does not sell arbitrary progression-tier skips. A later proposal requires explicit GDS-13/GDS-16 review so monetization does not replace meaningful play.
+
+### SCP-04 — Expiry is truthful and non-destructive
+
+The season end time is real. Missing the season does not remove previously finalized ordinary gameplay progress. Owned finalized seasonal rewards remain owned according to their grant semantics.
+
+## 24B. Rewarded Video Ads
+
+### RVA-01 — Optional and eligibility-gated
+
+Rewarded Video Ads may be used only when the experience/account/user is eligible under current Roblox platform policy and an ad is actually available.
+
+### RVA-02 — Reward is guaranteed and deterministic
+
+The player sees the exact reward before opting in. The reward cannot be randomized. It should be bounded to a small convenience/economy value and must use authoritative exact-once grant plumbing.
+
+### RVA-03 — Natural safe placement
+
+Ads belong at natural breaks such as the Vault, Return Brief, post-objective screens or menus. They do not interrupt capture, custody, hazards, trade confirmation, Protected Load Failure or other critical states.
+
+### RVA-04 — No ad dependence
+
+Core progression remains healthy for players who cannot or do not watch ads. Ad unavailability changes no ordinary reward already earned.
+
+## 24C. MonsterVault Avatar / UGC Commerce
+
+### UGC-01 — Branded identity beyond the experience
+
+When current creator/platform eligibility is satisfied, MonsterVault may create and sell branded avatar items such as creature-inspired shoulder accessories, helmets, backpacks, clothing and other compatible avatar cosmetics.
+
+### UGC-02 — In-game presentation is commerce, not gameplay authority
+
+Owning/equipping a MonsterVault avatar item may unlock matching presentation acknowledgement only where policy permits; it cannot grant rarity, capture power, mastery, Energy multipliers or claim priority.
+
+### UGC-03 — Visual pipeline
+
+Custom UGC 3D work should use the approved Blender pipeline when appropriate, preserve editable sources and validate final Roblox appearance through Studio/platform preview tooling.
+
+## 24D. Managed Pricing, Price Optimization and Roblox Plus
+
+### MPO-01 — Managed Pricing is preferred where supported
+
+Eligible passes/products/subscriptions/avatar items should use supported Managed/Regional Pricing unless a reviewed exception exists. Custom in-game price labels must retrieve the current platform price dynamically.
+
+### MPO-02 — Price Optimization is data-gated
+
+Platform price optimization tests are authorized only after there is sufficient real transaction volume for meaningful recommendations. Small-sample noise is not used to permanently tune prices.
+
+### MPO-03 — Roblox Plus integration is platform-level monetization
+
+MonsterVault may surface Roblox Plus in an appropriate shop/Vault commercial context and benefit from platform-funded discounts and eligible creator payouts.
+
+The game does not invent Plus-only rarity, capture, mastery, safety or hidden economy advantages.
+
+### MPO-04 — Monetization experiments keep higher-order guardrails
+
+Regional/managed price or offer experiments remain subordinate to retention, fairness, refund/regret and player-trust guardrails.
 
 ## 25. Commercial Analytics and Experimentation Boundaries
 
@@ -897,7 +1001,7 @@ Semantic/change-control decisions:
 - moderate non-coercive commercial position;
 - cosmetics/status as primary monetization;
 - bounded Collection/Display Capacity convenience;
-- no paid Production Slots/Buffer/Offline Window/multipliers;
+- no paid Production Slots/Buffer or permanent Production-rate multipliers; bounded Offline Window Extension and capped Return Overcharge are explicit exceptions;
 - no unlimited direct Energy packs;
 - one-time bounded starter Energy only;
 - no paid spawn/Mutation/capture luck;
@@ -905,7 +1009,7 @@ Semantic/change-control decisions:
 - no paid claim priority;
 - no paid core world/Event/Trade Access;
 - no paid trading safety/cooldown bypass;
-- no baseline subscription;
+- Vault Club subscription authorized after core-commerce/content-cadence readiness;
 - no baseline server-wide gameplay boosts;
 - no randomized paid cosmetic containers;
 - truthful offers/no fake urgency;
@@ -945,7 +1049,7 @@ Must implement authoritative product catalog mapping, receipt verification, idem
 | Paid capacity entitlement later removed | Capacity Reconciliation; no creature deletion |
 | Player asks to buy Production Slots | Not baseline-authorized |
 | Player asks to buy x2 production | Not baseline-authorized |
-| Player asks to buy longer Offline Window | Not baseline-authorized |
+| Player asks to buy longer Offline Window | Authorized only through the bounded Offline Window Extension product |
 | Player asks to buy Energy repeatedly | Unlimited direct packs not baseline-authorized |
 | Player buys Starter Bundle once | Fixed listed grant exactly once |
 | Starter purchase callback repeats | No duplicate Energy/cosmetics/capacity |
@@ -984,7 +1088,7 @@ Must implement authoritative product catalog mapping, receipt verification, idem
 | Reversal of spent starter Energy | No negative Energy/debt or creature seizure authorized |
 | Event-themed cosmetic purchased | Does not fabricate Event Completion/provenance |
 | Cosmetic leaves shop rotation | Existing entitlement remains |
-| Future subscription proposed | Requires GDS-13 change control |
+| Vault Club subscription proposed | Authorized after core-commerce stability and recurring-content readiness; benefits stay within §24 |
 | Paid loot box proposed | Requires GDS-13/GDS-6/GDS-15 reopening/review |
 | Paid random cosmetic crate proposed | Not baseline-authorized |
 | Paid server-wide luck boost proposed | Not baseline-authorized |

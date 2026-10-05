@@ -4,7 +4,7 @@
 
 ## Project Status
 
-**Game Design Specification — DESIGN COMPLETE with Monetization/Retention Strategy v2 / Technical Architecture TA-0..17 COMPLETE / IMPLEMENTATION OPEN — IMP-10 OPEN; VS1-19 deferred as a future Scale Readiness Gate under AD-260.**
+**Game Design Specification — DESIGN COMPLETE with Commercial Strategy v3, Retention Strategy v2 and Sensory/Game-Feel Strategy v1 / Technical Architecture TA-0..17 COMPLETE / IMPLEMENTATION OPEN — IMP-10 OPEN; VS1-19 deferred as a future Scale Readiness Gate under AD-260.**
 
 MonsterVault has completed the specification and Technical Architecture gates. **Implementation is now OPEN under the TA-17 locked contracts**; production release remains gated by TA-15 verification and the implementation roadmap.
 
@@ -689,8 +689,12 @@ The first implementation vertical slice is locked as **VS-1 — Trusted Join →
 No open-source license is currently granted. All rights are reserved unless explicitly stated otherwise.
 
 
-## Commercial and Retention Strategy v2
+## Commercial, Retention and Sensory Strategy
 
-Owner-authorized on 2026-10-05. GDS-13 now defines a concrete launch commercial portfolio centered on deterministic cosmetics, bounded Collection/Display Capacity, a one-time Starter Value Bundle, a durable Supporter/Style Pass, seasonal cosmetic bundles and bounded paid offline convenience: a permanent Offline Window Extension plus a capped 2× Return Overcharge on one server-authored offline return. Paid luck, persistent production-rate multipliers, 3× return boosts, capture power, mainline access bypass and paid attendance-streak repair remain outside the baseline.
+Owner-authorized on 2026-10-05.
 
-GDS-16 now authorizes optional activity-based Daily Expeditions and Weekly Objectives, plus one activity-earned free Daily Activity Wheel opportunity, alongside Return Brief, Next Aspirations, rotating world/event opportunities and existing bounded Offline Production. The wheel uses server-owned bounded odds and exact-once daily identity; paid extra spins are not baseline-authorized. MonsterVault still has no attendance-only login reward, no login streak and no missed-day punishment.
+**Commercial Strategy v3** defines a multi-surface revenue portfolio: cosmetic shop, Starter Value Bundle, Supporter/Style Pass, bounded Collection/Display Capacity, seasonal cosmetic bundles, Offline Window Extension, capped 2× Return Overcharge, Vault Club subscription, Seasonal Collection Pass, Rewarded Video Ads, MonsterVault avatar/UGC commerce, Roblox Plus integration, Managed/Regional Pricing and later data-gated Price Optimization. Paid luck, persistent production-rate multipliers, 3× Return boosts, paid Daily Wheel spins, capture power and mainline-access bypass remain outside baseline.
+
+**Retention Strategy v2** authorizes optional Daily Expeditions, Weekly Objectives, Seasonal Collection Pass goals, the activity-earned free Daily Activity Wheel, Return Brief, Next Aspirations, rotating opportunities and bounded Offline Production without attendance streaks or missed-day punishment.
+
+**Sensory / Game-Feel Strategy v1** makes satisfying feedback a production-quality requirement: capture/reveal juice, Vault machinery ASMR, Energy-claim transfer, progression/collection payoff, tactile UI, biome/creature audio, trails, haptics, environmental micro-animation, honest Wheel animation, Photo/Showcase Mode and idle-Vault life. Accessibility and performance budgets remain binding.
