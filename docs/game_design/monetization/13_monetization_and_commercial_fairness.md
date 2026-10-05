@@ -1,6 +1,6 @@
 # Monetization and Commercial Fairness
 
-> **Status:** Design Complete  
+> **Status:** Design Complete — owner-authorized Commercial Strategy v2 amendment (2026-10-05)  
 > **Owning GDS phase:** GDS-13 — Monetization and Commercial Fairness  
 > **Authority:** Monetization philosophy, authorized paid product classes, prohibited paid advantages, deterministic purchase semantics, commercial capacity/convenience, bounded starter acceleration, cosmetic/status products, event/trading/commercial boundaries, offer presentation, spending-pressure limits, refund/reversal-facing safety, pricing bands, and commercial fairness constraints  
 > **Depends on:** ../00_design_authority.md, ../01_game_overview.md, ../global_rules/02_global_game_rules_and_session_model.md, ../player/03_player_character_interaction_and_onboarding.md, ../creatures/04_creatures_collection_and_ownership.md, ../capture/05_capture_contesting_transport_and_extraction.md, ../rarity_mutations/06_rarity_mutations_traits_and_variant_value.md, ../vault/07_vault_base_passive_production_capacity_and_upgrades.md, ../economy_progression/08_economy_progression_unlocks_and_pacing.md, ../world/09_world_biomes_exploration_spawning_and_hazards.md, ../social/10_social_play_cooperation_competition_and_pvp_boundaries.md, ../events_liveops/11_server_events_dynamic_encounters_and_live_content.md, ../trading/12_trading_and_player_economy.md, ../GLOSSARY.md
@@ -234,6 +234,56 @@ GDS-13 authorizes no paid server-wide gameplay modifier to:
 - world access.
 
 Purely cosmetic server-wide celebration presentation may be proposed downstream if it creates no gameplay/economy effect.
+
+### 6.7 Commercial Strategy v2 — AUTHORIZED LAUNCH PORTFOLIO
+
+The launch commercial strategy is intentionally broader and more concrete than a generic future shop while preserving every fairness invariant above.
+
+Priority order:
+
+1. **Cosmetic Shop** — rotating and evergreen deterministic cosmetics such as Vault themes, capture-tool skins, trails/effects, emotes, profile/nameplate treatments and presentation accessories.
+2. **Starter Value Bundle** — one-time low-friction first-purchase offer with disclosed cosmetic value, a small fixed Energy grant and a small bounded convenience component.
+3. **Supporter / Style Pass** — durable one-time pass focused on status, cosmetics, Vault presentation and bounded collection/display convenience.
+4. **Commercial Capacity** — clearly bounded Collection Capacity, Display Capacity and presentation presets for players who want larger collections/showcases.
+5. **Seasonal Cosmetic Bundles** — event-themed deterministic cosmetics tied to genuine seasonal presentation, never event gameplay priority or hidden collectible odds.
+6. **Optional cosmetic consumables/presentation products** — only when deterministic, clearly disclosed and non-gameplay-authoritative.
+
+These products are the default monetization surfaces to implement before considering stronger acceleration mechanics.
+
+### CS2-01 — No paid gameplay multipliers at baseline
+
+Commercial Strategy v2 does **not** authorize:
+
+- 2x/3x Energy income;
+- Passive Production multipliers;
+- paid spawn/rarity/Mutation luck;
+- paid capture-success boosts;
+- paid event reward multipliers;
+- paid mastery/progression multipliers.
+
+Any proposal for those mechanics requires explicit GDS-13 change control rather than being inferred from revenue goals.
+
+### CS2-02 — No paid streak restoration at baseline
+
+Because GDS-16 intentionally has no attendance streak that destroys or multiplies value, there is no Robux "restore your daily streak" product at baseline.
+
+Monetization should sell desirable identity, presentation and bounded convenience rather than relief from attendance pressure invented by the game.
+
+### CS2-03 — Offer placement follows gameplay, not frustration
+
+The first session is gameplay-first. Commercial surfaces may become visible after the player understands the capture/Vault fantasy, but cannot be triggered as a rescue immediately after a failed capture, missed rare opportunity, hazard recovery or insufficient-Energy rejection.
+
+### CS2-04 — Seasonal commerce follows truthful availability
+
+Seasonal cosmetic bundles may use genuine event/season windows. Their timing must be real, disclosed and independent from the player's losses, inactivity or purchase reluctance.
+
+### CS2-05 — Subscription remains a later option, not launch scope
+
+A cosmetic/convenience-focused subscription may be reconsidered after real retention and payer data exists. It requires explicit GDS-13/GDS-15 change control and may not introduce paid luck, production multipliers, mainline access or attendance punishment.
+
+### CS2-06 — Revenue optimization is measured against product-health guardrails
+
+Conversion, ARPPU/revenue-per-player and product attach rate may be measured, but an offer is not successful if it materially worsens retention, player trust, payer/non-payer progression fairness, refund/regret signals or first-session comprehension.
 
 ## 7. Cosmetics and Identity Integrity
 

@@ -1,7 +1,7 @@
 # Project MonsterVault Documentation
 
 > **Project phase:** Implementation — TA-17 Implementation Locked — PASS  
-> **Implementation status:** OPEN — IMP-1 Contracts and Test Harness next
+> **Implementation status:** OPEN — IMP-9 COMPLETE; IMP-10 World Scaling OPEN; VS1-19 deferred to future Scale Readiness under AD-260
 
 This directory is the authoritative documentation space for Project MonsterVault.
 
@@ -130,10 +130,12 @@ TA-17 latest evidence:
 
 The active dependency is:
 
-> **IMP-9 — Vault / Economy / Progression (OPEN)**
+> **IMP-10 — World Scaling (OPEN)**
 
-The first Vault capacity-policy dependency is implemented and validated. [IMP-9 evidence](implementation/IMP9_IMPLEMENTATION_EVIDENCE.md) records the actual Studio results and remaining capacity, assignment, production and economy gates.
+IMP-9 Vault / Economy / Progression is COMPLETE. IMP-10 has closed registry/mastery/access, authored content, regional scheduling, World Cycle, travel/discovery/recovery, trusted-session presence, hazards/transport fairness and bounded world rewards. The next major functional dependency is protected-content lifetime binding and capture-fairness/fault-recovery evidence.
 
-All pre-code gates are satisfied. Gameplay implementation is now open under TA-17.
+All pre-code gates are satisfied. Gameplay implementation remains open under TA-17.
 
-The implementation dependency order is defined in [`implementation/IMPLEMENTATION_ROADMAP.md`](implementation/IMPLEMENTATION_ROADMAP.md), currently at **IMP-9 OPEN**. IMP-8 is COMPLETE with VS1-19 **DEFERRED — environment limitation** under [AD-249](technical_architecture/ARCHITECTURE_DECISIONS.md#ad-249--defer-vs1-19-to-the-imp-10-completion-gate); full 30-player L1 and supported real-client performance must pass before IMP-10 COMPLETE. Production/staging release remains separately gated.
+The implementation dependency order is defined in [`implementation/IMPLEMENTATION_ROADMAP.md`](implementation/IMPLEMENTATION_ROADMAP.md). VS1-19 remains **DEFERRED — environment limitation**, but [AD-260](technical_architecture/ARCHITECTURE_DECISIONS.md#ad-260--reclassify-vs1-19-as-a-scale-readiness-gate) reclassifies it as a future Scale Readiness Gate rather than an IMP-10 functional-completion blocker. Production/staging release remains separately gated by applicable TA-14/15 and release-readiness evidence.
+
+GDS-13 and GDS-16 also contain the owner-authorized 2026-10-05 Commercial / Retention Strategy v2: a concrete cosmetics/convenience-led launch portfolio plus optional activity-based Daily Expeditions and Weekly Objectives, while retaining no paid luck, no paid production multiplier, no login streak and no missed-day punishment.

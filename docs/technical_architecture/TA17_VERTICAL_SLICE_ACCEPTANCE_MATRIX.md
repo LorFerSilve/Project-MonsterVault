@@ -3,7 +3,7 @@
 > **Status:** LOCKED
 > **Date:** 2026-09-24
 > **Vertical slice:** VS-1 — Trusted Join -> One World Creature -> Capture -> Secure Ownership -> Rejoin
-> **Amendment:** [AD-249](ARCHITECTURE_DECISIONS.md#ad-249--defer-vs1-19-to-the-imp-10-completion-gate), accepted 2026-10-01. IMP-8 COMPLETE with deferred validation; VS1-19 remains DEFERRED.
+> **Amendments:** [AD-249](ARCHITECTURE_DECISIONS.md#ad-249--defer-vs1-19-to-the-imp-10-completion-gate) registered the original deferral; [AD-260](ARCHITECTURE_DECISIONS.md#ad-260--reclassify-vs1-19-as-a-scale-readiness-gate), accepted 2026-10-05, reclassifies VS1-19 as a future Scale Readiness Gate. IMP-8 remains COMPLETE with deferred validation; VS1-19 remains DEFERRED, not PASS.
 
 ## Scope
 
@@ -52,7 +52,7 @@ The slice proves architecture seams; it is not a content-complete gameplay demo.
 | VS1-16 | client timeout presents OutcomeUnknown/Pending until reconciliation | C1 |
 | VS1-17 | touch/keyboard/gamepad semantic interaction paths remain equivalent | C1 |
 | VS1-18 | Reduced Motion cannot remove critical capture state meaning | C1 |
-| VS1-19 | Full L0/L1 and supported real-client performance validation has no TA-14 hard guardrail violation; L1 is 30 players at MaxPlayers=60. Due before IMP-10 COMPLETE under AD-249. | C1 |
+| VS1-19 | Full L0/L1 and supported real-client performance validation has no TA-14 hard guardrail violation; historical L1 is 30 players at MaxPlayers=60. Under AD-260 this is a Scale Readiness Gate, not an IMP-10 functional-completion blocker. | C1 |
 | VS1-20 | diagnostics identify requestId/operationId/test seed without leaking secrets | C1 |
 
 ## Required evidence
@@ -81,14 +81,14 @@ Staging evidence before calling persistence adapter production-ready:
 
 ## Completion rule
 
-IMP-8 / VS-1 functional closure requires all C0/C1 rows except the specifically registered VS1-19 deferral to be backed by TA-15 evidence at the appropriate layer. [IMP-8 evidence](../implementation/IMP8_IMPLEMENTATION_EVIDENCE.md) records the functional results and owner-confirmed native gamepad result. Under AD-249, IMP-8 is COMPLETE with deferred validation and IMP-9 is OPEN for DEV work. This is not an all-rows-PASS or performance-readiness verdict.
+IMP-8 / VS-1 functional closure requires all C0/C1 rows except the specifically registered VS1-19 deferral to be backed by TA-15 evidence at the appropriate layer. [IMP-8 evidence](../implementation/IMP8_IMPLEMENTATION_EVIDENCE.md) records the functional results and owner-confirmed native gamepad result. Under AD-249/AD-260, IMP-8 is COMPLETE with deferred validation and later DEV phases may advance when their own functional gates pass. This is not an all-rows-PASS or performance-readiness verdict.
 
 ## Registered deferred validation
 
 | Gate | State | Reason | Owner / deadline |
 |---|---|---|---|
-| VS1-19 (C1) | **DEFERRED — environment limitation** | Connected Studio/MCP cannot run 30-player L1 or supported real-client frame/memory measurement. Existing three five-second solo samples remain partial L0 evidence. | **IMP-10 — World Scaling; mandatory before COMPLETE** |
+| VS1-19 (C1) | **DEFERRED — environment limitation** | Connected Studio/MCP cannot run 30-player L1 or supported real-client frame/memory measurement. Existing three five-second solo samples remain partial L0 evidence. | **Scale Readiness / release-growth gate under AD-260; not required for IMP-10 functional completion** |
 
-The full controlled L0/L1 and real-client validation, TA-14 numeric guardrails and TA-15 measurement/repetition rules are unchanged. The relevant World Scaling candidate build must have the complete required trusted evidence. IMP-10 cannot be COMPLETE and the roadmap cannot advance beyond it while this gate is deferred, missing, failed or incomplete. STG persistence readiness and full L0-L5 release validation remain separate mandatory gates.
+The full controlled L0/L1 and real-client validation, TA-14 numeric guardrails and TA-15 measurement/repetition rules remain unchanged. Under AD-260 the evidence is required when MonsterVault is preparing for or operating at concurrency beyond its validated envelope, not to close IMP-10 functionally. Until then, local bounded-performance/security checks remain mandatory and VS1-19 must continue to be reported as DEFERRED. STG persistence readiness and full L0-L5 release validation remain separate release gates.
 
 **VS-1 acceptance contract: LOCKED.**

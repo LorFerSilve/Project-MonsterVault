@@ -127,7 +127,7 @@ Run TA17_VERTICAL_SLICE_ACCEPTANCE_MATRIX.md.
 
 VS-1 functional acceptance must be complete before broad feature expansion, with the sole registered performance timing exception [AD-249](../technical_architecture/ARCHITECTURE_DECISIONS.md#ad-249--defer-vs1-19-to-the-imp-10-completion-gate).
 
-**Status (2026-10-01): COMPLETE with deferred validation.** All functional gates are closed, including owner-confirmed native gamepad parity and the trusted VS1-20 Studio capture log. **VS1-19 (C1) is DEFERRED — environment limitation**, not PASS. Its complete L0/L1 and supported real-client performance validation is mandatory **before IMP-10 COMPLETE**. See [IMP-8 evidence](IMP8_IMPLEMENTATION_EVIDENCE.md) and [the amended acceptance matrix](../technical_architecture/TA17_VERTICAL_SLICE_ACCEPTANCE_MATRIX.md).
+**Status (2026-10-01): COMPLETE with deferred validation.** All functional gates are closed, including owner-confirmed native gamepad parity and the trusted VS1-20 Studio capture log. **VS1-19 (C1) is DEFERRED — environment limitation**, not PASS. Under AD-260 it is a future **Scale Readiness Gate**, not an IMP-10 functional-completion blocker. See [IMP-8 evidence](IMP8_IMPLEMENTATION_EVIDENCE.md) and [the amended acceptance matrix](../technical_architecture/TA17_VERTICAL_SLICE_ACCEPTANCE_MATRIX.md).
 
 ## IMP-9 — Vault / Economy / Progression
 
@@ -147,7 +147,7 @@ Completed current dependency (AD-253): one server quote per session with opaque 
 
 Completed final dependency (AD-254): twelve immutable DEV definitions cover +6 capacity tiers, earned production/display slots, buffer and 4h/8h/12h offline upgrades, bounded persistent Capture Capability and GDS-9 Mid A/Mid B/Advanced access prerequisites. Every purchase reuses the existing server quote/P2 debit/effect/receipt chain. Production-affecting upgrades settle old capabilities first at a fixed boundary and reject clock regression. Access consumes an injected authoritative mastery owner; the shipped composition fails closed while that IMP-10 owner is unbound. Completed access survives save/rejoin and price/owner changes without creating discovery or world-completion proof.
 
-The full gate matrix closes with 153 fast tests, 40 native Studio C0 checks, real DEV GUI/unknown-write/race purchases and a fresh shipped composition restoring all twelve receipts and unchanged ownership/Held state. Actual world mastery/gated actions, one-time/event/commercial/temporary reward integrations, deferred-grant transfer/replay and live config remain with their explicitly routed owners; unbound valuable state remains protected. These are enablement boundaries, not deferred phase-owned validation gates. No world geometry/content or later system was implemented. AD-249 / VS1-19 remains mandatory before IMP-10 COMPLETE.
+The full gate matrix closes with 153 fast tests, 40 native Studio C0 checks, real DEV GUI/unknown-write/race purchases and a fresh shipped composition restoring all twelve receipts and unchanged ownership/Held state. Actual world mastery/gated actions, one-time/event/commercial/temporary reward integrations, deferred-grant transfer/replay and live config remain with their explicitly routed owners; unbound valuable state remains protected. These are enablement boundaries, not deferred phase-owned validation gates. No world geometry/content or later system was implemented. AD-249 / VS1-19 remains DEFERRED and is governed by superseding AD-260 as a future Scale Readiness Gate.
 
 ## IMP-10 — World Scaling
 
@@ -173,11 +173,12 @@ Next dependency: **one approved protected content/lifetime binding -> existing s
 
 Full biome/content registries, spawn scheduling, travel, mastery/hazards and TA-14 scaling.
 
-Mandatory completion gate inherited from IMP-8 / AD-249:
+Scale-readiness gate inherited from IMP-8 / AD-249 and rescheduled by AD-260:
 
-- **VS1-19 (C1): DEFERRED — environment limitation** until the full TA-14/TA-15 controlled L0/L1 plus supported real-client frame/memory validation is executed and passes for the relevant World Scaling candidate build.
-- L1 is **30 players at configured MaxPlayers=60**; the numeric guardrails, device measurements and repetition rules remain unchanged. Existing solo Studio samples are partial L0 evidence and cannot satisfy this gate.
-- **IMP-10 cannot be COMPLETE and the roadmap cannot advance beyond IMP-10** while VS1-19 is deferred, missing, failed or incomplete. Production release remains separately subject to full TA-15/TA-14 gates.
+- **VS1-19 (C1): DEFERRED — environment limitation** until full TA-14/TA-15 controlled L0/L1 plus supported real-client frame/memory validation can be executed.
+- Historical L1 is **30 players at MaxPlayers=60**. This remains the evidence target if that server density is pursued; MaxPlayers may be launched lower and increased only within validated operating evidence.
+- VS1-19 is **not required for IMP-10 functional completion or IMP-11 to begin**. It becomes mandatory before intentionally operating beyond the validated concurrency envelope or claiming corresponding production scale readiness.
+- Local bounded performance/security checks, streaming tests and practical small-client validation remain required during normal development. Production release remains subject to the applicable TA-14/TA-15/release gates.
 
 ## IMP-11 — Social and Events
 
@@ -189,11 +190,11 @@ Trade session/revision/reservations, durable journal, transaction-fenced partici
 
 ## IMP-13 — Commerce
 
-Product definitions/bindings, Game Pass reconciliation, Developer Product receipt journal, Starter grant and commercial UI.
+Implement the GDS-13 Commercial Strategy v2 portfolio: deterministic cosmetic shop surfaces, bounded Collection/Display Capacity products, one-time Starter Value Bundle, durable Supporter/Style Pass, seasonal cosmetic bundles and the required product/entitlement/receipt reconciliation. No baseline paid luck, capture power, production multiplier, event reward multiplier, mainline access bypass or paid streak restoration.
 
 ## IMP-14 — Live Ops / Analytics / Experimentation
 
-Telemetry registry/adapters, C2 config snapshots, flags, experiment assignment/exposure and privileged audit boundary.
+Telemetry registry/adapters, C2 config snapshots, flags, experiment assignment/exposure and privileged audit boundary. Bind the GDS-16 Retention Strategy v2 return loops where their owning systems are ready: Return Brief, Next Aspirations, optional activity-based Daily Expeditions / Weekly Objectives, rotating genuine opportunities and the metrics/guardrails needed to tune them without login-streak pressure.
 
 ## Pre-release Production Quality Track
 
@@ -231,9 +232,9 @@ Gate: a new player with no outside explanation can understand what MonsterVault 
 
 ### PQL-6 — Retention & Progression Presentation
 
-Make existing progression motivating and legible through mastery/discovery presentation, region and collection completion, rarity, upgrades, quests/objectives, milestones, achievements, unlock previews and meaningful reward moments. Do not invent grind solely to increase session time.
+Make existing progression motivating and legible through mastery/discovery presentation, region and collection completion, rarity, upgrades, quests/objectives, milestones, achievements, unlock previews and meaningful reward moments. Implement the approved Retention Strategy v2 presentation: concise Return Brief, Next Aspirations, optional Daily Expeditions and Weekly Objectives, with no login streak, attendance-only reward or missed-day punishment. Do not invent grind solely to increase session time.
 
-Gate: players can identify what they just achieved and have clear short-, medium- and longer-term goals.
+Gate: players can identify what they just achieved, what is worth doing now and what longer-term aspiration should bring them back.
 
 ### PQL-7 — Live Events & Seasonal Content
 
@@ -249,9 +250,9 @@ Gate: multiplayer feels intentionally social rather than like isolated single-pl
 
 ### PQL-9 — Commerce Presentation
 
-Integrate passes/products/entitlements into MonsterVault's visual language with clear previews, value communication, ownership state and purchase confirmation/recovery. Avoid intrusive spam, deceptive scarcity, confusing currencies and pay-to-win shortcuts that undermine collection/progression. Blender MCP may produce high-quality 3D product/reward previews where appropriate.
+Integrate the approved Commercial Strategy v2 into MonsterVault's visual language: cosmetic shop, Starter Value Bundle, Supporter/Style Pass, bounded Collection/Display Capacity and seasonal cosmetic bundles. Provide clear previews, value communication, ownership state and purchase confirmation/recovery. Avoid intrusive spam, deceptive scarcity, confusing currencies, paid streak repair and pay-to-win shortcuts. Blender MCP may produce high-quality 3D product/reward previews where appropriate.
 
-Gate: commerce is coherent with the game, receipt/entitlement behavior is reliable, and presentation does not degrade the core player experience.
+Gate: commerce is coherent with the game, receipt/entitlement behavior is reliable, the intended launch portfolio is understandable, and presentation does not degrade the core player experience.
 
 ### PQL-10 — Launch & Promotional Polish
 
@@ -269,4 +270,4 @@ Full TA-15 V0-V10 evidence, TA-14 L0-L5, security/fault sweeps, staging promotio
 
 A phase may be split into smaller PRs. It may not bypass upstream gates or move authority to a more convenient layer.
 
-AD-249 is an explicitly owner-authorized TA-17 amendment to validation timing, with a named gate, owner and hard deadline. It grants no general permission to defer other acceptance rows.
+AD-249 registered the original VS1-19 deferral; AD-260 supersedes its IMP-10 deadline and reclassifies it as a Scale Readiness Gate. Neither decision grants permission to silently defer unrelated functional correctness, security or release gates.

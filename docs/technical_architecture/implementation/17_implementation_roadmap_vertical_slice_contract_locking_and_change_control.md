@@ -4,7 +4,7 @@
 > **Date:** 2026-09-24
 > **Authority:** Final toolchain, repository, module/service graph, runtime namespace, vertical slice, implementation order, verification, branch/release and change-control lock
 > **Depends on:** GDS-17 PASS; TA-0..15 Architecture Complete; TA-16 Architecture Integration Complete — PASS
-> **Change control:** Reopened and relocked on 2026-10-01 by [AD-249](../ARCHITECTURE_DECISIONS.md#ad-249--defer-vs1-19-to-the-imp-10-completion-gate); performance-evidence timing only.
+> **Change control:** Reopened/relocked by [AD-249](../ARCHITECTURE_DECISIONS.md#ad-249--defer-vs1-19-to-the-imp-10-completion-gate) and superseding [AD-260](../ARCHITECTURE_DECISIONS.md#ad-260--reclassify-vs1-19-as-a-scale-readiness-gate); performance-evidence scheduling only.
 > **IMP-9 implementation extension:** [AD-250](../ARCHITECTURE_DECISIONS.md#ad-250--register-imp-9-capacity-migration-and-explicit-overflow-resolution) registers the additive V1 overflow route/projection and explicit capacity-domain migration; authority and phase gates remain locked.
 
 ## 1. Purpose
@@ -155,7 +155,7 @@ docs/implementation/IMPLEMENTATION_ROADMAP.md is authoritative.
 
 Implementation advances only when the current phase's acceptance evidence is complete. Later domains may prepare documentation/fixtures, but may not bypass foundational dependencies.
 
-AD-249 is the sole registered scheduling exception: IMP-8 closes with VS1-19 explicitly DEFERRED for environment limitation, permitting IMP-9 DEV implementation. All other IMP-8 rows retain their evidence requirements. The deferred performance validation must pass before IMP-10 can be COMPLETE or the roadmap advances beyond IMP-10.
+AD-249 registered the original VS1-19 deferral and AD-260 supersedes its deadline. IMP-8 closes with VS1-19 explicitly DEFERRED for environment limitation. All other IMP-8 rows retain their evidence requirements. VS1-19 is now a Scale Readiness Gate: later functional phases may advance while it is deferred, but production/high-concurrency rollout may not claim that scale validated until the real evidence passes.
 
 ## 9. Test / CI Lock
 
@@ -192,7 +192,7 @@ VS-1 must establish instrumentation for:
 - DataStore retries/budget/latency;
 - client frame/memory where measurable.
 
-VS1-19 requires no hard guardrail violation under complete L0/L1 controlled tests, including supported real-client frame/memory evidence. Under AD-249, this mandatory C1 validation is DEFERRED from IMP-8 to **before IMP-10 COMPLETE** because the current Studio/MCP environment cannot execute it. L1 remains 30 players at MaxPlayers=60. Existing solo Studio measurements are partial L0 evidence, not PASS for VS1-19.
+VS1-19 requires no hard guardrail violation under complete L0/L1 controlled tests, including supported real-client frame/memory evidence. Under AD-260, this C1 validation remains DEFERRED because the current Studio/MCP environment cannot execute it, but it is **not an IMP-10 functional-completion blocker**. The historical L1 definition remains 30 players at MaxPlayers=60; MaxPlayers may be conservatively reduced for launch/soft launch within a validated envelope. Existing solo Studio measurements are partial diagnostics, not PASS for VS1-19.
 
 Full release requires TA-15 L0-L5 evidence.
 
@@ -297,7 +297,7 @@ A feature/phase is done only when:
 - docs/config are updated when public contract changes;
 - performance/security evidence is attached where required.
 
-IMP-8's accepted AD-249 exception must remain visible as deferred validation. IMP-10 is not done while VS1-19 is DEFERRED, missing, failed, or unsupported by the full required TA-14/TA-15 evidence.
+IMP-8's deferred VS1-19 must remain visible as deferred validation. Under AD-260, IMP-10 may close functionally while VS1-19 is DEFERRED if all IMP-10-owned functional/security-sanity/local-performance gates pass. VS1-19 becomes mandatory before operating beyond the validated concurrency envelope or claiming corresponding scale readiness.
 
 ## 16. Architecture Reopen Rule
 
