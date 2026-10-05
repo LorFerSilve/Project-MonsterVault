@@ -67,6 +67,7 @@ local composition = ServerComposition.new({
 		if profileRuntime ~= nil then
 			partyRuntime = PartyRuntimeService.new({
 				worldRuntime = worldRuntime,
+				captureRuntime = captureRuntime,
 				players = game:GetService("Players"),
 				profileCoordinator = profileRuntime.coordinator,
 				httpService = HttpService,

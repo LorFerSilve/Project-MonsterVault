@@ -1,0 +1,460 @@
+{
+  "date": "2026-10-05",
+  "baseMain": "864baddf08d8fc94bcdec7dd599e3178809427ab",
+  "branch": "codex/imp11-challenge",
+  "phase": "IMP-11 OPEN; Friendly Challenge dependency complete",
+  "definitionId": "challenge/home-return-dev-v1",
+  "definitionVersion": 1,
+  "counts": {
+    "fast": 294,
+    "focusedChallenge": 32,
+    "focusedNative": {
+      "passed": 34,
+      "total": 34,
+      "deduplicatedBy": "case name across normal and scoped boot"
+    },
+    "python": 28,
+    "sourceParity": 92
+  },
+  "nativeChecks": [
+    {
+      "name": "actualCharacterResetCancels",
+      "status": "PASS"
+    },
+    {
+      "name": "actualOfferExpiryNoPenalty",
+      "status": "PASS"
+    },
+    {
+      "name": "collapsedNoModalFocus",
+      "status": "PASS"
+    },
+    {
+      "name": "explicitNativeAccept",
+      "status": "PASS"
+    },
+    {
+      "name": "foreignSessionCapabilityRejected",
+      "status": "PASS"
+    },
+    {
+      "name": "ignoredNoValueMutation",
+      "status": "PASS"
+    },
+    {
+      "name": "incomingOfferDoesNotStart",
+      "status": "PASS"
+    },
+    {
+      "name": "incomingRulesNoFocus",
+      "status": "PASS"
+    },
+    {
+      "name": "initialNoChallenge",
+      "status": "PASS"
+    },
+    {
+      "name": "nativeDisplayExpired",
+      "status": "PASS"
+    },
+    {
+      "name": "nativeOfferPinnedDefinitionAndConsent",
+      "status": "PASS"
+    },
+    {
+      "name": "nativeReplayNoSecondStart",
+      "status": "PASS"
+    },
+    {
+      "name": "nativeTravelResultProjection",
+      "status": "PASS"
+    },
+    {
+      "name": "noNewGameplayOrPartyAuthority",
+      "status": "PASS"
+    },
+    {
+      "name": "offerNoProfileOrStorageMutation",
+      "status": "PASS"
+    },
+    {
+      "name": "offerSpamCannotMultiply",
+      "status": "PASS"
+    },
+    {
+      "name": "oldAvatarCallbackCannotRewrite",
+      "status": "PASS"
+    },
+    {
+      "name": "ordinaryAuthoredStartCapability",
+      "status": "PASS"
+    },
+    {
+      "name": "ordinaryValidatedHomeArrival",
+      "status": "PASS"
+    },
+    {
+      "name": "privateProfileSessionReplacementFencesReplay",
+      "status": "PASS"
+    },
+    {
+      "name": "realWorldOutcomeOnlyResolution",
+      "status": "PASS"
+    },
+    {
+      "name": "remoteForgedDefinitionRejected",
+      "status": "PASS"
+    },
+    {
+      "name": "remoteForgedScoreRejected",
+      "status": "PASS"
+    },
+    {
+      "name": "remoteResolveAbsent",
+      "status": "PASS"
+    },
+    {
+      "name": "remoteSelfTargetRejected",
+      "status": "PASS"
+    },
+    {
+      "name": "replacementHasNoChallengeAuthority",
+      "status": "PASS"
+    },
+    {
+      "name": "resolvedCancelCannotRewrite",
+      "status": "PASS"
+    },
+    {
+      "name": "resultNoProfileValueMutation",
+      "status": "PASS"
+    },
+    {
+      "name": "shutdownAndStaleCallbacksAllZero",
+      "status": "PASS"
+    },
+    {
+      "name": "singleExistingDeadlineOwner",
+      "status": "PASS"
+    },
+    {
+      "name": "staleConsumedTimerCannotChangeNewOffer",
+      "status": "PASS"
+    },
+    {
+      "name": "terminalNativeCleanup",
+      "status": "PASS"
+    },
+    {
+      "name": "terminalResultFreeze",
+      "status": "PASS"
+    },
+    {
+      "name": "visibleAuthoredDefinition",
+      "status": "PASS"
+    }
+  ],
+  "normalBoot": {
+    "hostile": {
+      "cases": {
+        "1": "initialNoChallenge",
+        "2": "collapsedNoModalFocus",
+        "3": "visibleAuthoredDefinition",
+        "4": "remoteForgedScoreRejected",
+        "5": "remoteForgedDefinitionRejected",
+        "6": "remoteSelfTargetRejected",
+        "7": "remoteResolveAbsent"
+      }
+    },
+    "shippingUI": {
+      "definitionVisible": true,
+      "collapsed": true,
+      "focused": false
+    },
+    "console": "{\"fields\":{\"component\":\"world\"},\"version\":1,\"environment\":\"server\",\"severity\":\"info\",\"code\":\"WORLD_SPAWNED\",\"atUnixSeconds\":1791213936,\"sequence\":1}\n{\"fields\":{\"component\":\"server\"},\"version\":1,\"environment\":\"server\",\"severity\":\"info\",\"code\":\"BOOTSTRAP_READY\",\"atUnixSeconds\":1791213936,\"sequence\":2}\n{\"fields\":{\"component\":\"client\"},\"version\":1,\"environment\":\"client\",\"severity\":\"info\",\"code\":\"BOOTSTRAP_READY\",\"atUnixSeconds\":1791213936,\"sequence\":1}\n{\"fields\":{\"component\":\"profiles\",\"detailCode\":\"CleanOffline\"},\"version\":1,\"environment\":\"server\",\"severity\":\"info\",\"code\":\"PRODUCTION_LOAD_SETTLED\",\"atUnixSeconds\":1791213938,\"sequence\":3}"
+  },
+  "scoped": {
+    "actualClients": 1,
+    "adapterPeers": 1,
+    "core": [
+      {
+        "datamodel": "Server",
+        "method": "setup()",
+        "result": {
+          "actualClients": 1,
+          "scope": "IMP10World-0d1653bc-cab7-4c8e-8388-28585dc1d820",
+          "cases": {
+            "1": "ordinaryAuthoredStartCapability",
+            "2": "foreignSessionCapabilityRejected",
+            "3": "noNewGameplayOrPartyAuthority"
+          },
+          "adapterPeers": 1
+        }
+      },
+      {
+        "datamodel": "Client",
+        "method": "setup(true)",
+        "result": {
+          "actualClients": 1,
+          "cases": {
+            "1": "initialNoChallenge",
+            "2": "collapsedNoModalFocus",
+            "3": "visibleAuthoredDefinition"
+          }
+        }
+      },
+      {
+        "datamodel": "Server",
+        "method": "offerForClient()",
+        "result": {
+          "cases": {
+            "1": "ordinaryAuthoredStartCapability",
+            "2": "foreignSessionCapabilityRejected",
+            "3": "noNewGameplayOrPartyAuthority",
+            "4": "nativeOfferPinnedDefinitionAndConsent",
+            "5": "singleExistingDeadlineOwner",
+            "6": "offerNoProfileOrStorageMutation",
+            "7": "offerSpamCannotMultiply"
+          },
+          "challenge": {
+            "phase": "Offered",
+            "revision": 1,
+            "definitionVersion": 1,
+            "definitionId": "challenge/home-return-dev-v1",
+            "id": "35d46fb9-9a88-4f97-9648-954c7721ac87",
+            "toUserId": 1925180832,
+            "fromUserId": 700000001,
+            "expiresAt": 1791213869.484744
+          }
+        }
+      },
+      {
+        "datamodel": "Client",
+        "method": "acceptAndFinish()",
+        "result": {
+          "cases": {
+            "1": "initialNoChallenge",
+            "2": "collapsedNoModalFocus",
+            "3": "visibleAuthoredDefinition",
+            "4": "incomingOfferDoesNotStart",
+            "5": "incomingRulesNoFocus",
+            "6": "explicitNativeAccept",
+            "7": "nativeReplayNoSecondStart",
+            "8": "nativeTravelResultProjection",
+            "9": "resolvedCancelCannotRewrite"
+          },
+          "challenge": {
+            "revision": 3,
+            "definitionVersion": 1,
+            "definitionId": "challenge/home-return-dev-v1",
+            "id": "35d46fb9-9a88-4f97-9648-954c7721ac87",
+            "toUserId": 1925180832,
+            "elapsedMs": 216,
+            "phase": "Resolved",
+            "winnerUserId": 1925180832,
+            "fromUserId": 700000001,
+            "expiresAt": 1791213855.815754
+          }
+        }
+      },
+      {
+        "datamodel": "Server",
+        "method": "afterClientFinish()",
+        "result": {
+          "result": {
+            "revision": 3,
+            "definitionVersion": 1,
+            "definitionId": "challenge/home-return-dev-v1",
+            "winnerUserId": 1925180832,
+            "toUserId": 1925180832,
+            "elapsedMs": 216,
+            "id": "35d46fb9-9a88-4f97-9648-954c7721ac87",
+            "fromUserId": 700000001,
+            "phase": "Resolved",
+            "expiresAt": 1791213855.815754
+          },
+          "cases": {
+            "1": "ordinaryAuthoredStartCapability",
+            "2": "foreignSessionCapabilityRejected",
+            "3": "noNewGameplayOrPartyAuthority",
+            "4": "nativeOfferPinnedDefinitionAndConsent",
+            "5": "singleExistingDeadlineOwner",
+            "6": "offerNoProfileOrStorageMutation",
+            "7": "offerSpamCannotMultiply",
+            "8": "realWorldOutcomeOnlyResolution",
+            "9": "ordinaryValidatedHomeArrival",
+            "10": "resultNoProfileValueMutation",
+            "11": "terminalResultFreeze"
+          }
+        }
+      }
+    ],
+    "expiry": {
+      "expired": {
+        "revision": 2,
+        "definitionVersion": 1,
+        "definitionId": "challenge/home-return-dev-v1",
+        "id": "5d918433-532a-4cb3-9a0f-fe99e4dcd710",
+        "toUserId": 1925180832,
+        "reason": "Ignored",
+        "phase": "Expired",
+        "fromUserId": 700000001,
+        "expiresAt": 1791213882.347207
+      },
+      "cases": {
+        "1": "ordinaryAuthoredStartCapability",
+        "2": "foreignSessionCapabilityRejected",
+        "3": "noNewGameplayOrPartyAuthority",
+        "4": "nativeOfferPinnedDefinitionAndConsent",
+        "5": "singleExistingDeadlineOwner",
+        "6": "offerNoProfileOrStorageMutation",
+        "7": "offerSpamCannotMultiply",
+        "8": "realWorldOutcomeOnlyResolution",
+        "9": "ordinaryValidatedHomeArrival",
+        "10": "resultNoProfileValueMutation",
+        "11": "terminalResultFreeze",
+        "12": "terminalNativeCleanup",
+        "13": "staleConsumedTimerCannotChangeNewOffer",
+        "14": "actualOfferExpiryNoPenalty",
+        "15": "ignoredNoValueMutation"
+      }
+    },
+    "replacement": {
+      "cases": {
+        "1": "ordinaryAuthoredStartCapability",
+        "2": "foreignSessionCapabilityRejected",
+        "3": "noNewGameplayOrPartyAuthority",
+        "4": "nativeOfferPinnedDefinitionAndConsent",
+        "5": "singleExistingDeadlineOwner",
+        "6": "offerNoProfileOrStorageMutation",
+        "7": "offerSpamCannotMultiply",
+        "8": "realWorldOutcomeOnlyResolution",
+        "9": "ordinaryValidatedHomeArrival",
+        "10": "resultNoProfileValueMutation",
+        "11": "terminalResultFreeze",
+        "12": "terminalNativeCleanup",
+        "13": "staleConsumedTimerCannotChangeNewOffer",
+        "14": "actualOfferExpiryNoPenalty",
+        "15": "ignoredNoValueMutation",
+        "16": "actualCharacterResetCancels",
+        "17": "oldAvatarCallbackCannotRewrite",
+        "18": "privateProfileSessionReplacementFencesReplay",
+        "19": "replacementHasNoChallengeAuthority"
+      }
+    },
+    "clientExpiry": {
+      "cases": {
+        "1": "initialNoChallenge",
+        "2": "collapsedNoModalFocus",
+        "3": "visibleAuthoredDefinition",
+        "4": "incomingOfferDoesNotStart",
+        "5": "incomingRulesNoFocus",
+        "6": "explicitNativeAccept",
+        "7": "nativeReplayNoSecondStart",
+        "8": "nativeTravelResultProjection",
+        "9": "resolvedCancelCannotRewrite",
+        "10": "nativeDisplayExpired"
+      }
+    },
+    "shutdown": {
+      "actualClients": 1,
+      "counts": {
+        "invites": 0,
+        "challengeParticipants": 0,
+        "pings": 0,
+        "parties": 0,
+        "memberships": 0,
+        "challenges": 0,
+        "liveUsers": 0
+      },
+      "peakTimers": 1,
+      "cases": {
+        "1": "ordinaryAuthoredStartCapability",
+        "2": "foreignSessionCapabilityRejected",
+        "3": "noNewGameplayOrPartyAuthority",
+        "4": "nativeOfferPinnedDefinitionAndConsent",
+        "5": "singleExistingDeadlineOwner",
+        "6": "offerNoProfileOrStorageMutation",
+        "7": "offerSpamCannotMultiply",
+        "8": "realWorldOutcomeOnlyResolution",
+        "9": "ordinaryValidatedHomeArrival",
+        "10": "resultNoProfileValueMutation",
+        "11": "terminalResultFreeze",
+        "12": "terminalNativeCleanup",
+        "13": "staleConsumedTimerCannotChangeNewOffer",
+        "14": "actualOfferExpiryNoPenalty",
+        "15": "ignoredNoValueMutation",
+        "16": "actualCharacterResetCancels",
+        "17": "oldAvatarCallbackCannotRewrite",
+        "18": "privateProfileSessionReplacementFencesReplay",
+        "19": "replacementHasNoChallengeAuthority",
+        "20": "shutdownAndStaleCallbacksAllZero"
+      },
+      "adapterPeers": 1
+    }
+  },
+  "scopeLimits": [
+    "One real native Player; the second participant is an explicit adapter peer with a real ProfileSession and in-memory repository, not a second real client.",
+    "Real participant uses an isolated DEV DataStore through the existing world probe. Its ordinary gameplay owners/authoring/session/remote checks run unchanged.",
+    "Fixture anchors the unattended real avatar root during deadline waits; ordinary travel still uses the real WorldRuntime, safe target and post-relocation/session validation. Reset uses actual LoadCharacterAsync.",
+    "No physical same-live-server reconnect, two-real-client/platform validation or VS1-19 workload is claimed."
+  ],
+  "preliminaryProbeFailures": [
+    {
+      "stage": "offerExpiry",
+      "reason": "Read after 20-second offer plus six-second terminal window; terminal record already cleaned."
+    },
+    {
+      "stage": "resetSetup",
+      "reason": "Follow-on setup did not re-establish ordinary start; inspecting capability, not passing evidence."
+    },
+    {
+      "stage": "replacementClientExpiry",
+      "reason": "Replacement replay attempted inside existing three-second bucket; rate admission preceded owner reconciliation and client retained the valid original offer deadline. Corrected fixture waits for route capacity and asserts the specific fresh-session rejection."
+    },
+    {
+      "stage": "replacementReplayExpectedCode",
+      "reason": "Probe expected a fresh-owner Busy result, but the established gateway rejects the cached request earlier as REJECT_VALIDATION_REQUEST_REUSE. Final probe asserts that exact private identity fence, then requests ordinary Party resync."
+    }
+  ],
+  "sourceTransferRepair": "Exact parity found a Windows default-decoding mojibake in the transferred WorldRuntime display string. UTF-8 transfer was corrected; final 92 sources match repository bytes modulo CRLF exactly.",
+  "finalEdit": {
+    "sourceParity": 92,
+    "sourceFailures": 0,
+    "partsPreserved": 64,
+    "lightingPropertiesPreserved": 8,
+    "geometryAppearanceLightingUnchanged": true,
+    "probesRemoved": true,
+    "ordinaryBootsEnabled": true,
+    "mode": "Edit"
+  },
+  "historicalNotRerun": {
+    "partyFocusedFast": 23,
+    "partyNative": 29,
+    "pingFocusedFast": 26,
+    "pingNative": 28,
+    "imp10NativeC0": 52,
+    "imp10Authoring": 29,
+    "safeRouteSamples": 315,
+    "VS119": "DEFERRED AD-260"
+  },
+  "protocol": {
+    "projection": [
+      "id",
+      "revision",
+      "definitionId",
+      "definitionVersion",
+      "fromUserId",
+      "toUserId",
+      "phase",
+      "expiresAt",
+      "reason?",
+      "winnerUserId?",
+      "elapsedMs?"
+    ],
+    "definitionPresentation": "Matching shared authored definition only; acceptance/start stay private.",
+    "wireBudget": 4096,
+    "pingBackpressure": "Drop oldest optional P0 ping display entries, at most two, only when overlapping readback exceeds the existing budget. Consent/results/membership/invitations and live ping authority remain unchanged."
+  },
+  "localRepair": "Combined four-member Party/ping/Challenge and two-invitation/result fast tests found oversized redundant authored copy. Final compact projection plus existing P0 presentation backpressure preserve the established wire budget; 32 focused and 294 full fast pass."
+}

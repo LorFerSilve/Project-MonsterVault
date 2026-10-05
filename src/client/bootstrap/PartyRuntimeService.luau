@@ -5,6 +5,9 @@
 local RouteIds =
 	require(game:GetService("ReplicatedStorage").MonsterVault.Shared.contracts.RouteIds)
 local PartyRuntimeService = {}
+local FriendlyChallengeDefinition = require(
+	game:GetService("ReplicatedStorage").MonsterVault.Shared.config.FriendlyChallengeDefinition
+)
 
 function PartyRuntimeService.new(options: {
 	networking: any,
@@ -47,15 +50,16 @@ function PartyRuntimeService.new(options: {
 		end
 		clear()
 		local row = 0
-		local function label(text: string)
+		local function label(text: string, height: number?)
 			local item = Instance.new("TextLabel")
 			item.Size, item.Position =
-				globals.UDim2.new(1, -8, 0, 22), globals.UDim2.fromOffset(4, row)
+				globals.UDim2.new(1, -8, 0, height or 22), globals.UDim2.fromOffset(4, row)
+			item.TextWrapped = height ~= nil
 			item.BackgroundTransparency, item.TextSize, item.Text = 1, 14, text
 			item.TextColor3, item.TextXAlignment =
 				globals.Color3.new(1, 1, 1), Enum.TextXAlignment.Left
 			item.Parent = panel
-			row += 24
+			row += (height or 22) + 2
 		end
 		local function button(text: string, action: () -> ())
 			local item = Instance.new("TextButton")
@@ -87,8 +91,8 @@ function PartyRuntimeService.new(options: {
 		)
 		button(
 			if state.allowInvites
-				then "Invites: Same server (disable)"
-				else "Invites: None (enable)",
+				then "Party/challenge offers: Same server (disable)"
+				else "Party/challenge offers: None (enable)",
 			function()
 				send(
 					RouteIds.commands.socialPartySetInvitePolicy,
@@ -224,6 +228,99 @@ function PartyRuntimeService.new(options: {
 					ping.position.z
 				)
 			)
+		end
+		local challenge = state.challenge
+		if challenge then
+			local knownDefinition = challenge.definitionId == FriendlyChallengeDefinition.id
+				and challenge.definitionVersion == FriendlyChallengeDefinition.version
+			label(
+				(
+					if knownDefinition
+						then FriendlyChallengeDefinition.title
+						else challenge.definitionId
+				)
+					.. " / "
+					.. challenge.phase
+			)
+			label(
+				if knownDefinition
+					then "Rules: " .. FriendlyChallengeDefinition.rules
+					else "Definition unavailable; cancel or decline.",
+				128
+			)
+			label(
+				"Challenge "
+					.. string.sub(challenge.id, 1, 8)
+					.. " / revision "
+					.. tostring(challenge.revision)
+			)
+			label(
+				"Opponent: "
+					.. tostring(
+						if challenge.fromUserId == options.player.UserId
+							then challenge.toUserId
+							else challenge.fromUserId
+					)
+			)
+			label(string.format("Expires in %.1fs", math.max(0, challenge.expiresAt - clock())))
+			if challenge.phase == "Offered" and challenge.toUserId == options.player.UserId then
+				if knownDefinition then
+					button("Accept Home Return", function()
+						send(
+							RouteIds.commands.socialChallengeRespond,
+							{ challengeId = challenge.id, accept = true },
+							challenge.revision
+						)
+					end)
+				end
+				button("Decline challenge", function()
+					send(
+						RouteIds.commands.socialChallengeRespond,
+						{ challengeId = challenge.id, accept = false },
+						challenge.revision
+					)
+				end)
+			elseif challenge.phase == "Active" then
+				label("Use ordinary Home Return; no reward or stake.")
+			end
+			if challenge.phase == "Offered" or challenge.phase == "Active" then
+				button("Cancel challenge", function()
+					send(
+						RouteIds.commands.socialChallengeCancel,
+						{ challengeId = challenge.id },
+						challenge.revision
+					)
+				end)
+			elseif challenge.phase == "Resolved" then
+				label(
+					"Winner: "
+						.. tostring(challenge.winnerUserId)
+						.. " / "
+						.. tostring(challenge.elapsedMs)
+						.. "ms"
+				)
+			else
+				label("Reason: " .. tostring(challenge.reason))
+			end
+		else
+			label("No challenge / " .. FriendlyChallengeDefinition.title)
+			label("Rules: " .. FriendlyChallengeDefinition.rules, 128)
+			local target = Instance.new("TextBox")
+			target.Size, target.Position =
+				globals.UDim2.new(1, -8, 0, 24), globals.UDim2.fromOffset(4, row)
+			target.PlaceholderText, target.Text, target.TextSize, target.Parent =
+				"Challenge target UserId", "", 14, panel
+			row += 26
+			button("Offer Home Return (my consent)", function()
+				local userId = tonumber(target.Text)
+				if userId and userId > 0 and userId % 1 == 0 then
+					send(RouteIds.commands.socialChallengeRequest, {
+						targetUserId = userId,
+						definitionId = FriendlyChallengeDefinition.id,
+						definitionVersion = FriendlyChallengeDefinition.version,
+					})
+				end
+			end)
 		end
 		panel.CanvasSize = globals.UDim2.fromOffset(0, row)
 		arm()

@@ -75,6 +75,83 @@ function PartyProjectionV1.validPingPreference(payload: any, expected: any): boo
 		and keys(payload, { socialPingsMuted = true })
 		and type(payload.socialPingsMuted) == "boolean"
 end
+function PartyProjectionV1.validChallengeRequest(payload: any, expected: any): boolean
+	return expected == nil
+		and keys(payload, { targetUserId = true, definitionId = true, definitionVersion = true })
+		and integer(payload.targetUserId, 1)
+		and id(payload.definitionId)
+		and integer(payload.definitionVersion, 1)
+end
+function PartyProjectionV1.validChallengeRespond(payload: any, expected: any): boolean
+	return integer(expected, 1)
+		and keys(payload, { challengeId = true, accept = true })
+		and id(payload.challengeId)
+		and type(payload.accept) == "boolean"
+end
+function PartyProjectionV1.validChallengeCancel(payload: any, expected: any): boolean
+	return integer(expected, 1)
+		and keys(payload, { challengeId = true })
+		and id(payload.challengeId)
+end
+local function validChallenge(c: any): boolean
+	if
+		not keys(c, {
+			id = true,
+			revision = true,
+			definitionId = true,
+			definitionVersion = true,
+			fromUserId = true,
+			toUserId = true,
+			phase = true,
+			expiresAt = true,
+			winnerUserId = true,
+			elapsedMs = true,
+			reason = true,
+		})
+		or not id(c.id)
+		or not integer(c.revision, 1)
+		or not id(c.definitionId)
+		or not integer(c.definitionVersion, 1)
+		or not integer(c.fromUserId, 1)
+		or not integer(c.toUserId, 1)
+		or c.fromUserId == c.toUserId
+		or not remaining(c.expiresAt)
+	then
+		return false
+	end
+	if
+		not ({
+			Offered = true,
+			Active = true,
+			Declined = true,
+			Cancelled = true,
+			Expired = true,
+			Resolved = true,
+		} :: any)[c.phase]
+	then
+		return false
+	end
+	local live = c.phase == "Offered" or c.phase == "Active"
+	if c.phase == "Resolved" then
+		return c.reason == nil
+			and integer(c.elapsedMs, 0)
+			and (c.winnerUserId == c.fromUserId or c.winnerUserId == c.toUserId)
+	end
+	if c.winnerUserId ~= nil or c.elapsedMs ~= nil then
+		return false
+	end
+	if live then
+		return c.reason == nil
+	end
+	return c.reason == "Declined"
+		or c.reason == "Cancelled"
+		or c.reason == "Ignored"
+		or c.reason == "TimedOut"
+		or c.reason == "Interrupted"
+		or c.reason == "Unavailable"
+		or c.reason == "DefinitionChanged"
+		or c.reason == "AudienceRestricted"
+end
 function PartyProjectionV1.validWaypoint(value: any): boolean
 	if not keys(value, { x = true, y = true, z = true }) then
 		return false
@@ -108,10 +185,14 @@ function PartyProjectionV1.validSnapshot(payload: any): boolean
 			rejoin = true,
 			pingsMuted = true,
 			pings = true,
+			challenge = true,
 		})
 		or type(state.allowInvites) ~= "boolean"
 		or not array(state.incoming, 2)
 	then
+		return false
+	end
+	if state.challenge ~= nil and not validChallenge(state.challenge) then
 		return false
 	end
 	if state.party ~= nil then

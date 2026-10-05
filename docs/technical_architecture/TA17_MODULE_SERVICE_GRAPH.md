@@ -58,6 +58,8 @@ Each domain exposes one narrow public API module and hides internals below its o
 
 AD-255 binds `domains/world/{WorldRegistry,WorldDefinitions,WorldProgressionService}` to the existing `WorldService`. Bootstrap validates registries during composition construction, builds the immutable authored spatial index and starts world before profiles; capture depends on both. ProfileRuntimeService prepares/validates World V1, injects the actual mastery reader into progression and exposes WorldActionUseCase for P2/recovery. CaptureFinalizationUseCase receives a same-commit secured-evidence callback. Networking dispatches existing interaction IDs and Class A world resync through WorldRuntimeService. No domain imports another domain; current fixture spawn/variant/production behavior is retained.
 
+AD-267 extends the existing social P0 owner for one authored Friendly Challenge. Shipping PartyRuntimeService depends on profiles/world/capture and injects read-only world capability plus passive ordinary-travel completion and existing avatar interruption callbacks. World/capture do not import the social domain. World starts first; capture binds trusted presence; social then binds observations and starts its existing shared deadline owner. Reverse shutdown removes social bindings before capture/world stop. No new service root, writer, scheduler or dependency cycle is introduced.
+
 ### infrastructure
 
 - persistence;

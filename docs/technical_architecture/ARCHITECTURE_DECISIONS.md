@@ -3971,3 +3971,33 @@ Settings.UpdatePreferences activates only `{socialPingsMuted:boolean}`, no expec
 ### Boundaries
 
 No new remote, protocol generation, ProfileSession writer/schema migration, gameplay mutation, secret target disclosure, challenge/visitor/event/reward/commerce behavior or polished presentation is introduced. Paid status cannot alter authority, priority, rate or mute. Multiplayer/platform social-safety and scale/release gates retain their owners. [Ping evidence](../implementation/IMP11_SOCIAL_PING_EVIDENCE.md) and [IMP-11 matrix](../implementation/IMP11_GATE_MATRIX.md) record this slice without phase closure.
+
+---
+
+## AD-267 — Bind the authored Friendly Challenge consent and lifecycle wire
+
+**Date:** 2026-10-05
+
+**Status:** Accepted — within the owner-authorized third IMP-11 Friendly Challenge slice
+
+**Owning phase:** TA-17 runtime namespace; implements locked TA-10 §10 / GDS-10 PC-03..07 and LC-07 / AD-101
+
+### Context
+
+TA-10 already permits explicit session-only non-destructive route-time/status challenges. Reserved ChallengeRequest/Respond lacked definition/version consent, revision preconditions, cancellation and bounded lifecycle projection. Those missing wire details must be bound to expose the existing contract safely; no design rule is changed.
+
+### Decision
+
+Activate one visible authored DEV definition, `challenge/home-return-dev-v1` version 1, Home Return. Both participants must be at discovered Starter Travel with ordinary Home Hub return available under the existing world/session/access/discovery/capture/cooldown rules. This limits the relevant capability equally; it grants no new travel capability and reads no wealth or paid status. Party membership is unnecessary. First ordinary server-confirmed Home Return after the common acceptance boundary wins a transient elapsed-time/status result. Same-time completions use server admission order. There is no reward, persistent score or value mutation.
+
+Class B ChallengeRequest accepts exactly `{targetUserId,definitionId,definitionVersion}`, no expectedRevision. The request is the initiator's consent to that exact authored definition. ChallengeRespond accepts exactly `{challengeId,accept}` with required Challenge expectedRevision; only the intended live target can accept. Add Class B ChallengeCancel `{challengeId}` with required Challenge expectedRevision for either participant. There is no client scoring/result route. Exact Player/private Ready ProfileSession, pinned character/generation, authored definition identity/version and participant guard fence transitions and passive ordinary-world completion tickets. Definition replacement cancels rather than renewing consent silently.
+
+Extend the existing recipient-only full Social.StateChanged/Party resync with one optional Challenge projection: `id,revision,definitionId,definitionVersion,fromUserId,toUserId,phase,expiresAt,reason?,winnerUserId?,elapsedMs?`. Phase is Offered/Active/Declined/Cancelled/Expired/Resolved; acceptance/start stay private. The shared authored definition supplies visible title/rules only for matching ID/version; unknown versions expose no Accept control. Compact readback preserves both Party invitations and Challenge result inside the existing 4096-byte wire budget. Overlapping P0 ping presentation may drop oldest entries, at most two, under established backpressure; membership/consent/result and live ping authority are unchanged. The enclosing view revision orders readback independently of Party membership revision. No private session identity is serialized. Old V1 Party projections remain valid. Incoming offers stay collapsed and never steal focus.
+
+Use the existing P0 social owner, non-yielding participant admission, gateway/replay and one social next-deadline timer. DEV bounds: one record per participant (including the brief terminal notice), two participants, 30 live records, 20-second offer, 30-second active deadline and six-second terminal readback. ChallengeRequest uses the existing rate owner at one request per three seconds; existing global budget, sender/recipient invitation cooldown and private-session replay apply. The existing session-only invitation audience is shared by Party/challenge offers: default None, explicit SameServer opt-in; revocation cancels incoming pending offers. Accepted participation is ended through cancellation, never a forced value penalty.
+
+Reset/death, recovery, other authorized travel, disconnect, unavailable/replaced identity or incompatible capability cancels without loss. Disconnect releases affected private references/participant index immediately; the peer's bounded terminal notice then expires. Party's seat grace never restores challenge participation. Shutdown clears all transient state/observation bindings. No per-challenge task, Heartbeat or gameplay event history is introduced.
+
+### Boundaries
+
+No reward/P2 transaction/profile field, forced relocation, capture/ownership/Energy/mastery/access mutation, wager, damage, matchmaking, ranked ladder, visitor/showcase, event, trade or commerce authority is added. Ordinary travel remains its existing owner's decision; observer failure cannot change its result. Paid status cannot change consent, priority, rate, capability or scoring. [Friendly Challenge evidence](../implementation/IMP11_FRIENDLY_CHALLENGE_EVIDENCE.md) and [IMP-11 matrix](../implementation/IMP11_GATE_MATRIX.md) retain broader multiplayer/platform and scale/release owners.

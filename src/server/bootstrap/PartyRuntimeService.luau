@@ -5,6 +5,7 @@ local PartyProjectionV1 = require(shared.contracts.PartyProjectionV1)
 local WireValidation = require(shared.contracts.WireValidation)
 local RouteIds = require(shared.contracts.RouteIds)
 local PartyPolicy = require(shared.config.PartyPolicy)
+local FriendlyChallengeDefinition = require(shared.config.FriendlyChallengeDefinition)
 local PartyService = require(script.Parent.Parent.domains.social.PartyService)
 
 local PartyRuntimeService = {}
@@ -17,6 +18,7 @@ function PartyRuntimeService.new(options: {
 	monotonicSeconds: (() -> number)?,
 	scheduler: any?,
 	worldRuntime: any?,
+	captureRuntime: any?,
 	presentationSeconds: (() -> number)?,
 })
 	local clock = options.monotonicSeconds or os.clock
@@ -30,6 +32,14 @@ function PartyRuntimeService.new(options: {
 	local owner = PartyService.new({
 		policy = PartyPolicy,
 		pingContract = PartyProjectionV1,
+		challengeContract = PartyProjectionV1,
+		challengeDefinition = FriendlyChallengeDefinition,
+		projectionFits = WireValidation.payload,
+		challengeCapability = function(player: any, session: any, atStart: boolean): any
+			return if options.worldRuntime
+				then options.worldRuntime.challengeCapability(player, session, atStart)
+				else nil
+		end,
 		presentationSeconds = options.presentationSeconds or function()
 			return game:GetService("Workspace"):GetServerTimeNow()
 		end,
@@ -141,9 +151,38 @@ function PartyRuntimeService.new(options: {
 		[RouteIds.commands.socialPartyRejoin] = PartyProjectionV1.validParty,
 		[RouteIds.commands.socialPartySetInvitePolicy] = PartyProjectionV1.validInvitePolicy,
 		[RouteIds.commands.socialPing] = PartyProjectionV1.validPing,
+		[RouteIds.commands.socialChallengeRequest] = PartyProjectionV1.validChallengeRequest,
+		[RouteIds.commands.socialChallengeRespond] = PartyProjectionV1.validChallengeRespond,
+		[RouteIds.commands.socialChallengeCancel] = PartyProjectionV1.validChallengeCancel,
 		[RouteIds.commands.settingsUpdatePreferences] = PartyProjectionV1.validPingPreference,
 	}
 	local operations = {
+		[RouteIds.commands.socialChallengeRequest] = function(
+			player: any,
+			payload: any,
+			_expected: any
+		): string
+			return owner.challengeRequest(
+				player,
+				payload.targetUserId,
+				payload.definitionId,
+				payload.definitionVersion
+			)
+		end,
+		[RouteIds.commands.socialChallengeRespond] = function(
+			player: any,
+			payload: any,
+			expected: any
+		): string
+			return owner.challengeRespond(player, payload.challengeId, payload.accept, expected)
+		end,
+		[RouteIds.commands.socialChallengeCancel] = function(
+			player: any,
+			payload: any,
+			expected: any
+		): string
+			return owner.challengeCancel(player, payload.challengeId, expected)
+		end,
 		[RouteIds.commands.socialPing] = function(player: any, payload: any, expected: any): string
 			return owner.ping(player, payload.partyId, payload.pingKind, expected)
 		end,
@@ -229,6 +268,31 @@ function PartyRuntimeService.new(options: {
 	local function start()
 		assert(not running and generation == 0, "Party runtime already started")
 		running, generation = true, generation + 1
+		if options.worldRuntime and options.worldRuntime.bindChallengeLifecycle then
+			options.worldRuntime.bindChallengeLifecycle({
+				begin = function(player: any, context: any, target: any, recovery: boolean): any
+					local observation =
+						owner.beginChallengeTravel(player, context, target, recovery)
+					flush()
+					arm()
+					return observation
+				end,
+				complete = function(observation: any)
+					owner.completeChallengeTravel(observation)
+					flush()
+					arm()
+				end,
+			})
+		end
+		if options.captureRuntime and options.captureRuntime.bindChallengeInterruption then
+			options.captureRuntime.bindChallengeInterruption(
+				function(player: any, character: any, changed: boolean)
+					owner.interruptChallenge(player, character, changed)
+					flush()
+					arm()
+				end
+			)
+		end
 		table.insert(
 			connections,
 			options.players.PlayerAdded:Connect(function(player)
@@ -250,6 +314,12 @@ function PartyRuntimeService.new(options: {
 	end
 	local function stop(): { string }
 		running, generation, ticket = false, generation + 1, ticket + 1
+		if options.worldRuntime and options.worldRuntime.bindChallengeLifecycle then
+			options.worldRuntime.bindChallengeLifecycle(nil)
+		end
+		if options.captureRuntime and options.captureRuntime.bindChallengeInterruption then
+			options.captureRuntime.bindChallengeInterruption(nil)
+		end
 		if timer ~= nil then
 			pcall(scheduler.cancel, timer)
 		end
@@ -263,7 +333,9 @@ function PartyRuntimeService.new(options: {
 	end
 	return {
 		id = "social",
-		dependencies = { "profiles" },
+		dependencies = if options.captureRuntime
+			then { "profiles", "world", "capture" }
+			else if options.worldRuntime then { "profiles", "world" } else { "profiles" },
 		start = start,
 		stop = stop,
 		schemas = schemas,

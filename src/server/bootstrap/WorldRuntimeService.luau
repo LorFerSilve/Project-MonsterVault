@@ -95,6 +95,7 @@ function WorldRuntimeService.new(
 	local prompts = {}
 	local captureLifecycle: any = nil
 	local travelOwner: any = nil
+	local challengeLifecycle: any = nil
 	local function resync(player: any, requestId: string): string
 		if
 			not running
@@ -911,6 +912,21 @@ function WorldRuntimeService.new(
 			end,
 			destination = destination,
 			observe = observeNode,
+			beginTravelObservation = function(
+				player: any,
+				context: any,
+				target: any,
+				recovery: boolean
+			): any
+				return if challengeLifecycle
+					then challengeLifecycle.begin(player, context, target, recovery)
+					else nil
+			end,
+			completeTravelObservation = function(observation: any)
+				if challengeLifecycle then
+					challengeLifecycle.complete(observation)
+				end
+			end,
 			interrupt = function(player: any, context: any, current: () -> boolean): boolean
 				return current() and captureLifecycle.interrupt(player, context.generation)
 			end,
@@ -1069,6 +1085,7 @@ function WorldRuntimeService.new(
 			travelOwner.stop()
 		end
 		captureLifecycle = nil
+		challengeLifecycle = nil
 		for _, connection in landmarkConnections do
 			connection:Disconnect()
 		end
@@ -1124,6 +1141,30 @@ function WorldRuntimeService.new(
 			-- Only the sender's observed, accessible authored-region position.
 			-- No semantic target lookup, recipient access grant or discovery.
 			return { x = context.position.X, y = context.position.Y, z = context.position.Z }
+		end,
+		challengeCapability = function(player: any, expectedSession: any, atStart: boolean): any
+			local context = if running then travelContext(player) else nil
+			if
+				context == nil
+				or context.session ~= expectedSession
+				or not context.validPosition
+			then
+				return nil
+			end
+			if
+				atStart
+				and (
+					travelOwner == nil
+					or context.nodeId ~= "travel-node/starter"
+					or not travelOwner.available(player, context.generation, "travel-node/home-hub")
+				)
+			then
+				return nil
+			end
+			return { character = context.character, generation = context.generation }
+		end,
+		bindChallengeLifecycle = function(owner: any)
+			challengeLifecycle = owner
 		end,
 		bindCaptureLifecycle = function(owner: any)
 			captureLifecycle = owner
