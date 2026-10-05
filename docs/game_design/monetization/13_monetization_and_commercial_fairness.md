@@ -493,6 +493,26 @@ Cosmetic commercial content must not masquerade as collectible Species/Mutation 
 
 No paid loot box, gacha, egg, crate, spin or premium random Creature Instance/Variant generator is authorized at baseline.
 
+### RV-08 — Free Daily Activity Wheel is not a commercial product
+
+GDS-16 may provide one activity-earned free Daily Activity Wheel using bounded server-authoritative rewards. The opportunity cannot be purchased, replenished with Robux, replenished with paid in-game currency or converted into a paid random-item funnel under baseline GDS-13.
+
+Guaranteed deterministic products may be presented elsewhere in the same return/session flow, provided the free wheel result and paid offer are not misrepresented as one another.
+
+### RV-09 — Paid random wheel/spin monetization requires explicit reopen
+
+Robux-paid spins, paid spin tickets, paid currency used for random spins and equivalent indirect paid random outcomes are outside baseline authorization.
+
+Any future proposal requires:
+
+- GDS-13/GDS-15 change control;
+- current Roblox randomized-item policy validation;
+- regional/player PolicyService eligibility handling;
+- required odds disclosure before purchase;
+- economy/fairness review.
+
+No implementation may infer authorization merely because a free wheel exists.
+
 ## 12. World and Progression Monetization
 
 ### WP-01 — No paid required-region bypass
