@@ -1,55 +1,97 @@
 # Implementation Documentation
 
-> **Status:** OPEN — IMP-1 through IMP-8 complete under AD-249; IMP-9 active
+> **Status:** OPEN — IMP-9 COMPLETE; IMP-10 FUNCTIONALLY COMPLETE under AD-260; IMP-11 OPEN with Party, Social Ping, Friendly Challenge and Showcase/Visitor dependencies COMPLETE; Golden Playable Vertical Slice READY TO BEGIN; Halloween 2026 launch theme bound; VS1-19 DEFERRED to Scale Readiness
 > **Opened by:** TA-17 Implementation Locked — PASS (2026-09-24)
 
 This directory is the authoritative implementation handoff and phase-evidence layer.
 
-## Completed pre-code gates
+## Current implementation state
 
-1. **SATISFIED:** GDS-17 Design Complete — PASS.
-2. **SATISFIED:** TA-0 through TA-15 Architecture Complete — PASS.
-3. **SATISFIED:** TA-16 Architecture Integration Complete — PASS.
-4. **SATISFIED:** TA-17 implementation roadmap, VS-1, toolchain, module graph, test/CI and change-control contract locked.
-5. **SATISFIED:** project status changed to implementation open.
+Completed / advanced:
 
-## Completed implementation phase
+- IMP-1 — Contracts and Test Harness: COMPLETE.
+- IMP-2 — Composition and Diagnostics: COMPLETE.
+- IMP-3 — Profile Session Foundation: COMPLETE.
+- IMP-4 — V1 Networking and Projection: COMPLETE.
+- IMP-5 — Minimal Runtime World: COMPLETE.
+- IMP-6 — Capture and Durable Ownership: COMPLETE.
+- IMP-7 — Capture Client Experience: COMPLETE for its phase gates.
+- IMP-8 — VS-1 Closure: COMPLETE with registered deferred scale validation.
+- IMP-9 — Vault / Economy / Progression: COMPLETE.
+- IMP-10 — World Scaling: FUNCTIONALLY COMPLETE under AD-260.
+- IMP-11 — OPEN; Party, Social Ping, Friendly Challenge and Showcase/Visitor representative dependencies are complete. Shared Objectives/Collaboration Rewards and event/cross-server work remain open.
 
-> **IMP-1 — Contracts and Test Harness: COMPLETE — PASS** ([evidence](IMP1_IMPLEMENTATION_EVIDENCE.md))
+VS1-19 remains DEFERRED under AD-260 as a future Scale Readiness Gate. It is not a passing result.
 
-## Completed implementation phase
+## Current production track
 
-> **IMP-2 — Composition and Diagnostics: COMPLETE — PASS** ([evidence](IMP2_IMPLEMENTATION_EVIDENCE.md))
+The first **Golden Playable Vertical Slice / production-quality visual pass is ready to begin** on the stable world/capture/Collection/Vault/display/social foundation.
 
-## Completed implementation phase
+Halloween 2026 is the owner-authorized first-release theme.
 
-> **IMP-3 — Profile Session Foundation: COMPLETE — PASS** ([evidence](IMP3_IMPLEMENTATION_EVIDENCE.md))
+The governing release-theme rule is:
 
-## Completed implementation phase
+**permanent production-quality MonsterVault base + removable/configurable Halloween seasonal layer**
 
-> **IMP-4 — V1 Networking and Projection: COMPLETE — PASS** ([evidence](IMP4_IMPLEMENTATION_EVIDENCE.md))
+Launch-theme brief:
 
-## Completed implementation phase
+- [HALLOWEEN_2026_LAUNCH_THEME.md](HALLOWEEN_2026_LAUNCH_THEME.md)
 
-> **IMP-5 — Minimal Runtime World: COMPLETE — PASS** ([evidence](IMP5_IMPLEMENTATION_EVIDENCE.md))
+Golden production package:
 
-## Completed implementation phase
+- [production/README.md](production/README.md)
 
-> **IMP-6 — Capture and Durable Ownership: COMPLETE — local, DEV Studio and pull-request CI PASS** ([evidence](IMP6_IMPLEMENTATION_EVIDENCE.md))
+The production package contains:
 
-## Active dependency
+- art/visual bible;
+- concrete asset manifest;
+- Blender -> Roblox source/export/import standard;
+- reusable native UI/UX baseline;
+- Halloween content/owner matrix;
+- pre-measurement visual performance budgets;
+- Golden Slice acceptance matrix;
+- Work-mode execution handoff.
 
-> **IMP-9 — Vault / Economy / Progression**
+These production documents do not supersede approved GDS/TA contracts and do not mark PQL gates complete.
 
-IMP-8 is **COMPLETE with deferred validation under AD-249** ([evidence](IMP8_IMPLEMENTATION_EVIDENCE.md)). VS1-19 remains DEFERRED and must pass before IMP-10 COMPLETE. IMP-9 capacity, reconciliation, Overflow-Held resolution, assignments, production/offline settlement, Energy/Production Claim and the minimal progression quote/atomic purchase/persistent unlock chain have [local and connected DEV Studio evidence](IMP9_IMPLEMENTATION_EVIDENCE.md). The existing +6 capacity tier is the sole bound DEV purchase; remaining Vault/Capture Capability/Access definitions and the complete TA-8 gate audit are next. IMP-9 remains OPEN and IMP-10 has not started.
+## Key roadmaps and evidence
 
-Roadmap: [IMPLEMENTATION_ROADMAP.md](IMPLEMENTATION_ROADMAP.md)  
-First vertical slice: [FIRST_VERTICAL_SLICE.md](FIRST_VERTICAL_SLICE.md)
+- [IMPLEMENTATION_ROADMAP.md](IMPLEMENTATION_ROADMAP.md)
+- [FIRST_VERTICAL_SLICE.md](FIRST_VERTICAL_SLICE.md)
+- [IMP8_IMPLEMENTATION_EVIDENCE.md](IMP8_IMPLEMENTATION_EVIDENCE.md)
+- [IMP9_GATE_AUDIT.md](IMP9_GATE_AUDIT.md)
+- [IMP9_IMPLEMENTATION_EVIDENCE.md](IMP9_IMPLEMENTATION_EVIDENCE.md)
+- [IMP10_GATE_MATRIX.md](IMP10_GATE_MATRIX.md)
+- [IMP10_IMPLEMENTATION_EVIDENCE.md](IMP10_IMPLEMENTATION_EVIDENCE.md)
+- [IMP11_GATE_MATRIX.md](IMP11_GATE_MATRIX.md)
+- [IMP11_PARTY_EVIDENCE.md](IMP11_PARTY_EVIDENCE.md)
+- [IMP11_SOCIAL_PING_EVIDENCE.md](IMP11_SOCIAL_PING_EVIDENCE.md)
+- [IMP11_FRIENDLY_CHALLENGE_EVIDENCE.md](IMP11_FRIENDLY_CHALLENGE_EVIDENCE.md)
+- [IMP11_SHOWCASE_VISITOR_EVIDENCE.md](IMP11_SHOWCASE_VISITOR_EVIDENCE.md)
 
 ## Implementation rule
 
-Implementation may proceed only inside the GDS/TA contracts. A discovered architecture conflict is escalated to the owning TA/GDS rather than patched around locally.
+Implementation may proceed only inside the GDS/TA contracts.
+
+A discovered architecture conflict is escalated to the owning TA/GDS rather than patched around locally.
+
+Visual production follows the same rule:
+
+- presentation observes authoritative state;
+- asset/UI work does not invent gameplay truth;
+- timed event authority remains with IMP-11;
+- commerce remains with IMP-13;
+- production seasonal activation/config/analytics remains with IMP-14.
 
 ## Release boundary
 
-Implementation open does **not** mean production release is open. STG/PROD publishing remains gated by TA-15 C0/C1 evidence, TA-14 budgets, actual environment bindings and the later implementation/release phases.
+Implementation open and Golden Slice readiness do **not** mean production release is open.
+
+STG/PROD publishing remains gated by:
+
+- applicable TA-14/TA-15 evidence;
+- future Scale Readiness where required;
+- remaining implementation dependencies;
+- applicable PQL-1..PQL-10 completion;
+- current platform/policy validation;
+- release hardening.
