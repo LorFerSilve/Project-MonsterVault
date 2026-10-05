@@ -367,6 +367,41 @@ The objective pool should rotate among meaningful collection, exploration, Vault
 
 Exact objective counts, Energy/reward amounts and cadence are tuneable content/economy values. They must be validated against GDS-8 source/sink health and cannot silently become the dominant Energy source or replace the core capture/progression loop.
 
+### DW-12 — Daily Activity Wheel is authorized
+
+MonsterVault may offer one **Daily Activity Wheel** opportunity after the player completes a qualifying meaningful-play action for that day. Merely opening the experience, remaining AFK or maintaining a login streak does not qualify.
+
+Baseline qualification should reuse an already-authorized action such as completing one Daily Expedition, securing a creature, or completing another bounded activity explicitly approved by the owning system.
+
+### DW-13 — Wheel rewards are bounded and non-critical
+
+The free wheel may award only bounded rewards that do not determine ordinary access, mastery or competitive rare-creature opportunity.
+
+Launch-oriented reward classes may include:
+
+- small bounded Energy grants;
+- deterministic presentation/cosmetic rewards from an approved pool;
+- temporary non-competitive presentation effects;
+- other explicitly approved low-impact rewards.
+
+A wheel reward cannot directly grant Region Mastery, required Access Unlocks, rare spawn priority, capture advantage, event-completion provenance or a required Creature Instance.
+
+### DW-14 — Wheel randomness is server-authoritative and transparent
+
+The server selects the result from a versioned bounded reward table using server-owned randomness and an exact-once daily opportunity identity. The client cannot choose the reward, weights, seed or eligibility.
+
+Even when platform rules do not require odds disclosure for a free random mechanic, MonsterVault should show understandable reward categories and odds/weight information where practical to preserve player trust.
+
+### DW-15 — No paid extra spins at baseline
+
+Robux, paid in-game currency, paid tickets or a paid entitlement cannot buy additional random wheel spins under the baseline design.
+
+A future paid-random wheel would require explicit GDS-13/GDS-15 change control and current platform/regional policy review before implementation.
+
+### DW-16 — Missing a wheel is not punished
+
+Unused daily wheel opportunities need not accumulate indefinitely, but missing one cannot reset a streak, reduce later base rewards or block mainline progression.
+
 ## 11. Live-Content Cadence Philosophy
 
 ### LC-01 — Weekly capability is a production aspiration, not an attendance obligation
@@ -979,6 +1014,8 @@ optional paid offline convenience with free base preserved
         +
 optional Daily Expeditions / Weekly Objectives
         +
+activity-earned Daily Wheel opportunity
+        +
 rotating genuine world/event opportunities
         +
 social/collection goals
@@ -1119,6 +1156,10 @@ Semantic/change-control decisions:
 | Payer has low retention score | Cannot receive better rarity odds |
 | Non-payer has low retention score | Cannot receive manipulated odds |
 | Player opens game daily | No automatic login currency |
+| Player completes qualifying daily activity | At most one server-authoritative Daily Activity Wheel opportunity becomes available |
+| Player spins Daily Activity Wheel twice/retries | Same daily opportunity resolves once; no duplicate reward |
+| Player misses Daily Activity Wheel | No streak loss, debt or reduced future base reward |
+| Player offers Robux for another random spin | Not authorized at baseline; paid-random change control required |
 | Player misses 30 days | Collection/progression remains intact |
 | Notification says event starts at real time | Allowed if platform/policy eligible |
 | Notification says creature will disappear when false | Invalid |
