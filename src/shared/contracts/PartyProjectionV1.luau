@@ -64,6 +64,33 @@ function PartyProjectionV1.validInvitePolicy(payload: any, expected: any): boole
 		and keys(payload, { allowInvites = true })
 		and type(payload.allowInvites) == "boolean"
 end
+function PartyProjectionV1.validPing(payload: any, expected: any): boolean
+	return integer(expected, 1)
+		and keys(payload, { partyId = true, pingKind = true })
+		and id(payload.partyId)
+		and payload.pingKind == "ComeHere"
+end
+function PartyProjectionV1.validPingPreference(payload: any, expected: any): boolean
+	return expected == nil
+		and keys(payload, { socialPingsMuted = true })
+		and type(payload.socialPingsMuted) == "boolean"
+end
+function PartyProjectionV1.validWaypoint(value: any): boolean
+	if not keys(value, { x = true, y = true, z = true }) then
+		return false
+	end
+	for _, axis in { "x", "y", "z" } do
+		local coordinate = value[axis]
+		if
+			type(coordinate) ~= "number"
+			or coordinate ~= coordinate
+			or math.abs(coordinate) > 100_000
+		then
+			return false
+		end
+	end
+	return true
+end
 function PartyProjectionV1.validSnapshot(payload: any): boolean
 	if
 		not keys(payload, { domain = true, revision = true, state = true })
@@ -74,7 +101,14 @@ function PartyProjectionV1.validSnapshot(payload: any): boolean
 	end
 	local state = payload.state
 	if
-		not keys(state, { allowInvites = true, party = true, incoming = true, rejoin = true })
+		not keys(state, {
+			allowInvites = true,
+			party = true,
+			incoming = true,
+			rejoin = true,
+			pingsMuted = true,
+			pings = true,
+		})
 		or type(state.allowInvites) ~= "boolean"
 		or not array(state.incoming, 2)
 	then
@@ -128,6 +162,45 @@ function PartyProjectionV1.validSnapshot(payload: any): boolean
 		end
 	end
 	local seen = {}
+	-- Additive V1 fields: old Party snapshots remain safe with suppression on.
+	if state.pings ~= nil or state.pingsMuted ~= nil then
+		if type(state.pingsMuted) ~= "boolean" or not array(state.pings, 2) then
+			return false
+		end
+		if #state.pings > 0 and (state.party == nil or state.pingsMuted) then
+			return false
+		end
+		for _, ping in state.pings do
+			if
+				not keys(ping, {
+					id = true,
+					senderUserId = true,
+					kind = true,
+					position = true,
+					expiresAt = true,
+				})
+				or not id(ping.id)
+				or seen[ping.id]
+				or ping.kind ~= "ComeHere"
+				or not integer(ping.senderUserId, 1)
+				or not remaining(ping.expiresAt)
+				or not PartyProjectionV1.validWaypoint(ping.position)
+			then
+				return false
+			end
+			local present = false
+			for _, member in state.party.members do
+				if member.userId == ping.senderUserId and member.present then
+					present = true
+				end
+			end
+			if not present then
+				return false
+			end
+			seen[ping.id] = true
+		end
+	end
+	seen = {}
 	for _, invite in state.incoming do
 		if
 			not keys(invite, {

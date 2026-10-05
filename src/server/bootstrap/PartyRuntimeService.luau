@@ -16,6 +16,8 @@ function PartyRuntimeService.new(options: {
 	event: any,
 	monotonicSeconds: (() -> number)?,
 	scheduler: any?,
+	worldRuntime: any?,
+	presentationSeconds: (() -> number)?,
 })
 	local clock = options.monotonicSeconds or os.clock
 	local scheduler = options.scheduler or (getfenv() :: any).task
@@ -27,6 +29,26 @@ function PartyRuntimeService.new(options: {
 	local connections = {}
 	local owner = PartyService.new({
 		policy = PartyPolicy,
+		pingContract = PartyProjectionV1,
+		presentationSeconds = options.presentationSeconds or function()
+			return game:GetService("Workspace"):GetServerTimeNow()
+		end,
+		waypoint = function(player: any, session: any): any
+			return if options.worldRuntime
+				then options.worldRuntime.partyWaypoint(player, session)
+				else nil
+		end,
+		updatePingPreference = function(player: any, session: any, muted: boolean): string
+			if
+				options.players:GetPlayerByUserId(player.UserId) ~= player
+				or options.profileCoordinator.get(player.UserId) ~= session
+			then
+				return "Stale"
+			end
+			return session.bufferSettings(function(settings)
+				settings.socialPingsMuted = muted
+			end).status
+		end,
 		monotonicSeconds = clock,
 		newId = function()
 			return options.httpService:GenerateGUID(false)
@@ -39,6 +61,8 @@ function PartyRuntimeService.new(options: {
 					player = player,
 					session = session,
 					ready = session.state() == "Ready",
+					pingsMuted = session.state() ~= "Ready"
+						or session.snapshot().settings.socialPingsMuted ~= false,
 				}
 				else nil
 		end,
@@ -116,8 +140,20 @@ function PartyRuntimeService.new(options: {
 		[RouteIds.commands.socialPartyDisband] = PartyProjectionV1.validParty,
 		[RouteIds.commands.socialPartyRejoin] = PartyProjectionV1.validParty,
 		[RouteIds.commands.socialPartySetInvitePolicy] = PartyProjectionV1.validInvitePolicy,
+		[RouteIds.commands.socialPing] = PartyProjectionV1.validPing,
+		[RouteIds.commands.settingsUpdatePreferences] = PartyProjectionV1.validPingPreference,
 	}
 	local operations = {
+		[RouteIds.commands.socialPing] = function(player: any, payload: any, expected: any): string
+			return owner.ping(player, payload.partyId, payload.pingKind, expected)
+		end,
+		[RouteIds.commands.settingsUpdatePreferences] = function(
+			player: any,
+			payload: any,
+			_expected: any
+		): string
+			return owner.setPingPreference(player, payload.socialPingsMuted)
+		end,
 		[RouteIds.commands.socialPartyCreate] = function(
 			player: any,
 			_payload: any,

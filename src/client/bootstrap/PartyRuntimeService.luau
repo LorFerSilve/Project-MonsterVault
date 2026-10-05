@@ -6,7 +6,12 @@ local RouteIds =
 	require(game:GetService("ReplicatedStorage").MonsterVault.Shared.contracts.RouteIds)
 local PartyRuntimeService = {}
 
-function PartyRuntimeService.new(options: { networking: any, player: any })
+function PartyRuntimeService.new(options: {
+	networking: any,
+	player: any,
+	scheduler: any?,
+	presentationSeconds: (() -> number)?,
+})
 	local globals = getfenv() :: any
 	local Instance, Enum = globals.Instance, globals.Enum
 	local gui: any = nil
@@ -14,6 +19,16 @@ function PartyRuntimeService.new(options: { networking: any, player: any })
 	local unsubscribe: any = nil
 	local controls: { any } = {}
 	local connections = {}
+	local scheduler = options.scheduler or globals.task
+	local clock = options.presentationSeconds
+		or function(): number
+			return game:GetService("Workspace"):GetServerTimeNow()
+		end
+	local running = false
+	local timer: any = nil
+	local scheduledAt: number? = nil
+	local ticket = 0
+	local arm: () -> ()
 	local function send(route: string, payload: any, expected: number?)
 		options.networking.gateway.send(route, payload, expected)
 	end
@@ -60,6 +75,17 @@ function PartyRuntimeService.new(options: { networking: any, player: any })
 		end
 		local state = snapshot.state
 		button(
+			if state.pingsMuted ~= false
+				then "Party pings: muted (enable)"
+				else "Party pings: on (mute)",
+			function()
+				send(
+					RouteIds.commands.settingsUpdatePreferences,
+					{ socialPingsMuted = state.pingsMuted == false }
+				)
+			end
+		)
+		button(
 			if state.allowInvites
 				then "Invites: Same server (disable)"
 				else "Invites: None (enable)",
@@ -72,6 +98,13 @@ function PartyRuntimeService.new(options: { networking: any, player: any })
 		)
 		local party = state.party
 		if party then
+			button("ComeHere: ping my current location", function()
+				send(
+					RouteIds.commands.socialPing,
+					{ partyId = party.partyId, pingKind = "ComeHere" },
+					party.revision
+				)
+			end)
 			label(
 				"Party "
 					.. string.sub(party.partyId, 1, 8)
@@ -175,9 +208,51 @@ function PartyRuntimeService.new(options: { networking: any, player: any })
 				)
 			end)
 		end
+		for _, ping in state.pings or {} do
+			label(
+				string.format(
+					"ComeHere / %d / %.1fs",
+					ping.senderUserId,
+					math.max(0, ping.expiresAt - clock())
+				)
+			)
+			label(
+				string.format(
+					"Waypoint: %.1f, %.1f, %.1f",
+					ping.position.x,
+					ping.position.y,
+					ping.position.z
+				)
+			)
+		end
 		panel.CanvasSize = globals.UDim2.fromOffset(0, row)
+		arm()
+	end
+	arm = function()
+		local deadline = if running then options.networking.partyStore.nextDeadline() else nil
+		if deadline == scheduledAt then
+			return
+		end
+		ticket += 1
+		if timer ~= nil then
+			pcall(scheduler.cancel, timer)
+		end
+		timer, scheduledAt = nil, deadline
+		if deadline == nil then
+			return
+		end
+		local expected = ticket
+		timer = scheduler.delay(math.max(0, deadline - clock()), function()
+			if not running or expected ~= ticket then
+				return
+			end
+			timer, scheduledAt = nil, nil
+			ticket += 1
+			render()
+		end)
 	end
 	local function start()
+		running = true
 		gui = Instance.new("ScreenGui")
 		gui.Name, gui.ResetOnSpawn = "MonsterVaultPartyDiagnostic", false
 		local toggle = Instance.new("TextButton")
@@ -205,6 +280,11 @@ function PartyRuntimeService.new(options: { networking: any, player: any })
 		gui.Parent = options.player:WaitForChild("PlayerGui")
 	end
 	local function stop(): { string }
+		running, ticket = false, ticket + 1
+		if timer ~= nil then
+			pcall(scheduler.cancel, timer)
+		end
+		timer, scheduledAt = nil, nil
 		if unsubscribe then
 			unsubscribe()
 		end

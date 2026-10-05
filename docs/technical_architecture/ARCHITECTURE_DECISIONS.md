@@ -3943,3 +3943,31 @@ Four seats remains the semantic maximum. DEV tuning is 30-second invite/rejoin l
 ### Boundaries
 
 No Party progression/persistence, forced travel, teammate value/capture authority, cross-server restoration, chat/freeform name, guild, event, trade, reward or commerce behavior is authorized here. Paid/supporter/subscription/cosmetic status cannot affect priority, membership, consent or safety. PQL-3/PQL-8 own final social presentation. [Party evidence](../implementation/IMP11_PARTY_EVIDENCE.md) and [IMP-11 gates](../implementation/IMP11_GATE_MATRIX.md) register the proven slice without closing the phase or deferred scale/release gates.
+
+---
+
+## AD-266 — Bind bounded Party pings and the existing P1 suppression owner
+
+**Date:** 2026-10-05
+
+**Status:** Accepted — within the owner-authorized second IMP-11 Ping slice
+
+**Owning phase:** TA-17 runtime namespace and TA-12 preference binding; implements locked TA-10 §7 / GDS-10 PG-01..04 / AD-140
+
+### Context
+
+Social.Ping was reserved as pingKind/optional targetId without the Party/revision precondition or recipient waypoint projection. Settings.UpdatePreferences had reserved accessibility examples but no active social suppression binding. TA-12 §25 / AD-140 already assign Social Ping suppression to validated P1 settings through TA-4; ProfileSession.bufferSettings and the settings bucket already exist. The authorized ping gate requires concrete admission, disclosure, lifetime and mute behavior.
+
+### Decision
+
+Activate only ComeHere at the sender's current server-observed validated world position. Social.Ping accepts exactly `{partyId,pingKind="ComeHere"}` plus a required envelope expectedRevision compared to the current Party membership revision. No coordinates, semantic target, recipient, other identity, free text, paid status or mute override is accepted. WorldRuntime's existing authored walkable position/access/arrival and private ProfileSession checks own the waypoint; a second exact finite x/y/z check rejects absolute values above 100000. No clamp is authorized.
+
+Current active Ready Party members are the only recipients; missing/reserved/replaced/departed/muted identities receive no ping. Extend recipient-only full Social.StateChanged with pingsMuted and at most two pings `{id,senderUserId,kind,position,expiresAt}`, using the enclosing Party ID/revision. The server privately pins the sender identity and Party revision; every Party membership/leader revision clears pings. Ping/preference/expiry updates change only the recipient view revision. Older V1 Party snapshots remain valid and safely suppressed.
+
+DEV bounds: one live slot per sender, two per Party, six-second lifetime, and a Social.Ping bucket of capacity one/refill one per three seconds in the existing gateway rate owner. Existing global budget and bounded replay/session fencing apply first. P0 may drop under backpressure. Existing Party deadline ownership handles cleanup; synced Workspace:GetServerTimeNow deadlines drive one client expiry timer. No history, delivery queue, per-ping task or polling is introduced.
+
+Settings.UpdatePreferences activates only `{socialPingsMuted:boolean}`, no expectedRevision. Store the flag in the existing profile.settings P1 owner via bufferSettings. Only explicit false enables delivery; absent/malformed/unready state is safely muted. Successful acknowledgment means Buffered, not durable; unavailable writers do not claim success. P1 failure cannot change gameplay authority. Legitimate persisted preference reload never restores Party membership. Other reserved settings remain inactive for their later owners.
+
+### Boundaries
+
+No new remote, protocol generation, ProfileSession writer/schema migration, gameplay mutation, secret target disclosure, challenge/visitor/event/reward/commerce behavior or polished presentation is introduced. Paid status cannot alter authority, priority, rate or mute. Multiplayer/platform social-safety and scale/release gates retain their owners. [Ping evidence](../implementation/IMP11_SOCIAL_PING_EVIDENCE.md) and [IMP-11 matrix](../implementation/IMP11_GATE_MATRIX.md) record this slice without phase closure.

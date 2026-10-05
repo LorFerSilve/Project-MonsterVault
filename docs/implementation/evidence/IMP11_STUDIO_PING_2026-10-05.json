@@ -1,0 +1,595 @@
+{
+  "date": "2026-10-05",
+  "phase": "IMP-11",
+  "slice": "TA-10 §7 bounded Party ComeHere ping/waypoint",
+  "baseCommit": "8651591532f978643cc4bd5d6e119361b905ca50",
+  "basePullRequest": 69,
+  "status": "PASS for this bounded slice; IMP-11 OPEN",
+  "actualClients": 1,
+  "nativeChecks": {
+    "passed": 28,
+    "total": 28,
+    "cases": [
+      {
+        "id": "shipped-bootstrap",
+        "status": "PASS",
+        "evidence": "Server/client BOOTSTRAP_READY and real DEV CleanOffline",
+        "probe": "fresh shipped boot"
+      },
+      {
+        "id": "shipped-fresh-muted-readback",
+        "status": "PASS",
+        "evidence": "No Party, no pings, persisted suppression true on fresh shipped boot",
+        "probe": "fresh shipped readback"
+      },
+      {
+        "id": "shipped-ping-disclosure",
+        "status": "PASS",
+        "evidence": "Actual Command/Event ComeHere, sender/Party context/server waypoint and native diagnostic",
+        "probe": "shipped_fresh_ping_replay_expiry_final"
+      },
+      {
+        "id": "shipped-rate-burst",
+        "status": "PASS",
+        "evidence": "Immediate duplicate traffic is silently rate-dropped without extra projection",
+        "probe": "shipped_fresh_ping_replay_expiry_final"
+      },
+      {
+        "id": "shipped-replay",
+        "status": "PASS",
+        "evidence": "Within-window cached request does not multiply delivery",
+        "probe": "shipped_fresh_ping_replay_expiry_final"
+      },
+      {
+        "id": "shipped-expiry",
+        "status": "PASS",
+        "evidence": "Synced client store and native diagnostic discard expired ping",
+        "probe": "shipped_fresh_ping_replay_expiry_final"
+      },
+      {
+        "id": "hostile-recipient-injection",
+        "status": "PASS",
+        "evidence": "Arbitrary recipient list rejected",
+        "probe": "shipped_hostile_and_mute_final"
+      },
+      {
+        "id": "hostile-coordinate-injection",
+        "status": "PASS",
+        "evidence": "Client coordinate/NaN field rejected",
+        "probe": "shipped_hostile_and_mute_final"
+      },
+      {
+        "id": "hostile-semantic-target",
+        "status": "PASS",
+        "evidence": "Unimplemented semantic/secret targetId rejected",
+        "probe": "shipped_hostile_and_mute_final"
+      },
+      {
+        "id": "hostile-intent",
+        "status": "PASS",
+        "evidence": "CreatureHere is outside the one enabled intent",
+        "probe": "shipped_hostile_and_mute_final"
+      },
+      {
+        "id": "hostile-mute-bypass",
+        "status": "PASS",
+        "evidence": "Client bypassMute rejected",
+        "probe": "shipped_hostile_and_mute_final"
+      },
+      {
+        "id": "hostile-oversized-text",
+        "status": "PASS",
+        "evidence": "4097-byte text payload rejected",
+        "probe": "shipped_hostile_and_mute_final"
+      },
+      {
+        "id": "hostile-party-id",
+        "status": "PASS",
+        "evidence": "Foreign Party ID rejected",
+        "probe": "shipped_hostile_and_mute_final"
+      },
+      {
+        "id": "hostile-party-revision",
+        "status": "PASS",
+        "evidence": "Stale Party revision rejected",
+        "probe": "shipped_hostile_and_mute_final"
+      },
+      {
+        "id": "shipped-mute",
+        "status": "PASS",
+        "evidence": "P1 buffered mute acknowledged; admitted ping omitted from recipient presentation",
+        "probe": "shipped_hostile_and_mute_final"
+      },
+      {
+        "id": "shipped-leave",
+        "status": "PASS",
+        "evidence": "Party leave returns no Party/ping state",
+        "probe": "shipped_hostile_and_mute_final"
+      },
+      {
+        "id": "world-authorized-waypoint",
+        "status": "PASS",
+        "evidence": "Actual WorldRuntime current authored walkable sender position accepted",
+        "probe": "scoped_final_setup"
+      },
+      {
+        "id": "world-foreign-session",
+        "status": "PASS",
+        "evidence": "Foreign private ProfileSession rejected by waypoint owner",
+        "probe": "scoped_final_setup"
+      },
+      {
+        "id": "world-outside-geometry",
+        "status": "PASS",
+        "evidence": "Native root outside authored world rejected",
+        "probe": "scoped_final_setup"
+      },
+      {
+        "id": "world-locked-region",
+        "status": "PASS",
+        "evidence": "Native root in inaccessible region rejected",
+        "probe": "scoped_final_setup"
+      },
+      {
+        "id": "profile-value-unchanged",
+        "status": "PASS",
+        "evidence": "Real scoped profile is exactly unchanged by ping admission",
+        "probe": "scoped_final_setup"
+      },
+      {
+        "id": "native-expiry",
+        "status": "PASS",
+        "evidence": "Actual six-second task deadline consumes ping and leaves zero timers",
+        "probe": "scoped_final_expiryAndReplacement"
+      },
+      {
+        "id": "native-one-timer",
+        "status": "PASS",
+        "evidence": "Peak actual deadline timer count is one",
+        "probe": "scoped_final_expiryAndReplacement"
+      },
+      {
+        "id": "native-consumed-callback",
+        "status": "PASS",
+        "evidence": "Consumed callback cannot clear a newly rearmed ping",
+        "probe": "scoped_final_expiryAndReplacement"
+      },
+      {
+        "id": "native-P1-reload",
+        "status": "PASS",
+        "evidence": "Real DEV release/acquire replacement preserves explicit suppression preference",
+        "probe": "scoped_final_expiryAndReplacement"
+      },
+      {
+        "id": "native-replacement-authority",
+        "status": "PASS",
+        "evidence": "Replacement inherits no Party/ping, cancels timer and rejects cached old-session request",
+        "probe": "scoped_final_expiryAndReplacement"
+      },
+      {
+        "id": "native-replacement-world-and-callback",
+        "status": "PASS",
+        "evidence": "Old callback cannot resurrect ping; fresh identity needs new world arrival",
+        "probe": "scoped_final_expiryAndReplacement + scoped_final_shutdown"
+      },
+      {
+        "id": "native-shutdown",
+        "status": "PASS",
+        "evidence": "Stop plus every stale callback leaves all Party/invite/member/live/ping maps and timers zero",
+        "probe": "scoped_final_shutdown"
+      }
+    ]
+  },
+  "reports": {
+    "shipped_fresh_ping_replay_expiry_final": {
+      "replay": {
+        "duplicateDidNotDeliver": true,
+        "projectionRevision": 3
+      },
+      "expiry": {
+        "projection": {
+          "state": {
+            "incoming": [],
+            "pings": [],
+            "allowInvites": false,
+            "party": {
+              "partyId": "dfddafd2-2d92-478d-a847-fd3625e569eb",
+              "leaderUserId": 1925180832,
+              "members": [
+                {
+                  "userId": 1925180832,
+                  "present": true
+                }
+              ],
+              "revision": 1
+            },
+            "pingsMuted": false
+          },
+          "revision": 4,
+          "domain": "party"
+        },
+        "diagnosticExpired": true,
+        "clientExpired": true
+      },
+      "positive": {
+        "diagnosticWaypoint": 1,
+        "projection": {
+          "state": {
+            "incoming": [],
+            "pings": [
+              {
+                "senderUserId": 1925180832,
+                "position": {
+                  "y": 3.998046875,
+                  "x": 0,
+                  "z": 128
+                },
+                "id": "7f275eef-cfbd-419d-8207-e417d45ce073",
+                "kind": "ComeHere",
+                "expiresAt": 1791204085.584219
+              }
+            ],
+            "allowInvites": false,
+            "party": {
+              "partyId": "dfddafd2-2d92-478d-a847-fd3625e569eb",
+              "leaderUserId": 1925180832,
+              "members": [
+                {
+                  "userId": 1925180832,
+                  "present": true
+                }
+              ],
+              "revision": 1
+            },
+            "pingsMuted": false
+          },
+          "revision": 3,
+          "domain": "party"
+        },
+        "actualClients": 1,
+        "rateSpamDropped": true
+      },
+      "ready": {
+        "state": {
+          "pingsMuted": false,
+          "allowInvites": false,
+          "incoming": [],
+          "pings": []
+        },
+        "revision": 1,
+        "domain": "party"
+      }
+    },
+    "shipped_hostile_and_mute_final": {
+      "hostile": {
+        "cases": [
+          {
+            "route": "Session.RequestResync",
+            "result": "OK_PARTY_SNAPSHOT"
+          },
+          {
+            "route": "Social.PartyCreate",
+            "result": "OK_PARTY_CREATED"
+          },
+          {
+            "route": "Settings.UpdatePreferences",
+            "result": "OK_PREFERENCES_BUFFERED"
+          },
+          {
+            "route": "Social.Ping",
+            "result": "OK_SOCIAL_PING"
+          },
+          {
+            "route": "Social.Ping",
+            "result": "REJECT_VALIDATION_PAYLOAD"
+          },
+          {
+            "route": "Social.Ping",
+            "result": "REJECT_VALIDATION_PAYLOAD"
+          },
+          {
+            "route": "Social.Ping",
+            "result": "REJECT_VALIDATION_PAYLOAD"
+          },
+          {
+            "route": "Social.Ping",
+            "result": "REJECT_VALIDATION_PAYLOAD"
+          },
+          {
+            "route": "Social.Ping",
+            "result": "REJECT_VALIDATION_PAYLOAD"
+          },
+          {
+            "route": "Social.Ping",
+            "result": "REJECT_VALIDATION_PAYLOAD"
+          },
+          {
+            "route": "Social.Ping",
+            "result": "REJECT_STATE_PARTY_REVISION"
+          },
+          {
+            "route": "Social.Ping",
+            "result": "REJECT_STATE_PARTY_REVISION"
+          },
+          {
+            "route": "Settings.UpdatePreferences",
+            "result": "OK_PREFERENCES_BUFFERED"
+          },
+          {
+            "route": "Social.Ping",
+            "result": "OK_SOCIAL_PING"
+          },
+          {
+            "route": "Social.PartyLeave",
+            "result": "OK_PARTY_LEFT"
+          }
+        ],
+        "hostileDidNotCreatePing": true
+      },
+      "mute": {
+        "noParty": true,
+        "cases": [
+          {
+            "route": "Session.RequestResync",
+            "result": "OK_PARTY_SNAPSHOT"
+          },
+          {
+            "route": "Social.PartyCreate",
+            "result": "OK_PARTY_CREATED"
+          },
+          {
+            "route": "Settings.UpdatePreferences",
+            "result": "OK_PREFERENCES_BUFFERED"
+          },
+          {
+            "route": "Social.Ping",
+            "result": "OK_SOCIAL_PING"
+          },
+          {
+            "route": "Social.Ping",
+            "result": "REJECT_VALIDATION_PAYLOAD"
+          },
+          {
+            "route": "Social.Ping",
+            "result": "REJECT_VALIDATION_PAYLOAD"
+          },
+          {
+            "route": "Social.Ping",
+            "result": "REJECT_VALIDATION_PAYLOAD"
+          },
+          {
+            "route": "Social.Ping",
+            "result": "REJECT_VALIDATION_PAYLOAD"
+          },
+          {
+            "route": "Social.Ping",
+            "result": "REJECT_VALIDATION_PAYLOAD"
+          },
+          {
+            "route": "Social.Ping",
+            "result": "REJECT_VALIDATION_PAYLOAD"
+          },
+          {
+            "route": "Social.Ping",
+            "result": "REJECT_STATE_PARTY_REVISION"
+          },
+          {
+            "route": "Social.Ping",
+            "result": "REJECT_STATE_PARTY_REVISION"
+          },
+          {
+            "route": "Settings.UpdatePreferences",
+            "result": "OK_PREFERENCES_BUFFERED"
+          },
+          {
+            "route": "Social.Ping",
+            "result": "OK_SOCIAL_PING"
+          },
+          {
+            "route": "Social.PartyLeave",
+            "result": "OK_PARTY_LEFT"
+          }
+        ],
+        "suppression": true
+      }
+    },
+    "scoped_final_setup": {
+      "actualClients": 1,
+      "profileUnchanged": true,
+      "timerCount": 1,
+      "validAuthoredWaypoint": true,
+      "scope": "IMP10World-dcb415b8-3486-484a-acbf-bee3bbe897e8",
+      "foreignSessionRejected": true,
+      "lockedRegionRejected": true,
+      "outsideWorldRejected": true
+    },
+    "scoped_final_expiryAndReplacement": {
+      "replayFenced": true,
+      "peakTimers": 1,
+      "replacementCallbackFence": true,
+      "P1Persisted": true,
+      "consumedCallbackFence": true,
+      "elapsedSeconds": 10.574129900000116,
+      "nativeExpiry": true,
+      "profileReplaced": true,
+      "noInheritedMembership": true
+    },
+    "scoped_final_shutdown": {
+      "staleSessionWaypointRejected": true,
+      "timerCount": 0,
+      "counts": {
+        "invites": 0,
+        "pings": 0,
+        "parties": 0,
+        "memberships": 0,
+        "liveUsers": 0
+      },
+      "shutdownCallbackFence": true
+    }
+  },
+  "finalShippedReadback": {
+    "actualClients": 1,
+    "snapshot": {
+      "state": {
+        "pingsMuted": true,
+        "allowInvites": false,
+        "incoming": [],
+        "pings": []
+      },
+      "revision": 1,
+      "domain": "party"
+    },
+    "freshShipped": true
+  },
+  "freshShippingConsole": {
+    "server": "BOOTSTRAP_READY",
+    "client": "BOOTSTRAP_READY",
+    "world": "WORLD_SPAWNED",
+    "realDEVProfile": "CleanOffline"
+  },
+  "probeCorrections": [
+    {
+      "attempt": "shipped_replay",
+      "outcome": "probe failed",
+      "reason": "Replay check ran after the existing 120-second cache lifetime. Rerun bundled the replay within that window."
+    },
+    {
+      "attempt": "shipped_fresh_ping_replay_expiry",
+      "outcome": "probe failed",
+      "reason": "Immediate probe reuse exhausted the existing route bucket. Rerun waits 3.1 seconds before a new request."
+    },
+    {
+      "attempt": "scoped_expiry_and_replacement",
+      "outcome": "probe failed",
+      "reason": "Route-rate validation precedes replay inspection. Corrected probe respects cooldown before asserting replaced-session replay rejection; cleanup passed and a fresh isolated scope reran all steps."
+    }
+  ],
+  "finalEdit": {
+    "mode": "Edit",
+    "sourceParity": {
+      "total": 91,
+      "passed": 91,
+      "mismatches": []
+    },
+    "temporaryProbesRemoved": true,
+    "bootsEnabled": true,
+    "scenePreserved": true,
+    "parts": 64,
+    "lightingProperties": 8
+  },
+  "counts": {
+    "fast": 262,
+    "focusedPing": 26,
+    "focusedPingNative": 28,
+    "python": 28,
+    "sourceParity": 91
+  },
+  "sourceHashes": {
+    "src/client/bootstrap/CaptureRuntimeService.luau": "bb1b6b2121f8c0c1d81b5b80b7417f5d6648dd30db186bd1ba9c9e6ee9be7e25",
+    "src/client/bootstrap/ClientComposition.luau": "6a076b90c55a57dc695c548dceba00fd2319c6b8aadb587aeb96514f8b08da97",
+    "src/client/bootstrap/ClientMain.client.luau": "6aa446240569855d0542742e054ad9bac997503796e81186b93acf35ce6e274e",
+    "src/client/bootstrap/NetworkingRuntimeService.luau": "eb5c62f14004156a32de0680e3a0a78b9116badff75892faec98a8136fcb93fa",
+    "src/client/bootstrap/PartyRuntimeService.luau": "9e58cdbd4d97a6f656d5549dd241da9c3aec2960638db45125424d4fdcf08ddf",
+    "src/client/bootstrap/ProgressionRuntimeService.luau": "c4c30a8754cd9fb77e80327c6f8523a70272799848c37a204f4048e0037afe2a",
+    "src/client/bootstrap/VaultAssignmentRuntimeService.luau": "a3a653fc5dfa1ba9f54719936e69d42d2f2ff2b26d10ac86f7b9ca31b28cf6f3",
+    "src/client/bootstrap/VaultRuntimeService.luau": "2e84d30eebc4d25fcf16050153af7d20e7ec67990fe9f56a4c5b8e6198e1faab",
+    "src/client/bootstrap/WorldModelObserver.luau": "cc54050d83df0ed5f7dcce8c97bd9e1a086e5defa785464f528c8ee0e8f24e66",
+    "src/client/controllers/CaptureController.luau": "debcbf89912245c004125fed7c16fb8a63ce8a20405465feadb167effbe0baae",
+    "src/client/controllers/ProgressionController.luau": "717245ae01100785f2b845acc3f7df0571f3d313ede0f92b45bc9f3b56a5e157",
+    "src/client/controllers/VaultAssignmentController.luau": "4d77a2df14cbb4959e7ee279c15108772c0b6b5bf7a23e617ad5bf2bea317edb",
+    "src/client/controllers/VaultController.luau": "f71220af052b239c9be127f8aafc5eeba9fbf10a353be23e4f01aa11e7060056",
+    "src/client/input/InputRouter.luau": "93f41d4e56f3c7046a92393b122d049773d9f5db511290ebab8cbf0ba208ddcf",
+    "src/client/networking/ClientGateway.luau": "e0afb04863d83f394f35beb0bcd9c375edb8b907d02ae8aeb62ccd767e3c6ee1",
+    "src/client/presentation/CaptureView.luau": "43ad25166e5bd473f488b5aa05a3665b64747e0fdf6f6be00ed902cd7e364151",
+    "src/client/store/PartyProjectionStore.luau": "deac4b219bf6694cf3b3211bbdb818cf642fc50d45e113ff0a774926a153411a",
+    "src/client/store/ProjectionStore.luau": "c437b00617b9e3f006005a81e8729ab79398284df1c6a22702a28cd0b49f6708",
+    "src/client/store/SecuredCollectionStore.luau": "3bfef9a9086fc3adb35f72c4ea123690565393392ec2df851fb01c7a3f3cf2a1",
+    "src/client/store/WorldProjectionStore.luau": "066582a26125ff5236538af4e80a0d131df9e0b691f55db062a979e04253cc68",
+    "src/server/adapters/RobloxProfileRepository.luau": "70fd63a9bb943f79b02cfe33bb849dd4113ec5d845da6f045ccead05c0dc5a8e",
+    "src/server/application/CaptureFinalizationUseCase.luau": "9dc4f90c267e415a56408416db5aa934b3eeb61fd5a18630e1cf2f9313094e5b",
+    "src/server/application/NetworkingGateway.luau": "aa568ef2f2e07757c5aadec66ccfc359cdfe8cff9a7d8d309ddbf4090e4a4c26",
+    "src/server/application/NetworkRateLimiter.luau": "8413db465b94f1c00eeda55d535a9d84c446959823dd4e3b77cd8def0a093ad0",
+    "src/server/application/ProductionClaimUseCase.luau": "d666b99a346c1b0009f2e836103fada3a85b9385da4c13e4009ddfd432c29647",
+    "src/server/application/ProgressionProjection.luau": "822bdd8be65f24cdafa930f710ed5a820f3bbb74b9ca3e0d3329f078e56d6b98",
+    "src/server/application/ProgressionPurchaseUseCase.luau": "c77f37daf94087f1740c8bfb6e13389650ae290ccaddf1900734e5e8d0ed47f0",
+    "src/server/application/ProjectionPublisher.luau": "7588fcec6c97199e7a54dba42d031ce516e3565bcb05f6a24583a362cc11994e",
+    "src/server/application/ReplayWindow.luau": "db06ccd18d396a8f5ad5f8ea7c6f71280e2c87aa06a7780677de9e162dfd3c5b",
+    "src/server/application/RouteRegistry.luau": "bada991d6442583c9d7619701c2c1dd2c29d29029ecf40392d8026e4585e49a4",
+    "src/server/application/SecuredCollectionProjection.luau": "231c086d6265a9a5745caf258baa5434721489846e68b5abb128b9b3389b44a4",
+    "src/server/application/SessionCoordinator.luau": "765917d27f0a897bffcd6435ad8d1d3dd8df99a34fbadcaa342ab0526b910a3e",
+    "src/server/application/VaultAssignmentProjection.luau": "6ad7c222c6fec977e295dc34694ed816fc33bc9cb591abf42880c70130e7e8bd",
+    "src/server/application/VaultCapacityProjection.luau": "2d595d65ac73d642cb4c15f55d088fae17a24d3baaf495a1ca66e393ccf5266b",
+    "src/server/application/VaultCapacityUseCase.luau": "8a007a90f3c2de5d698bfd8b67e09e15dd371ebfffc6bb80817baac67f42e82f",
+    "src/server/application/VaultProductionUseCase.luau": "07e70a69857b38fe583ae08e7bee6999f0b37aa7943a3c17534a55ae8990f0f8",
+    "src/server/application/WorldActionUseCase.luau": "d7e9020f1744108b79156886821fad12a504e5ce8ae66e402ffb8ad727279d8a",
+    "src/server/bootstrap/CaptureRuntimeService.luau": "d89f6e5182f6573484eae6a6b216342e7bbff30c01991756aa6ed649ccd78bfb",
+    "src/server/bootstrap/NetworkingRuntimeService.luau": "86a481401d618284d99b10814ad93f5ec1f29ffe97fdf5cab7445d42f83acf48",
+    "src/server/bootstrap/PartyRuntimeService.luau": "37f7c2da4d375c08bce7b950c4ff761e500f9d3be7aa081e534b649f30bf2392",
+    "src/server/bootstrap/ProfileBinding.luau": "a6568070be25030d53e090bb6bbd5b35033322f83a373c1c2782ad442cd3531f",
+    "src/server/bootstrap/ProfileRuntimeService.luau": "84226de23267dcb90e6f5597c932247c06a83322dac5d36897f1aee13a4c1ac5",
+    "src/server/bootstrap/ServerComposition.luau": "d115ce151f3d70adec2e578d4f76306962a8e506ece22a89d0ffac24912df46c",
+    "src/server/bootstrap/ServerMain.server.luau": "8ca906a8d58f52c73f7a344487e77cd311c3702b1c85ef34b44dd24726fb5eff",
+    "src/server/bootstrap/ShutdownCoordinator.luau": "0d5db72a3bf82128bca827212df0aabff4074af18c416f578ee236050de3999c",
+    "src/server/bootstrap/StartupValidator.luau": "4632462504a8afa26b4e40a2d4845cd4edceb3b1023b557eba688e112b1387af",
+    "src/server/bootstrap/WorldRuntimeService.luau": "99d9f941733b717be8a629e867192442d31f1bd83c50189ecd96f4921d3f073e",
+    "src/server/domains/capture/CaptureService.luau": "0522c46e90ec9681a728f77aecb2dde304d3eeec15d11850b8527c6166c760ea",
+    "src/server/domains/capture/VariantIdentity.luau": "b8d4fe0c456f5d1bfc8cecaad1de4a58ec844b27cef20b819690bb5a9de5544e",
+    "src/server/domains/economy/EnergyService.luau": "d8f2d5558c2177bbb53e221946c9235c024df9fde48286e2b6589b7799016693",
+    "src/server/domains/progression/ProgressionService.luau": "9db693e9c74d6b18bfcfd65e501eede13363c7e50645bbda5a2b8ae3a59196fa",
+    "src/server/domains/social/PartyService.luau": "97609aa5a8d35f54647333dd06d674c74249f63f3afe737fd0bf46a6ca75c5a9",
+    "src/server/domains/vault/VaultProductionService.luau": "2356bffaf340e7efdde9d4f90b37da3b9cc71f8469030d7195b6dd23caa968b2",
+    "src/server/domains/vault/VaultService.luau": "b06129ea1c74cd331a1f739161f7ee72922f6e924f3ea96c238fcbaaf6986571",
+    "src/server/domains/world/FixtureDefinition.luau": "c59eac75e28f4ebdb850c7aefcbc1de464b5401ec13a33b230f0b0d084ab6e1f",
+    "src/server/domains/world/SpawnPlan.luau": "6b4e805b20e4098d551dcfb3ce25d258c7fc5214e657056b6fb7b215afdeba70",
+    "src/server/domains/world/WorldAuthoringIndex.luau": "4d7c59d7b281bae4c74caf00ca64a6fe70340a1a830e8814f939ca57eb8eb14c",
+    "src/server/domains/world/WorldCycle.luau": "ca89a63b4f3bb4dd991fa016991e1390aeacd5ebeac4c6d71b8df7783117f812",
+    "src/server/domains/world/WorldDefinitions.luau": "9017f477cc71a896aa4f6e0e8c4a6d1dd01c3c735c7822a138b073ba1e9e0fd8",
+    "src/server/domains/world/WorldProgressionService.luau": "a531c42373bfa38d77f4f5cfe8414d4d125f2485ef1600a22240f29385f1784a",
+    "src/server/domains/world/WorldRegistry.luau": "0496cdd7e8686a75d108131fd2fe7fac18e84f13e1f2e66dbdf94de5793a3144",
+    "src/server/domains/world/WorldService.luau": "c0591fda2a02851dc2ca2cf6af56a5ce62527b97a2946a6dae2c856e909d0ddb",
+    "src/server/domains/world/WorldTravelService.luau": "182fda92fed051fe4e8336991dae0035ec2ac034cd2b316783f1175471b4c69f",
+    "src/server/infrastructure/clock/ClockInterface.luau": "e50b368217f9e8e67c0e9a7d94d82536ae8e3f72c45fa1a0d212679810ef7534",
+    "src/server/infrastructure/performance/PerformanceCounters.luau": "b6a01c851a31d4d50d72f1271cc0557d54914bcce74111b6bf681bde508f20fb",
+    "src/server/infrastructure/persistence/ProfileRepositoryInterface.luau": "0f97143f20b8430c702f4015b7571601fb4ab5141d913abfe35602d80fdf5f61",
+    "src/server/infrastructure/persistence/ProfileSchemaV1.luau": "8fcd008aa4557a9fa098494aebd4197521324816dae9914c84c8247e40f893c0",
+    "src/server/infrastructure/persistence/ProfileSession.luau": "dbd5c63a97cc0031cf42d95694d80f5da5a0873ff3243f183b04c9e4d1ac8ebd",
+    "src/server/infrastructure/persistence/RetryPolicy.luau": "76174178e801e0fdf965c906733110643766a146796ca2a66758efbc136aec08",
+    "src/server/infrastructure/persistence/SingleWriterQueue.luau": "7e5e9591f498c05e501cacce2753f4f3e59930bdfa076d76ce7126ffc5d9c8cc",
+    "src/server/infrastructure/rng/RandomSourceInterface.luau": "a26d9636ce029acfd36097f4a20c839da2c62b9198d6da7a90ef56e8b0ac1952",
+    "src/shared/config/MaterialPalette.luau": "d9ccb880a8080792acae892691b5f55aa3f638b2e81aeaa67603f5a2e67fa427",
+    "src/shared/config/PartyPolicy.luau": "a6fd3517d2370b030b35f17d1817500105e93ae8b0decba6255c66d289f6aa62",
+    "src/shared/config/ProgressionFixture.luau": "d27f3bbb1d507d68a281be13454390b89d9dd014a8e9aee1d70bfa60e112b07b",
+    "src/shared/config/VaultCapacityFixture.luau": "1e84d72832f1385cf439ea83c3a53b8d86e1e0b842c14378459bacbcfaa3b7ba",
+    "src/shared/config/VaultProductionFixture.luau": "94c7682df6daf9f875ec1e45c938b7b86ca5767959c5e95a97ecf1c6cc4aaff4",
+    "src/shared/contracts/CaptureProjectionV1.luau": "43b16d1f2e4fed9699f4b8013ecc78a9323da9a6a58e480b92f762c83809b708",
+    "src/shared/contracts/PartyProjectionV1.luau": "b9715f3929fc8ee7830d4d68e209c2c31584e6ea9a54c4eff0e1dbd7903d692c",
+    "src/shared/contracts/ProgressionProjectionV1.luau": "7afc30f529e6a87a472a052cb20b5de74653b9c423f610cefb718958db8affde",
+    "src/shared/contracts/ProjectionV1.luau": "e0c524382ad38e3579a703c5d60ee8668bb7cd6be95f63b47a3657b761cb1d22",
+    "src/shared/contracts/ProtocolV1.luau": "5543ded452d216f86ae7302f1b628a6edd533fbc63d647330d805216cf5970a3",
+    "src/shared/contracts/ResultCodes.luau": "b3d6c7a2cd5e0eff5a44f8e8061ce1d4d519e0cac55f3a86175aaeae380fbbdf",
+    "src/shared/contracts/RouteIds.luau": "01deaf5085748821030c6dbf51d4fa02a9012569eda4235bbc0afee5c1ae390a",
+    "src/shared/contracts/SecuredCollectionProjectionV1.luau": "0ab8d95693d50b85f6fe27160f4c7933d58a458c34ed7f4dae6b46c37eba1740",
+    "src/shared/contracts/VaultAssignmentProjectionV1.luau": "4762e14fa7635c2b117be56e2875e001777559c5279be8cb6cfd7263c4c0731c",
+    "src/shared/contracts/VaultProjectionV1.luau": "3f75b2618dc3f0950a98ee8f39adb85f5630a548e7b3dec85348ab09f35428d3",
+    "src/shared/contracts/WireValidation.luau": "b6a99c3f9b83b56b5c2881f28054b4f201f78c47b8017c4bcacce9a3d50bad1e",
+    "src/shared/contracts/WorldProjectionV1.luau": "5b9d1daffa2fa7f14a4e8fd6425528974b928c6781f669ca1b5ff528015f97ba",
+    "src/shared/types/Ids.luau": "0d95471d6c66cb9baa4245f7fd0755e3e334d5a608787477f0368bc700b21cd4",
+    "src/shared/util/StartupPlan.luau": "feea980a3c0e61eebafacb4fa3975d34e34a22b3ffa3dc0a3631eb10798e50f0",
+    "src/shared/util/StructuredDiagnostics.luau": "bdd58852e86548217f7b7efed3f24241053f955ab0b581f0775ffb00119a994d"
+  },
+  "limits": [
+    "One real client. No two-real-client, physical same-live-server reconnect or platform restriction-policy release claim.",
+    "Real native world/session/timing and scoped DEV persistence complement deterministic adapter peers. No unavailable VS1-19/high-concurrency workload.",
+    "Configured Luau analysis has no Roblox API definitions; native compile/runtime supplies engine evidence.",
+    "Historical Party 29 native and IMP-10 evidence are preserved; they are not counted as reruns here."
+  ],
+  "probes": [
+    "scripts/studio/imp11_ping_client.luau",
+    "scripts/studio/imp11_ping_authority.luau"
+  ],
+  "reusedProbes": [
+    "scripts/studio/imp10_world_mastery_access.luau",
+    "scripts/studio/imp10_spawn_scheduling.luau"
+  ],
+  "nextDependency": "TA-10 §10 Friendly Challenges: explicit definition/participant consent -> non-destructive server-local lifecycle/capability handling."
+}

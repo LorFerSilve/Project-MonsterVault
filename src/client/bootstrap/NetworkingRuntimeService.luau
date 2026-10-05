@@ -26,7 +26,9 @@ function NetworkingRuntimeService.new(options: {
 	diagnostics: any,
 })
 	local store = ProjectionStore.new(ProjectionV1, WireValidation)
-	local partyStore = PartyProjectionStore.new(PartyProjectionV1, WireValidation)
+	local partyStore = PartyProjectionStore.new(PartyProjectionV1, WireValidation, function()
+		return game:GetService("Workspace"):GetServerTimeNow()
+	end)
 	local securedCollectionStore =
 		SecuredCollectionStore.new(SecuredCollectionProjectionV1, WireValidation)
 	local gateway = ClientGateway.new({

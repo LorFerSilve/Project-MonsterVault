@@ -1110,6 +1110,21 @@ function WorldRuntimeService.new(
 		presenceReady = function(player: any, characterGeneration: number): boolean
 			return travelOwner ~= nil and travelOwner.ready(player, characterGeneration)
 		end,
+		partyWaypoint = function(player: any, expectedSession: any): any
+			local context = if running then travelContext(player) else nil
+			if
+				context == nil
+				or context.session ~= expectedSession
+				or not context.validPosition
+				or travelOwner == nil
+				or not travelOwner.ready(player, context.generation)
+			then
+				return nil
+			end
+			-- Only the sender's observed, accessible authored-region position.
+			-- No semantic target lookup, recipient access grant or discovery.
+			return { x = context.position.X, y = context.position.Y, z = context.position.Z }
+		end,
 		bindCaptureLifecycle = function(owner: any)
 			captureLifecycle = owner
 			if owner then
