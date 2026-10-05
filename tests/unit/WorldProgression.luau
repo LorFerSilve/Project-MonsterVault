@@ -68,7 +68,7 @@ local function harness(options: any?): any
 	local registry = Registry.new(o.config or catalog())
 	local world = WorldProgression.new(registry)
 	local progression = Progression.new(Price, { mastery = world.mastery })
-	local energy = Energy.new(progression.boundSinks)
+	local energy = Energy.new(progression.boundSinks, registry.worldReward)
 	local capacity = copy(Capacity)
 	capacity.baseCollectionCapacity = o.capacity or Capacity.baseCollectionCapacity
 	local vault, production = Vault.new(capacity), Production.new(ProductionConfig)
@@ -124,8 +124,13 @@ local function harness(options: any?): any
 		monotonicSeconds = clock.monotonicClock.seconds,
 	})
 	local load = session.acquire()
-	local actions =
-		WorldActions.new({ world = world, progression = progression, newOperationId = operation })
+	local actions = WorldActions.new({
+		world = world,
+		progression = progression,
+		energy = energy,
+		unixSeconds = clock.wallClock.unixSeconds,
+		newOperationId = operation,
+	})
 	local purchases = Purchase.new({
 		progression = progression,
 		energy = energy,
@@ -138,6 +143,7 @@ local function harness(options: any?): any
 	local finalize = Finalize.new(vault, world.secured)
 	local h = {
 		world = world,
+		energy = energy,
 		registry = registry,
 		progression = progression,
 		session = session,
@@ -316,7 +322,7 @@ local function masteryRequiresActiveEvidence()
 	check(h.visit(entry).status == "Committed")
 	local p = h.session.snapshot()
 	check(h.world.mastery(p, "milestone/region-mastery/starter"))
-	check(p.economy.energyUnits == before.economy.energyUnits, "unbound world reward minted")
+	check(p.economy.energyUnits == before.economy.energyUnits + 5, "fixed authored reward missing")
 	check(
 		h.visit(entry).status == "AlreadyCommitted"
 			and h.visit(clearing).status == "AlreadyCommitted"
@@ -376,7 +382,7 @@ local function accessBindingsAndRejoin()
 	check(h.visit("landmark/mid-a-entry").status == "Committed")
 	check(h.buy("access/biome-advanced").status == "Committed")
 	local p = h.session.snapshot()
-	check(p.economy.energyUnits == 600)
+	check(p.economy.energyUnits == 605)
 	check(h.world.canAccess(p, "region/biome-advanced", h.progression.hasAccess))
 	check(not h.world.canAccess(p, "region/unknown", h.progression.hasAccess))
 	check(h.session.release(25).status == "Closed")
@@ -391,7 +397,7 @@ local function accessBindingsAndRejoin()
 			).status == "AlreadyCommitted"
 		)
 	end
-	check(rejoined.session.snapshot().economy.energyUnits == 600)
+	check(rejoined.session.snapshot().economy.energyUnits == 605)
 end
 local function unknownWriteCutPoints()
 	for _, mode in { "before", "after" } do
@@ -495,7 +501,7 @@ local function racesStaleAndInsufficient()
 		).status == "Rejected"
 	)
 	check(equal(before, h.session.snapshot()))
-	local poor = harness({ energy = 73 })
+	local poor = harness({ energy = 68 }) -- Starter reward preserves the insufficient-funds case.
 	starter(poor)
 	before = poor.session.snapshot()
 	check(poor.buy("access/biome-mid-a").reason == "INSUFFICIENT_ENERGY")
@@ -677,7 +683,296 @@ local function captureActionsFailClosed()
 	check(not capture.hasAcquisition(42) and capture.state("gated-creature") == "Interrupted")
 	check(equal(before, h.session.snapshot()), "recovery is not extraction")
 end
+local objective = "field-objective/fixture-return-route"
+local function rewardExactlyOnceAndRejoin()
+	local h = harness({ energy = 0 })
+	check(h.visit(entry).status == "Committed")
+	check(h.visit(clearing).status == "Committed")
+	local before = h.session.snapshot()
+	check(h.visit(entry).status == "Committed")
+	local p = h.session.snapshot()
+	check(p.economy.energyUnits == 5, "authored completion did not reward five Energy")
+	check(p.world.objectives[objective] == 3)
+	local receipt = check(p.economy.worldRewardReceipt)
+	check(receipt.sourceReference == "world-reward/starter-return-dev-v1")
+	check(receipt.remainingUnits == 0 and receipt.energyUnits == 5)
+	check(p.recentOperations[receipt.operationId] == before.profileRevision + 1)
+	for _, domain in { "collection", "discovery", "progression", "vault" } do
+		check(equal(before[domain], p[domain]), "reward changed another domain")
+	end
+	check(not h.world.mastery(p, "milestone/region-mastery/starter"), "reward invented mastery")
+	for _ = 1, 3 do
+		check(h.visit(entry).status == "AlreadyCommitted")
+		check(h.visit(clearing).status == "AlreadyCommitted")
+	end
+	check(equal(p, h.session.snapshot()), "duplicate observation rewarded")
+	check(h.session.release(25).status == "Closed")
+	local rejoin = harness({ repository = h.repository, clock = h.clock, lock = "reward-rejoin" })
+	local loaded = rejoin.session.snapshot()
+	check(rejoin.load.status == "Ready" and equal(p.economy, loaded.economy))
+	check(rejoin.visit(entry).status == "AlreadyCommitted")
+	check(equal(loaded, rejoin.session.snapshot()), "rejoin rewarded twice")
+end
+local function rewardUnknownCutPoints()
+	for _, after in { false, true } do
+		local h = harness({ energy = 0 })
+		check(h.visit(entry).status == "Committed" and h.visit(clearing).status == "Committed")
+		local before = h.session.snapshot()
+		h.repository.setReplayTransform(true)
+		if after then
+			h.repository.loseNextResultAfterWrite()
+		else
+			h.repository.failNext({ status = "error", reason = "BEFORE", retryable = false })
+		end
+		check(h.visit(entry).status == "OutcomeUnknown")
+		check(equal(before, h.session.snapshot()), "unknown reward exposed candidate")
+		local stored = h.repository.read("player/42").value
+		check(stored.economy.energyUnits == (if after then 5 else 0))
+		check(h.visit(entry, false).reason == "OUT_OF_RANGE")
+		local p = h.session.snapshot()
+		check(p.economy.energyUnits == 5 and p.world.objectives[objective] == 3)
+		check(p.profileRevision == before.profileRevision + 1, "reward used a second operation")
+		local original = p.economy.worldRewardReceipt.operationId
+		if after then
+			check(original == stored.economy.worldRewardReceipt.operationId)
+		end
+		check(h.visit(entry).status == "AlreadyCommitted" and equal(p, h.session.snapshot()))
+		check(h.session.release(100).status == "Closed")
+		local fresh = harness({
+			repository = h.repository,
+			clock = h.clock,
+			lock = "reward-cut-" .. tostring(after),
+		})
+		check(fresh.load.status == "Ready")
+		check(fresh.session.snapshot().economy.worldRewardReceipt.operationId == original)
+		check(fresh.visit(entry).status == "AlreadyCommitted")
+		check(fresh.session.snapshot().economy.energyUnits == 5)
+	end
+	-- Successful write, no acknowledgement/reconciliation, then process loss.
+	local crashed = harness({ energy = 0 })
+	check(
+		crashed.visit(entry).status == "Committed" and crashed.visit(clearing).status == "Committed"
+	)
+	crashed.repository.loseNextResultAfterWrite()
+	check(crashed.visit(entry).status == "OutcomeUnknown")
+	local written = crashed.repository.read("player/42").value.economy.worldRewardReceipt
+	crashed.clock.advance(301) -- Existing 300-second lease expires without a clean release.
+	local takeover = harness({
+		repository = crashed.repository,
+		clock = crashed.clock,
+		lock = "reward-takeover",
+	})
+	check(takeover.load.status == "Ready")
+	local restored = takeover.session.snapshot()
+	check(restored.economy.energyUnits == 5 and equal(written, restored.economy.worldRewardReceipt))
+	check(takeover.visit(entry).status == "AlreadyCommitted")
+	check(equal(restored, takeover.session.snapshot()), "unacknowledged rejoin rewarded twice")
+	check(
+		crashed.actions.reconcile(crashed.session).status ~= "Unchanged",
+		"old lease recovered reward authority"
+	)
+	check(equal(restored.economy, crashed.repository.read("player/42").value.economy))
+end
+local function rewardRaceAndContextFence()
+	local h = harness({ energy = 0 })
+	check(h.visit(entry).status == "Committed" and h.visit(clearing).status == "Committed")
+	local before = h.session.snapshot()
+	local reads = 0
+	local stale = h.actions.visit(h.session, entry, function()
+		reads += 1
+		return reads == 1 -- Presence/session changed before P2 admission.
+	end)
+	check(
+		stale.status == "Rejected" and equal(before, h.session.snapshot()),
+		"stale context rewarded"
+	)
+	local nested: any = nil
+	h.repository.setBeforeTransform(function()
+		h.repository.setBeforeTransform(nil)
+		nested = h.visit(entry)
+	end)
+	check(h.visit(entry).status == "Committed" and nested.status == "Busy")
+	local p = h.session.snapshot()
+	check(p.economy.energyUnits == 5 and p.profileRevision == before.profileRevision + 1)
+	check(h.visit(entry).status == "AlreadyCommitted" and equal(p, h.session.snapshot()))
+end
+local function rewardDeferredHeadroom()
+	for _, headroom in { 0, 2, 5 } do
+		local h = harness({ energy = 1_000_000_000_000 - headroom })
+		check(h.secure(Fixture.spawnContextId).status == "Secured")
+		check(h.visit(entry).status == "Committed" and h.visit(clearing).status == "Committed")
+		check(h.visit(entry).status == "Committed")
+		local p = h.session.snapshot()
+		local receipt = check(p.economy.worldRewardReceipt)
+		check(p.economy.energyUnits == 1_000_000_000_000)
+		check(receipt.initialUnits == headroom and receipt.remainingUnits == 5 - headroom)
+		local projected = require("../../src/server/application/ProgressionProjection").fromProfile(
+			p,
+			h.progression,
+			Vault.new(Capacity)
+		)
+		check(projected.state.deferredEnergyUnits == 5 - headroom, "deferred reward invisible")
+		check(h.visit(entry).status == "AlreadyCommitted" and equal(p, h.session.snapshot()))
+		check(h.buy("vault-upgrade/collection-capacity/1").status == "Committed")
+		check(h.actions.reconcile(h.session).status == "Unchanged")
+		p = h.session.snapshot()
+		check(p.economy.energyUnits == 1_000_000_000_000 - 25 + 5 - headroom)
+		check(p.economy.worldRewardReceipt.remainingUnits == 0)
+		check(p.economy.worldRewardReceipt.operationId == receipt.operationId)
+		check(h.energy.validate(p) == nil)
+		check(
+			h.actions.reconcile(h.session).status == "Unchanged" and equal(p, h.session.snapshot())
+		)
+	end
+end
+local function rewardDeferredCutPoints()
+	for _, after in { false, true } do
+		local h = harness({ energy = 1_000_000_000_000 })
+		check(h.secure(Fixture.spawnContextId).status == "Secured")
+		check(h.visit(entry).status == "Committed" and h.visit(clearing).status == "Committed")
+		check(h.visit(entry).status == "Committed")
+		local grant = h.session.snapshot().economy.worldRewardReceipt.operationId
+		check(h.buy("vault-upgrade/collection-capacity/1").status == "Committed")
+		local before = h.session.snapshot()
+		if after then
+			h.repository.loseNextResultAfterWrite()
+		else
+			h.repository.failNext({ status = "error", reason = "BEFORE", retryable = false })
+		end
+		check(h.actions.reconcile(h.session).status == "OutcomeUnknown")
+		check(equal(before, h.session.snapshot()))
+		check(h.session.release(100).status == "Closed", "release did not reconcile transfer")
+		local fresh = harness({
+			repository = h.repository,
+			clock = h.clock,
+			lock = "defer-" .. tostring(after),
+		})
+		check(fresh.load.status == "Ready")
+		local p = fresh.session.snapshot()
+		check(p.economy.energyUnits == 1_000_000_000_000 - 20)
+		check(
+			p.economy.worldRewardReceipt.remainingUnits == 0
+				and p.economy.worldRewardReceipt.operationId == grant
+		)
+		check(fresh.actions.reconcile(fresh.session).status == "Unchanged")
+		check(fresh.visit(entry).status == "AlreadyCommitted")
+		check(equal(p, fresh.session.snapshot()))
+	end
+end
+local function rewardContractsAndProtectedLoads()
+	local r = Registry.new(Definitions)
+	local reward = check(r.worldReward, "missing immutable DEV reward")
+	check(table.isfrozen(reward) and reward.energyUnits == 5 and reward.completionProgress == 3)
+	for _, mutate in
+		{
+			function(c: any)
+				c.worldReward = nil
+			end,
+			function(c: any)
+				c.worldReward.id = "world-reward/forged"
+			end,
+			function(c: any)
+				c.worldReward.objectiveId = "field-objective/mid-a-route"
+			end,
+			function(c: any)
+				c.worldReward.energyUnits = 0
+			end,
+			function(c: any)
+				c.worldReward.energyUnits = 5.5
+			end,
+			function(c: any)
+				c.worldReward.energyUnits = math.huge
+			end,
+			function(c: any)
+				c.worldReward.energyUnits = 6
+			end,
+			function(c: any)
+				c.worldReward.completionProgress = 1
+			end,
+			function(c: any)
+				c.worldReward.configSnapshotId = "client/forged"
+			end,
+		}
+	do
+		local c = copy(Definitions)
+		mutate(c)
+		check(not pcall(Registry.new, c), "unauthorized reward binding")
+	end
+	local h = harness({ energy = 0 })
+	check(h.visit(entry, false).reason == "OUT_OF_RANGE")
+	check(h.visit("landmark/unknown").reason == "ACCESS_BLOCKED")
+	check(h.visit("landmark/mid-a-entry").reason == "ACCESS_BLOCKED")
+	check(h.visit(entry).status == "Committed" and h.visit(clearing).status == "Committed")
+	check(h.visit(entry).status == "Committed")
+	local valid = h.session.snapshot()
+	for _, mutate in
+		{
+			function(p: any)
+				p.economy.worldRewardReceipt.remainingUnits = 6
+			end,
+			function(p: any)
+				p.economy.worldRewardReceipt.sourceReference = "event/unbound"
+			end,
+			function(p: any)
+				p.economy.worldRewardReceipt.energyUnits = 6
+			end,
+			function(p: any)
+				p.world.objectives[objective] = 2
+			end,
+			function(p: any)
+				p.economy.worldRewardReceipt.operationId = "forged"
+			end,
+		}
+	do
+		local bad = copy(valid)
+		mutate(bad)
+		check(h.energy.validate(bad) ~= nil, "invalid reward receipt trusted")
+		check(harness({ seed = bad }).load.status == "ProtectedLoadFailure")
+	end
+	check(Energy.new().validate(valid) ~= nil, "unbound world reward accepted")
+end
+local function rewardReceiptSurvivesAuditAndLegacy()
+	local h = harness({ energy = 0 })
+	check(h.visit(entry).status == "Committed" and h.visit(clearing).status == "Committed")
+	check(h.visit(entry).status == "Committed")
+	local p = h.session.snapshot()
+	local receipt = copy(p.economy.worldRewardReceipt)
+	for n = 1, 33 do
+		local snapshot = h.session.snapshot()
+		local op = "audit-reward-" .. n
+		check(h.session.checkpoint(op, function(candidate: any)
+			check(h.energy.apply(candidate, {
+				operationId = op,
+				reasonCode = "production-claim",
+				sourceOrSinkId = "vault/production",
+				deltaUnits = 0,
+				timestamp = 1000,
+				configSnapshotId = "content-snapshot/imp9-production-dev-v1",
+				expectedRevision = snapshot.profileRevision,
+			}).status == "Applied")
+		end).status == "Committed")
+	end
+	p = h.session.snapshot()
+	check(#p.economy.recentEnergyOperations == 32 and equal(receipt, p.economy.worldRewardReceipt))
+	check(h.visit(entry).status == "AlreadyCommitted" and equal(p, h.session.snapshot()))
+	local legacy = copy(p)
+	legacy.economy.worldRewardReceipt = nil
+	legacy.economy.recentEnergyOperations = {}
+	legacy.economy.energyUnits = 0 -- Already-completed pre-binding objective; no backfill.
+	local old = harness({ seed = legacy })
+	local before = old.session.snapshot()
+	check(old.load.status == "Ready" and old.visit(entry).status == "AlreadyCommitted")
+	check(old.actions.reconcile(old.session).status == "Unchanged")
+	check(equal(before, old.session.snapshot()), "legacy completion generated retroactive reward")
+end
 return {
+	rewardExactlyOnceAndRejoin = rewardExactlyOnceAndRejoin,
+	rewardUnknownCutPoints = rewardUnknownCutPoints,
+	rewardRaceAndContextFence = rewardRaceAndContextFence,
+	rewardDeferredHeadroom = rewardDeferredHeadroom,
+	rewardDeferredCutPoints = rewardDeferredCutPoints,
+	rewardContractsAndProtectedLoads = rewardContractsAndProtectedLoads,
+	rewardReceiptSurvivesAuditAndLegacy = rewardReceiptSurvivesAuditAndLegacy,
 	authoredContracts = authoredContracts,
 	registryContracts = registryContracts,
 	masteryRequiresActiveEvidence = masteryRequiresActiveEvidence,

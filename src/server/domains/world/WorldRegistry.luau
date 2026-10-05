@@ -228,6 +228,28 @@ function WorldRegistry.new(config: any): any
 			assert(n == 1 or landmarkId ~= o.landmarkIds[n - 1], "objective needs traversal")
 		end
 	end
+	local reward = freeze(config.worldReward)
+	assert(
+		type(reward) == "table"
+			and reward.id == "world-reward/starter-return-dev-v1"
+			and reward.objectiveId == "field-objective/fixture-return-route"
+			and objectives[reward.objectiveId].regionId == roles.Starter
+			and reward.completionProgress == #objectives[reward.objectiveId].landmarkIds
+			and reward.completionProgress == 3
+			and reward.energyUnits == 5
+			and reward.configSnapshotId == "content-snapshot/world-reward-starter-dev-v1",
+		"unbound DEV world reward"
+	)
+	for key in reward do
+		assert(
+			key == "id"
+				or key == "objectiveId"
+				or key == "completionProgress"
+				or key == "energyUnits"
+				or key == "configSnapshotId",
+			"unknown world reward field"
+		)
+	end
 	for _, r in regions do
 		local m = r.mastery
 		if m ~= nil then
@@ -412,6 +434,7 @@ function WorldRegistry.new(config: any): any
 		spawnContexts = contexts,
 		landmarks = landmarks,
 		objectives = objectives,
+		worldReward = reward,
 		authoringVersion = config.authoringVersion,
 		safeOutposts = safeOutposts,
 		securePoints = securePoints,

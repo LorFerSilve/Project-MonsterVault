@@ -64,9 +64,12 @@ function ProfileRuntimeService.new(options: {
 	local worldProgression = WorldProgressionService.new(WorldRegistry.new(WorldDefinitions))
 	local progression =
 		ProgressionService.new(ProgressionFixture, { mastery = worldProgression.mastery })
+	local energy = EnergyService.new(progression.boundSinks, worldProgression.registry.worldReward)
 	local worldActions = WorldActionUseCase.new({
 		world = worldProgression,
 		progression = progression,
+		energy = energy,
+		unixSeconds = os.time,
 		newOperationId = function()
 			return options.httpService:GenerateGUID(false)
 		end,
@@ -79,7 +82,6 @@ function ProfileRuntimeService.new(options: {
 			assert(effect == d.effectValue, "progression effect/config mismatch")
 		end
 	end
-	local energy = EnergyService.new(progression.boundSinks)
 	local assignments = VaultProductionUseCase.new({
 		production = production,
 		vault = vault,

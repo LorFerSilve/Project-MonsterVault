@@ -16,8 +16,25 @@ end
 local function id(value: any, maximum: number): boolean
 	return type(value) == "string" and #value > 0 and #value <= maximum
 end
-function EnergyService.new(boundSinks: { [string]: any }?)
+function EnergyService.new(boundSinks: { [string]: any }?, boundWorldReward: any?)
 	local sinks = table.clone(boundSinks or {})
+	-- A single immutable source supplied by the authoritative world registry.
+	local reward = if boundWorldReward then table.freeze(table.clone(boundWorldReward)) else nil
+	if reward then
+		assert(
+			id(reward.id, 128)
+				and id(reward.objectiveId, 128)
+				and id(reward.configSnapshotId, 128)
+				and integer(reward.energyUnits, MAX_UNITS)
+				and reward.energyUnits > 0
+				and integer(reward.completionProgress, 8)
+				and reward.completionProgress > 1,
+			"invalid world reward binding"
+		)
+	end
+	local function worldReason(reason: any): boolean
+		return reason == "world-objective-reward" or reason == "world-objective-transfer"
+	end
 	local function sinkReason(sink: string): string?
 		local reason = sinks[sink]
 		if reason == true then
@@ -35,11 +52,80 @@ function EnergyService.new(boundSinks: { [string]: any }?)
 			and operation.sourceOrSinkId == "vault/production"
 			and integer(operation.deltaUnits, MAX_UNITS)
 		)
+			or (operation.reasonCode == sinkReason(operation.sourceOrSinkId) and sinkReason(
+				operation.sourceOrSinkId
+			) ~= nil and integer(-operation.deltaUnits, MAX_UNITS))
 			or (
-				operation.reasonCode == sinkReason(operation.sourceOrSinkId)
-				and sinkReason(operation.sourceOrSinkId) ~= nil
-				and integer(-operation.deltaUnits, MAX_UNITS)
+				reward ~= nil
+				and worldReason(operation.reasonCode)
+				and operation.sourceOrSinkId == reward.id
+				and operation.configSnapshotId == reward.configSnapshotId
+				and integer(operation.deltaUnits, reward.energyUnits)
+				and (
+					operation.reasonCode == "world-objective-reward"
+					or (operation.deltaUnits > 0 and id(operation.grantOperationId, 96))
+				)
 			)
+	end
+	local function validRewardReceipt(profile: any): boolean
+		local r = profile.economy.worldRewardReceipt
+		if r == nil then
+			return true
+		end
+		if
+			reward == nil
+			or type(r) ~= "table"
+			or r.sourceReference ~= reward.id
+			or r.objectiveId ~= reward.objectiveId
+			or r.configSnapshotId ~= reward.configSnapshotId
+			or r.energyUnits ~= reward.energyUnits
+			or not integer(r.initialUnits, reward.energyUnits)
+			or not integer(r.remainingUnits, reward.energyUnits - r.initialUnits)
+			or not id(r.operationId, 96)
+			or not integer(r.timestamp, MAX_EXACT)
+			or not integer(r.expectedRevision, MAX_EXACT)
+			or r.expectedRevision < 1
+			or profile.recentOperations[r.operationId] ~= r.expectedRevision + 1
+			or r.expectedRevision >= profile.profileRevision
+			or type(profile.world) ~= "table"
+			or type(profile.world.objectives) ~= "table"
+			or profile.world.objectives[reward.objectiveId] ~= reward.completionProgress
+		then
+			return false
+		end
+		local transferred = r.remainingUnits < reward.energyUnits - r.initialUnits
+		if transferred then
+			if
+				not id(r.lastTransferOperationId, 96)
+				or not integer(r.lastTransferRevision, MAX_EXACT)
+				or r.lastTransferRevision <= r.expectedRevision
+				or r.lastTransferRevision >= profile.profileRevision
+				or profile.recentOperations[r.lastTransferOperationId]
+					~= r.lastTransferRevision + 1
+			then
+				return false
+			end
+		elseif r.lastTransferOperationId ~= nil or r.lastTransferRevision ~= nil then
+			return false
+		end
+		for key in r do
+			if
+				key ~= "sourceReference"
+				and key ~= "objectiveId"
+				and key ~= "configSnapshotId"
+				and key ~= "energyUnits"
+				and key ~= "initialUnits"
+				and key ~= "remainingUnits"
+				and key ~= "operationId"
+				and key ~= "timestamp"
+				and key ~= "expectedRevision"
+				and key ~= "lastTransferOperationId"
+				and key ~= "lastTransferRevision"
+			then
+				return false
+			end
+		end
+		return true
 	end
 	local function validate(profile: any): string?
 		local e = profile.economy
@@ -51,11 +137,15 @@ function EnergyService.new(boundSinks: { [string]: any }?)
 		then
 			return "INVALID_ENERGY_STATE"
 		end
+		if not validRewardReceipt(profile) then
+			return "INVALID_WORLD_REWARD_RECEIPT"
+		end
 		for key, value in e do
 			if
 				key ~= "energySchemaVersion"
 				and key ~= "energyUnits"
 				and key ~= "recentEnergyOperations"
+				and key ~= "worldRewardReceipt"
 				and (type(value) ~= "table" or next(value) ~= nil)
 			then
 				return "ENERGY_AUTHORITY_UNBOUND"
@@ -81,7 +171,27 @@ function EnergyService.new(boundSinks: { [string]: any }?)
 			then
 				return "INVALID_ENERGY_AUDIT"
 			end
-			if record.reasonCode ~= "production-claim" then
+			if worldReason(record.reasonCode) then
+				local r = e.worldRewardReceipt
+				if r == nil then
+					return "INVALID_ENERGY_AUDIT"
+				end
+				if record.reasonCode == "world-objective-reward" then
+					if
+						record.operationId ~= r.operationId
+						or record.deltaUnits ~= r.initialUnits
+						or record.expectedRevision ~= r.expectedRevision
+					then
+						return "INVALID_ENERGY_AUDIT"
+					end
+				elseif
+					record.grantOperationId ~= r.operationId
+					or record.expectedRevision <= r.expectedRevision
+					or record.deltaUnits > r.energyUnits - r.initialUnits
+				then
+					return "INVALID_ENERGY_AUDIT"
+				end
+			elseif record.reasonCode ~= "production-claim" then
 				local receipts = profile.progression.purchasesByUnlockId or {}
 				if type(receipts) ~= "table" then
 					return "INVALID_ENERGY_AUDIT"
@@ -139,6 +249,7 @@ function EnergyService.new(boundSinks: { [string]: any }?)
 		end
 		if
 			operation.reasonCode ~= "production-claim"
+			and not (reward ~= nil and worldReason(operation.reasonCode) and operation.sourceOrSinkId == reward.id)
 			and (
 				operation.reasonCode ~= sinkReason(operation.sourceOrSinkId)
 				or sinkReason(operation.sourceOrSinkId) == nil
@@ -174,6 +285,33 @@ function EnergyService.new(boundSinks: { [string]: any }?)
 		if operation.deltaUnits < -e.energyUnits then
 			return { status = "Rejected", reason = "INSUFFICIENT_ENERGY" }
 		end
+		if worldReason(operation.reasonCode) then
+			local definition = assert(reward, "world reward source unbound")
+			local r = e.worldRewardReceipt
+			if operation.reasonCode == "world-objective-reward" then
+				if r ~= nil then
+					return { status = "AlreadyApplied" }
+				end
+				if
+					type(profile.world) ~= "table"
+					or type(profile.world.objectives) ~= "table"
+					or profile.world.objectives[definition.objectiveId] ~= definition.completionProgress
+					or operation.deltaUnits
+						~= math.min(definition.energyUnits, MAX_UNITS - e.energyUnits)
+				then
+					return { status = "Rejected", reason = "INVALID_WORLD_REWARD" }
+				end
+			else
+				if
+					r == nil
+					or operation.grantOperationId ~= r.operationId
+					or operation.deltaUnits
+						~= math.min(r.remainingUnits, MAX_UNITS - e.energyUnits)
+				then
+					return { status = "Rejected", reason = "INVALID_WORLD_REWARD_TRANSFER" }
+				end
+			end
+		end
 		local record = {
 			operationId = operation.operationId,
 			reasonCode = operation.reasonCode,
@@ -185,6 +323,26 @@ function EnergyService.new(boundSinks: { [string]: any }?)
 			expectedRevision = operation.expectedRevision,
 			resultClass = "Applied",
 		}
+		if operation.reasonCode == "world-objective-reward" then
+			local definition = assert(reward, "world reward source unbound")
+			e.worldRewardReceipt = {
+				operationId = operation.operationId,
+				sourceReference = definition.id,
+				objectiveId = definition.objectiveId,
+				energyUnits = definition.energyUnits,
+				initialUnits = operation.deltaUnits,
+				remainingUnits = definition.energyUnits - operation.deltaUnits,
+				timestamp = operation.timestamp,
+				configSnapshotId = definition.configSnapshotId,
+				expectedRevision = operation.expectedRevision,
+			}
+		elseif operation.reasonCode == "world-objective-transfer" then
+			record.grantOperationId = operation.grantOperationId
+			local r = e.worldRewardReceipt
+			r.remainingUnits -= operation.deltaUnits
+			r.lastTransferOperationId, r.lastTransferRevision =
+				operation.operationId, operation.expectedRevision
+		end
 		e.energyUnits = record.resultingWallet
 		if #e.recentEnergyOperations == AUDIT_LIMIT then
 			table.remove(e.recentEnergyOperations, 1)

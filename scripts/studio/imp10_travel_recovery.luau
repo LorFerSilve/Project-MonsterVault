@@ -232,13 +232,13 @@ local function masteryAndRoutes(): any
 		check(equal(before, s.session.snapshot()), "roundtrip grants no value or mastery")
 		spawn.tick(1)
 	end
-	check(s.session.snapshot().economy.energyUnits == 320)
+	check(s.session.snapshot().economy.energyUnits == 325)
 	return {
 		passed = true,
 		roles = { "MidA", "MidB", "Advanced" },
 		realMastery = true,
 		discoveredNodes = s.session.snapshot().world.travelNodes,
-		energy = 320,
+		energy = 325,
 		noFieldToField = true,
 	}
 end
@@ -353,7 +353,7 @@ local function corruptBindings(): any
 end
 local function release(): any
 	local saved = spawn.release()
-	check(saved.profile.economy.energyUnits == 320)
+	check(saved.profile.economy.energyUnits == 325)
 	local count = 0
 	for _ in saved.profile.world.travelNodes do
 		count += 1
@@ -452,7 +452,7 @@ local function rejoin(resume: any): any
 				and equal(before.progression, p.progression),
 			"travel/respawn retains exact history"
 		)
-		check(p.economy.energyUnits == 320, "wallet retained")
+		check(p.economy.energyUnits == 325, "wallet retained")
 		return {
 			passed = true,
 			persistedDiscoveries = true,

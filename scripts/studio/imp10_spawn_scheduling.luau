@@ -87,7 +87,7 @@ local function starterAndUnlocks(): any
 		passed = true,
 		capturedId = oldId,
 		replacement = replacement,
-		energy = 520,
+		energy = 525,
 		realMidAccess = true,
 	}
 end
@@ -242,7 +242,7 @@ local function release(): any
 		world.populationCount() == 0 and #s.worldCallbacks == 1,
 		"stale shutdown callback cannot resurrect or schedule"
 	)
-	resume.expectedEnergy = 320
+	resume.expectedEnergy = 325
 	return resume
 end
 local function captureFailure(mode: string): any

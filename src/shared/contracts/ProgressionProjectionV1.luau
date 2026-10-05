@@ -51,6 +51,7 @@ function ProgressionProjectionV1.validSnapshot(payload: any): boolean
 		or not integer(s.catalogSize, 16)
 		or s.catalogSize < s.catalogIndex
 		or not integer(s.energyUnits, 1_000_000_000_000)
+		or (s.deferredEnergyUnits ~= nil and not integer(s.deferredEnergyUnits, 5))
 		or not integer(s.collectionCapacity, 2048)
 		or type(s.owned) ~= "boolean"
 		or (s.gateReason ~= "" and s.gateReason ~= "MISSING_MILESTONE" and s.gateReason ~= "ALREADY_OWNED" and s.gateReason ~= "INVALID_UNLOCK_LEVEL" and s.gateReason ~= "MILESTONE_AUTHORITY_UNBOUND" and s.gateReason ~= "MISSING_PREREQUISITE")
@@ -116,6 +117,7 @@ function ProgressionProjectionV1.validSnapshot(payload: any): boolean
 			and key ~= "catalogIndex"
 			and key ~= "catalogSize"
 			and key ~= "energyUnits"
+			and key ~= "deferredEnergyUnits"
 			and key ~= "collectionCapacity"
 			and key ~= "owned"
 			and key ~= "gateReason"
