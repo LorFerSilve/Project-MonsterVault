@@ -3799,3 +3799,34 @@ Exact prices, hour delta and Energy bonus cap remain tuneable downstream values.
 ### Change control
 
 Any persistent 2×/3× production-rate entitlement, 3× Return Overcharge, paid Production Slot/Buffer increase, paid rarity/capture advantage or other stronger acceleration requires a new explicit GDS-13 change-control decision.
+
+
+---
+
+## AD-262 — Authorize Activity-Earned Daily Wheel
+
+**Date:** 2026-10-05
+
+**Status:** Accepted — explicitly authorized by the project owner
+
+**Owning phases:** GDS-16 retention; GDS-8 reward/economy bounds; GDS-13/GDS-15 commercial-policy boundary; implementation owner IMP-14 or the owning retention/live-ops slice
+
+### Decision
+
+MonsterVault authorizes one **free Daily Activity Wheel** opportunity per eligible daily period after a player completes a qualifying meaningful-play action. Login alone, AFK presence and attendance streaks do not qualify.
+
+The wheel uses a versioned server-owned bounded reward table, server-owned randomness and an exact-once daily opportunity identity. It may grant small Energy or approved low-impact presentation/cosmetic rewards, but not required access/mastery, paid/rare claim priority, capture advantage or required creature ownership.
+
+### Commercial boundary
+
+Paid extra spins are **not baseline-authorized**. Robux-paid spins, paid tickets or paid currency consumed for random wheel outcomes require a future GDS-13/GDS-15 reopen and then-current randomized-item/platform/regional compliance review.
+
+Guaranteed deterministic commercial offers may coexist in the surrounding UI, but the free random reward and the paid deterministic product must remain semantically and visually distinct.
+
+### Retention consequence
+
+The mechanic exists to add a short satisfying reward moment after meaningful play, not to punish missed days. Missing a daily wheel opportunity creates no streak loss, debt, reduced future base reward or mainline progression penalty.
+
+### Implementation consequence
+
+Implementation must reuse authoritative reward/Energy owners and exact-once persistence. Client state cannot choose eligibility, seed, reward or weights. Telemetry should measure qualification, spin completion, reward distribution and subsequent meaningful-session behavior without turning analytics into reward authority.
