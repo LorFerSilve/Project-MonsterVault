@@ -1,0 +1,56 @@
+# IMP-11 Friendly Challenge evidence
+
+Date: 2026-10-05. **TA-10 §10 Friendly Challenge dependency COMPLETE; IMP-11 remains OPEN.** [Gate matrix](IMP11_GATE_MATRIX.md), [native artifact](evidence/IMP11_STUDIO_CHALLENGE_2026-10-05.json), AD-267. Current main was `864baddf08d8fc94bcdec7dd599e3178809427ab` (merged Ping PR #70) at inspection. Completed Party, Ping and IMP-10 evidence is preserved.
+
+## One authored DEV definition
+
+**Home Return (DEV)**, `challenge/home-return-dev-v1`, version **1**. Both participants start at discovered Starter Travel with ordinary Home Hub return ready. The first ordinary server-confirmed return after explicit consent wins an elapsed-time/session status result. Same-time completions use server admission order; a second callback cannot change the winner. This is the smallest authored route-time/status competition permitted by GDS-10 PC-03..07, TA-10 §10 and its scenarios 61..70. No Party is required.
+
+The public frozen definition supplies the visible title/rules on both clients. Requests pin its exact ID/version; a definition replacement cancels existing consent rather than rewriting it. Unknown client definition versions expose no Accept control. There is no player-created rule engine, free-form text, matchmaking, tournament, ranked ladder or stake.
+
+## Consent, eligibility and authority
+
+ChallengeRequest is the challenger's explicit consent to the visible ID/version. The target must be a different current server Player with a private Ready ProfileSession and the existing session-only **SameServer** invitation opt-in. Default None suppresses Party and Challenge offers. Revoking that audience cancels incoming pending offers; active accepted participation remains explicitly cancellable. Declining/ignoring creates no penalty. A Party leader and paid status have no special authority.
+
+Admission and acceptance recheck both participants against the existing world owner's ordinary travel availability: trusted live session/character/generation, valid authored walkable position, discovered source/destination, access, capture state, cooldown and safe destination. This limits the relevant capability equally without modifying normal action eligibility. No wealth/entitlement/cosmetic field is read. The existing participant index admits one incompatible Challenge record per player, including its brief terminal notice.
+
+The server owns the GUID, definition/version, two participant identities, acceptance, revision, common monotonic start boundary, deadlines, result and cancellation. Client intents are exactly Request `{targetUserId,definitionId,definitionVersion}`, Respond `{challengeId,accept}` and Cancel `{challengeId}`. Respond/Cancel require the current Challenge expectedRevision. No client score, winner, timestamp, session, recipient list, authority, text or resolve route is accepted.
+
+## Lifecycle and passive outcome
+
+`Offered` (20 seconds) becomes `Active` (30 seconds) only after the intended live target accepts. Offer creation grants no gameplay effect. Decline, ignore, explicit cancel, timeout and interruption produce bounded `Declined`, `Expired` or `Cancelled` readback. The first eligible authoritative completion freezes `Resolved`, winner UserId and elapsed milliseconds. Terminal readback lasts **six seconds**, then the record, remaining participant entries and private references disappear.
+
+WorldTravelService pins a private observation ticket before an already-authorized ordinary relocation and completes it only after existing current-session/character/generation/position arrival checks succeed. Social completion rechecks the record object, active revision, both live identities and pinned capabilities. Tickets cannot resolve a later generation or increment after resolution. Failed travel supplies no completion; observer failure cannot change the ordinary travel outcome. There is no score/event history or challenge-only gameplay mutation.
+
+Reset/death reuse CaptureRuntimeService's existing avatar lifecycle callbacks. Recovery, other authorized travel, disconnect, lost eligibility or Player/ProfileSession replacement cancels without loss. Stale old-avatar callbacks are inert. Disconnect drops the affected private identity/index immediately; the peer's brief cancellation notice then expires. Same-server rejoin starts with no old Challenge authority, including when a Party seat has its separate rejoin grace. Party membership changes do not force or end this independent challenge. Shutdown unbinds observations and clears all transient state.
+
+The slice transfers/consumes no creature, deducts no Energy, writes no Profile or persistent score/reward, changes no Capture Claim/mastery/access/spawn odds, and grants no travel/world priority. Ordinary gameplay keeps its own authority.
+
+## Bounds, networking and projection
+
+Existing Class B gateway validation, global traffic budget, Ready gate and 128-entry/120-second request replay remain the sole ingress owners. ChallengeRequest has capacity one/refill one per three seconds in that rate limiter; existing three-second sender/recipient invitation cooldowns also apply. A replay cannot multiply starts or delivery; an old private ProfileSession receives `REJECT_VALIDATION_REQUEST_REUSE`, never cached success. Maximum live state is **30** two-person records within the existing 60-identity bound; no queue or history exists.
+
+PartyService reuses the existing non-yielding participant admission and PartyRuntimeService's **one** cancellable next-deadline timer. No new timer owner, task per Challenge, Heartbeat or player polling exists. Existing callback ticket/generation/consume guards protect rearm and stop.
+
+The same recipient-only full Social.StateChanged/Party resync adds optional `state.challenge`: `{id,revision,definitionId,definitionVersion,fromUserId,toUserId,phase,expiresAt,reason?,winnerUserId?,elapsedMs?}`. Acceptance/start remain private; phase and result disclose the lifecycle. Compact public definition references resolve the visible authored copy without repeating it on every wire snapshot. Immutable synced server display expiry is separate from monotonic cleanup. The recipient view revision orders readback independently of Party membership revision; stale snapshots cannot restore authority/display.
+
+Combined-state tests exposed the existing conservative 4096-byte wire budget. Compact projection preserves Challenge results alongside both pending Party invitations. When an overlapping Party/Challenge/ping readback exceeds that existing budget, the owner drops oldest **presentation-only P0 ping entries** from the snapshot, at most two, under established TA-3/AD-266 backpressure policy. It retains consent/result/invitation/membership readback, does not change live ping records or membership revision, and never raises the wire limit. Other Party members without a Challenge can still receive the eligible pings. This affects optional social presentation only.
+
+The existing collapsed native diagnostic panel shows the definition/rules, opponent, phase/revision, expiry, accept/decline/cancel and winner/time. Incoming state never opens it or steals focus. The existing client expiry owner disposes stale display; disposal does not invent a server result. No art/audio/effects/localization/presentation polish is added; PQL-3/PQL-8/PQL-4 retain those owners.
+
+## Validation and limits
+
+- **32/32 focused Challenge; 294/294 full fast**, up from 262. Actual ProfileSession fixtures cover explicit/foreign consent, declined/ignored offers, expiry/accept boundaries, participant/global bounds, simultaneous conflicts, capability/definition changes, audience revocation, Party independence, server-observed completion/dedupe/admission order/result freeze, cancellation/stale generations, Player/session replacement, disconnect/rejoin, stale observation, no Profile/repository/value mutation, hostile schemas/replay/rate and bounded projection/combined wire pressure.
+- **34/34 distinct named native checks** (deduplicated across normal/scoped boots) in the artifact. Actual remotes and shipped store/UI prove visible consent, rejection of forged definition/score/self/resolve, replay without a second start, ordinary server-confirmed Home Return/result and expiry. Real scoped DEV profile/world/avatar plus one explicit adapter peer prove capability boundaries, no profile/value mutation, real timer expiry/rearm, actual LoadCharacterAsync cancellation, private ProfileSession replacement/replay, ordinary resync cancellation delivery and all-zero shutdown/stale callbacks.
+- **28/28 Python**, formatting/lint, dependency/integrity, Rojo build/sourcemap and configured Luau analysis pass. Local Roblox API definitions remain absent; configured analysis is not a full native API type pass. Native compile/runtime evidence supplements it.
+- Final fresh normal server/client boot reports BOOTSTRAP_READY and real DEV CleanOffline. Temporary probes are removed, ordinary boots enabled, Studio **Edit**, **92/92 exact source parity**, all **64** current authored/asset parts and eight Lighting properties unchanged.
+
+Four preliminary native probe failures are recorded, never counted as PASS: missed 20+6-second readback window, unattended avatar/start drift, a replacement replay attempted before the existing rate bucket refilled, and expecting a later owner rejection instead of the gateway's established REQUEST_REUSE fence. Corrected final probes pin only the unattended fixture avatar during waits, respect deadlines/rate admission and use ordinary resync. A UTF-8 source-transfer display-string error was also corrected before final exact parity. A later combined-wire fast test found the substantive projection-size issue described above; final compact projection and bounded P0 backpressure pass focused/full/native evidence.
+
+One real native client is proven. The opponent is an adapter peer with a real ProfileSession/in-memory repository, not a second real client. Scoped private-session replacement is not physical reconnect. Two-real-client/platform/reconnect and release validation remain with their broader social/release owners. Historical Party 23 fast/29 native, Ping 26 fast/28 native, IMP-10 52 native C0/29 authoring/315 route samples are retained, not rerun or summed into fresh evidence. VS1-19 remains DEFERRED under AD-260.
+
+## Files and next dependency
+
+Production extends existing PartyService, PartyRuntimeService (server/client), PartyPolicy, PartyProjectionV1/Store, gateway rate/routes, WorldTravelService/WorldRuntimeService, CaptureRuntimeService and ServerMain. One public FriendlyChallengeDefinition is added. Tests add FriendlyChallenge/manifest registration and the existing route inventory assertion. Two scoped native probes reuse existing world/spawn/repository fixtures. Roadmap/matrix, this evidence/native artifact, TA-17 namespace/service graph and AD-267 record only the proven dependency.
+
+Exact next dependency: **TA-10 §12 Showcase/Visitor -> authoritative read-only owner/visitor permission projection -> no personal-value or gameplay mutation authority**. Cooperative contribution/rewards and events follow their own gates. IMP-11 remains OPEN; no successor work is implemented here.

@@ -12,6 +12,7 @@ local CLASSES = table.freeze({
 -- Same gateway bucket owner, tighter budget for bounded social fan-out.
 local ROUTES = table.freeze({
 	["Social.Ping"] = { capacity = 1, refill = 1 / 3 },
+	["Social.ChallengeRequest"] = { capacity = 1, refill = 1 / 3 },
 })
 
 function NetworkRateLimiter.new(monotonicSeconds: () -> number)

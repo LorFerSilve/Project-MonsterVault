@@ -3,7 +3,7 @@
 -- P0 owner. Like CaptureService's admission, each transition is a non-yielding
 -- critical section. The Party record and participant membership index change
 -- together; no callbacks, persistence, network sends or queued waits run inside.
--- context, monotonicSeconds and newId are synchronous trusted adapters.
+-- Identity, clocks, GUID, world observation and P1 buffering are synchronous adapters.
 local PartyService = {}
 
 function PartyService.new(options: {
@@ -15,6 +15,10 @@ function PartyService.new(options: {
 	waypoint: ((any, any) -> any)?,
 	presentationSeconds: (() -> number)?,
 	updatePingPreference: ((any, any, boolean) -> string)?,
+	challengeDefinition: any?,
+	challengeContract: any?,
+	challengeCapability: ((any, any, boolean) -> any)?,
+	projectionFits: ((any) -> boolean)?,
 })
 	local policy = options.policy
 	assert(policy.maxMembers == 4, "GDS-10 Party cap is four")
@@ -28,6 +32,8 @@ function PartyService.new(options: {
 	local membership: { [number]: string } = {}
 	local invites: { [string]: any } = {}
 	local live: { [number]: any } = {}
+	local challenges: { [string]: any } = {}
+	local challengeByUser: { [number]: any } = {}
 	local dirty: { [number]: boolean } = {}
 	local projectionSequence = 0
 	local lastTime = 0
@@ -54,6 +60,69 @@ function PartyService.new(options: {
 		if live[userId] then
 			live[userId].revision = projectionSequence
 			dirty[userId] = true
+		end
+	end
+	local function displayNow(): number?
+		local value = (options.presentationSeconds or options.monotonicSeconds)()
+		return if type(value) == "number"
+				and value == value
+				and value >= 0
+				and value
+					< 2 ^ 53 - policy.challengeActiveSeconds - policy.challengeResultSeconds
+			then value
+			else nil
+	end
+	local function dropChallenge(c: any)
+		if challenges[c.id] ~= c then
+			return
+		end
+		challenges[c.id] = nil
+		for userId in c.people do
+			if challengeByUser[userId] == c then
+				challengeByUser[userId] = nil
+			end
+			touch(userId)
+		end
+		table.clear(c.people)
+	end
+	local function terminalChallenge(
+		c: any,
+		phase: string,
+		at: number,
+		reason: string?,
+		winner: number?
+	)
+		if challenges[c.id] ~= c or (c.phase ~= "Offered" and c.phase ~= "Active") then
+			return
+		end
+		local shown = displayNow()
+		if shown == nil then
+			dropChallenge(c)
+			return
+		end
+		c.phase, c.reason, c.winner = phase, reason, winner
+		c.elapsedMillis = if winner then math.floor(math.max(0, at - c.startMono) * 1000) else nil
+		c.revision += 1
+		c.deadline, c.expiresAt =
+			at + policy.challengeResultSeconds, shown + policy.challengeResultSeconds
+		for userId in c.people do
+			touch(userId)
+		end
+	end
+	local function detachChallenge(userId: number, identity: any)
+		local c = challengeByUser[userId]
+		if c == nil or c.people[userId] == nil or c.people[userId].identity ~= identity then
+			return
+		end
+		local at = now()
+		if at then
+			terminalChallenge(c, "Cancelled", at, "Unavailable", nil)
+		else
+			dropChallenge(c)
+		end
+		c.people[userId], challengeByUser[userId] = nil, nil
+		if next(c.people) == nil then
+			dropChallenge(c)
 		end
 	end
 	local function cancelInvite(id: string)
@@ -136,6 +205,7 @@ function PartyService.new(options: {
 				or current.session ~= prior.session
 			)
 		then
+			detachChallenge(userId, prior)
 			cancelForUser(userId)
 			local party = parties[membership[userId]]
 			if party and party.members[userId].player ~= nil then
@@ -165,6 +235,7 @@ function PartyService.new(options: {
 		elseif prior.ready ~= (current.ready == true) then
 			prior.ready = current.ready == true
 			if not prior.ready then
+				detachChallenge(userId, prior)
 				cancelForUser(userId)
 				local party = parties[membership[userId]]
 				if party and party.members[userId].player ~= nil then
@@ -192,7 +263,40 @@ function PartyService.new(options: {
 			end
 		end
 	end
+	local function reconcileChallenge(c: any, at: number)
+		local ids = {}
+		for userId in c.people do
+			table.insert(ids, userId)
+		end
+		table.sort(ids)
+		for _, userId in ids do
+			sync(userId)
+		end
+		if
+			options.challengeDefinition ~= c.definition
+			or c.definition.id ~= c.definitionId
+			or c.definition.version ~= c.definitionVersion
+		then
+			terminalChallenge(c, "Cancelled", at, "DefinitionChanged", nil)
+		end
+	end
 	local function expire(at: number)
+		for _, c in challenges do
+			reconcileChallenge(c, at)
+			if challenges[c.id] == c and at >= c.deadline then
+				if c.phase == "Offered" or c.phase == "Active" then
+					terminalChallenge(
+						c,
+						"Expired",
+						at,
+						if c.phase == "Offered" then "Ignored" else "TimedOut",
+						nil
+					)
+				else
+					dropChallenge(c)
+				end
+			end
+		end
 		for id, invite in invites do
 			if at >= invite.deadline then
 				cancelInvite(id)
@@ -250,7 +354,8 @@ function PartyService.new(options: {
 				and #id > 0
 				and #id <= 48
 				and parties[id] == nil
-				and invites[id] == nil,
+				and invites[id] == nil
+				and challenges[id] == nil,
 			"invalid Party identity"
 		)
 		return id
@@ -290,6 +395,10 @@ function PartyService.new(options: {
 		end
 		identity.allowInvites = allow
 		if not allow then
+			local c = challengeByUser[player.UserId]
+			if c and c.to == player.UserId and c.phase == "Offered" then
+				terminalChallenge(c, "Cancelled", now() :: number, "AudienceRestricted", nil)
+			end
 			for id, invite in invites do
 				if invite.targetId == player.UserId then
 					cancelInvite(id)
@@ -298,6 +407,264 @@ function PartyService.new(options: {
 		end
 		touch(player.UserId)
 		return "OK_PARTY_INVITE_POLICY"
+	end
+	local function capability(identity: any, atStart: boolean): any
+		local cap = if options.challengeCapability
+			then options.challengeCapability(identity.player, identity.session, atStart)
+			else nil
+		return if type(cap) == "table"
+				and cap.character ~= nil
+				and type(cap.generation) == "number"
+				and cap.generation >= 1
+				and cap.generation < 2 ^ 53
+				and cap.generation % 1 == 0
+			then { character = cap.character, generation = cap.generation }
+			else nil
+	end
+	local function challengeRequest(
+		player: any,
+		targetId: number,
+		definitionId: string,
+		version: number
+	): string
+		local identity, at = actor(player)
+		if identity == nil or at == nil then
+			return "REJECT_STATE_PARTY_SESSION"
+		end
+		local d, contract = options.challengeDefinition, options.challengeContract
+		if
+			contract == nil
+			or not contract.validChallengeRequest({
+				targetUserId = targetId,
+				definitionId = definitionId,
+				definitionVersion = version,
+			}, nil)
+		then
+			return "REJECT_VALIDATION_PAYLOAD"
+		end
+		if d == nil or d.id ~= definitionId or d.version ~= version then
+			return "REJECT_STATE_CHALLENGE_DEFINITION"
+		end
+		local target = if targetId ~= player.UserId then sync(targetId) else nil
+		if target == nil or not target.ready or not target.allowInvites then
+			return "REJECT_STATE_CHALLENGE_TARGET"
+		end
+		if challengeByUser[player.UserId] or challengeByUser[targetId] then
+			return "REJECT_STATE_CHALLENGE_BUSY"
+		end
+		if count(challenges) >= policy.maxChallenges then
+			return "REJECT_STATE_CHALLENGE_BOUNDS"
+		end
+		if at < identity.senderAt or at < target.recipientAt then
+			return "REJECT_RATE_LIMIT"
+		end
+		local fromCap, toCap, shown =
+			capability(identity, true), capability(target, true), displayNow()
+		if fromCap == nil or toCap == nil or shown == nil then
+			return "REJECT_STATE_CHALLENGE_CAPABILITY"
+		end
+		if
+			sync(player.UserId) ~= identity
+			or sync(targetId) ~= target
+			or not identity.ready
+			or not target.ready
+			or not target.allowInvites
+			or options.challengeDefinition ~= d
+			or challengeByUser[player.UserId]
+			or challengeByUser[targetId]
+		then
+			return "REJECT_STATE_CHALLENGE_STALE"
+		end
+		local id = newId()
+		local c = {
+			id = id,
+			revision = 1,
+			definition = d,
+			definitionId = d.id,
+			definitionVersion = d.version,
+			from = player.UserId,
+			to = targetId,
+			phase = "Offered",
+			accepted = false,
+			deadline = at + policy.challengeOfferSeconds,
+			expiresAt = shown + policy.challengeOfferSeconds,
+			people = {
+				[player.UserId] = { identity = identity, capability = fromCap },
+				[targetId] = { identity = target, capability = toCap },
+			},
+		}
+		challenges[id], challengeByUser[player.UserId], challengeByUser[targetId] = c, c, c
+		identity.senderAt, target.recipientAt =
+			at + policy.senderCooldownSeconds, at + policy.recipientCooldownSeconds
+		touch(player.UserId)
+		touch(targetId)
+		return "OK_CHALLENGE_OFFERED" -- Request is the challenger's consent to this exact definition.
+	end
+	local function challengeFor(
+		player: any,
+		identity: any,
+		id: string,
+		expected: number,
+		at: number
+	): any
+		local c = challengeByUser[player.UserId]
+		if c == nil or c.id ~= id or c.people[player.UserId].identity ~= identity then
+			return nil
+		end
+		reconcileChallenge(c, at)
+		return if challenges[id] == c and c.revision == expected then c else nil
+	end
+	local function challengeRespond(
+		player: any,
+		id: string,
+		accept: boolean,
+		expected: number
+	): string
+		local identity, at = actor(player)
+		if identity == nil or at == nil then
+			return "REJECT_STATE_PARTY_SESSION"
+		end
+		local c = challengeFor(player, identity, id, expected, at)
+		if c == nil then
+			return "REJECT_STATE_CHALLENGE_REVISION"
+		end
+		if c.to ~= player.UserId or c.phase ~= "Offered" then
+			return "REJECT_STATE_CHALLENGE_PHASE"
+		end
+		if type(accept) ~= "boolean" then
+			return "REJECT_VALIDATION_PAYLOAD"
+		end
+		if not accept then
+			terminalChallenge(c, "Declined", at, "Declined", nil)
+			return "OK_CHALLENGE_DECLINED"
+		end
+		if not identity.allowInvites then
+			return "REJECT_STATE_CHALLENGE_TARGET"
+		end
+		for _, member in c.people do
+			local cap = capability(member.identity, true)
+			if
+				cap == nil
+				or cap.character ~= member.capability.character
+				or cap.generation ~= member.capability.generation
+			then
+				terminalChallenge(c, "Cancelled", at, "Interrupted", nil)
+				return "REJECT_STATE_CHALLENGE_CAPABILITY"
+			end
+		end
+		local shown = displayNow()
+		if shown == nil or challengeFor(player, identity, id, expected, at) ~= c then
+			return "REJECT_STATE_CHALLENGE_STALE"
+		end
+		c.phase, c.accepted, c.revision = "Active", true, c.revision + 1
+		c.startMono, c.startedAt = at, shown
+		c.deadline, c.expiresAt =
+			at + policy.challengeActiveSeconds, shown + policy.challengeActiveSeconds
+		for userId in c.people do
+			touch(userId)
+		end
+		return "OK_CHALLENGE_ACTIVE"
+	end
+	local function challengeCancel(player: any, id: string, expected: number): string
+		local identity, at = actor(player)
+		if identity == nil or at == nil then
+			return "REJECT_STATE_PARTY_SESSION"
+		end
+		local c = challengeFor(player, identity, id, expected, at)
+		if c == nil then
+			return "REJECT_STATE_CHALLENGE_REVISION"
+		end
+		if c.phase ~= "Offered" and c.phase ~= "Active" then
+			return "REJECT_STATE_CHALLENGE_PHASE"
+		end
+		terminalChallenge(c, "Cancelled", at, "Cancelled", nil)
+		return "OK_CHALLENGE_CANCELLED"
+	end
+	local function beginChallengeTravel(
+		player: any,
+		context: any,
+		target: any,
+		recovery: boolean
+	): any
+		local identity, at = actor(player)
+		if identity == nil or at == nil then
+			return nil
+		end
+		local c = challengeByUser[player.UserId]
+		if c == nil or c.phase ~= "Active" or context.session ~= identity.session then
+			return nil
+		end
+		reconcileChallenge(c, at)
+		if challenges[c.id] ~= c or c.phase ~= "Active" then
+			return nil
+		end
+		local cap = c.people[player.UserId].capability
+		if
+			recovery
+			or context.character ~= cap.character
+			or context.generation ~= cap.generation
+			or context.nodeId ~= c.definition.sourceNodeId
+			or target.nodeId ~= c.definition.targetNodeId
+		then
+			terminalChallenge(c, "Cancelled", at, "Interrupted", nil)
+			return nil
+		end
+		return { challenge = c, revision = c.revision, identity = identity, player = player }
+	end
+	local function completeChallengeTravel(ticket: any)
+		if stopped or type(ticket) ~= "table" then
+			return
+		end
+		local c = ticket.challenge
+		if
+			c == nil
+			or challenges[c.id] ~= c
+			or c.phase ~= "Active"
+			or c.revision ~= ticket.revision
+		then
+			return
+		end
+		local identity, at = actor(ticket.player)
+		if identity ~= ticket.identity or at == nil or c.phase ~= "Active" then
+			return
+		end
+		for _, member in c.people do
+			local cap = capability(member.identity, false)
+			if
+				cap == nil
+				or cap.character ~= member.capability.character
+				or cap.generation ~= member.capability.generation
+			then
+				terminalChallenge(c, "Cancelled", at, "Interrupted", nil)
+				return
+			end
+		end
+		reconcileChallenge(c, at)
+		if
+			challenges[c.id] == c
+			and c.phase == "Active"
+			and c.revision == ticket.revision
+			and sync(ticket.player.UserId) == identity
+		then
+			terminalChallenge(c, "Resolved", at, nil, ticket.player.UserId)
+		end
+	end
+	local function interruptChallenge(player: any, character: any, changedCharacter: boolean)
+		local identity, at = actor(player)
+		if identity == nil or at == nil then
+			return
+		end
+		local c = challengeByUser[player.UserId]
+		if c == nil or (c.phase ~= "Offered" and c.phase ~= "Active") then
+			return
+		end
+		local cap = c.people[player.UserId].capability
+		if
+			(changedCharacter and cap.character ~= character)
+			or (not changedCharacter and cap.character == character)
+		then
+			terminalChallenge(c, "Cancelled", at, "Interrupted", nil)
+		end
 	end
 	local function setPingPreference(player: any, muted: boolean): string
 		local identity = actor(player)
@@ -541,6 +908,7 @@ function PartyService.new(options: {
 		end
 		local at = now()
 		cancelForUser(player.UserId)
+		detachChallenge(player.UserId, prior) -- Challenge has no Party seat grace or implicit rejoin.
 		local party = parties[membership[player.UserId]]
 		if party then
 			local seat = party.members[player.UserId]
@@ -605,6 +973,22 @@ function PartyService.new(options: {
 			pingsMuted = identity.pingsMuted,
 			pings = {},
 		}
+		local c = challengeByUser[player.UserId]
+		if c and c.people[player.UserId].identity == identity then
+			state.challenge = {
+				id = c.id,
+				revision = c.revision,
+				definitionId = c.definitionId,
+				definitionVersion = c.definitionVersion,
+				fromUserId = c.from,
+				toUserId = c.to,
+				phase = c.phase,
+				expiresAt = c.expiresAt,
+				winnerUserId = c.winner,
+				elapsedMs = c.elapsedMillis,
+				reason = c.reason,
+			}
+		end
 		local party = parties[membership[player.UserId]]
 		if party then
 			reconcile(party)
@@ -678,7 +1062,15 @@ function PartyService.new(options: {
 		table.sort(state.incoming, function(a, b)
 			return a.invitationId < b.invitationId
 		end)
-		return { domain = "party", revision = identity.revision, state = state }
+		local payload = { domain = "party", revision = identity.revision, state = state }
+		-- P0 pings may drop under existing wire backpressure. Consent/readback
+		-- always survives; at most two removals, without changing Party or ping authority.
+		if state.challenge and options.projectionFits then
+			while #state.pings > 0 and not options.projectionFits(payload) do
+				table.remove(state.pings, 1)
+			end
+		end
+		return payload
 	end
 
 	return {
@@ -692,6 +1084,12 @@ function PartyService.new(options: {
 		setInvitePolicy = setInvitePolicy,
 		ping = ping,
 		setPingPreference = setPingPreference,
+		challengeRequest = challengeRequest,
+		challengeRespond = challengeRespond,
+		challengeCancel = challengeCancel,
+		beginChallengeTravel = beginChallengeTravel,
+		completeChallengeTravel = completeChallengeTravel,
+		interruptChallenge = interruptChallenge,
 		disconnect = disconnect,
 		sessionFor = function(player: any): any
 			local identity = live[player.UserId]
@@ -711,6 +1109,9 @@ function PartyService.new(options: {
 		end,
 		nextDeadline = function(): number?
 			local nextAt = math.huge
+			for _, c in challenges do
+				nextAt = math.min(nextAt, c.deadline)
+			end
 			for _, pending in invites do
 				nextAt = math.min(nextAt, pending.deadline)
 			end
@@ -746,9 +1147,15 @@ function PartyService.new(options: {
 				invites = count(invites),
 				liveUsers = count(live),
 				pings = pingCount,
+				challenges = count(challenges),
+				challengeParticipants = count(challengeByUser),
 			}
 		end,
 		stop = function()
+			for _, c in challenges do
+				dropChallenge(c)
+			end
+			table.clear(challengeByUser)
 			stopped = true
 			table.clear(parties)
 			table.clear(membership)

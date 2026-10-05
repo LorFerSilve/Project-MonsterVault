@@ -7,7 +7,7 @@ function PartyProjectionStore.new(contract: any, wire: any, presentationSeconds:
 	local clock = presentationSeconds or os.clock
 	local lastTime = 0
 	local function expire()
-		if current == nil or current.state.pings == nil then
+		if current == nil then
 			return
 		end
 		local now = clock()
@@ -16,12 +16,17 @@ function PartyProjectionStore.new(contract: any, wire: any, presentationSeconds:
 			lastTime = now
 		end
 		local visible = {}
-		for _, ping in current.state.pings do
+		for _, ping in current.state.pings or {} do
 			if valid and now < ping.expiresAt then
 				table.insert(visible, ping)
 			end
 		end
-		current.state.pings = visible -- presentation expiry cannot resurrect on clock rollback.
+		if current.state.pings then
+			current.state.pings = visible
+		end
+		if current.state.challenge and (not valid or now >= current.state.challenge.expiresAt) then
+			current.state.challenge = nil -- Presentation disposal grants no lifecycle transition.
+		end
 	end
 	return {
 		snapshot = function(payload: any): string
@@ -42,6 +47,9 @@ function PartyProjectionStore.new(contract: any, wire: any, presentationSeconds:
 		nextDeadline = function(): number?
 			expire()
 			local deadline = math.huge
+			if current and current.state.challenge then
+				deadline = current.state.challenge.expiresAt
+			end
 			for _, ping in if current and current.state.pings then current.state.pings else {} do
 				deadline = math.min(deadline, ping.expiresAt)
 			end

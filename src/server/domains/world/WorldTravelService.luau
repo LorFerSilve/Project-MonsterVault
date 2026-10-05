@@ -78,6 +78,15 @@ function WorldTravelService.new(options: any): any
 			return "REJECT_STATE_TRAVEL_BUSY"
 		end
 		r.busy = true
+		-- Optional passive social observation. Failure cannot change ordinary travel.
+		local observation: any = nil
+		if options.beginTravelObservation then
+			local observed, value =
+				pcall(options.beginTravelObservation, player, context, target, recovery)
+			if observed then
+				observation = value
+			end
+		end
 		local ok, moved = pcall(options.relocate, player, context, target, recovery, function()
 			local live = observedContext(options.context(player), r)
 			return current(player, context) and (recovery or (live ~= nil and live.validPosition))
@@ -105,6 +114,9 @@ function WorldTravelService.new(options: any): any
 		r.hazard = nil
 		r.recoveryObservationNodeId = if recovery then target.recoveryObservationNodeId else nil
 		r.position = live.position -- Authorized relocation starts a new observation segment.
+		if not recovery and observation ~= nil and options.completeTravelObservation then
+			pcall(options.completeTravelObservation, observation)
+		end
 		return if recovery then "OK_WORLD_RECOVERED" else "OK_WORLD_TRAVELLED"
 	end
 	local function interruptHazard(player: any, context: any, r: any): boolean
@@ -194,6 +206,24 @@ function WorldTravelService.new(options: any): any
 	end
 	return {
 		step = step,
+		available = function(player: any, generation: number, nodeId: string): boolean
+			local r = records[player.UserId]
+			local c = if running then observedContext(options.context(player), r) else nil
+			if
+				r == nil
+				or c == nil
+				or r.busy
+				or not c.validPosition
+				or r.session ~= c.session
+				or r.character ~= c.character
+				or r.generation ~= generation
+				or c.generation ~= generation
+				or options.clock() < r.nextTravelAt
+			then
+				return false
+			end
+			return options.destination(c, nodeId) ~= nil
+		end,
 		ready = function(player: any, generation: number): boolean
 			local r = records[player.UserId]
 			local context = if running then observedContext(options.context(player), r) else nil

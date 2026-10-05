@@ -42,6 +42,7 @@ function CaptureRuntimeService.new(options: {
 	local operationRequests: { [string]: string } = {}
 	local running = false
 	local pulseGeneration = 0
+	local challengeInterruption: any = nil
 
 	local function position(player: any, draining: boolean?): (any?, number?)
 		local character = player.Character
@@ -305,6 +306,9 @@ function CaptureRuntimeService.new(options: {
 			playerConnections[player.UserId] = tracked
 			local deathConnection: any = nil
 			local function characterReady(character: any)
+				if challengeInterruption and player.Character == character then
+					pcall(challengeInterruption, player, character, true)
+				end
 				capture.interrupt(player.UserId)
 				generations[player.UserId] = (generations[player.UserId] or 0) + 1
 				if player.SetAttribute then
@@ -319,6 +323,9 @@ function CaptureRuntimeService.new(options: {
 				local humanoid = character:FindFirstChildOfClass("Humanoid")
 				if humanoid ~= nil then
 					deathConnection = humanoid.Died:Connect(function()
+						if challengeInterruption and player.Character == character then
+							pcall(challengeInterruption, player, character, false)
+						end
 						capture.interrupt(player.UserId)
 					end)
 				end
@@ -435,6 +442,7 @@ function CaptureRuntimeService.new(options: {
 			return {}
 		end
 		running = false
+		challengeInterruption = nil
 		pulseGeneration += 1
 		if options.worldRuntime.bindCaptureLifecycle then
 			options.worldRuntime.bindCaptureLifecycle(nil)
@@ -488,6 +496,9 @@ function CaptureRuntimeService.new(options: {
 		secure = secure,
 		reconcile = reconcile,
 		resync = resync,
+		bindChallengeInterruption = function(observer: any)
+			challengeInterruption = observer
+		end,
 		state = function(id: string): string?
 			return if capture then capture.state(id) else nil
 		end,

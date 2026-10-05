@@ -56,6 +56,7 @@ local function run()
 		"Social.Ping",
 		"Social.ChallengeRequest",
 		"Social.ChallengeRespond",
+		"Social.ChallengeCancel",
 		"Trade.Start",
 		"Trade.SetOffer",
 		"Trade.SetReady",
