@@ -64,3 +64,20 @@ The working reference pass is in
 [`tools/roblox/energy_core_appearance.luau`](tools/roblox/energy_core_appearance.luau).
 When another asset needs the palette, share these definitions rather than
 creating diverging per-asset copies; keep the existing Energy Core appearance.
+
+## Golden Slice production baseline
+
+Before substantial visual-production work, read the implementation pre-production package in
+[`docs/implementation/production/`](docs/implementation/production/README.md).
+
+For the first Golden Playable Vertical Slice, the required execution baseline is:
+
+- permanent production-quality MonsterVault base first;
+- removable/configurable Halloween 2026 launch layer second;
+- use the Visual Bible and Asset Manifest to avoid ad-hoc art direction;
+- use the Blender -> Roblox standard for every custom hero asset;
+- use the UI/UX system instead of creating unrelated per-screen styles;
+- treat the production performance budgets as authoring guardrails until measured TA-14 evidence exists;
+- update the Golden Slice acceptance matrix with actual Studio evidence rather than claiming quality from code/export success.
+
+Current authored content note: the repository currently has Common Species and one protected Legendary DEV Species, but no authored Rare/Epic Species. Visual production must not silently alter authoritative rarity to fill a presentation checklist.
