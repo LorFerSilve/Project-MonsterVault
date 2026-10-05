@@ -1,9 +1,13 @@
 # Project MonsterVault Documentation
 
 > **Project phase:** Implementation — TA-17 Implementation Locked — PASS  
-> **Implementation status:** OPEN — IMP-9 COMPLETE; IMP-10 World Scaling FUNCTIONALLY COMPLETE under AD-260; IMP-11 next; VS1-19 deferred to future Scale Readiness under AD-260
+> **Implementation status:** OPEN — IMP-9 COMPLETE; IMP-10 World Scaling FUNCTIONALLY COMPLETE under AD-260; IMP-11 OPEN with Party/Ping/Challenge/Showcase dependencies COMPLETE; Golden Playable Vertical Slice ready; **Halloween 2026 launch theme bound**; VS1-19 deferred to future Scale Readiness under AD-260
 
 This directory is the authoritative documentation space for Project MonsterVault.
+
+## Launch Theme
+
+The owner-authorized first-release seasonal direction is **Halloween 2026**. Implementation and production-quality work must use the permanent-base-plus-removable-seasonal-layer rule in [`implementation/HALLOWEEN_2026_LAUNCH_THEME.md`](implementation/HALLOWEEN_2026_LAUNCH_THEME.md), with concrete phase bindings in [`implementation/IMPLEMENTATION_ROADMAP.md`](implementation/IMPLEMENTATION_ROADMAP.md). Halloween presentation may begin in the Golden Slice; event authority, commerce and live-ops remain with their existing owning phases.
 
 The project follows a specification-first discipline: gameplay is designed first, Technical Architecture is derived from the approved design, and implementation begins only after both layers pass their formal completion gates.
 
