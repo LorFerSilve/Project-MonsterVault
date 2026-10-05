@@ -1,10 +1,17 @@
 --!strict
 
 -- AD-256: canonical DEV authored roles, pools, active routes and safe utilities.
--- Historic Starter IDs/provenance remain valid; no world reward is bound.
+-- Historic Starter IDs/provenance remain valid; one fixed active objective reward.
 local config = {
 	contentSnapshotId = "content-snapshot/imp10-world-dev-v2",
 	authoringVersion = 1,
+	worldReward = {
+		id = "world-reward/starter-return-dev-v1",
+		objectiveId = "field-objective/fixture-return-route",
+		completionProgress = 3,
+		energyUnits = 5,
+		configSnapshotId = "content-snapshot/world-reward-starter-dev-v1",
+	},
 	-- One optional, visibly marked DEV exposure pocket; no reward or travel edge.
 	hazards = {
 		{

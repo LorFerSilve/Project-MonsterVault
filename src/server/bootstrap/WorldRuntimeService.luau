@@ -159,10 +159,17 @@ function WorldRuntimeService.new(
 			return "REJECT_STATE_WORLD_UNKNOWN_LANDMARK"
 		end
 		local session = options.profileCoordinator.get(player.UserId)
+		local admittedPresence = if captureLifecycle then captureLifecycle.presence(player) else nil
 		local result = options.worldActions.visit(session, landmarkId, function(): boolean
+			if not running or options.profileCoordinator.get(player.UserId) ~= session then
+				return false
+			end
 			local presence = if captureLifecycle then captureLifecycle.presence(player) else nil
 			if
 				presence == nil
+				or admittedPresence == nil
+				or presence.character ~= admittedPresence.character
+				or presence.generation ~= admittedPresence.generation
 				or travelOwner == nil
 				or not travelOwner.ready(player, presence.generation)
 			then

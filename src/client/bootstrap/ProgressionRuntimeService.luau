@@ -37,8 +37,9 @@ function ProgressionRuntimeService.new(options: { networking: any, player: any, 
 			local s = if state.snapshot then state.snapshot.state else nil
 			summary.Text = if s
 				then string.format(
-					"Energy %d | Collection capacity %d\n%s",
+					"Energy %d | Pending reward %d | Collection capacity %d\n%s",
 					s.energyUnits,
+					s.deferredEnergyUnits or 0,
 					s.collectionCapacity,
 					s.label
 						.. (

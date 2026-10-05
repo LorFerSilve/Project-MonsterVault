@@ -101,7 +101,10 @@ local function setup(regional: boolean?, cycleUnixSeconds: (() -> number)?): any
 		require(shared.config.ProgressionFixture),
 		{ mastery = world.mastery }
 	)
-	local energy = require(server.domains.economy.EnergyService).new(progression.boundSinks)
+	local energy = require(server.domains.economy.EnergyService).new(
+		progression.boundSinks,
+		world.registry.worldReward
+	)
 	local capacity = table.clone(require(shared.config.VaultCapacityFixture))
 	capacity.baseCollectionCapacity = 10
 	local vault = require(server.domains.vault.VaultService).new(capacity)
@@ -169,6 +172,8 @@ local function setup(regional: boolean?, cycleUnixSeconds: (() -> number)?): any
 	local actions = require(server.application.WorldActionUseCase).new({
 		world = world,
 		progression = progression,
+		energy = energy,
+		unixSeconds = clock.wallClock.unixSeconds,
 		newOperationId = operation,
 	})
 	local purchases = require(server.application.ProgressionPurchaseUseCase).new({
@@ -298,6 +303,7 @@ local function setup(regional: boolean?, cycleUnixSeconds: (() -> number)?): any
 		profileCoordinator = coordinator,
 		captureRuntime = captureRuntime,
 		worldRuntime = worldRuntime,
+		worldActions = actions,
 		vault = vault,
 		capacity = require(server.application.VaultCapacityUseCase).new({
 			vault = vault,
@@ -509,7 +515,7 @@ local function productionAndAccess(): any
 		table.insert(receipts, { payload = payload, expectedRevision = q.expectedRevision })
 	end
 	local p = s.session.snapshot()
-	check(p.economy.energyUnits == 520, "two access debits only")
+	check(p.economy.energyUnits == 525, "production plus one world reward, two access debits")
 	check(
 		s.world.canAccess(p, "region/biome-mid-a", s.progression.hasAccess)
 			and s.world.canAccess(p, "region/biome-mid-b", s.progression.hasAccess),
@@ -633,7 +639,7 @@ local function rejoin(resume: any, inspectRuntime: ((any, any) -> ())?): any
 	check(equal(resume.profile.collection, p.collection), "exact ownership preserved")
 	check(
 		equal(resume.profile.progression, p.progression)
-			and p.economy.energyUnits == (resume.expectedEnergy or 520),
+			and p.economy.energyUnits == (resume.expectedEnergy or 525),
 		"access and exact wallet persisted"
 	)
 	check(

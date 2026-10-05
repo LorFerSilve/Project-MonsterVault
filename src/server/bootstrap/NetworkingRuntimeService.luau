@@ -34,6 +34,7 @@ function NetworkingRuntimeService.new(options: {
 	diagnostics: any,
 	captureRuntime: any?,
 	worldRuntime: any?,
+	worldActions: any?,
 	vault: any?,
 	capacity: any?,
 	production: any?,
@@ -426,6 +427,9 @@ function NetworkingRuntimeService.new(options: {
 		end
 		local active = options.profileCoordinator.get(player.UserId)
 		options.purchases.reconcile(active)
+		if options.worldActions ~= nil then
+			options.worldActions.reconcile(active)
+		end
 		if options.claims ~= nil then
 			options.claims.reconcile(active)
 		end

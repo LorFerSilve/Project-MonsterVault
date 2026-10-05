@@ -25,6 +25,9 @@ function ProgressionProjection.fromProfile(
 			catalogIndex = index,
 			catalogSize = #progression.definitions,
 			energyUnits = profile.economy.energyUnits,
+			deferredEnergyUnits = if profile.economy.worldRewardReceipt
+				then profile.economy.worldRewardReceipt.remainingUnits
+				else 0,
 			collectionCapacity = vault.collectionStatus(profile).capacity,
 			owned = progression.owned(profile, d.unlockId),
 			gateReason = progression.eligible(profile, d.unlockId) or "",
