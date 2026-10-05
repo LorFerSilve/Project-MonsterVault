@@ -12,6 +12,8 @@ local ProjectionV1 = require(shared.ProjectionV1)
 local CaptureProjectionV1 = require(shared.CaptureProjectionV1)
 local SecuredCollectionProjectionV1 = require(shared.SecuredCollectionProjectionV1)
 local ProjectionStore = require(script.Parent.Parent.store.ProjectionStore)
+local PartyProjectionV1 = require(shared.PartyProjectionV1)
+local PartyProjectionStore = require(script.Parent.Parent.store.PartyProjectionStore)
 local SecuredCollectionStore = require(script.Parent.Parent.store.SecuredCollectionStore)
 local ClientGateway = require(script.Parent.Parent.networking.ClientGateway)
 
@@ -24,6 +26,7 @@ function NetworkingRuntimeService.new(options: {
 	diagnostics: any,
 })
 	local store = ProjectionStore.new(ProjectionV1, WireValidation)
+	local partyStore = PartyProjectionStore.new(PartyProjectionV1, WireValidation)
 	local securedCollectionStore =
 		SecuredCollectionStore.new(SecuredCollectionProjectionV1, WireValidation)
 	local gateway = ClientGateway.new({
@@ -32,6 +35,8 @@ function NetworkingRuntimeService.new(options: {
 		resultCodes = ResultCodes,
 		wire = WireValidation,
 		store = store,
+		partyProjection = PartyProjectionV1,
+		partyStore = partyStore,
 		captureProjection = CaptureProjectionV1,
 		vaultProjection = VaultProjectionV1,
 		assignmentProjection = VaultAssignmentProjectionV1,
@@ -49,6 +54,7 @@ function NetworkingRuntimeService.new(options: {
 	local vaultListener: ((any) -> ())? = nil
 	local assignmentListener: ((any) -> ())? = nil
 	local progressionListener: ((any) -> ())? = nil
+	local partyListener: ((any) -> ())? = nil
 
 	local function start()
 		assert(not running, "networking already started")
@@ -60,6 +66,9 @@ function NetworkingRuntimeService.new(options: {
 			connections,
 			options.event.OnClientEvent:Connect(function(envelope)
 				local ok, outcome = pcall(gateway.handleEvent, envelope)
+				if ok and outcome == "Party" and partyListener ~= nil then
+					partyListener(envelope)
+				end
 				if ok and outcome == "Capture" and captureListener ~= nil then
 					captureListener(envelope)
 				end
@@ -135,6 +144,7 @@ function NetworkingRuntimeService.new(options: {
 		vaultListener = nil
 		assignmentListener = nil
 		progressionListener = nil
+		partyListener = nil
 		return {}
 	end
 
@@ -145,7 +155,17 @@ function NetworkingRuntimeService.new(options: {
 		stop = stop,
 		gateway = gateway,
 		store = store,
+		partyStore = partyStore,
 		securedCollectionStore = securedCollectionStore,
+		subscribeParty = function(listener: (any) -> ())
+			assert(partyListener == nil, "Party listener already bound")
+			partyListener = listener
+			return function()
+				if partyListener == listener then
+					partyListener = nil
+				end
+			end
+		end,
 		subscribeProgression = function(listener: (any) -> ())
 			assert(progressionListener == nil, "progression listener already bound")
 			progressionListener = listener

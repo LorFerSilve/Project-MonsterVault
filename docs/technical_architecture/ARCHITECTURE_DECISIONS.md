@@ -3917,3 +3917,29 @@ Reduced Motion, camera-shake controls, audio categories, semantic visual/text eq
 ### Production workflow
 
 Roblox-native UI, audio, particles, beams, trails and haptics are preferred where sufficient. Blender MCP is actively used for custom creatures, rigs/animation, machinery, showcase assets or custom effect geometry when it materially improves the production result, followed by Studio validation.
+
+---
+
+## AD-265 — Bind the server-local Party command and projection contract
+
+**Date:** 2026-10-05
+
+**Status:** Accepted — within the owner-authorized first IMP-11 Party slice
+
+**Owning phase:** TA-17 runtime namespace; implements the existing locked TA-10 / GDS-10 social contract
+
+### Context
+
+GDS-10 / TA-10 already authorize explicit Party creation, leader removal/disband, membership revisions, invitation preference and bounded same-server rejoin. The TA-17 V1 allowlist reserved only PartyInvite/PartyRespond/PartyLeave, without required revision preconditions or a Party resync selector. Those routes alone cannot expose the locked lifecycle safely.
+
+### Decision
+
+Extend the existing Class B allowlist with `Social.PartyCreate {}`, `Social.PartyRemove {partyId,targetUserId}`, `Social.PartyDisband {partyId}`, `Social.PartyRejoin {partyId}` and `Social.PartySetInvitePolicy {allowInvites:boolean}`. Invite keeps `{targetUserId}`, Respond keeps `{invitationId,accept}`, Leave keeps `{partyId}`. Invite/Respond/Leave/Remove/Disband/Rejoin require an envelope expectedRevision compared to server-owned Party revision. Creation/preference accept no expectedRevision or authority fields. Add the bounded Class A Party resync selector and recipient-only full Party snapshot on the existing Social.StateChanged event. No new remote is introduced.
+
+The P0 owner reuses non-yielding admission as the critical section for both Party state and the participant membership index. No external/yielding work runs inside; therefore Party/participant transitions serialize together without a new concurrency framework or lock order. Invitations bind exact current Player/ProfileSession identities. Existing non-Class-A replay entries additionally retain that private ProfileSession identity; it never appears on the wire. Replacement sessions cannot reuse cached social success.
+
+Four seats remains the semantic maximum. DEV tuning is 30-second invite/rejoin lifetimes, separate three-second sender/recipient cooldowns, four outgoing/two incoming pending invites, 60 Parties/live records. Default audience is None with explicit session-only SameServer opt-in. Grace retains no private identity references; explicit rejoin/release uses the current revision. Deterministic join-sequence succession never restores a former leader automatically; no available remaining member ends the Party. One native deadline timer owns expiry and is generation/ticket-fenced. Full multiplayer/platform-policy review remains a broader social/release obligation.
+
+### Boundaries
+
+No Party progression/persistence, forced travel, teammate value/capture authority, cross-server restoration, chat/freeform name, guild, event, trade, reward or commerce behavior is authorized here. Paid/supporter/subscription/cosmetic status cannot affect priority, membership, consent or safety. PQL-3/PQL-8 own final social presentation. [Party evidence](../implementation/IMP11_PARTY_EVIDENCE.md) and [IMP-11 gates](../implementation/IMP11_GATE_MATRIX.md) register the proven slice without closing the phase or deferred scale/release gates.

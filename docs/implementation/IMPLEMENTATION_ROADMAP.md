@@ -1,6 +1,6 @@
 # MonsterVault Implementation Roadmap
 
-> **Status:** IMP-8 COMPLETE with registered deferred validation; IMP-9 COMPLETE; IMP-10 FUNCTIONALLY COMPLETE under AD-260; IMP-11 is next. VS1-19 remains DEFERRED to Scale Readiness
+> **Status:** IMP-8 COMPLETE with registered deferred validation; IMP-9 COMPLETE; IMP-10 FUNCTIONALLY COMPLETE under AD-260; IMP-11 OPEN with its server-local Party dependency COMPLETE. VS1-19 remains DEFERRED to Scale Readiness
 > **Locked by:** TA-17
 > **Rule:** Dependency-driven; do not skip phases merely because later UI/content is easier to demo.
 
@@ -183,6 +183,16 @@ Scale-readiness gate inherited from IMP-8 / AD-249 and rescheduled by AD-260:
 - Local bounded performance/security checks, streaming tests and practical small-client validation remain required during normal development. Production release remains subject to the applicable TA-14/TA-15/release gates.
 
 ## IMP-11 — Social and Events
+
+**Status (2026-10-05): OPEN. First dependency COMPLETE: TA-10 server-local Party identity/invite/membership authority, revision/consent/session fencing and bounded same-server rejoin/cleanup.** [Party evidence](IMP11_PARTY_EVIDENCE.md) and [phase gate matrix](IMP11_GATE_MATRIX.md) distinguish the passing slice from the remaining phase and release obligations.
+
+One P0 owner implements four seats, one Party per player, explicit creation/invite/accept/decline/leave/removal/disband, join-sequence succession and a 30-second same-server seat reservation. Membership and the participant index change together in the existing non-yielding admission pattern. Invites bind exact live Player/ProfileSession identities and one Party revision; revisions invalidate old consent. Returning sessions require explicit rejoin at the current revision and cannot seize leadership. A single deadline timer owns all invite/grace expiry; native callback tickets and shutdown cleanup fence stale work. Default invitation audience is None with explicit session-only SameServer opt-in. No personal value, capture/access authority or commercial status is granted.
+
+AD-265 registers the missing Class B creation/removal/disband/rejoin/preference intents, required Party revision preconditions and Class A Party readback on the existing three remotes. The existing bounded replay window now binds non-Class-A entries to private ProfileSession identity. A collapsed native diagnostic panel exposes authoritative state without incoming-invite focus changes; PQL-3/PQL-8 own final presentation.
+
+Validation: **236/236 fast** (23 new Party C0 cases), **29/29 focused native checks**, **28/28 Python**, static/build/dependency/integrity and configured Luau analysis, **91/91 final Edit source parity**. Real native wire/Player/ProfileSession/respawn/CreatorKick/shutdown and one actual deadline timer are proven. The timer peer is an adapter fixture; two real clients and physical same-live-server reconnect are not claimed. All 64 current authored/asset parts and Lighting are preserved. Existing IMP-10 evidence is retained, not rewritten or counted as rerun.
+
+Exact next dependency: **TA-10 §7 bounded Social Ping/waypoint routing -> current Party membership/revision and recipient scope -> predefined intent, disclosure, rate and mute evidence**. Challenge/visitor/contribution/event work follows its own dependencies. IMP-11 is not complete; commerce, trading and presentation polish remain with their later owners.
 
 Party/Ping/challenge/visitor plus global event occurrence/contribution/rewards and cross-server hints.
 

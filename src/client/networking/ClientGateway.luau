@@ -14,6 +14,8 @@ function ClientGateway.new(options: {
 	progressionProjection: any?,
 	securedCollectionProjection: any?,
 	securedCollectionStore: any?,
+	partyProjection: any?,
+	partyStore: any?,
 	sendCommand: (any) -> (),
 })
 	local nextRequest = 0
@@ -82,6 +84,17 @@ function ClientGateway.new(options: {
 	local function handleEvent(envelope: any): string
 		if not validEvent(envelope) then
 			return "Invalid"
+		end
+		if envelope.routeId == options.routes.events.socialStateChanged then
+			if
+				options.partyProjection == nil
+				or options.partyStore == nil
+				or not options.partyProjection.validSnapshot(envelope.payload)
+				or envelope.revision ~= envelope.payload.revision
+			then
+				return "Invalid"
+			end
+			return options.partyStore.snapshot(envelope.payload)
 		end
 		if envelope.routeId == options.routes.events.projectionSnapshot then
 			if envelope.payload.domain == "vaultAssignments" then
@@ -240,6 +253,9 @@ function ClientGateway.new(options: {
 			options.store.reset()
 			if options.securedCollectionStore ~= nil then
 				options.securedCollectionStore.reset()
+			end
+			if options.partyStore ~= nil then
+				options.partyStore.reset()
 			end
 		end,
 	}

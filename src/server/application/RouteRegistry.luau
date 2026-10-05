@@ -31,6 +31,7 @@ local function resyncPayload(payload: any, expectedRevision: any): boolean
 				and value ~= "vaultAssignments"
 				and value ~= "progression"
 				and value ~= "world"
+				and value ~= "party"
 			then
 				return false
 			end
