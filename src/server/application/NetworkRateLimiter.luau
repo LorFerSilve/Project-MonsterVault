@@ -9,6 +9,10 @@ local CLASSES = table.freeze({
 	C = { capacity = 4, refill = 2 },
 	D = { capacity = 2, refill = 1 },
 })
+-- Same gateway bucket owner, tighter budget for bounded social fan-out.
+local ROUTES = table.freeze({
+	["Social.Ping"] = { capacity = 1, refill = 1 / 3 },
+})
 
 function NetworkRateLimiter.new(monotonicSeconds: () -> number)
 	local byUser: { [number]: any } = {}
@@ -38,7 +42,7 @@ function NetworkRateLimiter.new(monotonicSeconds: () -> number)
 	end
 
 	local function allowRoute(userId: number, routeId: string, class: string): boolean
-		local limits = CLASSES[class]
+		local limits = ROUTES[routeId] or CLASSES[class]
 		assert(limits ~= nil, "invalid rate class")
 		local now = monotonicSeconds()
 		local user = userAt(userId, now)

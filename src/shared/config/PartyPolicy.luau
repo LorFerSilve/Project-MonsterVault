@@ -7,6 +7,8 @@ return table.freeze({
 	maxLiveUsers = 60,
 	maxInvitesPerParty = 4,
 	maxIncomingInvites = 2,
+	maxPingsPerParty = 2,
+	pingSeconds = 6,
 	inviteSeconds = 30,
 	rejoinSeconds = 30,
 	senderCooldownSeconds = 3,

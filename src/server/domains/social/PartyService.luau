@@ -11,6 +11,10 @@ function PartyService.new(options: {
 	context: (number) -> any,
 	monotonicSeconds: () -> number,
 	newId: () -> string,
+	pingContract: any?,
+	waypoint: ((any, any) -> any)?,
+	presentationSeconds: (() -> number)?,
+	updatePingPreference: ((any, any, boolean) -> string)?,
 })
 	local policy = options.policy
 	assert(policy.maxMembers == 4, "GDS-10 Party cap is four")
@@ -68,6 +72,7 @@ function PartyService.new(options: {
 	end
 	local function changed(party: any)
 		party.revision += 1
+		table.clear(party.pings) -- prior membership context cannot keep social delivery alive.
 		for id, invite in invites do
 			if invite.partyId == party.id then
 				cancelInvite(id) -- consent to an older membership/leader revision is invalid.
@@ -151,6 +156,7 @@ function PartyService.new(options: {
 				session = current.session,
 				allowInvites = false,
 				ready = current.ready == true,
+				pingsMuted = current.pingsMuted ~= false,
 				senderAt = 0,
 				recipientAt = 0,
 			}
@@ -165,6 +171,10 @@ function PartyService.new(options: {
 					removeSeat(party, userId)
 				end
 			end
+			touch(userId)
+		end
+		if prior.pingsMuted ~= (current.pingsMuted ~= false) then
+			prior.pingsMuted = current.pingsMuted ~= false
 			touch(userId)
 		end
 		return prior
@@ -189,6 +199,14 @@ function PartyService.new(options: {
 			end
 		end
 		for _, party in parties do
+			for userId, ping in party.pings do
+				if at >= ping.deadline then
+					party.pings[userId] = nil
+					for memberId in party.members do
+						touch(memberId)
+					end
+				end
+			end
 			for userId, seat in party.members do
 				if seat.deadline and at >= seat.deadline then
 					removeSeat(party, userId)
@@ -255,6 +273,7 @@ function PartyService.new(options: {
 			revision = 1,
 			leaderId = player.UserId,
 			sequence = 1,
+			pings = {},
 			members = {
 				[player.UserId] = { player = player, session = identity.session, sequence = 1 },
 			},
@@ -279,6 +298,76 @@ function PartyService.new(options: {
 		end
 		touch(player.UserId)
 		return "OK_PARTY_INVITE_POLICY"
+	end
+	local function setPingPreference(player: any, muted: boolean): string
+		local identity = actor(player)
+		if identity == nil then
+			return "REJECT_STATE_PARTY_SESSION"
+		end
+		if type(muted) ~= "boolean" or options.updatePingPreference == nil then
+			return "REJECT_VALIDATION_PAYLOAD"
+		end
+		local status = options.updatePingPreference(player, identity.session, muted)
+		if status ~= "Buffered" then
+			return "UNAVAILABLE_PREFERENCES"
+		end
+		if sync(player.UserId) ~= identity then
+			return "REJECT_STATE_PARTY_SESSION"
+		end
+		return "OK_PREFERENCES_BUFFERED"
+	end
+	local function ping(player: any, partyId: string, kind: string, expected: number): string
+		local identity, at = actor(player)
+		if identity == nil or at == nil then
+			return "REJECT_STATE_PARTY_SESSION"
+		end
+		local contract = options.pingContract
+		if
+			contract == nil
+			or not contract.validPing({ partyId = partyId, pingKind = kind }, expected)
+		then
+			return "REJECT_VALIDATION_PAYLOAD"
+		end
+		local party = partyFor(player.UserId, partyId, expected)
+		if party == nil then
+			return "REJECT_STATE_PARTY_REVISION"
+		end
+		local position = if options.waypoint
+			then options.waypoint(player, identity.session)
+			else nil
+		local displayTime = (options.presentationSeconds or options.monotonicSeconds)()
+		if
+			not contract.validWaypoint(position)
+			or type(displayTime) ~= "number"
+			or displayTime ~= displayTime
+			or displayTime < 0
+			or displayTime >= 2 ^ 53
+		then
+			return "REJECT_STATE_PING_WAYPOINT"
+		end
+		-- Trusted synchronous observation must still match current admission.
+		if
+			partyFor(player.UserId, partyId, expected) ~= party
+			or sync(player.UserId) ~= identity
+		then
+			return "REJECT_STATE_PARTY_REVISION"
+		end
+		if party.pings[player.UserId] == nil and count(party.pings) >= policy.maxPingsPerParty then
+			return "REJECT_STATE_PING_BOUNDS"
+		end
+		party.pings[player.UserId] = {
+			id = newId(),
+			sender = identity,
+			senderId = player.UserId,
+			partyRevision = party.revision,
+			position = { x = position.x, y = position.y, z = position.z },
+			deadline = at + policy.pingSeconds,
+			expiresAt = displayTime + policy.pingSeconds,
+		}
+		for userId in party.members do
+			touch(userId)
+		end
+		return "OK_SOCIAL_PING" -- never disclose recipient presence or suppression.
 	end
 	local function invite(player: any, targetId: number, expected: number): string
 		local identity, at = actor(player)
@@ -510,7 +599,12 @@ function PartyService.new(options: {
 		if identity == nil or identity.player ~= player then
 			return nil
 		end
-		local state: any = { allowInvites = identity.allowInvites, incoming = {} }
+		local state: any = {
+			allowInvites = identity.allowInvites,
+			incoming = {},
+			pingsMuted = identity.pingsMuted,
+			pings = {},
+		}
 		local party = parties[membership[player.UserId]]
 		if party then
 			reconcile(party)
@@ -530,6 +624,33 @@ function PartyService.new(options: {
 						leaderUserId = party.leaderId,
 						members = members,
 					}
+					if identity.ready and not identity.pingsMuted then
+						for _, pending in party.pings do
+							local sender = sync(pending.senderId)
+							if
+								parties[party.id] == party
+								and party.revision == pending.partyRevision
+								and sender == pending.sender
+								and sender.ready
+								and eligible(party.members[pending.senderId], pending.senderId)
+							then
+								table.insert(state.pings, {
+									id = pending.id,
+									senderUserId = pending.senderId,
+									kind = "ComeHere",
+									position = {
+										x = pending.position.x,
+										y = pending.position.y,
+										z = pending.position.z,
+									},
+									expiresAt = pending.expiresAt,
+								})
+							end
+						end
+						table.sort(state.pings, function(a, b)
+							return a.id < b.id
+						end)
+					end
 				elseif seat.deadline then
 					state.rejoin = {
 						partyId = party.id,
@@ -569,6 +690,8 @@ function PartyService.new(options: {
 		disband = disband,
 		rejoin = rejoin,
 		setInvitePolicy = setInvitePolicy,
+		ping = ping,
+		setPingPreference = setPingPreference,
 		disconnect = disconnect,
 		sessionFor = function(player: any): any
 			local identity = live[player.UserId]
@@ -592,6 +715,9 @@ function PartyService.new(options: {
 				nextAt = math.min(nextAt, pending.deadline)
 			end
 			for _, party in parties do
+				for _, pingRecord in party.pings do
+					nextAt = math.min(nextAt, pingRecord.deadline)
+				end
 				for _, seat in party.members do
 					if seat.deadline then
 						nextAt = math.min(nextAt, seat.deadline)
@@ -610,11 +736,16 @@ function PartyService.new(options: {
 			return ids
 		end,
 		counts = function(): any
+			local pingCount = 0
+			for _, party in parties do
+				pingCount += count(party.pings)
+			end
 			return {
 				parties = count(parties),
 				memberships = count(membership),
 				invites = count(invites),
 				liveUsers = count(live),
+				pings = pingCount,
 			}
 		end,
 		stop = function()

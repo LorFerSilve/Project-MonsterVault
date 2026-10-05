@@ -1,6 +1,6 @@
 # MonsterVault Implementation Roadmap
 
-> **Status:** IMP-8 COMPLETE with registered deferred validation; IMP-9 COMPLETE; IMP-10 FUNCTIONALLY COMPLETE under AD-260; IMP-11 OPEN with its server-local Party dependency COMPLETE. VS1-19 remains DEFERRED to Scale Readiness
+> **Status:** IMP-8 COMPLETE with registered deferred validation; IMP-9 COMPLETE; IMP-10 FUNCTIONALLY COMPLETE under AD-260; IMP-11 OPEN with server-local Party and bounded Social Ping dependencies COMPLETE. VS1-19 remains DEFERRED to Scale Readiness
 > **Locked by:** TA-17
 > **Rule:** Dependency-driven; do not skip phases merely because later UI/content is easier to demo.
 
@@ -184,7 +184,7 @@ Scale-readiness gate inherited from IMP-8 / AD-249 and rescheduled by AD-260:
 
 ## IMP-11 — Social and Events
 
-**Status (2026-10-05): OPEN. First dependency COMPLETE: TA-10 server-local Party identity/invite/membership authority, revision/consent/session fencing and bounded same-server rejoin/cleanup.** [Party evidence](IMP11_PARTY_EVIDENCE.md) and [phase gate matrix](IMP11_GATE_MATRIX.md) distinguish the passing slice from the remaining phase and release obligations.
+**Status (2026-10-05): OPEN. First two dependencies COMPLETE: TA-10 server-local Party authority/lifecycle and §7 bounded Social Ping/waypoint routing.** [Party evidence](IMP11_PARTY_EVIDENCE.md), [Ping evidence](IMP11_SOCIAL_PING_EVIDENCE.md) and [phase gate matrix](IMP11_GATE_MATRIX.md) distinguish the passing slices from the remaining phase and release obligations.
 
 One P0 owner implements four seats, one Party per player, explicit creation/invite/accept/decline/leave/removal/disband, join-sequence succession and a 30-second same-server seat reservation. Membership and the participant index change together in the existing non-yielding admission pattern. Invites bind exact live Player/ProfileSession identities and one Party revision; revisions invalidate old consent. Returning sessions require explicit rejoin at the current revision and cannot seize leadership. A single deadline timer owns all invite/grace expiry; native callback tickets and shutdown cleanup fence stale work. Default invitation audience is None with explicit session-only SameServer opt-in. No personal value, capture/access authority or commercial status is granted.
 
@@ -192,7 +192,11 @@ AD-265 registers the missing Class B creation/removal/disband/rejoin/preference 
 
 Validation: **236/236 fast** (23 new Party C0 cases), **29/29 focused native checks**, **28/28 Python**, static/build/dependency/integrity and configured Luau analysis, **91/91 final Edit source parity**. Real native wire/Player/ProfileSession/respawn/CreatorKick/shutdown and one actual deadline timer are proven. The timer peer is an adapter fixture; two real clients and physical same-live-server reconnect are not claimed. All 64 current authored/asset parts and Lighting are preserved. Existing IMP-10 evidence is retained, not rewritten or counted as rerun.
 
-Exact next dependency: **TA-10 §7 bounded Social Ping/waypoint routing -> current Party membership/revision and recipient scope -> predefined intent, disclosure, rate and mute evidence**. Challenge/visitor/contribution/event work follows its own dependencies. IMP-11 is not complete; commerce, trading and presentation polish remain with their later owners.
+Second dependency COMPLETE (2026-10-05): [bounded Party ComeHere pings](IMP11_SOCIAL_PING_EVIDENCE.md). AD-266 binds the reserved Social.Ping route to current Party/revision and a server-observed accessible walkable sender position. Only active current identities receive the recipient-specific snapshot; reserved seats, replaced sessions, departed members and old Party revisions retain no ping authority. One slot per sender, two live pings per Party, a six-second lifetime and the existing gateway's one-request-per-three-seconds route bucket bound work. Party membership mutations revoke live pings. Existing Party deadline ownership and one client expiry timer avoid polling/per-ping tasks. The existing ProfileSession P1 settings owner buffers Social Ping suppression; only explicit false enables it, and mute changes no gameplay/Party authority. Minimal native disclosure/control stays diagnostic.
+
+Current validation: **26/26 focused Ping, 262/262 full fast, 28/28 focused Ping native, 28/28 Python, 91/91 final Edit source parity** and normal static/build/dependency/integrity/configured analysis. Native evidence covers actual remotes/UI/expiry/rate/replay, current authored geometry, private ProfileSession replacement and real scoped DEV P1 release/acquire. All 64 current parts and Lighting are preserved; Studio ends in Edit. One real client is proven; full multiplayer/reconnect/platform safety and deferred scale/release evidence remain open. Completed Party/IMP-10 evidence is preserved as historical evidence.
+
+Exact next dependency: **TA-10 §10 Friendly Challenges -> visible authored definition and explicit participant opt-in -> non-destructive server-local lifecycle/capability handling**. Visitor/contribution/event work follows its own dependencies. IMP-11 is not complete; commerce, trading and presentation polish remain with their later owners.
 
 Party/Ping/challenge/visitor plus global event occurrence/contribution/rewards and cross-server hints.
 

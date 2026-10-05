@@ -71,7 +71,7 @@ Same base envelope but no critical/durable truth and <=768 encoded bytes.
 | Social.PartyDisband | B | partyId:string; required envelope expectedRevision:Party revision |
 | Social.PartyRejoin | B | partyId:string; required envelope expectedRevision:Party revision |
 | Social.PartySetInvitePolicy | B | allowInvites:boolean; session-only preference; no expectedRevision |
-| Social.Ping | B | pingKind:enum, targetId:string? |
+| Social.Ping | B | partyId:string, pingKind="ComeHere"; required envelope expectedRevision:current Party revision; waypoint is server-derived |
 | Social.ChallengeRequest | B | targetUserId:number |
 | Social.ChallengeRespond | B | challengeId:string, accept:boolean |
 | Trade.Start | C | targetUserId:number |
@@ -80,13 +80,17 @@ Same base envelope but no critical/durable truth and <=768 encoded bytes.
 | Trade.FinalConfirm | C | tradeSessionId:string, tradeRevision:number |
 | Trade.Cancel | C | tradeSessionId:string |
 | Commerce.RefreshEntitlements | D | productDefinitionIds:string[] <=8 |
-| Settings.UpdatePreferences | B | reducedMotion:boolean?, captionsEnabled:boolean?, masterVolume:number? |
+| Settings.UpdatePreferences | B | Active IMP-11: only socialPingsMuted:boolean; no expectedRevision. Other presentation settings remain reserved/inactive |
 
 Routes are allowlisted registry constants; unknown strings never map dynamically to module paths.
 
 IMP-11 extension under [AD-265](ARCHITECTURE_DECISIONS.md#ad-265--bind-the-server-local-party-command-and-projection-contract): IDs are opaque server GUIDs (1..48 bytes), UserIds/revisions are finite positive integers below 2^53, schemas permit only the listed fields. PartyInvite derives the sender's Party from the server membership index. Party acceptance binds the invite's exact current live recipient and pinned Party revision. Every membership change invalidates older invitations. Non-Class-A bounded replay entries compare the current private ProfileSession identity before returning cached success; Class A retains its readiness/resync retry semantics.
 
+Ping extension under [AD-266](ARCHITECTURE_DECISIONS.md#ad-266--bind-bounded-party-pings-and-the-existing-p1-suppression-owner): Social.Ping accepts no target/coordinate/recipient/text/status/authority fields. Current active Ready Party and private Player/ProfileSession identity determine sender and recipient scope; the world owner supplies the sender's accessible authored walkable position. Exact finite x/y/z must be within ±100000, with no clamp. The existing gateway route bucket permits one request per sender per three seconds; global/replay/session checks remain. One live slot per sender, two per Party and six-second lifetime bound P0 state. Membership revision clears it. Settings.UpdatePreferences writes only settings.socialPingsMuted through existing ProfileSession P1 buffering; only explicit false enables delivery, and Buffered does not mean durable.
+
 Class A RequestResync additionally accepts only `{domain="party"}` for this owner. Ready handshake and resync emit full recipient-only `Social.StateChanged {domain="party",revision,state}`. The outer revision is a monotonically increasing recipient-view revision, distinct from `state.party.revision` / `state.rejoin.revision` and an invite's `partyRevision`. State is `{allowInvites:boolean,party?,incoming,rejoin?}`. Party contains `partyId,revision,leaderUserId,members` with up to four unique `{userId,present}` seats. Incoming contains at most two `{invitationId,partyId,partyRevision,inviterUserId,expiresAt,status="Pending"}` entries. Rejoin contains only `{partyId,revision,expiresAt}` and cannot coexist with active Party authority. Deadlines use immutable server-monotonic time; expiry/decline/cancellation removes the entry in a newer snapshot. No private session identity/history/value fields are projected. The exact shared contract and existing 4096-byte reliable wire validation are mandatory on server and client.
+
+AD-266 adds paired optional V1 fields pingsMuted:boolean and pings (array <=2). Shipped snapshots provide both. Each ping is exactly `{id,senderUserId,kind="ComeHere",position={x,y,z},expiresAt}`; the enclosing current Party identifies its context. A ping requires a present sender in that Party, an active eligible recipient and suppression false. Ping expiry uses immutable synced server time for client display; the server retains its private monotonic cleanup deadline. No ping-specific Party revision outcome exists. Client disposal/expiry and stale-view rejection cannot grant authority or resurrect old display. No-Party/rejoin/muted snapshots contain no pings. Older V1 state omitting both fields stays valid and safely muted.
 
 IMP-9 extension under [AD-250](ARCHITECTURE_DECISIONS.md#ad-250--register-imp-9-capacity-migration-and-explicit-overflow-resolution): RequestResync permits domain=vault and optional afterCreatureInstanceId:string (1..128 bytes). ResolveOverflow permits no other payload field or client capacity/owner/quantity. Both preserve the existing envelope, ingress schema/rate/replay and readiness gates. Class A Vault resync may reconcile an uncertain P2 operation before publishing Ready; Class C cannot grant readiness.
 
