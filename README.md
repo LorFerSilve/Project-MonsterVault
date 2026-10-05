@@ -691,6 +691,6 @@ No open-source license is currently granted. All rights are reserved unless expl
 
 ## Commercial and Retention Strategy v2
 
-Owner-authorized on 2026-10-05. GDS-13 now defines a concrete launch commercial portfolio centered on deterministic cosmetics, bounded Collection/Display Capacity, a one-time Starter Value Bundle, a durable Supporter/Style Pass and seasonal cosmetic bundles. Paid luck, production multipliers, capture power, mainline access bypass and paid attendance-streak repair remain outside the baseline.
+Owner-authorized on 2026-10-05. GDS-13 now defines a concrete launch commercial portfolio centered on deterministic cosmetics, bounded Collection/Display Capacity, a one-time Starter Value Bundle, a durable Supporter/Style Pass, seasonal cosmetic bundles and bounded paid offline convenience: a permanent Offline Window Extension plus a capped 2× Return Overcharge on one server-authored offline return. Paid luck, persistent production-rate multipliers, 3× return boosts, capture power, mainline access bypass and paid attendance-streak repair remain outside the baseline.
 
 GDS-16 now authorizes optional activity-based Daily Expeditions and Weekly Objectives alongside Return Brief, Next Aspirations, rotating world/event opportunities and existing bounded Offline Production. MonsterVault still has no attendance-only login reward, no login streak and no missed-day punishment.
