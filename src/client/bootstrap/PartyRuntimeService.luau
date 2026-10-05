@@ -20,6 +20,7 @@ function PartyRuntimeService.new(options: {
 	local gui: any = nil
 	local panel: any = nil
 	local unsubscribe: any = nil
+	local unsubscribeShowcase: any = nil
 	local controls: { any } = {}
 	local connections = {}
 	local scheduler = options.scheduler or globals.task
@@ -69,6 +70,99 @@ function PartyRuntimeService.new(options: {
 			table.insert(controls, item.Activated:Connect(action))
 			row += 26
 		end
+		local showcase = options.networking.showcaseStore.view()
+		label("Showcase / Visitors (read-only)")
+		button("Refresh Showcase", function()
+			send(RouteIds.commands.sessionRequestResync, { domain = "showcase" })
+		end)
+		local permissions = if showcase.permissions then showcase.permissions.state else nil
+		if permissions and permissions.permissionRevision > 0 then
+			label("My visitor audience: " .. permissions.audience)
+			for _, audience in { "Closed", "Party", "SameServer" } do
+				if audience ~= permissions.audience then
+					button("Set visitor audience: " .. audience, function()
+						send(
+							RouteIds.commands.socialShowcaseSetPolicy,
+							{ audience = audience },
+							permissions.permissionRevision
+						)
+					end)
+				end
+			end
+			if permissions.audience ~= "Closed" then
+				local target = Instance.new("TextBox")
+				target.Name = "ShowcaseTargetUserId"
+				target.Size, target.Position =
+					globals.UDim2.new(1, -8, 0, 24), globals.UDim2.fromOffset(4, row)
+				target.PlaceholderText, target.Text, target.TextSize, target.Parent =
+					"Visitor UserId", "", 14, panel
+				row += 26
+				button("Allow this visitor for 60s", function()
+					local userId = tonumber(target.Text)
+					if userId and userId > 0 and userId % 1 == 0 then
+						send(
+							RouteIds.commands.socialShowcaseGrant,
+							{ targetUserId = userId },
+							permissions.permissionRevision
+						)
+					end
+				end)
+			end
+			for _, grant in permissions.visitors do
+				label("Allowed visitor: " .. tostring(grant.userId))
+				button("Revoke visitor " .. tostring(grant.userId), function()
+					send(
+						RouteIds.commands.socialShowcaseRevoke,
+						{ grantId = grant.id },
+						permissions.permissionRevision
+					)
+				end)
+			end
+			for _, grant in permissions.incoming do
+				button("Inspect owner " .. tostring(grant.userId) .. " (read-only)", function()
+					send(
+						RouteIds.commands.socialShowcaseOpen,
+						{ ownerUserId = grant.userId, grantId = grant.id }
+					)
+				end)
+			end
+		end
+		local visit = if showcase.visit then showcase.visit.state else nil
+		if visit and visit.mode == "ReadOnly" then
+			label(
+				"READ-ONLY Showcase / "
+					.. visit.ownerDisplayName
+					.. " / "
+					.. tostring(visit.ownerUserId),
+				44
+			)
+			for _, creature in visit.creatures do
+				label("Instance: " .. creature.creatureInstanceId, 40)
+				label(
+					"Species: " .. creature.speciesId .. " / Rarity: " .. creature.speciesRarityId,
+					44
+				)
+				label(
+					"Mutation: "
+						.. table.concat(creature.mutationIds, ", ")
+						.. " / Trait: "
+						.. table.concat(creature.traitIds, ", "),
+					54
+				)
+				label("Display: " .. creature.displaySlotId)
+			end
+			if #visit.creatures == 0 then
+				label("No approved display card available")
+			end
+			if visit.hasMore then
+				label("Additional display content omitted from this bounded view", 44)
+			end
+			button("Close visit and return", function()
+				send(RouteIds.commands.socialShowcaseClose, { grantId = visit.grantId })
+			end)
+		else
+			label("Showcase closed / " .. (if visit then visit.reason else "Unavailable"))
+		end
 		local snapshot = options.networking.partyStore.view()
 		button("Refresh Party", function()
 			send(RouteIds.commands.sessionRequestResync, { domain = "party" })
@@ -91,8 +185,8 @@ function PartyRuntimeService.new(options: {
 		)
 		button(
 			if state.allowInvites
-				then "Party/challenge offers: Same server (disable)"
-				else "Party/challenge offers: None (enable)",
+				then "Party/challenge/Showcase offers: Same server (disable)"
+				else "Party/challenge/Showcase offers: None (enable)",
 			function()
 				send(
 					RouteIds.commands.socialPartySetInvitePolicy,
@@ -327,6 +421,12 @@ function PartyRuntimeService.new(options: {
 	end
 	arm = function()
 		local deadline = if running then options.networking.partyStore.nextDeadline() else nil
+		local showcaseDeadline = if running
+			then options.networking.showcaseStore.nextDeadline()
+			else nil
+		if showcaseDeadline then
+			deadline = math.min(deadline or math.huge, showcaseDeadline)
+		end
 		if deadline == scheduledAt then
 			return
 		end
@@ -373,6 +473,9 @@ function PartyRuntimeService.new(options: {
 		unsubscribe = options.networking.subscribeParty(function()
 			render()
 		end)
+		unsubscribeShowcase = options.networking.subscribeShowcase(function()
+			render()
+		end)
 		render()
 		gui.Parent = options.player:WaitForChild("PlayerGui")
 	end
@@ -384,6 +487,9 @@ function PartyRuntimeService.new(options: {
 		timer, scheduledAt = nil, nil
 		if unsubscribe then
 			unsubscribe()
+		end
+		if unsubscribeShowcase then
+			unsubscribeShowcase()
 		end
 		for _, connection in controls do
 			connection:Disconnect()

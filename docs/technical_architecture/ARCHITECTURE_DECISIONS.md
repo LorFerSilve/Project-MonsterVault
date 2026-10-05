@@ -4001,3 +4001,31 @@ Reset/death, recovery, other authorized travel, disconnect, unavailable/replaced
 ### Boundaries
 
 No reward/P2 transaction/profile field, forced relocation, capture/ownership/Energy/mastery/access mutation, wager, damage, matchmaking, ranked ladder, visitor/showcase, event, trade or commerce authority is added. Ordinary travel remains its existing owner's decision; observer failure cannot change its result. Paid status cannot change consent, priority, rate, capability or scoring. [Friendly Challenge evidence](../implementation/IMP11_FRIENDLY_CHALLENGE_EVIDENCE.md) and [IMP-11 matrix](../implementation/IMP11_GATE_MATRIX.md) retain broader multiplayer/platform and scale/release owners.
+
+---
+
+## AD-268 — Bind targeted read-only Showcase/Visitor permission and projection
+
+**Date:** 2026-10-05
+
+**Status:** Accepted — within the owner-authorized fourth IMP-11 Showcase/Visitor slice
+
+**Owning phase:** TA-17 runtime namespace; implements locked TA-10 §12 / GDS-10 SH/VV and GDS-7 owner/visitor boundaries
+
+### Context
+
+TA-10/GDS-7/10 already authorize bounded owner-controlled read-only inspection of legitimate displays. V1 has no visitor policy/grant/open/revoke/close or safe visitor readback binding. Existing owner Collection/Vault projections include private management/value facts and cannot be forwarded. These are missing protocol details; no visiting authority is broadened.
+
+### Decision
+
+Add five exact Class B intents on the existing three remotes: `Social.ShowcaseSetPolicy {audience="Closed"|"Party"|"SameServer"}`, `ShowcaseGrant {targetUserId}`, `ShowcaseRevoke {grantId}`, `ShowcaseOpen {ownerUserId,grantId}`, `ShowcaseClose {grantId}`. Policy/grant/revoke require the authenticated owner's current permission revision; open/close accept no expectedRevision. Owner/session always derives from the server. Revisions use one monotonic runtime serial, including replacement generation. Targeted GUID references pin both exact native Players/private Ready ProfileSessions. Audience alone grants no visit; the intended visitor explicitly opens. Party restricts eligibility only; friendship remains inactive pending its platform binding. Existing session-only invitation opt-in suppresses grants by default; revocation clears incoming permission.
+
+Policy change, owner revoke, visitor close, trust loss, disconnect or either identity replacement removes affected grants. Close consumes the grant. Avatar reset alone preserves the same Player/session. No rejoin/cross-server entitlement exists. Duplicate grants never renew expiry; current tokens/revisions and existing private-session replay prevent stale grant/revoke/open/cleanup resurrection. DEV bounds: 60 live identities, two outgoing/two incoming grants, one active view, 60-second lifetime. Grant/Open use the existing one-per-three-second route bucket. The existing social deadline owner expires grants; no new scheduler/Heartbeat/polling exists.
+
+Add `{domain="showcase"}` Class A resync. Ready/resync/events send two full recipient-only domains on existing Social.StateChanged: `showcase` permission summaries and `showcaseView` Closed/reason or ReadOnly/card. Each preserves the existing 4096-byte/depth/node budget. One exact eligible Display Assignment card exposes only `creatureInstanceId,speciesId,speciesRarityId,mutationIds,traitIds,displaySlotId`; metadata supplies current native owner UserId/DisplayName, token/expiry/hasMore. Private profile/provenance/signature/lock/operation/production/economy/discovery/mastery/commerce fields remain hidden. If complete intrinsic facts cannot fit, withhold the whole card. Future approved public provenance or cosmetic/status treatment must remain separate from intrinsic facts and permission.
+
+One detachable ProfileSession readback observer runs after its serialized writer settles; SessionCoordinator forwards only the exact current session. Social bootstrap filters once per changed owner and shares only that safe cache. Cache version/session/token rechecks discard delayed reads after revoke or profile/identity change. Observer failure cannot change an ordinary write result. Unsubscribe/forget/stop remove bindings; no profile schema/writer is added.
+
+### Boundaries
+
+No creature/Collection/Vault/Energy/production/assignment/capacity/progression/mastery/lock/commerce/capture/trade mutation or Discovery is granted. Existing gameplay routes select the caller's profile. Paid status cannot affect audience, priority, scope, rates, bounds or private disclosure. No housing/physical relocation/cross-server/arbitrary inspection/text/co-op/event/art system is added. The existing native diagnostic surface suffices. [Showcase evidence](../implementation/IMP11_SHOWCASE_VISITOR_EVIDENCE.md) and [IMP-11 gates](../implementation/IMP11_GATE_MATRIX.md) close only this representative dependency. Stable underlying systems permit the incremental Golden Playable Vertical Slice; later co-op/events/platform/multiplayer/scale/release gates retain their owners.

@@ -16,6 +16,8 @@ function ClientGateway.new(options: {
 	securedCollectionStore: any?,
 	partyProjection: any?,
 	partyStore: any?,
+	showcaseProjection: any?,
+	showcaseStore: any?,
 	sendCommand: (any) -> (),
 })
 	local nextRequest = 0
@@ -86,6 +88,28 @@ function ClientGateway.new(options: {
 			return "Invalid"
 		end
 		if envelope.routeId == options.routes.events.socialStateChanged then
+			if
+				envelope.payload.domain == "showcase"
+				or envelope.payload.domain == "showcaseView"
+			then
+				if
+					options.showcaseProjection == nil
+					or options.showcaseStore == nil
+					or not options.showcaseProjection.validSnapshot(envelope.payload)
+					or envelope.revision ~= envelope.payload.revision
+				then
+					return "Invalid"
+				end
+				local session = options.store.view()
+				if
+					envelope.payload.domain == "showcaseView"
+					and envelope.payload.state.mode == "ReadOnly"
+					and (session == nil or session.status ~= "Ready")
+				then
+					return "Stale"
+				end
+				return options.showcaseStore.snapshot(envelope.payload)
+			end
 			if
 				options.partyProjection == nil
 				or options.partyStore == nil
@@ -162,6 +186,9 @@ function ClientGateway.new(options: {
 			local outcome = options.store.snapshot(envelope.payload)
 			if outcome == "Applied" then
 				resyncInFlight = false
+				if options.showcaseStore and options.store.view().status ~= "Ready" then
+					options.showcaseStore.invalidate()
+				end
 				if options.securedCollectionStore ~= nil then
 					local session = options.store.view()
 					local collection = options.securedCollectionStore.view()
@@ -187,6 +214,13 @@ function ClientGateway.new(options: {
 				then
 					options.securedCollectionStore.reset()
 				end
+			end
+			if
+				outcome == "Applied"
+				and options.showcaseStore
+				and options.store.view().status ~= "Ready"
+			then
+				options.showcaseStore.invalidate()
 			end
 			if outcome == "Gap" then
 				requestResync()
@@ -256,6 +290,9 @@ function ClientGateway.new(options: {
 			end
 			if options.partyStore ~= nil then
 				options.partyStore.reset()
+			end
+			if options.showcaseStore then
+				options.showcaseStore.reset()
 			end
 		end,
 	}

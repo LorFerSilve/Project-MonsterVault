@@ -530,21 +530,37 @@ function ProfileSession.new(options: {
 		return save(true, true, absoluteDeadline)
 	end
 
+	local observer: (() -> ())? = nil
 	local function serialized(operation: () -> any): any
 		if mutating then
 			return { status = "Busy", reason = "SESSION_WRITER_ACTIVE" }
 		end
+		local priorState, priorProfile = state, profile
 		mutating = true
 		local ok, result = pcall(operation :: () -> any)
 		mutating = false
 		if not ok then
 			state = "PersistenceAtRisk"
-			return { status = state, reason = "SESSION_OPERATION_ERROR" }
+			result = { status = state, reason = "SESSION_OPERATION_ERROR" }
+		end
+		-- Event-driven readback after the writer settles. Observer failure cannot
+		-- turn a committed write into a failure or authorize any mutation.
+		if observer and (state ~= priorState or profile ~= priorProfile) then
+			pcall(observer)
 		end
 		return result
 	end
 
 	return {
+		subscribe = function(listener: () -> ()): () -> ()
+			assert(observer == nil, "profile observer already bound")
+			observer = listener
+			return function()
+				if observer == listener then
+					observer = nil
+				end
+			end
+		end,
 		userId = function(): number
 			return options.userId
 		end,

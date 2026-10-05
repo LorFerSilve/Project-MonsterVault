@@ -1,6 +1,6 @@
 # MonsterVault Implementation Roadmap
 
-> **Status:** IMP-8 COMPLETE with registered deferred validation; IMP-9 COMPLETE; IMP-10 FUNCTIONALLY COMPLETE under AD-260; IMP-11 OPEN with server-local Party and bounded Social Ping dependencies COMPLETE. VS1-19 remains DEFERRED to Scale Readiness
+> **Status:** IMP-8 COMPLETE with registered deferred validation; IMP-9 COMPLETE; IMP-10 FUNCTIONALLY COMPLETE under AD-260; IMP-11 OPEN with Party, Social Ping, Friendly Challenge and Showcase/Visitor dependencies COMPLETE. Golden Playable Vertical Slice ready to begin on these stable dependencies; VS1-19 remains DEFERRED to Scale Readiness
 > **Locked by:** TA-17
 > **Rule:** Dependency-driven; do not skip phases merely because later UI/content is easier to demo.
 
@@ -184,7 +184,7 @@ Scale-readiness gate inherited from IMP-8 / AD-249 and rescheduled by AD-260:
 
 ## IMP-11 — Social and Events
 
-**Status (2026-10-05): OPEN. First three dependencies COMPLETE: TA-10 server-local Party authority/lifecycle, §7 bounded Social Ping/waypoint routing and §10 Friendly Challenge consent/lifecycle.** [Party evidence](IMP11_PARTY_EVIDENCE.md), [Ping evidence](IMP11_SOCIAL_PING_EVIDENCE.md), [Friendly Challenge evidence](IMP11_FRIENDLY_CHALLENGE_EVIDENCE.md) and [phase gate matrix](IMP11_GATE_MATRIX.md) distinguish the passing slices from remaining phase/release obligations.
+**Status (2026-10-05): OPEN. First four dependencies COMPLETE: TA-10 Party, §7 Social Ping, §10 Friendly Challenge and §12 representative read-only Showcase/Visitor.** [Party evidence](IMP11_PARTY_EVIDENCE.md), [Ping evidence](IMP11_SOCIAL_PING_EVIDENCE.md), [Friendly Challenge evidence](IMP11_FRIENDLY_CHALLENGE_EVIDENCE.md), [Showcase/Visitor evidence](IMP11_SHOWCASE_VISITOR_EVIDENCE.md) and [phase gate matrix](IMP11_GATE_MATRIX.md) distinguish passing slices from remaining phase/release obligations.
 
 One P0 owner implements four seats, one Party per player, explicit creation/invite/accept/decline/leave/removal/disband, join-sequence succession and a 30-second same-server seat reservation. Membership and the participant index change together in the existing non-yielding admission pattern. Invites bind exact live Player/ProfileSession identities and one Party revision; revisions invalidate old consent. Returning sessions require explicit rejoin at the current revision and cannot seize leadership. A single deadline timer owns all invite/grace expiry; native callback tickets and shutdown cleanup fence stale work. Default invitation audience is None with explicit session-only SameServer opt-in. No personal value, capture/access authority or commercial status is granted.
 
@@ -200,7 +200,13 @@ Third dependency COMPLETE (2026-10-05): [Home Return (DEV) Friendly Challenge](I
 
 Current validation: **32/32 focused Challenge, 294/294 full fast, 34/34 distinct focused Challenge native, 28/28 Python, 92/92 final Edit source parity**, normal static/build/dependency/integrity/configured analysis. Native evidence covers one actual client plus an explicit adapter peer, real ordinary Home Return/result, no profile/value mutation, actual reset and private ProfileSession replacement/replay, shared deadline expiry/rearm/client disposal and all-zero stop. The 64 current parts and eight Lighting properties are preserved; Studio ends in Edit. Completed Party/Ping/IMP-10 evidence is retained; broader two-real-client/platform/reconnect and scale/release obligations remain open.
 
-Exact next dependency: **TA-10 §12 Showcase/Visitor -> authoritative read-only owner/visitor permission projection -> no personal-value or gameplay mutation authority**. Contribution/event work follows its own gates. IMP-11 is not complete; commerce, trading and presentation polish retain their later owners.
+Fourth dependency COMPLETE (2026-10-05): [Showcase/Visitor](IMP11_SHOWCASE_VISITOR_EVIDENCE.md). AD-268 binds default Closed/eligible Party/current-server policy plus explicit targeted grant and visitor open, owner revoke and close. Two 60-second grants per owner and one active view per visitor bind exact live Player/Ready ProfileSession identities. Only one existing eligible Display Assignment card's exact instance/Species/intrinsic rarity/Mutation/Trait/slot and current owner identity are disclosed; private owner state, provenance and commerce remain hidden. No writer/gameplay/value capability exists. One filtered cache per owner, profile lifecycle notifications and the existing social/client deadline owners provide event-driven refresh, immediate revoke and replacement/expiry/disconnect/shutdown cleanup.
+
+Current validation: **32/32 focused Showcase, 326/326 full fast, 29/29 distinct Showcase native, 28/28 Python, 97/97 final Edit source parity**, normal static/build/dependency/integrity/configured analysis. One actual native Player/client plus three explicit adapter peers prove remotes/store/UI, ownership rejection, real profile/session notifications, timer expiry and settled native disconnect/all-zero stop. The 64 current parts and eight Lighting properties are preserved. Completed Party/Ping/Challenge/IMP-10 evidence is unchanged; broader real multiplayer/platform/reconnect and scale/release obligations remain open.
+
+**Golden Playable Vertical Slice / first production-quality visual pass is ready to begin** on the stable world/capture/Collection/Vault/display and four social dependencies, under the existing incremental PQL rule and owner's 2026-10-05 scope. Remaining later IMP-11 co-op/events do not block that representative visual pass. PQL-1/2/3/4/8 and release completion are not claimed; no polished visual system is implemented by this slice.
+
+Exact next remaining IMP-11 functional dependency: **TA-10 §8 Shared Objective contribution -> server-observed per-player eligibility -> §9 owning-profile exact-once P2 Collaboration Rewards**. Subsequent event work retains its own gates. IMP-11 remains OPEN; commerce/trading retain their later owners.
 
 Party/Ping/challenge/visitor plus global event occurrence/contribution/rewards and cross-server hints.
 

@@ -32,6 +32,7 @@ local function resyncPayload(payload: any, expectedRevision: any): boolean
 				and value ~= "progression"
 				and value ~= "world"
 				and value ~= "party"
+				and value ~= "showcase"
 			then
 				return false
 			end
