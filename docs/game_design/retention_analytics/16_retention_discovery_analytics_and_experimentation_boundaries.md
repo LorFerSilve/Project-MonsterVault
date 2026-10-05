@@ -66,7 +66,7 @@ GDS-16 does **not** define:
 - fraud-detection implementation;
 - customer-support analytics;
 - implementation of dashboards or data warehouse;
-- a battle pass;
+- an unrestricted generic battle pass outside the authorized Seasonal Collection Pass semantics;
 - a login streak;
 - a new daily currency;
 - a new quest currency;
@@ -401,6 +401,28 @@ A future paid-random wheel would require explicit GDS-13/GDS-15 change control a
 ### DW-16 — Missing a wheel is not punished
 
 Unused daily wheel opportunities need not accumulate indefinitely, but missing one cannot reset a streak, reduce later base rewards or block mainline progression.
+
+## 10A. Seasonal Collection Pass Return Loop
+
+### SCPR-01 — Seasonal pass is an optional return scaffold
+
+The GDS-13 Seasonal Collection Pass may surface medium-term goals across already-authorized meaningful gameplay. It supplements Daily Expeditions/Weekly Objectives and events rather than replacing the core collection loop.
+
+### SCPR-02 — Missing days do not break pass progress
+
+Season progress is cumulative during the real season window. There is no attendance streak, missed-day penalty or mandatory daily completion requirement.
+
+### SCPR-03 — Free track remains meaningful
+
+The free track must contain enough visible value that the feature is useful to non-payers. Premium value focuses on deterministic cosmetics/status and bounded convenience.
+
+### SCPR-04 — Pass progression must not reward AFK-only presence
+
+Qualification/progress comes from meaningful gameplay outcomes, not raw session duration or repeated low-value input.
+
+### SCPR-05 — Pass telemetry measures both retention and regret
+
+Evaluate activation, progression, completion, premium conversion, post-purchase engagement and player-regret/refund/support signals. Higher conversion does not justify worse D1/D7, fairness or comprehension.
 
 ## 11. Live-Content Cadence Philosophy
 
@@ -1013,6 +1035,8 @@ bounded Offline Production / Vault state
 optional paid offline convenience with free base preserved
         +
 optional Daily Expeditions / Weekly Objectives
+        +
+optional Seasonal Collection Pass goals
         +
 activity-earned Daily Wheel opportunity
         +
