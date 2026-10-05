@@ -1,0 +1,244 @@
+# Golden Slice Asset Manifest
+
+> Status: PRE-PRODUCTION MANIFEST
+> Date: 2026-10-06
+> Scope: minimum asset set required to turn the current Starter/Home path into the Golden production reference
+> Rule: repository/runtime contracts define identity; this manifest defines presentation work only
+
+## 1. Current repository reality
+
+Current main is still a functional authored blockout:
+
+- Starter region uses FixtureGround / route / outpost / anchor parts.
+- Home Hub uses HomeHubGround plus functional travel, recovery, secure and Vault access parts.
+- The current repository contains one editable Blender hero asset: energy_core_generator.blend.
+- The matching export is energy_core_generator.glb.
+- Current world content defines four Common Species plus the protected Legendary DEV Species species/stability-orb-dev.
+- Current main does not author a Rare or Epic Species.
+- Current CaptureView is intentionally static, text-led engineering UI.
+
+Therefore the Golden Slice should replace presentation around existing contract anchors, not rename or invent gameplay identity for visual convenience.
+
+## 2. Priority classes
+
+- P0: required for the Golden path to stop reading as a prototype.
+- P1: required for the Halloween launch treatment and strong production impression.
+- P2: valuable follow-up after the coherent Golden baseline exists.
+
+## 3. Permanent 3D environment assets
+
+| ID | Priority | Asset | Purpose | Preferred production |
+| --- | --- | --- | --- | --- |
+| ENV-001 | P0 | Starter terrain/rock modular kit | Replace flat blockout feel; frame traversal | Blender modules + Studio terrain/native parts |
+| ENV-002 | P0 | Starter path-edge kit | Make safe route readable without UI arrows | Blender/native parts |
+| ENV-003 | P0 | Starter Safe Outpost kit | Wrap StarterOutpost, secure/recovery/travel functions in one readable structure | Blender modular architecture |
+| ENV-004 | P0 | Secure Point beacon/pad | Production presentation around secure-point/fixture-spawn | Blender + EnergyGreen mapping |
+| ENV-005 | P0 | Travel terminal | Production presentation around travel-node/starter and home-hub | Blender + native UI prompt |
+| ENV-006 | P0 | Home Hub base kit | Replace HomeHubGround test-plate impression | Blender modules + Studio terrain/native parts |
+| ENV-007 | P0 | Vault exterior shell | Establish Home/Vault as aspirational destination | Blender |
+| ENV-008 | P0 | Vault interior modular shell | Walls/floor/frames/door language | Blender kit |
+| ENV-009 | P0 | Display pedestal | Physical creature display point, reusable later | Blender |
+| ENV-010 | P0 | Energy Core integration surround | Integrate existing Energy Core into a believable machine bay | Blender additions; preserve core |
+| ENV-011 | P0 | Production machine module | Communicate passive production machinery | Blender |
+| ENV-012 | P1 | Home arrival arch / landmark | Screenshot-readable Home silhouette | Blender |
+| ENV-013 | P1 | Starter field hero landmark | Makes Starter recognizable from screenshots | Blender / terrain hybrid |
+| ENV-014 | P1 | Foliage cluster kit | Controlled reusable vegetation clusters | Native parts / meshes |
+| ENV-015 | P1 | Rock/ruin cluster kit | Midground/background composition | Blender reusable meshes |
+| ENV-016 | P2 | Decorative cable/conduit kit | Vault polish after major masses work | Blender/native beams |
+
+## 4. Permanent gameplay-facing props
+
+| ID | Priority | Asset | Contract relationship |
+| --- | --- | --- | --- |
+| GME-001 | P0 | Capture containment visual | Presentation around existing capture flow only |
+| GME-002 | P0 | Capture target marker / authored ring | Visual targeting, no authority |
+| GME-003 | P0 | Energy Claim receiver/wallet visual | Receives visual Energy transfer |
+| GME-004 | P0 | Vault access terminal | Wraps vault-access-point/home-hub |
+| GME-005 | P1 | Progression unlock module | Mechanical reveal language for later upgrades |
+| GME-006 | P1 | Collection lock-in pedestal/slot | Physicalizes secured/display payoff |
+
+## 5. Creature production set
+
+### CRE-001 — species/fixture-orb
+
+Priority: P0.
+
+Use as the first production Common creature baseline.
+
+Requirements:
+
+- strong silhouette;
+- retains current authored Species identity;
+- readable front/orientation;
+- world idle;
+- capture-compatible root/pivot;
+- Vault display pose;
+- material mapping that does not depend on permanent Neon;
+- optional simple rig if motion quality materially benefits.
+
+### CRE-002 — species/fixture-companion
+
+Priority: P1.
+
+Purpose:
+
+- prove the style works for a second Common silhouette;
+- prevent the creature language from being optimized only for one orb-like form.
+
+### CRE-003 — species/stability-orb-dev
+
+Priority: P0/P1 hero.
+
+Purpose:
+
+- production Legendary representative;
+- exercise protected-encounter reveal;
+- establish Legendary aura/audio/framing;
+- suitable Halloween-compatible spectral treatment.
+
+Important: this is intrinsic Legendary content already authored by the repo.
+
+### CRE-004 — Rare style test
+
+Priority: P2 / non-runtime until authored.
+
+Current main has no authored Rare Species. Do not change a Common Species to Rare simply to fill a visual checklist.
+
+Allowed before future content authoring:
+
+- offline concept/material test;
+- UI rarity component test with mock presentation data that cannot enter gameplay truth.
+
+Not allowed:
+
+- silently altering WorldDefinitions rarity;
+- shipping fake Rare identity through client-only labels.
+
+## 6. Halloween 2026 3D seasonal layer
+
+All seasonal assets must be removable/configurable.
+
+| ID | Priority | Asset | Reuse strategy |
+| --- | --- | --- | --- |
+| HW-001 | P1 | Pumpkin family, 3–5 variants | shared meshes / scale/rotation reuse |
+| HW-002 | P1 | Lantern + candle family | reusable seasonal lighting props |
+| HW-003 | P1 | Web / hanging decoration kit | low-overdraw, selective placement |
+| HW-004 | P1 | Gravestone / small ruin accents | clustered, not path-blocking |
+| HW-005 | P1 | Dead/autumn foliage variant kit | seasonal swap/additive clusters |
+| HW-006 | P1 | Spectral relay / haunted Energy hero prop | seasonal landmark tied visually to MonsterVault tech |
+| HW-007 | P1 | Vault seasonal dressing kit | banners, candles, pumpkins, spectral conduits |
+| HW-008 | P2 | Bat silhouette rig/loop | lightweight shared ambient animation |
+| HW-009 | P2 | Halloween showcase plinth skin | cosmetic/presentation only |
+
+Halloween geometry may not alter safe-route collision semantics unless the underlying route is separately validated.
+
+## 7. UI/2D asset set
+
+| ID | Priority | Asset | Notes |
+| --- | --- | --- | --- |
+| UIA-001 | P0 | Core icon language | Energy, capture, collection, travel, Vault, objective |
+| UIA-002 | P0 | Rarity shape/badge set | Common through Legendary; text remains present |
+| UIA-003 | P0 | Creature card frame system | intrinsic facts, variants, Showcase |
+| UIA-004 | P0 | HUD objective treatment | sparse world HUD |
+| UIA-005 | P0 | Notification / reward lock-in visual | respects priority hierarchy |
+| UIA-006 | P0 | Energy counter/claim visual | connects to hero claim sequence |
+| UIA-007 | P1 | Halloween decorative token set | border motifs, small icons, banner accents |
+| UIA-008 | P1 | Seasonal launch/update banner | no fake event authority |
+| UIA-009 | P2 | Photo/Showcase decorative framing | future PQL-4/8 extension |
+
+Prefer native Roblox UI shapes, text, gradients and reusable image assets. Do not create unique bitmaps for every button state.
+
+## 8. VFX set
+
+| ID | Priority | Effect | Implementation preference |
+| --- | --- | --- | --- |
+| VFX-001 | P0 | Capture buildup/containment | particles + beams + light, state-driven |
+| VFX-002 | P0 | Capture secured payoff | short burst + lock-in |
+| VFX-003 | P0 | Legendary reveal | layered shared rarity system |
+| VFX-004 | P0 | Energy Claim transfer | source-to-wallet beams/particles/count-up |
+| VFX-005 | P1 | Vault idle Energy pulse | bounded loop/shared controller |
+| VFX-006 | P1 | Halloween mist wisps | selective, low overdraw |
+| VFX-007 | P1 | Halloween spectral motes | seasonal additive layer |
+| VFX-008 | P2 | Progression unlock flourish | reusable later |
+
+Do not make VFX outcome-authoritative.
+
+## 9. Audio set
+
+| ID | Priority | Audio family |
+| --- | --- | --- |
+| AUD-001 | P0 | Starter ambient bed |
+| AUD-002 | P0 | Vault mechanical ambient bed |
+| AUD-003 | P0 | Energy hum / transfer / completion |
+| AUD-004 | P0 | Capture semantic cue family |
+| AUD-005 | P0 | Rarity layered reveal family |
+| AUD-006 | P0 | UI tactile press/select/confirm |
+| AUD-007 | P1 | Creature idle/personality set |
+| AUD-008 | P1 | Halloween ambient overlay |
+| AUD-009 | P1 | Seasonal stingers / lantern / leaf / spectral detail |
+
+All critical outcomes require visual/text equivalents.
+
+## 10. Material groups to preserve
+
+Existing:
+
+- DarkMetal
+- SecondaryMetal
+- PanelPlastic
+- EnergyGreen
+- FixtureCreature
+
+Work may extend the central palette when a real repeated need exists.
+
+Recommended future groups, only after Studio validation:
+
+- StoneCool
+- SoilDark
+- FoliageDeep
+- FoliageMid
+- WarmUtility
+- HarvestOrange
+- SpectralViolet
+
+Do not create a new material group for a one-off color that can be handled by an existing reusable group.
+
+## 11. Repository layout for new assets
+
+Do not move the existing Energy Core files just to satisfy this structure.
+
+New assets should prefer:
+
+assets/blender/environment/  
+assets/blender/vault/  
+assets/blender/creatures/  
+assets/blender/seasonal/halloween_2026/  
+
+assets/exported/environment/  
+assets/exported/vault/  
+assets/exported/creatures/  
+assets/exported/seasonal/halloween_2026/  
+
+tools/blender/environment/  
+tools/blender/vault/  
+tools/blender/creatures/  
+tools/blender/seasonal/halloween_2026/
+
+Generators should derive paths from their own file location as required by AGENTS.md.
+
+## 12. Build order
+
+Recommended Golden production order:
+
+1. permanent environment masses and route composition;
+2. Home/Vault shell and existing Energy Core integration;
+3. first production creature;
+4. capture and secured feedback;
+5. UI token/component foundation;
+6. Energy Claim hero sequence;
+7. Legendary representative;
+8. Halloween environmental layer;
+9. Halloween sensory/UI layer;
+10. screenshot/evidence cleanup.
+
+Do not begin with dozens of decorative pumpkins while permanent geometry is still blockout quality.
