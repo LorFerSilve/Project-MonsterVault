@@ -10,6 +10,8 @@ MonsterVault has completed the specification and Technical Architecture gates. *
 
 Launch-season production work follows [`docs/implementation/HALLOWEEN_2026_LAUNCH_THEME.md`](docs/implementation/HALLOWEEN_2026_LAUNCH_THEME.md): build a permanent production-quality MonsterVault base first, with a removable/configurable Halloween 2026 presentation layer and later event/commerce/live-ops behavior routed through their existing owners.
 
+Golden Slice implementation is pre-planned in [`docs/implementation/production/README.md`](docs/implementation/production/README.md), including art direction, asset priorities, Blender/Studio standards, UI/UX tokens, performance guardrails and the acceptance matrix.
+
 ```text
 Game Design Specification (GDS)
   -> cross-system design audit
