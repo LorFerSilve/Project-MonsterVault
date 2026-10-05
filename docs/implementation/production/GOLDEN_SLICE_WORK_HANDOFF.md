@@ -16,9 +16,11 @@ Before editing, Work should inspect in this order:
 6. GOLDEN_SLICE_UI_UX_SYSTEM.md
 7. HALLOWEEN_2026_CONTENT_MATRIX.md
 8. GOLDEN_SLICE_PERFORMANCE_BUDGETS.md
-9. GOLDEN_SLICE_ACCEPTANCE_MATRIX.md
-10. repository AGENTS.md
-11. current Studio state and current main
+9. GOLDEN_SLICE_CODE_INTEGRATION_MAP.md
+10. GOLDEN_SLICE_EXECUTION_PLAN.md
+11. GOLDEN_SLICE_ACCEPTANCE_MATRIX.md
+12. repository AGENTS.md
+13. current Studio state and current main
 
 Repo/GDS/TA truth overrides this handoff if the project has advanced.
 
@@ -59,6 +61,10 @@ with:
 Do not roll art across the whole world yet.
 
 ## 4. Recommended implementation order
+
+The detailed implementation order, exact file seams, regression targets and stop conditions are now owned by [GOLDEN_SLICE_EXECUTION_PLAN.md](GOLDEN_SLICE_EXECUTION_PLAN.md). Use that as the default execution plan unless the actual Studio truth audit proves a dependency has changed.
+
+The existing controller/store/projection ownership and currently known presentation gaps are mapped in [GOLDEN_SLICE_CODE_INTEGRATION_MAP.md](GOLDEN_SLICE_CODE_INTEGRATION_MAP.md). Check that map before modifying gameplay-facing services.
 
 ### Slice A — Studio audit and evidence baseline
 

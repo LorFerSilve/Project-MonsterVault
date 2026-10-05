@@ -44,6 +44,8 @@ The first production-quality visual pass now has an implementation-facing baseli
 - [UI/UX System](production/GOLDEN_SLICE_UI_UX_SYSTEM.md)
 - [Halloween Content Matrix](production/HALLOWEEN_2026_CONTENT_MATRIX.md)
 - [Performance Budgets](production/GOLDEN_SLICE_PERFORMANCE_BUDGETS.md)
+- [Code Integration Map](production/GOLDEN_SLICE_CODE_INTEGRATION_MAP.md)
+- [Executable Task Plan](production/GOLDEN_SLICE_EXECUTION_PLAN.md)
 - [Acceptance Matrix](production/GOLDEN_SLICE_ACCEPTANCE_MATRIX.md)
 - [Work Handoff](production/GOLDEN_SLICE_WORK_HANDOFF.md)
 

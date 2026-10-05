@@ -79,5 +79,7 @@ For the first Golden Playable Vertical Slice, the required execution baseline is
 - use the UI/UX system instead of creating unrelated per-screen styles;
 - treat the production performance budgets as authoring guardrails until measured TA-14 evidence exists;
 - update the Golden Slice acceptance matrix with actual Studio evidence rather than claiming quality from code/export success.
+- read the Golden Slice Code Integration Map before changing gameplay-facing services; extend existing controller/store/projection seams instead of building duplicate authority;
+- follow the Golden Slice Executable Task Plan as the default implementation order, beginning with the Studio truth audit and permanent environment before seasonal decoration.
 
 Current authored content note: the repository currently has Common Species and one protected Legendary DEV Species, but no authored Rare/Epic Species. Visual production must not silently alter authoritative rarity to fill a presentation checklist.

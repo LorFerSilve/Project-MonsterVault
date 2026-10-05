@@ -15,8 +15,10 @@ It does not supersede GDS or Technical Architecture. If a conflict exists, the a
 4. GOLDEN_SLICE_UI_UX_SYSTEM.md — reusable native UI/UX baseline.
 5. HALLOWEEN_2026_CONTENT_MATRIX.md — seasonal routing by owning phase.
 6. GOLDEN_SLICE_PERFORMANCE_BUDGETS.md — pre-measurement authoring guardrails.
-7. GOLDEN_SLICE_ACCEPTANCE_MATRIX.md — evidence required to call the representative slice established.
-8. GOLDEN_SLICE_WORK_HANDOFF.md — efficient execution order for the next Work run.
+7. GOLDEN_SLICE_CODE_INTEGRATION_MAP.md — exact existing controllers/stores/projections and safe production hooks.
+8. GOLDEN_SLICE_EXECUTION_PLAN.md — ordered implementation slices, files, tests and stop conditions.
+9. GOLDEN_SLICE_ACCEPTANCE_MATRIX.md — evidence required to call the representative slice established.
+10. GOLDEN_SLICE_WORK_HANDOFF.md — final concise handoff for the next Work run.
 
 Parent release-theme brief:
 
