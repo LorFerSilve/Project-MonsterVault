@@ -1,6 +1,6 @@
 # Presentation, UI/UX, Feedback, and Accessibility
 
-> **Status:** Design Complete  
+> **Status:** Design Complete — owner-authorized Sensory / Game-Feel Strategy v1 amendment (2026-10-05)  
 > **Owning GDS phase:** GDS-14 — Presentation, UI/UX, Feedback, and Accessibility  
 > **Authority:** Player-facing information hierarchy, HUD/menu architecture, interaction prompts, collection/Vault/economy/world/capture/event/social/trading/commercial presentation, confirmation/warning patterns, notification priority, cross-input navigation, text/readability, color/audio redundancy, reduced-motion/accessibility settings, onboarding presentation, and presentation-state recovery  
 > **Depends on:** ../00_design_authority.md, ../01_game_overview.md, ../global_rules/02_global_game_rules_and_session_model.md, ../player/03_player_character_interaction_and_onboarding.md, ../creatures/04_creatures_collection_and_ownership.md, ../capture/05_capture_contesting_transport_and_extraction.md, ../rarity_mutations/06_rarity_mutations_traits_and_variant_value.md, ../vault/07_vault_base_passive_production_capacity_and_upgrades.md, ../economy_progression/08_economy_progression_unlocks_and_pacing.md, ../world/09_world_biomes_exploration_spawning_and_hazards.md, ../social/10_social_play_cooperation_competition_and_pvp_boundaries.md, ../events_liveops/11_server_events_dynamic_encounters_and_live_content.md, ../trading/12_trading_and_player_economy.md, ../monetization/13_monetization_and_commercial_fairness.md, ../GLOSSARY.md
@@ -844,6 +844,108 @@ Keyboard/gamepad focus must have a clear non-color-only indication.
 
 Readability Mode may strengthen background panels/outlines/contrast without changing gameplay.
 
+## 23A. Sensory Reward and Game-Feel Strategy v1
+
+MonsterVault treats satisfying audiovisual/tactile feedback as a product-quality requirement for repeated core actions. The goal is to make capture, collection, Vault operation and progression feel materially pleasant and memorable without obscuring authoritative state or using deceptive near-miss/manipulation.
+
+### GF-01 — Capture sequence receives a complete feedback arc
+
+A capture attempt should have a readable buildup, containment/energy motion, impact/release moment and distinct outcome cue using an appropriate combination of animation, VFX, SFX, camera treatment and optional haptics.
+
+Success/failure/custody/secured ownership remain semantically distinct.
+
+### GF-02 — Rare and exceptional reveal has layered presentation
+
+Rare/Epic/Legendary or otherwise exceptional discoveries may add progressively richer sound, light, particles, framing and reveal timing.
+
+Presentation never fabricates rarity, changes odds or presents a paid cosmetic as intrinsic rarity.
+
+### GF-03 — Vault machinery has satisfying ambient/ASMR character
+
+Production machines, Energy systems, terminals and Vault props should use restrained mechanical hums, relay/click sounds, fluid/electrical motion, vents, indicator pulses and other micro-feedback so the Vault feels alive even outside active menus.
+
+Loops must be mix-safe and individually reducible through audio settings.
+
+### GF-04 — Energy Claim is a hero sensory moment
+
+Claiming production should visibly and audibly transfer accumulated value rather than only changing a number. Preferred treatment includes source-to-wallet motion/streams, count-up feedback, pitch/tick progression and a clear completion impact.
+
+Large offline returns may use a stronger but bounded version of the same sequence.
+
+### GF-05 — Progression unlocks have mechanical/visual payoff
+
+Unlocking a capability, slot, region-related entitlement or meaningful upgrade should have a short distinct reveal: component movement, card/panel unlock, sound signature and confirmation of the newly available capability.
+
+### GF-06 — Collection completion has tactile placement feedback
+
+Securing a new Species/Variant/collection milestone should create a satisfying placement/lock-in/stamp moment, completion-ring or collection-progress motion without delaying authoritative gameplay.
+
+### GF-07 — Tactile UI is a baseline polish target
+
+Common buttons, tabs, cards and confirmations should provide restrained press/selection response, short audio ticks and optional haptic response where supported.
+
+Core UI must remain usable with audio/haptics/motion disabled.
+
+### GF-08 — Material-specific interaction audio
+
+Frequently encountered material families should have coherent contact/interact signatures: metal, crystal/energy, vegetation/ground, Vault machinery and creature-specific surfaces where useful.
+
+### GF-09 — Rarity audio is layered, not replaced
+
+Higher rarity may add layers/harmonics/impact to a common semantic cue rather than using unrelated random sounds. Players should learn the sound language over time.
+
+### GF-10 — Biomes have distinct ambient soundscapes
+
+Each production biome should receive an authored ambient identity using wind, water, fauna, machinery, distant creature activity, reverb/space and other context-appropriate audio.
+
+Ambient audio cannot be the sole signal for hazards or required actions.
+
+### GF-11 — Creatures have personality audio
+
+Important creatures should use restrained breaths, chirps, purrs, mechanical hums, movement/idle sounds or other species-appropriate cues so owned/displayed creatures feel alive.
+
+Audio density must remain scalable when many creatures are nearby.
+
+### GF-12 — Movement and value trails support readability
+
+Capture tools, Energy transfer, rare/important creature motion, travel transitions and other high-value movement may use beams/trails/afterimages when they improve legibility and feel.
+
+### GF-13 — Haptics reinforce high-value moments
+
+On supported devices/controllers, short haptic ticks/pulses may reinforce UI selection, capture milestones, successful secure/reward moments and rare reveals.
+
+Haptics are optional, bounded and never required to understand outcome.
+
+### GF-14 — Environmental micro-animation makes spaces feel alive
+
+Production spaces should include restrained non-blocking motion such as foliage response, cables pulsing, screens updating, vents/fans cycling, machinery idling and small creature/environment reactions.
+
+### GF-15 — Daily Wheel animation is satisfying but non-deceptive
+
+The Daily Activity Wheel may use physical easing, tick sounds, highlights and haptic ticks. The animation must represent the already-authoritative result without fake near-miss logic designed to imply a different outcome was almost won.
+
+### GF-16 — Photo / Showcase Mode is authorized
+
+MonsterVault may provide a screenshot-friendly presentation mode for the player and selected owned creatures, with controlled poses/camera framing, clean UI options and high-quality Vault/world backdrops.
+
+It is a social/presentation feature and may also showcase owned cosmetics without changing gameplay authority.
+
+### GF-17 — Idle Vault satisfaction is intentional
+
+When safe, the Vault should remain visually and audibly rewarding during brief idle moments through creature idles, machine cycles, production indicators and ambient value flow rather than a static room.
+
+### GF-18 — Sensory intensity is configurable
+
+Reduced Motion, camera-shake controls, volume categories, caption/visual equivalents and notification intensity remain binding. Where practical, an additional effects/haptics intensity control may reduce non-essential sensory feedback.
+
+### GF-19 — Performance budget is part of sensory quality
+
+Particles, audio emitters, animated props, haptics and micro-animation must be pooled/bounded and degrade gracefully. Sensory polish cannot create per-entity heartbeat/task sprawl or compromise mobile/client performance.
+
+### GF-20 — Blender / Studio production workflow applies
+
+Use Blender MCP for custom rigs, creature animations, mechanical props, custom effect geometry or showcase assets when it materially improves quality. Keep runtime particles, UI, assembly, Lighting and final visual validation in Roblox Studio where appropriate.
+
 ## 24. Audio, Captions, and Non-Audio Equivalents
 
 ### AU-01 — Audio is reinforcement, not the sole carrier of critical meaning
@@ -1177,6 +1279,7 @@ Exact visual art direction, final typography asset, exact palette, panel dimensi
 - [x] Social presentation is defined.
 - [x] Trade revision/final-review UI semantics are defined.
 - [x] Commercial purchase presentation is defined.
+- [x] Sensory/Game-Feel Strategy v1 defines capture, rarity, Vault, Energy claim, progression, collection, UI, biome, creature, haptic, wheel, showcase and idle-Vault feedback.
 - [x] Notifications/errors are prioritized.
 - [x] Color/audio semantic redundancy is required.
 - [x] Reduced Motion/readability baseline is defined.
