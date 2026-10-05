@@ -9,6 +9,11 @@ This directory is the authoritative documentation space for Project MonsterVault
 
 The owner-authorized first-release seasonal direction is **Halloween 2026**. Implementation and production-quality work must use the permanent-base-plus-removable-seasonal-layer rule in [`implementation/HALLOWEEN_2026_LAUNCH_THEME.md`](implementation/HALLOWEEN_2026_LAUNCH_THEME.md), with concrete phase bindings in [`implementation/IMPLEMENTATION_ROADMAP.md`](implementation/IMPLEMENTATION_ROADMAP.md). Halloween presentation may begin in the Golden Slice; event authority, commerce and live-ops remain with their existing owning phases.
 
+
+## Golden Slice Production Package
+
+The implementation-facing production baseline is indexed at [`implementation/production/README.md`](implementation/production/README.md). It defines the visual bible, asset manifest, Blender/Roblox production rules, UI/UX system, Halloween routing matrix, authoring performance budgets, acceptance evidence and Work handoff for the first Golden Playable Vertical Slice.
+
 The project follows a specification-first discipline: gameplay is designed first, Technical Architecture is derived from the approved design, and implementation begins only after both layers pass their formal completion gates.
 
 ## Documentation Layers
