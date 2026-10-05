@@ -118,6 +118,9 @@ function WorldService.new(options: {
 			spawnContextId = record.spawnContextId,
 			runtimeRevision = record.revision,
 			availability = record.state,
+			lifetimeClass = if record.stabilitySeconds > 0 then "ProtectedVariant" else "Ordinary",
+			availableAt = record.availableAt,
+			idleExpiresAt = record.idleExpiresAt,
 			position = copyPosition(record.position),
 		}
 	end
@@ -176,6 +179,9 @@ function WorldService.new(options: {
 			position = copyPosition(fixture.position),
 			createdAt = now,
 			expiresAt = now + fixture.lifetimeSeconds,
+			stabilitySeconds = 0,
+			availableAt = nil,
+			idleExpiresAt = nil,
 			nextAttemptAt = now,
 			attempts = 0,
 			revision = 1,
@@ -196,9 +202,26 @@ function WorldService.new(options: {
 				fixture.speciesIds == nil or table.find(fixture.speciesIds, candidate.speciesId),
 				"species outside authored bucket"
 			)
-			assert(candidate.rarityId == fixture.rarityId, "unbound selected rarity")
+			local binding = if fixture.speciesDefinitions
+				then fixture.speciesDefinitions[candidate.speciesId]
+				else nil
+			assert(
+				candidate.rarityId == (if binding then binding.rarityId else fixture.rarityId),
+				"unbound selected rarity"
+			)
+			record.stabilitySeconds = if binding then binding.stabilitySeconds else 0
 			record.speciesId, record.rarityId = candidate.speciesId, candidate.rarityId
 		end
+		assert(
+			finite(record.stabilitySeconds)
+				and record.stabilitySeconds >= 0
+				and record.stabilitySeconds <= 3600
+				and (
+					record.rarityId == "rarity/common"
+					or (record.rarityId == "rarity/legendary" and record.stabilitySeconds >= 180)
+				),
+			"unbound encounter lifetime"
+		)
 		if options.generateVariant ~= nil then
 			record.variantIdentity = options.generateVariant({
 				creatureInstanceId = id,
@@ -240,14 +263,27 @@ function WorldService.new(options: {
 			local projected = public(record)
 			projected.availability = "IdleAvailable"
 			projected.runtimeRevision = record.revision + 1
-			local activated = pcall(options.activate, handle, projected)
+			local activated, availableAt = pcall(function(): number
+				options.activate(handle, projected)
+				local value = options.clock()
+				assert(finite(value) and value >= now, "invalid activation clock")
+				return value
+			end)
 			if activated and current() then
 				record.projection = handle
+				record.availableAt = availableAt
+				-- Stability starts when actionable, not at reservation/retry. Release
+				-- never restarts it; TA-7 non-idle states carry stronger protection.
+				record.idleExpiresAt =
+					math.max(record.expiresAt, availableAt + record.stabilitySeconds)
 				record.state = "IdleAvailable"
 				record.revision += 1
 				local key = cellKey(record.position, baseFixture.cellSize)
 				cells[key] = cells[key] or {}
 				cells[key][record.id] = true
+				if options.updateProjection then
+					options.updateProjection(handle, public(record))
+				end
 				return
 			end
 			pcall(options.destroyProjection, handle)
@@ -280,25 +316,36 @@ function WorldService.new(options: {
 
 	local function stepBucket(bucket: any, now: number, expectedGeneration: number): string
 		local record = if bucket.currentId ~= nil then records[bucket.currentId] else nil
+		local expectedRevision = if record then record.revision else nil
+		local function current(): boolean
+			return running
+				and expectedGeneration == generation
+				and bucket.currentId == (if record then record.id else nil)
+				and (
+					record == nil
+					or (records[record.id] == record and record.revision == expectedRevision)
+				)
+		end
 		local active = options.isBucketActive == nil
 			or options.isBucketActive(bucket.definition) == true
-		if not running or expectedGeneration ~= generation then
+		if not current() then
 			return "Stale"
 		end
 		if record ~= nil and record.state == "Reserved" and not active then
 			terminate(record, now)
 			return "Expired"
 		end
-		if
-			record ~= nil
-			and record.state == "IdleAvailable"
-			and options.isProjectionAlive
-			and not options.isProjectionAlive(record.projection, public(record))
-		then
-			terminate(record, now)
-			return "Expired"
+		if record ~= nil and record.state == "IdleAvailable" and options.isProjectionAlive then
+			local alive = options.isProjectionAlive(record.projection, public(record))
+			if not current() then
+				return "Stale"
+			end
+			if not alive then
+				terminate(record, now)
+				return "Expired"
+			end
 		end
-		if record ~= nil and record.state == "IdleAvailable" and now >= record.expiresAt then
+		if record ~= nil and record.state == "IdleAvailable" and now >= record.idleExpiresAt then
 			terminate(record, now)
 			return "Expired"
 		end
@@ -378,7 +425,14 @@ function WorldService.new(options: {
 			return false
 		end
 		local now = options.clock()
-		if now < record.expiresAt then
+		if
+			not finite(now)
+			or now < lastStepAt
+			or now < record.idleExpiresAt
+			or records[id] ~= record
+			or record.state ~= "IdleAvailable"
+			or record.revision ~= expectedRevision
+		then
 			return false
 		end
 		return terminate(record, now)
@@ -397,6 +451,18 @@ function WorldService.new(options: {
 		local dz = position.z - record.position.z
 		if dx * dx + dy * dy + dz * dz > record.bucket.definition.interactionRadius ^ 2 then
 			return "OutOfRange", nil
+		end
+		local revision = record.revision
+		local now = options.clock()
+		if
+			not finite(now)
+			or now < lastStepAt
+			or now >= record.idleExpiresAt
+			or records[id] ~= record
+			or record.state ~= "IdleAvailable"
+			or record.revision ~= revision
+		then
+			return "Unavailable", nil
 		end
 		return "Available", public(record)
 	end

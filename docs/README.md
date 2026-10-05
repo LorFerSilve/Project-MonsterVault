@@ -1,7 +1,7 @@
 # Project MonsterVault Documentation
 
 > **Project phase:** Implementation — TA-17 Implementation Locked — PASS  
-> **Implementation status:** OPEN — IMP-9 COMPLETE; IMP-10 World Scaling OPEN; VS1-19 deferred to future Scale Readiness under AD-260
+> **Implementation status:** OPEN — IMP-9 COMPLETE; IMP-10 World Scaling FUNCTIONALLY COMPLETE under AD-260; IMP-11 next; VS1-19 deferred to future Scale Readiness under AD-260
 
 This directory is the authoritative documentation space for Project MonsterVault.
 
@@ -130,9 +130,9 @@ TA-17 latest evidence:
 
 The active dependency is:
 
-> **IMP-10 — World Scaling (OPEN)**
+> **IMP-10 — World Scaling (FUNCTIONALLY COMPLETE under AD-260)**
 
-IMP-9 Vault / Economy / Progression is COMPLETE. IMP-10 has closed registry/mastery/access, authored content, regional scheduling, World Cycle, travel/discovery/recovery, trusted-session presence, hazards/transport fairness and bounded world rewards. The next major functional dependency is protected-content lifetime binding and capture-fairness/fault-recovery evidence.
+IMP-9 Vault / Economy / Progression is COMPLETE. IMP-10 has closed registry/mastery/access, authored content, regional scheduling, World Cycle, travel/discovery/recovery, trusted-session presence, hazards/transport fairness and bounded world rewards. Protected DEV lifetimes and capture-fairness/fault-recovery evidence now close the final functional gate ([evidence](implementation/IMP10_PROTECTED_LIFETIME_EVIDENCE.md)). Next is IMP-11 server-local Party/invite/membership authority; VS1-19 remains DEFERRED to Scale Readiness.
 
 All pre-code gates are satisfied. Gameplay implementation remains open under TA-17.
 

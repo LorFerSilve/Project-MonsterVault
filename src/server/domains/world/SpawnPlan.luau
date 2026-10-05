@@ -70,14 +70,22 @@ function SpawnPlan.new(registry: any, positions: any, FixtureDefinition: any): a
 				and #context.speciesWeights == #context.speciesIds,
 			"unbound spawn weights"
 		)
-		local total = 0
+		local total, speciesDefinitions = 0, {}
 		for n, speciesId in context.speciesIds do
 			assert(positive(context.speciesWeights[n], 1000000), "invalid spawn weight")
-			-- Protected high-value lifetimes are not invented for later content.
+			local rarityId = registry.species[speciesId].rarityId
+			local protected = registry.protectedEncounter
+			local stabilitySeconds = if speciesId == protected.speciesId
+					and id == protected.spawnContextId
+				then protected.stabilitySeconds
+				else 0
 			assert(
-				registry.species[speciesId].rarityId == "rarity/common",
+				rarityId == "rarity/common"
+					or (rarityId == "rarity/legendary" and stabilitySeconds > 0),
 				"unbound lifetime class"
 			)
+			speciesDefinitions[speciesId] =
+				table.freeze({ rarityId = rarityId, stabilitySeconds = stabilitySeconds })
 			total += context.speciesWeights[n]
 		end
 		local bucket: any = table.clone(policy)
@@ -88,6 +96,7 @@ function SpawnPlan.new(registry: any, positions: any, FixtureDefinition: any): a
 		bucket.position = table.freeze(table.clone(position))
 		bucket.speciesIds, bucket.speciesWeights, bucket.totalWeight =
 			context.speciesIds, context.speciesWeights, total
+		bucket.speciesDefinitions = table.freeze(speciesDefinitions)
 		bucket.replenishingFixture = id == policy.protectedFixtureContextId
 		if bucket.replenishingFixture then
 			for _, phase in registry.worldCycle.phases do
@@ -139,7 +148,10 @@ function SpawnPlan.select(bucket: any, random: any): any
 	for n, speciesId in bucket.speciesIds do
 		cumulative += bucket.speciesWeights[n]
 		if target < cumulative then
-			return { speciesId = speciesId, rarityId = "rarity/common" }
+			return {
+				speciesId = speciesId,
+				rarityId = bucket.speciesDefinitions[speciesId].rarityId,
+			}
 		end
 	end
 	error("spawn selection outside authored pool")

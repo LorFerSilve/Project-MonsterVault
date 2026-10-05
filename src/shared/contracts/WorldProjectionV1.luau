@@ -17,6 +17,9 @@ local availability = table.freeze({
 local function publicId(value: any): boolean
 	return type(value) == "string" and #value > 0 and #value <= 96
 end
+local function optionalTime(value: any): boolean
+	return value == nil or (type(value) == "number" and value >= 0 and value < math.huge)
+end
 
 function WorldProjectionV1.valid(value: any): boolean
 	if type(value) ~= "table" then
@@ -30,6 +33,9 @@ function WorldProjectionV1.valid(value: any): boolean
 			and key ~= "SpawnContextId"
 			and key ~= "RuntimeRevision"
 			and key ~= "Availability"
+			and key ~= "LifetimeClass"
+			and key ~= "AvailableAt"
+			and key ~= "IdleExpiresAt"
 		then
 			return false
 		end
@@ -43,6 +49,14 @@ function WorldProjectionV1.valid(value: any): boolean
 		and value.RuntimeRevision % 1 == 0
 		and value.RuntimeRevision < math.huge
 		and availability[value.Availability] == true
+		and (value.LifetimeClass == nil or value.LifetimeClass == "Ordinary" or value.LifetimeClass == "ProtectedVariant")
+		and optionalTime(value.AvailableAt)
+		and optionalTime(value.IdleExpiresAt)
+		and (
+			value.AvailableAt == nil
+			or value.IdleExpiresAt == nil
+			or value.IdleExpiresAt >= value.AvailableAt
+		)
 end
 
 return table.freeze(WorldProjectionV1)

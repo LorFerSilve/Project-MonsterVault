@@ -43,7 +43,12 @@ local function move(part: any)
 	root.AssemblyLinearVelocity = globals.Vector3.zero
 	globals.task.wait(0.1)
 end
-local function setup(scope: string?, seedEnergy: number?): any
+local function setup(
+	scope: string?,
+	seedEnergy: number?,
+	worldDraw: number?,
+	manualCapturePulse: boolean?
+): any
 	check(state == nil and game:GetService("RunService"):IsStudio())
 	check(game:GetService("RunService"):IsServer())
 	local server: any = game.ServerScriptService.MonsterVaultServer
@@ -63,6 +68,7 @@ local function setup(scope: string?, seedEnergy: number?): any
 		mono = 0,
 		wall = 299,
 		callbacks = {},
+		captureCallbacks = {},
 		packets = {},
 		captureStates = {},
 	}
@@ -181,7 +187,7 @@ local function setup(scope: string?, seedEnergy: number?): any
 		},
 		random = {
 			NextNumber = function()
-				return 0.75
+				return worldDraw or 0.75
 			end,
 		},
 	})
@@ -196,12 +202,20 @@ local function setup(scope: string?, seedEnergy: number?): any
 		httpService = http,
 		diagnostics = diagnostics,
 		event = event,
+		scheduler = if manualCapturePulse
+			then {
+				spawn = globals.task.spawn,
+				delay = function(_seconds: number, callback: () -> ())
+					table.insert(s.captureCallbacks, callback)
+				end,
+			}
+			else nil,
 		workspace = {
 			FindFirstChild = function(_self: any, name: string): any
 				return s.root:FindFirstChild(name)
 			end,
 			GetServerTimeNow = function(): number
-				return workspace:GetServerTimeNow()
+				return if manualCapturePulse then s.mono else workspace:GetServerTimeNow()
 			end,
 		},
 		random = {
@@ -546,6 +560,10 @@ local function deferredGrant(): any
 	}
 end
 return {
+	setup = setup,
+	tick = tick,
+	move = move,
+	rejoin = rejoin,
 	beginHappy = beginHappy,
 	stage = stage,
 	finishHappy = finishHappy,

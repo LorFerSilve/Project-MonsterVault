@@ -1,0 +1,1045 @@
+{
+  "date": "2026-10-05",
+  "timezone": "Europe/Brussels",
+  "baseCommit": "e151e0a5f40be230711d0f54b341089a6d40f0a7",
+  "phase": "IMP-10 FUNCTIONALLY COMPLETE under AD-260",
+  "scope": "One authored optional Legendary DEV opportunity; existing spawn scheduler, TA-7 lifetime and ProfileSession P2",
+  "studio": {
+    "studioId": "6289091c-cab1-4c59-91d5-f6e3e6146eb7",
+    "placeId": 110304961224794,
+    "universeId": 10766503968,
+    "environment": "DEV",
+    "finalMode": "Edit",
+    "normalServerAndClientBoot": true,
+    "temporaryProbeRootsRemoved": 7
+  },
+  "binding": {
+    "speciesId": "species/stability-orb-dev",
+    "rarityId": "rarity/legendary",
+    "spawnContextId": "spawn-context/starter-field",
+    "contentSnapshotId": "content-snapshot/imp10-world-dev-v3",
+    "stabilitySeconds": 300,
+    "startsAt": "Successful actionable activation, after materialization retries",
+    "speciesWeights": [
+      100,
+      100,
+      1
+    ],
+    "protectedVariantReason": "protected-variant/legendary-species",
+    "regionalSlotBudget": 1,
+    "globalSlotBudget": 8,
+    "workPerWorldPulse": 2
+  },
+  "results": {
+    "fast": {
+      "passed": 213,
+      "total": 213
+    },
+    "nativeC0": {
+      "passed": 52,
+      "total": 52,
+      "composition": {
+        "pure": 32,
+        "protectedRuntime": 4,
+        "presenceRuntime": 4,
+        "hazardRuntime": 8,
+        "rewardRuntime": 4
+      }
+    },
+    "authoring": {
+      "passed": 29,
+      "total": 29
+    },
+    "safeRouteSamples": {
+      "passed": 315,
+      "total": 315
+    },
+    "python": {
+      "passed": 28,
+      "total": 28
+    },
+    "sourceParity": {
+      "passed": 85,
+      "total": 85,
+      "mismatches": []
+    }
+  },
+  "nativePure": {
+    "total": 32,
+    "cases": [
+      {
+        "name": "WorldTravel.hazardInterruptsBeforeMissingArrivalAndCannotEscape",
+        "passed": true
+      },
+      {
+        "name": "WorldTravel.yieldedShutdownAndMissingAnchorsFailClosed",
+        "passed": true
+      },
+      {
+        "name": "WorldTravel.hazardCannotSkipBetweenObservations",
+        "passed": true
+      },
+      {
+        "name": "WorldTravel.yieldedRaceAndReplacedCharacterFence",
+        "passed": true
+      },
+      {
+        "name": "WorldTravel.hazardTravelRaceRecoversWithoutReplay",
+        "passed": true
+      },
+      {
+        "name": "WorldTravel.hazardRecoveryRequiresExplorationBeforeDiscovery",
+        "passed": true
+      },
+      {
+        "name": "WorldTravel.arrivalRecoveryAndNoRepeatedRelocation",
+        "passed": true
+      },
+      {
+        "name": "WorldTravel.hazardRegistryIsBoundedAndPhaseIndependent",
+        "passed": true
+      },
+      {
+        "name": "WorldTravel.failedHazardInterruptKeepsPresenceInactive",
+        "passed": true
+      },
+      {
+        "name": "WorldTravel.interruptedRelocationRecoversWithoutReplay",
+        "passed": true
+      },
+      {
+        "name": "WorldTravel.replacementSessionWaitsForValidAnchor",
+        "passed": true
+      },
+      {
+        "name": "WorldTravel.discoveryPreparationAndProtectedEpochs",
+        "passed": true
+      },
+      {
+        "name": "WorldTravel.staleGenerationAndBoundedSpam",
+        "passed": true
+      },
+      {
+        "name": "WorldTravel.yieldedHazardInterruptFencesReplacementAndShutdown",
+        "passed": true
+      },
+      {
+        "name": "WorldTravel.yieldedPresenceCheckCannotObserveReplacementSession",
+        "passed": true
+      },
+      {
+        "name": "WorldTravel.replacementSessionRequiresSafeArrival",
+        "passed": true
+      },
+      {
+        "name": "WorldTravel.yieldedSessionReplacementCannotCompleteTravel",
+        "passed": true
+      },
+      {
+        "name": "WorldProgression.rewardReceiptSurvivesAuditAndLegacy",
+        "passed": true
+      },
+      {
+        "name": "WorldProgression.rewardUnknownCutPoints",
+        "passed": true
+      },
+      {
+        "name": "WorldProgression.rewardDeferredHeadroom",
+        "passed": true
+      },
+      {
+        "name": "WorldProgression.rewardDeferredCutPoints",
+        "passed": true
+      },
+      {
+        "name": "WorldProgression.rewardRaceAndContextFence",
+        "passed": true
+      },
+      {
+        "name": "WorldProgression.rewardContractsAndProtectedLoads",
+        "passed": true
+      },
+      {
+        "name": "WorldProgression.rewardExactlyOnceAndRejoin",
+        "passed": true
+      },
+      {
+        "name": "SpawnScheduling.protectedIdleWindowAndCycleReplan",
+        "passed": true
+      },
+      {
+        "name": "SpawnScheduling.protectedWindowStartsAfterActivation",
+        "passed": true
+      },
+      {
+        "name": "SpawnScheduling.acquisitionReleaseDoesNotRestartWindow",
+        "passed": true
+      },
+      {
+        "name": "SpawnScheduling.protectedBindingAndClassification",
+        "passed": true
+      },
+      {
+        "name": "SpawnScheduling.custodyGracePendingAndShutdownLifetime",
+        "passed": true
+      },
+      {
+        "name": "SpawnScheduling.yieldedProjectionCheckCannotKillClaim",
+        "passed": true
+      },
+      {
+        "name": "CapturePersistence.protectedVariantFaultsRejoinAndDedupe",
+        "passed": true
+      },
+      {
+        "name": "WorldProjection.lifetimeProjectionRetainsDistinctStates",
+        "passed": true
+      }
+    ],
+    "passed": 32
+  },
+  "protectedRuntime": {
+    "beginVisibility": {
+      "pinnedContext": true,
+      "creatureId": "creature-aa3fb457-d4ca-45d7-9947-c069123aed71-2",
+      "scope": "IMP10Reward-c0afb85f-7558-4f01-8bbf-49041ee4042a",
+      "ordinaryExpired": true,
+      "nativeCue": true,
+      "record": {
+        "creatureInstanceId": "creature-aa3fb457-d4ca-45d7-9947-c069123aed71-2",
+        "rarityId": "rarity/legendary",
+        "idleExpiresAt": 303,
+        "availableAt": 3,
+        "runtimeRevision": 2,
+        "position": {
+          "y": 3,
+          "x": 36,
+          "z": -40
+        },
+        "spawnContextId": "spawn-context/starter-field",
+        "availability": "IdleAvailable",
+        "lifetimeClass": "ProtectedVariant",
+        "speciesId": "species/stability-orb-dev"
+      }
+    },
+    "visibility": {
+      "immutableWindow": true,
+      "claimTimeout": true,
+      "streamingClientTamperingInert": true,
+      "scope": "IMP10Reward-c0afb85f-7558-4f01-8bbf-49041ee4042a",
+      "replacementId": "creature-aa3fb457-d4ca-45d7-9947-c069123aed71-4",
+      "passed": true
+    },
+    "finalizationFaults": {
+      "cases": [
+        {
+          "fault": "Before",
+          "history": true,
+          "rejoin": true,
+          "creatureId": "creature-f0b553f6-9d7f-4a12-97e8-3927ceb7cdd8-2",
+          "scope": "IMP10Reward-5af9bf5c-5711-4962-9498-f8ba29ba6874",
+          "locked": true,
+          "operationId": "aacb8cf6-a359-486a-8f7e-19a24b48d393",
+          "faultCuts": {
+            "Before": 3,
+            "After": 0
+          }
+        },
+        {
+          "fault": "After",
+          "history": true,
+          "rejoin": true,
+          "creatureId": "creature-295748e4-0637-4716-8ebc-da558b43e217-2",
+          "scope": "IMP10Reward-85889ad4-f9cd-4812-8760-197d853632d2",
+          "locked": true,
+          "operationId": "c1982131-02ae-4ae1-8eb9-639f4d55ed8e",
+          "faultCuts": {
+            "Before": 0,
+            "After": 1
+          }
+        }
+      ],
+      "passed": true,
+      "exactOnce": true
+    },
+    "recoveryAndBinding": {
+      "scope": "IMP10Reward-4b68bdc1-e491-49a9-bfb5-1b5cbd35073e",
+      "corruptBindingFailClosed": true,
+      "passed": true,
+      "replacementAndHazardNeverExtract": true
+    },
+    "shutdown": {
+      "rejoin": true,
+      "creatureId": "creature-2d78e8b6-048f-403f-ab3b-b1dd061c3875-2",
+      "scope": "IMP10Reward-e7d2fa0c-ebf6-4440-8df9-ae0cd6730caa",
+      "trustedShutdownOnly": true,
+      "passed": true,
+      "operationId": "123dc057-e445-4bc2-a79d-fc02b4b811b6"
+    },
+    "clientTampering": {
+      "forgedFieldsRejected": "REJECT_VALIDATION_PAYLOAD",
+      "creatureId": "creature-aa3fb457-d4ca-45d7-9947-c069123aed71-2",
+      "actualObserver": {
+        "creatureInstanceId": "creature-aa3fb457-d4ca-45d7-9947-c069123aed71-2",
+        "present": true,
+        "rarityId": "rarity/legendary",
+        "idleExpiresAt": 303,
+        "availableAt": 3,
+        "runtimeRevision": 2,
+        "spawnContextId": "spawn-context/starter-field",
+        "availability": "IdleAvailable",
+        "lifetimeClass": "ProtectedVariant",
+        "speciesId": "species/stability-orb-dev"
+      },
+      "passed": true,
+      "cue": "Legendary DEV — protected encounter\nIdleAvailable"
+    },
+    "engineStreamOut": {
+      "streamedOut": true,
+      "observerPresent": false,
+      "passed": true,
+      "streamingEnabled": true
+    },
+    "engineStreamIn": {
+      "streamedOut": true,
+      "streamedIn": true,
+      "clientTamperingDiscarded": true,
+      "actualObserver": {
+        "creatureInstanceId": "creature-aa3fb457-d4ca-45d7-9947-c069123aed71-2",
+        "present": true,
+        "rarityId": "rarity/legendary",
+        "idleExpiresAt": 303,
+        "availableAt": 3,
+        "runtimeRevision": 2,
+        "spawnContextId": "spawn-context/starter-field",
+        "availability": "IdleAvailable",
+        "lifetimeClass": "ProtectedVariant",
+        "speciesId": "species/stability-orb-dev"
+      },
+      "passed": true,
+      "sameId": "creature-aa3fb457-d4ca-45d7-9947-c069123aed71-2"
+    }
+  },
+  "regressions": {
+    "presence": [
+      {
+        "result": {
+          "scope": "IMP10World-b8e98d94-1827-4eb6-8090-35782fc5d632",
+          "noValueChange": true,
+          "passed": true,
+          "knownUnlockedArrival": true
+        },
+        "name": "lockedPresence",
+        "passed": true
+      },
+      {
+        "result": {
+          "replacementReady": true,
+          "saved": true,
+          "scope": "IMP10World-1c3f2956-eedd-49a2-a8aa-0fb2d97c5e24",
+          "passed": true,
+          "missingAnchor": true
+        },
+        "name": "replacementSession",
+        "passed": true
+      },
+      {
+        "result": {
+          "scope": "IMP10World-ad41ee86-f871-47eb-bcb4-14bbd77bc7fe",
+          "noExtraction": true,
+          "passed": true,
+          "creatureId": "creature-c7a04061-1aa2-4fd4-b368-e57d328db946-1"
+        },
+        "name": "transportCorrection",
+        "passed": true
+      },
+      {
+        "result": {
+          "creatureId": "creature-770f39a6-72d0-4625-b334-3e405fd57316-1",
+          "scope": "IMP10World-e92895a3-4616-409b-816c-b340ce39af44",
+          "exactOnce": true,
+          "passed": true,
+          "originalCandidate": true
+        },
+        "name": "pendingFinalization",
+        "passed": true
+      }
+    ],
+    "hazards": [
+      {
+        "result": {
+          "phaseBoundary": true,
+          "nativeWalkEntry": true,
+          "scope": "IMP10World-df754c5c-c18a-4b66-a313-a2c5cb0f7d0c",
+          "noOpportunityReset": true,
+          "passed": true,
+          "noValueChange": true
+        },
+        "name": "observedRecoveryAndCycle",
+        "passed": true
+      },
+      {
+        "result": {
+          "passed": true,
+          "cases": [
+            {
+              "scope": "IMP10World-f9aaf4f3-e5a9-4499-99f4-958c57f87805",
+              "noExtraction": true,
+              "provisional": false,
+              "creatureId": "creature-03d5f466-5307-40c7-8142-b11c0221c7fb-1"
+            },
+            {
+              "scope": "IMP10World-adef4e02-7f89-47c4-b967-9b8fd4305db0",
+              "noExtraction": true,
+              "provisional": true,
+              "creatureId": "creature-a6c267e7-09a9-4b2c-8d07-fe2662e57b26-1"
+            }
+          ]
+        },
+        "name": "acquisitionRecovery",
+        "passed": true
+      },
+      {
+        "result": {
+          "interruptedWithoutAnchor": true,
+          "missingMarkerClosed": true,
+          "scope": "IMP10World-d4957146-f3f3-4951-8be9-e2000dbc974c",
+          "walkOutClosed": true,
+          "passed": true,
+          "corruptAnchorClosed": true
+        },
+        "name": "unavailableArrival",
+        "passed": true
+      },
+      {
+        "result": {
+          "creatureId": "creature-08eff861-d06b-4f4f-b748-33342cf1e842-1",
+          "scope": "IMP10World-6757c056-1fb7-4813-87ed-b2128fa016c4",
+          "exactOnce": true,
+          "passed": true,
+          "admittedP2Preserved": true
+        },
+        "name": "pendingFinalization",
+        "passed": true
+      },
+      {
+        "result": {
+          "lockedAndUnknownRejected": true,
+          "validatedOutpostExtraction": true,
+          "creatureId": "creature-376f58f1-b9dd-4056-a20d-2cf986fe0b84-1",
+          "scope": "IMP10World-cbbd763e-9d70-42c8-ab4a-af2bc36bc744",
+          "securedValueSurvivedHazard": true,
+          "passed": true,
+          "baselineWalkTransport": true
+        },
+        "name": "safeTransport",
+        "passed": true
+      },
+      {
+        "result": {
+          "transportGraceInterrupted": true,
+          "scope": "IMP10World-41c06ab7-3abc-40be-8b5c-2fd9cc53045f",
+          "persistedRejoin": true,
+          "passed": true,
+          "staleCharacterFenced": true
+        },
+        "name": "respawnRejoin",
+        "passed": true
+      },
+      {
+        "result": {
+          "recoveryDidNotDiscover": true,
+          "duplicateInert": true,
+          "scope": "IMP10World-a3d91d28-cb60-46c0-b84f-8bb5c77ded22",
+          "unavailableNodeDidNotFakeDeparture": true,
+          "passed": true,
+          "realDepartureAndReturnDiscovered": true
+        },
+        "name": "recoveryDoesNotDiscover",
+        "passed": true
+      },
+      {
+        "result": {
+          "noValueChange": true,
+          "custodyInterrupted": true,
+          "scope": "IMP10World-41b0eed5-0925-49b4-9b2d-e861d5d53d1f",
+          "admissionBlockedBeforePulse": true,
+          "passed": true,
+          "safeEndpointsCrossed": true
+        },
+        "name": "sweptCrossing",
+        "passed": true
+      }
+    ],
+    "rewards": {
+      "happy": {
+        "rejoin": {
+          "energy": 5,
+          "passed": true,
+          "receipt": {
+            "initialUnits": 5,
+            "energyUnits": 5,
+            "expectedRevision": 5,
+            "operationId": "c05b214b-f526-4697-83ac-ae26af92fa56",
+            "remainingUnits": 0,
+            "objectiveId": "field-objective/fixture-return-route",
+            "timestamp": 1791191705,
+            "configSnapshotId": "content-snapshot/world-reward-starter-dev-v1",
+            "sourceReference": "world-reward/starter-return-dev-v1"
+          }
+        },
+        "actualClientRoute": true,
+        "energy": 5,
+        "scope": "IMP10Reward-6aabf6bc-9286-46f7-82be-4564e8dfe3c3",
+        "cycleDuplicateInert": true,
+        "passed": true,
+        "receipt": {
+          "initialUnits": 5,
+          "energyUnits": 5,
+          "expectedRevision": 5,
+          "operationId": "c05b214b-f526-4697-83ac-ae26af92fa56",
+          "remainingUnits": 0,
+          "sourceReference": "world-reward/starter-return-dev-v1",
+          "timestamp": 1791191705,
+          "configSnapshotId": "content-snapshot/world-reward-starter-dev-v1",
+          "objectiveId": "field-objective/fixture-return-route"
+        }
+      },
+      "faultRecovery": {
+        "passed": true,
+        "cases": [
+          {
+            "rejoin": {
+              "energy": 5,
+              "passed": true,
+              "receipt": {
+                "initialUnits": 5,
+                "energyUnits": 5,
+                "expectedRevision": 5,
+                "operationId": "e7998dba-d2d8-4321-8ef9-20f6a79a6458",
+                "remainingUnits": 0,
+                "objectiveId": "field-objective/fixture-return-route",
+                "timestamp": 1791191571,
+                "configSnapshotId": "content-snapshot/world-reward-starter-dev-v1",
+                "sourceReference": "world-reward/starter-return-dev-v1"
+              }
+            },
+            "originalReceipt": {
+              "initialUnits": 5,
+              "energyUnits": 5,
+              "expectedRevision": 5,
+              "operationId": "e7998dba-d2d8-4321-8ef9-20f6a79a6458",
+              "remainingUnits": 0,
+              "sourceReference": "world-reward/starter-return-dev-v1",
+              "timestamp": 1791191571,
+              "configSnapshotId": "content-snapshot/world-reward-starter-dev-v1",
+              "objectiveId": "field-objective/fixture-return-route"
+            },
+            "scope": "IMP10Reward-e3d64da6-9941-49cd-899a-6eb2ad2a3d87",
+            "mode": "Before",
+            "faultCuts": {
+              "Before": 3,
+              "After": 0
+            }
+          },
+          {
+            "rejoin": {
+              "energy": 5,
+              "passed": true,
+              "receipt": {
+                "initialUnits": 5,
+                "energyUnits": 5,
+                "expectedRevision": 5,
+                "operationId": "97b1336f-70fa-4a55-ad5b-d38f71934c4a",
+                "remainingUnits": 0,
+                "sourceReference": "world-reward/starter-return-dev-v1",
+                "timestamp": 1791191578,
+                "configSnapshotId": "content-snapshot/world-reward-starter-dev-v1",
+                "objectiveId": "field-objective/fixture-return-route"
+              }
+            },
+            "originalReceipt": {
+              "initialUnits": 5,
+              "energyUnits": 5,
+              "expectedRevision": 5,
+              "operationId": "97b1336f-70fa-4a55-ad5b-d38f71934c4a",
+              "remainingUnits": 0,
+              "objectiveId": "field-objective/fixture-return-route",
+              "timestamp": 1791191578,
+              "configSnapshotId": "content-snapshot/world-reward-starter-dev-v1",
+              "sourceReference": "world-reward/starter-return-dev-v1"
+            },
+            "scope": "IMP10Reward-8ad62605-f6e6-4e26-a302-0514477fcf59",
+            "mode": "After",
+            "faultCuts": {
+              "Before": 0,
+              "After": 1
+            }
+          }
+        ]
+      },
+      "unsafeAndFences": {
+        "lockedClosed": true,
+        "staleCharacter": true,
+        "replacementSession": true,
+        "scope": "IMP10Reward-d5f95bd6-df7f-4dff-9e9c-2aa87fe9e734",
+        "noCompletionOrExtraction": true,
+        "passed": true,
+        "hazardInterruptedCustody": true
+      },
+      "deferredGrant": {
+        "finalEnergy": 999999999978,
+        "legacyHeadroomFixture": true,
+        "scope": "IMP10Reward-e5e3474d-1533-4834-ba02-a75c581c7652",
+        "passed": true,
+        "rejoin": {
+          "energy": 999999999978,
+          "passed": true,
+          "receipt": {
+            "initialUnits": 2,
+            "energyUnits": 5,
+            "objectiveId": "field-objective/fixture-return-route",
+            "operationId": "805f91cb-b869-4e69-b2d8-1406b6a8aade",
+            "remainingUnits": 0,
+            "sourceReference": "world-reward/starter-return-dev-v1",
+            "lastTransferOperationId": "a42b0557-7446-4c43-8944-8df8b915bf0c",
+            "lastTransferRevision": 8,
+            "timestamp": 1791191588,
+            "configSnapshotId": "content-snapshot/world-reward-starter-dev-v1",
+            "expectedRevision": 5
+          }
+        },
+        "deferredUnits": 3,
+        "originalGrantPreserved": true,
+        "purchasePrice": 25,
+        "initialUnits": 2
+      }
+    },
+    "actualRewardClients": [
+      {
+        "forged": "REJECT_VALIDATION_PAYLOAD",
+        "repeated": "OK_WORLD_VISITED",
+        "actualRemote": true,
+        "replay": "OK_WORLD_VISITED",
+        "first": "OK_WORLD_VISITED",
+        "passed": true,
+        "serverOwnerPrivate": true
+      },
+      {
+        "repeated": "OK_WORLD_VISITED",
+        "actualRemote": true,
+        "replay": "OK_WORLD_VISITED",
+        "first": "OK_WORLD_VISITED",
+        "passed": true,
+        "serverOwnerPrivate": true
+      },
+      {
+        "repeated": "OK_WORLD_VISITED",
+        "actualRemote": true,
+        "replay": "OK_WORLD_VISITED",
+        "first": "OK_WORLD_VISITED",
+        "passed": true,
+        "serverOwnerPrivate": true
+      }
+    ],
+    "regional": {
+      "starter": {
+        "realMidAccess": true,
+        "capturedId": "creature-1bcd3c84-4833-4a20-ba55-43fa547b3a8a-1",
+        "energy": 525,
+        "passed": true,
+        "replacement": "creature-1bcd3c84-4833-4a20-ba55-43fa547b3a8a-3"
+      },
+      "midA": {
+        "ownership": {
+          "spawnContextId": "spawn-context/mid-a",
+          "contentSnapshotId": "content-snapshot/imp10-world-dev-v3"
+        },
+        "role": "MidA",
+        "mastery": true,
+        "replenished": true,
+        "passed": true,
+        "identity": {
+          "creatureInstanceId": "creature-1bcd3c84-4833-4a20-ba55-43fa547b3a8a-4",
+          "cycleContext": {
+            "nextTransitionUnixSeconds": 1791191100,
+            "definitionVersion": 1,
+            "definitionId": "world-cycle/ordinary-dev-v1",
+            "phaseId": "world-phase/day",
+            "phaseIndex": 1,
+            "phaseStartedAtUnixSeconds": 1791190800,
+            "cycleIndex": 1990212
+          },
+          "spawnContextId": "spawn-context/mid-a",
+          "variantIdentity": {
+            "protectedVariantReasons": [],
+            "traitIds": [],
+            "mutationIdsCanonical": [],
+            "spawnContextId": "spawn-context/mid-a",
+            "speciesRarityId": "rarity/common",
+            "contentSnapshotId": "content-snapshot/imp10-world-dev-v3",
+            "variantSignature": "species/field-pebble|"
+          },
+          "contentSnapshotId": "content-snapshot/imp10-world-dev-v3",
+          "speciesId": "species/field-pebble"
+        }
+      },
+      "midB": {
+        "ownership": {
+          "spawnContextId": "spawn-context/mid-b",
+          "contentSnapshotId": "content-snapshot/imp10-world-dev-v3"
+        },
+        "role": "MidB",
+        "mastery": true,
+        "replenished": true,
+        "passed": true,
+        "identity": {
+          "creatureInstanceId": "creature-1bcd3c84-4833-4a20-ba55-43fa547b3a8a-7",
+          "cycleContext": {
+            "nextTransitionUnixSeconds": 1791191100,
+            "definitionVersion": 1,
+            "definitionId": "world-cycle/ordinary-dev-v1",
+            "phaseId": "world-phase/day",
+            "phaseIndex": 1,
+            "phaseStartedAtUnixSeconds": 1791190800,
+            "cycleIndex": 1990212
+          },
+          "spawnContextId": "spawn-context/mid-b",
+          "variantIdentity": {
+            "protectedVariantReasons": [],
+            "traitIds": [],
+            "mutationIdsCanonical": [],
+            "spawnContextId": "spawn-context/mid-b",
+            "speciesRarityId": "rarity/common",
+            "contentSnapshotId": "content-snapshot/imp10-world-dev-v3",
+            "variantSignature": "species/field-leaf|"
+          },
+          "contentSnapshotId": "content-snapshot/imp10-world-dev-v3",
+          "speciesId": "species/field-leaf"
+        }
+      },
+      "advanced": {
+        "ownership": {
+          "spawnContextId": "spawn-context/advanced",
+          "contentSnapshotId": "content-snapshot/imp10-world-dev-v3"
+        },
+        "role": "Advanced",
+        "mastery": true,
+        "replenished": true,
+        "passed": true,
+        "identity": {
+          "creatureInstanceId": "creature-1bcd3c84-4833-4a20-ba55-43fa547b3a8a-11",
+          "cycleContext": {
+            "nextTransitionUnixSeconds": 1791191100,
+            "definitionVersion": 1,
+            "definitionId": "world-cycle/ordinary-dev-v1",
+            "phaseId": "world-phase/day",
+            "phaseIndex": 1,
+            "phaseStartedAtUnixSeconds": 1791190800,
+            "cycleIndex": 1990212
+          },
+          "spawnContextId": "spawn-context/advanced",
+          "variantIdentity": {
+            "protectedVariantReasons": [],
+            "traitIds": [],
+            "mutationIdsCanonical": [],
+            "spawnContextId": "spawn-context/advanced",
+            "speciesRarityId": "rarity/common",
+            "contentSnapshotId": "content-snapshot/imp10-world-dev-v3",
+            "variantSignature": "species/field-leaf|"
+          },
+          "contentSnapshotId": "content-snapshot/imp10-world-dev-v3",
+          "speciesId": "species/field-leaf"
+        }
+      },
+      "caps": {
+        "nativeCap": 8,
+        "destroyedReplaced": true,
+        "energy": 325,
+        "invalidBindingClosed": true,
+        "duplicateTickets": true,
+        "passed": true,
+        "idleRefill": true
+      },
+      "finalEnergy": 325,
+      "allFourMasteries": true,
+      "sourceSnapshot": "content-snapshot/imp10-world-dev-v3"
+    }
+  },
+  "authoring": {
+    "ordinaryLocomotion": true,
+    "hazardFreeRouteSamples": 315,
+    "baselineRouteGroundSamples": 315,
+    "passed": true,
+    "cases": {
+      "HazardInsideRecovery": {
+        "rejected": true,
+        "passed": true,
+        "detail": "ServerScriptService.MonsterVaultServer.domains.world.WorldAuthoringIndex:146: invalid DEV hazard volume"
+      },
+      "MissingRegion": {
+        "rejected": true,
+        "passed": true,
+        "detail": "ServerScriptService.MonsterVaultServer.domains.world.WorldAuthoringIndex:39: missing authored MonsterVaultRegion"
+      },
+      "MissingHabitat": {
+        "rejected": true,
+        "passed": true,
+        "detail": "ServerScriptService.MonsterVaultServer.domains.world.WorldAuthoringIndex:39: missing authored MonsterVaultHabitat"
+      },
+      "MissingOutpost": {
+        "rejected": true,
+        "passed": true,
+        "detail": "ServerScriptService.MonsterVaultServer.domains.world.WorldAuthoringIndex:39: missing authored MonsterVaultSafeOutpost"
+      },
+      "OverlappingSurvey": {
+        "rejected": true,
+        "passed": true,
+        "detail": "ServerScriptService.MonsterVaultServer.domains.world.WorldAuthoringIndex:87: overlapping route points"
+      },
+      "UnknownHazard": {
+        "rejected": true,
+        "passed": true,
+        "detail": "ServerScriptService.MonsterVaultServer.domains.world.WorldAuthoringIndex:13: invalid authored MonsterVaultHazard"
+      },
+      "SpawnInsideOutpost": {
+        "rejected": true,
+        "passed": true,
+        "detail": "ServerScriptService.MonsterVaultServer.domains.world.WorldAuthoringIndex:87: overlapping route points"
+      },
+      "OverlappingRegion": {
+        "rejected": true,
+        "passed": true,
+        "detail": "ServerScriptService.MonsterVaultServer.domains.world.WorldAuthoringIndex:66: overlapping regions"
+      },
+      "UnknownPool": {
+        "rejected": true,
+        "passed": true,
+        "detail": "ServerScriptService.MonsterVaultServer.domains.world.WorldAuthoringIndex:115: spawn membership mismatch"
+      },
+      "MissingTravel": {
+        "rejected": true,
+        "passed": true,
+        "detail": "ServerScriptService.MonsterVaultServer.domains.world.WorldAuthoringIndex:39: missing authored MonsterVaultTravelNode"
+      },
+      "MissingHazard": {
+        "rejected": true,
+        "passed": true,
+        "detail": "ServerScriptService.MonsterVaultServer.domains.world.WorldAuthoringIndex:39: missing authored MonsterVaultHazard"
+      },
+      "DuplicateHazard": {
+        "rejected": true,
+        "passed": true,
+        "detail": "ServerScriptService.MonsterVaultServer.domains.world.WorldAuthoringIndex:13: invalid authored MonsterVaultHazard"
+      },
+      "Unanchored": {
+        "rejected": true,
+        "passed": true,
+        "detail": "ServerScriptService.MonsterVaultServer.domains.world.WorldAuthoringIndex:13: invalid authored MonsterVaultLandmark"
+      },
+      "Valid": {
+        "rejected": false,
+        "passed": true
+      },
+      "MissingRecovery": {
+        "rejected": true,
+        "passed": true,
+        "detail": "ServerScriptService.MonsterVaultServer.domains.world.WorldAuthoringIndex:39: missing authored MonsterVaultRecoveryAnchor"
+      },
+      "UnknownLandmark": {
+        "rejected": true,
+        "passed": true,
+        "detail": "ServerScriptService.MonsterVaultServer.domains.world.WorldAuthoringIndex:13: invalid authored MonsterVaultLandmark"
+      },
+      "MissingVault": {
+        "rejected": true,
+        "passed": true,
+        "detail": "ServerScriptService.MonsterVaultServer.domains.world.WorldAuthoringIndex:39: missing authored MonsterVaultVaultAccessPoint"
+      },
+      "WrongUtilityRegion": {
+        "rejected": true,
+        "passed": true,
+        "detail": "ServerScriptService.MonsterVaultServer.domains.world.WorldAuthoringIndex:21: authored region mismatch"
+      },
+      "HazardInsideEncounter": {
+        "rejected": true,
+        "passed": true,
+        "detail": "ServerScriptService.MonsterVaultServer.domains.world.WorldAuthoringIndex:164: hazard overlaps safe utility or required encounter"
+      },
+      "MissingSecurePoint": {
+        "rejected": true,
+        "passed": true,
+        "detail": "ServerScriptService.MonsterVaultServer.domains.world.WorldAuthoringIndex:39: missing authored MonsterVaultSecurePoint"
+      },
+      "MissingHazardCross": {
+        "rejected": true,
+        "passed": true,
+        "detail": "ServerScriptService.MonsterVaultServer.domains.world.WorldAuthoringIndex:219: missing visible hazard cross"
+      },
+      "MissingHazardWarning": {
+        "rejected": true,
+        "passed": true,
+        "detail": "ServerScriptService.MonsterVaultServer.domains.world.WorldAuthoringIndex:173: hazard needs its visible marker and warning"
+      },
+      "MisleadingHazardWarning": {
+        "rejected": true,
+        "passed": true,
+        "detail": "ServerScriptService.MonsterVaultServer.domains.world.WorldAuthoringIndex:173: hazard needs its visible marker and warning"
+      },
+      "DuplicateUtility": {
+        "rejected": true,
+        "passed": true,
+        "detail": "ServerScriptService.MonsterVaultServer.domains.world.WorldAuthoringIndex:13: invalid authored MonsterVaultVaultAccessPoint"
+      },
+      "HiddenHazardMarker": {
+        "rejected": true,
+        "passed": true,
+        "detail": "ServerScriptService.MonsterVaultServer.domains.world.WorldAuthoringIndex:173: hazard needs its visible marker and warning"
+      },
+      "HazardOutsideRegion": {
+        "rejected": true,
+        "passed": true,
+        "detail": "ServerScriptService.MonsterVaultServer.domains.world.WorldAuthoringIndex:146: invalid DEV hazard volume"
+      },
+      "MissingSpawnContext": {
+        "rejected": true,
+        "passed": true,
+        "detail": "ServerScriptService.MonsterVaultServer.domains.world.WorldAuthoringIndex:39: missing authored MonsterVaultLandmark"
+      },
+      "MissingHazardMarker": {
+        "rejected": true,
+        "passed": true,
+        "detail": "ServerScriptService.MonsterVaultServer.domains.world.WorldAuthoringIndex:173: hazard needs its visible marker and warning"
+      },
+      "UnsafeRecovery": {
+        "rejected": true,
+        "passed": true,
+        "detail": "ServerScriptService.MonsterVaultServer.domains.world.WorldAuthoringIndex:96: utility outside protected outpost"
+      }
+    }
+  },
+  "localPerformance": {
+    "pendingWorldCallbacks": 1,
+    "durableRevisionUnchanged": true,
+    "maxPopulation": 2,
+    "elapsedMs": 58.33229999552714,
+    "scaleReadiness": false,
+    "maxBucketsPerPulse": 2,
+    "passed": true,
+    "manualWorldPulses": 400
+  },
+  "normalBoot": {
+    "console": [
+      "{\"fields\":{\"component\":\"world\"},\"version\":1,\"environment\":\"server\",\"severity\":\"info\",\"code\":\"WORLD_SPAWNED\",\"atUnixSeconds\":1791192013,\"sequence\":1}\n{\"fields\":{\"component\":\"server\"},\"version\":1,\"environment\":\"server\",\"severity\":\"info\",\"code\":\"BOOTSTRAP_READY\",\"atUnixSeconds\":1791192013,\"sequence\":2}\n{\"fields\":{\"component\":\"client\"},\"version\":1,\"environment\":\"client\",\"severity\":\"info\",\"code\":\"BOOTSTRAP_READY\",\"atUnixSeconds\":1791192013,\"sequence\":1}\n{\"fields\":{\"component\":\"profiles\",\"detailCode\":\"CleanOffline\"},\"version\":1,\"environment\":\"server\",\"severity\":\"info\",\"code\":\"PRODUCTION_LOAD_SETTLED\",\"atUnixSeconds\":1791192015,\"sequence\":3}"
+    ],
+    "clientObserver": {
+      "ordinaryView": {
+        "creatureInstanceId": "creature-0c4482f4-f9b1-4323-b61f-e92b29d75799-1",
+        "present": true,
+        "rarityId": "rarity/common",
+        "idleExpiresAt": 46493.43442409999,
+        "availableAt": 46313.434597499996,
+        "runtimeRevision": 2,
+        "spawnContextId": "spawn-context/fixture-clearing",
+        "availability": "IdleAvailable",
+        "lifetimeClass": "Ordinary",
+        "speciesId": "species/fixture-orb"
+      },
+      "probeRootsGone": true,
+      "passed": true,
+      "normalBootProjectionValid": true
+    }
+  },
+  "preservation": {
+    "world": true,
+    "meshes": true,
+    "lighting": true,
+    "authoredParts": 58,
+    "meshParts": 5,
+    "energyCoreMeshes": [
+      "Workspace.EnergyCoreGenerator_Source.EnergyCoreGenerator.EC_EnergyGreen.EC_EnergyGreen_Mesh",
+      "Workspace.EnergyCoreGenerator_Source.EnergyCoreGenerator.EC_SecondaryMetal.EC_SecondaryMetal_Mesh",
+      "Workspace.EnergyCoreGenerator_Source.EnergyCoreGenerator.EC_DarkMetal.EC_DarkMetal_Mesh",
+      "Workspace.EnergyCoreGenerator_Source.EnergyCoreGenerator.EC_PanelPlastic.EC_PanelPlastic_Mesh"
+    ],
+    "recordedLighting": {
+      "clockTime": 14.5,
+      "fogEnd": 100000,
+      "globalShadows": true,
+      "exposure": 0,
+      "fogStart": 0,
+      "ambient": [
+        0.27450981736183167,
+        0.27450981736183167,
+        0.27450981736183167
+      ],
+      "outdoorAmbient": [
+        0.27450981736183167,
+        0.27450981736183167,
+        0.27450981736183167
+      ],
+      "brightness": 3,
+      "children": [
+        {
+          "attributes": [],
+          "name": "Sky",
+          "className": "Sky"
+        },
+        {
+          "attributes": [],
+          "name": "SunRays",
+          "className": "SunRaysEffect"
+        },
+        {
+          "attributes": [],
+          "name": "Atmosphere",
+          "className": "Atmosphere"
+        },
+        {
+          "attributes": [],
+          "name": "Bloom",
+          "className": "BloomEffect"
+        },
+        {
+          "attributes": [],
+          "name": "DepthOfField",
+          "className": "DepthOfFieldEffect"
+        }
+      ]
+    },
+    "serverBootEnabled": true,
+    "clientBootEnabled": true
+  },
+  "invariants": {
+    "noSecondLifetimeCoordinator": true,
+    "noPerCreatureLoop": true,
+    "reservationAndVariantArePinned": true,
+    "releaseDoesNotRenewWindow": true,
+    "expiredIdleCannotBeReclaimedBeforeCleanup": true,
+    "staleIdleObservationCannotKillNewClaim": true,
+    "provisionalRecoveryNeverExtracts": true,
+    "admittedP2Preserved": true,
+    "protectedAutoLockInOriginalP2": true,
+    "consumedIdsNeverResurrectOnRejoin": true,
+    "worldRewardAndCommonMasteryUnchanged": true
+  },
+  "limitations": {
+    "VS119": "DEFERRED environment limitation; future Scale Readiness Gate, not PASS",
+    "highConcurrencyAudit": "DEFERRED to scale/release readiness",
+    "measuredClients": 1,
+    "controlledL0L1": false,
+    "supportedRealClientFrameMemory": false,
+    "ordinaryUnclaimedCrossServerCarryover": false,
+    "futureProtectedBindings": "Remain fail-closed until authored; no event/Extreme/Compound content enabled"
+  },
+  "reproducibility": {
+    "serverProbe": "scripts/studio/imp10_protected_lifetimes.luau",
+    "sharedProbeHarness": "scripts/studio/imp10_world_rewards.luau",
+    "unitModules": [
+      "tests/unit/SpawnScheduling.luau",
+      "tests/unit/CapturePersistence.luau",
+      "tests/unit/WorldProjection.luau"
+    ],
+    "nativeClientProcedure": "Start existing WorldModelObserver, assert public lifetime view; local lifetime/ID/state tampering and real RemoteEvent rejection; move server ReplicationFocus to (10000,100,10000), request actual streaming and assert model absent + cache present=false; restore focus, request (36,3,-40), assert same ID/deadline and cache reconstruction; stop observer."
+  }
+}

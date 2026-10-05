@@ -9,6 +9,7 @@ local Retry = require("../../src/server/infrastructure/persistence/RetryPolicy")
 local Finalization = require("../fixtures/CaptureFinalization")
 local VariantIdentity = require("../../src/server/domains/capture/VariantIdentity")
 local Fixture = require("../../src/server/domains/world/FixtureDefinition")
+local Definitions = require("../../src/server/domains/world/WorldDefinitions")
 
 local function sessionFor(repository: any, clock: any, lockId: string, userId: number?): any
 	return ProfileSession.new({
@@ -177,7 +178,81 @@ local function uncertainReleaseRetainsPendingCheckpoint()
 	assertRejoined(repository, clock)
 end
 
+local function protectedVariantFaultsRejoinAndDedupe()
+	for _, fault in { "before", "after" } do
+		local session, repository, clock = setup()
+		local item = payload()
+		item.speciesId = Definitions.protectedEncounter.speciesId
+		item.origin = {
+			spawnContextId = Definitions.protectedEncounter.spawnContextId,
+			contentSnapshotId = Definitions.contentSnapshotId,
+		}
+		item.variantIdentity = VariantIdentity.generate({
+			speciesId = item.speciesId,
+			rarityId = "rarity/legendary",
+			spawnContextId = item.origin.spawnContextId,
+			contentSnapshotId = item.origin.contentSnapshotId,
+		}, {
+			nextUnit = function()
+				return 0.75
+			end,
+		})
+		repository.setReplayTransform(true)
+		if fault == "before" then
+			for _ = 1, 3 do
+				repository.failNext({ status = "error", reason = "TRANSIENT", retryable = true })
+			end
+		else
+			repository.loseNextResultAfterWrite()
+		end
+		assert(
+			Finalization.finalize(session, item).status == "OutcomeUnknown",
+			"fault remains pending"
+		)
+		assert(session.snapshot().collection.creaturesById == nil, "unknown is not ownership")
+		assert(
+			session.release(clock.monotonicClock.seconds() + 25).status == "Closed",
+			"same candidate drained"
+		)
+		local rejoined = sessionFor(repository, clock, "protected-rejoin")
+		assert(rejoined.acquire().status == "Ready", "rejoined protected profile")
+		local profile = rejoined.snapshot()
+		local record = profile.collection.creaturesById[item.creatureInstanceId]
+		assert(
+			record.locked and record.speciesId == item.speciesId,
+			"Protected Variant auto-lock shares P2"
+		)
+		assert(
+			record.variantIdentity.protectedVariantReasons[1]
+				== "protected-variant/legendary-species",
+			"classification persisted"
+		)
+		assert(
+			record.operationId == item.operationId
+				and record.origin.contentSnapshotId == Definitions.contentSnapshotId,
+			"original operation and content epoch persisted"
+		)
+		assert(
+			profile.profileRevision == 2 and next(profile.economy) == nil,
+			"capture creates no wallet grant"
+		)
+		assert(profile.discovery.speciesById[item.speciesId], "same-commit discovery")
+		assert(Finalization.finalize(rejoined, item).status == "Secured", "same operation deduped")
+		assert(
+			rejoined.snapshot().profileRevision == profile.profileRevision,
+			"rejoin replay minted value"
+		)
+		item.operationId = "different-capture-operation"
+		assert(
+			Finalization.finalize(rejoined, item).status == "Rejected",
+			"new operation resurrected consumed creature"
+		)
+		assert(rejoined.release(25).status == "Closed", "rejoin cleanup")
+	end
+end
+
 return {
+	protectedVariantFaultsRejoinAndDedupe = protectedVariantFaultsRejoinAndDedupe,
 	intendedOwnerAndLegacyProfiles = intendedOwnerAndLegacyProfiles,
 	lostResultReleaseAndRejoin = lostResultReleaseAndRejoin,
 	beforeWriteReleaseKeepsCandidate = beforeWriteReleaseKeepsCandidate,
