@@ -34,6 +34,21 @@ Current launch priorities are:
 
 A seasonal deadline never permits bypassing correctness, persistence, safety, accessibility, platform-policy or release gates.
 
+## Golden Slice pre-production package
+
+The first production-quality visual pass now has an implementation-facing baseline in [production/](production/README.md). Work should consume that package before creating production assets:
+
+- [Visual Bible](production/GOLDEN_SLICE_VISUAL_BIBLE.md)
+- [Asset Manifest](production/GOLDEN_SLICE_ASSET_MANIFEST.md)
+- [Blender -> Roblox Asset Production Standard](production/BLENDER_ROBLOX_ASSET_PRODUCTION_STANDARD.md)
+- [UI/UX System](production/GOLDEN_SLICE_UI_UX_SYSTEM.md)
+- [Halloween Content Matrix](production/HALLOWEEN_2026_CONTENT_MATRIX.md)
+- [Performance Budgets](production/GOLDEN_SLICE_PERFORMANCE_BUDGETS.md)
+- [Acceptance Matrix](production/GOLDEN_SLICE_ACCEPTANCE_MATRIX.md)
+- [Work Handoff](production/GOLDEN_SLICE_WORK_HANDOFF.md)
+
+These are implementation-production standards subordinate to the approved GDS/TA. They intentionally do not mark PQL gates complete. The Golden Slice must earn those representative acceptance results through actual Studio/client evidence.
+
 ## IMP-1 — Contracts and Test Harness
 
 Deliver:
