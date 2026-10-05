@@ -3465,7 +3465,7 @@ Technical Architecture is complete. Implementation is OPEN at IMP-1. Production 
 
 **Date:** 2026-10-01
 
-**Status:** Accepted — explicitly authorized by the project owner
+**Status:** Superseded by AD-260 on 2026-10-05 — retained as historical scheduling record
 
 **Owning TA phase:** TA-17
 
@@ -3709,3 +3709,53 @@ TA-7 exposes `hasAcquisition`, covering engagement, attempt, provisional/transpo
 Valid legacy world schema 1 receives an empty bounded `travelNodes` map before Ready. It never infers discovery from purchases, mastery, collection or previous global discovery. At most five registered facts carry operation/revision/approved content epoch; malformed, unbound or unsupported state stays protected. Actual server-observed alive/access-valid node presence commits through WorldActionUseCase and the existing P2 writer/queue. Unknown results retain/reconcile the same candidate after departure. Discovery grants no objective/mastery/Energy. Owner readback adds five sorted node IDs and public generation hint to the existing bounded world event; private proofs remain server-only.
 
 [Evidence](../implementation/IMP10_TRAVEL_RECOVERY_EVIDENCE.md): 187 fast tests, ten native C0 checks, actual authored routes/all masteries, missing/corrupt/unsafe arrival, invalid clock/presence, native R6/R15, provisional recovery without extraction, true engine streaming, real client duplicate/race/tampering, DEV discovery cut points and fresh Play/respawn with exact history/wallet/three purchase retries. Normal bootstrap and final Edit parity/assets are retained. **IMP-10 OPEN; hazards/locked-presence correction and transport fairness are next. No hazards or rewards start here. VS1-19 / AD-249 full 30-player L1 and supported real-client performance remain mandatory before COMPLETE.**
+
+
+---
+
+## AD-260 — Reclassify VS1-19 as a Scale Readiness Gate
+
+**Date:** 2026-10-05
+
+**Status:** Accepted — explicitly authorized by the project owner
+
+**Owning TA phase:** TA-17; affects TA-14/15 validation scheduling only
+
+**Supersedes:** AD-249's requirement that VS1-19 pass before IMP-10 COMPLETE
+
+### Context
+
+AD-249 correctly preserved the full TA-14/TA-15 performance evidence rather than fabricating a PASS, but it attached the unavailable 30-player L1 / supported real-client frame-memory run to IMP-10's functional completion. The current development environment is a single developer workstation and cannot produce representative 30-client evidence. Holding functional world development or IMP-11 behind an unavailable production-scale environment creates schedule pressure without improving runtime correctness.
+
+The project still requires continuous development-time performance discipline: bounded schedulers/pulses, no accidental per-entity/per-frame fan-out, streaming-safe behavior, static/build/security checks, focused MicroProfiler or equivalent profiling when useful, memory/network sanity checks, and small multi-client Studio validation within the available environment.
+
+### Decision
+
+VS1-19 remains **DEFERRED — environment limitation** and is still not PASS.
+
+However, it is reclassified from an IMP-10 completion blocker to a **Scale Readiness Gate**.
+
+IMP-10 may become **FUNCTIONALLY COMPLETE / COMPLETE for roadmap advancement** and IMP-11 may open when all phase-owned functional, correctness, security-sanity and locally executable performance gates are satisfied, even while VS1-19 remains deferred.
+
+The deferred scale validation becomes mandatory before MonsterVault intentionally operates above the currently validated concurrency envelope or before a production rollout explicitly depends on comparable high-population server density. The trigger is operational, not speculative: execute the full controlled TA-14/TA-15 L0/L1 and supported real-client frame/memory evidence when higher concurrency is being considered, observed, or required by launch/growth planning.
+
+The historical L1 definition remains **ceil(0.5 × configured MaxPlayers)**. At MaxPlayers=60 that is 30 players. MaxPlayers itself may be tuned downward for launch/soft launch when evidence supports a smaller validated server population; lowering it is no longer treated as evading an IMP-10 gate. Any later increase must respect the validated operating envelope and re-run applicable scale evidence.
+
+Solo Studio, fake players and short synthetic probes still do not count as VS1-19 PASS. They may contribute development diagnostics only.
+
+### Development / soft-launch policy
+
+Before scale-readiness evidence exists:
+
+- keep local regression, fault, streaming and security gates binding;
+- test a small practical number of Studio clients when useful and feasible;
+- profile expensive paths when changes materially affect world/runtime cost;
+- keep scheduler, persistence, networking and memory work bounded by design;
+- launch/soft-launch only inside a conservatively validated server-population envelope;
+- use real production/soft-launch telemetry to decide when heavier load validation is justified.
+
+### Consequence
+
+AD-249 remains a historical record of the original deferral, but its deadline is superseded. VS1-19 cannot be reported as PASS until the real required evidence exists, yet it no longer prevents functional roadmap advancement from IMP-10 to IMP-11.
+
+Full TA-14/TA-15 release hardening remains mandatory at the appropriate release/scale stage. This decision changes validation timing only; it does not relax gameplay authority, exact-once durability, security boundaries, supported-device correctness, or performance guardrails themselves.
