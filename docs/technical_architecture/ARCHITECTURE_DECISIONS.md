@@ -3759,3 +3759,43 @@ Before scale-readiness evidence exists:
 AD-249 remains a historical record of the original deferral, but its deadline is superseded. VS1-19 cannot be reported as PASS until the real required evidence exists, yet it no longer prevents functional roadmap advancement from IMP-10 to IMP-11.
 
 Full TA-14/TA-15 release hardening remains mandatory at the appropriate release/scale stage. This decision changes validation timing only; it does not relax gameplay authority, exact-once durability, security boundaries, supported-device correctness, or performance guardrails themselves.
+
+
+---
+
+## AD-261 — Authorize Bounded Paid Offline Convenience
+
+**Date:** 2026-10-05
+
+**Status:** Accepted — explicitly authorized by the project owner
+
+**Owning phases:** GDS-7 / GDS-13 / GDS-16 change control; implementation owner IMP-13 / TA-11 commerce integration
+
+### Decision
+
+MonsterVault authorizes two bounded offline-production monetization products:
+
+1. a durable **Offline Window Extension** that adds a fixed bounded duration to the player's otherwise-valid earned Offline Production Window; and
+2. a repeatable **2× Return Overcharge** that grants one deterministic commercial Energy bonus equal to the server-authored eligible offline-return amount for one return interval, subject to a hard absolute bonus cap.
+
+The Return Overcharge is not a persistent production-rate multiplier. It cannot change production cursor time, assignments, slots, buffer capacity, world state, mastery, discovery, capture outcomes or event credit. The ordinary base offline reward remains available without purchase.
+
+A 3× return product is not baseline-authorized.
+
+### Authority and implementation routing
+
+GDS-7 remains authoritative for ordinary/offline production and elapsed-time settlement. GDS-13 owns commercial eligibility/value constraints. GDS-16 owns non-coercive Return Brief presentation.
+
+TA-11 / IMP-13 must reuse verified MarketplaceService receipt/entitlement processing and exact-once commercial finalization. TA-8 Energy/ProfileSession remains the gameplay-value owner. Client fields cannot choose elapsed time, eligible amount, multiplier, bonus cap or durable entitlement state.
+
+The permanent extension is a durable entitlement/pass-style product. The Return Overcharge is a repeatable developer-product-style purchase tied to one immutable server-authored return identity. Receipt retries, reconnect, server hopping and lost responses reconcile the same commercial outcome exactly once.
+
+### Fairness / economy consequences
+
+The free/earned offline-production path remains viable. Paid convenience cannot become required mainline progression, cannot erase earned upgrades, cannot create debt and cannot make absence the dominant progression strategy.
+
+Exact prices, hour delta and Energy bonus cap remain tuneable downstream values. Launch references are currently +4 hours for the permanent extension and 29–49 Robux for the capped 2× Return Overcharge; these are tuning guidance, not locked semantic constants.
+
+### Change control
+
+Any persistent 2×/3× production-rate entitlement, 3× Return Overcharge, paid Production Slot/Buffer increase, paid rarity/capture advantage or other stronger acceleration requires a new explicit GDS-13 change-control decision.
