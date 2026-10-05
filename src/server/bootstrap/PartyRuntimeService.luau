@@ -7,6 +7,10 @@ local RouteIds = require(shared.contracts.RouteIds)
 local PartyPolicy = require(shared.config.PartyPolicy)
 local FriendlyChallengeDefinition = require(shared.config.FriendlyChallengeDefinition)
 local PartyService = require(script.Parent.Parent.domains.social.PartyService)
+local ShowcaseService = require(script.Parent.Parent.domains.social.ShowcaseService)
+local ShowcaseProjection = require(script.Parent.Parent.application.ShowcaseProjection)
+local ShowcaseProjectionV1 = require(shared.contracts.ShowcaseProjectionV1)
+local ShowcasePolicy = require(shared.config.ShowcasePolicy)
 
 local PartyRuntimeService = {}
 
@@ -20,6 +24,7 @@ function PartyRuntimeService.new(options: {
 	worldRuntime: any?,
 	captureRuntime: any?,
 	presentationSeconds: (() -> number)?,
+	production: any?,
 })
 	local clock = options.monotonicSeconds or os.clock
 	local scheduler = options.scheduler or (getfenv() :: any).task
@@ -29,6 +34,7 @@ function PartyRuntimeService.new(options: {
 	local timer: any = nil
 	local scheduledAt: number? = nil
 	local connections = {}
+	local unsubscribe: any = nil
 	local owner = PartyService.new({
 		policy = PartyPolicy,
 		pingContract = PartyProjectionV1,
@@ -77,6 +83,68 @@ function PartyRuntimeService.new(options: {
 				else nil
 		end,
 	})
+	local showcase = ShowcaseService.new({
+		policy = ShowcasePolicy,
+		contract = ShowcaseProjectionV1,
+		wire = WireValidation,
+		monotonicSeconds = clock,
+		presentationSeconds = options.presentationSeconds or function()
+			return game:GetService("Workspace"):GetServerTimeNow()
+		end,
+		newId = function()
+			return options.httpService:GenerateGUID(false)
+		end,
+		context = function(userId: number): any
+			local player = options.players:GetPlayerByUserId(userId)
+			local session = options.profileCoordinator.get(userId)
+			return if player and session
+				then { player = player, session = session, ready = session.state() == "Ready" }
+				else nil
+		end,
+		eligible = function(first: any, second: any, audience: string): boolean
+			return owner.invitesAllowed(second, options.profileCoordinator.get(second.UserId))
+				and (
+					audience == "SameServer"
+					or (
+						audience == "Party"
+						and owner.sameParty(
+							first,
+							options.profileCoordinator.get(first.UserId),
+							second,
+							options.profileCoordinator.get(second.UserId)
+						)
+					)
+				)
+		end,
+		presentation = function(player: any, session: any): any
+			return if options.production
+				then ShowcaseProjection.fromProfile(
+					session.snapshot(),
+					player.UserId,
+					options.production
+				)
+				else { creatures = {}, hasMore = false }
+		end,
+	})
+	local function publishShowcase(player: any, requestId: string?): boolean
+		if not running or options.players:GetPlayerByUserId(player.UserId) ~= player then
+			return false
+		end
+		for _, payload in { showcase.snapshot(player), showcase.viewSnapshot(player) } do
+			assert(
+				ShowcaseProjectionV1.validSnapshot(payload) and WireValidation.payload(payload),
+				"invalid bounded Showcase projection"
+			)
+			options.event:FireClient(player, {
+				protocolVersion = 1,
+				routeId = RouteIds.events.socialStateChanged,
+				correlationId = requestId,
+				revision = payload.revision,
+				payload = payload,
+			})
+		end
+		return true
+	end
 	local function publish(player: any, requestId: string?): boolean
 		if not running or options.players:GetPlayerByUserId(player.UserId) ~= player then
 			return false
@@ -103,8 +171,18 @@ function PartyRuntimeService.new(options: {
 		-- member. Drain that finite change set, never poll the player population.
 		for _ = 1, PartyPolicy.maxLiveUsers + 1 do
 			local changed = owner.takeChanges()
-			if #changed == 0 then
+			for _, userId in changed do
+				showcase.refreshAudience(userId)
+			end
+			local showcaseChanges = showcase.takeChanges()
+			if #changed == 0 and #showcaseChanges == 0 then
 				return
+			end
+			for _, userId in showcaseChanges do
+				local player = options.players:GetPlayerByUserId(userId)
+				if player then
+					publishShowcase(player, nil)
+				end
 			end
 			for _, userId in changed do
 				local player = options.players:GetPlayerByUserId(userId)
@@ -118,6 +196,10 @@ function PartyRuntimeService.new(options: {
 	local arm: () -> ()
 	arm = function()
 		local deadline = if running then owner.nextDeadline() else nil
+		local showcaseDeadline = if running then showcase.nextDeadline() else nil
+		if showcaseDeadline then
+			deadline = math.min(deadline or math.huge, showcaseDeadline)
+		end
 		if deadline == scheduledAt then
 			return
 		end
@@ -137,11 +219,17 @@ function PartyRuntimeService.new(options: {
 			timer, scheduledAt = nil, nil
 			ticket += 1 -- consume this callback before any projection/lifecycle work.
 			owner.expire()
+			showcase.expire()
 			flush()
 			arm()
 		end)
 	end
 	local schemas = {
+		[RouteIds.commands.socialShowcaseSetPolicy] = ShowcaseProjectionV1.validPolicy,
+		[RouteIds.commands.socialShowcaseGrant] = ShowcaseProjectionV1.validGrant,
+		[RouteIds.commands.socialShowcaseRevoke] = ShowcaseProjectionV1.validRevoke,
+		[RouteIds.commands.socialShowcaseOpen] = ShowcaseProjectionV1.validOpen,
+		[RouteIds.commands.socialShowcaseClose] = ShowcaseProjectionV1.validClose,
 		[RouteIds.commands.socialPartyCreate] = PartyProjectionV1.validCreate,
 		[RouteIds.commands.socialPartyInvite] = PartyProjectionV1.validInvite,
 		[RouteIds.commands.socialPartyRespond] = PartyProjectionV1.validRespond,
@@ -157,6 +245,41 @@ function PartyRuntimeService.new(options: {
 		[RouteIds.commands.settingsUpdatePreferences] = PartyProjectionV1.validPingPreference,
 	}
 	local operations = {
+		[RouteIds.commands.socialShowcaseSetPolicy] = function(
+			player: any,
+			payload: any,
+			expected: any
+		): string
+			return showcase.setPolicy(player, payload.audience, expected)
+		end,
+		[RouteIds.commands.socialShowcaseGrant] = function(
+			player: any,
+			payload: any,
+			expected: any
+		): string
+			return showcase.grant(player, payload.targetUserId, expected)
+		end,
+		[RouteIds.commands.socialShowcaseRevoke] = function(
+			player: any,
+			payload: any,
+			expected: any
+		): string
+			return showcase.revoke(player, payload.grantId, expected)
+		end,
+		[RouteIds.commands.socialShowcaseOpen] = function(
+			player: any,
+			payload: any,
+			_expected: any
+		): string
+			return showcase.open(player, payload.ownerUserId, payload.grantId)
+		end,
+		[RouteIds.commands.socialShowcaseClose] = function(
+			player: any,
+			payload: any,
+			_expected: any
+		): string
+			return showcase.close(player, payload.grantId)
+		end,
 		[RouteIds.commands.socialChallengeRequest] = function(
 			player: any,
 			payload: any,
@@ -268,6 +391,22 @@ function PartyRuntimeService.new(options: {
 	local function start()
 		assert(not running and generation == 0, "Party runtime already started")
 		running, generation = true, generation + 1
+		if options.profileCoordinator.subscribe then
+			unsubscribe = options.profileCoordinator.subscribe(
+				function(userId: number, session: any)
+					if not running then
+						return
+					end
+					if options.profileCoordinator.get(userId) ~= session then
+						return
+					end
+					owner.observe(userId)
+					showcase.profileChanged(userId, session)
+					flush()
+					arm()
+				end
+			)
+		end
 		if options.worldRuntime and options.worldRuntime.bindChallengeLifecycle then
 			options.worldRuntime.bindChallengeLifecycle({
 				begin = function(player: any, context: any, target: any, recovery: boolean): any
@@ -297,6 +436,7 @@ function PartyRuntimeService.new(options: {
 			connections,
 			options.players.PlayerAdded:Connect(function(player)
 				owner.observe(player.UserId) -- a replacement Player invalidates the old identity.
+				showcase.observe(player.UserId)
 				flush()
 				arm()
 			end)
@@ -307,6 +447,7 @@ function PartyRuntimeService.new(options: {
 				-- Match TA-7's conservative treatment of ambiguous native Unknown.
 				local session = owner.sessionFor(player)
 				owner.disconnect(player, session, reason == nil or reason.Name == "Unknown")
+				showcase.disconnect(player, showcase.sessionFor(player))
 				flush()
 				arm()
 			end)
@@ -314,6 +455,10 @@ function PartyRuntimeService.new(options: {
 	end
 	local function stop(): { string }
 		running, generation, ticket = false, generation + 1, ticket + 1
+		if unsubscribe then
+			unsubscribe()
+			unsubscribe = nil
+		end
 		if options.worldRuntime and options.worldRuntime.bindChallengeLifecycle then
 			options.worldRuntime.bindChallengeLifecycle(nil)
 		end
@@ -329,6 +474,7 @@ function PartyRuntimeService.new(options: {
 		end
 		table.clear(connections)
 		owner.stop()
+		showcase.stop()
 		return {}
 	end
 	return {
@@ -346,6 +492,13 @@ function PartyRuntimeService.new(options: {
 			arm()
 			return if sent then "OK_PARTY_SNAPSHOT" else "REJECT_STATE_PARTY_SESSION"
 		end,
+		showcaseResync = function(player: any, requestId: string): string
+			local sent = publishShowcase(player, requestId)
+			flush()
+			arm()
+			return if sent then "OK_SHOWCASE_SNAPSHOT" else "REJECT_STATE_SHOWCASE_SESSION"
+		end,
+		showcase = showcase,
 		owner = owner,
 	}
 end

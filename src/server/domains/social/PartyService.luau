@@ -1090,6 +1090,36 @@ function PartyService.new(options: {
 		beginChallengeTravel = beginChallengeTravel,
 		completeChallengeTravel = completeChallengeTravel,
 		interruptChallenge = interruptChallenge,
+		invitesAllowed = function(player: any, session: any): boolean
+			local identity = live[player.UserId]
+			return identity ~= nil
+				and identity.player == player
+				and identity.session == session
+				and identity.ready
+				and identity.allowInvites
+		end,
+		sameParty = function(
+			first: any,
+			firstSession: any,
+			second: any,
+			secondSession: any
+		): boolean
+			local a, b = live[first.UserId], live[second.UserId]
+			local partyId = membership[first.UserId]
+			local party = parties[partyId]
+			return a ~= nil
+				and b ~= nil
+				and a.player == first
+				and b.player == second
+				and a.session == firstSession
+				and b.session == secondSession
+				and a.ready
+				and b.ready
+				and party ~= nil
+				and membership[second.UserId] == partyId
+				and party.members[first.UserId].player == first
+				and party.members[second.UserId].player == second
+		end,
 		disconnect = disconnect,
 		sessionFor = function(player: any): any
 			local identity = live[player.UserId]

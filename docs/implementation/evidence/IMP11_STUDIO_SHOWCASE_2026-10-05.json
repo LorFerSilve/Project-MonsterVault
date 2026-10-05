@@ -1,0 +1,558 @@
+{
+  "date": "2026-10-05",
+  "baseMain": "da6e49b01cf0a5c788146ced4fdecd2647e80357",
+  "branch": "codex/imp11-showcase",
+  "phase": "IMP-11 OPEN; representative TA-10 §12 Showcase/Visitor dependency complete",
+  "architectureDecision": "AD-268",
+  "counts": {
+    "fast": 326,
+    "focusedShowcase": 32,
+    "focusedNative": {
+      "passed": 29,
+      "total": 29,
+      "deduplicatedBy": "case name across scoped runs"
+    },
+    "python": 28,
+    "sourceParity": 97
+  },
+  "nativeChecks": [
+    {
+      "name": "actualPlayerRemovingClearsVisitorAuthority",
+      "status": "PASS"
+    },
+    {
+      "name": "actualProfileSessionReplacementRevokesVisitor",
+      "status": "PASS"
+    },
+    {
+      "name": "nativeClientDisposalRemovesUI",
+      "status": "PASS"
+    },
+    {
+      "name": "nativeClientExpiryAndDisposal",
+      "status": "PASS"
+    },
+    {
+      "name": "nativeCollapsedNoFocusChange",
+      "status": "PASS"
+    },
+    {
+      "name": "nativeExplicitOpenReadOnlyCard",
+      "status": "PASS"
+    },
+    {
+      "name": "nativeForgedOwnerAndPrivateFieldsRejected",
+      "status": "PASS"
+    },
+    {
+      "name": "nativeGrantExpiryClearsAllAuthority",
+      "status": "PASS"
+    },
+    {
+      "name": "nativeIntrinsicAndCosmeticSeparation",
+      "status": "PASS"
+    },
+    {
+      "name": "nativePermissionReadback",
+      "status": "PASS"
+    },
+    {
+      "name": "nativeRevokedViewAndUI",
+      "status": "PASS"
+    },
+    {
+      "name": "nativeVisibleReadOnlyOwnerAndReturn",
+      "status": "PASS"
+    },
+    {
+      "name": "nativeVisitorCannotAssignOwnerCreature",
+      "status": "PASS"
+    },
+    {
+      "name": "noOwnershipEnergyDiscoveryOrAssignmentMutation",
+      "status": "PASS"
+    },
+    {
+      "name": "noPrivateOrCommercialFields",
+      "status": "PASS"
+    },
+    {
+      "name": "ownerRevokeImmediatelyClearsNativeView",
+      "status": "PASS"
+    },
+    {
+      "name": "ownerSessionReplacementRevokesPermission",
+      "status": "PASS"
+    },
+    {
+      "name": "ownerTargetedGrantDoesNotOpenVisitor",
+      "status": "PASS"
+    },
+    {
+      "name": "permissionAndViewDoNotWriteProfiles",
+      "status": "PASS"
+    },
+    {
+      "name": "privateReplayFenceRejectsReplacementSuccess",
+      "status": "PASS"
+    },
+    {
+      "name": "realPlayerExactReadOnlyProjection",
+      "status": "PASS"
+    },
+    {
+      "name": "realProfileObserverRefreshesBothVisitors",
+      "status": "PASS"
+    },
+    {
+      "name": "replacementDoesNotInheritAudience",
+      "status": "PASS"
+    },
+    {
+      "name": "shutdownAndLateCallbacksLeaveZeroAuthority",
+      "status": "PASS"
+    },
+    {
+      "name": "singleSharedDeadlineOwner",
+      "status": "PASS"
+    },
+    {
+      "name": "staleProfileCallbackCannotRestoreVisit",
+      "status": "PASS"
+    },
+    {
+      "name": "staleTimerCannotRestoreRevokedAuthority",
+      "status": "PASS"
+    },
+    {
+      "name": "thirdVisitorBoundRejected",
+      "status": "PASS"
+    },
+    {
+      "name": "twoVisitorsShareApprovedExactInstance",
+      "status": "PASS"
+    }
+  ],
+  "engineScope": {
+    "actualPlayers": 1,
+    "actualClients": 1,
+    "adapterPeers": 3,
+    "profileSessions": "Actual ProfileSession/SessionCoordinator with isolated in-memory fixture storage",
+    "physicalMultiplayer": false,
+    "physicalReconnect": false
+  },
+  "cleanup": {
+    "liveUsers": 0,
+    "visits": 0,
+    "grants": 0,
+    "peakTimers": 1
+  },
+  "studio": {
+    "finalMode": "Edit",
+    "parity": {
+      "total": 97,
+      "mismatches": [],
+      "matched": 97
+    },
+    "authoredScripts": 97,
+    "parts": 64,
+    "partsPreserved": true,
+    "lightingPreserved": true,
+    "httpEnabled": false,
+    "serverBootEnabled": true,
+    "clientBootEnabled": true,
+    "probesRemaining": false,
+    "normalClient": {
+      "labels": [
+        "Showcase / Visitors (read-only)",
+        "Showcase closed / None"
+      ],
+      "focus": false,
+      "collapsed": true,
+      "actualUserId": 1925180832
+    },
+    "bootLogs": [
+      {
+        "fields": {
+          "component": "world"
+        },
+        "version": 1,
+        "environment": "server",
+        "severity": "info",
+        "code": "WORLD_SPAWNED",
+        "atUnixSeconds": 1791225891,
+        "sequence": 1
+      },
+      {
+        "fields": {
+          "component": "server"
+        },
+        "version": 1,
+        "environment": "server",
+        "severity": "info",
+        "code": "BOOTSTRAP_READY",
+        "atUnixSeconds": 1791225891,
+        "sequence": 2
+      },
+      {
+        "fields": {
+          "component": "client"
+        },
+        "version": 1,
+        "environment": "client",
+        "severity": "info",
+        "code": "BOOTSTRAP_READY",
+        "atUnixSeconds": 1791225891,
+        "sequence": 1
+      },
+      {
+        "fields": {
+          "component": "profiles",
+          "detailCode": "CleanOffline"
+        },
+        "version": 1,
+        "environment": "server",
+        "severity": "info",
+        "code": "PRODUCTION_LOAD_SETTLED",
+        "atUnixSeconds": 1791225893,
+        "sequence": 3
+      }
+    ]
+  },
+  "evidenceStages": {
+    "nativeSetup": {
+      "peakTimers": 1,
+      "counts": {
+        "liveUsers": 4,
+        "visits": 0,
+        "grants": 1
+      },
+      "actualClients": 1,
+      "cases": {
+        "1": "ownerTargetedGrantDoesNotOpenVisitor"
+      },
+      "adapterPeers": 3
+    },
+    "nativeClientSetup": {
+      "actualClients": 1,
+      "cases": {
+        "1": "nativePermissionReadback",
+        "2": "nativeCollapsedNoFocusChange"
+      }
+    },
+    "nativeClientOpen": {
+      "state": {
+        "ownerDisplayName": "Showcase peer",
+        "grantId": "48c1a8ee-eb99-4c94-bf97-074d538dbf44",
+        "hasMore": true,
+        "ownerUserId": 700000010,
+        "creatures": {
+          "1": {
+            "creatureInstanceId": "showcase-700000010-1",
+            "speciesId": "species/fixture-orb",
+            "speciesRarityId": "rarity/legendary",
+            "traitIds": {
+              "1": "trait/calm"
+            },
+            "displaySlotId": "display/1",
+            "mutationIds": {
+              "1": "mutation/neon"
+            }
+          }
+        },
+        "mode": "ReadOnly",
+        "expiresAt": 1791225515.7834
+      },
+      "cases": {
+        "1": "nativePermissionReadback",
+        "2": "nativeCollapsedNoFocusChange",
+        "3": "nativeExplicitOpenReadOnlyCard",
+        "4": "nativeIntrinsicAndCosmeticSeparation",
+        "5": "nativeVisibleReadOnlyOwnerAndReturn"
+      }
+    },
+    "nativeReadback": {
+      "peakTimers": 1,
+      "counts": {
+        "liveUsers": 4,
+        "visits": 1,
+        "grants": 1
+      },
+      "actualClients": 1,
+      "cases": {
+        "1": "ownerTargetedGrantDoesNotOpenVisitor",
+        "2": "realPlayerExactReadOnlyProjection",
+        "3": "noPrivateOrCommercialFields",
+        "4": "permissionAndViewDoNotWriteProfiles",
+        "5": "noOwnershipEnergyDiscoveryOrAssignmentMutation"
+      },
+      "adapterPeers": 3
+    },
+    "nativeClientHostile": {
+      "cases": {
+        "1": "nativePermissionReadback",
+        "2": "nativeCollapsedNoFocusChange",
+        "3": "nativeExplicitOpenReadOnlyCard",
+        "4": "nativeIntrinsicAndCosmeticSeparation",
+        "5": "nativeVisibleReadOnlyOwnerAndReturn",
+        "6": "nativeForgedOwnerAndPrivateFieldsRejected",
+        "7": "nativeVisitorCannotAssignOwnerCreature"
+      }
+    },
+    "nativeRevoke": {
+      "peakTimers": 1,
+      "counts": {
+        "liveUsers": 4,
+        "visits": 0,
+        "grants": 0
+      },
+      "actualClients": 1,
+      "cases": {
+        "1": "ownerTargetedGrantDoesNotOpenVisitor",
+        "2": "realPlayerExactReadOnlyProjection",
+        "3": "noPrivateOrCommercialFields",
+        "4": "permissionAndViewDoNotWriteProfiles",
+        "5": "noOwnershipEnergyDiscoveryOrAssignmentMutation",
+        "6": "ownerRevokeImmediatelyClearsNativeView"
+      },
+      "adapterPeers": 3
+    },
+    "nativeClientRevoked": {
+      "cases": {
+        "1": "nativePermissionReadback",
+        "2": "nativeCollapsedNoFocusChange",
+        "3": "nativeExplicitOpenReadOnlyCard",
+        "4": "nativeIntrinsicAndCosmeticSeparation",
+        "5": "nativeVisibleReadOnlyOwnerAndReturn",
+        "6": "nativeForgedOwnerAndPrivateFieldsRejected",
+        "7": "nativeVisitorCannotAssignOwnerCreature",
+        "8": "nativeRevokedViewAndUI"
+      }
+    },
+    "nativeBounds": {
+      "peakTimers": 1,
+      "counts": {
+        "liveUsers": 4,
+        "visits": 0,
+        "grants": 0
+      },
+      "actualClients": 1,
+      "cases": {
+        "1": "ownerTargetedGrantDoesNotOpenVisitor",
+        "2": "realPlayerExactReadOnlyProjection",
+        "3": "noPrivateOrCommercialFields",
+        "4": "permissionAndViewDoNotWriteProfiles",
+        "5": "noOwnershipEnergyDiscoveryOrAssignmentMutation",
+        "6": "ownerRevokeImmediatelyClearsNativeView",
+        "7": "twoVisitorsShareApprovedExactInstance",
+        "8": "thirdVisitorBoundRejected",
+        "9": "realProfileObserverRefreshesBothVisitors",
+        "10": "staleTimerCannotRestoreRevokedAuthority"
+      },
+      "adapterPeers": 3
+    },
+    "nativeReplacement": {
+      "peakTimers": 1,
+      "counts": {
+        "liveUsers": 4,
+        "visits": 0,
+        "grants": 0
+      },
+      "actualClients": 1,
+      "cases": {
+        "1": "ownerTargetedGrantDoesNotOpenVisitor",
+        "2": "realPlayerExactReadOnlyProjection",
+        "3": "noPrivateOrCommercialFields",
+        "4": "permissionAndViewDoNotWriteProfiles",
+        "5": "noOwnershipEnergyDiscoveryOrAssignmentMutation",
+        "6": "ownerRevokeImmediatelyClearsNativeView",
+        "7": "twoVisitorsShareApprovedExactInstance",
+        "8": "thirdVisitorBoundRejected",
+        "9": "realProfileObserverRefreshesBothVisitors",
+        "10": "staleTimerCannotRestoreRevokedAuthority",
+        "11": "actualProfileSessionReplacementRevokesVisitor",
+        "12": "staleProfileCallbackCannotRestoreVisit",
+        "13": "replacementDoesNotInheritAudience",
+        "14": "ownerSessionReplacementRevokesPermission",
+        "15": "privateReplayFenceRejectsReplacementSuccess"
+      },
+      "adapterPeers": 3
+    },
+    "nativeTimerStart": {
+      "peakTimers": 1,
+      "cases": {
+        "1": "ownerTargetedGrantDoesNotOpenVisitor",
+        "2": "realPlayerExactReadOnlyProjection",
+        "3": "noPrivateOrCommercialFields",
+        "4": "permissionAndViewDoNotWriteProfiles",
+        "5": "noOwnershipEnergyDiscoveryOrAssignmentMutation",
+        "6": "ownerRevokeImmediatelyClearsNativeView",
+        "7": "twoVisitorsShareApprovedExactInstance",
+        "8": "thirdVisitorBoundRejected",
+        "9": "realProfileObserverRefreshesBothVisitors",
+        "10": "staleTimerCannotRestoreRevokedAuthority",
+        "11": "actualProfileSessionReplacementRevokesVisitor",
+        "12": "staleProfileCallbackCannotRestoreVisit",
+        "13": "replacementDoesNotInheritAudience",
+        "14": "ownerSessionReplacementRevokesPermission",
+        "15": "privateReplayFenceRejectsReplacementSuccess"
+      },
+      "grant": {
+        "id": "99d0ab84-631a-49c0-84eb-22a4df2cfbf7",
+        "userId": 700000010,
+        "expiresAt": 1791225552.735879
+      }
+    },
+    "nativeTimerOpen": {
+      "state": {
+        "ownerDisplayName": "Showcase peer",
+        "grantId": "99d0ab84-631a-49c0-84eb-22a4df2cfbf7",
+        "hasMore": true,
+        "ownerUserId": 700000010,
+        "creatures": {
+          "1": {
+            "creatureInstanceId": "showcase-700000010-1",
+            "speciesId": "species/fixture-orb",
+            "speciesRarityId": "rarity/legendary",
+            "traitIds": {
+              "1": "trait/calm"
+            },
+            "displaySlotId": "display/1",
+            "mutationIds": {
+              "1": "mutation/neon"
+            }
+          }
+        },
+        "mode": "ReadOnly",
+        "expiresAt": 1791225552.735879
+      },
+      "cases": {
+        "1": "nativePermissionReadback",
+        "2": "nativeCollapsedNoFocusChange",
+        "3": "nativeExplicitOpenReadOnlyCard",
+        "4": "nativeIntrinsicAndCosmeticSeparation",
+        "5": "nativeVisibleReadOnlyOwnerAndReturn",
+        "6": "nativeForgedOwnerAndPrivateFieldsRejected",
+        "7": "nativeVisitorCannotAssignOwnerCreature",
+        "8": "nativeRevokedViewAndUI",
+        "9": "nativeExplicitOpenReadOnlyCard",
+        "10": "nativeIntrinsicAndCosmeticSeparation",
+        "11": "nativeVisibleReadOnlyOwnerAndReturn"
+      }
+    },
+    "nativeTimerFinish": {
+      "peakTimers": 1,
+      "counts": {
+        "liveUsers": 4,
+        "visits": 0,
+        "grants": 0
+      },
+      "actualClients": 1,
+      "cases": {
+        "1": "ownerTargetedGrantDoesNotOpenVisitor",
+        "2": "realPlayerExactReadOnlyProjection",
+        "3": "noPrivateOrCommercialFields",
+        "4": "permissionAndViewDoNotWriteProfiles",
+        "5": "noOwnershipEnergyDiscoveryOrAssignmentMutation",
+        "6": "ownerRevokeImmediatelyClearsNativeView",
+        "7": "twoVisitorsShareApprovedExactInstance",
+        "8": "thirdVisitorBoundRejected",
+        "9": "realProfileObserverRefreshesBothVisitors",
+        "10": "staleTimerCannotRestoreRevokedAuthority",
+        "11": "actualProfileSessionReplacementRevokesVisitor",
+        "12": "staleProfileCallbackCannotRestoreVisit",
+        "13": "replacementDoesNotInheritAudience",
+        "14": "ownerSessionReplacementRevokesPermission",
+        "15": "privateReplayFenceRejectsReplacementSuccess",
+        "16": "nativeGrantExpiryClearsAllAuthority",
+        "17": "singleSharedDeadlineOwner"
+      },
+      "adapterPeers": 3
+    },
+    "nativeClientExpired": {
+      "cases": {
+        "1": "nativePermissionReadback",
+        "2": "nativeCollapsedNoFocusChange",
+        "3": "nativeExplicitOpenReadOnlyCard",
+        "4": "nativeIntrinsicAndCosmeticSeparation",
+        "5": "nativeVisibleReadOnlyOwnerAndReturn",
+        "6": "nativeForgedOwnerAndPrivateFieldsRejected",
+        "7": "nativeVisitorCannotAssignOwnerCreature",
+        "8": "nativeRevokedViewAndUI",
+        "9": "nativeExplicitOpenReadOnlyCard",
+        "10": "nativeIntrinsicAndCosmeticSeparation",
+        "11": "nativeVisibleReadOnlyOwnerAndReturn",
+        "12": "nativeClientExpiryAndDisposal"
+      }
+    },
+    "nativeClientFinal": {
+      "cases": {
+        "1": "nativePermissionReadback",
+        "2": "nativeCollapsedNoFocusChange",
+        "3": "nativeExplicitOpenReadOnlyCard",
+        "4": "nativeIntrinsicAndCosmeticSeparation",
+        "5": "nativeVisibleReadOnlyOwnerAndReturn",
+        "6": "nativeForgedOwnerAndPrivateFieldsRejected",
+        "7": "nativeVisitorCannotAssignOwnerCreature",
+        "8": "nativeRevokedViewAndUI",
+        "9": "nativeExplicitOpenReadOnlyCard",
+        "10": "nativeIntrinsicAndCosmeticSeparation",
+        "11": "nativeVisibleReadOnlyOwnerAndReturn",
+        "12": "nativeClientExpiryAndDisposal",
+        "13": "nativeClientDisposalRemovesUI"
+      },
+      "events": 36
+    },
+    "nativeCleanupFinal": {
+      "peakTimers": 1,
+      "counts": {
+        "liveUsers": 0,
+        "visits": 0,
+        "grants": 0
+      },
+      "actualClients": 1,
+      "cases": {
+        "1": "ownerTargetedGrantDoesNotOpenVisitor",
+        "2": "actualPlayerRemovingClearsVisitorAuthority",
+        "3": "shutdownAndLateCallbacksLeaveZeroAuthority"
+      },
+      "adapterPeers": 3
+    }
+  },
+  "preliminaryProbeFailures": [
+    {
+      "group": "zero-revision fixture",
+      "assertions": 1,
+      "detail": "Existing positive-revision Vault schema rejected the native foreign-assignment probe before ownership validation. Fixture revision set to one; final actual remote ownership and claim-schema negatives passed."
+    },
+    {
+      "group": "early expiry inspection",
+      "assertions": 2,
+      "detail": "Server/client expiry probes ran before the actual 60-second grant deadline. Final later inspection passed real timer expiry and client disposal."
+    },
+    {
+      "group": "early PlayerRemoving inspection",
+      "assertions": 1,
+      "detail": "Initial CreatorKick cleanup read preceded settled native removal. Final bounded wait observed actual PlayerRemoving before all-zero shutdown."
+    },
+    {
+      "group": "cleanup-only harness reruns",
+      "assertions": 6,
+      "detail": "Three cleanup starts encountered the established grant rate bucket, duplicate acknowledgment, or an expired grant. Their following removal checks also failed because kick had not run. Final helper respects cooldown/duplicate semantics; settled native kick and shutdown passed."
+    }
+  ],
+  "limits": [
+    "One real client; three peers are explicit adapters, not physical clients.",
+    "Private session replacement is not physical reconnect.",
+    "Platform friend/restricted/blocked audience integration and broader release gates remain open.",
+    "VS1-19 remains deferred under AD-260.",
+    "Configured Luau analysis lacks local Roblox API definitions; native compilation/runtime supplements it."
+  ],
+  "goldenSlice": {
+    "readyToBegin": true,
+    "productionQualityComplete": false,
+    "releaseReady": false,
+    "remainingImp11EventsBlockStableGoldenSlice": false
+  },
+  "nextImp11Dependency": "TA-10 §8 per-player server-observed Shared Objective contribution -> §9 owning-profile exact-once P2 Collaboration Rewards"
+}

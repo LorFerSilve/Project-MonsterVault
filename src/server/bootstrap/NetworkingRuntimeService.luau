@@ -511,6 +511,7 @@ function NetworkingRuntimeService.new(options: {
 		progressionResync = publishProgression,
 		worldResync = if options.worldRuntime then options.worldRuntime.resync else nil,
 		partyResync = if options.partyRuntime then options.partyRuntime.resync else nil,
+		showcaseResync = if options.partyRuntime then options.partyRuntime.showcaseResync else nil,
 		captureResync = if options.captureRuntime ~= nil
 			then options.captureRuntime.resync
 			else nil,

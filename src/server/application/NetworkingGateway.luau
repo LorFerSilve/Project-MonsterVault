@@ -22,6 +22,7 @@ function NetworkingGateway.new(options: {
 	progressionResync: ((any, string, string?) -> string)?,
 	worldResync: ((any, string) -> string)?,
 	partyResync: ((any, string) -> string)?,
+	showcaseResync: ((any, string) -> string)?,
 })
 	local function event(
 		player: any,
@@ -111,6 +112,9 @@ function NetworkingGateway.new(options: {
 		if code == "OK_SESSION_READY" and options.partyResync then
 			options.partyResync(player, requestId)
 		end
+		if code == "OK_SESSION_READY" and options.showcaseResync then
+			options.showcaseResync(player, requestId)
+		end
 		return code
 	end
 
@@ -123,6 +127,11 @@ function NetworkingGateway.new(options: {
 	options.registry.bind(
 		options.routes.commands.sessionRequestResync,
 		function(player: any, envelope: any)
+			if envelope.payload.domain == "showcase" then
+				return if options.showcaseResync
+					then options.showcaseResync(player, envelope.requestId)
+					else "UNAVAILABLE_SHOWCASE"
+			end
 			if envelope.payload.domain == "party" then
 				return if options.partyResync
 					then options.partyResync(player, envelope.requestId)

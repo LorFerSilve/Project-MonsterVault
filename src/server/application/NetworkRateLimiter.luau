@@ -13,6 +13,8 @@ local CLASSES = table.freeze({
 local ROUTES = table.freeze({
 	["Social.Ping"] = { capacity = 1, refill = 1 / 3 },
 	["Social.ChallengeRequest"] = { capacity = 1, refill = 1 / 3 },
+	["Social.ShowcaseGrant"] = { capacity = 1, refill = 1 / 3 },
+	["Social.ShowcaseOpen"] = { capacity = 1, refill = 1 / 3 },
 })
 
 function NetworkRateLimiter.new(monotonicSeconds: () -> number)

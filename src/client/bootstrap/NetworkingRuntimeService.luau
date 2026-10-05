@@ -14,6 +14,8 @@ local SecuredCollectionProjectionV1 = require(shared.SecuredCollectionProjection
 local ProjectionStore = require(script.Parent.Parent.store.ProjectionStore)
 local PartyProjectionV1 = require(shared.PartyProjectionV1)
 local PartyProjectionStore = require(script.Parent.Parent.store.PartyProjectionStore)
+local ShowcaseProjectionV1 = require(shared.ShowcaseProjectionV1)
+local ShowcaseProjectionStore = require(script.Parent.Parent.store.ShowcaseProjectionStore)
 local SecuredCollectionStore = require(script.Parent.Parent.store.SecuredCollectionStore)
 local ClientGateway = require(script.Parent.Parent.networking.ClientGateway)
 
@@ -26,6 +28,13 @@ function NetworkingRuntimeService.new(options: {
 	diagnostics: any,
 })
 	local store = ProjectionStore.new(ProjectionV1, WireValidation)
+	local showcaseStore = ShowcaseProjectionStore.new(
+		ShowcaseProjectionV1,
+		WireValidation,
+		function()
+			return game:GetService("Workspace"):GetServerTimeNow()
+		end
+	)
 	local partyStore = PartyProjectionStore.new(PartyProjectionV1, WireValidation, function()
 		return game:GetService("Workspace"):GetServerTimeNow()
 	end)
@@ -39,6 +48,8 @@ function NetworkingRuntimeService.new(options: {
 		store = store,
 		partyProjection = PartyProjectionV1,
 		partyStore = partyStore,
+		showcaseStore = showcaseStore,
+		showcaseProjection = ShowcaseProjectionV1,
 		captureProjection = CaptureProjectionV1,
 		vaultProjection = VaultProjectionV1,
 		assignmentProjection = VaultAssignmentProjectionV1,
@@ -57,6 +68,7 @@ function NetworkingRuntimeService.new(options: {
 	local assignmentListener: ((any) -> ())? = nil
 	local progressionListener: ((any) -> ())? = nil
 	local partyListener: ((any) -> ())? = nil
+	local showcaseListener: ((any) -> ())? = nil
 
 	local function start()
 		assert(not running, "networking already started")
@@ -68,6 +80,17 @@ function NetworkingRuntimeService.new(options: {
 			connections,
 			options.event.OnClientEvent:Connect(function(envelope)
 				local ok, outcome = pcall(gateway.handleEvent, envelope)
+				if ok and outcome == "Showcase" and showcaseListener then
+					showcaseListener(envelope)
+				end
+				if
+					ok
+					and outcome == "Applied"
+					and store.view().status ~= "Ready"
+					and showcaseListener
+				then
+					showcaseListener(envelope)
+				end
 				if ok and outcome == "Party" and partyListener ~= nil then
 					partyListener(envelope)
 				end
@@ -147,6 +170,7 @@ function NetworkingRuntimeService.new(options: {
 		assignmentListener = nil
 		progressionListener = nil
 		partyListener = nil
+		showcaseListener = nil
 		return {}
 	end
 
@@ -158,7 +182,17 @@ function NetworkingRuntimeService.new(options: {
 		gateway = gateway,
 		store = store,
 		partyStore = partyStore,
+		showcaseStore = showcaseStore,
 		securedCollectionStore = securedCollectionStore,
+		subscribeShowcase = function(listener: (any) -> ())
+			assert(showcaseListener == nil, "Showcase listener already bound")
+			showcaseListener = listener
+			return function()
+				if showcaseListener == listener then
+					showcaseListener = nil
+				end
+			end
+		end,
 		subscribeParty = function(listener: (any) -> ())
 			assert(partyListener == nil, "Party listener already bound")
 			partyListener = listener

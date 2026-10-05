@@ -12,6 +12,22 @@ function SessionCoordinator.new(options: {
 	waitSeconds: (number) -> (),
 })
 	local sessions: { [number]: any } = {}
+	local subscriptions: { [number]: any } = {}
+	local observer: ((number, any) -> ())? = nil
+	local function notify(userId: number, session: any)
+		if observer and sessions[userId] == session then
+			pcall(observer, userId, session)
+		end
+	end
+	local function forget(userId: number, session: any)
+		if sessions[userId] ~= session then
+			return
+		end
+		if subscriptions[userId] then
+			subscriptions[userId]()
+		end
+		subscriptions[userId], sessions[userId] = nil, nil
+	end
 	local dueAt: { [number]: number } = {}
 	local pendingClose: { [number]: boolean } = {}
 	local reopening: { [number]: boolean } = {}
@@ -54,6 +70,11 @@ function SessionCoordinator.new(options: {
 		end
 		local session = options.createSession(userId)
 		sessions[userId] = session
+		if session.subscribe then
+			subscriptions[userId] = session.subscribe(function()
+				notify(userId, session)
+			end)
+		end
 		local outcome = session.acquire()
 		if outcome.status == "Ready" then
 			if pendingClose[userId] or admissionClosed then
@@ -61,7 +82,7 @@ function SessionCoordinator.new(options: {
 			end
 			dueAt[userId] = options.unixSeconds() + interval(userId)
 		elseif pendingClose[userId] and sessions[userId] == session then
-			sessions[userId] = nil
+			forget(userId, session)
 			pendingClose[userId] = nil
 		end
 		return outcome
@@ -85,7 +106,7 @@ function SessionCoordinator.new(options: {
 		end
 		if state ~= "Ready" and state ~= "PersistenceAtRisk" and state ~= "Releasing" then
 			if sessions[userId] == session then
-				sessions[userId] = nil
+				forget(userId, session)
 				dueAt[userId] = nil
 				pendingClose[userId] = nil
 			end
@@ -98,7 +119,7 @@ function SessionCoordinator.new(options: {
 		end
 		if outcome.status == "Closed" then
 			if sessions[userId] == session then
-				sessions[userId] = nil
+				forget(userId, session)
 				dueAt[userId] = nil
 				pendingClose[userId] = nil
 			end
@@ -175,6 +196,15 @@ function SessionCoordinator.new(options: {
 	end
 
 	return {
+		subscribe = function(listener: (number, any) -> ()): () -> ()
+			assert(observer == nil, "session observer already bound")
+			observer = listener
+			return function()
+				if observer == listener then
+					observer = nil
+				end
+			end
+		end,
 		open = open,
 		close = close,
 		tick = tick,
