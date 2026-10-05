@@ -194,7 +194,7 @@ Implement the GDS-13 Commercial Strategy v2 portfolio: deterministic cosmetic sh
 
 ## IMP-14 — Live Ops / Analytics / Experimentation
 
-Telemetry registry/adapters, C2 config snapshots, flags, experiment assignment/exposure and privileged audit boundary. Bind the GDS-16 Retention Strategy v2 return loops where their owning systems are ready: Return Brief, Next Aspirations, optional activity-based Daily Expeditions / Weekly Objectives, rotating genuine opportunities and the metrics/guardrails needed to tune them without login-streak pressure.
+Telemetry registry/adapters, C2 config snapshots, flags, experiment assignment/exposure and privileged audit boundary. Bind the GDS-16 Retention Strategy v2 return loops where their owning systems are ready: Return Brief, Next Aspirations, optional activity-based Daily Expeditions / Weekly Objectives, one activity-earned free Daily Activity Wheel, rotating genuine opportunities and the metrics/guardrails needed to tune them without login-streak pressure. The wheel uses versioned server-owned odds/exact-once daily identity; no paid extra spins are baseline-authorized.
 
 ## Pre-release Production Quality Track
 
@@ -232,7 +232,7 @@ Gate: a new player with no outside explanation can understand what MonsterVault 
 
 ### PQL-6 — Retention & Progression Presentation
 
-Make existing progression motivating and legible through mastery/discovery presentation, region and collection completion, rarity, upgrades, quests/objectives, milestones, achievements, unlock previews and meaningful reward moments. Implement the approved Retention Strategy v2 presentation: concise Return Brief, Next Aspirations, optional Daily Expeditions and Weekly Objectives, with no login streak, attendance-only reward or missed-day punishment. Do not invent grind solely to increase session time.
+Make existing progression motivating and legible through mastery/discovery presentation, region and collection completion, rarity, upgrades, quests/objectives, milestones, achievements, unlock previews and meaningful reward moments. Implement the approved Retention Strategy v2 presentation: concise Return Brief, Next Aspirations, optional Daily Expeditions and Weekly Objectives, plus the activity-earned free Daily Activity Wheel, with no login streak, attendance-only reward, paid extra spins or missed-day punishment. Do not invent grind solely to increase session time.
 
 Gate: players can identify what they just achieved, what is worth doing now and what longer-term aspiration should bring them back.
 
