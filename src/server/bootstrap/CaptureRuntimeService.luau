@@ -390,6 +390,13 @@ function CaptureRuntimeService.new(options: {
 				blocked = function(player: any): boolean
 					return capture.hasAcquisition(player.UserId)
 				end,
+				interrupt = function(player: any, generation: number): boolean
+					if not running or generations[player.UserId] ~= generation then
+						return false
+					end
+					capture.interrupt(player.UserId, true)
+					return true
+				end,
 				recover = function(player: any, generation: number): boolean
 					if not running or generations[player.UserId] ~= generation then
 						return false

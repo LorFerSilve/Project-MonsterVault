@@ -71,6 +71,36 @@ return function(): any
 		UnknownHazard = function(root: any)
 			root.HomeHubVault:AddTag("MonsterVaultHazard")
 		end,
+		MissingHazard = function(root: any)
+			root.StarterCorrosiveHazard:Destroy()
+		end,
+		DuplicateHazard = function(root: any)
+			root.StarterCorrosiveHazard:Clone().Parent = root
+		end,
+		HazardOutsideRegion = function(root: any)
+			root.StarterCorrosiveHazard.Position += Vector3.new(64, 0, 0)
+		end,
+		HazardInsideRecovery = function(root: any)
+			root.StarterCorrosiveHazard.Position = root.StarterRecovery.Position
+		end,
+		HazardInsideEncounter = function(root: any)
+			root.StarterCorrosiveHazard.Position = Vector3.new(0, 10, -16)
+		end,
+		MissingHazardMarker = function(root: any)
+			root.StarterCorrosiveHazard.Marker:Destroy()
+		end,
+		HiddenHazardMarker = function(root: any)
+			root.StarterCorrosiveHazard.Marker.Transparency = 1
+		end,
+		MissingHazardCross = function(root: any)
+			root.StarterCorrosiveHazard.Marker.CrossA:Destroy()
+		end,
+		MissingHazardWarning = function(root: any)
+			root.StarterCorrosiveHazard.Warning:Destroy()
+		end,
+		MisleadingHazardWarning = function(root: any)
+			root.StarterCorrosiveHazard.Warning.Text.Text = "Safe shortcut"
+		end,
 	}
 	for name, mutate in mutations do
 		local root = workspace.MonsterVaultWorld:Clone()
@@ -111,7 +141,11 @@ return function(): any
 			Vector3.new(40, 0, -250),
 			Vector3.new(0, 0, -248),
 		},
+		-- Protected first capture and optional Starter survey use ordinary ground.
+		{ Vector3.new(0, 0, 18), Vector3.new(0, 0, -16), Vector3.new(0, 0, 10) },
+		{ Vector3.new(0, 0, 18), Vector3.new(0, 0, -40), Vector3.new(36, 0, -40) },
 	}
+	local hazard = workspace.MonsterVaultWorld.StarterCorrosiveHazard
 	local params = RaycastParams.new()
 	params.FilterType = Enum.RaycastFilterType.Include
 	params.RespectCanCollide = true
@@ -127,9 +161,21 @@ return function(): any
 					params
 				)
 				assert(hit ~= nil and hit.Instance.CanCollide, "missing baseline route ground")
+				assert(hit.Normal.Y >= 0.9, "route requires exceptional locomotion")
+				local p = hazard.CFrame:PointToObjectSpace(position)
+				assert(
+					math.abs(p.X) > hazard.Size.X / 2 + 2 or math.abs(p.Z) > hazard.Size.Z / 2 + 2,
+					"hazard blocks required safe route"
+				)
 				samples += 1
 			end
 		end
 	end
-	return { passed = true, cases = cases, baselineRouteGroundSamples = samples }
+	return {
+		passed = true,
+		cases = cases,
+		baselineRouteGroundSamples = samples,
+		hazardFreeRouteSamples = samples,
+		ordinaryLocomotion = true,
+	}
 end

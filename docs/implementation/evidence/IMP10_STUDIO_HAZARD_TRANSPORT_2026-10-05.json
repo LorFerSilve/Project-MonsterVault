@@ -1,0 +1,762 @@
+{
+  "clientDate": "2026-10-05",
+  "timezone": "Europe/Brussels",
+  "baseCommit": "b3dedff974431da7c933d354d584877b6d89fefe",
+  "phase": "IMP-10 OPEN",
+  "scope": "One authored DEV corrosive hazard and existing TA-7 recovery/transport fairness; no contract amendment",
+  "hazard": {
+    "id": "hazard/starter-corrosive-dev-v1",
+    "regionId": "region/fixture-clearing",
+    "volume": {
+      "center": [
+        44,
+        10,
+        36
+      ],
+      "size": [
+        16,
+        40,
+        16
+      ]
+    },
+    "consequence": "Recovery",
+    "cycle": "Explicit phase-independent binding in Day/Dusk/Night; existing cycle/context identity retained",
+    "materialGroups": [
+      "EnergyGreen",
+      "PanelPlastic"
+    ],
+    "visibleParts": 3,
+    "authoredParts": 4,
+    "warningText": "CORROSIVE PATCH\nEntry causes recovery.\nCarried capture is interrupted."
+  },
+  "studio": {
+    "placeId": 110304961224794,
+    "universeId": 10766503968,
+    "studioId": "6289091c-cab1-4c59-91d5-f6e3e6146eb7",
+    "native": {
+      "coordinatorCases": 17,
+      "priorPresenceRuntimeCases": 4,
+      "hazardRuntimeCases": 8,
+      "totalC0Cases": 29,
+      "passed": 29,
+      "coordinator": {
+        "hazardInterruptsBeforeMissingArrivalAndCannotEscape": {
+          "passed": true
+        },
+        "yieldedShutdownAndMissingAnchorsFailClosed": {
+          "passed": true
+        },
+        "hazardCannotSkipBetweenObservations": {
+          "passed": true
+        },
+        "yieldedRaceAndReplacedCharacterFence": {
+          "passed": true
+        },
+        "hazardTravelRaceRecoversWithoutReplay": {
+          "passed": true
+        },
+        "hazardRecoveryRequiresExplorationBeforeDiscovery": {
+          "passed": true
+        },
+        "arrivalRecoveryAndNoRepeatedRelocation": {
+          "passed": true
+        },
+        "yieldedSessionReplacementCannotCompleteTravel": {
+          "passed": true
+        },
+        "hazardRegistryIsBoundedAndPhaseIndependent": {
+          "passed": true
+        },
+        "interruptedRelocationRecoversWithoutReplay": {
+          "passed": true
+        },
+        "replacementSessionWaitsForValidAnchor": {
+          "passed": true
+        },
+        "discoveryPreparationAndProtectedEpochs": {
+          "passed": true
+        },
+        "staleGenerationAndBoundedSpam": {
+          "passed": true
+        },
+        "yieldedHazardInterruptFencesReplacementAndShutdown": {
+          "passed": true
+        },
+        "yieldedPresenceCheckCannotObserveReplacementSession": {
+          "passed": true
+        },
+        "replacementSessionRequiresSafeArrival": {
+          "passed": true
+        },
+        "failedHazardInterruptKeepsPresenceInactive": {
+          "passed": true
+        }
+      },
+      "presence": {
+        "lockedPresence": {
+          "scope": "IMP10World-2dd0e815-db4d-43e9-bd8a-be042fab8313",
+          "noValueChange": true,
+          "passed": true,
+          "knownUnlockedArrival": true
+        },
+        "replacementSession": {
+          "replacementReady": true,
+          "saved": true,
+          "scope": "IMP10World-a3465430-d8c0-4c0b-9385-5a613c62d597",
+          "passed": true,
+          "missingAnchor": true
+        },
+        "transportCorrection": {
+          "scope": "IMP10World-1b31fff5-4980-412e-bf70-e19eafe6ea3d",
+          "noExtraction": true,
+          "passed": true,
+          "creatureId": "creature-d5bd0d6c-5219-457f-bb1c-f512889ac65a-1"
+        },
+        "pendingFinalization": {
+          "creatureId": "creature-a72cad55-ee43-459f-a490-54e7c746f233-1",
+          "scope": "IMP10World-38f919a5-6335-47b2-ad7a-50010a8a223a",
+          "exactOnce": true,
+          "passed": true,
+          "originalCandidate": true
+        }
+      },
+      "hazard": {
+        "observedRecoveryAndCycle": {
+          "phaseBoundary": true,
+          "nativeWalkEntry": true,
+          "scope": "IMP10World-30c8fa33-551a-4fa3-99ab-202530780e21",
+          "noOpportunityReset": true,
+          "passed": true,
+          "noValueChange": true
+        },
+        "acquisitionRecovery": {
+          "passed": true,
+          "cases": [
+            {
+              "scope": "IMP10World-5441e982-f7c0-4e7e-91e1-95adef411319",
+              "noExtraction": true,
+              "provisional": false,
+              "creatureId": "creature-32e6341d-9fbf-4d78-abf0-7ecc4ce9217a-1"
+            },
+            {
+              "scope": "IMP10World-1e7dbba4-3828-46fb-8110-71008a7efc3f",
+              "noExtraction": true,
+              "provisional": true,
+              "creatureId": "creature-60154ec2-b20f-4dd0-8bbd-1f006a28a1fc-1"
+            }
+          ]
+        },
+        "unavailableArrival": {
+          "interruptedWithoutAnchor": true,
+          "missingMarkerClosed": true,
+          "scope": "IMP10World-8700e21f-102c-4b2f-acdf-43a20be6e66e",
+          "walkOutClosed": true,
+          "passed": true,
+          "corruptAnchorClosed": true
+        },
+        "pendingFinalization": {
+          "creatureId": "creature-48dadd13-414b-4951-9014-2eb338b5dd74-1",
+          "scope": "IMP10World-835909b2-bcc6-4086-8b36-820ce0bc02eb",
+          "exactOnce": true,
+          "passed": true,
+          "admittedP2Preserved": true
+        },
+        "safeTransport": {
+          "lockedAndUnknownRejected": true,
+          "validatedOutpostExtraction": true,
+          "creatureId": "creature-cf226fcb-babe-4d0d-9ae7-1c3411a6bffb-1",
+          "scope": "IMP10World-72eb0e55-41d7-4242-a332-d745de334181",
+          "securedValueSurvivedHazard": true,
+          "passed": true,
+          "baselineWalkTransport": true
+        },
+        "respawnRejoin": {
+          "transportGraceInterrupted": true,
+          "scope": "IMP10World-59a1cbad-1674-4d5c-a5bd-2f984091c499",
+          "persistedRejoin": true,
+          "passed": true,
+          "staleCharacterFenced": true
+        },
+        "recoveryDoesNotDiscover": {
+          "recoveryDidNotDiscover": true,
+          "duplicateInert": true,
+          "scope": "IMP10World-f12243b6-ddad-4e22-9c9e-2a65b434dc38",
+          "unavailableNodeDidNotFakeDeparture": true,
+          "passed": true,
+          "realDepartureAndReturnDiscovered": true
+        },
+        "sweptCrossing": {
+          "noValueChange": true,
+          "custodyInterrupted": true,
+          "scope": "IMP10World-eaff5b36-c3aa-4b99-aa6e-f80e1434fea5",
+          "admissionBlockedBeforePulse": true,
+          "passed": true,
+          "safeEndpointsCrossed": true
+        }
+      },
+      "sweptCrossingAssertions": [
+        "Safe endpoints cross the authored volume",
+        "Valuable admission rejects before the pulse",
+        "Returning to the prior safe endpoint before the pulse does not cancel the latched hazard",
+        "TA-7 interrupts provisional custody once; recovery preserves profile"
+      ]
+    },
+    "authoring": {
+      "ordinaryLocomotion": true,
+      "hazardFreeRouteSamples": 315,
+      "baselineRouteGroundSamples": 315,
+      "passed": true,
+      "cases": {
+        "HazardInsideRecovery": {
+          "rejected": true,
+          "passed": true,
+          "detail": "ServerScriptService.MonsterVaultServer.domains.world.WorldAuthoringIndex:146: invalid DEV hazard volume"
+        },
+        "MissingRegion": {
+          "rejected": true,
+          "passed": true,
+          "detail": "ServerScriptService.MonsterVaultServer.domains.world.WorldAuthoringIndex:39: missing authored MonsterVaultRegion"
+        },
+        "MissingHabitat": {
+          "rejected": true,
+          "passed": true,
+          "detail": "ServerScriptService.MonsterVaultServer.domains.world.WorldAuthoringIndex:39: missing authored MonsterVaultHabitat"
+        },
+        "MissingOutpost": {
+          "rejected": true,
+          "passed": true,
+          "detail": "ServerScriptService.MonsterVaultServer.domains.world.WorldAuthoringIndex:39: missing authored MonsterVaultSafeOutpost"
+        },
+        "OverlappingSurvey": {
+          "rejected": true,
+          "passed": true,
+          "detail": "ServerScriptService.MonsterVaultServer.domains.world.WorldAuthoringIndex:87: overlapping route points"
+        },
+        "UnknownHazard": {
+          "rejected": true,
+          "passed": true,
+          "detail": "ServerScriptService.MonsterVaultServer.domains.world.WorldAuthoringIndex:13: invalid authored MonsterVaultHazard"
+        },
+        "SpawnInsideOutpost": {
+          "rejected": true,
+          "passed": true,
+          "detail": "ServerScriptService.MonsterVaultServer.domains.world.WorldAuthoringIndex:87: overlapping route points"
+        },
+        "OverlappingRegion": {
+          "rejected": true,
+          "passed": true,
+          "detail": "ServerScriptService.MonsterVaultServer.domains.world.WorldAuthoringIndex:66: overlapping regions"
+        },
+        "UnknownPool": {
+          "rejected": true,
+          "passed": true,
+          "detail": "ServerScriptService.MonsterVaultServer.domains.world.WorldAuthoringIndex:115: spawn membership mismatch"
+        },
+        "MissingTravel": {
+          "rejected": true,
+          "passed": true,
+          "detail": "ServerScriptService.MonsterVaultServer.domains.world.WorldAuthoringIndex:39: missing authored MonsterVaultTravelNode"
+        },
+        "MissingHazard": {
+          "rejected": true,
+          "passed": true,
+          "detail": "ServerScriptService.MonsterVaultServer.domains.world.WorldAuthoringIndex:39: missing authored MonsterVaultHazard"
+        },
+        "DuplicateHazard": {
+          "rejected": true,
+          "passed": true,
+          "detail": "ServerScriptService.MonsterVaultServer.domains.world.WorldAuthoringIndex:13: invalid authored MonsterVaultHazard"
+        },
+        "Unanchored": {
+          "rejected": true,
+          "passed": true,
+          "detail": "ServerScriptService.MonsterVaultServer.domains.world.WorldAuthoringIndex:13: invalid authored MonsterVaultLandmark"
+        },
+        "Valid": {
+          "rejected": false,
+          "passed": true
+        },
+        "MissingRecovery": {
+          "rejected": true,
+          "passed": true,
+          "detail": "ServerScriptService.MonsterVaultServer.domains.world.WorldAuthoringIndex:39: missing authored MonsterVaultRecoveryAnchor"
+        },
+        "UnknownLandmark": {
+          "rejected": true,
+          "passed": true,
+          "detail": "ServerScriptService.MonsterVaultServer.domains.world.WorldAuthoringIndex:13: invalid authored MonsterVaultLandmark"
+        },
+        "MissingVault": {
+          "rejected": true,
+          "passed": true,
+          "detail": "ServerScriptService.MonsterVaultServer.domains.world.WorldAuthoringIndex:39: missing authored MonsterVaultVaultAccessPoint"
+        },
+        "WrongUtilityRegion": {
+          "rejected": true,
+          "passed": true,
+          "detail": "ServerScriptService.MonsterVaultServer.domains.world.WorldAuthoringIndex:21: authored region mismatch"
+        },
+        "HazardInsideEncounter": {
+          "rejected": true,
+          "passed": true,
+          "detail": "ServerScriptService.MonsterVaultServer.domains.world.WorldAuthoringIndex:164: hazard overlaps safe utility or required encounter"
+        },
+        "MissingSecurePoint": {
+          "rejected": true,
+          "passed": true,
+          "detail": "ServerScriptService.MonsterVaultServer.domains.world.WorldAuthoringIndex:39: missing authored MonsterVaultSecurePoint"
+        },
+        "MissingHazardCross": {
+          "rejected": true,
+          "passed": true,
+          "detail": "ServerScriptService.MonsterVaultServer.domains.world.WorldAuthoringIndex:219: missing visible hazard cross"
+        },
+        "MissingHazardWarning": {
+          "rejected": true,
+          "passed": true,
+          "detail": "ServerScriptService.MonsterVaultServer.domains.world.WorldAuthoringIndex:173: hazard needs its visible marker and warning"
+        },
+        "MisleadingHazardWarning": {
+          "rejected": true,
+          "passed": true,
+          "detail": "ServerScriptService.MonsterVaultServer.domains.world.WorldAuthoringIndex:173: hazard needs its visible marker and warning"
+        },
+        "DuplicateUtility": {
+          "rejected": true,
+          "passed": true,
+          "detail": "ServerScriptService.MonsterVaultServer.domains.world.WorldAuthoringIndex:13: invalid authored MonsterVaultVaultAccessPoint"
+        },
+        "HiddenHazardMarker": {
+          "rejected": true,
+          "passed": true,
+          "detail": "ServerScriptService.MonsterVaultServer.domains.world.WorldAuthoringIndex:173: hazard needs its visible marker and warning"
+        },
+        "HazardOutsideRegion": {
+          "rejected": true,
+          "passed": true,
+          "detail": "ServerScriptService.MonsterVaultServer.domains.world.WorldAuthoringIndex:146: invalid DEV hazard volume"
+        },
+        "MissingSpawnContext": {
+          "rejected": true,
+          "passed": true,
+          "detail": "ServerScriptService.MonsterVaultServer.domains.world.WorldAuthoringIndex:39: missing authored MonsterVaultLandmark"
+        },
+        "MissingHazardMarker": {
+          "rejected": true,
+          "passed": true,
+          "detail": "ServerScriptService.MonsterVaultServer.domains.world.WorldAuthoringIndex:173: hazard needs its visible marker and warning"
+        },
+        "UnsafeRecovery": {
+          "rejected": true,
+          "passed": true,
+          "detail": "ServerScriptService.MonsterVaultServer.domains.world.WorldAuthoringIndex:96: utility outside protected outpost"
+        }
+      }
+    },
+    "client": {
+      "streamIn": {
+        "streamingEnabled": true,
+        "streamIn": true
+      },
+      "streamOut": {
+        "engineEvicted": true
+      },
+      "tamper": {
+        "localMetadataForged": true,
+        "engineRestored": true,
+        "localMarkerHidden": true
+      },
+      "requests": {
+        "forged": "REJECT_VALIDATION_PAYLOAD",
+        "stale": "REJECT_STATE_TRAVEL_STALE",
+        "context": "REJECT_STATE_TRAVEL_CONTEXT",
+        "passed": true,
+        "serverOwnerPrivate": true
+      },
+      "recovery": {
+        "profileUnchanged": true,
+        "safeArrival": true,
+        "scope": "IMP10World-6888e0c3-c4f5-41da-9a34-8d7f09f62476",
+        "duplicateInert": true,
+        "passed": true,
+        "hiddenMarkerNoBypass": true
+      },
+      "method": "Real engine eviction/restoration using temporary ReplicationFocus; real character stays at valid Starter ground. Client hides marker and forges local metadata/generation, then sends actual strict remote requests. Server authoring/presence persists."
+    },
+    "normalBoot": {
+      "serverReady": true,
+      "clientReady": true,
+      "productionLoadSettled": "CleanOffline",
+      "arrival": [
+        0,
+        3.998046875,
+        128
+      ],
+      "characterGeneration": 3,
+      "console": [
+        {
+          "fields": {
+            "component": "world"
+          },
+          "version": 1,
+          "environment": "server",
+          "severity": "info",
+          "code": "WORLD_SPAWNED",
+          "atUnixSeconds": 1791158037,
+          "sequence": 1
+        },
+        {
+          "fields": {
+            "component": "server"
+          },
+          "version": 1,
+          "environment": "server",
+          "severity": "info",
+          "code": "BOOTSTRAP_READY",
+          "atUnixSeconds": 1791158037,
+          "sequence": 2
+        },
+        {
+          "fields": {
+            "component": "client"
+          },
+          "version": 1,
+          "environment": "client",
+          "severity": "info",
+          "code": "BOOTSTRAP_READY",
+          "atUnixSeconds": 1791158037,
+          "sequence": 1
+        },
+        {
+          "fields": {
+            "component": "profiles",
+            "detailCode": "CleanOffline"
+          },
+          "version": 1,
+          "environment": "server",
+          "severity": "info",
+          "code": "PRODUCTION_LOAD_SETTLED",
+          "atUnixSeconds": 1791158039,
+          "sequence": 3
+        }
+      ]
+    },
+    "finalEdit": {
+      "sourceParity": {
+        "expected": 85,
+        "count": 85,
+        "matched": 85,
+        "mismatches": [],
+        "passed": true
+      },
+      "normalServerBootEnabled": true,
+      "normalClientBootEnabled": true,
+      "temporaryModulesRemoved": 7,
+      "mode": "Edit",
+      "preservation": {
+        "originalAuthoredParts": 54,
+        "finalAuthoredParts": 58,
+        "allOriginalPartsUnchanged": true,
+        "existingMeshParts": 5,
+        "energyCoreMeshParts": 4,
+        "allExistingMeshPartsUnchanged": true,
+        "lightingUnchanged": true
+      },
+      "existingMeshParts": {
+        "Workspace.EnergyCoreGenerator_Source.EnergyCoreGenerator.EC_EnergyGreen.EC_EnergyGreen_Mesh": {
+          "canQuery": true,
+          "canCollide": true,
+          "color": [
+            0.2980392277240753,
+            1,
+            0.4313725531101227
+          ],
+          "anchored": false,
+          "canTouch": true,
+          "textureId": "",
+          "transparency": 0,
+          "attributes": {
+            "EnergyCoreMaterialGroup": "EnergyGreen"
+          },
+          "meshId": "rbxassetid://111406198103853",
+          "tags": [],
+          "cframe": [
+            -9.13223648071289,
+            3.2895002365112305,
+            32.43950271606445,
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ],
+          "material": "Neon",
+          "size": [
+            3.174999952316284,
+            4.769000053405762,
+            2.7709999084472656
+          ]
+        },
+        "Workspace.EnergyCoreGenerator_Source.EnergyCoreGenerator.EC_SecondaryMetal.EC_SecondaryMetal_Mesh": {
+          "canQuery": true,
+          "canCollide": true,
+          "color": [
+            0.6000000238418579,
+            0.6745098233222961,
+            0.7333333492279053
+          ],
+          "anchored": false,
+          "canTouch": true,
+          "textureId": "",
+          "transparency": 0,
+          "attributes": {
+            "EnergyCoreMaterialGroup": "SecondaryMetal"
+          },
+          "meshId": "rbxassetid://140395381153946",
+          "tags": [],
+          "cframe": [
+            -9.13223648071289,
+            3.2100000381469727,
+            33.04500198364258,
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ],
+          "material": "Metal",
+          "size": [
+            3.820000171661377,
+            5.579999923706055,
+            3.820000171661377
+          ]
+        },
+        "Workspace.EnergyCoreGenerator_Source.EnergyCoreGenerator.EC_DarkMetal.EC_DarkMetal_Mesh": {
+          "canQuery": true,
+          "canCollide": true,
+          "color": [
+            0.19607843458652496,
+            0.24705882370471954,
+            0.2980392277240753
+          ],
+          "anchored": false,
+          "canTouch": true,
+          "textureId": "",
+          "transparency": 0,
+          "attributes": {
+            "EnergyCoreMaterialGroup": "DarkMetal"
+          },
+          "meshId": "rbxassetid://82608047802888",
+          "tags": [],
+          "cframe": [
+            -9.13223648071289,
+            2.9749999046325684,
+            33.04500198364258,
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ],
+          "material": "Metal",
+          "size": [
+            4.000000476837158,
+            5.949999809265137,
+            4.000000476837158
+          ]
+        },
+        "Workspace.EnergyCoreGenerator_Source.EnergyCoreGenerator.EC_PanelPlastic.EC_PanelPlastic_Mesh": {
+          "canQuery": true,
+          "canCollide": true,
+          "color": [
+            0.07450980693101883,
+            0.09803921729326248,
+            0.12941177189350128
+          ],
+          "anchored": false,
+          "canTouch": true,
+          "textureId": "",
+          "transparency": 0,
+          "attributes": {
+            "EnergyCoreMaterialGroup": "PanelPlastic"
+          },
+          "meshId": "rbxassetid://138888023376661",
+          "tags": [],
+          "cframe": [
+            -9.172237396240234,
+            3.4074997901916504,
+            32.496253967285156,
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ],
+          "material": "SmoothPlastic",
+          "size": [
+            3.429999828338623,
+            5.125,
+            2.8575000762939453
+          ]
+        },
+        "Workspace.Scene.TestCrate.TestCrateMesh": {
+          "canQuery": true,
+          "canCollide": true,
+          "color": [
+            0.6392157077789307,
+            0.6352941393852234,
+            0.6470588445663452
+          ],
+          "anchored": false,
+          "canTouch": true,
+          "textureId": "",
+          "transparency": 0,
+          "attributes": [],
+          "meshId": "rbxassetid://137358332371859",
+          "tags": [],
+          "cframe": [
+            -2.199005126953125,
+            0.75,
+            34,
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ],
+          "material": "Plastic",
+          "size": [
+            3.000000238418579,
+            1.5,
+            2.000000238418579
+          ]
+        }
+      },
+      "lighting": {
+        "clockTime": 14.5,
+        "fogEnd": 100000,
+        "globalShadows": true,
+        "exposure": 0,
+        "fogStart": 0,
+        "ambient": [
+          0.27450981736183167,
+          0.27450981736183167,
+          0.27450981736183167
+        ],
+        "outdoorAmbient": [
+          0.27450981736183167,
+          0.27450981736183167,
+          0.27450981736183167
+        ],
+        "brightness": 3,
+        "children": [
+          {
+            "attributes": [],
+            "name": "Sky",
+            "className": "Sky"
+          },
+          {
+            "attributes": [],
+            "name": "SunRays",
+            "className": "SunRaysEffect"
+          },
+          {
+            "attributes": [],
+            "name": "Atmosphere",
+            "className": "Atmosphere"
+          },
+          {
+            "attributes": [],
+            "name": "Bloom",
+            "className": "BloomEffect"
+          },
+          {
+            "attributes": [],
+            "name": "DepthOfField",
+            "className": "DepthOfFieldEffect"
+          }
+        ]
+      }
+    },
+    "visual": {
+      "captureId": "IMP10PhysicalHazardMarkFinal",
+      "physicalCrossAndPatchVisuallyVerified": true,
+      "nativeBillboardTextAndReplicationVerified": true,
+      "unmappedMaterialGroups": 0,
+      "boundary": "MCP capture did not render world GUI text pixels, including unrelated native GUI probes. Physical cross was visually checked; enabled warning, exact text and native bounds/replication checked. No production readability/accessibility or general world-art claim."
+    }
+  },
+  "local": {
+    "focusedHazardCases": 7,
+    "fast": {
+      "passed": 198,
+      "total": 198
+    },
+    "python": {
+      "passed": 28,
+      "total": 28
+    },
+    "format": "PASS",
+    "selene": {
+      "errors": 0,
+      "warnings": 0,
+      "parseErrors": 0
+    },
+    "architecture": "PASS",
+    "integrity": "PASS",
+    "rojoBuild": "PASS",
+    "sourcemap": "PASS",
+    "strictAnalysis": {
+      "exitCode": 0,
+      "boundary": "Existing CLI warning: Roblox definition files unavailable. Not a complete Roblox API type pass."
+    }
+  },
+  "fairness": {
+    "nativeSafeGroundSamples": 315,
+    "hazardFreeSamples": 315,
+    "baselineNonPremiumLocomotion": true,
+    "protectedFirstCapturePath": true,
+    "lockedAndUndiscoveredTravelRejected": true,
+    "activeAcquisitionTravelRejected": true,
+    "provisionalRecoveryNeverExtracts": true,
+    "admittedP2Preserved": true,
+    "securedValueAndOriginalContextPreserved": true,
+    "recoveryDoesNotDiscoverFieldNode": true,
+    "nodeBindingLossDoesNotFakeDeparture": true,
+    "hazardTravelRaceFenced": true,
+    "duplicatesInert": true
+  },
+  "boundaries": [
+    "Server root and one conservative straight segment between trusted observations; not a general continuous movement or anti-cheat framework",
+    "No hazard reward, Energy deduction, mastery grant, travel edge or premium route",
+    "Protected content classes remain unbound; no new clock, scheduler, remote or profile schema",
+    "Solo native evidence does not satisfy VS1-19/AD-249 L1"
+  ],
+  "remainingGates": [
+    "Authorized bounded world rewards and objective dedupe",
+    "Protected content lifetime classes",
+    "Full TA-14/15 World Scaling/security/performance audit",
+    "VS1-19 / AD-249: controlled L0/L1; L1 30 players at MaxPlayers=60 plus supported real-client frame/memory and required repetitions"
+  ],
+  "nextDependency": "Authorized bounded world reward source/amount bindings -> existing TA-8 Energy / ProfileSession P2 operation and objective dedupe -> fault/rejoin evidence"
+}

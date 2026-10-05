@@ -5,6 +5,15 @@
 local config = {
 	contentSnapshotId = "content-snapshot/imp10-world-dev-v2",
 	authoringVersion = 1,
+	-- One optional, visibly marked DEV exposure pocket; no reward or travel edge.
+	hazards = {
+		{
+			id = "hazard/starter-corrosive-dev-v1",
+			regionId = "region/fixture-clearing",
+			consequence = "Recovery",
+			warningText = "CORROSIVE PATCH\nEntry causes recovery.\nCarried capture is interrupted.",
+		},
+	},
 	regions = {
 		{
 			id = "region/home-hub",
@@ -440,7 +449,7 @@ config.worldCycle = {
 		{ id = "world-phase/night", durationSeconds = 300 },
 	},
 }
-local cycleBindings: { any } = { config.habitats, config.spawnContexts }
+local cycleBindings: { any } = { config.habitats, config.spawnContexts, config.hazards }
 for _, definitions in cycleBindings do
 	for _, definition in definitions do
 		definition.cycleDefinitionId = config.worldCycle.id

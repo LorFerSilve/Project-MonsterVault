@@ -2000,6 +2000,206 @@
               128
             ]
           }
+        },
+        "StarterCorrosiveHazard": {
+          "$className": "Part",
+          "$properties": {
+            "Anchored": true,
+            "Position": [
+              44,
+              10,
+              36
+            ],
+            "Size": [
+              16,
+              40,
+              16
+            ],
+            "CanCollide": false,
+            "CanTouch": false,
+            "CanQuery": false,
+            "Transparency": 1,
+            "Material": "SmoothPlastic",
+            "Color": [
+              0.07450980392156863,
+              0.09803921568627451,
+              0.12941176470588237
+            ],
+            "Tags": [
+              "MonsterVaultHazard"
+            ],
+            "Attributes": {
+              "HazardId": {
+                "String": "hazard/starter-corrosive-dev-v1"
+              },
+              "RegionId": {
+                "String": "region/fixture-clearing"
+              },
+              "MaterialGroup": {
+                "String": "PanelPlastic"
+              }
+            }
+          },
+          "Marker": {
+            "$className": "Part",
+            "$properties": {
+              "Anchored": true,
+              "Position": [
+                44,
+                0.05,
+                36
+              ],
+              "Size": [
+                16,
+                0.1,
+                16
+              ],
+              "CanCollide": false,
+              "CanTouch": false,
+              "CanQuery": false,
+              "Transparency": 0,
+              "Material": "Neon",
+              "Color": [
+                0.2980392156862745,
+                1,
+                0.43137254901960786
+              ],
+              "Attributes": {
+                "MaterialGroup": {
+                  "String": "EnergyGreen"
+                }
+              }
+            },
+            "CrossA": {
+              "$className": "Part",
+              "$properties": {
+                "Anchored": true,
+                "Position": [
+                  44,
+                  0.2,
+                  36
+                ],
+                "Orientation": [
+                  0,
+                  45,
+                  0
+                ],
+                "Size": [
+                  14,
+                  0.2,
+                  1
+                ],
+                "CanCollide": false,
+                "CanTouch": false,
+                "CanQuery": false,
+                "Transparency": 0,
+                "Material": "SmoothPlastic",
+                "Color": [
+                  0.07450980392156863,
+                  0.09803921568627451,
+                  0.12941176470588237
+                ],
+                "Attributes": {
+                  "MaterialGroup": {
+                    "String": "PanelPlastic"
+                  }
+                }
+              }
+            },
+            "CrossB": {
+              "$className": "Part",
+              "$properties": {
+                "Anchored": true,
+                "Position": [
+                  44,
+                  0.2,
+                  36
+                ],
+                "Orientation": [
+                  0,
+                  -45,
+                  0
+                ],
+                "Size": [
+                  14,
+                  0.2,
+                  1
+                ],
+                "CanCollide": false,
+                "CanTouch": false,
+                "CanQuery": false,
+                "Transparency": 0,
+                "Material": "SmoothPlastic",
+                "Color": [
+                  0.07450980392156863,
+                  0.09803921568627451,
+                  0.12941176470588237
+                ],
+                "Attributes": {
+                  "MaterialGroup": {
+                    "String": "PanelPlastic"
+                  }
+                }
+              }
+            }
+          },
+          "Warning": {
+            "$className": "BillboardGui",
+            "$properties": {
+              "Enabled": true,
+              "AlwaysOnTop": true,
+              "MaxDistance": 96,
+              "StudsOffsetWorldSpace": [
+                0,
+                -5,
+                0
+              ],
+              "Size": {
+                "UDim2": [
+                  [
+                    0,
+                    260
+                  ],
+                  [
+                    0,
+                    90
+                  ]
+                ]
+              }
+            },
+            "Text": {
+              "$className": "TextLabel",
+              "$properties": {
+                "Size": {
+                  "UDim2": [
+                    [
+                      1,
+                      0
+                    ],
+                    [
+                      1,
+                      0
+                    ]
+                  ]
+                },
+                "BackgroundColor3": [
+                  0.07450980392156863,
+                  0.09803921568627451,
+                  0.12941176470588237
+                ],
+                "BackgroundTransparency": 0.15,
+                "TextColor3": [
+                  1,
+                  1,
+                  1
+                ],
+                "TextScaled": true,
+                "TextWrapped": true,
+                "Font": "GothamBold",
+                "Text": "CORROSIVE PATCH\nEntry causes recovery.\nCarried capture is interrupted."
+              }
+            }
+          }
         }
       }
     }
