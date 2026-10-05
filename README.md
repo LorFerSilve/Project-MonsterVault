@@ -62,7 +62,7 @@ No gameplay system should be implemented merely because an idea appears promisin
 - **TA-15 — Testing, Diagnostics, Security Validation, and CI Architecture: ARCHITECTURE COMPLETE — PASS**
 - **TA-16 — Architecture Integration and Implementation-Readiness Audit: INTEGRATION COMPLETE — PASS**
 - **TA-17 — Implementation Roadmap, Vertical Slice, Contract Locking, and Change Control: IMPLEMENTATION LOCKED — PASS**
-- **Gameplay implementation: OPEN — IMP-9 COMPLETE; IMP-10 FUNCTIONALLY COMPLETE; IMP-11 next; VS1-19 remains DEFERRED but is a future Scale Readiness Gate under AD-260, not an IMP-10 functional blocker**
+- **Gameplay implementation: OPEN — IMP-9 COMPLETE; IMP-10 FUNCTIONALLY COMPLETE; IMP-11 OPEN with Party, Social Ping, Friendly Challenge and Showcase/Visitor representative dependencies COMPLETE; Golden Playable Vertical Slice ready; later co-op/events remain open; VS1-19 remains DEFERRED to Scale Readiness under AD-260**
 - Production release: blocked until applicable TA-15/TA-14/staging/release gates pass
 
 GDS-17 final evidence is recorded in [`17_cross_system_consistency_and_design_complete_audit.md`](docs/game_design/audit/17_cross_system_consistency_and_design_complete_audit.md), [`GDS17_AUTHORITY_NAMESPACE_AUDIT.md`](docs/game_design/GDS17_AUTHORITY_NAMESPACE_AUDIT.md), [`GDS17_MATURITY_OPEN_QUESTION_AUDIT.md`](docs/game_design/GDS17_MATURITY_OPEN_QUESTION_AUDIT.md), [`GDS17_COMPOUND_SCENARIO_VALIDATION.md`](docs/game_design/GDS17_COMPOUND_SCENARIO_VALIDATION.md), [`GDS17_DECISION_INDEX.md`](docs/game_design/GDS17_DECISION_INDEX.md), and [`GDS17_CLOSURE_REPORT.md`](docs/game_design/GDS17_CLOSURE_REPORT.md).
