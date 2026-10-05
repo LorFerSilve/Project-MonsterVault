@@ -1,6 +1,6 @@
 # MonsterVault Implementation Roadmap
 
-> **Status:** IMP-8 COMPLETE with registered deferred validation; IMP-9 COMPLETE; IMP-10 FUNCTIONALLY COMPLETE under AD-260; IMP-11 OPEN with Party, Social Ping, Friendly Challenge and Showcase/Visitor dependencies COMPLETE. Golden Playable Vertical Slice ready to begin on these stable dependencies; VS1-19 remains DEFERRED to Scale Readiness
+> **Status:** IMP-8 COMPLETE with registered deferred validation; IMP-9 COMPLETE; IMP-10 FUNCTIONALLY COMPLETE under AD-260; IMP-11 OPEN with Party, Social Ping, Friendly Challenge and Showcase/Visitor dependencies COMPLETE. Golden Playable Vertical Slice ready to begin on these stable dependencies; **Halloween 2026 is the owner-authorized launch theme**; VS1-19 remains DEFERRED to Scale Readiness
 > **Locked by:** TA-17
 > **Rule:** Dependency-driven; do not skip phases merely because later UI/content is easier to demo.
 
@@ -11,6 +11,28 @@ Owner-authorized roadmap expansion (2026-10-04): a technically complete feature 
 For visual/design work, Codex/Work must actively evaluate the connected **Blender MCP** pipeline for custom models, environment kits, landmarks, props, creatures, rigs/animations, VFX-support meshes, 3D UI/presentation assets and promotional scenes when that materially improves quality. Preserve editable `.blend` sources and Roblox-compatible exports. Use the **Roblox Studio MCP** for import/integration, material mapping, placement and final in-game visual validation. Prefer existing assets and Roblox-native UI/particles/primitives when they already meet the required quality; do not use Blender merely because it is available.
 
 Once the relevant world/gameplay dependencies are stable, establish one **golden playable vertical slice** at near-production visual quality and use it as the quality bar for later content rollout. Do not postpone all visual validation until release hardening.
+
+## Halloween 2026 launch-theme rule
+
+Owner-authorized roadmap addition (2026-10-05): MonsterVault's first production release targets the **Halloween 2026 season** as its launch theme. The exact public date remains subject to normal implementation, PQL, scale, platform-policy and release gates.
+
+Source of truth: [Halloween 2026 Launch Theme](HALLOWEEN_2026_LAUNCH_THEME.md).
+
+From this point forward, release-facing work should follow **permanent production-quality MonsterVault base + removable/configurable Halloween seasonal layer**. The Golden Slice should establish both the reusable permanent art/UX/sensory bar and the first Halloween presentation treatment. The permanent game must remain coherent with the seasonal layer disabled.
+
+Halloween presentation may proceed before later IMP-11 event authority exists. Actual timed event occurrence, spawn modifiers, objectives/contribution, rewards, persistent cooldowns and cross-server hints stay with their existing IMP-11/TA-10 owners. Seasonal commerce stays with IMP-13; production activation/config/analytics stays with IMP-14. Do not build one-off presentation code that becomes parallel event, economy or commerce authority.
+
+Current launch priorities are:
+
+1. permanent Golden Slice quality;
+2. modular Halloween Starter Region + Home/Vault dressing;
+3. Halloween-compatible creature/rarity/reveal and sensory examples;
+4. seasonal launch UI/promotional identity;
+5. Halloween as the preferred first production event when remaining IMP-11 event dependencies are ready;
+6. deterministic seasonal commercial presentation when IMP-13 is ready;
+7. live-ops scheduling/rollback/analytics when IMP-14 is ready.
+
+A seasonal deadline never permits bypassing correctness, persistence, safety, accessibility, platform-policy or release gates.
 
 ## IMP-1 — Contracts and Test Harness
 
@@ -216,7 +238,7 @@ Trade session/revision/reservations, durable journal, transaction-fenced partici
 
 ## IMP-13 — Commerce
 
-Implement the **GDS-13 Commercial Strategy v3** in dependency order.
+Implement the **GDS-13 Commercial Strategy v3** in dependency order. For the Halloween 2026 launch window, use the [launch-theme brief](HALLOWEEN_2026_LAUNCH_THEME.md) as the first seasonal commercial presentation target once the underlying commerce owners are ready; seasonal products remain deterministic, optional and non-pay-to-win.
 
 Core commerce:
 - deterministic cosmetic shop;
@@ -242,6 +264,8 @@ Reuse TA-8 production/Energy and TA-11 commerce/receipt/entitlement owners. No b
 
 ## IMP-14 — Live Ops / Analytics / Experimentation
 
+Halloween 2026 is the first launch-season configuration target: production seasonal presentation/event state should be activatable, reversible and observable through the proper TA-13/IMP-14 owners rather than hard-coded one-off runtime branches.
+
 Telemetry registry/adapters, C2 config snapshots, flags, experiment assignment/exposure and privileged audit boundary. Bind the GDS-16 retention loops where their owning systems are ready: Return Brief, Next Aspirations, optional Daily Expeditions / Weekly Objectives, Seasonal Collection Pass progression, one activity-earned free Daily Activity Wheel, rotating genuine opportunities and the metrics/guardrails needed to tune them without login-streak pressure.
 
 Measure retention and monetization together: pass activation/completion, shop funnel, subscription retention, rewarded-ad usage, UGC/store attachment, Return Overcharge conversion, payer/non-payer progression fairness, refund/regret/support signals and sensory/game-feel interaction where useful. Analytics remains observational and cannot grant value.
@@ -254,19 +278,25 @@ The following ten gates broaden the existing implementation roadmap without chan
 
 Turn functional regions into authored, attractive spaces with distinct biome identity, terrain composition, paths, landmarks, foliage/props, structures, environmental storytelling, lighting, atmosphere, readable traversal and strong points of interest. Important regions should be recognizable from screenshots alone. Use Blender MCP for modular environment kits, architecture, hero landmarks and props where custom modelling adds value; validate final appearance in Studio.
 
-Gate: the representative/golden region reads as an intentional production environment with the HUD hidden, and the established quality bar is reproducible across later regions.
+For the launch Golden Slice, the Starter Region and Home/Vault must establish a production-quality **permanent base plus modular Halloween 2026 dressing**. Seasonal props, atmosphere, lighting accents and environmental motion should improve composition without hiding unfinished permanent geometry, and must be removable without breaking traversal or gameplay.
+
+Gate: the representative/golden region reads as an intentional production environment with the HUD hidden, remains production-quality with Halloween disabled, and the established quality bar is reproducible across later regions.
 
 ### PQL-2 — Creature & Asset Quality
 
 Bring creatures, collectibles and gameplay props to a consistent visual standard: silhouettes, rarity readability, materials, animation-ready topology where needed, idle presentation, Vault/display presentation and performant geometry/LOD strategy where applicable. Use Blender MCP for creature/hero models, riggable meshes, machines and display assets.
 
-Gate: no important gameplay object remains an engineering placeholder, and common/rare/exceptional content is visually distinguishable without relying only on text.
+The Golden Slice should include at least one Halloween-compatible hero creature, cosmetic creature treatment or Legendary reveal asset that exercises the same permanent creature/rarity pipeline rather than creating a seasonal parallel identity system.
+
+Gate: no important gameplay object remains an engineering placeholder, common/rare/exceptional content is visually distinguishable without relying only on text, and seasonal treatment stays visually distinct from intrinsic rarity.
 
 ### PQL-3 — UI/UX & Presentation Polish
 
 Polish HUD, navigation, Vault, collection, discovery, progression/mastery, travel, notifications, objectives, rewards, commerce surfaces, settings, mobile layouts, controller navigation and accessibility states. Establish consistent typography, spacing, hierarchy, iconography, panel language, rarity treatment, interaction/loading/error/empty states and restrained motion. Keep actual interface behavior Roblox-native; use Blender MCP only for visual assets or 3D presentation where it clearly improves the result.
 
-Gate: every primary gameplay loop is understandable and fully usable without developer/debug knowledge across supported inputs.
+Halloween launch accents may affect decorative framing, banners, icons, ambient motifs and presentation surfaces, but the permanent information hierarchy, accessibility and navigation must remain correct with the theme disabled.
+
+Gate: every primary gameplay loop is understandable and fully usable without developer/debug knowledge across supported inputs in both seasonal and off-season presentation.
 
 ### PQL-4 — Animation, VFX, SFX & Sensory Game Feel
 
@@ -292,7 +322,9 @@ Implement the GDS-14 **Sensory / Game-Feel Strategy v1** across the golden slice
 
 Use Roblox-native particles/beams/trails/audio/haptics where sufficient; use Blender MCP for rigs, animated props, creatures, mechanical assets, custom effect geometry and showcase assets when custom work materially improves quality. All sensory systems obey Reduced Motion/audio/haptic controls and bounded performance budgets.
 
-Gate: capture, reward, progression, collection and Vault interactions feel intentionally satisfying and recognizable, while state remains legible with motion/audio/haptics reduced or disabled.
+For the Halloween launch slice, extend the permanent sensory language with restrained spooky ambience, seasonal environmental motion, reveal layers and stingers where appropriate. Seasonal effects must not fabricate rarity or authoritative event state and must remain removable.
+
+Gate: capture, reward, progression, collection and Vault interactions feel intentionally satisfying and recognizable, including the representative Halloween launch treatment, while state remains legible with motion/audio/haptics reduced or disabled.
 
 ### PQL-5 — Onboarding & First-Session Experience
 
@@ -310,7 +342,9 @@ Gate: players can identify what they just achieved, what is worth doing now and 
 
 Exercise the live-ops architecture through polished player-facing events: seasonal creatures/content, temporary world states or spawn changes, event objectives/community goals, limited rewards, countdown/status UI and update messaging. Reuse existing systems instead of creating event-only parallel frameworks. Use Blender MCP for event-specific props, decorations, landmarks, creatures and reward models when useful.
 
-Gate: at least one representative event can run through the production live-ops/config path with correct start/end/recovery behavior.
+**Halloween 2026 is the preferred first representative production event** if the launch window remains applicable when the remaining IMP-11/IMP-14 owners are ready. Visual Halloween dressing may exist earlier, but authoritative occurrence/spawn/reward semantics must use the proper event/live-ops path.
+
+Gate: the Halloween representative event, or a later equivalent if the calendar window is no longer applicable, can run through the production live-ops/config path with correct start/end/recovery behavior and leaves the permanent world coherent after deactivation.
 
 ### PQL-8 — Social Presentation & Multiplayer Polish
 
@@ -322,13 +356,15 @@ Gate: multiplayer feels intentionally social rather than like isolated single-pl
 
 Integrate **Commercial Strategy v3** into MonsterVault's visual language: cosmetic shop, Starter Value Bundle, Supporter/Style Pass, bounded Collection/Display Capacity, Offline Window Extension, capped 2× Return Overcharge, seasonal cosmetic bundles, Vault Club subscription, Seasonal Collection Pass, Rewarded Video placements, MonsterVault avatar/UGC commerce and Roblox Plus surfaces where eligible.
 
+For the Halloween 2026 launch presentation, prioritize coherent deterministic seasonal cosmetics such as Vault themes, creature presentation cosmetics, profile frames/nameplates, capture/reveal cosmetic treatment and eligible avatar/UGC items. Intrinsic rarity and gameplay authority remain visually and mechanically distinct from purchased seasonal treatment.
+
 Prices shown in custom UI must reflect the current platform price/Managed Pricing. Subscription renewal/value, rewarded-ad reward, pass-track value and UGC ownership are explicit. Avoid intrusive spam, deceptive scarcity, confusing currencies, paid streak repair, paid random Daily Wheel spins and pay-to-win shortcuts. Blender MCP may produce high-quality 3D product/UGC/reward previews where appropriate.
 
 Gate: the full applicable commerce portfolio is coherent with the game, receipt/entitlement/subscription/ad behavior is reliable, current platform eligibility/policy is respected, and presentation does not degrade the core experience.
 
 ### PQL-10 — Launch & Promotional Polish
 
-Finish loading/title/menu/startup transitions, reconnect/recovery messaging, update/event banners and final visual consistency. Prepare production-quality Roblox icon, thumbnails, screenshots, key art, store copy, update artwork and trailer/promotional scenes where applicable. Promotional imagery must represent the actual game honestly. Blender MCP may be used to stage/render hero assets and poses; Roblox Studio remains the final authority for in-game appearance.
+Finish loading/title/menu/startup transitions, reconnect/recovery messaging, update/event banners and final visual consistency. For the targeted first release, the launch identity should deliberately communicate the Halloween 2026 theme while still showing the real permanent MonsterVault visual language underneath. Prepare production-quality Roblox icon, thumbnails, screenshots, key art, store copy, update artwork and trailer/promotional scenes where applicable. Promotional imagery must represent the actual game honestly. Blender MCP may be used to stage/render hero assets and poses; Roblox Studio remains the final authority for in-game appearance.
 
 Gate: no obvious placeholder/debug presentation remains, core screenshots represent actual polished gameplay, and map/creatures/UI/VFX/animation/audio/progression/social/commerce/event presentation pass a final consistency audit.
 
