@@ -1,9 +1,11 @@
 # Golden Slice Visual Bible
 
-> Status: PRE-PRODUCTION BASELINE
+> Status: BASELINE APPLIED TO THE REPRESENTATIVE STUDIO SLICE; BROADER ROLLOUT OPEN
 > Date: 2026-10-06
 > Scope: first Golden Playable Vertical Slice and reusable production-quality visual language
 > Authority: subordinate to the approved GDS, TA contracts, implementation roadmap and Halloween 2026 launch-theme brief
+
+The applied Starter/Home implementation and reusable material/asset/UI/sensory seams are documented in [Golden Slice evidence](GOLDEN_SLICE_EVIDENCE.md). The permanent pine/rock/field-station and ribbed Vault kit now exists in Studio; the removable spectral-harvest layer is inspected ON/OFF. This application does not certify every PQL screen, biome or device.
 
 ## 1. Product-facing visual thesis
 

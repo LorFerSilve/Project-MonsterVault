@@ -1,9 +1,11 @@
 # Golden Slice Performance Budgets
 
-> Status: PRE-MEASUREMENT AUTHORING BUDGET
+> Status: WORKING BUDGETS + SIX STUDIO MEASUREMENTS; REAL-DEVICE GATES OPEN
 > Date: 2026-10-06
 > Authority: TA-14 remains authoritative for actual performance gates
 > Purpose: stop production art from creating avoidable performance debt before real-device measurement
+
+Measured implementation: [six-view evidence and exceptions](GOLDEN_SLICE_EVIDENCE.md#measured-bounds), [raw native statistics](evidence/golden/performance_native.json). All sampled visible triangle/draw counts are below the working scene targets. Fresh Studio p95 is 22-24ms and an earlier long-session p95 is 101ms; no TA-14 reference-device performance pass is claimed.
 
 ## 1. Important distinction
 

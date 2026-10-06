@@ -1,0 +1,56 @@
+{
+  "actualClients": 1,
+  "adapterPeers": 3,
+  "server": {
+    "actualClients": 1,
+    "peakTimers": 1,
+    "counts": {
+      "visits": 0,
+      "grants": 0,
+      "liveUsers": 0
+    },
+    "cases": [
+      "ownerTargetedGrantDoesNotOpenVisitor",
+      "realPlayerExactReadOnlyProjection",
+      "noPrivateOrCommercialFields",
+      "permissionAndViewDoNotWriteProfiles",
+      "noOwnershipEnergyDiscoveryOrAssignmentMutation",
+      "ownerRevokeImmediatelyClearsNativeView",
+      "twoVisitorsShareApprovedExactInstance",
+      "thirdVisitorBoundRejected",
+      "realProfileObserverRefreshesBothVisitors",
+      "staleTimerCannotRestoreRevokedAuthority",
+      "actualProfileSessionReplacementRevokesVisitor",
+      "staleProfileCallbackCannotRestoreVisit",
+      "replacementDoesNotInheritAudience",
+      "ownerSessionReplacementRevokesPermission",
+      "privateReplayFenceRejectsReplacementSuccess",
+      "nativeGrantExpiryClearsAllAuthority",
+      "singleSharedDeadlineOwner",
+      "actualPlayerRemovingClearsVisitorAuthority",
+      "shutdownAndLateCallbacksLeaveZeroAuthority"
+    ],
+    "adapterPeers": 3
+  },
+  "client": {
+    "cases": [
+      "nativePermissionReadback",
+      "nativeCollapsedNoFocusChange",
+      "nativeExplicitOpenReadOnlyCard",
+      "nativeIntrinsicAndCosmeticSeparation",
+      "nativeVisibleReadOnlyOwnerAndReturn",
+      "nativeForgedOwnerAndPrivateFieldsRejected",
+      "nativeVisitorCannotAssignOwnerCreature",
+      "nativeRevokedViewAndUI",
+      "nativeExplicitOpenReadOnlyCard",
+      "nativeIntrinsicAndCosmeticSeparation",
+      "nativeVisibleReadOnlyOwnerAndReturn",
+      "nativeClientExpiryAndDisposal",
+      "nativeClientDisposalRemovesUI"
+    ],
+    "events": 40
+  },
+  "elapsedMeasured": true,
+  "tooling": "native Roblox Studio Player/RemoteEvent/ProfileSession with explicitly isolated in-memory DEV peer adapters",
+  "distinctCases": 29
+}

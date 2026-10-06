@@ -1,0 +1,237 @@
+{
+  "date": "2026-10-06",
+  "source": "Roblox Studio MCP screen_capture; actual native client state",
+  "processing": "JPEG to PNG format conversion only. No retouching, composition or resizing.",
+  "cameraNote": "Null means the original capture did not retain its precise camera pose.",
+  "beforeEvidence": "01-before-spawn.jpg and studio_before.json only; other requested BEFORE views were not retained.",
+  "shots": [
+    {
+      "file": "golden_01_starter_permanent.png",
+      "caption": "Permanent Mossline vista; seasonal presentation OFF.",
+      "dimensions": [
+        1565,
+        880
+      ],
+      "sha256": "67b023010feba652a2c3e72897b89669c9f324472342a3f0094e89ceb89cdc3e",
+      "nativeSourceSha256": "b76af28440c1748d870d6a018c850266807935830eafaab2173b0475a29e31dc",
+      "camera": [
+        -24,
+        6,
+        22
+      ],
+      "lookAt": [
+        -4,
+        3,
+        -25
+      ]
+    },
+    {
+      "file": "golden_02_starter_halloween.png",
+      "caption": "Same Starter vista; actual seasonal toggle ON.",
+      "dimensions": [
+        1565,
+        880
+      ],
+      "sha256": "989e81b8099bd6b301bb9347403138db92cb189e7caef4ea83f1020f1cfae910",
+      "nativeSourceSha256": "cde0ac8cbab62dd3fcfed9fff88350ee7e1419deb5d82a588ae314aeca70b29d",
+      "camera": [
+        -24,
+        6,
+        22
+      ],
+      "lookAt": [
+        -4,
+        3,
+        -25
+      ]
+    },
+    {
+      "file": "golden_03_safe_outpost.png",
+      "caption": "Field Station wraps the existing secure and travel anchors.",
+      "dimensions": [
+        1565,
+        880
+      ],
+      "sha256": "2a7dfac433883cee43fc8895a421b875f5e0b791e62aacbec04e5032b6e7f338",
+      "nativeSourceSha256": "9df26e491290f19c6a16c10f70ac44071768a1df7c150ad36d6fe7f310a3192c",
+      "camera": null,
+      "lookAt": null
+    },
+    {
+      "file": "golden_04_common_encounter.png",
+      "caption": "Mossbud; existing authored Common identity.",
+      "dimensions": [
+        1565,
+        880
+      ],
+      "sha256": "9e0d035af5d820158d48508767bc908e778fc2817282cefeb9497e57ed5866e0",
+      "nativeSourceSha256": "1964cf16fd51f477778531f61a20b25b79124ff3ffad2bc82c1350130294725f",
+      "camera": null,
+      "lookAt": null
+    },
+    {
+      "file": "golden_05_capture_buildup.png",
+      "caption": "Native engage/Claimed frame; ordered lifecycle and peak VFX are in capture evidence.",
+      "dimensions": [
+        1565,
+        880
+      ],
+      "sha256": "f9b1ce60c491f3e265e1153765bd5bd7609458c5ad7fce9b2c96fbd41a61d940",
+      "nativeSourceSha256": "fa109cfecfd657feca9994652ca8db9fa7231d5d42ddf746295c28039527d0ea",
+      "camera": null,
+      "lookAt": null
+    },
+    {
+      "file": "golden_06_capture_secured.png",
+      "caption": "Authoritative Secured/Collection payoff after custody reached safety.",
+      "dimensions": [
+        1565,
+        880
+      ],
+      "sha256": "a96b0f06aa6eab842eac193ed9ec5750190235c241fa4ed7c187497bc9c40627",
+      "nativeSourceSha256": "30068ed94ed3120396e280f7cd9325e64cbb882090a559403edb205617b44e95",
+      "camera": null,
+      "lookAt": null
+    },
+    {
+      "file": "golden_07_legendary_reveal.png",
+      "caption": "Helion, protected Legendary DEV. Native isolated clock/RNG probe; settled reveal pose, not live odds evidence.",
+      "dimensions": [
+        1920,
+        1079
+      ],
+      "sha256": "2b13cec75d91510d56037ba2d556afc0b57262a4db8d763d7d314e3595b65d96",
+      "nativeSourceSha256": "2e70e90e03e408f9a757a9a1bd4fec2b0f2eb7f01d70b83c64a014c1a90ba276",
+      "camera": [
+        43,
+        4,
+        -32
+      ],
+      "lookAt": [
+        36,
+        2.5,
+        -40
+      ]
+    },
+    {
+      "file": "golden_08_home_exterior.png",
+      "caption": "Permanent Home entry; identical source capture to the Home OFF matched pair.",
+      "dimensions": [
+        1565,
+        880
+      ],
+      "sha256": "752dd4ed258ae09e4216e7827c6e9a03aff93cdd0524145b05a2da9edd723b73",
+      "nativeSourceSha256": "d3c7ba1575311a8d7415d3d7506a14c04cf658388de691eb7fffc41bb37b8550",
+      "camera": null,
+      "lookAt": null
+    },
+    {
+      "file": "golden_09_vault_interior.png",
+      "caption": "Permanent Vault architecture, displays, accumulator and reused Energy Core.",
+      "dimensions": [
+        1565,
+        880
+      ],
+      "sha256": "6b80076fa3ab8ab69b953c72e0f6ad5d9baaa0d96393a487ce2080d5c02b68d1",
+      "nativeSourceSha256": "ece8f571b9cd9ac5b978fa31dd6470bcf912bf35a2c3ab5b47f4ee8c0cd23c11",
+      "camera": [
+        -17,
+        8,
+        115
+      ],
+      "lookAt": [
+        5,
+        4,
+        139
+      ]
+    },
+    {
+      "file": "golden_10_creature_display.png",
+      "caption": "Exact owned Mossbud presentation faces the Vault entry; no ownership/capture tags.",
+      "dimensions": [
+        1565,
+        880
+      ],
+      "sha256": "9cf331fea4ff7f128a4ba9c9e5c2d1e603437897af94e8f090d74e8b4dc474f6",
+      "nativeSourceSha256": "0a9529ec839c28d100cc8ae9a03e4303e20bb98d7d0d0cf6a6a8831d71ee831f",
+      "camera": null,
+      "lookAt": null
+    },
+    {
+      "file": "golden_11_energy_claim.png",
+      "caption": "Matched +8 authoritative receipt; count-up and local energy path in progress.",
+      "dimensions": [
+        1565,
+        880
+      ],
+      "sha256": "2866bfa9a4a0449b1ccca757c9c10df85ef7ef6363ab6e576016542225960c00",
+      "nativeSourceSha256": "14977072cab588e157abacd7c12538cf749a5e5cca991f88b401c75905f86d3d",
+      "camera": null,
+      "lookAt": null
+    },
+    {
+      "file": "golden_12_progression.png",
+      "caption": "Current capacity and next aspiration using the existing quote/purchase flow.",
+      "dimensions": [
+        1565,
+        880
+      ],
+      "sha256": "87af3e7f292df4758ecdddeffc5985eddf3c2227fda32481b70c536dd8a3dff1",
+      "nativeSourceSha256": "3ebbf728552b6cd746d02de3d61a1aa076c89316720e94bff3eb2323b16e6d1c",
+      "camera": null,
+      "lookAt": null
+    },
+    {
+      "file": "golden_13_showcase.png",
+      "caption": "Current owner preview of the same approved Read Only card; visitor authority is tested separately.",
+      "dimensions": [
+        1565,
+        880
+      ],
+      "sha256": "950c5160b224507e87016ca4f899072f14dd7d08d3982f1b324f2fb233441142",
+      "nativeSourceSha256": "f3075c1828b57bc9eb5a8bcee9af1e2ce8addcbcfb267f2f9aff960a10c685a2",
+      "camera": null,
+      "lookAt": null
+    },
+    {
+      "file": "golden_14_mobile.png",
+      "caption": "Samsung Galaxy A06 landscape emulator, 705 x 338 native viewport; scrolling Showcase card.",
+      "dimensions": [
+        671,
+        302
+      ],
+      "sha256": "29a676ced7218c8d6d8df68fc21b4acb8dc4b69bf94ab0ad1f458c113b02bbc9",
+      "nativeSourceSha256": "997e92b027e834c69c543e886663deffedacff88daea82ca072999e063f824b3",
+      "camera": [
+        -17,
+        8,
+        115
+      ],
+      "lookAt": [
+        5,
+        4,
+        139
+      ]
+    },
+    {
+      "file": "golden_15_reduced_motion.png",
+      "caption": "Native settings: Reduced Motion ON, effects LOW, audio OFF; receipt semantics tested separately.",
+      "dimensions": [
+        671,
+        302
+      ],
+      "sha256": "104f59b68a04fe2c51a69f8c0ad8e1d7f75fa78fc57bcb966eece25c443e5d16",
+      "nativeSourceSha256": "cc11b4d56b6491eb392bc6e32c38699b65841db3c9e7bf0359f18d9920de08c1",
+      "camera": [
+        -17,
+        8,
+        115
+      ],
+      "lookAt": [
+        5,
+        4,
+        139
+      ]
+    }
+  ]
+}

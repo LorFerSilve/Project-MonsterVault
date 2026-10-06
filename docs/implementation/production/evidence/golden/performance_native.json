@@ -1,0 +1,538 @@
+{
+  "views": {
+    "starterHalloween": {
+      "maxMs": 25.592099875211716,
+      "memoryMb": 2342.64453125,
+      "frames": 180,
+      "camera": [
+        -24,
+        6,
+        22
+      ],
+      "p95ms": 23.14460091292858,
+      "render": {
+        "Children": [
+          {
+            "Name": "Opaque",
+            "Sizes": {
+              "Drawcalls": 38,
+              "Triangles": 32516
+            }
+          },
+          {
+            "Name": "Transparent",
+            "Sizes": {
+              "Drawcalls": 1,
+              "Triangles": 8
+            }
+          },
+          {
+            "Name": "UI",
+            "Sizes": {
+              "Drawcalls": 3,
+              "Triangles": 142
+            }
+          },
+          {
+            "Name": "Particles",
+            "Sizes": {
+              "Drawcalls": 1,
+              "Triangles": 8
+            }
+          },
+          {
+            "Name": "Shadows",
+            "Sizes": {
+              "Drawcalls": 123,
+              "Triangles": 131484
+            }
+          }
+        ],
+        "Name": "TriangleComposition",
+        "Sizes": {
+          "Drawcalls": 166,
+          "Triangles": 164158
+        }
+      },
+      "lookAt": [
+        -4,
+        3,
+        -25
+      ],
+      "p50ms": 21.372899413108826,
+      "startMemoryMb": 2342.62890625
+    },
+    "energyClaim": {
+      "maxMs": 26.616500690579414,
+      "finalWallet": "\u25c6  2720",
+      "snapshots": [
+        {
+          "claimExpectedRevision": 127,
+          "revision": 134,
+          "claimUnits": 8,
+          "energyUnits": 2720
+        },
+        {
+          "claimExpectedRevision": 127,
+          "revision": 134,
+          "claimUnits": 8,
+          "energyUnits": 2720
+        },
+        {
+          "claimExpectedRevision": 127,
+          "revision": 134,
+          "claimUnits": 8,
+          "energyUnits": 2720
+        },
+        {
+          "claimExpectedRevision": 127,
+          "revision": 134,
+          "claimUnits": 8,
+          "energyUnits": 2720
+        },
+        {
+          "claimExpectedRevision": 127,
+          "revision": 134,
+          "claimUnits": 8,
+          "energyUnits": 2720
+        },
+        {
+          "claimExpectedRevision": 127,
+          "revision": 134,
+          "claimUnits": 8,
+          "energyUnits": 2720
+        },
+        {
+          "claimExpectedRevision": 127,
+          "revision": 134,
+          "claimUnits": 8,
+          "energyUnits": 2720
+        },
+        {
+          "claimExpectedRevision": 127,
+          "revision": 134,
+          "claimUnits": 8,
+          "energyUnits": 2720
+        },
+        {
+          "claimExpectedRevision": 127,
+          "revision": 134,
+          "claimUnits": 8,
+          "energyUnits": 2720
+        },
+        {
+          "claimExpectedRevision": 127,
+          "revision": 134,
+          "claimUnits": 8,
+          "energyUnits": 2720
+        },
+        {
+          "claimExpectedRevision": 127,
+          "revision": 134,
+          "claimUnits": 8,
+          "energyUnits": 2720
+        },
+        {
+          "claimExpectedRevision": 127,
+          "revision": 134,
+          "claimUnits": 8,
+          "energyUnits": 2720
+        }
+      ],
+      "done": true,
+      "frames": 180,
+      "lookAt": [
+        3,
+        4,
+        138
+      ],
+      "camera": [
+        5,
+        7,
+        112
+      ],
+      "p95ms": 23.19590002298355,
+      "render": {
+        "Children": [
+          {
+            "Name": "Opaque",
+            "Sizes": {
+              "Drawcalls": 27,
+              "Triangles": 20096
+            }
+          },
+          {
+            "Name": "UI",
+            "Sizes": {
+              "Drawcalls": 9,
+              "Triangles": 366
+            }
+          },
+          {
+            "Name": "Shadows",
+            "Sizes": {
+              "Drawcalls": 118,
+              "Triangles": 91511
+            }
+          }
+        ],
+        "Name": "TriangleComposition",
+        "Sizes": {
+          "Drawcalls": 154,
+          "Triangles": 111973
+        }
+      },
+      "memoryMb": 2338.375,
+      "maxTransient": 6,
+      "p50ms": 21.354099735617638,
+      "startMemoryMb": 2333.01953125
+    },
+    "starterPermanent": {
+      "maxMs": 25.41770040988922,
+      "memoryMb": 2300.3828125,
+      "frames": 180,
+      "camera": [
+        -24,
+        6,
+        22
+      ],
+      "p95ms": 23.53549934923649,
+      "render": {
+        "Children": [
+          {
+            "Name": "Opaque",
+            "Sizes": {
+              "Drawcalls": 25,
+              "Triangles": 24216
+            }
+          },
+          {
+            "Name": "UI",
+            "Sizes": {
+              "Drawcalls": 3,
+              "Triangles": 142
+            }
+          },
+          {
+            "Name": "Shadows",
+            "Sizes": {
+              "Drawcalls": 89,
+              "Triangles": 105890
+            }
+          }
+        ],
+        "Name": "TriangleComposition",
+        "Sizes": {
+          "Drawcalls": 117,
+          "Triangles": 130248
+        }
+      },
+      "lookAt": [
+        -4,
+        3,
+        -25
+      ],
+      "p50ms": 21.349800750613213,
+      "startMemoryMb": 2300.3828125
+    },
+    "vaultIdle": {
+      "maxMs": 24.01679940521717,
+      "memoryMb": 2337.953125,
+      "frames": 180,
+      "camera": [
+        -17,
+        8,
+        115
+      ],
+      "p95ms": 23.507900536060333,
+      "render": {
+        "Children": [
+          {
+            "Name": "Opaque",
+            "Sizes": {
+              "Drawcalls": 32,
+              "Triangles": 27180
+            }
+          },
+          {
+            "Name": "UI",
+            "Sizes": {
+              "Drawcalls": 10,
+              "Triangles": 426
+            }
+          },
+          {
+            "Name": "Shadows",
+            "Sizes": {
+              "Drawcalls": 119,
+              "Triangles": 110337
+            }
+          }
+        ],
+        "Name": "TriangleComposition",
+        "Sizes": {
+          "Drawcalls": 161,
+          "Triangles": 137943
+        }
+      },
+      "lookAt": [
+        5,
+        4,
+        139
+      ],
+      "p50ms": 21.38970047235489,
+      "startMemoryMb": 2337.953125
+    },
+    "legendaryReveal": {
+      "maxMs": 24.67459999024868,
+      "endTransient": 0,
+      "scope": "IMP10Reward-82dc7acb-69b5-44ea-a039-87e8e0df00c1",
+      "memoryMb": 2374.80859375,
+      "frames": 180,
+      "p50ms": 21.30029909312725,
+      "render": {
+        "Children": [
+          {
+            "Name": "Opaque",
+            "Sizes": {
+              "Drawcalls": 17,
+              "Triangles": 15212
+            }
+          },
+          {
+            "Name": "UI",
+            "Sizes": {
+              "Drawcalls": 1,
+              "Triangles": 124
+            }
+          },
+          {
+            "Name": "Shadows",
+            "Sizes": {
+              "Drawcalls": 62,
+              "Triangles": 63461
+            }
+          }
+        ],
+        "Name": "TriangleComposition",
+        "Sizes": {
+          "Drawcalls": 80,
+          "Triangles": 78797
+        }
+      },
+      "camera": [
+        43,
+        4,
+        -32
+      ],
+      "p95ms": 22.17560075223446,
+      "maxTransient": 1,
+      "fixture": "protected Legendary DEV; shipped public model, native probe clock/RNG",
+      "lookAt": [
+        36,
+        2.5,
+        -40
+      ],
+      "startMemoryMb": 2374.80859375,
+      "peakFrame": 5
+    }
+  },
+  "capture": {
+    "render": {
+      "Children": [
+        {
+          "Name": "Opaque",
+          "Sizes": {
+            "Drawcalls": 17,
+            "Triangles": 12268
+          }
+        },
+        {
+          "Name": "Transparent",
+          "Sizes": {
+            "Drawcalls": 1,
+            "Triangles": 32
+          }
+        },
+        {
+          "Name": "UI",
+          "Sizes": {
+            "Drawcalls": 2,
+            "Triangles": 70
+          }
+        },
+        {
+          "Name": "Particles",
+          "Sizes": {
+            "Drawcalls": 1,
+            "Triangles": 32
+          }
+        },
+        {
+          "Name": "Shadows",
+          "Sizes": {
+            "Drawcalls": 86,
+            "Triangles": 95191
+          }
+        }
+      ],
+      "Name": "TriangleComposition",
+      "Sizes": {
+        "Drawcalls": 107,
+        "Triangles": 107593
+      }
+    },
+    "started": 35462.2127915,
+    "done": true,
+    "frames": 180,
+    "history": [
+      {
+        "status": "Claimed",
+        "revision": 2,
+        "correlationId": "client-99",
+        "creatureInstanceId": "creature-59e068f3-b77e-48c3-bc59-6859440ee61d-1"
+      },
+      {
+        "status": "Claimed",
+        "revision": 2,
+        "correlationId": "client-100",
+        "creatureInstanceId": "creature-59e068f3-b77e-48c3-bc59-6859440ee61d-1"
+      },
+      {
+        "status": "Claimed",
+        "revision": 2,
+        "correlationId": "client-104",
+        "creatureInstanceId": "creature-59e068f3-b77e-48c3-bc59-6859440ee61d-1"
+      },
+      {
+        "status": "Claimed",
+        "revision": 2,
+        "correlationId": "client-108",
+        "creatureInstanceId": "creature-59e068f3-b77e-48c3-bc59-6859440ee61d-1"
+      },
+      {
+        "status": "Failed",
+        "revision": 3,
+        "correlationId": "client-109",
+        "creatureInstanceId": "creature-59e068f3-b77e-48c3-bc59-6859440ee61d-1"
+      },
+      {
+        "status": "Claimed",
+        "revision": 4,
+        "correlationId": "client-131",
+        "creatureInstanceId": "creature-59e068f3-b77e-48c3-bc59-6859440ee61d-3"
+      },
+      {
+        "status": "Claimed",
+        "revision": 4,
+        "correlationId": "client-132",
+        "creatureInstanceId": "creature-59e068f3-b77e-48c3-bc59-6859440ee61d-3"
+      },
+      {
+        "status": "TransportActive",
+        "revision": 5,
+        "correlationId": "client-133",
+        "creatureInstanceId": "creature-59e068f3-b77e-48c3-bc59-6859440ee61d-3"
+      },
+      {
+        "status": "TransportActive",
+        "revision": 5,
+        "correlationId": "client-137",
+        "creatureInstanceId": "creature-59e068f3-b77e-48c3-bc59-6859440ee61d-3"
+      },
+      {
+        "status": "TransportActive",
+        "revision": 5,
+        "correlationId": "client-141",
+        "creatureInstanceId": "creature-59e068f3-b77e-48c3-bc59-6859440ee61d-3"
+      },
+      {
+        "status": "TransportActive",
+        "revision": 5,
+        "correlationId": "client-145",
+        "creatureInstanceId": "creature-59e068f3-b77e-48c3-bc59-6859440ee61d-3"
+      },
+      {
+        "status": "FinalizationPending",
+        "revision": 6,
+        "creatureInstanceId": "creature-59e068f3-b77e-48c3-bc59-6859440ee61d-3"
+      },
+      {
+        "status": "Secured",
+        "revision": 7,
+        "creatureInstanceId": "creature-59e068f3-b77e-48c3-bc59-6859440ee61d-3"
+      }
+    ],
+    "p95ms": 23.293999955058098,
+    "memoryMb": 2300.76171875,
+    "maxMs": 25.287499651312828,
+    "maxTransient": 6,
+    "startMemoryMb": 2300.76171875,
+    "p50ms": 21.406199783086777
+  },
+  "audio": [
+    {
+      "name": "MV_GS_Reserve",
+      "volume": 0,
+      "loaded": true,
+      "id": "rbxassetid://131180614536198",
+      "playing": true
+    },
+    {
+      "name": "MV_GS_Machine",
+      "volume": 0.07000000029802322,
+      "loaded": true,
+      "id": "rbxassetid://128255067108333",
+      "playing": true
+    },
+    {
+      "name": "GoldenCue1",
+      "volume": 0.10000000149011612,
+      "loaded": true,
+      "id": "rbxassetid://103248426846177",
+      "playing": false
+    },
+    {
+      "name": "GoldenCue2",
+      "volume": 0.10000000149011612,
+      "loaded": true,
+      "id": "rbxassetid://103248426846177",
+      "playing": false
+    },
+    {
+      "name": "GoldenCue3",
+      "volume": 0.10000000149011612,
+      "loaded": true,
+      "id": "rbxassetid://103248426846177",
+      "playing": false
+    },
+    {
+      "name": "GoldenCue4",
+      "volume": 0.10000000149011612,
+      "loaded": true,
+      "id": "rbxassetid://103248426846177",
+      "playing": false
+    },
+    {
+      "name": "GoldenCue5",
+      "volume": 0.10000000149011612,
+      "loaded": true,
+      "id": "rbxassetid://103248426846177",
+      "playing": false
+    },
+    {
+      "name": "GoldenCue6",
+      "volume": 0.10000000149011612,
+      "loaded": true,
+      "id": "rbxassetid://103248426846177",
+      "playing": false
+    }
+  ],
+  "measurementScope": "Studio on the current workstation; emulation is not physical-device performance. Shadow pass excluded from working rendering totals.",
+  "exceptions": [
+    "Fresh-session p95 22.18-23.54 ms exceeds the 16.67 ms reference-device target; no TA-14 closure.",
+    "Earlier long-session physical-controller capture recorded p50 67.24 ms / p95 101.05 ms at ~2422 MB. See gamepad_capture_native.json; cause not established.",
+    "Energy triangle query is an early receipt frame, not guaranteed to be maximum particle overdraw; 180-frame transient maximum is recorded separately.",
+    "Legendary measurement uses the existing protected native DEV probe with isolated clock/RNG; it does not establish production encounter odds."
+  ]
+}

@@ -1,0 +1,65 @@
+{
+  "initialWallet": "◆  2720",
+  "finalWallet": "◆  3031",
+  "audio": "Audio · OFF",
+  "maxTransientParts": 0,
+  "low": "Effects · LOW",
+  "events": [
+    {
+      "energyUnits": 2720,
+      "revision": 168,
+      "claimUnits": 8,
+      "claimExpectedRevision": 127
+    },
+    {
+      "energyUnits": 3031,
+      "revision": 169,
+      "claimUnits": 311,
+      "claimExpectedRevision": 168
+    }
+  ],
+  "reduced": "Reduced Motion · ON",
+  "endTransientParts": 0,
+  "sounds": [
+    {
+      "playing": true,
+      "name": "MV_GS_Reserve",
+      "volume": 0
+    },
+    {
+      "playing": true,
+      "name": "MV_GS_Machine",
+      "volume": 0
+    },
+    {
+      "playing": false,
+      "name": "GoldenCue1",
+      "volume": 0.10000000149011612
+    },
+    {
+      "playing": false,
+      "name": "GoldenCue2",
+      "volume": 0.10000000149011612
+    },
+    {
+      "playing": false,
+      "name": "GoldenCue3",
+      "volume": 0.10000000149011612
+    },
+    {
+      "playing": false,
+      "name": "GoldenCue4",
+      "volume": 0.10000000149011612
+    },
+    {
+      "playing": false,
+      "name": "GoldenCue5",
+      "volume": 0.5
+    },
+    {
+      "playing": false,
+      "name": "GoldenCue6",
+      "volume": 0.5
+    }
+  ]
+}

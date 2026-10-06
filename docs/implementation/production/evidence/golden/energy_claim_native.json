@@ -1,0 +1,54 @@
+{
+  "finalEnergy": "◆  1459",
+  "snapshots": [
+    {
+      "revision": 83,
+      "claimUnits": 1307,
+      "energyUnits": 1295,
+      "claimExpectedRevision": 57
+    },
+    {
+      "revision": 84,
+      "claimUnits": 164,
+      "energyUnits": 1459,
+      "claimExpectedRevision": 83
+    },
+    {
+      "revision": 84,
+      "claimUnits": 164,
+      "energyUnits": 1459,
+      "claimExpectedRevision": 83
+    },
+    {
+      "revision": 84,
+      "claimUnits": 164,
+      "energyUnits": 1459,
+      "claimExpectedRevision": 83
+    },
+    {
+      "revision": 84,
+      "claimUnits": 164,
+      "energyUnits": 1459,
+      "claimExpectedRevision": 83
+    },
+    {
+      "revision": 84,
+      "claimUnits": 164,
+      "energyUnits": 1459,
+      "claimExpectedRevision": 83
+    }
+  ],
+  "device": "Average Laptop",
+  "frames": 300,
+  "peakTransient": 8,
+  "effectSeconds": 1.1933736000028148,
+  "p95ms": 18.13340000808239,
+  "maxms": 30.23719973862171,
+  "viewport": [
+    1365,
+    768
+  ],
+  "peakTransferOrbs": 5,
+  "stage": "integration",
+  "p50ms": 16.792399808764458
+}

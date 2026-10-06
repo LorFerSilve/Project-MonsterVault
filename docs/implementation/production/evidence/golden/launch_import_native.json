@@ -1,0 +1,272 @@
+{
+  "manifest": {
+    "version": 1,
+    "assets": [
+      {
+        "geometrySha256": "f78ead7b713b39513eb7ead00e20b310683507a3c2b0a2066607bc999f7d5e31",
+        "meshes": [
+          {
+            "name": "GS_ReservePine_BarkWood",
+            "group": "BarkWood",
+            "meshId": "rbxassetid://114780498323529",
+            "center": [
+              0,
+              3,
+              -0.01820149999999998
+            ],
+            "size": [
+              0.861524,
+              6,
+              0.847275
+            ]
+          },
+          {
+            "name": "GS_ReservePine_ForestDeep",
+            "group": "ForestDeep",
+            "meshId": "rbxassetid://119836049031744",
+            "center": [
+              0.10553799999999991,
+              7,
+              0
+            ],
+            "size": [
+              6.788924,
+              9.2,
+              6.893654
+            ]
+          },
+          {
+            "name": "GS_ReservePine_LeafGreen",
+            "group": "LeafGreen",
+            "meshId": "rbxassetid://134877871287414",
+            "center": [
+              0.08141500000000002,
+              7.25,
+              0
+            ],
+            "size": [
+              5.237170000000001,
+              4.5,
+              5.317962
+            ]
+          }
+        ],
+        "key": "ReservePine",
+        "triangles": 240
+      },
+      {
+        "geometrySha256": "1339374a618030dc8bb25384f34f96f66316871ecd4b88dabf2409a709f4d560",
+        "meshes": [
+          {
+            "name": "GS_MossBank_GrassMeadow",
+            "group": "GrassMeadow",
+            "meshId": "rbxassetid://79508180386485",
+            "center": [
+              0,
+              2.5858035,
+              0
+            ],
+            "size": [
+              28,
+              5.171607,
+              20
+            ]
+          }
+        ],
+        "key": "MossBank",
+        "triangles": 288
+      },
+      {
+        "geometrySha256": "57a5c84ccb6241a1974bd3eb78ec3a313f056bb62c1aed7ceab40d0655b79e7a",
+        "meshes": [
+          {
+            "name": "GS_HarvestPumpkin_HarvestOrange",
+            "group": "HarvestOrange",
+            "meshId": "rbxassetid://98073288340915",
+            "center": [
+              0,
+              0.85,
+              0
+            ],
+            "size": [
+              2.101426,
+              1.594882,
+              2.101426
+            ]
+          },
+          {
+            "name": "GS_HarvestPumpkin_BarkWood",
+            "group": "BarkWood",
+            "meshId": "rbxassetid://136544592443418",
+            "center": [
+              0.12,
+              1.75,
+              -0.002357000000000005
+            ],
+            "size": [
+              0.23757,
+              0.3799999999999999,
+              0.238966
+            ]
+          },
+          {
+            "name": "GS_HarvestPumpkin_CandleGold",
+            "group": "CandleGold",
+            "meshId": "rbxassetid://99670941969749",
+            "center": [
+              0,
+              0.9450000000000001,
+              0.98
+            ],
+            "size": [
+              0.98,
+              0.7300000000000001,
+              0.12
+            ]
+          }
+        ],
+        "key": "HarvestPumpkin",
+        "triangles": 450
+      },
+      {
+        "geometrySha256": "26a5cf8700cdc00425c61fbb0503f0395d32bb5dc6572087743625e2c88a81e4",
+        "meshes": [
+          {
+            "name": "GS_HarvestLantern_DarkMetal",
+            "group": "DarkMetal",
+            "meshId": "rbxassetid://83362654484368",
+            "center": [
+              0,
+              1.2725,
+              0
+            ],
+            "size": [
+              1.26386,
+              2.545,
+              1.26386
+            ]
+          },
+          {
+            "name": "GS_HarvestLantern_CandleGold",
+            "group": "CandleGold",
+            "meshId": "rbxassetid://106743687132838",
+            "center": [
+              -0.001313500000000023,
+              1,
+              0
+            ],
+            "size": [
+              0.564693,
+              1.35,
+              0.56732
+            ]
+          },
+          {
+            "name": "GS_HarvestLantern_SecondaryMetal",
+            "group": "SecondaryMetal",
+            "meshId": "rbxassetid://85454344527571",
+            "center": [
+              0,
+              1,
+              0
+            ],
+            "size": [
+              0.726396,
+              1.65,
+              0.726396
+            ]
+          }
+        ],
+        "key": "HarvestLantern",
+        "triangles": 1380
+      },
+      {
+        "geometrySha256": "c2d8b278a6b31d15e0400cac265368f4e4d818cf1279091bf162a478c81b9795",
+        "meshes": [
+          {
+            "name": "GS_SpectralReliquary_NightPlum",
+            "group": "NightPlum",
+            "meshId": "rbxassetid://87803075559714",
+            "center": [
+              0,
+              1.74,
+              0
+            ],
+            "size": [
+              5.680332,
+              3.48,
+              4.182066
+            ]
+          },
+          {
+            "name": "GS_SpectralReliquary_DarkMetal",
+            "group": "DarkMetal",
+            "meshId": "rbxassetid://121209780079525",
+            "center": [
+              0,
+              2,
+              0
+            ],
+            "size": [
+              4.35,
+              3.5,
+              2.482066
+            ]
+          },
+          {
+            "name": "GS_SpectralReliquary_SecondaryMetal",
+            "group": "SecondaryMetal",
+            "meshId": "rbxassetid://136969768075355",
+            "center": [
+              0,
+              2.75,
+              0
+            ],
+            "size": [
+              3.84,
+              3.84,
+              0.207846
+            ]
+          },
+          {
+            "name": "GS_SpectralReliquary_SpectralViolet",
+            "group": "SpectralViolet",
+            "meshId": "rbxassetid://99376494079394",
+            "center": [
+              0,
+              2.75,
+              0.24
+            ],
+            "size": [
+              3.38,
+              3.3800000000000003,
+              1.52
+            ]
+          },
+          {
+            "name": "GS_SpectralReliquary_EyeInk",
+            "group": "EyeInk",
+            "meshId": "rbxassetid://123670027032340",
+            "center": [
+              0,
+              3.2800000000000002,
+              0.6399999999999999
+            ],
+            "size": [
+              0.67,
+              0.2799999999999998,
+              0.09999999999999998
+            ]
+          }
+        ],
+        "key": "SpectralReliquary",
+        "triangles": 2136
+      }
+    ]
+  },
+  "seasonalDescendants": 173,
+  "unmapped": [],
+  "worldDescendants": 681,
+  "meshes": 432,
+  "libraryCount": 14
+}

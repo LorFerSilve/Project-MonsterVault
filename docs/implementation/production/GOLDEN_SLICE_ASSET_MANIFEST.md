@@ -242,3 +242,28 @@ Recommended Golden production order:
 10. screenshot/evidence cleanup.
 
 Do not begin with dozens of decorative pumpkins while permanent geometry is still blockout quality.
+
+## 13. Imported production set — 2026-10-06
+
+The working Golden branch has 14 validated new editable Blender assets, of which 13 are used at runtime. The original Energy Core is reused. All prepared runtime meshes have been imported into Studio, normalized and centrally mapped; no further asset import is pending. See [native import evidence](evidence/golden/launch_import_native.json), [source audit](../../../assets/exported/golden_source_audit.json) and [persistent mesh mapping](../../../assets/exported/golden_asset_manifest.json).
+
+| Asset | Editable source / GLB family | Triangles | Current use / classification |
+| --- | --- | ---: | --- |
+| Mossbud | creatures/golden_mossbud.blend / matching GLB | 4504 | COMPLETE — mapped prefab and permanent world/runtime placement |
+| Prismfin | creatures/golden_prismfin.blend / matching GLB | 2772 | NOT NEEDED IN RUNTIME — offline Rare concept; no authored Rare Species |
+| Helion | creatures/golden_helion.blend / matching GLB | 5700 | COMPLETE — mapped prefab and permanent world/runtime placement |
+| Basalt | environment/golden_basalt.blend / matching GLB | 316 | COMPLETE — mapped prefab and permanent world/runtime placement |
+| Fern | environment/golden_fern.blend / matching GLB | 304 | COMPLETE — mapped prefab and permanent world/runtime placement |
+| Relay | environment/golden_relay.blend / matching GLB | 1996 | COMPLETE — mapped prefab and permanent world/runtime placement |
+| Plinth | vault/golden_plinth.blend / matching GLB | 1380 | COMPLETE — mapped prefab and permanent world/runtime placement |
+| Gate | environment/golden_gate.blend / matching GLB | 1620 | COMPLETE — mapped prefab and permanent world/runtime placement |
+| Accumulator | vault/golden_accumulator.blend / matching GLB | 1208 | COMPLETE — mapped prefab and permanent world/runtime placement |
+| ReservePine | environment/golden_reservepine.blend / matching GLB | 240 | COMPLETE — mapped prefab and permanent world/runtime placement |
+| MossBank | environment/golden_mossbank.blend / matching GLB | 288 | COMPLETE — mapped prefab and permanent world/runtime placement |
+| HarvestPumpkin | seasonal/halloween_2026/golden_harvestpumpkin.blend / matching GLB | 450 | COMPLETE — mapped seasonal template; native toggle validated |
+| HarvestLantern | seasonal/halloween_2026/golden_harvestlantern.blend / matching GLB | 1380 | COMPLETE — mapped seasonal template; native toggle validated |
+| SpectralReliquary | seasonal/halloween_2026/golden_spectralreliquary.blend / matching GLB | 2136 | COMPLETE — mapped seasonal template; native toggle validated |
+
+Combined FBX files are import transport, not the editable asset source. `golden_studio_import.fbx` contains the initial material-group meshes; `golden_launch_import.fbx` contains the five supplementary assets. Native `golden_assets.rbxm`, `golden_world.rbxm` and seasonal `dressing.rbxm` are the Rojo delivery artifacts. Do not re-upload the eleven existing original WAVs; the current IDs are in `GoldenAudio.luau`.
+
+The Common and Legendary source rigs retain `GentleIdle` authoring actions. Runtime presentation currently uses the bounded shared cosmetic controller; Roblox Animator-track import is not claimed. Vault shell, bridge deck, outpost frame, path slabs and energy conduits reuse native parts plus the custom kit.

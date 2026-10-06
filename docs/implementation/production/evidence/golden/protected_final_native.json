@@ -1,0 +1,34 @@
+{
+  "validation": {
+    "immutableWindow": true,
+    "claimTimeout": true,
+    "streamingClientTamperingInert": true,
+    "scope": "IMP10Reward-bfd51f4a-c022-4b94-a360-3378c70a32a6",
+    "replacementId": "creature-3aaa5965-b6ca-4db7-897a-8041ccf2a8fd-4",
+    "passed": true
+  },
+  "setup": {
+    "pinnedContext": true,
+    "creatureId": "creature-3aaa5965-b6ca-4db7-897a-8041ccf2a8fd-2",
+    "scope": "IMP10Reward-bfd51f4a-c022-4b94-a360-3378c70a32a6",
+    "ordinaryExpired": true,
+    "nativeCue": true,
+    "record": {
+      "creatureInstanceId": "creature-3aaa5965-b6ca-4db7-897a-8041ccf2a8fd-2",
+      "rarityId": "rarity/legendary",
+      "idleExpiresAt": 303,
+      "availableAt": 3,
+      "runtimeRevision": 2,
+      "position": {
+        "y": 3,
+        "x": 36,
+        "z": -40
+      },
+      "spawnContextId": "spawn-context/starter-field",
+      "availability": "IdleAvailable",
+      "lifetimeClass": "ProtectedVariant",
+      "speciesId": "species/stability-orb-dev"
+    }
+  },
+  "fixtureNote": "QA capture stays at the authored anchor; earlier photographic relocation is not this claim test"
+}

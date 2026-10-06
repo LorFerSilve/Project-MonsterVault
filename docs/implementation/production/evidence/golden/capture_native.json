@@ -1,0 +1,240 @@
+{
+  "setup": "One actual Player with source boot in isolated DEV profile scope; range position set only; ordinary RNG/outcome unchanged.",
+  "input": "Native mouse Activated / IAS Pressed; MCP SendKey E emitted Keyboard events without IAS Pressed in this run; no keyboard/gamepad pass claimed.",
+  "provisional": {
+    "message": "Carry the creature to the secure point. It is not owned yet.",
+    "heading": "Bring it to safety",
+    "action": [
+      "Pressed",
+      "Released",
+      "Pressed",
+      "Released",
+      "Pressed",
+      "Released"
+    ],
+    "active": false,
+    "button": "Return to safety",
+    "proof": {
+      "input": [
+        {
+          "type": "Enum.UserInputType.Keyboard",
+          "key": "Enum.KeyCode.E",
+          "processed": true
+        },
+        {
+          "type": "Enum.UserInputType.Keyboard",
+          "key": "Enum.KeyCode.E",
+          "processed": true
+        },
+        {
+          "type": "Enum.UserInputType.Keyboard",
+          "key": "Enum.KeyCode.E",
+          "processed": true
+        },
+        {
+          "type": "Enum.UserInputType.MouseButton1",
+          "key": "Enum.KeyCode.None",
+          "processed": true
+        },
+        {
+          "type": "Enum.UserInputType.Keyboard",
+          "key": "Enum.KeyCode.E",
+          "processed": true
+        },
+        {
+          "type": "Enum.UserInputType.MouseButton1",
+          "key": "Enum.KeyCode.None",
+          "processed": true
+        },
+        {
+          "type": "Enum.UserInputType.MouseButton1",
+          "key": "Enum.KeyCode.None",
+          "processed": true
+        }
+      ],
+      "events": [
+        {
+          "correlation": "client-105",
+          "route": "Capture.StateChanged",
+          "creature": "creature-4c6004b7-33d6-472a-bf69-a14ba6a8f715-1",
+          "state": "Claimed"
+        },
+        {
+          "correlation": "client-105",
+          "route": "Command.Result",
+          "code": "OK_CAPTURE_CLAIMED"
+        },
+        {
+          "correlation": "client-106",
+          "route": "Capture.StateChanged",
+          "creature": "creature-4c6004b7-33d6-472a-bf69-a14ba6a8f715-1",
+          "state": "Claimed"
+        },
+        {
+          "correlation": "client-106",
+          "route": "Command.Result",
+          "code": "OK_CAPTURE_RESYNC"
+        },
+        {
+          "correlation": "client-107",
+          "route": "Capture.StateChanged",
+          "creature": "creature-4c6004b7-33d6-472a-bf69-a14ba6a8f715-1",
+          "state": "TransportActive"
+        },
+        {
+          "correlation": "client-107",
+          "route": "Command.Result",
+          "code": "OK_CAPTURE_PROVISIONAL"
+        }
+      ],
+      "states": []
+    }
+  },
+  "secured": {
+    "message": "The server confirmed this creature is saved in your collection.",
+    "heading": "Capture secured",
+    "button": "Saved to Collection",
+    "visible": true,
+    "proof": {
+      "input": [
+        {
+          "type": "Enum.UserInputType.Keyboard",
+          "key": "Enum.KeyCode.E",
+          "processed": true
+        },
+        {
+          "type": "Enum.UserInputType.Keyboard",
+          "key": "Enum.KeyCode.E",
+          "processed": true
+        },
+        {
+          "type": "Enum.UserInputType.Keyboard",
+          "key": "Enum.KeyCode.E",
+          "processed": true
+        },
+        {
+          "type": "Enum.UserInputType.MouseButton1",
+          "key": "Enum.KeyCode.None",
+          "processed": true
+        },
+        {
+          "type": "Enum.UserInputType.Keyboard",
+          "key": "Enum.KeyCode.E",
+          "processed": true
+        },
+        {
+          "type": "Enum.UserInputType.MouseButton1",
+          "key": "Enum.KeyCode.None",
+          "processed": true
+        },
+        {
+          "type": "Enum.UserInputType.MouseButton1",
+          "key": "Enum.KeyCode.None",
+          "processed": true
+        }
+      ],
+      "events": [
+        {
+          "correlation": "client-105",
+          "route": "Capture.StateChanged",
+          "creature": "creature-4c6004b7-33d6-472a-bf69-a14ba6a8f715-1",
+          "state": "Claimed"
+        },
+        {
+          "correlation": "client-105",
+          "route": "Command.Result",
+          "code": "OK_CAPTURE_CLAIMED"
+        },
+        {
+          "correlation": "client-106",
+          "route": "Capture.StateChanged",
+          "creature": "creature-4c6004b7-33d6-472a-bf69-a14ba6a8f715-1",
+          "state": "Claimed"
+        },
+        {
+          "correlation": "client-106",
+          "route": "Command.Result",
+          "code": "OK_CAPTURE_RESYNC"
+        },
+        {
+          "correlation": "client-107",
+          "route": "Capture.StateChanged",
+          "creature": "creature-4c6004b7-33d6-472a-bf69-a14ba6a8f715-1",
+          "state": "TransportActive"
+        },
+        {
+          "correlation": "client-107",
+          "route": "Command.Result",
+          "code": "OK_CAPTURE_PROVISIONAL"
+        },
+        {
+          "correlation": "client-111",
+          "route": "Capture.StateChanged",
+          "creature": "creature-4c6004b7-33d6-472a-bf69-a14ba6a8f715-1",
+          "state": "TransportActive"
+        },
+        {
+          "correlation": "client-111",
+          "route": "Command.Result",
+          "code": "OK_CAPTURE_RESYNC"
+        },
+        {
+          "correlation": "client-115",
+          "route": "Capture.StateChanged",
+          "creature": "creature-4c6004b7-33d6-472a-bf69-a14ba6a8f715-1",
+          "state": "TransportActive"
+        },
+        {
+          "correlation": "client-115",
+          "route": "Command.Result",
+          "code": "OK_CAPTURE_RESYNC"
+        },
+        {
+          "correlation": "client-119",
+          "route": "Capture.StateChanged",
+          "creature": "creature-4c6004b7-33d6-472a-bf69-a14ba6a8f715-1",
+          "state": "TransportActive"
+        },
+        {
+          "correlation": "client-119",
+          "route": "Command.Result",
+          "code": "OK_CAPTURE_RESYNC"
+        },
+        {
+          "correlation": "client-123",
+          "route": "Capture.StateChanged",
+          "creature": "creature-4c6004b7-33d6-472a-bf69-a14ba6a8f715-1",
+          "state": "TransportActive"
+        },
+        {
+          "correlation": "client-123",
+          "route": "Command.Result",
+          "code": "OK_CAPTURE_RESYNC"
+        },
+        {
+          "correlation": "client-127",
+          "route": "Capture.StateChanged",
+          "creature": "creature-4c6004b7-33d6-472a-bf69-a14ba6a8f715-1",
+          "state": "TransportActive"
+        },
+        {
+          "correlation": "client-127",
+          "route": "Command.Result",
+          "code": "OK_CAPTURE_RESYNC"
+        },
+        {
+          "route": "Capture.StateChanged",
+          "creature": "creature-4c6004b7-33d6-472a-bf69-a14ba6a8f715-1",
+          "state": "FinalizationPending"
+        },
+        {
+          "route": "Capture.StateChanged",
+          "creature": "creature-4c6004b7-33d6-472a-bf69-a14ba6a8f715-1",
+          "state": "Secured"
+        }
+      ],
+      "states": []
+    }
+  },
+  "secure": "Actual Humanoid MoveTo into existing secure zone, existing server Touched/P2 finalization; no direct secure command."
+}

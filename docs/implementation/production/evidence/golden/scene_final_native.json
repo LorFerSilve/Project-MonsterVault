@@ -1,0 +1,40 @@
+{
+  "clock": 15.5,
+  "roots": [
+    {
+      "class": "Folder",
+      "name": "MonsterVaultWorld",
+      "desc": 60
+    },
+    {
+      "position": "0, 0, 0",
+      "class": "Terrain",
+      "name": "Terrain",
+      "desc": 0
+    },
+    {
+      "class": "Camera",
+      "name": "Camera",
+      "desc": 0
+    },
+    {
+      "class": "Model",
+      "name": "MonsterVaultPresentation",
+      "desc": 763
+    }
+  ],
+  "counts": {
+    "lights": 3,
+    "shadowLights": 0,
+    "worldParts": 513,
+    "libraryParts": 48,
+    "worldMeshes": 356
+  },
+  "http": false,
+  "baselineGeometry": {
+    "authoredParts": 58,
+    "positionRotationSizeDeviations": [],
+    "initialAuditEntries": 64,
+    "initialAuditIncludesTerrainAndFiveLocalMeshes": true
+  }
+}

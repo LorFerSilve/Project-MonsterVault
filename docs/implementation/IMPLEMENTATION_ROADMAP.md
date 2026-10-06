@@ -1,6 +1,6 @@
 # MonsterVault Implementation Roadmap
 
-> **Status:** IMP-8 COMPLETE with registered deferred validation; IMP-9 COMPLETE; IMP-10 FUNCTIONALLY COMPLETE under AD-260; IMP-11 OPEN with Party, Social Ping, Friendly Challenge and Showcase/Visitor dependencies COMPLETE. Golden Playable Vertical Slice ready to begin on these stable dependencies; **Halloween 2026 is the owner-authorized launch theme**; VS1-19 remains DEFERRED to Scale Readiness
+> **Status:** IMP-8 COMPLETE with registered deferred validation; IMP-9 COMPLETE; IMP-10 FUNCTIONALLY COMPLETE under AD-260; IMP-11 OPEN with Party, Social Ping, Friendly Challenge and Showcase/Visitor dependencies COMPLETE. Golden Playable Vertical Slice IMPLEMENTED IN STUDIO, acceptance still OPEN; **Halloween 2026 is the owner-authorized launch theme**; VS1-19 remains DEFERRED to Scale Readiness
 > **Locked by:** TA-17
 > **Rule:** Dependency-driven; do not skip phases merely because later UI/content is easier to demo.
 
@@ -243,7 +243,7 @@ Fourth dependency COMPLETE (2026-10-05): [Showcase/Visitor](IMP11_SHOWCASE_VISIT
 
 Current validation: **32/32 focused Showcase, 326/326 full fast, 29/29 distinct Showcase native, 28/28 Python, 97/97 final Edit source parity**, normal static/build/dependency/integrity/configured analysis. One actual native Player/client plus three explicit adapter peers prove remotes/store/UI, ownership rejection, real profile/session notifications, timer expiry and settled native disconnect/all-zero stop. The 64 current parts and eight Lighting properties are preserved. Completed Party/Ping/Challenge/IMP-10 evidence is unchanged; broader real multiplayer/platform/reconnect and scale/release obligations remain open.
 
-**Golden Playable Vertical Slice / first production-quality visual pass is ready to begin** on the stable world/capture/Collection/Vault/display and four social dependencies, under the existing incremental PQL rule and owner's 2026-10-05 scope. Remaining later IMP-11 co-op/events do not block that representative visual pass. PQL-1/2/3/4/8 and release completion are not claimed; no polished visual system is implemented by this slice.
+**Golden Playable Vertical Slice / first visual production pass is now implemented in Studio, with acceptance still open.** The permanent Starter/Home kit, Common/protected Legendary presentation, native UI, capture/claim feedback, Read Only Showcase and removable Halloween layer are integrated. See [current native evidence](production/GOLDEN_SLICE_EVIDENCE.md), [15-image gallery](production/evidence/golden/README.md) and [acceptance matrix](production/GOLDEN_SLICE_ACCEPTANCE_MATRIX.md). Imports are complete; 339/339 fast, 28/28 Python and 109/109 final Edit source parity passed. Physical controller menus, actual increased platform text preference and reference-device/long-session performance acceptance remain open. Broader PQL-1/2/3/4/8 rollout and release completion are not claimed. Later IMP-11 co-op/events do not block this representative visual work and have not been started.
 
 Exact next remaining IMP-11 functional dependency: **TA-10 §8 Shared Objective contribution -> server-observed per-player eligibility -> §9 owning-profile exact-once P2 Collaboration Rewards**. Subsequent event work retains its own gates. IMP-11 remains OPEN; commerce/trading retain their later owners.
 

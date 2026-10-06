@@ -1,8 +1,20 @@
 # Golden Slice Work Handoff
 
-> Status: READY FOR WORK MODE
+> Status: RESUME IMPLEMENTED GOLDEN BRANCH — MANUAL ACCEPTANCE OPEN
 > Date: 2026-10-06
-> Purpose: give the next high-reasoning Work run an already-resolved production baseline
+> Purpose: preserve the integrated Golden implementation and remaining acceptance work
+
+## Current continuation state — 2026-10-06
+
+The implementation below has advanced: **do not repeat the old preparation/audit sequence or ask for another import**. Start from [current evidence](GOLDEN_SLICE_EVIDENCE.md), [acceptance matrix](GOLDEN_SLICE_ACCEPTANCE_MATRIX.md) and the current branch/PR. The remainder of this handoff preserves the original production brief for reference.
+
+- `codex/golden-slice` implements 13 new runtime assets plus the reused Energy Core; 14 editable source assets include the offline Rare concept. All prepared imports are mapped and integrated.
+- Permanent Starter/Home world, seasonal template and prefabs are serialized Rojo artifacts. Eleven uploaded original audio IDs are reused; no further upload is pending.
+- Actual native capture/travel/display/claim/Showcase evidence and 15 screenshots are retained. 339/339 fast, 28/28 Python and 109/109 final Edit source parity passed.
+- User is at school and requested that manual questions/tests wait for the next work phase. Physical controller capture/secure passed, touchpad menu entry failed; direct △ entry is implemented but needs physical menu/select/○ retest. Actual platform text preference remained Medium; 1.5x font stress is separate evidence.
+- Six Studio performance views are recorded with rendering headroom, but fresh p95 exceeds the 16.67ms reference target and a 101ms long-session exception remains unexplained. No real-device/scale closure.
+- Leave the PR draft until applicable Golden acceptance is resolved. No later IMP-11 backend work, trading or commerce has started. PQL rollout remains open.
+- Studio is left in Edit with normal scripts enabled, QA store seam/scope/helpers removed and local original assets preserved. Original device is restored. Do not overwrite the user's unrelated `AGENTS.md`, IMP-10 evidence edit, test_crate/test_asset or Energy Core FBX files.
 
 ## 1. Read first
 

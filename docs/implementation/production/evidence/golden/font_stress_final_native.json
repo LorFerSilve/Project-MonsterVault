@@ -1,0 +1,47 @@
+{
+  "platformPreference": "Enum.PreferredTextSize.Medium",
+  "platformLargestVerified": false,
+  "navigation": [
+    {
+      "textFits": true,
+      "textSize": 24,
+      "name": "Vault",
+      "size": "221.600006, 50"
+    },
+    {
+      "textFits": true,
+      "textSize": 24,
+      "name": "Collection",
+      "size": "221.600006, 50"
+    },
+    {
+      "textFits": true,
+      "textSize": 24,
+      "name": "Journey",
+      "size": "221.600006, 50"
+    },
+    {
+      "textFits": true,
+      "textSize": 24,
+      "name": "Showcase",
+      "size": "221.600006, 50"
+    },
+    {
+      "textFits": true,
+      "textSize": 24,
+      "name": "Settings",
+      "size": "221.600006, 50"
+    },
+    {
+      "textFits": true,
+      "textSize": 24,
+      "name": "Home",
+      "size": "221.600006, 50"
+    }
+  ],
+  "scale": 1.5,
+  "viewport": [
+    705,
+    338
+  ]
+}

@@ -1,9 +1,11 @@
-# Production Pre-Production Package
+# Golden Slice production package
 
-> Status: READY FOR GOLDEN SLICE IMPLEMENTATION
+> Status: REPRESENTATIVE IMPLEMENTATION IN STUDIO — ACCEPTANCE STILL OPEN
 > Date: 2026-10-06
 
 This folder is the implementation-facing production baseline for the first Golden Playable Vertical Slice.
+
+Resume the existing work from [GOLDEN_SLICE_EVIDENCE.md](GOLDEN_SLICE_EVIDENCE.md) and the [native gallery](evidence/golden/README.md). Imports, permanent composition and representative UI/sensory integration are implemented. Remaining controller menu, actual platform text preference and performance acceptance are listed in the [matrix](GOLDEN_SLICE_ACCEPTANCE_MATRIX.md). Do not restart from pre-production.
 
 It does not supersede GDS or Technical Architecture. If a conflict exists, the approved GDS/TA and explicit architecture decisions win.
 
