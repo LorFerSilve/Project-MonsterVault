@@ -43,7 +43,7 @@ The exact start ordering may follow current runtime travel/onboarding behavior, 
 | GS-23 Performance | visual scene stays within working budgets or records measured justified exceptions | six native views; rendering headroom; 22-24ms fresh p95 and 101ms long-session exception recorded | PARTIAL — Studio measurement done, real-device/exception investigation open |
 | GS-24 Source completeness | hero 3D assets have editable source + exports + mapping | 14 new sources/13 runtime; GLB/FBX/central IDs; exact native pack roundtrip | PASS |
 | GS-25 Studio validation | no hero asset accepted from Blender-only evidence | 15 native screenshots, import/mapping/scale/collision/Play audits | PASS for current assets; historical before coverage incomplete |
-| GS-26 CI/regression | applicable existing automated suite remains green | 339/339 fast, 28/28 Python, static/build locally; normal remote CI required before merge | LOCAL PASS; remote CI remains merge prerequisite |
+| GS-26 CI/regression | applicable existing automated suite remains green | 339/339 fast, 28/28 Python, static/build locally and normal remote CI on validated head; see ci_validated_native_package.json | PASS for recorded implementation; each later head retains normal CI gate |
 
 ## 3. Required representative screenshots
 
