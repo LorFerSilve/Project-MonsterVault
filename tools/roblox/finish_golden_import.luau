@@ -1,7 +1,7 @@
 -- Edit-only follow-up to ordinary Studio Import of golden_studio_import.fbx.
 -- Normalizes bounds/origins from Blender, applies the central native palette,
 -- and fails before replacing prefabs if any persistent imported mesh is absent.
-return function(data, importRoot, extend)
+return function(data, importRoot, extend, textureIds)
 	assert(not game:GetService("RunService"):IsRunning(), "Edit only")
 	local paletteModule = game.ReplicatedStorage.MonsterVault.Shared.config.MaterialPalette:Clone()
 	paletteModule.Parent = game.ServerStorage
@@ -66,8 +66,28 @@ return function(data, importRoot, extend)
 			local style = assert(palette[g.material], "unknown material " .. g.material)
 			p.Color, p.Material = style.color, style.material
 			p:SetAttribute("MaterialGroup", g.material)
-			p:SetAttribute("TriangleCount", #g.triangles)
+			p:SetAttribute(
+				"TriangleCount",
+				if typeof(g.triangles) == "number" then g.triangles else #g.triangles
+			)
 			p:SetAttribute("GeometrySha256", a.geometrySha256)
+			if g.doubleSided then
+				p.DoubleSided = true
+			end
+			if g.texture then
+				local id =
+					assert(textureIds and textureIds[g.texture], "missing texture " .. g.texture)
+				local appearance = Instance.new("SurfaceAppearance")
+				appearance.Name, appearance.ColorMap = "PaletteAtlas", id
+				appearance.AlphaMode = if g.alpha
+					then Enum.AlphaMode.Transparency
+					else Enum.AlphaMode.Overlay
+				appearance.Parent = p
+				p:SetAttribute("PaletteAtlas", g.texture)
+			end
+			if g.glass then
+				p.Transparency, p.CastShadow = 0.35, false
+			end
 			p.Parent = m
 			table.insert(entry.meshes, {
 				name = g.name,
@@ -75,6 +95,7 @@ return function(data, importRoot, extend)
 				group = g.material,
 				size = g.size,
 				center = g.center,
+				texture = g.texture,
 			})
 		end
 		m.WorldPivot = CFrame.identity

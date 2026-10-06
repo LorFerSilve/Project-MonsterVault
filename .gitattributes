@@ -1,1 +1,5 @@
 *.luau text eol=lf
+# Keep staged glTF dependency hashes stable on every checkout platform.
+assets/source/cc0-refresh/**/*.gltf text eol=lf
+# Preserve supplied vendor license formatting without project whitespace lint.
+assets/source/cc0-refresh/**/*.txt whitespace=-blank-at-eol,cr-at-eol

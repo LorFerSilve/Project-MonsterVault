@@ -1,0 +1,944 @@
+{
+  "version": 1,
+  "assets": [
+    {
+      "key": "CanopyOak",
+      "model": "CommonTree_5",
+      "author": "Quaternius",
+      "license": "CC0-1.0",
+      "geometrySha256": "72f63ef87e3a2db8efa9d6c0338d919a55c02004bdcee82ba4d41ae62a679047",
+      "triangles": 3182,
+      "groups": [
+        {
+          "name": "RF_CanopyOak_00_LeafGreen",
+          "material": "LeafGreen",
+          "sourceMaterial": "Leaves_NormalTree",
+          "center": [
+            0,
+            13.024405999999999,
+            0
+          ],
+          "size": [
+            9.955718,
+            11.951188,
+            11.443136
+          ],
+          "triangles": 1300,
+          "texture": "assets/exported/refresh/textures/Leaves_NormalTree_C_png_LeafGreen.png",
+          "doubleSided": true,
+          "alpha": true,
+          "glass": false
+        },
+        {
+          "name": "RF_CanopyOak_01_BarkWood",
+          "material": "BarkWood",
+          "sourceMaterial": "Bark_NormalTree",
+          "center": [
+            0.22253900000000004,
+            7.724046,
+            -0.014045000000000085
+          ],
+          "size": [
+            4.886851999999999,
+            15.448092,
+            4.67911
+          ],
+          "triangles": 1882,
+          "texture": "assets/exported/refresh/textures/Bark_NormalTree_png_BarkWood.png",
+          "doubleSided": false,
+          "alpha": true,
+          "glass": false
+        }
+      ],
+      "blend": "assets/blender/refresh/CanopyOak.blend",
+      "export": "assets/exported/refresh/CanopyOak.glb",
+      "sourceHashes": {
+        "assets/source/cc0-refresh/Quaternius-Nature/glTF/CommonTree_5.bin": "0e617612d50e6bb2ca3c64338383f8938ce9e04d55b548ff11cec7a7b7d8f072",
+        "assets/source/cc0-refresh/Quaternius-Nature/glTF/Bark_NormalTree_Normal.png": "852f6155404b8c39e100e41e26970e02a6a5c81b482d3726618dab28e3ad03a2",
+        "assets/source/cc0-refresh/Quaternius-Nature/glTF/Bark_NormalTree.png": "f36e94fdd73255347325b998e02a0b2575fdf714b0315bfe5e8ff34bc8e13603",
+        "assets/source/cc0-refresh/Quaternius-Nature/glTF/Leaves_NormalTree_C.png": "998612bdf0b76a22f5f54d65cd7a457815d2842d89653fa4348a4ebb42933ad3",
+        "assets/source/cc0-refresh/Quaternius-Nature/glTF/CommonTree_5.gltf": "674b928ed837a46c88f126026256fdf3e5460509ff34551f55ac1560562a6630"
+      }
+    },
+    {
+      "key": "CanopyPine",
+      "model": "Pine_5",
+      "author": "Quaternius",
+      "license": "CC0-1.0",
+      "geometrySha256": "e948e714e4e55310b543007cf34d2ac5c2baa5f29ec0339347ee46de059b4e83",
+      "triangles": 1646,
+      "groups": [
+        {
+          "name": "RF_CanopyPine_00_LeafGreen",
+          "material": "LeafGreen",
+          "sourceMaterial": "Leaves_Pine",
+          "center": [
+            0,
+            13.7260635,
+            0
+          ],
+          "size": [
+            16.926466,
+            18.547869000000002,
+            16.404078
+          ],
+          "triangles": 1158,
+          "texture": "assets/exported/refresh/textures/Leaf_Pine_C_png_LeafGreen.png",
+          "doubleSided": true,
+          "alpha": true,
+          "glass": false
+        },
+        {
+          "name": "RF_CanopyPine_01_BarkWood",
+          "material": "BarkWood",
+          "sourceMaterial": "Bark_NormalTree",
+          "center": [
+            -0.35775,
+            11.293747,
+            0.4069035000000001
+          ],
+          "size": [
+            2.955924,
+            22.587494,
+            5.204279
+          ],
+          "triangles": 488,
+          "texture": "assets/exported/refresh/textures/Bark_NormalTree_png_BarkWood.png",
+          "doubleSided": false,
+          "alpha": true,
+          "glass": false
+        }
+      ],
+      "blend": "assets/blender/refresh/CanopyPine.blend",
+      "export": "assets/exported/refresh/CanopyPine.glb",
+      "sourceHashes": {
+        "assets/source/cc0-refresh/Quaternius-Nature/glTF/Pine_5.bin": "18982d7f6c430d1a42568d4ef62017398dedb1ddc60dfbab047f8cddea9cf797",
+        "assets/source/cc0-refresh/Quaternius-Nature/glTF/Bark_NormalTree_Normal.png": "852f6155404b8c39e100e41e26970e02a6a5c81b482d3726618dab28e3ad03a2",
+        "assets/source/cc0-refresh/Quaternius-Nature/glTF/Bark_NormalTree.png": "f36e94fdd73255347325b998e02a0b2575fdf714b0315bfe5e8ff34bc8e13603",
+        "assets/source/cc0-refresh/Quaternius-Nature/glTF/Leaf_Pine_C.png": "86f7ff7a214f5424de48d269568f36a15485e61c80677e426c7be9f45181eef9",
+        "assets/source/cc0-refresh/Quaternius-Nature/glTF/Pine_5.gltf": "60e881fab1b4c8738bd592768460935694919e7780675930a6cfff6c1a9ada53"
+      }
+    },
+    {
+      "key": "ReserveBoulder",
+      "model": "Rock_Medium_1",
+      "author": "Quaternius",
+      "license": "CC0-1.0",
+      "geometrySha256": "b4b0dcc3240665a8848628dac2002a643e4cfadcbf8390a3b5d3b1ceaacd4c41",
+      "triangles": 342,
+      "groups": [
+        {
+          "name": "RF_ReserveBoulder_00_MossRock",
+          "material": "MossRock",
+          "sourceMaterial": "Rocks",
+          "center": [
+            0,
+            3.5033995,
+            0
+          ],
+          "size": [
+            10,
+            7.006799,
+            9.268214
+          ],
+          "triangles": 342,
+          "texture": "assets/exported/refresh/textures/Rocks_Diffuse_png_MossRock.png",
+          "doubleSided": false,
+          "alpha": false,
+          "glass": false
+        }
+      ],
+      "blend": "assets/blender/refresh/ReserveBoulder.blend",
+      "export": "assets/exported/refresh/ReserveBoulder.glb",
+      "sourceHashes": {
+        "assets/source/cc0-refresh/Quaternius-Nature/glTF/Rock_Medium_1.bin": "ea79527d4c2b3bdb7a28bf589bf0c1fd96d192a4d0738636753911dd58681e99",
+        "assets/source/cc0-refresh/Quaternius-Nature/glTF/Rocks_Diffuse.png": "b813696df6081f469a127092eb0ce45cc39d56f3ccc0699152bfcd3804810b48",
+        "assets/source/cc0-refresh/Quaternius-Nature/glTF/Rock_Medium_1.gltf": "c168f1b3c3fca5dd30df0e0f4c62ed8f7d8d9705d0ab3b0d6d30bf04c53c3083"
+      }
+    },
+    {
+      "key": "ReserveBoulderWide",
+      "model": "Rock_Medium_2",
+      "author": "Quaternius",
+      "license": "CC0-1.0",
+      "geometrySha256": "aac0b06ce128f03079999397e8c9ca5e4bfcedffa36a9f569db992a8741ee78e",
+      "triangles": 244,
+      "groups": [
+        {
+          "name": "RF_ReserveBoulderWide_00_MossRock",
+          "material": "MossRock",
+          "sourceMaterial": "Rocks",
+          "center": [
+            0,
+            2.8029055,
+            0
+          ],
+          "size": [
+            9,
+            5.605811,
+            7.318268
+          ],
+          "triangles": 244,
+          "texture": "assets/exported/refresh/textures/Rocks_Diffuse_png_MossRock.png",
+          "doubleSided": false,
+          "alpha": false,
+          "glass": false
+        }
+      ],
+      "blend": "assets/blender/refresh/ReserveBoulderWide.blend",
+      "export": "assets/exported/refresh/ReserveBoulderWide.glb",
+      "sourceHashes": {
+        "assets/source/cc0-refresh/Quaternius-Nature/glTF/Rock_Medium_2.bin": "76b60bf8349f71abdb0ed462b3223d93c2dcabdfb5754bc132e18b021cc6c805",
+        "assets/source/cc0-refresh/Quaternius-Nature/glTF/Rocks_Diffuse.png": "b813696df6081f469a127092eb0ce45cc39d56f3ccc0699152bfcd3804810b48",
+        "assets/source/cc0-refresh/Quaternius-Nature/glTF/Rock_Medium_2.gltf": "1d4f32c4829920b14d7e0b5d030fd0607fdb5e3f4a8ed3f27cc9c881d069b814"
+      }
+    },
+    {
+      "key": "FernCluster",
+      "model": "Fern_1",
+      "author": "Quaternius",
+      "license": "CC0-1.0",
+      "geometrySha256": "e6094170d4197ad51117747a3770c6353a50b5bfb78fd9c13f338990889a043a",
+      "triangles": 288,
+      "groups": [
+        {
+          "name": "RF_FernCluster_00_LeafGreen",
+          "material": "LeafGreen",
+          "sourceMaterial": "Leaves",
+          "center": [
+            0,
+            1.1,
+            0
+          ],
+          "size": [
+            7.401732,
+            2.2,
+            6.944542
+          ],
+          "triangles": 288,
+          "texture": "assets/exported/refresh/textures/Leaves_png_LeafGreen.png",
+          "doubleSided": true,
+          "alpha": true,
+          "glass": false
+        }
+      ],
+      "blend": "assets/blender/refresh/FernCluster.blend",
+      "export": "assets/exported/refresh/FernCluster.glb",
+      "sourceHashes": {
+        "assets/source/cc0-refresh/Quaternius-Nature/glTF/Fern_1.bin": "5e92b87a27f81a69fe15347a533df3c77d567b48298dceeef43168ccb7c22853",
+        "assets/source/cc0-refresh/Quaternius-Nature/glTF/Leaves.png": "23248cebe28a24e78add32db3c2ee2f4d7b9219e9d2467279722f0197a7b6bd5",
+        "assets/source/cc0-refresh/Quaternius-Nature/glTF/Fern_1.gltf": "4a0c0c44dd1d998e97c730c60f661d6b01e55df7d567e111cabdab5a5148c02c"
+      }
+    },
+    {
+      "key": "MeadowGrass",
+      "model": "Grass_Common_Short",
+      "author": "Quaternius",
+      "license": "CC0-1.0",
+      "geometrySha256": "c689c9b523845b042ae8c252547833a6ee27c502aca1ebc7eca957617419463e",
+      "triangles": 155,
+      "groups": [
+        {
+          "name": "RF_MeadowGrass_00_LeafGreen",
+          "material": "LeafGreen",
+          "sourceMaterial": "Grass",
+          "center": [
+            0,
+            0.675,
+            0
+          ],
+          "size": [
+            0.646484,
+            1.35,
+            0.74605
+          ],
+          "triangles": 155,
+          "texture": "assets/exported/refresh/textures/Grass_png_LeafGreen.png",
+          "doubleSided": true,
+          "alpha": false,
+          "glass": false
+        }
+      ],
+      "blend": "assets/blender/refresh/MeadowGrass.blend",
+      "export": "assets/exported/refresh/MeadowGrass.glb",
+      "sourceHashes": {
+        "assets/source/cc0-refresh/Quaternius-Nature/glTF/Grass_Common_Short.bin": "7a0f0f7a9ac39cfa4b303bac03a6594f43e48d873b73553fa06a79e4df1271e9",
+        "assets/source/cc0-refresh/Quaternius-Nature/glTF/Grass.png": "5d69048193b246a73c996b892607fb36c75d0c60afcb2dab8aa12de3c0b2d9bd",
+        "assets/source/cc0-refresh/Quaternius-Nature/glTF/Grass_Common_Short.gltf": "0f85942911f004be5de8d28a3e0617f5d153c807f893c536380cb847bdfd663c"
+      }
+    },
+    {
+      "key": "FlowerPatch",
+      "model": "Flower_3_Group",
+      "author": "Quaternius",
+      "license": "CC0-1.0",
+      "geometrySha256": "c79272bafd5219f1144d6803ac2932717e4ba7becc66b029bf5fc1dcb11f3d7f",
+      "triangles": 755,
+      "groups": [
+        {
+          "name": "RF_FlowerPatch_00_CreatureCream",
+          "material": "CreatureCream",
+          "sourceMaterial": "Flowers",
+          "center": [
+            0,
+            1.2924630000000001,
+            0
+          ],
+          "size": [
+            1.086566,
+            0.41507399999999994,
+            1.1615
+          ],
+          "triangles": 45,
+          "texture": "assets/exported/refresh/textures/Flowers_png_CreatureCream.png",
+          "doubleSided": true,
+          "alpha": true,
+          "glass": false
+        },
+        {
+          "name": "RF_FlowerPatch_01_LeafGreen",
+          "material": "LeafGreen",
+          "sourceMaterial": "Leaves",
+          "center": [
+            -0.01503850000000001,
+            0.660215,
+            0.06358799999999998
+          ],
+          "size": [
+            0.990249,
+            1.32043,
+            0.910504
+          ],
+          "triangles": 710,
+          "texture": "assets/exported/refresh/textures/Leaves_png_LeafGreen.png",
+          "doubleSided": true,
+          "alpha": true,
+          "glass": false
+        }
+      ],
+      "blend": "assets/blender/refresh/FlowerPatch.blend",
+      "export": "assets/exported/refresh/FlowerPatch.glb",
+      "sourceHashes": {
+        "assets/source/cc0-refresh/Quaternius-Nature/glTF/Flower_3_Group.bin": "5ab387dd3d6fe181df3af4eeac4df85533e4c27e77545ae39a61e0c2aaaab248",
+        "assets/source/cc0-refresh/Quaternius-Nature/glTF/Leaves.png": "23248cebe28a24e78add32db3c2ee2f4d7b9219e9d2467279722f0197a7b6bd5",
+        "assets/source/cc0-refresh/Quaternius-Nature/glTF/Flowers.png": "5c531f2329c241c625aafd6cb769de29f33b480ef2a16491c2489f3c68e62a6a",
+        "assets/source/cc0-refresh/Quaternius-Nature/glTF/Flower_3_Group.gltf": "a071e41365ed03180ca9b42eec1e764988d4c86eb8b08ce8b897145e9d47c2ce"
+      }
+    },
+    {
+      "key": "LeafBush",
+      "model": "Bush_Common",
+      "author": "Quaternius",
+      "license": "CC0-1.0",
+      "geometrySha256": "f2f440a7bbd79d64b144b511a3a505e4075e8eca1db1aaaab13256514204279e",
+      "triangles": 900,
+      "groups": [
+        {
+          "name": "RF_LeafBush_00_LeafGreen",
+          "material": "LeafGreen",
+          "sourceMaterial": "Leaves_TwistedTree",
+          "center": [
+            0,
+            1.5,
+            0
+          ],
+          "size": [
+            3.631676,
+            3,
+            3.727068
+          ],
+          "triangles": 900,
+          "texture": "assets/exported/refresh/textures/Leaves_TwistedTree_C_png_LeafGreen.png",
+          "doubleSided": true,
+          "alpha": true,
+          "glass": false
+        }
+      ],
+      "blend": "assets/blender/refresh/LeafBush.blend",
+      "export": "assets/exported/refresh/LeafBush.glb",
+      "sourceHashes": {
+        "assets/source/cc0-refresh/Quaternius-Nature/glTF/Bush_Common.bin": "a5e1a773c8ba78fd9c05a8b342131eba4879302a8fddd2c5186cab9ee1ef4966",
+        "assets/source/cc0-refresh/Quaternius-Nature/glTF/Leaves_TwistedTree_C.png": "0e459b56b14c0e81b1b7cf3d1e8c6f0bb71790eb6c46bb02a76a922d8df646ea",
+        "assets/source/cc0-refresh/Quaternius-Nature/glTF/Bush_Common.gltf": "d0cfd0734dc1e0f08a15329dcd7a1fbd454e28d3bbfafe77c2a135277cdc3d10"
+      }
+    },
+    {
+      "key": "FoundryColumn",
+      "model": "Column_MetalSupport",
+      "author": "Quaternius",
+      "license": "CC0-1.0",
+      "geometrySha256": "c5fd948f573be6035ab3b5eabbd3da930e466c64603cdf32fed08c273557143f",
+      "triangles": 748,
+      "groups": [
+        {
+          "name": "RF_FoundryColumn_00_SecondaryMetal",
+          "material": "SecondaryMetal",
+          "sourceMaterial": "MI_Trim_02",
+          "center": [
+            0,
+            8.6000005,
+            0
+          ],
+          "size": [
+            4.113504,
+            17.200001,
+            0.189238
+          ],
+          "triangles": 360,
+          "texture": "assets/exported/refresh/textures/T_Trim_02_BaseColor_Red_png_SecondaryMetal.png",
+          "doubleSided": false,
+          "alpha": false,
+          "glass": false
+        },
+        {
+          "name": "RF_FoundryColumn_01_PanelPlastic",
+          "material": "PanelPlastic",
+          "sourceMaterial": "MI_PaddedWall",
+          "center": [
+            0,
+            8.6000005,
+            0
+          ],
+          "size": [
+            4.113504,
+            17.200001,
+            0.189238
+          ],
+          "triangles": 388,
+          "texture": "assets/exported/refresh/textures/T_PaddedWall_BaseColor_png_PanelPlastic.png",
+          "doubleSided": false,
+          "alpha": false,
+          "glass": false
+        }
+      ],
+      "blend": "assets/blender/refresh/FoundryColumn.blend",
+      "export": "assets/exported/refresh/FoundryColumn.glb",
+      "sourceHashes": {
+        "assets/source/cc0-refresh/Quaternius-SciFi/Modular SciFi MegaKit[Standard]/glTF/Columns/Column_MetalSupport.bin": "e7d613d9ce8c5c035a7e219eceeecd17d90f79cb8f5ee0b62fe0c6b809aa2865",
+        "assets/source/cc0-refresh/Quaternius-SciFi/Modular SciFi MegaKit[Standard]/glTF/Columns/T_PaddedWall_Normal.png": "141c075ee32a4dda83c4b954076ea563b86e2a6329d5c536aa7ddccb6c1328bf",
+        "assets/source/cc0-refresh/Quaternius-SciFi/Modular SciFi MegaKit[Standard]/glTF/Columns/T_PaddedWall_BaseColor.png": "7b431c76896c8d2de736e33271049fc869f2a8a5c0632678c9f030146e90c650",
+        "assets/source/cc0-refresh/Quaternius-SciFi/Modular SciFi MegaKit[Standard]/glTF/Columns/T_PaddedWall_ORM.png": "555039f51a71803be3d617ac03eac05e840ec5b36c269de2115a50e956bff3b2",
+        "assets/source/cc0-refresh/Quaternius-SciFi/Modular SciFi MegaKit[Standard]/glTF/Columns/T_Trim_02_Normal.png": "7faaa7059192f43aded9cc2f93917dd54fd14545509c37318d4e6bf0a8104960",
+        "assets/source/cc0-refresh/Quaternius-SciFi/Modular SciFi MegaKit[Standard]/glTF/Columns/T_Trim_02_BaseColor_Red.png": "4a08abf8dc0a5bf558a0ae38dc0d70eddc328eaa8060725d07b95d7c8a75663c",
+        "assets/source/cc0-refresh/Quaternius-SciFi/Modular SciFi MegaKit[Standard]/glTF/Columns/T_Trim_02_ORM.png": "2a433e6a7fbcec375b5c5e5c7aa57dbe1fd23ca6592f48c52d09dde2d622aab8",
+        "assets/source/cc0-refresh/Quaternius-SciFi/Modular SciFi MegaKit[Standard]/glTF/Columns/Column_MetalSupport.gltf": "983256940d7a7451e4fbef6fc55c2e47d70dcdb52fee1fe0f13e045e0de8f644"
+      }
+    },
+    {
+      "key": "FoundryWall",
+      "model": "WallAstra_Straight_Flat",
+      "author": "Quaternius",
+      "license": "CC0-1.0",
+      "geometrySha256": "f79f42df3da6ab76a69ba31e903d865b66e5354bb16d51a037e86089de364ab1",
+      "triangles": 124,
+      "groups": [
+        {
+          "name": "RF_FoundryWall_00_SecondaryMetal",
+          "material": "SecondaryMetal",
+          "sourceMaterial": "MI_Trim_02",
+          "center": [
+            0,
+            6.9724070000000005,
+            -0.016515499999999995
+          ],
+          "size": [
+            9.599996,
+            0.45518400000000003,
+            0.20696900000000001
+          ],
+          "triangles": 6,
+          "texture": "assets/exported/refresh/textures/T_Trim_02_BaseColor_Red_png_SecondaryMetal.png",
+          "doubleSided": false,
+          "alpha": false,
+          "glass": false
+        },
+        {
+          "name": "RF_FoundryWall_01_DarkMetal",
+          "material": "DarkMetal",
+          "sourceMaterial": "MI_Trim_03",
+          "center": [
+            0,
+            4.5599995,
+            0
+          ],
+          "size": [
+            9.6,
+            5.279999,
+            0.24
+          ],
+          "triangles": 58,
+          "texture": "assets/exported/refresh/textures/T_Trim_03_BaseColor_png_DarkMetal.png",
+          "doubleSided": false,
+          "alpha": false,
+          "glass": false
+        },
+        {
+          "name": "RF_FoundryWall_02_PanelPlastic",
+          "material": "PanelPlastic",
+          "sourceMaterial": "MI_Trim_03_Dark",
+          "center": [
+            4.999999996257998e-7,
+            0.96,
+            0
+          ],
+          "size": [
+            9.599997,
+            1.92,
+            0.24
+          ],
+          "triangles": 60,
+          "texture": "assets/exported/refresh/textures/T_Trim_03_Cables_png_PanelPlastic.png",
+          "doubleSided": false,
+          "alpha": false,
+          "glass": false
+        }
+      ],
+      "blend": "assets/blender/refresh/FoundryWall.blend",
+      "export": "assets/exported/refresh/FoundryWall.glb",
+      "sourceHashes": {
+        "assets/source/cc0-refresh/Quaternius-SciFi/Modular SciFi MegaKit[Standard]/glTF/Walls/WallAstra_Straight_Flat.bin": "4979819c780de114f8daa39b53441808ce058de019663355b54876697ac171fe",
+        "assets/source/cc0-refresh/Quaternius-SciFi/Modular SciFi MegaKit[Standard]/glTF/Walls/T_Trim_03_Normal.png": "b2c3238cbe2586e44df0b00179adf85e5b7ac7fed1713ec0b807482245a30738",
+        "assets/source/cc0-refresh/Quaternius-SciFi/Modular SciFi MegaKit[Standard]/glTF/Walls/T_Trim_03_BaseColor.png": "2a15eadbedbc928d771ed8f2a7a8c1a16bce89b2836a0ecf34ece7e2fab96769",
+        "assets/source/cc0-refresh/Quaternius-SciFi/Modular SciFi MegaKit[Standard]/glTF/Walls/T_Trim_03_ORM.png": "c57134b5d496b39b955a87765ea32b93567b1ab494fe6b890de24c75dcfd6fe4",
+        "assets/source/cc0-refresh/Quaternius-SciFi/Modular SciFi MegaKit[Standard]/glTF/Walls/T_Trim_03_Cables.png": "758a95beccdc9f0621d8b8a283ee2593e04b56f1cd32776165ec85e1568e8eb8",
+        "assets/source/cc0-refresh/Quaternius-SciFi/Modular SciFi MegaKit[Standard]/glTF/Walls/T_Trim_02_Normal.png": "7faaa7059192f43aded9cc2f93917dd54fd14545509c37318d4e6bf0a8104960",
+        "assets/source/cc0-refresh/Quaternius-SciFi/Modular SciFi MegaKit[Standard]/glTF/Walls/T_Trim_02_BaseColor_Red.png": "4a08abf8dc0a5bf558a0ae38dc0d70eddc328eaa8060725d07b95d7c8a75663c",
+        "assets/source/cc0-refresh/Quaternius-SciFi/Modular SciFi MegaKit[Standard]/glTF/Walls/T_Trim_02_ORM.png": "2a433e6a7fbcec375b5c5e5c7aa57dbe1fd23ca6592f48c52d09dde2d622aab8",
+        "assets/source/cc0-refresh/Quaternius-SciFi/Modular SciFi MegaKit[Standard]/glTF/Walls/WallAstra_Straight_Flat.gltf": "256f53e5a136fd80a7c6c4497e94e2377bc0210a1c0312bbc399383466421290"
+      }
+    },
+    {
+      "key": "FoundryWindow",
+      "model": "WallAstra_Straight_Flat_Window",
+      "author": "Quaternius",
+      "license": "CC0-1.0",
+      "geometrySha256": "35ad5b963555c22ee16690724b55021d1f750f03e1ac7070e096a1cabe973838",
+      "triangles": 476,
+      "groups": [
+        {
+          "name": "RF_FoundryWindow_00_EnergyGreen",
+          "material": "EnergyGreen",
+          "sourceMaterial": "MI_Trim_03_Cables",
+          "center": [
+            9.999999999177334e-7,
+            4.4476095,
+            -0.243884
+          ],
+          "size": [
+            5.4519400000000005,
+            3.478321,
+            0.25654
+          ],
+          "triangles": 48,
+          "texture": "assets/exported/refresh/textures/T_Trim_03_Cables_png_EnergyGreen.png",
+          "doubleSided": false,
+          "alpha": false,
+          "glass": false
+        },
+        {
+          "name": "RF_FoundryWindow_01_RavineWater",
+          "material": "RavineWater",
+          "sourceMaterial": "M_Glass",
+          "center": [
+            4.999999998478444e-7,
+            4.4706585,
+            -0.175077
+          ],
+          "size": [
+            7.703351,
+            3.599617,
+            0.001
+          ],
+          "triangles": 8,
+          "texture": null,
+          "doubleSided": false,
+          "alpha": false,
+          "glass": true
+        },
+        {
+          "name": "RF_FoundryWindow_02_DarkMetal",
+          "material": "DarkMetal",
+          "sourceMaterial": "MI_Trim_03",
+          "center": [
+            0,
+            4.5599995,
+            -0.434515
+          ],
+          "size": [
+            9.6,
+            5.279999,
+            0.334454
+          ],
+          "triangles": 210,
+          "texture": "assets/exported/refresh/textures/T_Trim_03_BaseColor_png_DarkMetal.png",
+          "doubleSided": false,
+          "alpha": false,
+          "glass": false
+        },
+        {
+          "name": "RF_FoundryWindow_03_PanelPlastic",
+          "material": "PanelPlastic",
+          "sourceMaterial": "MI_Trim_03_Dark",
+          "center": [
+            4.999999996257998e-7,
+            0.96,
+            -0.4817415
+          ],
+          "size": [
+            9.599997,
+            1.92,
+            0.24000100000000002
+          ],
+          "triangles": 60,
+          "texture": "assets/exported/refresh/textures/T_Trim_03_Cables_png_001_PanelPlastic.png",
+          "doubleSided": false,
+          "alpha": false,
+          "glass": false
+        },
+        {
+          "name": "RF_FoundryWindow_04_SecondaryMetal",
+          "material": "SecondaryMetal",
+          "sourceMaterial": "MI_Trim_02",
+          "center": [
+            0,
+            4.9554215,
+            0
+          ],
+          "size": [
+            9.599996,
+            4.489155,
+            1.203484
+          ],
+          "triangles": 150,
+          "texture": "assets/exported/refresh/textures/T_Trim_02_BaseColor_Red_png_SecondaryMetal.png",
+          "doubleSided": false,
+          "alpha": false,
+          "glass": false
+        }
+      ],
+      "blend": "assets/blender/refresh/FoundryWindow.blend",
+      "export": "assets/exported/refresh/FoundryWindow.glb",
+      "sourceHashes": {
+        "assets/source/cc0-refresh/Quaternius-SciFi/Modular SciFi MegaKit[Standard]/glTF/Walls/WallAstra_Straight_Flat_Window.bin": "6a573d7244b2b5f9a1392ec749375bbfef5c74dde3ae74eba6e8def97672bce5",
+        "assets/source/cc0-refresh/Quaternius-SciFi/Modular SciFi MegaKit[Standard]/glTF/Walls/T_Trim_03_Normal.png": "b2c3238cbe2586e44df0b00179adf85e5b7ac7fed1713ec0b807482245a30738",
+        "assets/source/cc0-refresh/Quaternius-SciFi/Modular SciFi MegaKit[Standard]/glTF/Walls/T_Trim_03_BaseColor.png": "2a15eadbedbc928d771ed8f2a7a8c1a16bce89b2836a0ecf34ece7e2fab96769",
+        "assets/source/cc0-refresh/Quaternius-SciFi/Modular SciFi MegaKit[Standard]/glTF/Walls/T_Trim_03_ORM.png": "c57134b5d496b39b955a87765ea32b93567b1ab494fe6b890de24c75dcfd6fe4",
+        "assets/source/cc0-refresh/Quaternius-SciFi/Modular SciFi MegaKit[Standard]/glTF/Walls/T_Trim_03_Cables.png": "758a95beccdc9f0621d8b8a283ee2593e04b56f1cd32776165ec85e1568e8eb8",
+        "assets/source/cc0-refresh/Quaternius-SciFi/Modular SciFi MegaKit[Standard]/glTF/Walls/T_Trim_02_Normal.png": "7faaa7059192f43aded9cc2f93917dd54fd14545509c37318d4e6bf0a8104960",
+        "assets/source/cc0-refresh/Quaternius-SciFi/Modular SciFi MegaKit[Standard]/glTF/Walls/T_Trim_02_BaseColor_Red.png": "4a08abf8dc0a5bf558a0ae38dc0d70eddc328eaa8060725d07b95d7c8a75663c",
+        "assets/source/cc0-refresh/Quaternius-SciFi/Modular SciFi MegaKit[Standard]/glTF/Walls/T_Trim_02_ORM.png": "2a433e6a7fbcec375b5c5e5c7aa57dbe1fd23ca6592f48c52d09dde2d622aab8",
+        "assets/source/cc0-refresh/Quaternius-SciFi/Modular SciFi MegaKit[Standard]/glTF/Walls/WallAstra_Straight_Flat_Window.gltf": "4cb942599c702ae4eb32d48d09ebbb83fffc74872bf1997fb27ea2a74df0ceb6"
+      }
+    },
+    {
+      "key": "FoundryVent",
+      "model": "Prop_Vent_Wide",
+      "author": "Quaternius",
+      "license": "CC0-1.0",
+      "geometrySha256": "ad5c75355b38d8523fcc50db5314bfa90986496cc714d046c2e3c5c885996b4c",
+      "triangles": 208,
+      "groups": [
+        {
+          "name": "RF_FoundryVent_00_PanelPlastic",
+          "material": "PanelPlastic",
+          "sourceMaterial": "M_Black",
+          "center": [
+            0.000006999999999979245,
+            0.26228049999999997,
+            0.027337
+          ],
+          "size": [
+            2.5355860000000003,
+            0.401065,
+            0.001
+          ],
+          "triangles": 68,
+          "texture": null,
+          "doubleSided": false,
+          "alpha": false,
+          "glass": false
+        },
+        {
+          "name": "RF_FoundryVent_01_DarkMetal",
+          "material": "DarkMetal",
+          "sourceMaterial": "MI_Trim_01",
+          "center": [
+            0.000006999999999979245,
+            0.24417499999999998,
+            0.010985
+          ],
+          "size": [
+            3.153568,
+            0.45387,
+            0.076304
+          ],
+          "triangles": 88,
+          "texture": "assets/exported/refresh/textures/T_Trim_01_BaseColor_Red_png_DarkMetal.png",
+          "doubleSided": false,
+          "alpha": false,
+          "glass": false
+        },
+        {
+          "name": "RF_FoundryVent_02_SecondaryMetal",
+          "material": "SecondaryMetal",
+          "sourceMaterial": "MI_Trim_02",
+          "center": [
+            0,
+            0.240192,
+            0
+          ],
+          "size": [
+            3.2,
+            0.480384,
+            0.098274
+          ],
+          "triangles": 52,
+          "texture": "assets/exported/refresh/textures/T_Trim_02_BaseColor_Red_png_SecondaryMetal.png",
+          "doubleSided": false,
+          "alpha": false,
+          "glass": false
+        }
+      ],
+      "blend": "assets/blender/refresh/FoundryVent.blend",
+      "export": "assets/exported/refresh/FoundryVent.glb",
+      "sourceHashes": {
+        "assets/source/cc0-refresh/Quaternius-SciFi/Modular SciFi MegaKit[Standard]/glTF/Props/Prop_Vent_Wide.bin": "20bdac5e69a095731643b34d37a31363a44dddb54d83baae92e5bd0dfa24dea7",
+        "assets/source/cc0-refresh/Quaternius-SciFi/Modular SciFi MegaKit[Standard]/glTF/Props/T_Trim_01_Normal.png": "1aec7ad47a642fc68216b5a3119341b7dca038c1fc9493df8a15ad4aa27ddbcf",
+        "assets/source/cc0-refresh/Quaternius-SciFi/Modular SciFi MegaKit[Standard]/glTF/Props/T_Trim_01_BaseColor_Red.png": "15fc0e344ed35483bc771aaa95c1c2a0b0ec2349a893cf24af18b8742f0842ac",
+        "assets/source/cc0-refresh/Quaternius-SciFi/Modular SciFi MegaKit[Standard]/glTF/Props/T_Trim_01_ORM.png": "6ab7ad231df22867652048ebfd602684a9072d45c483ca57df0fcd4cb2cb4feb",
+        "assets/source/cc0-refresh/Quaternius-SciFi/Modular SciFi MegaKit[Standard]/glTF/Props/T_Trim_02_Normal.png": "7faaa7059192f43aded9cc2f93917dd54fd14545509c37318d4e6bf0a8104960",
+        "assets/source/cc0-refresh/Quaternius-SciFi/Modular SciFi MegaKit[Standard]/glTF/Props/T_Trim_02_BaseColor_Red.png": "4a08abf8dc0a5bf558a0ae38dc0d70eddc328eaa8060725d07b95d7c8a75663c",
+        "assets/source/cc0-refresh/Quaternius-SciFi/Modular SciFi MegaKit[Standard]/glTF/Props/T_Trim_02_ORM.png": "2a433e6a7fbcec375b5c5e5c7aa57dbe1fd23ca6592f48c52d09dde2d622aab8",
+        "assets/source/cc0-refresh/Quaternius-SciFi/Modular SciFi MegaKit[Standard]/glTF/Props/Prop_Vent_Wide.gltf": "a7daed7772a7841c7467a228b3eed048f999d4303dcc7e0a376cb49eb8a1dfec"
+      }
+    },
+    {
+      "key": "ServiceCrate",
+      "model": "Prop_Crate4",
+      "author": "Quaternius",
+      "license": "CC0-1.0",
+      "geometrySha256": "0817cacaf533aba337522813950b7c951212b766c827b900a67e4f52055b5270",
+      "triangles": 972,
+      "groups": [
+        {
+          "name": "RF_ServiceCrate_00_SecondaryMetal",
+          "material": "SecondaryMetal",
+          "sourceMaterial": "MI_Trim_02",
+          "center": [
+            0,
+            1.4,
+            0
+          ],
+          "size": [
+            2.8,
+            2.8,
+            2.8
+          ],
+          "triangles": 972,
+          "texture": "assets/exported/refresh/textures/T_Trim_02_BaseColor_Red_png_SecondaryMetal.png",
+          "doubleSided": false,
+          "alpha": false,
+          "glass": false
+        }
+      ],
+      "blend": "assets/blender/refresh/ServiceCrate.blend",
+      "export": "assets/exported/refresh/ServiceCrate.glb",
+      "sourceHashes": {
+        "assets/source/cc0-refresh/Quaternius-SciFi/Modular SciFi MegaKit[Standard]/glTF/Props/Prop_Crate4.bin": "4f6c8e258818502078d4b18323c8eb49393c20b031cab5ef9fbfde41a9fab596",
+        "assets/source/cc0-refresh/Quaternius-SciFi/Modular SciFi MegaKit[Standard]/glTF/Props/T_Trim_02_Normal.png": "7faaa7059192f43aded9cc2f93917dd54fd14545509c37318d4e6bf0a8104960",
+        "assets/source/cc0-refresh/Quaternius-SciFi/Modular SciFi MegaKit[Standard]/glTF/Props/T_Trim_02_BaseColor_Red.png": "4a08abf8dc0a5bf558a0ae38dc0d70eddc328eaa8060725d07b95d7c8a75663c",
+        "assets/source/cc0-refresh/Quaternius-SciFi/Modular SciFi MegaKit[Standard]/glTF/Props/T_Trim_02_ORM.png": "2a433e6a7fbcec375b5c5e5c7aa57dbe1fd23ca6592f48c52d09dde2d622aab8",
+        "assets/source/cc0-refresh/Quaternius-SciFi/Modular SciFi MegaKit[Standard]/glTF/Props/Prop_Crate4.gltf": "e454d8317eb34f416e0413e2bc4a3dcb77a18979c3b2847516ae1945cdb72c23"
+      }
+    },
+    {
+      "key": "CableHeader",
+      "model": "TopCables_Straight",
+      "author": "Quaternius",
+      "license": "CC0-1.0",
+      "geometrySha256": "177df2f6cd5d6fb887e55f0361678bcaf3639c64f4d1675a7277115ff0b83edd",
+      "triangles": 942,
+      "groups": [
+        {
+          "name": "RF_CableHeader_00_EnergyGreen",
+          "material": "EnergyGreen",
+          "sourceMaterial": "MI_Trim_03_Cables_Blue",
+          "center": [
+            -0.066859,
+            1.3894355,
+            -0.02167300000000001
+          ],
+          "size": [
+            8.6251,
+            0.5499450000000001,
+            0.518954
+          ],
+          "triangles": 456,
+          "texture": "assets/exported/refresh/textures/T_Trim_03_Cables_png_EnergyGreen.png",
+          "doubleSided": false,
+          "alpha": false,
+          "glass": false
+        },
+        {
+          "name": "RF_CableHeader_01_SecondaryMetal",
+          "material": "SecondaryMetal",
+          "sourceMaterial": "MI_Trim_02",
+          "center": [
+            0,
+            2.7987575,
+            -0.009486500000000009
+          ],
+          "size": [
+            9.599998,
+            4.002483,
+            0.902327
+          ],
+          "triangles": 98,
+          "texture": "assets/exported/refresh/textures/T_Trim_02_BaseColor_Red_png_SecondaryMetal.png",
+          "doubleSided": false,
+          "alpha": false,
+          "glass": false
+        },
+        {
+          "name": "RF_CableHeader_02_DarkMetal",
+          "material": "DarkMetal",
+          "sourceMaterial": "MI_Trim_01",
+          "center": [
+            0,
+            2.3999995,
+            0
+          ],
+          "size": [
+            9.6,
+            4.799999,
+            0.9213
+          ],
+          "triangles": 370,
+          "texture": "assets/exported/refresh/textures/T_Trim_01_BaseColor_Red_png_DarkMetal.png",
+          "doubleSided": false,
+          "alpha": false,
+          "glass": false
+        },
+        {
+          "name": "RF_CableHeader_03_PanelPlastic",
+          "material": "PanelPlastic",
+          "sourceMaterial": "MI_Trim_03_Dark",
+          "center": [
+            -5.00000000069889e-7,
+            0.797516,
+            0.0970645
+          ],
+          "size": [
+            5.595115,
+            0.001,
+            0.08198699999999998
+          ],
+          "triangles": 18,
+          "texture": "assets/exported/refresh/textures/T_Trim_03_Cables_png_001_PanelPlastic.png",
+          "doubleSided": false,
+          "alpha": false,
+          "glass": false
+        }
+      ],
+      "blend": "assets/blender/refresh/CableHeader.blend",
+      "export": "assets/exported/refresh/CableHeader.glb",
+      "sourceHashes": {
+        "assets/source/cc0-refresh/Quaternius-SciFi/Modular SciFi MegaKit[Standard]/glTF/Walls/TopCables_Straight.bin": "5f0ded32e7b2e14cce63557af52851064cda1e33d045a6e5bf223abf823af972",
+        "assets/source/cc0-refresh/Quaternius-SciFi/Modular SciFi MegaKit[Standard]/glTF/Walls/T_Trim_02_Normal.png": "7faaa7059192f43aded9cc2f93917dd54fd14545509c37318d4e6bf0a8104960",
+        "assets/source/cc0-refresh/Quaternius-SciFi/Modular SciFi MegaKit[Standard]/glTF/Walls/T_Trim_02_BaseColor_Red.png": "4a08abf8dc0a5bf558a0ae38dc0d70eddc328eaa8060725d07b95d7c8a75663c",
+        "assets/source/cc0-refresh/Quaternius-SciFi/Modular SciFi MegaKit[Standard]/glTF/Walls/T_Trim_02_ORM.png": "2a433e6a7fbcec375b5c5e5c7aa57dbe1fd23ca6592f48c52d09dde2d622aab8",
+        "assets/source/cc0-refresh/Quaternius-SciFi/Modular SciFi MegaKit[Standard]/glTF/Walls/T_Trim_01_Normal.png": "1aec7ad47a642fc68216b5a3119341b7dca038c1fc9493df8a15ad4aa27ddbcf",
+        "assets/source/cc0-refresh/Quaternius-SciFi/Modular SciFi MegaKit[Standard]/glTF/Walls/T_Trim_01_BaseColor_Red.png": "15fc0e344ed35483bc771aaa95c1c2a0b0ec2349a893cf24af18b8742f0842ac",
+        "assets/source/cc0-refresh/Quaternius-SciFi/Modular SciFi MegaKit[Standard]/glTF/Walls/T_Trim_01_ORM.png": "6ab7ad231df22867652048ebfd602684a9072d45c483ca57df0fcd4cb2cb4feb",
+        "assets/source/cc0-refresh/Quaternius-SciFi/Modular SciFi MegaKit[Standard]/glTF/Walls/T_Trim_03_Normal.png": "b2c3238cbe2586e44df0b00179adf85e5b7ac7fed1713ec0b807482245a30738",
+        "assets/source/cc0-refresh/Quaternius-SciFi/Modular SciFi MegaKit[Standard]/glTF/Walls/T_Trim_03_Cables.png": "758a95beccdc9f0621d8b8a283ee2593e04b56f1cd32776165ec85e1568e8eb8",
+        "assets/source/cc0-refresh/Quaternius-SciFi/Modular SciFi MegaKit[Standard]/glTF/Walls/T_Trim_03_ORM.png": "c57134b5d496b39b955a87765ea32b93567b1ab494fe6b890de24c75dcfd6fe4",
+        "assets/source/cc0-refresh/Quaternius-SciFi/Modular SciFi MegaKit[Standard]/glTF/Walls/TopCables_Straight.gltf": "e5f5961c41b7a05ce8f2892d258dd555da6fc94c24784fbd2c5f4f74c7197ba3"
+      }
+    },
+    {
+      "key": "StationTerminal",
+      "model": "Prop_Computer",
+      "author": "Quaternius",
+      "license": "CC0-1.0",
+      "geometrySha256": "a7cca7dab22c409b8fd4fb0463739eb179f292fb65baa6da5500ed9ab25ae3b7",
+      "triangles": 519,
+      "groups": [
+        {
+          "name": "RF_StationTerminal_00_PanelPlastic",
+          "material": "PanelPlastic",
+          "sourceMaterial": "M_Black",
+          "center": [
+            0,
+            2.33631,
+            0.0121975
+          ],
+          "size": [
+            1.138456,
+            0.52738,
+            0.5273810000000001
+          ],
+          "triangles": 94,
+          "texture": null,
+          "doubleSided": false,
+          "alpha": false,
+          "glass": false
+        },
+        {
+          "name": "RF_StationTerminal_01_CreatureCream",
+          "material": "CreatureCream",
+          "sourceMaterial": "M_Decal_Screen",
+          "center": [
+            0,
+            2.3424829999999996,
+            0.0121975
+          ],
+          "size": [
+            1.100038,
+            0.5125600000000001,
+            0.5002150000000001
+          ],
+          "triangles": 75,
+          "texture": "assets/exported/refresh/textures/T_Decals_png_CreatureCream.png",
+          "doubleSided": false,
+          "alpha": false,
+          "glass": false
+        },
+        {
+          "name": "RF_StationTerminal_02_DarkMetal",
+          "material": "DarkMetal",
+          "sourceMaterial": "MI_Trim_01",
+          "center": [
+            0,
+            1.3,
+            0
+          ],
+          "size": [
+            1.213442,
+            2.6,
+            0.918154
+          ],
+          "triangles": 350,
+          "texture": "assets/exported/refresh/textures/T_Trim_01_BaseColor_Red_png_DarkMetal.png",
+          "doubleSided": false,
+          "alpha": false,
+          "glass": false
+        }
+      ],
+      "blend": "assets/blender/refresh/StationTerminal.blend",
+      "export": "assets/exported/refresh/StationTerminal.glb",
+      "sourceHashes": {
+        "assets/source/cc0-refresh/Quaternius-SciFi/Modular SciFi MegaKit[Standard]/glTF/Props/Prop_Computer.bin": "4edcd2674633831714ae8aafe7174be52c2f3d21f24e009fd7e9417e27eb788d",
+        "assets/source/cc0-refresh/Quaternius-SciFi/Modular SciFi MegaKit[Standard]/glTF/Props/T_Decals.png": "cfd1dfe9d3c86a7f5f9bc2e516d935599a70854090f413a29aec0ced1d6c908a",
+        "assets/source/cc0-refresh/Quaternius-SciFi/Modular SciFi MegaKit[Standard]/glTF/Props/T_Trim_01_Normal.png": "1aec7ad47a642fc68216b5a3119341b7dca038c1fc9493df8a15ad4aa27ddbcf",
+        "assets/source/cc0-refresh/Quaternius-SciFi/Modular SciFi MegaKit[Standard]/glTF/Props/T_Trim_01_BaseColor_Red.png": "15fc0e344ed35483bc771aaa95c1c2a0b0ec2349a893cf24af18b8742f0842ac",
+        "assets/source/cc0-refresh/Quaternius-SciFi/Modular SciFi MegaKit[Standard]/glTF/Props/T_Trim_01_ORM.png": "6ab7ad231df22867652048ebfd602684a9072d45c483ca57df0fcd4cb2cb4feb",
+        "assets/source/cc0-refresh/Quaternius-SciFi/Modular SciFi MegaKit[Standard]/glTF/Props/Prop_Computer.gltf": "010e49b1a77a5f9b46716f4108e6e1e8e3ebae020e5ff281f1098f8f0d2d0465"
+      }
+    }
+  ],
+  "licenses": {
+    "Quaternius-Nature": "assets/source/cc0-refresh/Quaternius-Nature/License_Standard.txt",
+    "Quaternius-SciFi": "assets/source/cc0-refresh/Quaternius-SciFi/License_Standard.txt"
+  }
+}
