@@ -1,7 +1,8 @@
 """Audit Golden sources/exports; --repair-exports re-exports the saved exact meshes.
 
 Blender --background --python tools/blender/validate_golden_sources.py -- --repair-exports
-Only source paths declared in the two Golden manifests can be written.
+Only source paths declared in the selected Golden manifests can be written.
+Optional: --manifest radioactive_vault_geometry.json --report radioactive_source_audit.json
 """
 import json
 from pathlib import Path
@@ -22,7 +23,12 @@ def owned_path(relative):
 
 def main():
     assets = []
-    for name in ("golden_geometry.json", "golden_launch_geometry.json"):
+    names = ("golden_geometry.json", "golden_launch_geometry.json")
+    if "--manifest" in sys.argv:
+        name = sys.argv[sys.argv.index("--manifest") + 1]
+        assert Path(name).name == name, "manifest must be in assets/exported"
+        names = (name,)
+    for name in names:
         assets.extend(json.loads((ROOT / "assets/exported" / name).read_text())["assets"])
     report = []
     for data in assets:
@@ -78,7 +84,11 @@ def main():
         report.append({"asset": data["key"], "blend": data["blend"], "export": data["export"],
                        "triangles": triangles, "meshObjects": len(meshes), "animations": animations,
                        "glbBytes": len(glb), "runtime": data.get("runtime", True)})
-    target = ROOT / "assets/exported/golden_source_audit.json"
+    report_name = "golden_source_audit.json"
+    if "--report" in sys.argv:
+        report_name = sys.argv[sys.argv.index("--report") + 1]
+        assert Path(report_name).name == report_name, "report must be in assets/exported"
+    target = ROOT / "assets/exported" / report_name
     target.write_text(json.dumps({"assets": report, "validated": len(report)}, indent=2), encoding="utf-8")
     print("GOLDEN_SOURCE_AUDIT", json.dumps({"validated": len(report), "triangles": sum(row["triangles"] for row in report)}))
 

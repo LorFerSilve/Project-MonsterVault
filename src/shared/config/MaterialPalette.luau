@@ -35,6 +35,9 @@ local styles: { [string]: { material: any, color: any } } = {
 	SpectralViolet = { material = Enum.Material.Neon, color = Color3.fromRGB(167, 107, 255) },
 	NightPlum = { material = Enum.Material.SmoothPlastic, color = Color3.fromRGB(42, 23, 56) },
 	AutumnLeaf = { material = Enum.Material.SmoothPlastic, color = Color3.fromRGB(172, 90, 52) },
+	WeatheredMetal = { material = Enum.Material.Metal, color = Color3.fromRGB(88, 110, 101) },
+	OxideRust = { material = Enum.Material.Metal, color = Color3.fromRGB(130, 74, 44) },
+	HazardAmber = { material = Enum.Material.SmoothPlastic, color = Color3.fromRGB(224, 184, 67) },
 }
 
 for _, style in styles do
