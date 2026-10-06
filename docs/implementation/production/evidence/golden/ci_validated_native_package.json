@@ -1,0 +1,21 @@
+{
+  "pullRequest": "https://github.com/LorFerSilve/Project-MonsterVault/pull/76",
+  "validatedHead": "59b9db503b215df10a7a11de926cfe744bf5c618",
+  "check": {
+    "id": 112174726070,
+    "name": "CI / static-build",
+    "head_sha": "59b9db503b215df10a7a11de926cfe744bf5c618",
+    "status": "completed",
+    "conclusion": "success",
+    "details_url": "https://github.com/LorFerSilve/Project-MonsterVault/actions/runs/37435060320/job/112174726070",
+    "output": {
+      "title": null,
+      "summary": null,
+      "text": null,
+      "annotations_count": 0
+    }
+  },
+  "fastTests": 339,
+  "pythonTests": 28,
+  "note": "Exact validated implementation/evidence commit. Subsequent documentation commits must pass their own normal CI; this is not manual Golden or release closure."
+}
