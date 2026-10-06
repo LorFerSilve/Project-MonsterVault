@@ -85,7 +85,7 @@ Actual Studio Play validation:
 - [29/29 existing native authoring cases](authoring_summary.json), 315 baseline
   grounded route samples and 315 hazard-free samples. Those baseline raycasts
   filter functional geometry; the new art route is proven by the actual walk.
-- [Runtime console](console_native.log): normal bootstrap/settlement messages,
+- [Runtime console](console_native.txt): normal bootstrap/settlement messages,
   no runtime error in this Play session. No new capture/claim receipt or physical
   controller proof is substituted for earlier evidence.
 
