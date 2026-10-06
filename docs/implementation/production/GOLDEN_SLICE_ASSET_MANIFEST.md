@@ -1,15 +1,14 @@
 # Golden Slice Asset Manifest
 
-Latest 2026-10-07 state: [comfort/reclaimed Energy pass](evidence/comfort/README.md).
-The completed pack refresh is reused in enlarged spaces with separate static
-collision. Three new custom assets are **READY TO IMPORT**, not COMPLETE:
-ContainmentShell (7,664 triangles), SurveyRover (2,676), RelayRuins (2,168).
-Each has `assets/blender/environment/golden_<key>.blend` and matching exported
-GLB using lowercase keys. One manual import is pending:
-`assets/exported/radioactive_vault_import.fbx`. Existing audio IDs are retained.
-Older counts/classifications below are historical evidence for their own passes.
+Latest 2026-10-07 state: [reclaimed reserve / radioactive Vault](evidence/reclaimed/README.md).
+ContainmentShell (7,664 triangles), SurveyRover (2,676) and RelayRuins (2,168)
+are **IMPORTED, MAPPED, PLACED AND NATIVE-VALIDATED**. Their editable sources
+and GLBs are reused; all 21 persistent MeshParts are recorded in the native
+manifest. The library has 32 prefabs / 101 MeshParts / 45,531 unique triangles.
+No import or audio upload is pending. Final Golden owner visual acceptance remains
+open. Older counts/classifications below describe historical passes.
 
-> Status: APPLIED GOLDEN KIT + SUPPLEMENTARY IMPORT PENDING
+> Status: APPLIED GOLDEN KIT + SUPPLEMENTARY RADIOACTIVE KIT
 > Date: 2026-10-07
 > Scope: minimum asset set required to turn the current Starter/Home path into the Golden production reference
 > Rule: repository/runtime contracts define identity; this manifest defines presentation work only

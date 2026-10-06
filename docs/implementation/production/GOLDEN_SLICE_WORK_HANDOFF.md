@@ -8,16 +8,20 @@
 
 The implementation below has advanced: **do not repeat the old preparation/audit sequence**. Start from [current evidence](GOLDEN_SLICE_EVIDENCE.md), [acceptance matrix](GOLDEN_SLICE_ACCEPTANCE_MATRIX.md) and the current branch/PR. The remainder of this handoff preserves the original production brief for reference.
 
-Latest owner-feedback pass (2026-10-07): [comfort/reclaimed Energy evidence](evidence/comfort/README.md).
-Starter/Home and the Vault hall are enlarged, solid props have collision, and
-native doors/buttons/movement feedback are integrated. Exact parity is 111/111;
-339 fast and 28 Python pass. Three supplementary Blender assets are READY TO
-IMPORT in `assets/exported/radioactive_vault_import.fbx`: ContainmentShell,
-SurveyRover, RelayRuins. The manual import request is pending; do not regenerate
-these assets or declare the radioactive exterior complete. Resume that import,
-mapping, placement and native front/side/rear/Play inspection first. The current
-native world already preserves the completed expanded-space pass. Historical
-refresh counts/status below describe the preceding pass.
+Latest owner-feedback pass (2026-10-07): [reclaimed reserve / radioactive Vault evidence](evidence/reclaimed/README.md).
+All three supplementary assets are imported/mapped/placed/native-validated;
+**no import or audio upload is pending**. Reuse their editable sources and native
+IDs. The actual central Field Station is rebuilt, Starter is 176 x 256 and its
+northern forest loop is walked in Play. The Vault exterior now has the Blender
+containment shell, sloped shoulders and reactor/cooling skyline. Current delivery:
+1,004 parts / 651 meshes / 325,963 repeated triangles; 111/111 exact Edit parity;
+339 fast / 28 Python; 14 route legs, six physics checks and 29 authoring cases pass.
+Studio p95 about 18ms exceeds the reference 16.67ms gate. Final owner visual review,
+physical controller menus, increased platform text and real-device performance
+remain open. Resume those and focused sensory/animation refinement on draft PR #76;
+do not restart import/planning or start later IMP-11 backends. Source reproduction
+now ends with expand_golden_reserve.luau after the comfort pass. Older counts below
+are historical. Studio is left Edit; user-local files are preserved.
 
 Latest continuation: [CC0 library refresh](evidence/refresh/README.md), fifteen
 adapted/imported models plus native UI accents. Their sources, exports, persistent

@@ -9,8 +9,8 @@ local layout: {
 } =
 	{
 		world = {
-			FixtureGround = { position = { 0, -0.5, 8 }, size = { 176, 1, 144 } },
-			StarterBounds = { position = { 0, 10, 8 }, size = { 176, 40, 144 } },
+			FixtureGround = { position = { 0, -0.5, -48 }, size = { 176, 1, 256 } },
+			StarterBounds = { position = { 0, 10, -48 }, size = { 176, 40, 256 } },
 			HomeHubGround = { position = { 0, -0.5, 160 }, size = { 160, 1, 144 } },
 			HomeHubBounds = { position = { 0, 10, 160 }, size = { 160, 40, 144 } },
 			MidABounds = { position = { -160, 10, -128 }, size = { 144, 40, 160 } },

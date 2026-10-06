@@ -85,12 +85,12 @@
             "Size": [
               176,
               1,
-              144
+              256
             ],
             "Position": [
               0,
               -0.5,
-              8
+              -48
             ],
             "Color": [
               0.17,
@@ -265,12 +265,12 @@
             "Position": [
               0,
               10,
-              8
+              -48
             ],
             "Size": [
               176,
               40,
-              144
+              256
             ],
             "CanCollide": false,
             "CanTouch": false,

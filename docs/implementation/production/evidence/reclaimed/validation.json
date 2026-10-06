@@ -1,0 +1,37 @@
+{
+  "date": "2026-10-07",
+  "focusedGolden": {
+    "passed": 13,
+    "total": 13
+  },
+  "fast": {
+    "passed": 339,
+    "total": 339
+  },
+  "python": {
+    "passed": 28,
+    "total": 28
+  },
+  "integrity": "PASS",
+  "dependencies": "PASS",
+  "stylua": "PASS",
+  "selene": {
+    "errors": 0,
+    "warnings": 0
+  },
+  "rojo": "PASS",
+  "configuredLuauAnalysis": {
+    "exit": 0,
+    "limitation": "Missing Roblox definitions warnings; not an engine type-clean claim."
+  },
+  "studio": {
+    "mode": "Edit",
+    "serverMainEnabled": true,
+    "clientMainEnabled": true,
+    "sourceParity": 111,
+    "materialUnknown": 0,
+    "idempotentCount": 2082,
+    "noRuinDrift": true
+  },
+  "acceptance": "Visual owner acceptance, physical controller menus/text preference and real-device performance remain open."
+}

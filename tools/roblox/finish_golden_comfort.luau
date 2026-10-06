@@ -395,7 +395,7 @@ return function()
 	if prefabs:FindFirstChild("ContainmentShell") then
 		asset("ContainmentShell", "RadioactiveVaultShell", Vector3.new(0, 0, 142), 1, 0)
 		for _, x in { -26, 26 } do
-			block(
+			local p = block(
 				layer,
 				"VaultFrontWing",
 				"DarkMetal",
@@ -403,9 +403,10 @@ return function()
 				CFrame.new(x, 10, 107.4),
 				true
 			)
+			p.Transparency, p.CastShadow = 1, false
 		end
 		for _, x in { -12, 12 } do
-			block(
+			local p = block(
 				layer,
 				"VaultPortalFoot",
 				"SecondaryMetal",
@@ -413,6 +414,7 @@ return function()
 				CFrame.new(x, 6.5, 107),
 				true
 			)
+			p.Transparency, p.CastShadow = 1, false
 		end
 		for _, side in { -1, 1 } do
 			for _, z in { 118, 136, 154, 172 } do

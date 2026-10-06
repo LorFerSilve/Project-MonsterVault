@@ -7,14 +7,14 @@ This folder is the implementation-facing production baseline for the first Golde
 
 Resume the existing work from [GOLDEN_SLICE_EVIDENCE.md](GOLDEN_SLICE_EVIDENCE.md) and the [native gallery](evidence/golden/README.md). Imports, permanent composition and representative UI/sensory integration are implemented. Remaining controller menu, actual platform text preference and performance acceptance are listed in the [matrix](GOLDEN_SLICE_ACCEPTANCE_MATRIX.md). Do not restart from pre-production.
 
-Latest continuation (2026-10-07): [comfort/reclaimed Energy revision](evidence/comfort/README.md).
-Expanded Starter/Home/Vault, static collision and native door/button/movement
-feedback are integrated, with 111/111 parity. Three new Blender assets await
-the manual `radioactive_vault_import.fbx` import and actual native validation.
-This responds to the owner's rejection of final map quality; visual acceptance
-remains open. The previous [CC0 asset-library refresh](evidence/refresh/README.md)
-has fifteen imported/adapted models, native UI accents and historical before/after
-evidence; reuse those assets and do not re-upload its audio.
+Latest continuation (2026-10-07): [larger central reserve / radioactive Vault](evidence/reclaimed/README.md).
+The supplementary three-model import is complete: all 21 persistent mesh groups
+are mapped and integrated. Starter is 176 x 256 with an actually rebuilt central
+station/court and northern forest loop; Vault has the radioactive containment
+shell and a stepped skyline. Native traversal/physics, exact 111/111 parity and
+339 fast / 28 Python pass. No import/audio upload is pending. Final owner visual
+acceptance and manual/device gates remain open. Reuse the existing CC0 and custom
+assets; earlier comfort/refresh evidence remains historical.
 
 It does not supersede GDS or Technical Architecture. If a conflict exists, the approved GDS/TA and explicit architecture decisions win.
 

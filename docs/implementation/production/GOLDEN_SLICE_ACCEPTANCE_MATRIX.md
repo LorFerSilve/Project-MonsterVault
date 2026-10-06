@@ -6,14 +6,15 @@
 > Physical controller menus, real increased platform text preference and reference-device performance remain open.
 > It does not mark any PQL gate complete by itself.
 
-Owner-feedback revision (2026-10-07): [comfort/reclaimed Energy pass](evidence/comfort/README.md).
-The owner rejected final map quality (bare edges, walk-through props, cramped
-hall, box exterior). Expanded geometry, static collision and bounded interaction
-feedback are now native-validated; three new Blender assets await manual import.
-Current parity is 111/111, 339 fast / 28 Python pass locally. GS-01/09/10/24/25
-remain PARTIAL for this revised visual direction until the radioactive exterior,
-reclaimed scenery and representative views are integrated/inspected. Earlier
-PASS observations below are historical, not owner acceptance of the final map.
+Owner-feedback revision (2026-10-07): [larger central reserve / radioactive Vault](evidence/reclaimed/README.md).
+All three supplementary Blender assets are imported/mapped/placed and inspected
+in Studio/Play. The central station/court is actually rebuilt; Starter is 176 x
+256 with a new forest loop. Native 14-leg traversal, six physics checks, 29
+authoring cases and 111/111 parity pass; 339 fast / 28 Python remain green.
+GS-24/25 have representative native evidence; GS-01/09/10 remain PARTIAL pending
+final owner visual acceptance after rejection of the earlier map. No import is
+pending. Broader device/manual/seasonal acceptance remains separate. Earlier
+PASS observations are evidence for their scope, not final-map owner acceptance.
 
 Latest continuation: [library refresh evidence](evidence/refresh/README.md).
 Fifteen selected assets and native UI accents are integrated; matched Starter/Vault
@@ -35,7 +36,7 @@ The exact start ordering may follow current runtime travel/onboarding behavior, 
 
 | Gate | Requirement | Evidence | Status |
 | --- | --- | --- | --- |
-| GS-01 Permanent Starter vista | Starter reads as authored environment with Halloween OFF | golden_01; comfort/starter_coast.jpg and native audits | PARTIAL — expanded landscape inspected; reclaimed relics/import and owner visual acceptance open |
+| GS-01 Permanent Starter vista | Starter reads as authored environment with Halloween OFF | reclaimed/starter_overview.jpg, starter_court.jpg, northern_survey.jpg; 14-leg walk | PARTIAL — larger central court/forest/relics integrated; final owner visual acceptance open |
 | GS-02 Halloween Starter vista | Same area reads intentionally seasonal with layer ON | golden_02; matched actual toggle | PASS, representative |
 | GS-03 Route readability | Player can identify outpost/route without dev markers | native traversal + actual controller return to safety | PASS, observed representative route |
 | GS-04 Safe Outpost | secure/recovery/travel functions wrapped by coherent production art | golden_03, actual Secured and ordinary Home travel | PASS |
@@ -43,8 +44,8 @@ The exact start ordering may follow current runtime travel/onboarding behavior, 
 | GS-06 Legendary representative | species/stability-orb-dev has clearly stronger intrinsic reveal without fake rarity | golden_07, protected_final_native, Legendary DEV peak stats | PASS, explicitly isolated DEV opportunity |
 | GS-07 Capture arc | engage/buildup/outcome/Secured are visually distinct | golden_05/06; custody/failure extras; actual lifecycle/peak | PASS, ordered state evidence; no uninterrupted video |
 | GS-08 Capture truth | presentation never invents success/rarity | receipt/projection negative tests; actual Failed then Secured | PASS |
-| GS-09 Home destination | Home/Vault reads as intentional aspirational destination | golden_08; comfort evidence | PARTIAL — expanded Home integrated; radioactive exterior import/native inspection open |
-| GS-10 Vault interior | display, machinery, Energy areas have hierarchy | golden_09; comfort/vault_interior.jpg, actual walk/collision/door test | PARTIAL — roomier hall inspected; final revised visual acceptance open |
+| GS-09 Home destination | Home/Vault reads as intentional aspirational destination | reclaimed/vault_exterior.jpg, vault_entry.jpg; shell native manifest/physics | PARTIAL — radioactive exterior integrated/inspected; final owner visual acceptance open |
+| GS-10 Vault interior | display, machinery, Energy areas have hierarchy | reclaimed/vault_interior.jpg, physics_native.json, doors_native.json | PARTIAL — roomier hall and clear entrance/spine inspected; final revised visual acceptance open |
 | GS-11 Existing Energy Core | integrated and material-correct, not accidentally replaced/degraded | preserved original + exact mapping/native inspection; golden_09/11 | PASS, reused functional role; no original Home before screenshot |
 | GS-12 Display payoff | owned exact creature can be visually displayed without duplicate ownership semantics | golden_10; display_paging_native; AD-269 fences | PASS |
 | GS-13 Energy Claim | source-to-wallet/count-up/completion hero sequence | golden_11, matching +8/+1253 receipts; bounded peak | PASS, ordinary free claim |
@@ -57,9 +58,9 @@ The exact start ordering may follow current runtime travel/onboarding behavior, 
 | GS-20 Reduced Motion | semantic capture/UI/reward feedback survives reduced motion | golden_15; native +311 claim with zero transient parts/audio muted | PASS, manual reduction; platform binding covered by tests |
 | GS-21 Halloween OFF | disabling seasonal layer leaves complete production-quality base | matched Starter/Home ON/OFF; restored Lighting/Atmosphere | PASS, representative composition |
 | GS-22 Seasonal isolation | Halloween disable does not break collision/routes/gameplay | zero seasonal colliders/query/tags/scripts; native OFF disposal + regressions | PASS |
-| GS-23 Performance | visual scene stays within working budgets or records measured justified exceptions | six native views; rendering headroom; 22-24ms fresh p95 and 101ms long-session exception recorded | PARTIAL — Studio measurement done, real-device/exception investigation open |
-| GS-24 Source completeness | hero 3D assets have editable source + exports + mapping | previous kit; radioactive_source_audit.json validates 3 new sources/GLBs | PARTIAL — new source/export/palette ready; persistent mesh mapping awaits import |
-| GS-25 Studio validation | no hero asset accepted from Blender-only evidence | previous native views plus expanded hall/perimeter/physics/feedback | PARTIAL — supplementary shell/rover/ruins still require actual native import/views/Play |
+| GS-23 Performance | visual scene stays within working budgets or records measured justified exceptions | reclaimed/performance_native.json: 120 frames/view, about 18ms p95; render-count headroom; older exceptions retained | PARTIAL — reference 16.67ms, physical devices/long-term memory/exception investigation open |
+| GS-24 Source completeness | hero 3D assets have editable source + exports + mapping | radioactive_source_audit.json (3/3), reclaimed/radioactive_native_manifest.json (21 meshes), native package roundtrip | PASS, representative sources/exports/persistent mapping |
+| GS-25 Studio validation | no hero asset accepted from Blender-only evidence | six reclaimed native views, actual 14-leg walk / six physics checks / door state | PASS, representative import/placement/appearance/Play evidence; final artistic owner acceptance remains GS-01/09/10 |
 | GS-26 CI/regression | applicable existing automated suite remains green | 339/339 fast, 28/28 Python, static/build locally and normal remote CI on validated head; see ci_validated_native_package.json | PASS for recorded implementation; each later head retains normal CI gate |
 
 ## 3. Required representative screenshots

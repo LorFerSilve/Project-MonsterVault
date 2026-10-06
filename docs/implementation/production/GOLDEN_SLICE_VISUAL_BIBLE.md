@@ -24,8 +24,9 @@ from shielded reactor hardware, faceted armor and controlled green Energy lines.
 It remains a safe, aspirational collection space. Decorative sealed cells/marks
 do not create damage, mutated Species, rewards or private inspection authority.
 Use local pockets of technology and overgrowth rather than a wasteland carpet.
-The prepared shell/rover/ruins are pending native import; see
-[current applied/pending evidence](evidence/comfort/README.md).
+The shell/rover/ruins are imported, mapped, placed and inspected in Studio/Play; see
+[current applied evidence](evidence/reclaimed/README.md). The larger central court
+and northern reserve retain open creature clearings and grouped lush vegetation.
 
 The permanent visual identity combines:
 

@@ -1,0 +1,55 @@
+{
+  "source": "Actual Studio Client RenderStepped/Stats",
+  "framesPerView": 120,
+  "views": [
+    {
+      "view": "starter",
+      "render": {
+        "Decal": "0 tris, 0 draws",
+        "Terrain": "0 tris, 0 draws",
+        "Grass": "0 tris, 0 draws",
+        "Particles": "0 tris, 0 draws",
+        "Cloud": "0 tris, 0 draws",
+        "SSAO": "0 tris, 0 draws",
+        "GenericPostProcess": "0 tris, 0 draws",
+        "Sky": "0 tris, 0 draws",
+        "Transparent": "0 tris, 0 draws",
+        "UI": "460 tris, 9 draws",
+        "Opaque": "222362 tris, 53 draws",
+        "DOF": "0 tris, 0 draws",
+        "Undefined": "0 tris, 0 draws"
+      },
+      "p95ms": 18.00289936363697,
+      "maxMs": 18.841000273823738,
+      "startMemoryMb": 2848.56640625,
+      "memoryMb": 2848.58984375,
+      "frames": 120,
+      "p50ms": 16.913199797272682
+    },
+    {
+      "view": "vault",
+      "render": {
+        "Decal": "0 tris, 0 draws",
+        "Terrain": "0 tris, 0 draws",
+        "Grass": "0 tris, 0 draws",
+        "Particles": "0 tris, 0 draws",
+        "Cloud": "0 tris, 0 draws",
+        "SSAO": "0 tris, 0 draws",
+        "GenericPostProcess": "0 tris, 0 draws",
+        "Sky": "0 tris, 0 draws",
+        "Transparent": "0 tris, 0 draws",
+        "UI": "444 tris, 11 draws",
+        "Opaque": "39993 tris, 48 draws",
+        "DOF": "0 tris, 0 draws",
+        "Undefined": "0 tris, 0 draws"
+      },
+      "p95ms": 18.081000074744225,
+      "maxMs": 18.47420074045658,
+      "startMemoryMb": 2847.3671875,
+      "memoryMb": 2847.3671875,
+      "frames": 120,
+      "p50ms": 16.89309999346733
+    }
+  ],
+  "limitations": "Studio workstation only; p95 exceeds reference 16.67ms. Short samples do not prove long-term memory stability or real-device/VS1-19 gates."
+}
