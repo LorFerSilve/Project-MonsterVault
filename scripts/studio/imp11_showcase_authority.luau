@@ -90,7 +90,7 @@ local function fixtureProfile(id: number): any
 		p.collection.creaturesById[idText] = {
 			creatureInstanceId = idText,
 			ownerUserId = id,
-			speciesId = "species/fixture-orb",
+			speciesId = "species/stability-orb-dev",
 			operationId = "capture-" .. idText,
 			securedAt = os.time(),
 			locked = true,

@@ -14,13 +14,13 @@ function PartyRuntimeService.new(options: {
 	player: any,
 	scheduler: any?,
 	presentationSeconds: (() -> number)?,
+	presentation: any?,
 })
 	local globals = getfenv() :: any
 	local Instance, Enum = globals.Instance, globals.Enum
 	local gui: any = nil
 	local panel: any = nil
 	local unsubscribe: any = nil
-	local unsubscribeShowcase: any = nil
 	local controls: { any } = {}
 	local connections = {}
 	local scheduler = options.scheduler or globals.task
@@ -51,7 +51,11 @@ function PartyRuntimeService.new(options: {
 		end
 		clear()
 		local row = 0
+		local controlHeight = if options.presentation then 44 else 24
 		local function label(text: string, height: number?)
+			if options.presentation then
+				height = math.max(height or 32, 32)
+			end
 			local item = Instance.new("TextLabel")
 			item.Size, item.Position =
 				globals.UDim2.new(1, -8, 0, height or 22), globals.UDim2.fromOffset(4, row)
@@ -65,103 +69,10 @@ function PartyRuntimeService.new(options: {
 		local function button(text: string, action: () -> ())
 			local item = Instance.new("TextButton")
 			item.Size, item.Position =
-				globals.UDim2.new(1, -8, 0, 24), globals.UDim2.fromOffset(4, row)
+				globals.UDim2.new(1, -8, 0, controlHeight), globals.UDim2.fromOffset(4, row)
 			item.Text, item.TextSize, item.Parent = text, 14, panel
 			table.insert(controls, item.Activated:Connect(action))
-			row += 26
-		end
-		local showcase = options.networking.showcaseStore.view()
-		label("Showcase / Visitors (read-only)")
-		button("Refresh Showcase", function()
-			send(RouteIds.commands.sessionRequestResync, { domain = "showcase" })
-		end)
-		local permissions = if showcase.permissions then showcase.permissions.state else nil
-		if permissions and permissions.permissionRevision > 0 then
-			label("My visitor audience: " .. permissions.audience)
-			for _, audience in { "Closed", "Party", "SameServer" } do
-				if audience ~= permissions.audience then
-					button("Set visitor audience: " .. audience, function()
-						send(
-							RouteIds.commands.socialShowcaseSetPolicy,
-							{ audience = audience },
-							permissions.permissionRevision
-						)
-					end)
-				end
-			end
-			if permissions.audience ~= "Closed" then
-				local target = Instance.new("TextBox")
-				target.Name = "ShowcaseTargetUserId"
-				target.Size, target.Position =
-					globals.UDim2.new(1, -8, 0, 24), globals.UDim2.fromOffset(4, row)
-				target.PlaceholderText, target.Text, target.TextSize, target.Parent =
-					"Visitor UserId", "", 14, panel
-				row += 26
-				button("Allow this visitor for 60s", function()
-					local userId = tonumber(target.Text)
-					if userId and userId > 0 and userId % 1 == 0 then
-						send(
-							RouteIds.commands.socialShowcaseGrant,
-							{ targetUserId = userId },
-							permissions.permissionRevision
-						)
-					end
-				end)
-			end
-			for _, grant in permissions.visitors do
-				label("Allowed visitor: " .. tostring(grant.userId))
-				button("Revoke visitor " .. tostring(grant.userId), function()
-					send(
-						RouteIds.commands.socialShowcaseRevoke,
-						{ grantId = grant.id },
-						permissions.permissionRevision
-					)
-				end)
-			end
-			for _, grant in permissions.incoming do
-				button("Inspect owner " .. tostring(grant.userId) .. " (read-only)", function()
-					send(
-						RouteIds.commands.socialShowcaseOpen,
-						{ ownerUserId = grant.userId, grantId = grant.id }
-					)
-				end)
-			end
-		end
-		local visit = if showcase.visit then showcase.visit.state else nil
-		if visit and visit.mode == "ReadOnly" then
-			label(
-				"READ-ONLY Showcase / "
-					.. visit.ownerDisplayName
-					.. " / "
-					.. tostring(visit.ownerUserId),
-				44
-			)
-			for _, creature in visit.creatures do
-				label("Instance: " .. creature.creatureInstanceId, 40)
-				label(
-					"Species: " .. creature.speciesId .. " / Rarity: " .. creature.speciesRarityId,
-					44
-				)
-				label(
-					"Mutation: "
-						.. table.concat(creature.mutationIds, ", ")
-						.. " / Trait: "
-						.. table.concat(creature.traitIds, ", "),
-					54
-				)
-				label("Display: " .. creature.displaySlotId)
-			end
-			if #visit.creatures == 0 then
-				label("No approved display card available")
-			end
-			if visit.hasMore then
-				label("Additional display content omitted from this bounded view", 44)
-			end
-			button("Close visit and return", function()
-				send(RouteIds.commands.socialShowcaseClose, { grantId = visit.grantId })
-			end)
-		else
-			label("Showcase closed / " .. (if visit then visit.reason else "Unavailable"))
+			row += controlHeight + 8
 		end
 		local snapshot = options.networking.partyStore.view()
 		button("Refresh Party", function()
@@ -238,10 +149,10 @@ function PartyRuntimeService.new(options: {
 			if party.leaderUserId == options.player.UserId then
 				local target = Instance.new("TextBox")
 				target.Size, target.Position =
-					globals.UDim2.new(1, -8, 0, 24), globals.UDim2.fromOffset(4, row)
+					globals.UDim2.new(1, -8, 0, controlHeight), globals.UDim2.fromOffset(4, row)
 				target.PlaceholderText, target.Text, target.TextSize, target.Parent =
 					"Target UserId (number)", "", 14, panel
-				row += 26
+				row += controlHeight + 8
 				button("Invite target", function()
 					local userId = tonumber(target.Text)
 					if userId and userId > 0 and userId % 1 == 0 then
@@ -401,10 +312,10 @@ function PartyRuntimeService.new(options: {
 			label("Rules: " .. FriendlyChallengeDefinition.rules, 128)
 			local target = Instance.new("TextBox")
 			target.Size, target.Position =
-				globals.UDim2.new(1, -8, 0, 24), globals.UDim2.fromOffset(4, row)
+				globals.UDim2.new(1, -8, 0, controlHeight), globals.UDim2.fromOffset(4, row)
 			target.PlaceholderText, target.Text, target.TextSize, target.Parent =
 				"Challenge target UserId", "", 14, panel
-			row += 26
+			row += controlHeight + 8
 			button("Offer Home Return (my consent)", function()
 				local userId = tonumber(target.Text)
 				if userId and userId > 0 and userId % 1 == 0 then
@@ -421,12 +332,6 @@ function PartyRuntimeService.new(options: {
 	end
 	arm = function()
 		local deadline = if running then options.networking.partyStore.nextDeadline() else nil
-		local showcaseDeadline = if running
-			then options.networking.showcaseStore.nextDeadline()
-			else nil
-		if showcaseDeadline then
-			deadline = math.min(deadline or math.huge, showcaseDeadline)
-		end
 		if deadline == scheduledAt then
 			return
 		end
@@ -456,6 +361,7 @@ function PartyRuntimeService.new(options: {
 		toggle.Size, toggle.Position, toggle.Text =
 			globals.UDim2.fromOffset(130, 28), globals.UDim2.fromOffset(8, 128), "Party diagnostics"
 		toggle.Parent = gui
+		toggle.Visible = options.presentation == nil
 		panel = Instance.new("ScrollingFrame")
 		panel.Size, panel.Position, panel.Visible =
 			globals.UDim2.new(0, 280, 0.6, 0), globals.UDim2.fromOffset(8, 158), false
@@ -473,9 +379,6 @@ function PartyRuntimeService.new(options: {
 		unsubscribe = options.networking.subscribeParty(function()
 			render()
 		end)
-		unsubscribeShowcase = options.networking.subscribeShowcase(function()
-			render()
-		end)
 		render()
 		gui.Parent = options.player:WaitForChild("PlayerGui")
 	end
@@ -487,9 +390,6 @@ function PartyRuntimeService.new(options: {
 		timer, scheduledAt = nil, nil
 		if unsubscribe then
 			unsubscribe()
-		end
-		if unsubscribeShowcase then
-			unsubscribeShowcase()
 		end
 		for _, connection in controls do
 			connection:Disconnect()
@@ -505,7 +405,20 @@ function PartyRuntimeService.new(options: {
 		gui, panel = nil, nil
 		return {}
 	end
-	return { id = "social", dependencies = { "networking" }, start = start, stop = stop }
+	return {
+		id = "social",
+		dependencies = { "networking" },
+		start = start,
+		stop = stop,
+		ui = function()
+			return gui, panel
+		end,
+		open = function(value: boolean)
+			if panel then
+				panel.Visible = value
+			end
+		end,
+	}
 end
 
 return PartyRuntimeService

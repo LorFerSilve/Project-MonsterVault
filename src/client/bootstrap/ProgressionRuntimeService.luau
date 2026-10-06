@@ -12,11 +12,12 @@ function ProgressionRuntimeService.new(options: { networking: any, player: any, 
 	local previous, nextButton: any = nil, nil
 	local running, expanded = false, false
 	local connections, unsubscribe = {}, nil :: any
+	local purchaseObserver: any = nil
 	local function enable(button: any, enabled: boolean)
 		button.Active, button.Interactable, button.Selectable = enabled, enabled, enabled
 		button.BackgroundColor3 = if enabled
-			then globals.Color3.fromRGB(20, 118, 77)
-			else globals.Color3.fromRGB(67, 79, 75)
+			then globals.Color3.fromRGB(30, 41, 49)
+			else globals.Color3.fromRGB(59, 73, 77)
 	end
 	local controller = Controller.new({
 		gateway = options.networking.gateway,
@@ -26,6 +27,11 @@ function ProgressionRuntimeService.new(options: { networking: any, player: any, 
 			game:GetService("ReplicatedStorage").MonsterVault.Shared.config.ProgressionFixture
 		).definitions,
 		clock = os.clock,
+		onPurchaseConfirmed = function(state: any)
+			if purchaseObserver then
+				purchaseObserver(state)
+			end
+		end,
 		sessionReady = function()
 			local state = options.networking.store.view()
 			return state ~= nil and state.status == "Ready"
@@ -37,10 +43,7 @@ function ProgressionRuntimeService.new(options: { networking: any, player: any, 
 			local s = if state.snapshot then state.snapshot.state else nil
 			summary.Text = if s
 				then string.format(
-					"Energy %d | Pending reward %d | Collection capacity %d\n%s",
-					s.energyUnits,
-					s.deferredEnergyUnits or 0,
-					s.collectionCapacity,
+					"%s\n◆ %d Energy  ·  %d collection spaces%s",
 					s.label
 						.. (
 							if s.owned
@@ -50,7 +53,12 @@ function ProgressionRuntimeService.new(options: { networking: any, player: any, 
 									else if s.gateReason ~= ""
 										then " | Active milestone required"
 										else ""
-						)
+						),
+					s.energyUnits,
+					s.collectionCapacity,
+					if (s.deferredEnergyUnits or 0) > 0
+						then "\nPending return reward · " .. s.deferredEnergyUnits .. " Energy"
+						else ""
 				)
 				else "Loading progression..."
 			message.Text = state.message
@@ -66,6 +74,19 @@ function ProgressionRuntimeService.new(options: { networking: any, player: any, 
 	})
 	return {
 		id = "progression_client",
+		view = controller.view,
+		observePurchase = function(observer: any)
+			purchaseObserver = observer
+		end,
+		ui = function()
+			return screen, panel
+		end,
+		open = function(value: boolean)
+			expanded = value
+			if panel then
+				panel.Visible = value
+			end
+		end,
 		dependencies = { "networking" },
 		start = function()
 			running = true

@@ -15,6 +15,7 @@ function CaptureRuntimeService.new(options: {
 	player: any,
 	userInputService: any,
 	guiService: any,
+	onPresentation: ((any) -> ())?,
 })
 	local scheduler = (getfenv() :: any).task
 	local running, started = false, false
@@ -61,6 +62,9 @@ function CaptureRuntimeService.new(options: {
 			return false
 		end,
 		onChanged = function(state)
+			if options.onPresentation then
+				pcall(options.onPresentation, state)
+			end
 			if presentation ~= nil then
 				presentation.render(state)
 			end
@@ -112,6 +116,9 @@ function CaptureRuntimeService.new(options: {
 			parent = options.player:WaitForChild("PlayerGui"),
 			guiService = options.guiService,
 			userInputService = options.userInputService,
+			modalOpen = function()
+				return options.player.PlayerGui:GetAttribute("GoldenModalOpen") == true
+			end,
 		})
 		input = InputRouter.new({
 			parent = options.player:WaitForChild("PlayerGui"),
@@ -122,6 +129,9 @@ function CaptureRuntimeService.new(options: {
 				controller.activate()
 			end,
 			onInputChanged = presentation.setGlyph,
+			modalOpen = function()
+				return options.player.PlayerGui:GetAttribute("GoldenModalOpen") == true
+			end,
 		})
 		unsubscribe = options.networking.subscribeCapture(function(envelope)
 			if

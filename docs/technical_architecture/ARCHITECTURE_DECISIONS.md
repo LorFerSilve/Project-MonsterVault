@@ -4029,3 +4029,27 @@ One detachable ProfileSession readback observer runs after its serialized writer
 ### Boundaries
 
 No creature/Collection/Vault/Energy/production/assignment/capacity/progression/mastery/lock/commerce/capture/trade mutation or Discovery is granted. Existing gameplay routes select the caller's profile. Paid status cannot affect audience, priority, scope, rates, bounds or private disclosure. No housing/physical relocation/cross-server/arbitrary inspection/text/co-op/event/art system is added. The existing native diagnostic surface suffices. [Showcase evidence](../implementation/IMP11_SHOWCASE_VISITOR_EVIDENCE.md) and [IMP-11 gates](../implementation/IMP11_GATE_MATRIX.md) close only this representative dependency. Stable underlying systems permit the incremental Golden Playable Vertical Slice; later co-op/events/platform/multiplayer/scale/release gates retain their owners.
+
+## AD-269 — Bind bounded owner display identity for the Golden presentation
+
+**Date:** 2026-10-06
+
+**Status:** Accepted — within the owner-authorized Golden Playable Vertical Slice
+
+**Owning phase:** TA-7/TA-12 presentation over the existing TA-17 VaultAssignmentV1 readback
+
+### Context
+
+The owner assignment page identifies an exact owned creature and its assignment, but lacks the intrinsic facts needed to choose its production model and card. Forwarding a profile or granting the visitor the owner's management projection would violate GDS-7/TA-10 boundaries. The existing Showcase card establishes the safe intrinsic field set.
+
+### Decision
+
+Each existing owner-only VaultAssignmentV1 row may additionally contain exactly four fields together: `speciesId`, `rarityId`, `mutationIds`, `traitIds`. The compact `rarityId` is the unchanged authoritative `variantIdentity.speciesRarityId`; it is never a cosmetic grade. Instance and display-slot identity remain the existing `creatureInstanceId` and `displaySlotId`. Mutation/Trait arrays are copied from the same saved intrinsic record, with the existing canonical Mutation bound of two and Trait bound of sixteen. No origin, operation, signature, private profile or commercial field is added.
+
+Keep the existing two-row page, ordering, cursor and 240-character assignment limit. Add facts only if the complete projection still fits the existing 4096-byte/depth/node wire budget. Give displayed rows priority within that budget; if a row's complete four-field set cannot fit, withhold all four and retain its assignment/claim/capacity facts. The client accepts both legacy rows and complete intrinsic rows, rejects partial or unknown fields, and renders an explicit unavailable presentation rather than inventing identity. No writer, route, profile schema or ownership change is introduced.
+
+The same owner-only readback may include one independent `displayCard` with exactly the existing Showcase field set: `creatureInstanceId,speciesId,speciesRarityId,mutationIds,traitIds,displaySlotId`. The server reuses `ShowcaseProjection.fromProfile` with the current caller's native UserId, so foreign-owned, Overflow-Held and producing creatures are excluded. This card is independent of the management cursor and takes presentation budget priority. If its complete facts cannot fit the existing wire budget, withhold the whole card; never displace assignment or Energy state. Legacy snapshots without this optional field remain valid. No owner-management, provenance, operation or commercial fields may appear in the card.
+
+Physical owner displays consume this one current accepted card and exact Ready session/profile revision. They are untagged, non-colliding presentation clones with no capture or mutation authority. Changing the list page does not remove the card; invalidating its session/revision or withdrawing the card removes the local display. The representative presentation maps the approved card to one of two authored display positions; broader display/content rollout remains PQL work. Visitor projection, consent, bounds and private session fencing remain AD-268.
+
+Current matching claim and upgrade receipts may invoke disposable client presentation callbacks after existing controller settlement. Historical, unrelated, stale, replayed or unconfirmed readbacks do not replay a reward. Callback failure cannot alter settlement. This binds a missing readback detail; it does not modify Energy, economy, progression or production authority.

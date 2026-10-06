@@ -30,7 +30,7 @@ local function send(route: string, payload: any, expected: number?, wanted: stri
 end
 local function labels(fragment: string): number
 	local n = 0
-	for _, item in s.player.PlayerGui.MonsterVaultPartyDiagnostic:GetDescendants() do
+	for _, item in s.player.PlayerGui.MonsterVaultShowcase:GetDescendants() do
 		if item:IsA("TextLabel") and item.Text:find(fragment, 1, true) then
 			n += 1
 		end
@@ -66,7 +66,7 @@ local function setup(): any
 		unreliableEvent = s.remotes.UnreliableEvent,
 		diagnostics = { emit = function() end },
 	})
-	s.ui = g.require(client.bootstrap.PartyRuntimeService)
+	s.ui = g.require(client.bootstrap.ShowcaseRuntimeService)
 		.new({ networking = s.network, player = s.player })
 	s.network.start()
 	s.ui.start()
@@ -77,9 +77,8 @@ local function setup(): any
 	)
 	case(
 		"nativeCollapsedNoFocusChange",
-		not s.player.PlayerGui.MonsterVaultPartyDiagnostic:FindFirstChildOfClass(
-				"ScrollingFrame"
-			).Visible and game:GetService("UserInputService"):GetFocusedTextBox() == nil
+		not s.player.PlayerGui.MonsterVaultShowcase.Panel.Visible
+			and game:GetService("UserInputService"):GetFocusedTextBox() == nil
 	)
 	return { actualClients = 1, cases = s.cases }
 end
@@ -92,6 +91,7 @@ local function open(): any
 		"OK_SHOWCASE_READ_ONLY"
 	)
 	local v = view().visit.state
+	s.ui.open(true)
 	case(
 		"nativeExplicitOpenReadOnlyCard",
 		v.mode == "ReadOnly"
@@ -106,7 +106,13 @@ local function open(): any
 	)
 	case(
 		"nativeVisibleReadOnlyOwnerAndReturn",
-		labels("READ-ONLY Showcase") == 1 and labels("Instance:") == 1
+		labels("READ ONLY") >= 2
+			and labels("Showcase peer") == 1
+			and labels("LEGENDARY") == 1
+			and s.player.PlayerGui.MonsterVaultShowcase.Panel.CreatureCard:GetAttribute(
+					"PresentedCreatureInstanceId"
+				)
+				== "showcase-700000010-1"
 	)
 	return { cases = s.cases, state = v }
 end
@@ -152,7 +158,7 @@ local function revoked(): any
 	case(
 		"nativeRevokedViewAndUI",
 		view().visit.state.reason == "Revoked"
-			and labels("Revoked") == 1
+			and labels("Access is no longer active") == 1
 			and #view().permissions.state.incoming == 0
 	)
 	return { cases = s.cases }
@@ -172,7 +178,7 @@ local function stop(): any
 	s.listener:Disconnect()
 	case(
 		"nativeClientDisposalRemovesUI",
-		s.player.PlayerGui:FindFirstChild("MonsterVaultPartyDiagnostic") == nil
+		s.player.PlayerGui:FindFirstChild("MonsterVaultShowcase") == nil
 	)
 	return { cases = s.cases, events = s.events }
 end

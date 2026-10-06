@@ -39,6 +39,7 @@ local function harness(initialKeyDown: boolean?): any
 	local created: { any } = {}
 	local signals: { any } = {}
 	local activations = 0
+	local modalOpen = false
 	local glyphs: { string } = {}
 	local enum = {
 		KeyCode = {
@@ -142,6 +143,9 @@ local function harness(initialKeyDown: boolean?): any
 		onInputChanged = function(text: string)
 			table.insert(glyphs, text)
 		end,
+		modalOpen = function()
+			return modalOpen
+		end,
 	})
 	router.setMode("World")
 	router.start()
@@ -158,6 +162,9 @@ local function harness(initialKeyDown: boolean?): any
 		signals = signals,
 		activations = function()
 			return activations
+		end,
+		setModal = function(value: boolean)
+			modalOpen = value
 		end,
 		press = function()
 			input.keyDown = true
@@ -291,7 +298,22 @@ local function pointerReleaseNeutralizesHandoff()
 	h.router.stop()
 end
 
+local function showcaseModalRequiresFreshCaptureGesture()
+	local h = harness()
+	h.setModal(true)
+	h.press()
+	assert(h.activations() == 0, "read-only card or owner modal consumes capture gesture")
+	h.setModal(false)
+	h.action.Pressed:Fire()
+	assert(h.activations() == 0, "closing card cannot leak a held capture gesture")
+	h.release()
+	h.press()
+	assert(h.activations() == 1, "fresh gesture after close is accepted")
+	h.router.stop()
+end
+
 return {
+	showcaseModalRequiresFreshCaptureGesture = showcaseModalRequiresFreshCaptureGesture,
 	heldGestureCannotActivateNextStage = heldGestureCannotActivateNextStage,
 	blockedFocusAndMenusRequireFreshGesture = blockedFocusAndMenusRequireFreshGesture,
 	deviceSwitchOnlyUpdatesBindingText = deviceSwitchOnlyUpdatesBindingText,

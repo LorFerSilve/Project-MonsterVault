@@ -12,6 +12,13 @@ function WorldModelObserver.new(options: { collectionService: any, diagnostics: 
 	local connections: { any } = {}
 	local observed: { [any]: any } = {}
 	local running = false
+	local presentationListener: any = nil
+	local function publish(model: any)
+		if presentationListener then
+			local view = store.view(model:GetAttribute("CreatureInstanceId"))
+			pcall(presentationListener, model, if view and view.present then view else nil)
+		end
+	end
 
 	local function observe(model: any)
 		if observed[model] ~= nil or not model:IsA("Model") then
@@ -22,9 +29,14 @@ function WorldModelObserver.new(options: { collectionService: any, diagnostics: 
 			options.diagnostics.emit("warn", "WORLD_PROJECTION_INVALID", { component = "world" })
 			return
 		end
+		if outcome == "Applied" then
+			publish(model)
+		end
 		observed[model] = model.AttributeChanged:Connect(function()
 			if running then
-				store.streamIn(model, model:GetAttributes())
+				if store.streamIn(model, model:GetAttributes()) == "Applied" then
+					publish(model)
+				end
 			end
 		end)
 	end
@@ -35,7 +47,9 @@ function WorldModelObserver.new(options: { collectionService: any, diagnostics: 
 			connection:Disconnect()
 			observed[model] = nil
 		end
-		store.streamOut(model)
+		if store.streamOut(model) and presentationListener then
+			pcall(presentationListener, model, nil)
+		end
 	end
 
 	local function start()
@@ -67,7 +81,25 @@ function WorldModelObserver.new(options: { collectionService: any, diagnostics: 
 		return {}
 	end
 
-	return { id = "world_observer", dependencies = {}, start = start, stop = stop, store = store }
+	return {
+		id = "world_observer",
+		dependencies = {},
+		start = start,
+		stop = stop,
+		store = store,
+		subscribePresentation = function(listener: any)
+			assert(presentationListener == nil, "world presentation already subscribed")
+			presentationListener = listener
+			for _, row in store.present() do
+				publish(row.model)
+			end
+			return function()
+				if presentationListener == listener then
+					presentationListener = nil
+				end
+			end
+		end,
+	}
 end
 
 return WorldModelObserver

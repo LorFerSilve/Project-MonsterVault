@@ -489,7 +489,19 @@ local function authoritativeReadback()
 	local snap = Projection.fromProfile(s.active.snapshot(), s.progression, s.vault, q)
 	check(Contract.validSnapshot(snap) and Wire.payload(snap))
 	local sent, codes, serial, now = {}, {}, 0, 0
-	local controller = Controller.new({
+	local presentationReceipts = {}
+	local controller: any = nil
+	controller = Controller.new({
+		onPurchaseConfirmed = function(state: any)
+			table.insert(presentationReceipts, {
+				state.receiptPriceUnits,
+				state.energyUnits,
+				state.unlockId,
+				not controller.view().pending
+					and controller.view().snapshot.state.energyUnits == state.energyUnits,
+			})
+			error("cosmetic renderer unavailable") -- Saved purchase must still settle.
+		end,
 		routes = Routes,
 		projection = Contract,
 		sessionReady = function()
@@ -520,6 +532,7 @@ local function authoritativeReadback()
 		correlationId = sent[#sent].requestId,
 	}) == "Applied")
 	check(controller.confirm() == nil, "explicit review required")
+	check(#presentationReceipts == 0, "initial readback cannot celebrate an old receipt")
 	controller.review()
 	local request = controller.confirm()
 	check(request ~= nil and controller.view().pending and sent[#sent].payload.quoteId == q.quoteId)
@@ -532,6 +545,7 @@ local function authoritativeReadback()
 		revision = snap.revision,
 		correlationId = sent[#sent].requestId,
 	}) == "Unconfirmed")
+	check(#presentationReceipts == 0, "unconfirmed readback cannot celebrate a purchase")
 	check(buy(s, q).status == "Committed")
 	local saved = Projection.fromProfile(s.active.snapshot(), s.progression, s.vault, nil)
 	check(Contract.validSnapshot(saved) and Wire.payload(saved))
@@ -545,6 +559,19 @@ local function authoritativeReadback()
 			and controller.view().snapshot.state.energyUnits == 48
 			and not controller.view().canReview
 	)
+	check(
+		#presentationReceipts == 1
+			and presentationReceipts[1][1] == 25
+			and presentationReceipts[1][2] == 48
+			and presentationReceipts[1][4],
+		"only the matching saved purchase supplies its exact receipt after settlement"
+	)
+	controller.handleSnapshot({
+		payload = saved,
+		revision = saved.revision,
+		correlationId = sent[#sent].requestId,
+	})
+	check(#presentationReceipts == 1, "replayed purchase readback cannot duplicate the payoff")
 	-- Busy proves non-admission only after correlated authoritative readback.
 	local fresh = setup(nil, nil, "busy")
 	check(fresh.active.acquire().status == "Ready")

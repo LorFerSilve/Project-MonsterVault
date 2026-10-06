@@ -1,7 +1,13 @@
 --!strict
 
 local VaultAssignmentProjection = {}
-function VaultAssignmentProjection.fromProfile(profile: any, production: any, afterId: string?): any
+function VaultAssignmentProjection.fromProfile(
+	profile: any,
+	production: any,
+	afterId: string?,
+	presentationFits: ((any) -> boolean)?,
+	displayCard: any?
+): any
 	local ids, rows = {}, {}
 	for id in profile.collection.creaturesById or {} do
 		if afterId == nil or id > afterId then
@@ -42,7 +48,7 @@ function VaultAssignmentProjection.fromProfile(profile: any, production: any, af
 			break
 		end
 	end
-	return {
+	local payload: any = {
 		domain = "vaultAssignments",
 		revision = profile.profileRevision,
 		state = {
@@ -61,5 +67,47 @@ function VaultAssignmentProjection.fromProfile(profile: any, production: any, af
 			hasMore = #ids > #rows,
 		},
 	}
+	-- Optional intrinsic facts for owner cards. Keep assignment/claim state when
+	-- a presentation would exceed the existing wire budget. No profile tables
+	-- or authority-bearing creature fields are shared through this readback.
+	if presentationFits then
+		-- The existing Showcase filter supplies one owner-bound display card.
+		-- It is independent of the management cursor and has budget priority.
+		if displayCard then
+			payload.state.displayCard = {
+				creatureInstanceId = displayCard.creatureInstanceId,
+				speciesId = displayCard.speciesId,
+				speciesRarityId = displayCard.speciesRarityId,
+				mutationIds = table.clone(displayCard.mutationIds),
+				traitIds = table.clone(displayCard.traitIds),
+				displaySlotId = displayCard.displaySlotId,
+			}
+			if not presentationFits(payload) then
+				payload.state.displayCard = nil
+			end
+		end
+		local presentationRows = table.clone(rows)
+		table.sort(presentationRows, function(a, b)
+			local aDisplay, bDisplay = a.displaySlotId ~= nil, b.displaySlotId ~= nil
+			if aDisplay ~= bDisplay then
+				return aDisplay
+			end
+			return a.creatureInstanceId < b.creatureInstanceId
+		end)
+		for _, row in presentationRows do
+			local record = profile.collection.creaturesById[row.creatureInstanceId]
+			local variant = record.variantIdentity
+			if type(variant) == "table" then
+				row.speciesId = record.speciesId
+				row.rarityId = variant.speciesRarityId
+				row.mutationIds = table.clone(variant.mutationIdsCanonical)
+				row.traitIds = table.clone(variant.traitIds)
+				if not presentationFits(payload) then
+					row.speciesId, row.rarityId, row.mutationIds, row.traitIds = nil, nil, nil, nil
+				end
+			end
+		end
+	end
+	return payload
 end
 return VaultAssignmentProjection

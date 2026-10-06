@@ -11,6 +11,19 @@ end
 local function id(value: any): boolean
 	return type(value) == "string" and #value > 0 and #value <= 128
 end
+local function ids(value: any, maximum: number): boolean
+	if type(value) ~= "table" or #value > maximum then
+		return false
+	end
+	local count = 0
+	for k, v in value do
+		if not integer(k, #value) or k < 1 or not id(v) then
+			return false
+		end
+		count += 1
+	end
+	return count == #value
+end
 function VaultAssignmentProjectionV1.validAssignment(payload: any, revision: any): boolean
 	if
 		type(payload) ~= "table"
@@ -105,6 +118,28 @@ function VaultAssignmentProjectionV1.validSnapshot(payload: any): boolean
 		if row.overflowHeld and (row.productionSlotId ~= nil or row.displaySlotId ~= nil) then
 			return false
 		end
+		if
+			row.speciesId ~= nil
+			or row.rarityId ~= nil
+			or row.mutationIds ~= nil
+			or row.traitIds ~= nil
+		then
+			if
+				not id(row.speciesId)
+				or not id(row.rarityId)
+				or not ids(row.mutationIds, 2)
+				or not ids(row.traitIds, 16)
+			then
+				return false
+			end
+			local prior = ""
+			for _, mutation in row.mutationIds do
+				if mutation <= prior then
+					return false
+				end
+				prior = mutation
+			end
+		end
 		for key in row do
 			if
 				key ~= "creatureInstanceId"
@@ -112,6 +147,10 @@ function VaultAssignmentProjectionV1.validSnapshot(payload: any): boolean
 				and key ~= "locked"
 				and key ~= "productionSlotId"
 				and key ~= "displaySlotId"
+				and key ~= "speciesId"
+				and key ~= "rarityId"
+				and key ~= "mutationIds"
+				and key ~= "traitIds"
 			then
 				return false
 			end
@@ -120,6 +159,40 @@ function VaultAssignmentProjectionV1.validSnapshot(payload: any): boolean
 	end
 	if state.hasMore and #state.creatures == 0 then
 		return false
+	end
+	local display = state.displayCard
+	if display ~= nil then
+		if
+			type(display) ~= "table"
+			or not id(display.creatureInstanceId)
+			or not id(display.speciesId)
+			or not id(display.speciesRarityId)
+			or not id(display.displaySlotId)
+			or #display.displaySlotId > 32
+			or not ids(display.mutationIds, 2)
+			or not ids(display.traitIds, 16)
+		then
+			return false
+		end
+		local prior = ""
+		for _, mutation in display.mutationIds do
+			if mutation <= prior then
+				return false
+			end
+			prior = mutation
+		end
+		for key in display do
+			if
+				key ~= "creatureInstanceId"
+				and key ~= "speciesId"
+				and key ~= "speciesRarityId"
+				and key ~= "mutationIds"
+				and key ~= "traitIds"
+				and key ~= "displaySlotId"
+			then
+				return false
+			end
+		end
 	end
 	for key in state do
 		if
@@ -133,6 +206,7 @@ function VaultAssignmentProjectionV1.validSnapshot(payload: any): boolean
 			and key ~= "claimExpectedRevision"
 			and key ~= "claimUnits"
 			and key ~= "creatures"
+			and key ~= "displayCard"
 			and key ~= "hasMore"
 		then
 			return false

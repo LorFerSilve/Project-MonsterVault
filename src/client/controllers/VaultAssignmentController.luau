@@ -8,6 +8,7 @@ function VaultAssignmentController.new(options: {
 	sessionReady: () -> boolean,
 	clock: () -> number,
 	onChanged: ((any) -> ())?,
+	onClaimSettled: ((number, number, number) -> ())?,
 })
 	local snapshot: any = nil
 	local selected: any = nil
@@ -105,6 +106,7 @@ function VaultAssignmentController.new(options: {
 		then
 			return "Stale"
 		end
+		local confirmedClaim = nil
 		if pending ~= nil then
 			if pending.kind == "claim" then
 				if envelope.payload.state.claimExpectedRevision ~= pending.expectedRevision then
@@ -121,6 +123,11 @@ function VaultAssignmentController.new(options: {
 				else
 					message =
 						string.format("Claim saved: +%d Energy.", envelope.payload.state.claimUnits)
+					confirmedClaim = {
+						envelope.payload.state.claimUnits,
+						pending.expectedRevision,
+						envelope.payload.state.energyUnits,
+					}
 				end
 			else
 				local present = false
@@ -144,6 +151,10 @@ function VaultAssignmentController.new(options: {
 			selected = nil
 		end
 		changed()
+		if confirmedClaim and options.onClaimSettled then
+			-- Settlement is visible before a disposable cosmetic callback runs.
+			pcall(options.onClaimSettled, table.unpack(confirmedClaim))
+		end
 		return "Applied"
 	end
 	local function tick()

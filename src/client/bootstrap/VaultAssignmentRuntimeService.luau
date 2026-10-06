@@ -5,6 +5,7 @@ local Controller = require(script.Parent.Parent.controllers.VaultAssignmentContr
 local Projection = require(shared.contracts.VaultAssignmentProjectionV1)
 local Routes = require(shared.contracts.RouteIds)
 local Fixture = require(shared.config.VaultProductionFixture)
+local Catalog = require(shared.config.CreaturePresentationCatalog)
 local VaultAssignmentRuntimeService = {}
 function VaultAssignmentRuntimeService.new(
 	options: { networking: any, player: any, guiService: any }
@@ -17,11 +18,16 @@ function VaultAssignmentRuntimeService.new(
 	local connections: { any } = {}
 	local running, expanded = false, false
 	local unsubscribe: any = nil
+	local claimListener: any = nil
 	local function enable(button: any, value: boolean)
 		button.Active, button.Interactable, button.Selectable = value, value, value
-		button.BackgroundColor3 = if value
-			then globals.Color3.fromRGB(20, 118, 77)
-			else globals.Color3.fromRGB(67, 79, 75)
+		button.BackgroundColor3 = if value and button:GetAttribute("GoldenPrimary")
+			then globals.Color3.fromRGB(76, 255, 110)
+			elseif value then globals.Color3.fromRGB(30, 41, 49)
+			else globals.Color3.fromRGB(59, 73, 77)
+		button.TextColor3 = if value and button:GetAttribute("GoldenPrimary")
+			then globals.Color3.fromRGB(19, 25, 33)
+			else globals.Color3.fromRGB(241, 246, 227)
 	end
 	local controller = Controller.new({
 		gateway = options.networking.gateway,
@@ -32,6 +38,11 @@ function VaultAssignmentRuntimeService.new(
 			return session ~= nil and session.status == "Ready"
 		end,
 		clock = os.clock,
+		onClaimSettled = function(amount, revision, balance)
+			if claimListener then
+				claimListener(amount, revision, balance)
+			end
+		end,
 		onChanged = function(state)
 			if screen == nil then
 				return
@@ -40,7 +51,7 @@ function VaultAssignmentRuntimeService.new(
 			local data = if state.snapshot then state.snapshot.state else nil
 			summary.Text = if data
 				then string.format(
-					"Energy %d | Saved output %.3f / %.3f | Offline +%.3f",
+					"ENERGY  %d\nOutput ready %.1f / %.1f · Offline +%.1f",
 					data.energyUnits,
 					data.bufferMilli / 1000,
 					data.bufferCapacityMilli / 1000,
@@ -53,16 +64,29 @@ function VaultAssignmentRuntimeService.new(
 			end
 			for index, row in rows do
 				local entry = if data then data.creatures[index] else nil
+				local display = data and data.displayCard
+				local speciesId = entry
+					and (
+						entry.speciesId
+						or (
+							display
+							and display.creatureInstanceId == entry.creatureInstanceId
+							and display.speciesId
+						)
+					)
 				row.Visible = entry ~= nil
 				row.Text = if entry
 					then (if state.selected == entry.creatureInstanceId then "> " else "")
-						.. entry.creatureInstanceId
+						.. (if speciesId and Catalog[speciesId]
+							then Catalog[speciesId].label
+							else "Owned creature")
 						.. "\n"
 						.. (if entry.overflowHeld
-							then "Overflow-Held"
-							else if entry.productionSlotId then "Active" else "Stored")
-						.. (if entry.productionSlotId then " | " .. entry.productionSlotId else "")
-						.. (if entry.displaySlotId then " | " .. entry.displaySlotId else "")
+							then "Overflow · awaiting storage"
+							else if entry.productionSlotId
+								then "Producing Energy"
+								else "Stored")
+						.. (if entry.displaySlotId then " · On display" else "")
 					else ""
 				enable(row, entry ~= nil and not entry.overflowHeld and not state.pending)
 			end
@@ -117,7 +141,7 @@ function VaultAssignmentRuntimeService.new(
 		summary = item("TextLabel", "Output", "", 44)
 		message = item("TextLabel", "Message", "", 44)
 		summary.BackgroundTransparency, message.BackgroundTransparency = 1, 1
-		claimButton = item("TextButton", "ClaimProduction", "Claim production", 36)
+		claimButton = item("TextButton", "ClaimProduction", "Claim saved Energy", 36)
 		table.insert(connections, claimButton.Activated:Connect(controller.claim))
 		for index = 1, 2 do
 			local row = item("TextButton", "Creature" .. index, "", 64)
@@ -192,6 +216,21 @@ function VaultAssignmentRuntimeService.new(
 		dependencies = { "networking" },
 		start = start,
 		stop = stop,
+		view = controller.view,
+		firstPage = controller.firstPage,
+		nextPage = controller.nextPage,
+		ui = function()
+			return screen, panel
+		end,
+		open = function(value: boolean)
+			expanded = value
+			if panel then
+				panel.Visible = value
+			end
+		end,
+		observeClaim = function(listener: any)
+			claimListener = listener
+		end,
 	}
 end
 return VaultAssignmentRuntimeService
