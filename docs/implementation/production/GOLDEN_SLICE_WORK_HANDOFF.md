@@ -6,14 +6,25 @@
 
 ## Current continuation state — 2026-10-06
 
-The implementation below has advanced: **do not repeat the old preparation/audit sequence or ask for another import**. Start from [current evidence](GOLDEN_SLICE_EVIDENCE.md), [acceptance matrix](GOLDEN_SLICE_ACCEPTANCE_MATRIX.md) and the current branch/PR. The remainder of this handoff preserves the original production brief for reference.
+The implementation below has advanced: **do not repeat the old preparation/audit sequence**. Start from [current evidence](GOLDEN_SLICE_EVIDENCE.md), [acceptance matrix](GOLDEN_SLICE_ACCEPTANCE_MATRIX.md) and the current branch/PR. The remainder of this handoff preserves the original production brief for reference.
+
+Latest owner-feedback pass (2026-10-07): [comfort/reclaimed Energy evidence](evidence/comfort/README.md).
+Starter/Home and the Vault hall are enlarged, solid props have collision, and
+native doors/buttons/movement feedback are integrated. Exact parity is 111/111;
+339 fast and 28 Python pass. Three supplementary Blender assets are READY TO
+IMPORT in `assets/exported/radioactive_vault_import.fbx`: ContainmentShell,
+SurveyRover, RelayRuins. The manual import request is pending; do not regenerate
+these assets or declare the radioactive exterior complete. Resume that import,
+mapping, placement and native front/side/rear/Play inspection first. The current
+native world already preserves the completed expanded-space pass. Historical
+refresh counts/status below describe the preceding pass.
 
 Latest continuation: [CC0 library refresh](evidence/refresh/README.md), fifteen
 adapted/imported models plus native UI accents. Their sources, exports, persistent
 IDs, before/after views and native world/library readback are committed with this
 phase. No further import is pending. Exact Edit parity is 110/110; 339 fast and
 28 Python still pass. New Studio p95 is about 68ms and its cause remains open.
-Resume visual/manual/performance acceptance on PR #76, not asset preparation.
+Resume the supplementary import and visual/manual/performance acceptance on PR #76.
 
 - `codex/golden-slice` implements 13 new runtime assets plus the reused Energy Core; 14 editable source assets include the offline Rare concept. All prepared imports are mapped and integrated.
 - Permanent Starter/Home world, seasonal template and prefabs are serialized Rojo artifacts. Eleven uploaded original audio IDs are reused; no further upload is pending.

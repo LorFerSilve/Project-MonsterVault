@@ -6,6 +6,8 @@ local Instance, Enum, CFrame, Vector3 =
 local Audio = require(game:GetService("ReplicatedStorage").MonsterVault.Shared.config.GoldenAudio)
 local Feedback = require(script.Parent.GoldenFeedback)
 local Theme = require(script.Parent.GoldenTheme)
+local Layout =
+	require(game:GetService("ReplicatedStorage").MonsterVault.Shared.config.GoldenWorldLayout)
 local Sensory = {}
 function Sensory.new(player: any, preferences: any, wallet: (number) -> ())
 	local root = Instance.new("Folder")
@@ -24,6 +26,87 @@ function Sensory.new(player: any, preferences: any, wallet: (number) -> ())
 		debris = game:GetService("Debris"),
 		run = game:GetService("RunService"),
 	}
+	-- One local movement emitter, driven by actual avatar state/distance. No
+	-- movement authority, per-character loop, polling task or permanent emission.
+	local dustAnchor = Instance.new("Part")
+	dustAnchor.Name, dustAnchor.Size, dustAnchor.Transparency =
+		"AvatarGroundFeedback", Vector3.one * 0.1, 1
+	dustAnchor.Anchored, dustAnchor.CanCollide, dustAnchor.CanQuery, dustAnchor.CanTouch, dustAnchor.CastShadow =
+		true, false, false, false, false
+	dustAnchor.Parent = root
+	local dust = Instance.new("ParticleEmitter")
+	dust.Name, dust.Texture, dust.Rate =
+		"GroundDust", "rbxasset://textures/particles/smoke_main.dds", 0
+	dust.Color = globals.ColorSequence.new(globals.Color3.fromRGB(156, 171, 137))
+	dust.Lifetime, dust.Speed, dust.SpreadAngle =
+		globals.NumberRange.new(0.18, 0.35),
+		globals.NumberRange.new(0.4, 1.2),
+		globals.Vector2.new(70, 70)
+	dust.Size = globals.NumberSequence.new({
+		globals.NumberSequenceKeypoint.new(0, 0.2),
+		globals.NumberSequenceKeypoint.new(1, 0.6),
+	})
+	dust.Transparency = globals.NumberSequence.new({
+		globals.NumberSequenceKeypoint.new(0, 0.62),
+		globals.NumberSequenceKeypoint.new(1, 1),
+	})
+	dust.Parent = dustAnchor
+	local characterConnections: { any } = {}
+	local humanoid: any = nil
+	local characterRoot: any = nil
+	local walked, nextStep, nextImpact = 0, 0, 0
+	local lastPosition: any = nil
+	local function groundCue(amount: number)
+		if characterRoot and not preferences.reducedMotion and not preferences.lowEffects then
+			dustAnchor.Position = characterRoot.Position - Vector3.new(0, 2.8, 0)
+			dust:Emit(amount)
+		end
+	end
+	local function characterChanged(character: any)
+		for _, connection in characterConnections do
+			connection:Disconnect()
+		end
+		table.clear(characterConnections)
+		humanoid, characterRoot, lastPosition, walked = nil, nil, nil, 0
+		dust:Clear()
+		local function added(item: any)
+			if not running or player.Character ~= character then
+				return
+			end
+			if item.Name == "HumanoidRootPart" then
+				characterRoot = item
+			elseif item:IsA("Humanoid") and not humanoid then
+				humanoid = item
+				table.insert(
+					characterConnections,
+					item.StateChanged:Connect(function(_old: any, state: any)
+						if player.Character ~= character or humanoid ~= item then
+							return
+						end
+						local t = os.clock()
+						if
+							t >= nextImpact
+							and (
+								state == Enum.HumanoidStateType.Landed
+								or state == Enum.HumanoidStateType.Jumping
+							)
+						then
+							nextImpact = t + 0.16
+							groundCue(if state == Enum.HumanoidStateType.Landed then 10 else 5)
+						end
+					end)
+				)
+			end
+		end
+		table.insert(characterConnections, character.ChildAdded:Connect(added))
+		for _, item in character:GetChildren() do
+			added(item)
+		end
+	end
+	local characterConnection = player.CharacterAdded:Connect(characterChanged)
+	if player.Character then
+		characterChanged(player.Character)
+	end
 	local reserve, machine = Instance.new("Sound"), Instance.new("Sound")
 	for _, entry in { { reserve, "Reserve" }, { machine, "Machine" } } do
 		entry[1].Name, entry[1].SoundId, entry[1].Looped, entry[1].Volume =
@@ -210,6 +293,8 @@ function Sensory.new(player: any, preferences: any, wallet: (number) -> ())
 			add(item, item:GetPivot(), "accumulator")
 		elseif item.Name == "EnergyRotor" then
 			add(item, item:GetPivot(), "machine")
+		elseif item.Name == "EntryDoorLeft" or item.Name == "EntryDoorRight" then
+			add(item, item:GetPivot(), "door")
 		end
 	end
 	local addedConnection = workspace.DescendantAdded:Connect(foundryItem)
@@ -231,11 +316,53 @@ function Sensory.new(player: any, preferences: any, wallet: (number) -> ())
 	local nextAmbient = 0
 	local renderConnection = services.run.RenderStepped:Connect(function(deltaTime: number)
 		local t = os.clock()
+		local p = characterRoot
+		if p and p.Parent ~= player.Character then
+			p = nil
+		end
+		if p and p.Parent then
+			local distance = if lastPosition then (p.Position - lastPosition).Magnitude else 0
+			lastPosition = p.Position
+			if
+				humanoid
+				and humanoid.MoveDirection.Magnitude > 0.1
+				and humanoid.FloorMaterial ~= Enum.Material.Air
+				and distance < 4
+			then
+				walked += distance
+				if walked >= 3 and t >= nextStep then
+					walked, nextStep = 0, t + 0.14
+					groundCue(3)
+				end
+			else
+				walked = 0
+			end
+		end
 		for model, record in animated do
 			if model.Parent then
 				local base = if type(record.base) == "function" then record.base() else record.base
 				if base then
-					if record.role == "machine" then
+					if record.role == "door" then
+						local target = if p
+								and (p.Position - Vector3.new(0, p.Position.Y, 108)).Magnitude
+									< 18
+							then 1
+							else 0
+						record.open = if preferences.reducedMotion
+							then target
+							else (record.open or 0) + (target - (record.open or 0)) * math.min(
+								1,
+								deltaTime * 9
+							)
+						model:PivotTo(
+							base
+								* CFrame.new(
+									(model:GetAttribute("OpenOffsetX") or 0) * record.open,
+									0,
+									0
+								)
+						)
+					elseif record.role == "machine" then
 						if not preferences.reducedMotion then
 							record.angle = (record.angle or 0)
 								+ math.min(deltaTime, 0.1)
@@ -259,6 +386,18 @@ function Sensory.new(player: any, preferences: any, wallet: (number) -> ())
 								)
 						)
 					else
+						local reaction = 0
+						if record.reaction then
+							local progress = math.clamp(
+								(t - record.reaction.started) / record.reaction.duration,
+								0,
+								1
+							)
+							reaction = math.sin(progress * math.pi) * record.reaction.tilt
+							if progress >= 1 then
+								record.reaction = nil
+							end
+						end
 						model:PivotTo(
 							base
 								* (
@@ -269,7 +408,7 @@ function Sensory.new(player: any, preferences: any, wallet: (number) -> ())
 											0.06 * math.sin(t * 1.7 + record.offset),
 											0
 										) * CFrame.Angles(
-											0,
+											reaction,
 											0.035 * math.sin(t * 0.6 + record.offset),
 											0
 										)
@@ -298,9 +437,10 @@ function Sensory.new(player: any, preferences: any, wallet: (number) -> ())
 		end
 		if t >= nextAmbient then
 			nextAmbient = t + 0.1
-			local character = player.Character
-			local p = character and character:FindFirstChild("HumanoidRootPart")
-			local home = p and p.Position.Z > 95 and p.Position.Z < 165
+			local homeBounds = Layout.world.HomeHubBounds
+			local home = p
+				and math.abs(p.Position.X - homeBounds.position[1]) < homeBounds.size[1] / 2
+				and math.abs(p.Position.Z - homeBounds.position[3]) < homeBounds.size[3] / 2
 			for model, record in animated do
 				if
 					p
@@ -371,7 +511,27 @@ function Sensory.new(player: any, preferences: any, wallet: (number) -> ())
 		play = play,
 		pulse = pulse,
 		beam = beam,
+		arrival = function()
+			play("UI", 0.12)
+			if characterRoot then
+				pulse(characterRoot.Position - Vector3.new(0, 1.5, 0), Theme.colors.energy)
+			end
+		end,
 		add = add,
+		react = function(model: any, cue: string)
+			local record = animated[model]
+			if
+				record
+				and (cue == "Engage" or cue == "Failure")
+				and not preferences.reducedMotion
+			then
+				record.reaction = {
+					started = os.clock(),
+					duration = if cue == "Failure" then 0.28 else 0.42,
+					tilt = if cue == "Failure" then -0.15 else 0.1,
+				}
+			end
+		end,
 		root = root,
 		remove = function(model: any)
 			if animated[model] then
@@ -415,6 +575,14 @@ function Sensory.new(player: any, preferences: any, wallet: (number) -> ())
 			return balanceAnimation ~= nil
 		end,
 		preferencesChanged = function()
+			if preferences.reducedMotion or preferences.lowEffects then
+				dust:Clear()
+			end
+			if preferences.reducedMotion then
+				for _, record in animated do
+					record.reaction = nil
+				end
+			end
 			if preferences.reducedMotion and balanceAnimation then
 				wallet(balanceAnimation.to)
 				balanceAnimation = nil
@@ -440,6 +608,11 @@ function Sensory.new(player: any, preferences: any, wallet: (number) -> ())
 			renderConnection:Disconnect()
 			addedConnection:Disconnect()
 			removedConnection:Disconnect()
+			characterConnection:Disconnect()
+			for _, connection in characterConnections do
+				connection:Disconnect()
+			end
+			table.clear(characterConnections)
 			clearTransient()
 			table.clear(animated)
 			for _, sound in sounds do

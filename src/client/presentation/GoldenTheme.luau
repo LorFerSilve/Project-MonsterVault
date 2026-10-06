@@ -6,6 +6,92 @@ local catalog = require(
 	game:GetService("ReplicatedStorage").MonsterVault.Shared.config.CreaturePresentationCatalog
 )
 local Theme = {}
+local motion: any = setmetatable({}, { __mode = "k" })
+local function scaleMotion(object: any, target: number, duration: number)
+	local entry = motion[object]
+	if not entry then
+		local scale = Instance.new("UIScale")
+		scale.Name, scale.Parent = "GoldenInteractionScale", object
+		entry = { scale = scale }
+		motion[object] = entry
+		object.Destroying:Connect(function()
+			if entry.tween then
+				entry.tween:Cancel()
+			end
+			motion[object] = nil
+		end)
+	end
+	if entry.tween then
+		entry.tween:Cancel()
+	end
+	if duration == 0 then
+		entry.scale.Scale = target
+	else
+		entry.tween = game:GetService("TweenService"):Create(
+			entry.scale,
+			globals.TweenInfo.new(duration, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
+			{ Scale = target }
+		)
+		entry.tween:Play()
+	end
+end
+-- Native pointer/gamepad focus feedback. Idempotent bindings share the existing
+-- preference table and die with the button; no idle UI loop or delayed actions.
+function Theme.interaction(button: any, preferences: any)
+	if button:GetAttribute("GoldenMotionBound") or not button:IsA("GuiButton") then
+		return
+	end
+	button:SetAttribute("GoldenMotionBound", true)
+	local hover, selected, pressed = false, false, false
+	local function update()
+		local reduced = preferences.reducedMotion or not button.Interactable
+		scaleMotion(
+			button,
+			if reduced then 1 elseif pressed then 0.98 elseif hover or selected then 1.025 else 1,
+			if reduced then 0 else 0.11
+		)
+	end
+	button.MouseEnter:Connect(function()
+		hover = true
+		update()
+	end)
+	button.MouseLeave:Connect(function()
+		hover, pressed = false, false
+		update()
+	end)
+	button.SelectionGained:Connect(function()
+		selected = true
+		update()
+	end)
+	button.SelectionLost:Connect(function()
+		selected, pressed = false, false
+		update()
+	end)
+	button.MouseButton1Down:Connect(function()
+		pressed = true
+		update()
+	end)
+	button.MouseButton1Up:Connect(function()
+		pressed = false
+		update()
+	end)
+	button.Activated:Connect(function()
+		pressed = false
+		update()
+	end)
+	button:GetPropertyChangedSignal("Interactable"):Connect(update)
+end
+function Theme.appear(object: any, preferences: any)
+	scaleMotion(object, if preferences.reducedMotion then 1 else 0.98, 0)
+	scaleMotion(object, 1, if preferences.reducedMotion then 0 else 0.16)
+end
+function Theme.resetMotion(root: any)
+	for object in motion do
+		if object:IsDescendantOf(root) then
+			scaleMotion(object, 1, 0)
+		end
+	end
+end
 local RarityTokens = require(script.Parent.RarityTokens)
 local images = require(
 	game:GetService("ReplicatedStorage").MonsterVault.Shared.config.RefreshPresentationImages

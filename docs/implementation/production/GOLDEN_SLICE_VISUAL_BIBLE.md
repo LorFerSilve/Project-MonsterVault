@@ -15,7 +15,17 @@ silhouettes or authored trim detail; geometry and lighting carry the composition
 
 ## 1. Product-facing visual thesis
 
-MonsterVault should read as a **stylized arcane-tech creature expedition**.
+MonsterVault should read as a **stylized creature expedition through a reclaimed Energy frontier**.
+
+Owner refinement (2026-10-07): **radioactive + wild nature**. Healthy, lush
+vegetation surrounds old survey structures and weathered machinery; a few
+abandoned relics tell the history. Home's radioactive-vault silhouette comes
+from shielded reactor hardware, faceted armor and controlled green Energy lines.
+It remains a safe, aspirational collection space. Decorative sealed cells/marks
+do not create damage, mutated Species, rewards or private inspection authority.
+Use local pockets of technology and overgrowth rather than a wasteland carpet.
+The prepared shell/rover/ruins are pending native import; see
+[current applied/pending evidence](evidence/comfort/README.md).
 
 The permanent visual identity combines:
 
@@ -97,6 +107,9 @@ Existing repository-native material groups remain authoritative where used:
 | SecondaryMetal | 153, 172, 187 | trim, moving mechanical detail, readable edges |
 | PanelPlastic | 19, 25, 33 | dark UI-adjacent panels, machine shells |
 | EnergyGreen | 76, 255, 110 | powered tech / Energy / containment |
+| WeatheredMetal | 88, 110, 101 | reclaimed exterior armor and retired equipment |
+| OxideRust | 130, 74, 44 | restrained wear on abandoned infrastructure |
+| HazardAmber | 224, 184, 67 | geometric containment/warning signs; never rarity |
 | FixtureCreature reference | 77, 205, 255 | current DEV creature reference only |
 
 Recommended permanent environment support palette:

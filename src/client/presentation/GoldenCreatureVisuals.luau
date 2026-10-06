@@ -4,6 +4,7 @@ local Instance, Enum, Vector3, CFrame, UDim2 =
 	globals.Instance, globals.Enum, globals.Vector3, globals.CFrame, globals.UDim2
 local shared = game:GetService("ReplicatedStorage").MonsterVault.Shared
 local Fixture = require(shared.config.VaultProductionFixture)
+local Layout = require(shared.config.GoldenWorldLayout)
 local Theme = require(script.Parent.GoldenTheme)
 local Visuals = {}
 function Visuals.new(sensory: any, observer: any)
@@ -120,6 +121,14 @@ function Visuals.new(sensory: any, observer: any)
 		end
 	end
 	return {
+		captureReaction = function(id: string?, cue: string)
+			for _, record in records do
+				if record.id == id then
+					sensory.react(record.visual, cue)
+					return
+				end
+			end
+		end,
 		owned = function(rows: any)
 			clearOwned()
 			for _, row in rows do
@@ -140,7 +149,8 @@ function Visuals.new(sensory: any, observer: any)
 						model:SetAttribute("PresentedTraitIds", table.concat(row.traitIds, ","))
 						model:SetAttribute("PresentedDisplaySlotId", row.displaySlotId)
 						model.Parent = sensory.root
-						local cf = CFrame.new(-12, 1.24, if slot == 1 then 120 else 133)
+						local position = Layout.displays[slot]
+						local cf = CFrame.new(position[1], position[2] + 1.02, position[3])
 							* CFrame.Angles(0, math.rad(155), 0)
 						model:PivotTo(cf)
 						if sensory.add(model, cf, "display") then

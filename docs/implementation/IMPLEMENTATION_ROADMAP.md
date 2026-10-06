@@ -36,6 +36,16 @@ A seasonal deadline never permits bypassing correctness, persistence, safety, ac
 
 ## Golden Slice pre-production package
 
+Current owner-feedback continuation (2026-10-07):
+[comfort/reclaimed Energy evidence](production/evidence/comfort/README.md).
+Starter/Home/Vault space, collision and bounded native feedback are revised;
+111/111 source parity, 339 fast and 28 Python pass locally. The owner's desired
+radioactive Vault and wild-nature/abandoned-infrastructure direction has three
+audited Blender assets pending manual import/native integration. Golden final
+visual acceptance remains OPEN; this supersedes earlier “imports complete” notes
+for the supplementary kit only. PR #76 remains draft, PQL rollout and later
+IMP-11 gates remain separate.
+
 The first production-quality visual pass now has an implementation-facing baseline in [production/](production/README.md). Work should consume that package before creating production assets:
 
 - [Visual Bible](production/GOLDEN_SLICE_VISUAL_BIBLE.md)

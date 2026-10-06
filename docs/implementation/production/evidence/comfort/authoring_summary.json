@@ -1,0 +1,9 @@
+{
+  "passed": true,
+  "cases": 29,
+  "hazardFreeRouteSamples": 315,
+  "baselineRouteGroundSamples": 315,
+  "ordinaryLocomotion": true,
+  "method": "Existing scripts/studio/imp10_authoring_checks.luau executed in actual native Server Play",
+  "stage": "expanded world before supplementary import"
+}

@@ -1,6 +1,6 @@
 -- Edit-only native package/readback evidence. The optional local write callback
 -- is supplied by the development bridge; no runtime HTTP or gameplay writer.
-return function(write)
+return function(write, authorizedLayout)
 	assert(not game:GetService("RunService"):IsRunning(), "Edit only")
 	local serialization = game:GetService("SerializationService")
 	local evidence = { packages = {}, authority = {}, materials = {} }
@@ -28,6 +28,7 @@ return function(write)
 				if instance:IsA("MeshPart") then
 					entry.mesh, entry.texture, entry.doubleSided =
 						instance.MeshId, instance.TextureID, instance.DoubleSided
+					entry.collisionFidelity = tostring(instance.CollisionFidelity)
 				end
 			elseif instance:IsA("Model") then
 				entry.frame, entry.scale, entry.streaming =
@@ -102,7 +103,7 @@ return function(write)
 		local parts, meshes, triangles, instances = 0, 0, 0, 0
 		for _, entry in before do
 			instances += 1
-			if entry.class == "Part" or entry.class == "MeshPart" then
+			if entry.size ~= nil then
 				parts += 1
 			end
 			if entry.class == "MeshPart" then
@@ -142,9 +143,42 @@ return function(write)
 	table.sort(current, function(a, b)
 		return a.name < b.name
 	end)
-	assert(same(prior, current), "gameplay anchors changed")
-	evidence.authority =
-		{ before = #prior, after = #current, identical = true, decorativeWriters = 0 }
+	local changes = {}
+	if authorizedLayout then
+		-- Only the six source-backed layout edits may differ. Preserve rotations,
+		-- tags, collisions and all other 52 utility/habitat/spawn/hazard records.
+		local permitted = {
+			FixtureGround = true,
+			StarterBounds = true,
+			HomeHubGround = true,
+			HomeHubBounds = true,
+			MidABounds = true,
+			MidBBounds = true,
+		}
+		for name in authorizedLayout do
+			assert(permitted[name], "unapproved layout part: " .. name)
+		end
+		for _, record in prior do
+			local entry = authorizedLayout[record.name]
+			if entry then
+				for i = 1, 3 do
+					record.frame[i] = entry.position[i]
+				end
+				record.size = table.clone(entry.size)
+				table.insert(changes, record.name)
+			end
+		end
+		assert(#changes == 6, "layout whitelist incomplete")
+	end
+	assert(same(prior, current), "unauthorized gameplay anchor change")
+	evidence.authority = {
+		before = #prior,
+		after = #current,
+		identical = #changes == 0,
+		approvedLayout = changes,
+		unchanged = #prior - #changes,
+		decorativeWriters = 0,
+	}
 	local paletteModule = game.ReplicatedStorage.MonsterVault.Shared.config.MaterialPalette:Clone()
 	paletteModule.Parent = game.ServerStorage
 	local palette = require(paletteModule)

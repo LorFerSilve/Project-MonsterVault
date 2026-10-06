@@ -6,6 +6,15 @@
 > Physical controller menus, real increased platform text preference and reference-device performance remain open.
 > It does not mark any PQL gate complete by itself.
 
+Owner-feedback revision (2026-10-07): [comfort/reclaimed Energy pass](evidence/comfort/README.md).
+The owner rejected final map quality (bare edges, walk-through props, cramped
+hall, box exterior). Expanded geometry, static collision and bounded interaction
+feedback are now native-validated; three new Blender assets await manual import.
+Current parity is 111/111, 339 fast / 28 Python pass locally. GS-01/09/10/24/25
+remain PARTIAL for this revised visual direction until the radioactive exterior,
+reclaimed scenery and representative views are integrated/inspected. Earlier
+PASS observations below are historical, not owner acceptance of the final map.
+
 Latest continuation: [library refresh evidence](evidence/refresh/README.md).
 Fifteen selected assets and native UI accents are integrated; matched Starter/Vault
 before/after captures, source audits and native roundtrip pass. Exact Edit parity
@@ -26,7 +35,7 @@ The exact start ordering may follow current runtime travel/onboarding behavior, 
 
 | Gate | Requirement | Evidence | Status |
 | --- | --- | --- | --- |
-| GS-01 Permanent Starter vista | Starter reads as authored environment with Halloween OFF | golden_01, native geometry/material audit | PASS, representative Studio inspection |
+| GS-01 Permanent Starter vista | Starter reads as authored environment with Halloween OFF | golden_01; comfort/starter_coast.jpg and native audits | PARTIAL — expanded landscape inspected; reclaimed relics/import and owner visual acceptance open |
 | GS-02 Halloween Starter vista | Same area reads intentionally seasonal with layer ON | golden_02; matched actual toggle | PASS, representative |
 | GS-03 Route readability | Player can identify outpost/route without dev markers | native traversal + actual controller return to safety | PASS, observed representative route |
 | GS-04 Safe Outpost | secure/recovery/travel functions wrapped by coherent production art | golden_03, actual Secured and ordinary Home travel | PASS |
@@ -34,8 +43,8 @@ The exact start ordering may follow current runtime travel/onboarding behavior, 
 | GS-06 Legendary representative | species/stability-orb-dev has clearly stronger intrinsic reveal without fake rarity | golden_07, protected_final_native, Legendary DEV peak stats | PASS, explicitly isolated DEV opportunity |
 | GS-07 Capture arc | engage/buildup/outcome/Secured are visually distinct | golden_05/06; custody/failure extras; actual lifecycle/peak | PASS, ordered state evidence; no uninterrupted video |
 | GS-08 Capture truth | presentation never invents success/rarity | receipt/projection negative tests; actual Failed then Secured | PASS |
-| GS-09 Home destination | Home/Vault reads as intentional aspirational destination | golden_08; permanent/Halloween Home pair | PASS, representative Studio inspection |
-| GS-10 Vault interior | display, machinery, Energy areas have hierarchy | golden_09 | PASS, representative |
+| GS-09 Home destination | Home/Vault reads as intentional aspirational destination | golden_08; comfort evidence | PARTIAL — expanded Home integrated; radioactive exterior import/native inspection open |
+| GS-10 Vault interior | display, machinery, Energy areas have hierarchy | golden_09; comfort/vault_interior.jpg, actual walk/collision/door test | PARTIAL — roomier hall inspected; final revised visual acceptance open |
 | GS-11 Existing Energy Core | integrated and material-correct, not accidentally replaced/degraded | preserved original + exact mapping/native inspection; golden_09/11 | PASS, reused functional role; no original Home before screenshot |
 | GS-12 Display payoff | owned exact creature can be visually displayed without duplicate ownership semantics | golden_10; display_paging_native; AD-269 fences | PASS |
 | GS-13 Energy Claim | source-to-wallet/count-up/completion hero sequence | golden_11, matching +8/+1253 receipts; bounded peak | PASS, ordinary free claim |
@@ -49,8 +58,8 @@ The exact start ordering may follow current runtime travel/onboarding behavior, 
 | GS-21 Halloween OFF | disabling seasonal layer leaves complete production-quality base | matched Starter/Home ON/OFF; restored Lighting/Atmosphere | PASS, representative composition |
 | GS-22 Seasonal isolation | Halloween disable does not break collision/routes/gameplay | zero seasonal colliders/query/tags/scripts; native OFF disposal + regressions | PASS |
 | GS-23 Performance | visual scene stays within working budgets or records measured justified exceptions | six native views; rendering headroom; 22-24ms fresh p95 and 101ms long-session exception recorded | PARTIAL — Studio measurement done, real-device/exception investigation open |
-| GS-24 Source completeness | hero 3D assets have editable source + exports + mapping | 14 new sources/13 runtime; GLB/FBX/central IDs; exact native pack roundtrip | PASS |
-| GS-25 Studio validation | no hero asset accepted from Blender-only evidence | 15 native screenshots, import/mapping/scale/collision/Play audits | PASS for current assets; historical before coverage incomplete |
+| GS-24 Source completeness | hero 3D assets have editable source + exports + mapping | previous kit; radioactive_source_audit.json validates 3 new sources/GLBs | PARTIAL — new source/export/palette ready; persistent mesh mapping awaits import |
+| GS-25 Studio validation | no hero asset accepted from Blender-only evidence | previous native views plus expanded hall/perimeter/physics/feedback | PARTIAL — supplementary shell/rover/ruins still require actual native import/views/Play |
 | GS-26 CI/regression | applicable existing automated suite remains green | 339/339 fast, 28/28 Python, static/build locally and normal remote CI on validated head; see ci_validated_native_package.json | PASS for recorded implementation; each later head retains normal CI gate |
 
 ## 3. Required representative screenshots

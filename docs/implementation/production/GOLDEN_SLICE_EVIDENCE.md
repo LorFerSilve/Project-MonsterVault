@@ -1,5 +1,14 @@
 # Golden Slice implementation and native evidence
 
+Latest owner-feedback revision (2026-10-07):
+[expanded spaces, collision and feedback](evidence/comfort/README.md).
+This supersedes the earlier dimensions/collision/parity counts below: the current
+native world has 841 BaseParts / 621 MeshParts / 242,796 repeated mesh triangles,
+111/111 source parity, 339 fast and 28 Python passing locally. The owner's
+radioactive/wild-nature refinement has three audited Blender assets awaiting
+manual import and native inspection. Final visual acceptance remains open;
+the radioactive exterior is not yet claimed complete.
+
 Date: 2026-10-06. Base: `80b9e8b25973ac2c0dab7a5ea3bfddf35d9f98f5` (main after PR #75). Branch: `codex/golden-slice`.
 
 **IMPLEMENTED, acceptance still open.** The permanent Starter/Home path, imported production kit, native UI and representative sensory feedback are integrated and inspected in Studio. Physical controller menu retest, actual increased platform text preference, missing historical before views and reference-device performance remain open. This is not Golden reference-quality closure, full PQL completion or release readiness.

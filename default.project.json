@@ -83,14 +83,14 @@
           "$properties": {
             "Anchored": true,
             "Size": [
-              128,
+              176,
               1,
-              128
+              144
             ],
             "Position": [
               0,
               -0.5,
-              0
+              8
             ],
             "Color": [
               0.17,
@@ -206,12 +206,12 @@
             "Position": [
               0,
               10,
-              128
+              160
             ],
             "Size": [
-              80,
+              160,
               40,
-              80
+              144
             ],
             "CanCollide": false,
             "CanTouch": false,
@@ -240,12 +240,12 @@
             "Position": [
               0,
               -0.5,
-              128
+              160
             ],
             "Size": [
-              80,
+              160,
               1,
-              80
+              144
             ],
             "CanCollide": true,
             "CanTouch": false,
@@ -265,12 +265,12 @@
             "Position": [
               0,
               10,
-              0
+              8
             ],
             "Size": [
-              128,
+              176,
               40,
-              128
+              144
             ],
             "CanCollide": false,
             "CanTouch": false,
@@ -297,12 +297,12 @@
           "$properties": {
             "Anchored": true,
             "Position": [
-              -144,
+              -160,
               10,
               -128
             ],
             "Size": [
-              160,
+              144,
               40,
               160
             ],
@@ -356,12 +356,12 @@
           "$properties": {
             "Anchored": true,
             "Position": [
-              144,
+              160,
               10,
               -128
             ],
             "Size": [
-              160,
+              144,
               40,
               160
             ],

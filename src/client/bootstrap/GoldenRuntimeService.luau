@@ -58,6 +58,7 @@ function Golden.new(options: any)
 		local p = Instance.new("TextButton")
 		p.Name, p.Text, p.Parent = name, content, parent
 		Theme.button(p)
+		Theme.interaction(p, preferences)
 		table.insert(
 			connections,
 			p.Activated:Connect(function()
@@ -102,6 +103,9 @@ function Golden.new(options: any)
 		end
 		for key, window in windows do
 			window.frame.Visible = key == name
+			if key == name then
+				Theme.appear(window.frame, preferences)
+			end
 			if window.service then
 				window.service.open(key == name)
 			end
@@ -209,6 +213,7 @@ function Golden.new(options: any)
 		local function styleItem(p: any)
 			if p:IsA("TextButton") then
 				Theme.button(p)
+				Theme.interaction(p, preferences)
 				p.Size = UDim2.new(1, -8, 0, math.max(48, p.Size.Y.Offset))
 				p.AutomaticSize = Enum.AutomaticSize.Y
 			elseif p:IsA("TextLabel") then
@@ -488,6 +493,9 @@ function Golden.new(options: any)
 		visuals = Visuals.new(sensory, options.worldObserver)
 		preferenceBinding = Preferences.bind(game:GetService("GuiService"), preferences, function()
 			sensory.preferencesChanged()
+			if preferences.reducedMotion then
+				Theme.resetMotion(gui)
+			end
 			if seasonal then
 				seasonal.preferencesChanged()
 			end
@@ -578,6 +586,9 @@ function Golden.new(options: any)
 					end
 					control.Text = if preferences[key] then onText else offText
 					sensory.preferencesChanged()
+					if preferences.reducedMotion then
+						Theme.resetMotion(gui)
+					end
 					seasonal.preferencesChanged()
 				end
 			)
@@ -782,6 +793,9 @@ function Golden.new(options: any)
 				if outcome == "Result" and _envelope.correlationId == travelRequest then
 					travelRequest = nil
 					local code = _envelope.payload.code
+					if code:sub(1, 3) == "OK_" then
+						sensory.arrival()
+					end
 					notify(
 						if code == "REJECT_STATE_TRAVEL_UNDISCOVERED"
 							then "Follow the path to discover Mossline first."
@@ -848,6 +862,7 @@ function Golden.new(options: any)
 			end
 			local cue = feedback.capture(state)
 			if cue then
+				visuals.captureReaction(id, cue)
 				sensory.play(cue)
 				local character = options.player.Character
 				local root = character and character:FindFirstChild("HumanoidRootPart")

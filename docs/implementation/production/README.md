@@ -7,7 +7,14 @@ This folder is the implementation-facing production baseline for the first Golde
 
 Resume the existing work from [GOLDEN_SLICE_EVIDENCE.md](GOLDEN_SLICE_EVIDENCE.md) and the [native gallery](evidence/golden/README.md). Imports, permanent composition and representative UI/sensory integration are implemented. Remaining controller menu, actual platform text preference and performance acceptance are listed in the [matrix](GOLDEN_SLICE_ACCEPTANCE_MATRIX.md). Do not restart from pre-production.
 
-Latest continuation: [CC0 asset-library refresh](evidence/refresh/README.md), with fifteen imported/adapted models, permanent Starter/Vault integration, native UI accents, before/after screenshots and 110/110 source parity. No import is pending; the new Studio frame samples keep performance acceptance open.
+Latest continuation (2026-10-07): [comfort/reclaimed Energy revision](evidence/comfort/README.md).
+Expanded Starter/Home/Vault, static collision and native door/button/movement
+feedback are integrated, with 111/111 parity. Three new Blender assets await
+the manual `radioactive_vault_import.fbx` import and actual native validation.
+This responds to the owner's rejection of final map quality; visual acceptance
+remains open. The previous [CC0 asset-library refresh](evidence/refresh/README.md)
+has fifteen imported/adapted models, native UI accents and historical before/after
+evidence; reuse those assets and do not re-upload its audio.
 
 It does not supersede GDS or Technical Architecture. If a conflict exists, the approved GDS/TA and explicit architecture decisions win.
 

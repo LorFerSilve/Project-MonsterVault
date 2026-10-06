@@ -5,6 +5,16 @@
 > Authority: TA-14 remains authoritative for actual performance gates
 > Purpose: stop production art from creating avoidable performance debt before real-device measurement
 
+Latest [comfort-pass measurements](evidence/comfort/performance_before_import.json):
+120 frames/view, Starter p95 17.90ms and Vault 18.02ms on this Studio workstation,
+with 150,897/44 and 38,617/43 opaque triangles/draws. Expanded permanent delivery
+has 841 BaseParts / 621 MeshParts / 242,796 repeated triangles and three lights.
+These measurements precede the supplementary radioactive shell/ruins/rover import.
+They do not prove the reference 16.67ms or real-device gates, or resolve the older
+68/101ms cadence. One movement emitter uses Rate 0, <=10 particles per impact,
+three per >=3 studs of walking with a >=0.14s interval, lifetime <=0.35s and
+Reduced Motion/Low Effects suppression. Two doors reuse the same 16-motion cap.
+
 Measured implementation: [six-view evidence and exceptions](GOLDEN_SLICE_EVIDENCE.md#measured-bounds), [raw native statistics](evidence/golden/performance_native.json). All sampled visible triangle/draw counts are below the working scene targets. Fresh Studio p95 is 22-24ms and an earlier long-session p95 is 101ms; no TA-14 reference-device performance pass is claimed.
 
 Latest [library-refresh samples](evidence/refresh/performance_native.json): Starter
