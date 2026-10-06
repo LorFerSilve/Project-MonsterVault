@@ -8,6 +8,13 @@
 
 The implementation below has advanced: **do not repeat the old preparation/audit sequence or ask for another import**. Start from [current evidence](GOLDEN_SLICE_EVIDENCE.md), [acceptance matrix](GOLDEN_SLICE_ACCEPTANCE_MATRIX.md) and the current branch/PR. The remainder of this handoff preserves the original production brief for reference.
 
+Latest continuation: [CC0 library refresh](evidence/refresh/README.md), fifteen
+adapted/imported models plus native UI accents. Their sources, exports, persistent
+IDs, before/after views and native world/library readback are committed with this
+phase. No further import is pending. Exact Edit parity is 110/110; 339 fast and
+28 Python still pass. New Studio p95 is about 68ms and its cause remains open.
+Resume visual/manual/performance acceptance on PR #76, not asset preparation.
+
 - `codex/golden-slice` implements 13 new runtime assets plus the reused Energy Core; 14 editable source assets include the offline Rare concept. All prepared imports are mapped and integrated.
 - Permanent Starter/Home world, seasonal template and prefabs are serialized Rojo artifacts. Eleven uploaded original audio IDs are reused; no further upload is pending.
 - Actual native capture/travel/display/claim/Showcase evidence and 15 screenshots are retained. 339/339 fast, 28/28 Python and 109/109 final Edit source parity passed.

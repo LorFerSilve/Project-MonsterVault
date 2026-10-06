@@ -6,6 +6,14 @@
 > Physical controller menus, real increased platform text preference and reference-device performance remain open.
 > It does not mark any PQL gate complete by itself.
 
+Latest continuation: [library refresh evidence](evidence/refresh/README.md).
+Fifteen selected assets and native UI accents are integrated; matched Starter/Vault
+before/after captures, source audits and native roundtrip pass. Exact Edit parity
+is now 110/110. GS-01/04/09/10/16/24/25 have refreshed representative evidence;
+GS-18/19 remain as below. GS-23 stays PARTIAL: the new two-view Studio p95 is
+about 68ms, with reference-device/cause investigation open. This continuation
+does not substitute a new capture/claim/physical-controller proof for earlier evidence.
+
 ## 1. Golden reference path
 
 The acceptance path is:

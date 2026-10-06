@@ -57,6 +57,7 @@ function CaptureView.new(options: {
 	button.LayoutOrder = 3
 	button.Size = UDim2.new(1, 0, 0, 52)
 	Theme.button(button, true)
+	button:SetAttribute("GoldenPrimary", true)
 	button.TextSize = 18
 	button.AutomaticSize = Enum.AutomaticSize.Y
 	button.Parent = panel
@@ -103,7 +104,7 @@ function CaptureView.new(options: {
 		body.Text = state.message
 		if state.state == "Idle" and state.canActivate then
 			heading.Text = "Creature within reach"
-			body.Text = "Start capture to engage. The server checks your claim."
+			body.Text = "Engage the creature, then bring your catch back to the Field Station."
 		end
 		button.Text = "[" .. glyph .. "] " .. state.actionLabel
 		if not state.canActivate then
@@ -117,6 +118,7 @@ function CaptureView.new(options: {
 		if state.canActivate then
 			Theme.button(button, true)
 		end
+		Theme.inputGlyph(button, glyph, state.canActivate)
 		-- Only claim otherwise-unowned gamepad focus. Existing UI keeps its focus.
 		local gamepad = options.userInputService.PreferredInput == Enum.PreferredInput.Gamepad
 		if

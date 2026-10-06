@@ -7,6 +7,8 @@ This folder is the implementation-facing production baseline for the first Golde
 
 Resume the existing work from [GOLDEN_SLICE_EVIDENCE.md](GOLDEN_SLICE_EVIDENCE.md) and the [native gallery](evidence/golden/README.md). Imports, permanent composition and representative UI/sensory integration are implemented. Remaining controller menu, actual platform text preference and performance acceptance are listed in the [matrix](GOLDEN_SLICE_ACCEPTANCE_MATRIX.md). Do not restart from pre-production.
 
+Latest continuation: [CC0 asset-library refresh](evidence/refresh/README.md), with fifteen imported/adapted models, permanent Starter/Vault integration, native UI accents, before/after screenshots and 110/110 source parity. No import is pending; the new Studio frame samples keep performance acceptance open.
+
 It does not supersede GDS or Technical Architecture. If a conflict exists, the approved GDS/TA and explicit architecture decisions win.
 
 ## Read order

@@ -7,6 +7,9 @@ local catalog = require(
 )
 local Theme = {}
 local RarityTokens = require(script.Parent.RarityTokens)
+local images = require(
+	game:GetService("ReplicatedStorage").MonsterVault.Shared.config.RefreshPresentationImages
+)
 Theme.colors = table.freeze({
 	panel = Color3.fromRGB(19, 25, 33),
 	inset = Color3.fromRGB(30, 41, 49),
@@ -34,6 +37,50 @@ function Theme.panel(object: any)
 		stroke.Name, stroke.Color, stroke.Transparency, stroke.Parent =
 			"GoldenStroke", Theme.colors.border, 0.3, object
 	end
+	if not object:FindFirstChild("GoldenDepth") then
+		local gradient = Instance.new("UIGradient")
+		gradient.Name, gradient.Rotation = "GoldenDepth", 90
+		gradient.Color =
+			globals.ColorSequence.new(Color3.fromRGB(255, 255, 255), Color3.fromRGB(208, 225, 227))
+		gradient.Parent = object
+	end
+end
+function Theme.header(object: any)
+	if object:FindFirstChild("FoundryHeader") then
+		return
+	end
+	local accent = Instance.new("ImageLabel")
+	accent.Name, accent.BackgroundTransparency, accent.Image =
+		"FoundryHeader", 1, images.panelHeader
+	accent.Position, accent.Size = UDim2.fromOffset(18, 3), UDim2.new(1, -36, 0, 6)
+	accent.ScaleType, accent.SliceCenter = Enum.ScaleType.Slice, globals.Rect.new(9, 9, 72, 44)
+	accent.ImageTransparency, accent.Parent = 0.25, object
+end
+-- Decorative prompts accompany the native binding text. No input route or
+-- controller family is inferred from the connected-device count.
+function Theme.inputGlyph(button: any, glyph: string, visible: boolean)
+	local key = ({
+		E = "keyboardE",
+		Square = "playstationSquare",
+		["□"] = "playstationSquare",
+		Triangle = "playstationTriangle",
+		["△"] = "playstationTriangle",
+		X = "xboxX",
+		Y = "xboxY",
+	} :: any)[glyph]
+	local icon = button:FindFirstChild("InputGlyph")
+	if not icon then
+		icon = Instance.new("ImageLabel")
+		icon.Name, icon.BackgroundTransparency = "InputGlyph", 1
+		icon.AnchorPoint, icon.Position, icon.Size =
+			globals.Vector2.new(0, 0.5), UDim2.new(0, 12, 0.5, 0), UDim2.fromOffset(28, 28)
+		icon.ScaleType, icon.Parent = Enum.ScaleType.Fit, button
+	end
+	icon.Visible = visible and key ~= nil and button.AbsoluteSize.X >= 280
+	icon.Image = if key then (images :: any)[key] else ""
+	icon.ImageColor3 = if button:GetAttribute("GoldenPrimary")
+		then Theme.colors.panel
+		else Theme.colors.text
 end
 function Theme.text(object: any, size: number?, bold: boolean?)
 	object.Font = if bold then Enum.Font.GothamBold else Enum.Font.Gotham

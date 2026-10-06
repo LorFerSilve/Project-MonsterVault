@@ -7,6 +7,12 @@
 
 The applied Starter/Home implementation and reusable material/asset/UI/sensory seams are documented in [Golden Slice evidence](GOLDEN_SLICE_EVIDENCE.md). The permanent pine/rock/field-station and ribbed Vault kit now exists in Studio; the removable spectral-harvest layer is inspected ON/OFF. This application does not certify every PQL screen, biome or device.
 
+The [CC0 library refresh](evidence/refresh/README.md) extends this direction with
+leafy canopy/understory and textured modular foundry bays. Pack assets retain the
+central palette, silhouette hierarchy and route negative space. Surface detail
+uses shared <=512px color/alpha atlases where native material alone loses foliage
+silhouettes or authored trim detail; geometry and lighting carry the composition.
+
 ## 1. Product-facing visual thesis
 
 MonsterVault should read as a **stylized arcane-tech creature expedition**.

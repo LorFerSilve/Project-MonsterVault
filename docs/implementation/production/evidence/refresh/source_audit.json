@@ -1,0 +1,240 @@
+{
+  "validated": 15,
+  "triangles": 11501,
+  "meshObjects": 32,
+  "assets": [
+    {
+      "asset": "CanopyOak",
+      "triangles": 3182,
+      "meshObjects": 2,
+      "blend": "assets/blender/refresh/CanopyOak.blend",
+      "export": "assets/exported/refresh/CanopyOak.glb",
+      "geometryUvSha256": "f8e090e1fe5c5154c9280a3e9c96ea8a8a56a0720b49535c68d25b0a70200952",
+      "blendSha256": "c9be0e0517ac3edf3c2bff5d70cea802097a177d306627aa45bdf86e13a54660",
+      "glbSha256": "a0b3201886e230f60604fda75331c63b3103fc6f138bd33fd0d825825e0c6793"
+    },
+    {
+      "asset": "CanopyPine",
+      "triangles": 1646,
+      "meshObjects": 2,
+      "blend": "assets/blender/refresh/CanopyPine.blend",
+      "export": "assets/exported/refresh/CanopyPine.glb",
+      "geometryUvSha256": "7531a4cc2504ec30f21a4f2ca7dc9d72c5f27e3a325edac543f55daec4dbfa7e",
+      "blendSha256": "0f0d7ccda1a5b1fc9c637124781094adc1e3b82bfbaa20873693c790acdd5229",
+      "glbSha256": "e5ccb9a029ca4bbbc31215a7f41687636f6bf200f23e3183d17bda5ac5866f78"
+    },
+    {
+      "asset": "ReserveBoulder",
+      "triangles": 342,
+      "meshObjects": 1,
+      "blend": "assets/blender/refresh/ReserveBoulder.blend",
+      "export": "assets/exported/refresh/ReserveBoulder.glb",
+      "geometryUvSha256": "e4c8b7c14203556c43236504a3afbe593ec9516ea14e5f76d4e5c0eca05a3684",
+      "blendSha256": "55495c52feffc7bb9b76dddc69a0f9301125b6f979a266cd515728b29ba00524",
+      "glbSha256": "5ae85184ca69ac89ac395479ddcd42246b096f55e80f70200e2ec474c1c53683"
+    },
+    {
+      "asset": "ReserveBoulderWide",
+      "triangles": 244,
+      "meshObjects": 1,
+      "blend": "assets/blender/refresh/ReserveBoulderWide.blend",
+      "export": "assets/exported/refresh/ReserveBoulderWide.glb",
+      "geometryUvSha256": "bdf101c5d8f7318b83003ec9d6fd83214273c45247a106457ea5186232c0efb5",
+      "blendSha256": "dcb6562c8444ae2aecb1d4e36fc96cc85457206a9db44e8d23d806780b1ffeab",
+      "glbSha256": "8433faa6bf20c47c340f2787d82c5fbbf334e1ad14094b003579acf57bac381a"
+    },
+    {
+      "asset": "FernCluster",
+      "triangles": 288,
+      "meshObjects": 1,
+      "blend": "assets/blender/refresh/FernCluster.blend",
+      "export": "assets/exported/refresh/FernCluster.glb",
+      "geometryUvSha256": "622205d3c1099b195bdbf1901fd4cf4a7a37e08f4e0ac4034c91a7d40dae9dbf",
+      "blendSha256": "a9675f7853546b5ad56b2bc6b6616285f11f52d1e3acfef618d029e35cd6826a",
+      "glbSha256": "50952b082e3a9ac2ae360572f2aec1c2edfc23b0f12a671a7377a79bf326dbd2"
+    },
+    {
+      "asset": "MeadowGrass",
+      "triangles": 155,
+      "meshObjects": 1,
+      "blend": "assets/blender/refresh/MeadowGrass.blend",
+      "export": "assets/exported/refresh/MeadowGrass.glb",
+      "geometryUvSha256": "f537a0ebf570a634d83ab1f6389eca5717a84ecb8f0e465af4d41e405c66a60f",
+      "blendSha256": "82be2050f0f356771a41a99658fc9977589cb7b25c3f790825984f252e0c4b03",
+      "glbSha256": "ada277eff8c060eecef9bae8cc449c1547a8790c508d1d1e89627a8e71174733"
+    },
+    {
+      "asset": "FlowerPatch",
+      "triangles": 755,
+      "meshObjects": 2,
+      "blend": "assets/blender/refresh/FlowerPatch.blend",
+      "export": "assets/exported/refresh/FlowerPatch.glb",
+      "geometryUvSha256": "f87047d240af3678dff0e381deedabba7df0c2893cd8ac57e72317eaec97eafb",
+      "blendSha256": "0364519a664f9ee357212779007a064350d7f978448d35323dfd9a2fbeb80398",
+      "glbSha256": "ed28233917139c7d4d4532633e2457cafdcce9d5befc0136b7bbdf3239a7a35c"
+    },
+    {
+      "asset": "LeafBush",
+      "triangles": 900,
+      "meshObjects": 1,
+      "blend": "assets/blender/refresh/LeafBush.blend",
+      "export": "assets/exported/refresh/LeafBush.glb",
+      "geometryUvSha256": "ed721e9235fa3662b586e818673d2dac9c5c80681bae38b8ec3beebe73c5ec36",
+      "blendSha256": "54156ede98a0f7bcf6e4923a5b06cf761d73cf4cfe673e6ea7e4373e5466806b",
+      "glbSha256": "e96322b04442090d76753838a1c20c733cfc6d163000bc74040c5e7652102dca"
+    },
+    {
+      "asset": "FoundryColumn",
+      "triangles": 748,
+      "meshObjects": 2,
+      "blend": "assets/blender/refresh/FoundryColumn.blend",
+      "export": "assets/exported/refresh/FoundryColumn.glb",
+      "geometryUvSha256": "d36d621e048640390bcc4360764e70788cb66ff29f43bc487fded258be2f3050",
+      "blendSha256": "76bb72006ee109fea13d7e5a00d33d5427eeac43e4ee39cfc09f2427a8f695e3",
+      "glbSha256": "8f13226d202c7556608226e211297756e4a2b03344a3204090ea8dd8b1e358ca"
+    },
+    {
+      "asset": "FoundryWall",
+      "triangles": 124,
+      "meshObjects": 3,
+      "blend": "assets/blender/refresh/FoundryWall.blend",
+      "export": "assets/exported/refresh/FoundryWall.glb",
+      "geometryUvSha256": "85756f64347effba2263a600a58dfa27a8ec857a9cef8c0154b370af2e2f2336",
+      "blendSha256": "7783c34cc4127e9140b24ef8b9724dbe0d7da6f4c4aba1758017d0faf380007d",
+      "glbSha256": "9910d1e3b4fd2f968345f0de5b00a1f0c25a10c66473d0edbab90ebcbb48bae8"
+    },
+    {
+      "asset": "FoundryWindow",
+      "triangles": 476,
+      "meshObjects": 5,
+      "blend": "assets/blender/refresh/FoundryWindow.blend",
+      "export": "assets/exported/refresh/FoundryWindow.glb",
+      "geometryUvSha256": "939a8c33778dda0e212d15db099e8fd2e0bc8d4a2a2fde017ac0b4ff01cf691e",
+      "blendSha256": "883460bf584ad6966fc8043fb75f392ab4b886673109b71c0ab5624263c51bdd",
+      "glbSha256": "627bd7929ccb05c53146cfc9d3a90dbcd5e902fbc4c939c34feee220c0ffb82c"
+    },
+    {
+      "asset": "FoundryVent",
+      "triangles": 208,
+      "meshObjects": 3,
+      "blend": "assets/blender/refresh/FoundryVent.blend",
+      "export": "assets/exported/refresh/FoundryVent.glb",
+      "geometryUvSha256": "853485f560d980397d641c3cb6a3ab17a51ddc1be05010d383632760285bb81d",
+      "blendSha256": "1e731bc87e3d7c60988160b8b8804765c54cfea2cd6fc7c3ca6dba249261880d",
+      "glbSha256": "5211efb398fe2ece9204e9841b772d8cbd10bcd70a853426b074f62559d6ff41"
+    },
+    {
+      "asset": "ServiceCrate",
+      "triangles": 972,
+      "meshObjects": 1,
+      "blend": "assets/blender/refresh/ServiceCrate.blend",
+      "export": "assets/exported/refresh/ServiceCrate.glb",
+      "geometryUvSha256": "647ef2b05097bb0d7b279d0efe611e0a62565c2d9989acd826069301b4e20a79",
+      "blendSha256": "f25333a136afc4e6611e1a0a86ba880daab0324ba1734d9b1c52efb0224d9887",
+      "glbSha256": "e87861225d15f139a314a024700407ec6bdb94c164ac9c5587fa33e164960326"
+    },
+    {
+      "asset": "CableHeader",
+      "triangles": 942,
+      "meshObjects": 4,
+      "blend": "assets/blender/refresh/CableHeader.blend",
+      "export": "assets/exported/refresh/CableHeader.glb",
+      "geometryUvSha256": "3daf4e9a481a07122662b2e231d683eb333064022bc05cee9bd86a595d5670b1",
+      "blendSha256": "7bb976beb77854ad2dcfe227de5c23767e7fa319bd6518e49f828b59c896cd0e",
+      "glbSha256": "f6488b77d17b7505cd3dc41a98b6fd8adc80d3c8a172862faf217c9418344759"
+    },
+    {
+      "asset": "StationTerminal",
+      "triangles": 519,
+      "meshObjects": 3,
+      "blend": "assets/blender/refresh/StationTerminal.blend",
+      "export": "assets/exported/refresh/StationTerminal.glb",
+      "geometryUvSha256": "84bed85637eecdcbdf2e855b7d31a35b2ec2948f502250afada99e9362f6c7ef",
+      "blendSha256": "fcc08b2db2e26f63dee914a549b0c970129a7cefb1f2c8fd83445e1720c22bc6",
+      "glbSha256": "d515a52f0d14b2b7e2f7b657fb73b36be2277349767ebe9d5966b2d63e10a8a5"
+    }
+  ],
+  "atlas": {
+    "assets/exported/refresh/textures/Leaves_NormalTree_C_png_LeafGreen.png": {
+      "width": 512,
+      "height": 512,
+      "sha256": "657166c015549c90190bf32da5babcf953a28a66c0a3f7a1a5cbe3ccc7ce2bc7"
+    },
+    "assets/exported/refresh/textures/Bark_NormalTree_png_BarkWood.png": {
+      "width": 512,
+      "height": 512,
+      "sha256": "b495d57e26653c3dff7bee276fa4b8b62eed92ffaf44c421c7c51466bc438412"
+    },
+    "assets/exported/refresh/textures/Leaf_Pine_C_png_LeafGreen.png": {
+      "width": 512,
+      "height": 512,
+      "sha256": "5920b92e5d419c5bb5e0c0d28f07354e187f4c9f8aa68b52d201ec1172d00eb2"
+    },
+    "assets/exported/refresh/textures/Rocks_Diffuse_png_MossRock.png": {
+      "width": 512,
+      "height": 512,
+      "sha256": "0e446ce9398a032b52d899d19ca5e73153c15348c899531edcb38ec7b7c10dc8"
+    },
+    "assets/exported/refresh/textures/Leaves_png_LeafGreen.png": {
+      "width": 512,
+      "height": 512,
+      "sha256": "cf1917be0e5f2660c50fc18349d8050abeeecd10cef8f12338a2a812162ce5ed"
+    },
+    "assets/exported/refresh/textures/Grass_png_LeafGreen.png": {
+      "width": 512,
+      "height": 512,
+      "sha256": "5e4d8d7aec6b683fd69a3d5e872deccbcf8e0ebb68b1437d4fb8e73e7a23501c"
+    },
+    "assets/exported/refresh/textures/Flowers_png_CreatureCream.png": {
+      "width": 512,
+      "height": 498,
+      "sha256": "2a296c192e700a71f0ad26345598fc8cfc59d0d75d95148b075df4aea0244e91"
+    },
+    "assets/exported/refresh/textures/Leaves_TwistedTree_C_png_LeafGreen.png": {
+      "width": 512,
+      "height": 512,
+      "sha256": "5dbf719fbfc06e8c2a39f02afb165eb50bb4ef1db639b5e2ba0919f669cd60a2"
+    },
+    "assets/exported/refresh/textures/T_Trim_02_BaseColor_Red_png_SecondaryMetal.png": {
+      "width": 512,
+      "height": 512,
+      "sha256": "a0621ed15b4d749c067e5e7cba1a5f929c7a2d72e279600d3484792c25bd6b87"
+    },
+    "assets/exported/refresh/textures/T_PaddedWall_BaseColor_png_PanelPlastic.png": {
+      "width": 512,
+      "height": 512,
+      "sha256": "73f192081ddb936f54fb16057c9c36abf4e4a3ed22eb229ff2f324d960b6c214"
+    },
+    "assets/exported/refresh/textures/T_Trim_03_BaseColor_png_DarkMetal.png": {
+      "width": 512,
+      "height": 512,
+      "sha256": "dda80a89c186e32c9054acfa23e0951eda4e733f0c793e5c1eab55b10315f37f"
+    },
+    "assets/exported/refresh/textures/T_Trim_03_Cables_png_PanelPlastic.png": {
+      "width": 512,
+      "height": 512,
+      "sha256": "95e338512990b195105702589a3af736b6eb78e1a2fc78d990bba4ff536b1099"
+    },
+    "assets/exported/refresh/textures/T_Trim_03_Cables_png_EnergyGreen.png": {
+      "width": 512,
+      "height": 512,
+      "sha256": "e2b4be9c80ea66ff9105f7e07ff564ca215b0545d1e2b4afff8b4c0b5edeb8fc"
+    },
+    "assets/exported/refresh/textures/T_Trim_03_Cables_png_001_PanelPlastic.png": {
+      "width": 512,
+      "height": 512,
+      "sha256": "95e338512990b195105702589a3af736b6eb78e1a2fc78d990bba4ff536b1099"
+    },
+    "assets/exported/refresh/textures/T_Trim_01_BaseColor_Red_png_DarkMetal.png": {
+      "width": 512,
+      "height": 512,
+      "sha256": "46e926588bb310c675fb761148cf1196b5b2a5d5cc201e741b983bad45e7bc6c"
+    },
+    "assets/exported/refresh/textures/T_Decals_png_CreatureCream.png": {
+      "width": 512,
+      "height": 512,
+      "sha256": "59d2600c2643c1bb091b338efb61c8bf36c6d0efc678630cd8d4e55dfd758945"
+    }
+  },
+  "scope": "Source/UV/topology/transforms/resources; native Studio import is separate evidence"
+}

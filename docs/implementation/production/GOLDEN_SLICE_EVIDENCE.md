@@ -4,6 +4,13 @@ Date: 2026-10-06. Base: `80b9e8b25973ac2c0dab7a5ea3bfddf35d9f98f5` (main after P
 
 **IMPLEMENTED, acceptance still open.** The permanent Starter/Home path, imported production kit, native UI and representative sensory feedback are integrated and inspected in Studio. Physical controller menu retest, actual increased platform text preference, missing historical before views and reference-device performance remain open. This is not Golden reference-quality closure, full PQL completion or release readiness.
 
+Latest continuation: [CC0 library refresh](evidence/refresh/README.md). Fifteen
+adapted/imported assets improve permanent Starter/Home composition; native UI
+accents and matched Starter/Vault before/after views are recorded. Current Rojo
+library/world sizes are 377,056/300,158 bytes and exact Edit source parity is
+110/110. The earlier package counts and performance table below describe the
+pre-refresh baseline; the latest Studio p95 is about 68ms and keeps acceptance open.
+
 ## Representative path
 
 Starter arrival/vista -> Field Station -> Common encounter -> engage/containment -> failure or custody -> safety/Secured -> Collection -> ordinary travel Home -> Vault display -> production/claim -> next capacity aspiration -> Read Only Showcase.

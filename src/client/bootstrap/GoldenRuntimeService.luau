@@ -155,6 +155,7 @@ function Golden.new(options: any)
 			UDim2.fromScale(0.5, 0.5)
 		frame.Visible, frame.Parent = false, screen
 		Theme.panel(frame)
+		Theme.header(frame)
 		local size = Instance.new("UISizeConstraint")
 		size.MaxSize, size.Parent = Vector2.new(560, 670), frame
 		local function fitWindow()

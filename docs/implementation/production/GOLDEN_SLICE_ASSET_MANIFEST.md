@@ -267,3 +267,43 @@ The working Golden branch has 14 validated new editable Blender assets, of which
 Combined FBX files are import transport, not the editable asset source. `golden_studio_import.fbx` contains the initial material-group meshes; `golden_launch_import.fbx` contains the five supplementary assets. Native `golden_assets.rbxm`, `golden_world.rbxm` and seasonal `dressing.rbxm` are the Rojo delivery artifacts. Do not re-upload the eleven existing original WAVs; the current IDs are in `GoldenAudio.luau`.
 
 The Common and Legendary source rigs retain `GentleIdle` authoring actions. Runtime presentation currently uses the bounded shared cosmetic controller; Roblox Animator-track import is not claimed. Vault shell, bridge deck, outpost frame, path slabs and energy conduits reuse native parts plus the custom kit.
+
+## 14. CC0 library refresh — 2026-10-06
+
+Fifteen selected Quaternius assets are adapted, imported, mapped and placed. The
+complete downloaded packs are not replicated into runtime. Basalt/Fern/ReservePine
+prefabs remain available for existing/seasonal work; the representative permanent
+composition uses their new library counterparts. Existing creatures and machinery
+are reused. [Native views and reproduction](evidence/refresh/README.md),
+[source/export manifest](../../../assets/exported/refresh/refresh_manifest.json),
+[source audit](evidence/refresh/source_audit.json).
+
+| Runtime key | Triangles | Actual use | Classification |
+| --- | ---: | --- | --- |
+| CanopyOak | 3182 | Starter/Home canopy | COMPLETE, representative native inspection |
+| CanopyPine | 1646 | Starter/Home canopy | COMPLETE, representative native inspection |
+| ReserveBoulder | 342 | grounded cliff/rock shoulders | COMPLETE, representative native inspection |
+| ReserveBoulderWide | 244 | complementary rock masses | COMPLETE, representative native inspection |
+| FernCluster | 288 | route-side understory | COMPLETE, representative native inspection |
+| MeadowGrass | 155 | twelve bounded clusters | COMPLETE, representative native inspection |
+| FlowerPatch | 755 | six route-side patches | COMPLETE, representative native inspection |
+| LeafBush | 900 | understory masses | COMPLETE, representative native inspection |
+| FoundryColumn | 748 | Vault supports/entry | COMPLETE, representative native inspection |
+| FoundryWall | 124 | Vault wall skin | COMPLETE, representative native inspection |
+| FoundryWindow | 476 | Vault/Field Station bays | COMPLETE, representative native inspection |
+| FoundryVent | 208 | Vault return vents | COMPLETE, representative native inspection |
+| ServiceCrate | 972 | Field Station/Vault supplies | COMPLETE, representative native inspection |
+| CableHeader | 942 | rear Vault Energy routing | COMPLETE, representative native inspection |
+| StationTerminal | 519 | Field Station/Collection console dressing | COMPLETE, representative native inspection |
+
+Each key has `assets/blender/refresh/<key>.blend` and
+`assets/exported/refresh/<key>.glb`; combined editable source and FBX are import
+transport. Total unique added geometry: 11,501 triangles, 32 material-group meshes.
+All are static decoration, without collision/query/authority tags or scripts.
+Required high-resolution source inputs remain outside runtime; color/alpha atlases
+are <=512px. Six selected Kenney UI images retain their license/source/export
+mapping; native text/layout/controllers are retained.
+
+Current native delivery: `golden_assets.rbxm` 377,056 bytes and `golden_world.rbxm`
+300,158 bytes. Exact native serialization/readback passed. No import or additional
+audio upload is pending. Broader asset rollout and Golden acceptance remain open.

@@ -1,9 +1,16 @@
 # Golden Slice UI/UX System
 
-> Status: PRE-PRODUCTION DESIGN SYSTEM
+> Status: REPRESENTATIVE NATIVE FOUNDATION IMPLEMENTED; BROADER ACCEPTANCE OPEN
 > Date: 2026-10-06
 > Authority: presentation implementation baseline only; GDS-14 and TA-12 remain authoritative
 > Goal: replace one-off diagnostic styling with reusable native Roblox UI primitives
+
+`GoldenTheme` implements the representative primitives. The library refresh adds
+native gradient depth, one thin Kenney header accent and binding-specific input
+icons alongside the existing action text. These are decorative resources, not
+input/permission state. [Actual refreshed UI](evidence/refresh/README.md).
+Physical controller menus and actual increased platform text preference remain
+open in the acceptance matrix.
 
 ## 1. UX principles
 

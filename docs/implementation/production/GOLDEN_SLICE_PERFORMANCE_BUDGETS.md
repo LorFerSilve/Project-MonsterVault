@@ -7,6 +7,14 @@
 
 Measured implementation: [six-view evidence and exceptions](GOLDEN_SLICE_EVIDENCE.md#measured-bounds), [raw native statistics](evidence/golden/performance_native.json). All sampled visible triangle/draw counts are below the working scene targets. Fresh Studio p95 is 22-24ms and an earlier long-session p95 is 101ms; no TA-14 reference-device performance pass is claimed.
 
+Latest [library-refresh samples](evidence/refresh/performance_native.json): Starter
+p95 68.17ms, Vault 68.21ms, 120 native frames each. Opaque rendering is 98,710/39
+and 41,768/55 triangles/draws respectively (UI and shadow passes are separate).
+The permanent art now has 565 parts / 426 MeshParts / 164,226 mesh triangles,
+three local lights and zero local shadow lights. Render-count budgets have
+headroom, but both frame targets fail in these Studio samples. The cadence's
+cause is unresolved; do not infer a real-device pass or a proven throttle cause.
+
 ## 1. Important distinction
 
 Numbers in this document are **MonsterVault working targets**, not Roblox platform limits.
