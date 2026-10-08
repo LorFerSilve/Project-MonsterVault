@@ -53,4 +53,23 @@ function Feedback.claim(amount: number, balance: number, reducedMotion: boolean)
 		strong = amount >= 25,
 	}
 end
+-- Local visual offsets only. The gameplay root and capture range never move.
+function Feedback.pose(
+	role: string,
+	time: number,
+	phase: number,
+	reaction: number,
+	reduced: boolean
+): (number, number, number, number)
+	if reduced then
+		return 0, 0, 0, 0
+	end
+	local legendary = role == "legendary"
+	local breath = math.sin(time * 1.7 + phase)
+	local glance = math.sin(time * 0.65 + phase)
+	return (if legendary then 0.12 else 0.07) * breath,
+		0.025 * breath + reaction,
+		0.09 * glance ^ 3,
+		(if legendary then 0.045 else 0.02) * math.sin(time * 1.1 + phase)
+end
 return Feedback

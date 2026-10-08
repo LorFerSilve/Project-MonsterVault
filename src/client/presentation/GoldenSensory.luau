@@ -20,6 +20,8 @@ function Sensory.new(player: any, preferences: any, wallet: (number) -> ())
 	local balanceAnimation: any = nil
 	local powerUntil = 0
 	local producing, bufferPositive, claimReady = false, false, false
+	local bufferFraction = 0
+	local productionKnown = false
 	local seasonal = false
 	local services = {
 		tween = game:GetService("TweenService"),
@@ -269,6 +271,30 @@ function Sensory.new(player: any, preferences: any, wallet: (number) -> ())
 		end
 	end
 	local accumulator: any = nil
+	local function outputState()
+		if not accumulator or not accumulator.Parent then
+			return
+		end
+		local readout = accumulator:FindFirstChild("OutputState", true)
+		if readout then
+			readout.Text = if not productionKnown
+				then "OPEN VAULT FOR OUTPUT"
+				elseif claimReady then "OUTPUT READY"
+				elseif bufferPositive then "OUTPUT BUFFERED"
+				elseif producing then "PRODUCING ENERGY"
+				else "ASSIGN A PRODUCER"
+		end
+		accumulator:SetAttribute("PresentedBufferFraction", bufferFraction)
+		local record = animated[accumulator]
+		if record then
+			for _, bar in record.gauge or {} do
+				bar.LocalTransparencyModifier = if (bar:GetAttribute("BufferStep") or 9) / 8
+						<= bufferFraction
+					then 0
+					else 1
+			end
+		end
+	end
 	local function add(model: any, base: any, role: string): boolean
 		if count >= 16 or animated[model] then
 			return false
@@ -280,6 +306,27 @@ function Sensory.new(player: any, preferences: any, wallet: (number) -> ())
 	-- Streaming can deliver Home after this controller starts in the Reserve.
 	-- Register only these two authored idles; never poll for missing props.
 	local function foundryItem(item: any)
+		-- DescendantAdded may deliver streamed children after their Model.
+		if
+			(item:IsA("BasePart") and item:GetAttribute("BufferStep"))
+			or (item:IsA("TextLabel") and item.Name == "OutputState")
+		then
+			local owner = item:FindFirstAncestor("EnergyAccumulator")
+			local record = owner and animated[owner]
+			if record and record.role == "accumulator" then
+				if
+					item:IsA("BasePart")
+					and #record.gauge < 8
+					and not table.find(record.gauge, item)
+				then
+					table.insert(record.gauge, item)
+				elseif item:IsA("TextLabel") and record.originalReadout == nil then
+					record.originalReadout = item.Text
+				end
+				outputState()
+			end
+			return
+		end
 		local parent = item.Parent
 		if not parent or parent.Name ~= "VaultFoundry" or not item:IsA("Model") then
 			return
@@ -290,7 +337,18 @@ function Sensory.new(player: any, preferences: any, wallet: (number) -> ())
 		end
 		if item.Name == "EnergyAccumulator" then
 			accumulator = item
-			add(item, item:GetPivot(), "accumulator")
+			if add(item, item:GetPivot(), "accumulator") then
+				local gauge = {}
+				for _, bar in item:GetDescendants() do
+					if bar:IsA("BasePart") and bar:GetAttribute("BufferStep") then
+						table.insert(gauge, bar)
+					end
+				end
+				animated[item].gauge = gauge
+				local readout = item:FindFirstChild("OutputState", true)
+				animated[item].originalReadout = readout and readout.Text
+			end
+			outputState() -- Restore the latest projection after stream-in.
 		elseif item.Name == "EnergyRotor" then
 			add(item, item:GetPivot(), "machine")
 		elseif item.Name == "EntryDoorLeft" or item.Name == "EntryDoorRight" then
@@ -299,6 +357,13 @@ function Sensory.new(player: any, preferences: any, wallet: (number) -> ())
 	end
 	local addedConnection = workspace.DescendantAdded:Connect(foundryItem)
 	local removedConnection = workspace.DescendantRemoving:Connect(function(item: any)
+		if item:IsA("BasePart") and item:GetAttribute("BufferStep") then
+			local record = accumulator and animated[accumulator]
+			local index = record and table.find(record.gauge, item)
+			if index then
+				table.remove(record.gauge, index)
+			end
+		end
 		if animated[item] then
 			animated[item] = nil
 			count -= 1
@@ -385,6 +450,14 @@ function Sensory.new(player: any, preferences: any, wallet: (number) -> ())
 										else CFrame.new(0, 0.025 * math.sin(t * 2.1), 0)
 								)
 						)
+						for _, bar in record.gauge or {} do
+							local step = bar:GetAttribute("BufferStep") or 9
+							local lit = step / 8 <= bufferFraction or t < powerUntil
+							bar.LocalTransparencyModifier = if not lit
+								then 1
+								elseif preferences.reducedMotion or preferences.lowEffects then 0
+								else 0.12 + 0.12 * math.sin(t * 3 - step * 0.6)
+						end
 					else
 						local reaction = 0
 						if record.reaction then
@@ -398,21 +471,15 @@ function Sensory.new(player: any, preferences: any, wallet: (number) -> ())
 								record.reaction = nil
 							end
 						end
+						local lift, pitch, yaw, roll = Feedback.pose(
+							record.role,
+							t,
+							record.offset,
+							reaction,
+							preferences.reducedMotion or preferences.lowEffects
+						)
 						model:PivotTo(
-							base
-								* (
-									if preferences.reducedMotion
-										then CFrame.identity
-										else CFrame.new(
-											0,
-											0.06 * math.sin(t * 1.7 + record.offset),
-											0
-										) * CFrame.Angles(
-											reaction,
-											0.035 * math.sin(t * 0.6 + record.offset),
-											0
-										)
-								)
+							base * CFrame.new(0, lift, 0) * CFrame.Angles(pitch, yaw, roll)
 						)
 					end
 				end
@@ -491,22 +558,17 @@ function Sensory.new(player: any, preferences: any, wallet: (number) -> ())
 		seasonalAccent = seasonalAccent,
 		production = function(state: any)
 			producing, bufferPositive, claimReady = false, false, false
+			bufferFraction = 0
+			productionKnown = state ~= nil
 			if state then
 				bufferPositive, claimReady = state.bufferMilli > 0, state.bufferMilli >= 1000
+				bufferFraction =
+					math.clamp(state.bufferMilli / math.max(1, state.bufferCapacityMilli), 0, 1)
 				for _, row in state.creatures do
 					producing = producing or row.productionSlotId ~= nil
 				end
 			end
-			if accumulator and accumulator.Parent then
-				local readout = accumulator:FindFirstChild("OutputState", true)
-				if readout then
-					readout.Text = if claimReady
-						then "OUTPUT READY"
-						elseif bufferPositive then "OUTPUT BUFFERED"
-						elseif producing then "PRODUCING ENERGY"
-						else "ASSIGN A PRODUCER"
-				end
-			end
+			outputState()
 		end,
 		play = play,
 		pulse = pulse,
@@ -524,6 +586,7 @@ function Sensory.new(player: any, preferences: any, wallet: (number) -> ())
 				record
 				and (cue == "Engage" or cue == "Failure")
 				and not preferences.reducedMotion
+				and not preferences.lowEffects
 			then
 				record.reaction = {
 					started = os.clock(),
@@ -614,6 +677,26 @@ function Sensory.new(player: any, preferences: any, wallet: (number) -> ())
 			end
 			table.clear(characterConnections)
 			clearTransient()
+			for model, record in animated do
+				if model.Parent then
+					local base = if type(record.base) == "function"
+						then record.base()
+						else record.base
+					if base then
+						model:PivotTo(base)
+					end
+					for _, bar in record.gauge or {} do
+						bar.LocalTransparencyModifier = 0
+					end
+					if record.role == "accumulator" then
+						model:SetAttribute("PresentedBufferFraction", nil)
+						local readout = model:FindFirstChild("OutputState", true)
+						if readout then
+							readout.Text = record.originalReadout or "ASSIGN A PRODUCER"
+						end
+					end
+				end
+			end
 			table.clear(animated)
 			for _, sound in sounds do
 				sound:Destroy()

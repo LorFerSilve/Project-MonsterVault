@@ -11,6 +11,30 @@ local Config = require("../../src/shared/config/VaultProductionFixture")
 local Preferences = require("../../src/client/presentation/PresentationPreferences")
 local Showcase = require("../../src/server/application/ShowcaseProjection")
 local ShowcaseContract = require("../../src/shared/contracts/ShowcaseProjectionV1")
+local function boundedCreatureMotion()
+	for _, role in { "world", "legendary", "display", "custody" } do
+		for tick = 0, 600 do
+			local lift, pitch, yaw, roll = Feedback.pose(role, tick / 20, tick % 10, 0.15, false)
+			assert(
+				lift == lift and math.abs(lift) <= 0.12,
+				"idle stays inside the display clearance"
+			)
+			assert(
+				math.abs(pitch) <= 0.175 and math.abs(yaw) <= 0.09 and math.abs(roll) <= 0.045,
+				"reaction/idle cannot turn a visual out of its readable framing"
+			)
+		end
+	end
+end
+local function reducedCreatureMotion()
+	for _, role in { "world", "legendary", "display", "custody" } do
+		local lift, pitch, yaw, roll = Feedback.pose(role, 5.1, 2.7, -0.15, true)
+		assert(
+			lift == 0 and pitch == 0 and yaw == 0 and roll == 0,
+			"reduced effects retain the exact authored framing even during a reaction"
+		)
+	end
+end
 local function platformReducedMotionAndDisconnect()
 	local listener, disconnected, updates = nil, false, 0
 	local service = { ReducedMotionEnabled = true } :: any
@@ -422,6 +446,8 @@ local function cosmeticFailureCannotInterruptClaim()
 	)
 end
 return {
+	boundedCreatureMotion = boundedCreatureMotion,
+	reducedCreatureMotion = reducedCreatureMotion,
 	platformReducedMotionAndDisconnect = platformReducedMotionAndDisconnect,
 	noUnconfirmedCelebration = noUnconfirmedCelebration,
 	terminalDeduplication = terminalDeduplication,

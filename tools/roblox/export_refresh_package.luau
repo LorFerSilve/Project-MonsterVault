@@ -12,6 +12,8 @@ return function(write, authorizedLayout)
 				attributes = instance:GetAttributes(),
 				tags = instance:GetTags(),
 			}
+			-- Tags are a set; Studio may reorder GetTags() after reopening a place.
+			table.sort(entry.tags)
 			if instance:IsA("LuaSourceContainer") then
 				error("script in art package: " .. path)
 			end
@@ -126,9 +128,14 @@ return function(write, authorizedLayout)
 	end
 	local prior = game:GetService("HttpService")
 		:JSONDecode(game.ServerStorage.RefreshAnchorSnapshot.Value)
+	for _, entry in prior do
+		table.sort(entry.tags)
+	end
 	local current = {}
 	for _, p in workspace.MonsterVaultWorld:GetDescendants() do
 		if p:IsA("BasePart") then
+			local tags = p:GetTags()
+			table.sort(tags)
 			table.insert(current, {
 				name = p.Name,
 				frame = { p.CFrame:GetComponents() },
@@ -136,7 +143,7 @@ return function(write, authorizedLayout)
 				collide = p.CanCollide,
 				touch = p.CanTouch,
 				query = p.CanQuery,
-				tags = p:GetTags(),
+				tags = tags,
 			})
 		end
 	end
