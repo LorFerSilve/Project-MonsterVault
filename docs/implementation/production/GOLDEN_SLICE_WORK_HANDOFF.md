@@ -8,6 +8,24 @@
 
 The implementation below has advanced: **do not repeat the old preparation/audit sequence**. Start from [current evidence](GOLDEN_SLICE_EVIDENCE.md), [acceptance matrix](GOLDEN_SLICE_ACCEPTANCE_MATRIX.md) and the current branch/PR. The remainder of this handoff preserves the original production brief for reference.
 
+Latest continuation (2026-10-08): [creature/Vault motion and Halloween evidence](evidence/harvest/README.md).
+The existing imported kit is reused; no import/audio upload is pending. Eight
+projected accumulator segments and bounded creature poses pass 11 native
+streaming/reduction/cleanup checks. Halloween now fits the enlarged map, with
+grounded candles, real lantern hangers and a readable northern reliquary.
+Current delivery: 1,012 permanent parts / 651 meshes / 325,963 repeated mesh
+triangles; 177 seasonal parts / 116 meshes / 29,982 triangles. Actual normal
+Play proves +524 Energy, an ordinary 25-Energy capacity upgrade and Secured,
+then fresh Play readback 11/16 and wallet 501. No profile injection or creature
+deletion was used. Reopened StarterBounds was restored to source; 29 authoring,
+111/111 parity, 341 fast and 28 Python pass. Studio ON/OFF p95 is about 68ms;
+render-cadence cause, devices/long-session memory, physical controller menus,
+actual increased platform text and owner art acceptance remain open. Resume
+those on draft PR #76, rather than later IMP-11 backends. Reproduction now adds
+finish_golden_motion.luau after expand_golden_reserve.luau, then rebuilds the
+seasonal template. Studio is left Edit, normal mains enabled, preview OFF and
+HTTP false; user-local files and the recovered bounds note are preserved.
+
 Latest owner-feedback pass (2026-10-07): [reclaimed reserve / radioactive Vault evidence](evidence/reclaimed/README.md).
 All three supplementary assets are imported/mapped/placed/native-validated;
 **no import or audio upload is pending**. Reuse their editable sources and native

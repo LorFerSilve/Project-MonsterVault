@@ -315,3 +315,13 @@ mapping; native text/layout/controllers are retained.
 Current native delivery: `golden_assets.rbxm` 377,056 bytes and `golden_world.rbxm`
 300,158 bytes. Exact native serialization/readback passed. No import or additional
 audio upload is pending. Broader asset rollout and Golden acceptance remain open.
+
+## 15. Current-map sensory and seasonal continuation — 2026-10-08
+
+[Native harvest evidence](evidence/harvest/README.md) reuses the existing editable
+seasonal and creature kit; no new Blender source, import or audio upload is
+needed. Eight Roblox-native projected accumulator segments extend the existing
+world to 1,012 parts / 651 meshes / 325,963 repeated mesh triangles. Rebuilt
+Halloween dressing is 177 parts / 116 meshes / 29,982 triangles, fully mapped
+and exact native readback. Current-world ON/OFF views and normal capture/claim
+proof are retained; final owner art/device/performance acceptance remains open.

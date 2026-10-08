@@ -1,0 +1,62 @@
+[
+  {
+    "file": "harvest_capture_engage.jpg",
+    "bytes": 229400,
+    "sha256": "83c6f87b2b063b58ea8390adc3972618547073996bc68bdcb1a7130831c6e7e4"
+  },
+  {
+    "file": "harvest_capture_outcome.jpg",
+    "bytes": 240519,
+    "sha256": "76d4140be492094c8365def10f8a01130d4766b27d4f2918821fad0c45446236"
+  },
+  {
+    "file": "harvest_claim_saved.jpg",
+    "bytes": 125586,
+    "sha256": "8edc39d736f64bf445e882ed9e1b770725cba5a6e346437f7d3e21eeac216fa0"
+  },
+  {
+    "file": "harvest_collection_rejoin.jpg",
+    "bytes": 185244,
+    "sha256": "a29e1b246d9436c855dd51103f6eedc7583952dd996dc68e1594d8ff90fa6f4a"
+  },
+  {
+    "file": "harvest_interior_off.jpg",
+    "bytes": 208821,
+    "sha256": "452d7507952d28e563a81e698083f2a4807d39ccc48941cc650e9100b1df3fbb"
+  },
+  {
+    "file": "harvest_interior_on.jpg",
+    "bytes": 197538,
+    "sha256": "a6a20be9c9c9f80d4d1cb5976d072246829f217e58a928b6461c9f5f60c2953a"
+  },
+  {
+    "file": "harvest_northern_off.jpg",
+    "bytes": 343843,
+    "sha256": "d57b4af686808c5d446e9d9657194b4b7844c3a59067dab1e5378ce5d7791b19"
+  },
+  {
+    "file": "harvest_northern_on.jpg",
+    "bytes": 191718,
+    "sha256": "ae1136be598c79ed07bca1727e698af05aa0050fe6515bdae6f75e8527845e49"
+  },
+  {
+    "file": "harvest_starter_off.jpg",
+    "bytes": 273339,
+    "sha256": "e5c8360889a48bbc578da4cdcefd6cd7fe076efadaed60ff715a0d5e46cdc587"
+  },
+  {
+    "file": "harvest_starter_on.jpg",
+    "bytes": 207140,
+    "sha256": "6bb9e8ad78b8f9ee239ad4b014647dad576d9b7e754d7a40af5a8ad1e9c8a401"
+  },
+  {
+    "file": "harvest_vault_off.jpg",
+    "bytes": 266307,
+    "sha256": "04a137e53f37ea6443a8c0620c6b8b47d34371dc039f8d89cf21040af13992a7"
+  },
+  {
+    "file": "harvest_vault_on.jpg",
+    "bytes": 192591,
+    "sha256": "add4f83eb6812cee18eac289bd75522f07db947678f7fa25a69ae0ca357b0d09"
+  }
+]

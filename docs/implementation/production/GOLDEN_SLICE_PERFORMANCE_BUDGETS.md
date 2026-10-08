@@ -5,6 +5,17 @@
 > Authority: TA-14 remains authoritative for actual performance gates
 > Purpose: stop production art from creating avoidable performance debt before real-device measurement
 
+Latest [current-map ON/OFF measurements](evidence/harvest/performance_native.json):
+120 frames/view, Starter/Vault p95 about 68ms with either layer setting. OFF
+has 480 Heartbeats per 120 RenderStepped events and Heartbeat p95 about 18ms;
+this does not establish a throttle or geometry cause. Opaque counts are
+173,346/41 and 46,889/51 OFF; 186,078/54 and 49,395/59 ON. Both frame targets
+fail in these workstation samples. Memory about 2.84-2.97GB is not a stability
+proof. Current world is 1,012 parts; seasonal template 177 parts / 29,982 mesh
+triangles, three non-shadowing lights and one Rate-3 emitter. Eight cached
+accumulator segments reuse the one <=16-record motion owner. Real devices,
+long-session/cadence diagnosis, TA-14 and VS1-19 remain open.
+
 Latest [reclaimed-reserve measurements](evidence/reclaimed/performance_native.json):
 120 frames/view, Starter p95 18.00ms and Vault 18.08ms on this Studio workstation,
 with 222,362/53 and 39,993/48 opaque triangles/draws. Permanent delivery has

@@ -1,0 +1,18 @@
+{
+  "claimAmountFixture": 27,
+  "isolatedClient": true,
+  "passed": true,
+  "checks": {
+    "modelStream": true,
+    "idle": true,
+    "motionBound16": true,
+    "claimResponse": true,
+    "engageReaction": true,
+    "cleanup": true,
+    "reducedMotion": true,
+    "projectedBuffer": true,
+    "partialStream": true,
+    "lowEffects": true,
+    "unknownOutput": true
+  }
+}

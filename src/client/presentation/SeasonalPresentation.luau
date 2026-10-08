@@ -18,6 +18,9 @@ function Seasonal.new(preferences: any, changed: (boolean) -> ())
 		for _, item in root:GetDescendants() do
 			if item:IsA("ParticleEmitter") then
 				item.Enabled = not preferences.lowEffects and not preferences.reducedMotion
+				if not item.Enabled then
+					item:Clear()
+				end
 			elseif item:IsA("PointLight") then
 				item.Enabled = not preferences.lowEffects
 			end

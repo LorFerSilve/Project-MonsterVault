@@ -36,6 +36,19 @@ A seasonal deadline never permits bypassing correctness, persistence, safety, ac
 
 ## Golden Slice pre-production package
 
+Current sensory/seasonal continuation (2026-10-08):
+[bounded creature/Vault feedback and recomposed Halloween dressing](production/evidence/harvest/README.md).
+Existing imported assets are reused. Eight projected accumulator segments,
+stream-in/cleanup handling and bounded creature poses pass 11 native checks;
+the removable layer is grounded around the expanded map and inspected ON/OFF.
+Actual normal Play proves +524 Energy, a 25-Energy capacity upgrade and a new
+Secured creature, then fresh Play readback 11/16. The reopened StarterBounds
+position was restored to its source layout; 29 authoring cases and 111/111
+parity pass. Current counts: 341 fast / 28 Python; world 1,012 parts / 651 meshes.
+Studio p95 is about 68ms with the layer both ON and OFF; cause/device acceptance
+remains open. PR #76 remains draft; final owner art/manual/PQL acceptance and
+later IMP-11 backend gates are not closed. No import or audio upload is pending.
+
 Current owner-feedback continuation (2026-10-07):
 [larger central reserve and radioactive Vault](production/evidence/reclaimed/README.md).
 The supplementary shell/rover/ruins import is complete and native-validated.

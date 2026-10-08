@@ -7,7 +7,15 @@ This folder is the implementation-facing production baseline for the first Golde
 
 Resume the existing work from [GOLDEN_SLICE_EVIDENCE.md](GOLDEN_SLICE_EVIDENCE.md) and the [native gallery](evidence/golden/README.md). Imports, permanent composition and representative UI/sensory integration are implemented. Remaining controller menu, actual platform text preference and performance acceptance are listed in the [matrix](GOLDEN_SLICE_ACCEPTANCE_MATRIX.md). Do not restart from pre-production.
 
-Latest continuation (2026-10-07): [larger central reserve / radioactive Vault](evidence/reclaimed/README.md).
+Latest continuation (2026-10-08): [creature/Vault motion and recomposed Halloween](evidence/harvest/README.md).
+Native motion/streaming/cleanup checks 11/11, authoring 29/29 and parity 111/111
+pass; full fast is 341/341, Python 28/28. Existing imports are reused; current
+world has 1,012 parts and removable dressing has 177. Normal capture/claim/
+capacity readback and matched ON/OFF views are retained. Studio p95 remains
+about 68ms with either layer setting; final art/manual/device/performance
+acceptance is open. No import/audio upload is pending; PR #76 remains draft.
+
+Earlier continuation (2026-10-07): [larger central reserve / radioactive Vault](evidence/reclaimed/README.md).
 The supplementary three-model import is complete: all 21 persistent mesh groups
 are mapped and integrated. Starter is 176 x 256 with an actually rebuilt central
 station/court and northern forest loop; Vault has the radioactive containment

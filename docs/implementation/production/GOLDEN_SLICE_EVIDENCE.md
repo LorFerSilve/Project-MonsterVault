@@ -1,5 +1,17 @@
 # Golden Slice implementation and native evidence
 
+Latest sensory/seasonal continuation (2026-10-08):
+[creature/Vault feedback, current-map Halloween and ordinary Play proof](evidence/harvest/README.md).
+Eight accumulator segments and bounded poses use the existing controller;
+native streaming/reduction/cleanup 11/11, authoring 29/29, final parity 111/111,
+341 fast and 28 Python pass. Existing editable/imported assets are reused;
+world is 1,012 parts, seasonal template 177. Current ON/OFF screenshots and
+actual +524 claim / 25-Energy upgrade / Secured / fresh Collection 11/16 readback
+are retained. Source-backed StarterBounds drift is repaired with its prior
+frame preserved. The new p95 is about 68ms with either seasonal setting;
+cause/device/performance and final owner/manual acceptance remain open.
+Earlier counts, frame samples and images below are historical evidence.
+
 Latest owner-feedback revision (2026-10-07):
 [larger central reserve and integrated radioactive Vault](evidence/reclaimed/README.md).
 This supersedes the earlier dimensions/collision/parity counts below. All three

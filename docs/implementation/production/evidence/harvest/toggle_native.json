@@ -1,0 +1,14 @@
+{
+  "reducedEffects": {
+    "lightsDisabled": 3,
+    "effects": "Effects · LOW",
+    "motion": "Reduced Motion · ON",
+    "emittersDisabled": 1,
+    "physicsWriters": 0
+  },
+  "off": {
+    "seasonalPresent": false,
+    "gradingPresent": false
+  },
+  "default": "OFF"
+}

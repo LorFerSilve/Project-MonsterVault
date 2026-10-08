@@ -17,7 +17,7 @@ function Builder.run()
 	local root = Instance.new("Model")
 	root.Name, root.Parent = "Halloween2026", library
 	root:SetAttribute("PresentationOnly", true)
-	root:SetAttribute("ArtVersion", "SpectralHarvest-v1")
+	root:SetAttribute("ArtVersion", "SpectralHarvest-v2-Reclaimed")
 	local function style(p, group)
 		local material = assert(palette[group], group)
 		p.Material, p.Color = material.material, material.color
@@ -53,6 +53,15 @@ function Builder.run()
 		)
 	end
 	local function candle(pos, scale)
+		-- A physical tray grounds the candle; never suspend decorations at an
+		-- obsolete blockout console height.
+		part(
+			root,
+			"CandleTray",
+			"DarkMetal",
+			Vector3.new(0.6, 0.08, 0.6) * scale,
+			CFrame.new(pos + Vector3.new(0, 0.04 * scale, 0))
+		)
 		part(
 			root,
 			"Candle",
@@ -73,53 +82,67 @@ function Builder.run()
 	-- Small clustered props frame navigation, never become navigation or collision.
 	for i, p in
 		{
-			Vector3.new(-15, 0.1, 28),
-			Vector3.new(-17, 0.1, 30),
-			Vector3.new(15, 0.1, 28),
-			Vector3.new(15, 0.1, 3),
-			Vector3.new(17, 0.1, 5),
-			Vector3.new(-15, 0.1, 19),
-			Vector3.new(-30, 0.1, -10),
-			Vector3.new(-28, 0.1, -11),
-			Vector3.new(25, 0.1, -33),
-			Vector3.new(-15, 0.2, 107),
-			Vector3.new(16, 0.2, 109),
-			Vector3.new(18, 0.2, 143),
+			Vector3.new(-31, 0.18, 30),
+			Vector3.new(-33, 0.18, 31),
+			Vector3.new(31, 0.18, 30),
+			Vector3.new(33, 0.18, 32),
+			Vector3.new(-31, 0.18, -4),
+			Vector3.new(31, 0.18, -4),
+			Vector3.new(-45, 0.1, 34),
+			Vector3.new(-47, 0.1, 35),
+			Vector3.new(-57, 0.1, -86),
+			Vector3.new(-59, 0.1, -88),
+			Vector3.new(20, 0.1, -127),
+			Vector3.new(22, 0.1, -126),
+			Vector3.new(53, 0.1, -58),
+			Vector3.new(-15, 0.2, 101),
+			Vector3.new(-17, 0.2, 102),
+			Vector3.new(15, 0.2, 101),
+			Vector3.new(17, 0.2, 102),
+			Vector3.new(-31, 0.22, 162),
+			Vector3.new(31, 0.22, 162),
 		}
 	do
 		asset("HarvestPumpkin", "HarvestPumpkin" .. i, p, 0.65 + (i % 3) * 0.17, i * 37)
 	end
 	for i, p in
 		{
-			Vector3.new(-12, 8.2, 1),
-			Vector3.new(12, 8.2, 1),
-			Vector3.new(-12, 8.2, 21),
-			Vector3.new(12, 8.2, 21),
-			Vector3.new(-17, 0.2, 29),
-			Vector3.new(17, 0.2, 29),
-			Vector3.new(-18, 0.25, 113),
-			Vector3.new(18, 0.25, 113),
-			Vector3.new(-18, 0.25, 148),
-			Vector3.new(18, 0.25, 148),
+			Vector3.new(-27, 8.9, -3),
+			Vector3.new(27, 8.9, -3),
+			Vector3.new(-27, 8.9, 28),
+			Vector3.new(27, 8.9, 28),
+			Vector3.new(-32, 0.18, 35),
+			Vector3.new(32, 0.18, 35),
+			Vector3.new(-11, 8.8, 104.7),
+			Vector3.new(11, 8.8, 104.7),
+			Vector3.new(-32, 0.22, 159),
+			Vector3.new(32, 0.22, 159),
+			Vector3.new(-58, 0.1, -108),
+			Vector3.new(21, 0.1, -129),
 		}
 	do
-		asset("HarvestLantern", "HarvestLantern" .. i, p, if i < 5 then 0.42 else 0.65, i * 42)
+		local hanging = i <= 4 or i == 7 or i == 8
+		local scale = if hanging then 0.55 else 0.65
+		asset("HarvestLantern", "HarvestLantern" .. i, p, scale, i * 42)
+		if hanging then
+			local top = p + Vector3.new(0, 2.545 * scale, 0)
+			local ceiling = if i <= 4 then 12 else 13.4
+			line(root, "LanternHanger", top, Vector3.new(p.X, ceiling, p.Z), "DarkMetal", 0.045)
+		end
 	end
 	for _, p in
 		{
-			Vector3.new(-9, 4.16, 18.2),
-			Vector3.new(9, 4.16, 18.2),
-			Vector3.new(-20, 0.3, 137),
-			Vector3.new(20, 0.3, 137),
-			Vector3.new(-20, 0.3, 139),
-			Vector3.new(20, 0.3, 140),
+			Vector3.new(-31, 0.18, 34),
+			Vector3.new(31, 0.18, 34),
+			Vector3.new(-30, 0.22, 159),
+			Vector3.new(30, 0.22, 159),
 		}
 	do
 		candle(p, 1)
 	end
 	-- The webs use opaque thin threads, not layered transparent sheets.
-	for _, x in { -12, 12 } do
-		local corner = Vector3.new(x, 8.1, 1.2)
+	for _, x in { -27, 27 } do
+		local corner = Vector3.new(x, 11.8, -3.3)
 		local web = Instance.new("Model")
 		web.Name, web.Parent = "OutpostWeb", root
 		for i = 0, 4 do
@@ -161,7 +184,7 @@ function Builder.run()
 		end
 	end
 	for i, p in
-		{ Vector3.new(-37, 0.1, -35), Vector3.new(-42, 0.1, -30), Vector3.new(38, 0.1, -54) }
+		{ Vector3.new(-61, 0.1, -111), Vector3.new(-61, 0.1, -105), Vector3.new(55, 0.1, -58) }
 	do
 		local ruin = part(
 			root,
@@ -181,12 +204,15 @@ function Builder.run()
 	end
 	for i, p in
 		{
-			Vector3.new(-25, 0.1, 23),
-			Vector3.new(24, 0.1, 17),
-			Vector3.new(-34, 0.1, -39),
-			Vector3.new(42, 0.1, -44),
-			Vector3.new(31, 0.1, 106),
-			Vector3.new(-32, 0.1, 142),
+			Vector3.new(-34, 0.1, 32),
+			Vector3.new(34, 0.1, 32),
+			Vector3.new(-58, 0.1, -111),
+			Vector3.new(53, 0.1, -62),
+			Vector3.new(20, 0.1, -132),
+			Vector3.new(-16, 0.2, 100),
+			Vector3.new(16, 0.2, 100),
+			Vector3.new(-35, 0.22, 164),
+			Vector3.new(35, 0.22, 164),
 		}
 	do
 		local foliage = asset("Fern", "AutumnCluster" .. i, p, 1.15, i * 31)
@@ -197,7 +223,7 @@ function Builder.run()
 		end
 	end
 	local hero =
-		asset("SpectralReliquary", "SpectralReliquary", Vector3.new(-34, 0.1, -13), 1.35, 20)
+		asset("SpectralReliquary", "SpectralReliquary", Vector3.new(-50, 0.1, -114), 1.35, 20)
 	local mote = Instance.new("ParticleEmitter")
 	mote.Name, mote.Rate, mote.Lifetime, mote.Speed =
 		"SpectralMotes", 3, NumberRange.new(2, 3), NumberRange.new(0.25, 0.6)
@@ -207,7 +233,7 @@ function Builder.run()
 	mote.Size, mote.Transparency, mote.LightEmission =
 		NumberSequence.new(0.1), NumberSequence.new(0.45), 0.4
 	mote.Parent = hero:FindFirstChildWhichIsA("BasePart", true)
-	for i, p in { Vector3.new(-34, 4, -13), Vector3.new(0, 6, 11), Vector3.new(0, 5, 130) } do
+	for i, p in { Vector3.new(-50, 4, -114), Vector3.new(-23, 6, 18), Vector3.new(0, 6, 128) } do
 		local holder =
 			part(root, "SeasonalLight" .. i, "PanelPlastic", Vector3.one * 0.1, CFrame.new(p))
 		holder.Transparency, holder.CastShadow = 1, false
