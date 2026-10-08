@@ -6,7 +6,12 @@ local VaultProjectionV1 = require(shared.VaultProjectionV1)
 local RouteIds = require(shared.RouteIds)
 local VaultRuntimeService = {}
 
-function VaultRuntimeService.new(options: { networking: any, player: any, guiService: any })
+function VaultRuntimeService.new(options: {
+	networking: any,
+	player: any,
+	guiService: any,
+	golden: boolean?,
+})
 	local globals = getfenv() :: any
 	local screen: any = nil
 	local panel: any = nil
@@ -22,8 +27,8 @@ function VaultRuntimeService.new(options: { networking: any, player: any, guiSer
 	local function enabled(button: any, active: boolean)
 		button.Active, button.Interactable, button.Selectable = active, active, active
 		button.BackgroundColor3 = if active
-			then globals.Color3.fromRGB(20, 118, 77)
-			else globals.Color3.fromRGB(67, 79, 75)
+			then globals.Color3.fromRGB(30, 41, 49)
+			else globals.Color3.fromRGB(59, 73, 77)
 	end
 	local controller = VaultController.new({
 		gateway = options.networking.gateway,
@@ -39,9 +44,11 @@ function VaultRuntimeService.new(options: { networking: any, player: any, guiSer
 				return
 			end
 			local data = if state.snapshot ~= nil then state.snapshot.state else nil
-			panel.Size = if data ~= nil and data.overflowHeldCount == 0
-				then globals.UDim2.new(0.72, 0, 0, 110)
-				else globals.UDim2.fromScale(0.72, 0.6)
+			if not options.golden then
+				panel.Size = if data ~= nil and data.overflowHeldCount == 0
+					then globals.UDim2.new(0.72, 0, 0, 110)
+					else globals.UDim2.fromScale(0.72, 0.6)
+			end
 			heading.Text = if data ~= nil
 				then string.format(
 					"Collection %d / %d   |   Overflow %d",
@@ -173,6 +180,20 @@ function VaultRuntimeService.new(options: { networking: any, player: any, guiSer
 		end
 		return {}
 	end
-	return { id = "vault_client", dependencies = { "networking" }, start = start, stop = stop }
+	return {
+		id = "vault_client",
+		dependencies = { "networking" },
+		start = start,
+		stop = stop,
+		view = controller.view,
+		ui = function()
+			return screen, panel
+		end,
+		open = function(value: boolean)
+			if panel then
+				panel.Visible = value
+			end
+		end,
+	}
 end
 return VaultRuntimeService

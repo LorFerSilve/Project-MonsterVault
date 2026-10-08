@@ -1,0 +1,30 @@
+{
+  "method": "Actual Studio Play native Mouse input, Humanoid MoveTo and keyboard Space",
+  "doors": {
+    "closedLeftX": -5,
+    "closedRightX": 5,
+    "approachedLeftX": -14.99998664855957,
+    "approachedRightX": 14.99998664855957
+  },
+  "buttonHoverScale": 1.024999976158142,
+  "reducedMotion": {
+    "label": "Reduced Motion · ON",
+    "allSampledScales": 1,
+    "doorLeftX": -15
+  },
+  "jumpStates": [
+    "Jumping",
+    "Freefall",
+    "Landed",
+    "Running"
+  ],
+  "dust": {
+    "rate": 0,
+    "lifetimeMin": 0.18,
+    "lifetimeMax": 0.35,
+    "physical": false
+  },
+  "normalBootstrap": true,
+  "errorsObserved": 0,
+  "stage": "expanded geometry before supplementary import"
+}

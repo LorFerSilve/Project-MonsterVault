@@ -1,0 +1,17 @@
+{
+  "scratch": [],
+  "httpEnabled": false,
+  "starterPosition": "0, 10, -48",
+  "mode": "Edit",
+  "scripts": [
+    {
+      "disabled": false,
+      "path": "ServerScriptService.MonsterVaultServer.bootstrap.ServerMain"
+    },
+    {
+      "disabled": false,
+      "path": "StarterPlayer.StarterPlayerScripts.MonsterVaultClient.bootstrap.ClientMain"
+    }
+  ],
+  "recoveredBounds": "{\"before\":[208,7,80,1,0,0,0,1,0,0,0,1],\"tags\":[\"MonsterVaultRegion\"],\"size\":[176,40,256],\"reason\":\"Source-backed authoring mismatch found before Play\"}"
+}

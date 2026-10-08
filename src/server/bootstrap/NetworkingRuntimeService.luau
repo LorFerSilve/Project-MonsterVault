@@ -19,6 +19,7 @@ local VaultCapacityProjection = require(script.Parent.Parent.application.VaultCa
 local VaultAssignmentProjection =
 	require(script.Parent.Parent.application.VaultAssignmentProjection)
 local VaultAssignmentProjectionV1 = require(shared.VaultAssignmentProjectionV1)
+local ShowcaseProjection = require(script.Parent.Parent.application.ShowcaseProjection)
 local ProgressionProjectionV1 = require(shared.ProgressionProjectionV1)
 local ProgressionProjection = require(script.Parent.Parent.application.ProgressionProjection)
 local VaultProjectionV1 =
@@ -413,8 +414,15 @@ function NetworkingRuntimeService.new(options: {
 		if not ready then
 			return "PROTECTED_VAULT_UNAVAILABLE"
 		end
-		local payload =
-			VaultAssignmentProjection.fromProfile(active.snapshot(), options.production, afterId)
+		local profile = active.snapshot()
+		local display = ShowcaseProjection.fromProfile(profile, player.UserId, options.production)
+		local payload = VaultAssignmentProjection.fromProfile(
+			profile,
+			options.production,
+			afterId,
+			WireValidation.payload,
+			display.creatures[1]
+		)
 		assert(
 			VaultAssignmentProjectionV1.validSnapshot(payload) and WireValidation.payload(payload),
 			"invalid bounded assignment projection"

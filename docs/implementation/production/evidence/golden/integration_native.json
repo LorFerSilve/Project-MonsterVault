@@ -1,0 +1,132 @@
+{
+  "stage": "IMPLEMENTING — not Golden reference closure",
+  "base": "80b9e8b25973ac2c0dab7a5ea3bfddf35d9f98f5",
+  "devProfileScope": "GS-15934a45-fcd8-44a4-905f-963f24de309f",
+  "protected": {
+    "begin": {
+      "pinnedContext": true,
+      "creatureId": "creature-94e376e1-7639-41cd-a058-944b18b7df98-2",
+      "scope": "IMP10Reward-dfabb9dd-9517-4bab-ba0e-65ba89f27cc1",
+      "ordinaryExpired": true,
+      "nativeCue": true,
+      "record": {
+        "creatureInstanceId": "creature-94e376e1-7639-41cd-a058-944b18b7df98-2",
+        "rarityId": "rarity/legendary",
+        "idleExpiresAt": 303,
+        "availableAt": 3,
+        "runtimeRevision": 2,
+        "position": {
+          "y": 3,
+          "x": 36,
+          "z": -40
+        },
+        "spawnContextId": "spawn-context/starter-field",
+        "availability": "IdleAvailable",
+        "lifetimeClass": "ProtectedVariant",
+        "speciesId": "species/stability-orb-dev"
+      }
+    },
+    "finish": {
+      "immutableWindow": true,
+      "claimTimeout": true,
+      "streamingClientTamperingInert": true,
+      "scope": "IMP10Reward-dfabb9dd-9517-4bab-ba0e-65ba89f27cc1",
+      "replacementId": "creature-94e376e1-7639-41cd-a058-944b18b7df98-4",
+      "passed": true
+    },
+    "clientModel": {
+      "rootSize": [
+        4,
+        4,
+        4
+      ],
+      "speciesId": "species/stability-orb-dev",
+      "rarityId": "rarity/legendary"
+    },
+    "note": "Existing isolated DEV RNG/clock/pulse probe; one actual Player, normal cosmetic presentation; unrelated overlapping creatures locally hidden for visual inspection; not live rarity odds evidence."
+  },
+  "mobile": {
+    "device": "Samsung Galaxy A06",
+    "landscapeViewport": [
+      705,
+      338
+    ],
+    "portraitViewport": [
+      359,
+      718
+    ],
+    "touch": "Native InputBegan Touch/Activated. Tool coordinates require measured hardware inset correction (47px landscape X / portrait Y).",
+    "navigationBottom": 566,
+    "jumpTop": 570,
+    "reducedMotion": "Native manual setting ON; owned display pivot unchanged over 0.4s; platform ReducedMotionEnabled remained false.",
+    "audio": [
+      {
+        "playing": true,
+        "name": "MV_GS_Reserve",
+        "volume": 0
+      },
+      {
+        "playing": true,
+        "name": "MV_GS_Machine",
+        "volume": 0
+      },
+      {
+        "playing": false,
+        "name": "GoldenCue1",
+        "volume": 0.10000000149011612
+      },
+      {
+        "playing": false,
+        "name": "GoldenCue2",
+        "volume": 0.10000000149011612
+      },
+      {
+        "playing": false,
+        "name": "GoldenCue3",
+        "volume": 0.10000000149011612
+      },
+      {
+        "playing": false,
+        "name": "GoldenCue4",
+        "volume": 0.10000000149011612
+      },
+      {
+        "playing": false,
+        "name": "GoldenCue5",
+        "volume": 0.10000000149011612
+      },
+      {
+        "playing": false,
+        "name": "GoldenCue6",
+        "volume": 0.10000000149011612
+      }
+    ]
+  },
+  "claim": {
+    "beforeEnergyUnits": 13,
+    "confirmedClaimUnits": 1307,
+    "confirmedEnergyUnits": 1320,
+    "note": "Actual server saved claim from existing DEV production. Accrued amount settled by server, not calculated from earlier displayed buffer. Initial capture shows Pending, not completed animation peak."
+  },
+  "upgrade": {
+    "review": "Collection capacity +6 (tier 1) for 25 Energy?",
+    "confirmedPriceUnits": 25,
+    "confirmedEnergyUnits": 1295,
+    "collectionCapacity": 16,
+    "explicitReviewAndConfirm": true
+  },
+  "tests": {
+    "fast": "337/337",
+    "python": "28/28",
+    "selene": "0 errors, 0 warnings",
+    "stylua": "PASS",
+    "dependencies": "PASS",
+    "integrity": "PASS"
+  },
+  "gaps": [
+    "Five-model golden_launch_import.fbx not yet imported in native Studio.",
+    "Final forest composition and removable Halloween ON/OFF pairs pending.",
+    "Actual gamepad activation and platform PreferredTextSize Largest need manual native test; MCP SendKey produces Keyboard ButtonX events and CoreGui input is restricted.",
+    "Final six-view performance evidence and 15 final screenshots pending."
+  ]
+}

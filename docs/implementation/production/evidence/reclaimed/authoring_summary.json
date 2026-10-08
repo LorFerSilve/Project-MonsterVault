@@ -1,0 +1,10 @@
+{
+  "source": "Actual scripts/studio/imp10_authoring_checks.luau, Server",
+  "passed": true,
+  "cases": 29,
+  "passedCases": 29,
+  "baselineRouteGroundSamples": 315,
+  "hazardFreeRouteSamples": 315,
+  "scope": "Baseline raycast samples include functional world only. New art route traversability is separately recorded in traversal_native.json.",
+  "ordinaryLocomotion": true
+}

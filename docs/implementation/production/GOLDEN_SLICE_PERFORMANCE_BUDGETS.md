@@ -1,9 +1,47 @@
 # Golden Slice Performance Budgets
 
-> Status: PRE-MEASUREMENT AUTHORING BUDGET
+> Status: WORKING BUDGETS + SIX STUDIO MEASUREMENTS; REAL-DEVICE GATES OPEN
 > Date: 2026-10-06
 > Authority: TA-14 remains authoritative for actual performance gates
 > Purpose: stop production art from creating avoidable performance debt before real-device measurement
+
+Latest [current-map ON/OFF measurements](evidence/harvest/performance_native.json):
+120 frames/view, Starter/Vault p95 about 68ms with either layer setting. OFF
+has 480 Heartbeats per 120 RenderStepped events and Heartbeat p95 about 18ms;
+this does not establish a throttle or geometry cause. Opaque counts are
+173,346/41 and 46,889/51 OFF; 186,078/54 and 49,395/59 ON. Both frame targets
+fail in these workstation samples. Memory about 2.84-2.97GB is not a stability
+proof. Current world is 1,012 parts; seasonal template 177 parts / 29,982 mesh
+triangles, three non-shadowing lights and one Rate-3 emitter. Eight cached
+accumulator segments reuse the one <=16-record motion owner. Real devices,
+long-session/cadence diagnosis, TA-14 and VS1-19 remain open.
+
+[Follow-up fresh-session diagnostic](evidence/harvest/cadence_diagnostic_native.json):
+Starter/Vault sampled after the MCP command returned have p95 21.77/23.34ms;
+same-session Starter inside a pending command is 23.42ms. All are 120:120
+Heartbeat/RenderStepped with unchanged runtime/settings. This does not prove
+MCP caused the older 68ms cadence or establish a performance fix. Fresh samples
+still exceed 16.67ms; supported-device and long-session gates remain open.
+
+Latest [reclaimed-reserve measurements](evidence/reclaimed/performance_native.json):
+120 frames/view, Starter p95 18.00ms and Vault 18.08ms on this Studio workstation,
+with 222,362/53 and 39,993/48 opaque triangles/draws. Permanent delivery has
+1,004 BaseParts / 651 MeshParts / 325,963 repeated triangles and three lights.
+The supplementary shell/ruins/rover are included. Short-view memory is about
+2,848MB and nearly unchanged within each sample; long-term stability is unproven.
+These results do not pass the reference 16.67ms or physical-device gates, resolve
+the older 68/101ms cadence, or close VS1-19. No runtime loop/emitter/light was
+added by this larger composition. Existing bounded movement/door effects remain.
+
+Measured implementation: [six-view evidence and exceptions](GOLDEN_SLICE_EVIDENCE.md#measured-bounds), [raw native statistics](evidence/golden/performance_native.json). All sampled visible triangle/draw counts are below the working scene targets. Fresh Studio p95 is 22-24ms and an earlier long-session p95 is 101ms; no TA-14 reference-device performance pass is claimed.
+
+Latest [library-refresh samples](evidence/refresh/performance_native.json): Starter
+p95 68.17ms, Vault 68.21ms, 120 native frames each. Opaque rendering is 98,710/39
+and 41,768/55 triangles/draws respectively (UI and shadow passes are separate).
+The permanent art now has 565 parts / 426 MeshParts / 164,226 mesh triangles,
+three local lights and zero local shadow lights. Render-count budgets have
+headroom, but both frame targets fail in these Studio samples. The cadence's
+cause is unresolved; do not infer a real-device pass or a proven throttle cause.
 
 ## 1. Important distinction
 

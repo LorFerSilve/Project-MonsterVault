@@ -1,0 +1,68 @@
+{
+  "date": "2026-10-06",
+  "source": "Studio Play, native RenderStepped and Stats",
+  "framesPerView": 120,
+  "views": [
+    {
+      "view": "starter",
+      "maxMs": 68.30620020627975,
+      "p95ms": 68.16569715738297,
+      "frames": 120,
+      "render": {
+        "Grass": "0 tris, 0 draws",
+        "Terrain": "0 tris, 0 draws",
+        "Decal": "0 tris, 0 draws",
+        "DOF": "0 tris, 0 draws",
+        "Cloud": "0 tris, 0 draws",
+        "SSAO": "0 tris, 0 draws",
+        "GenericPostProcess": "0 tris, 0 draws",
+        "Sky": "0 tris, 0 draws",
+        "Transparent": "0 tris, 0 draws",
+        "UI": "142 tris, 3 draws",
+        "Opaque": "98710 tris, 39 draws",
+        "Particles": "0 tris, 0 draws",
+        "Undefined": "0 tris, 0 draws"
+      },
+      "memoryMb": 2004.07421875,
+      "p50ms": 66.62719696760178,
+      "startMemoryMb": 2014.26953125
+    },
+    {
+      "view": "vault",
+      "maxMs": 69.31799650192261,
+      "p95ms": 68.21049749851227,
+      "frames": 120,
+      "render": {
+        "Grass": "0 tris, 0 draws",
+        "Terrain": "0 tris, 0 draws",
+        "Decal": "0 tris, 0 draws",
+        "DOF": "0 tris, 0 draws",
+        "Cloud": "0 tris, 0 draws",
+        "SSAO": "0 tris, 0 draws",
+        "GenericPostProcess": "0 tris, 0 draws",
+        "Sky": "0 tris, 0 draws",
+        "Transparent": "0 tris, 0 draws",
+        "UI": "374 tris, 9 draws",
+        "Opaque": "41768 tris, 55 draws",
+        "Particles": "0 tris, 0 draws",
+        "Undefined": "0 tris, 0 draws"
+      },
+      "memoryMb": 2022.55859375,
+      "p50ms": 66.8879970908165,
+      "startMemoryMb": 2033.375
+    }
+  ],
+  "targetFrameP95Ms": 16.67,
+  "lowEndTargetFrameP95Ms": 33.33,
+  "status": "OPEN: sampled p95 exceeds both targets; no physical device or VS1-19 pass",
+  "rootCause": "Unresolved; Studio/background cadence is a hypothesis, not a proven cause",
+  "scene": {
+    "parts": 565,
+    "meshParts": 426,
+    "meshTriangles": 164226,
+    "localLights": 3,
+    "localShadowLights": 0
+  },
+  "addedDecorativeHeartbeatConnections": 0,
+  "addedDecorativePollingLoops": 0
+}

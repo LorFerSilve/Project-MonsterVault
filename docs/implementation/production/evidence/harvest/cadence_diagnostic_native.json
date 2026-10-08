@@ -1,0 +1,114 @@
+{
+  "source": "Fresh normal Play with the unchanged shipped head 681a70893de1532da91e803d5a2171aba8fb0c9e",
+  "cameras": {
+    "starter": {
+      "position": [
+        -32,
+        7,
+        39
+      ],
+      "lookAt": [
+        0,
+        6,
+        -18
+      ]
+    },
+    "vault": {
+      "position": [
+        -23,
+        7,
+        120
+      ],
+      "lookAt": [
+        8,
+        7,
+        155
+      ]
+    }
+  },
+  "samples": [
+    {
+      "view": "starter_permanent",
+      "method": "Event callbacks scheduled after execute_luau returned; no pending MCP sampling command",
+      "maximum": 22.56529964506626,
+      "memoryAfter": 2713.57421875,
+      "frames": 120,
+      "p95": 21.771200001239777,
+      "heartbeatFrames": 120,
+      "memoryBefore": 2741.1796875,
+      "render": {
+        "Decal": "0 tris, 0 draws",
+        "Terrain": "0 tris, 0 draws",
+        "Grass": "0 tris, 0 draws",
+        "Particles": "0 tris, 0 draws",
+        "Cloud": "0 tris, 0 draws",
+        "SSAO": "0 tris, 0 draws",
+        "GenericPostProcess": "0 tris, 0 draws",
+        "Sky": "0 tris, 0 draws",
+        "Transparent": "0 tris, 0 draws",
+        "UI": "414 tris, 8 draws",
+        "Opaque": "173310 tris, 41 draws",
+        "DOF": "0 tris, 0 draws",
+        "Undefined": "0 tris, 0 draws"
+      },
+      "heartbeatP95": 22.045964375138283,
+      "p50": 21.31200022995472
+    },
+    {
+      "view": "starter_permanent",
+      "method": "Pending execute_luau command, same fresh normal Play/camera/settings as the outside-command sample",
+      "maximum": 24.309899657964706,
+      "memoryAfter": 2714.67578125,
+      "frames": 120,
+      "p95": 23.418299853801727,
+      "heartbeatFrames": 120,
+      "memoryBefore": 2714.51171875,
+      "render": {
+        "Decal": "0 tris, 0 draws",
+        "Terrain": "0 tris, 0 draws",
+        "Grass": "0 tris, 0 draws",
+        "Particles": "0 tris, 0 draws",
+        "Cloud": "0 tris, 0 draws",
+        "SSAO": "0 tris, 0 draws",
+        "GenericPostProcess": "0 tris, 0 draws",
+        "Sky": "0 tris, 0 draws",
+        "Transparent": "0 tris, 0 draws",
+        "UI": "414 tris, 8 draws",
+        "Opaque": "173346 tris, 43 draws",
+        "DOF": "0 tris, 0 draws",
+        "Undefined": "0 tris, 0 draws"
+      },
+      "heartbeatP95": 23.507455363869667,
+      "p50": 21.341299638152122
+    },
+    {
+      "view": "vault_permanent",
+      "method": "Event callbacks scheduled after execute_luau returned; no pending MCP sampling command",
+      "maximum": 24.715900421142578,
+      "memoryAfter": 2713.52734375,
+      "frames": 120,
+      "p95": 23.341599851846695,
+      "heartbeatFrames": 120,
+      "memoryBefore": 2713.5078125,
+      "render": {
+        "Decal": "0 tris, 0 draws",
+        "Terrain": "0 tris, 0 draws",
+        "Grass": "0 tris, 0 draws",
+        "Particles": "0 tris, 0 draws",
+        "Cloud": "0 tris, 0 draws",
+        "SSAO": "0 tris, 0 draws",
+        "GenericPostProcess": "0 tris, 0 draws",
+        "Sky": "0 tris, 0 draws",
+        "Transparent": "0 tris, 0 draws",
+        "UI": "444 tris, 11 draws",
+        "Opaque": "46901 tris, 52 draws",
+        "DOF": "0 tris, 0 draws",
+        "Undefined": "0 tris, 0 draws"
+      },
+      "heartbeatP95": 23.089837282896042,
+      "p50": 21.449899300932884
+    }
+  ],
+  "inference": "A fresh normal Play produces 1:1 Heartbeat/RenderStepped rather than the earlier 4:1 cadence. Both outside and inside the sampling MCP command are about 22-23ms in this fresh session, so this comparison does not establish MCP sampling as the cause of the earlier 68ms samples.",
+  "limitations": "No runtime performance fix, render-setting change, real-device pass, long-session stability or TA-14/VS1-19 closure. Fresh Starter still exceeds the 16.67ms target."
+}

@@ -1,0 +1,53 @@
+{
+  "maxMs": 24.67459999024868,
+  "endTransient": 0,
+  "scope": "IMP10Reward-82dc7acb-69b5-44ea-a039-87e8e0df00c1",
+  "memoryMb": 2374.80859375,
+  "frames": 180,
+  "p50ms": 21.30029909312725,
+  "render": {
+    "Children": [
+      {
+        "Name": "Opaque",
+        "Sizes": {
+          "Drawcalls": 17,
+          "Triangles": 15212
+        }
+      },
+      {
+        "Name": "UI",
+        "Sizes": {
+          "Drawcalls": 1,
+          "Triangles": 124
+        }
+      },
+      {
+        "Name": "Shadows",
+        "Sizes": {
+          "Drawcalls": 62,
+          "Triangles": 63461
+        }
+      }
+    ],
+    "Name": "TriangleComposition",
+    "Sizes": {
+      "Drawcalls": 80,
+      "Triangles": 78797
+    }
+  },
+  "camera": [
+    43,
+    4,
+    -32
+  ],
+  "p95ms": 22.17560075223446,
+  "maxTransient": 1,
+  "fixture": "protected Legendary DEV; shipped public model, native probe clock/RNG",
+  "lookAt": [
+    36,
+    2.5,
+    -40
+  ],
+  "startMemoryMb": 2374.80859375,
+  "peakFrame": 5
+}

@@ -1,0 +1,68 @@
+{
+  "source": "Unedited native Studio MCP JPEGs; original bytes preserved",
+  "pairs": [
+    {
+      "on": "harvest_starter_on.jpg",
+      "off": "harvest_starter_off.jpg",
+      "position": [
+        -32,
+        7,
+        39
+      ],
+      "lookAt": [
+        0,
+        6,
+        -18
+      ]
+    },
+    {
+      "on": "harvest_northern_on.jpg",
+      "off": "harvest_northern_off.jpg",
+      "position": [
+        -39,
+        5,
+        -120
+      ],
+      "lookAt": [
+        -50,
+        2.5,
+        -114
+      ]
+    },
+    {
+      "on": "harvest_vault_on.jpg",
+      "off": "harvest_vault_off.jpg",
+      "position": [
+        -70,
+        32,
+        90
+      ],
+      "lookAt": [
+        0,
+        14,
+        143
+      ]
+    },
+    {
+      "on": "harvest_interior_on.jpg",
+      "off": "harvest_interior_off.jpg",
+      "position": [
+        -23,
+        7,
+        120
+      ],
+      "lookAt": [
+        8,
+        7,
+        155
+      ]
+    }
+  ],
+  "gameplay": {
+    "capture_engage": "harvest_capture_engage.jpg: authoritative Claimed state, separate earlier attempt",
+    "capture_outcome": "harvest_capture_outcome.jpg: successful TransportActive/Custody, bring to safety",
+    "energy_claim": "harvest_claim_saved.jpg: actual server-saved +524 claim",
+    "collection_rejoin": "harvest_collection_rejoin.jpg: fresh normal Play readback Collection 11/16 after Secured, wallet 501"
+  },
+  "limitations": "ON/OFF images are separate Play sessions with the same camera coordinates; streamed dressing, viewport size and avatar location can differ. Art owner acceptance remains open. No montage, compositing or image edits."
+}

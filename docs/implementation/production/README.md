@@ -1,9 +1,30 @@
-# Production Pre-Production Package
+# Golden Slice production package
 
-> Status: READY FOR GOLDEN SLICE IMPLEMENTATION
+> Status: REPRESENTATIVE IMPLEMENTATION IN STUDIO — ACCEPTANCE STILL OPEN
 > Date: 2026-10-06
 
 This folder is the implementation-facing production baseline for the first Golden Playable Vertical Slice.
+
+Resume the existing work from [GOLDEN_SLICE_EVIDENCE.md](GOLDEN_SLICE_EVIDENCE.md) and the [native gallery](evidence/golden/README.md). Imports, permanent composition and representative UI/sensory integration are implemented. Remaining controller menu, actual platform text preference and performance acceptance are listed in the [matrix](GOLDEN_SLICE_ACCEPTANCE_MATRIX.md). Do not restart from pre-production.
+
+Latest continuation (2026-10-08): [creature/Vault motion and recomposed Halloween](evidence/harvest/README.md).
+Native motion/streaming/cleanup checks 11/11, authoring 29/29 and parity 111/111
+pass; full fast is 341/341, Python 28/28. Existing imports are reused; current
+world has 1,012 parts and removable dressing has 177. Normal capture/claim/
+capacity readback and matched ON/OFF views are retained. Studio p95 remains
+about 68ms with either layer setting; final art/manual/device/performance
+acceptance is open. No import/audio upload is pending; PR #76 remains draft.
+Fresh-session follow-up is 21.77-23.42ms with unchanged runtime/settings;
+16.67ms and the older 68ms cause/device/long-session gates remain open.
+
+Earlier continuation (2026-10-07): [larger central reserve / radioactive Vault](evidence/reclaimed/README.md).
+The supplementary three-model import is complete: all 21 persistent mesh groups
+are mapped and integrated. Starter is 176 x 256 with an actually rebuilt central
+station/court and northern forest loop; Vault has the radioactive containment
+shell and a stepped skyline. Native traversal/physics, exact 111/111 parity and
+339 fast / 28 Python pass. No import/audio upload is pending. Final owner visual
+acceptance and manual/device gates remain open. Reuse the existing CC0 and custom
+assets; earlier comfort/refresh evidence remains historical.
 
 It does not supersede GDS or Technical Architecture. If a conflict exists, the approved GDS/TA and explicit architecture decisions win.
 

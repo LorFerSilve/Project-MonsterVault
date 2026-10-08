@@ -1,0 +1,3688 @@
+[
+  {
+    "path": "Quaternius-Nature\\glTF\\Bush_Common.gltf",
+    "name": "Bush_Common",
+    "triangles": 900,
+    "materials": [
+      {
+        "name": "Leaves_TwistedTree",
+        "alpha": "MASK",
+        "texture": 0
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-Nature\\glTF\\Bush_Common_Flowers.gltf",
+    "name": "Bush_Common_Flowers",
+    "triangles": 1368,
+    "materials": [
+      {
+        "name": "Leaves_NormalTree",
+        "alpha": "MASK",
+        "texture": 0
+      },
+      {
+        "name": "Flowers",
+        "alpha": "MASK",
+        "texture": 1
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-Nature\\glTF\\Clover_1.gltf",
+    "name": "Clover_1",
+    "triangles": 379,
+    "materials": [
+      {
+        "name": "Leaves",
+        "alpha": "MASK",
+        "texture": 0
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-Nature\\glTF\\Clover_2.gltf",
+    "name": "Clover_2",
+    "triangles": 615,
+    "materials": [
+      {
+        "name": "Leaves",
+        "alpha": "MASK",
+        "texture": 0
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-Nature\\glTF\\CommonTree_1.gltf",
+    "name": "CommonTree_1",
+    "triangles": 6265,
+    "materials": [
+      {
+        "name": "Bark_NormalTree",
+        "alpha": "MASK",
+        "texture": 1
+      },
+      {
+        "name": "Leaves_NormalTree",
+        "alpha": "MASK",
+        "texture": 2
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-Nature\\glTF\\CommonTree_2.gltf",
+    "name": "CommonTree_2",
+    "triangles": 5648,
+    "materials": [
+      {
+        "name": "Bark_NormalTree",
+        "alpha": "MASK",
+        "texture": 1
+      },
+      {
+        "name": "Leaves_NormalTree",
+        "alpha": "MASK",
+        "texture": 2
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-Nature\\glTF\\CommonTree_3.gltf",
+    "name": "CommonTree_3",
+    "triangles": 3505,
+    "materials": [
+      {
+        "name": "Bark_NormalTree",
+        "alpha": "MASK",
+        "texture": 1
+      },
+      {
+        "name": "Leaves_NormalTree",
+        "alpha": "MASK",
+        "texture": 2
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-Nature\\glTF\\CommonTree_4.gltf",
+    "name": "CommonTree_4",
+    "triangles": 4066,
+    "materials": [
+      {
+        "name": "Bark_NormalTree",
+        "alpha": "MASK",
+        "texture": 1
+      },
+      {
+        "name": "Leaves_NormalTree",
+        "alpha": "MASK",
+        "texture": 2
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-Nature\\glTF\\CommonTree_5.gltf",
+    "name": "CommonTree_5",
+    "triangles": 3182,
+    "materials": [
+      {
+        "name": "Bark_NormalTree",
+        "alpha": "MASK",
+        "texture": 1
+      },
+      {
+        "name": "Leaves_NormalTree",
+        "alpha": "MASK",
+        "texture": 2
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-Nature\\glTF\\DeadTree_1.gltf",
+    "name": "DeadTree_1",
+    "triangles": 6169,
+    "materials": [
+      {
+        "name": "Bark_DeadTree",
+        "texture": 1
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-Nature\\glTF\\DeadTree_2.gltf",
+    "name": "DeadTree_2",
+    "triangles": 6557,
+    "materials": [
+      {
+        "name": "Bark_DeadTree",
+        "texture": 1
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-Nature\\glTF\\DeadTree_3.gltf",
+    "name": "DeadTree_3",
+    "triangles": 5802,
+    "materials": [
+      {
+        "name": "Bark_DeadTree",
+        "texture": 1
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-Nature\\glTF\\DeadTree_4.gltf",
+    "name": "DeadTree_4",
+    "triangles": 5702,
+    "materials": [
+      {
+        "name": "Bark_DeadTree",
+        "texture": 1
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-Nature\\glTF\\DeadTree_5.gltf",
+    "name": "DeadTree_5",
+    "triangles": 5648,
+    "materials": [
+      {
+        "name": "Bark_DeadTree",
+        "texture": 1
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-Nature\\glTF\\Fern_1.gltf",
+    "name": "Fern_1",
+    "triangles": 288,
+    "materials": [
+      {
+        "name": "Leaves",
+        "alpha": "MASK",
+        "texture": 0
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-Nature\\glTF\\Flower_3_Group.gltf",
+    "name": "Flower_3_Group",
+    "triangles": 755,
+    "materials": [
+      {
+        "name": "Leaves",
+        "alpha": "MASK",
+        "texture": 0
+      },
+      {
+        "name": "Flowers",
+        "alpha": "MASK",
+        "texture": 1
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-Nature\\glTF\\Flower_3_Single.gltf",
+    "name": "Flower_3_Single",
+    "triangles": 285,
+    "materials": [
+      {
+        "name": "Leaves",
+        "alpha": "MASK",
+        "texture": 0
+      },
+      {
+        "name": "Flowers",
+        "alpha": "MASK",
+        "texture": 1
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-Nature\\glTF\\Flower_4_Group.gltf",
+    "name": "Flower_4_Group",
+    "triangles": 1690,
+    "materials": [
+      {
+        "name": "Leaves",
+        "alpha": "MASK",
+        "texture": 0
+      },
+      {
+        "name": "Flowers",
+        "alpha": "MASK",
+        "texture": 1
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-Nature\\glTF\\Flower_4_Single.gltf",
+    "name": "Flower_4_Single",
+    "triangles": 642,
+    "materials": [
+      {
+        "name": "Leaves",
+        "alpha": "MASK",
+        "texture": 0
+      },
+      {
+        "name": "Flowers",
+        "alpha": "MASK",
+        "texture": 1
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-Nature\\glTF\\Grass_Common_Short.gltf",
+    "name": "Grass_Common_Short",
+    "triangles": 155,
+    "materials": [
+      {
+        "name": "Grass",
+        "texture": 0
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-Nature\\glTF\\Grass_Common_Tall.gltf",
+    "name": "Grass_Common_Tall",
+    "triangles": 326,
+    "materials": [
+      {
+        "name": "Grass",
+        "texture": 0
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-Nature\\glTF\\Grass_Wispy_Short.gltf",
+    "name": "Grass_Wispy_Short",
+    "triangles": 494,
+    "materials": [
+      {
+        "name": "Grass",
+        "texture": 0
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-Nature\\glTF\\Grass_Wispy_Tall.gltf",
+    "name": "Grass_Wispy_Tall",
+    "triangles": 622,
+    "materials": [
+      {
+        "name": "Grass",
+        "texture": 0
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-Nature\\glTF\\Mushroom_Common.gltf",
+    "name": "Mushroom_Common",
+    "triangles": 880,
+    "materials": [
+      {
+        "name": "Mushrooms",
+        "texture": 0
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-Nature\\glTF\\Mushroom_Laetiporus.gltf",
+    "name": "Mushroom_Laetiporus",
+    "triangles": 3216,
+    "materials": [
+      {
+        "name": "Mushrooms",
+        "texture": 0
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-Nature\\glTF\\Pebble_Round_1.gltf",
+    "name": "Pebble_Round_1",
+    "triangles": 136,
+    "materials": [
+      {
+        "name": "PathRocks",
+        "texture": 0
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-Nature\\glTF\\Pebble_Round_2.gltf",
+    "name": "Pebble_Round_2",
+    "triangles": 114,
+    "materials": [
+      {
+        "name": "PathRocks",
+        "texture": 0
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-Nature\\glTF\\Pebble_Round_3.gltf",
+    "name": "Pebble_Round_3",
+    "triangles": 128,
+    "materials": [
+      {
+        "name": "PathRocks",
+        "texture": 0
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-Nature\\glTF\\Pebble_Round_4.gltf",
+    "name": "Pebble_Round_4",
+    "triangles": 126,
+    "materials": [
+      {
+        "name": "PathRocks",
+        "texture": 0
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-Nature\\glTF\\Pebble_Round_5.gltf",
+    "name": "Pebble_Round_5",
+    "triangles": 124,
+    "materials": [
+      {
+        "name": "PathRocks",
+        "texture": 0
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-Nature\\glTF\\Pebble_Square_1.gltf",
+    "name": "Pebble_Square_1",
+    "triangles": 104,
+    "materials": [
+      {
+        "name": "PathRocks",
+        "texture": 0
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-Nature\\glTF\\Pebble_Square_2.gltf",
+    "name": "Pebble_Square_2",
+    "triangles": 78,
+    "materials": [
+      {
+        "name": "PathRocks",
+        "texture": 0
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-Nature\\glTF\\Pebble_Square_3.gltf",
+    "name": "Pebble_Square_3",
+    "triangles": 52,
+    "materials": [
+      {
+        "name": "PathRocks",
+        "texture": 0
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-Nature\\glTF\\Pebble_Square_4.gltf",
+    "name": "Pebble_Square_4",
+    "triangles": 48,
+    "materials": [
+      {
+        "name": "PathRocks",
+        "texture": 0
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-Nature\\glTF\\Pebble_Square_5.gltf",
+    "name": "Pebble_Square_5",
+    "triangles": 72,
+    "materials": [
+      {
+        "name": "PathRocks",
+        "texture": 0
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-Nature\\glTF\\Pebble_Square_6.gltf",
+    "name": "Pebble_Square_6",
+    "triangles": 65,
+    "materials": [
+      {
+        "name": "PathRocks",
+        "texture": 0
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-Nature\\glTF\\Petal_1.gltf",
+    "name": "Petal_1",
+    "triangles": 13,
+    "materials": [
+      {
+        "name": "Flowers",
+        "alpha": "MASK",
+        "texture": 0
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-Nature\\glTF\\Petal_2.gltf",
+    "name": "Petal_2",
+    "triangles": 15,
+    "materials": [
+      {
+        "name": "Flowers",
+        "alpha": "MASK",
+        "texture": 0
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-Nature\\glTF\\Petal_3.gltf",
+    "name": "Petal_3",
+    "triangles": 15,
+    "materials": [
+      {
+        "name": "Flowers",
+        "alpha": "MASK",
+        "texture": 0
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-Nature\\glTF\\Petal_4.gltf",
+    "name": "Petal_4",
+    "triangles": 30,
+    "materials": [
+      {
+        "name": "Flowers",
+        "alpha": "MASK",
+        "texture": 0
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-Nature\\glTF\\Petal_5.gltf",
+    "name": "Petal_5",
+    "triangles": 15,
+    "materials": [
+      {
+        "name": "Flowers",
+        "alpha": "MASK",
+        "texture": 0
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-Nature\\glTF\\Pine_1.gltf",
+    "name": "Pine_1",
+    "triangles": 3947,
+    "materials": [
+      {
+        "name": "Bark_NormalTree",
+        "alpha": "MASK",
+        "texture": 1
+      },
+      {
+        "name": "Leaves_Pine",
+        "alpha": "MASK",
+        "texture": 2
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-Nature\\glTF\\Pine_2.gltf",
+    "name": "Pine_2",
+    "triangles": 3648,
+    "materials": [
+      {
+        "name": "Bark_NormalTree",
+        "alpha": "MASK",
+        "texture": 1
+      },
+      {
+        "name": "Leaves_Pine",
+        "alpha": "MASK",
+        "texture": 2
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-Nature\\glTF\\Pine_3.gltf",
+    "name": "Pine_3",
+    "triangles": 4964,
+    "materials": [
+      {
+        "name": "Bark_NormalTree",
+        "alpha": "MASK",
+        "texture": 1
+      },
+      {
+        "name": "Leaves_Pine",
+        "alpha": "MASK",
+        "texture": 2
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-Nature\\glTF\\Pine_4.gltf",
+    "name": "Pine_4",
+    "triangles": 3370,
+    "materials": [
+      {
+        "name": "Bark_NormalTree",
+        "alpha": "MASK",
+        "texture": 1
+      },
+      {
+        "name": "Leaves_Pine",
+        "alpha": "MASK",
+        "texture": 2
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-Nature\\glTF\\Pine_5.gltf",
+    "name": "Pine_5",
+    "triangles": 1646,
+    "materials": [
+      {
+        "name": "Bark_NormalTree",
+        "alpha": "MASK",
+        "texture": 1
+      },
+      {
+        "name": "Leaves_Pine",
+        "alpha": "MASK",
+        "texture": 2
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-Nature\\glTF\\Plant_1.gltf",
+    "name": "Plant_1",
+    "triangles": 120,
+    "materials": [
+      {
+        "name": "Leaves",
+        "alpha": "MASK",
+        "texture": 0
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-Nature\\glTF\\Plant_1_Big.gltf",
+    "name": "Plant_1_Big",
+    "triangles": 360,
+    "materials": [
+      {
+        "name": "Leaves",
+        "alpha": "MASK",
+        "texture": 0
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-Nature\\glTF\\Plant_7.gltf",
+    "name": "Plant_7",
+    "triangles": 48,
+    "materials": [
+      {
+        "name": "Leaves",
+        "alpha": "MASK",
+        "texture": 0
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-Nature\\glTF\\Plant_7_Big.gltf",
+    "name": "Plant_7_Big",
+    "triangles": 112,
+    "materials": [
+      {
+        "name": "Leaves",
+        "alpha": "MASK",
+        "texture": 0
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-Nature\\glTF\\RockPath_Round_Small_1.gltf",
+    "name": "RockPath_Round_Small_1",
+    "triangles": 998,
+    "materials": [
+      {
+        "name": "PathRocks",
+        "texture": 0
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-Nature\\glTF\\RockPath_Round_Small_2.gltf",
+    "name": "RockPath_Round_Small_2",
+    "triangles": 1126,
+    "materials": [
+      {
+        "name": "PathRocks",
+        "texture": 0
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-Nature\\glTF\\RockPath_Round_Small_3.gltf",
+    "name": "RockPath_Round_Small_3",
+    "triangles": 1002,
+    "materials": [
+      {
+        "name": "PathRocks",
+        "texture": 0
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-Nature\\glTF\\RockPath_Round_Thin.gltf",
+    "name": "RockPath_Round_Thin",
+    "triangles": 2254,
+    "materials": [
+      {
+        "name": "PathRocks",
+        "texture": 0
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-Nature\\glTF\\RockPath_Round_Wide.gltf",
+    "name": "RockPath_Round_Wide",
+    "triangles": 3500,
+    "materials": [
+      {
+        "name": "PathRocks",
+        "texture": 0
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-Nature\\glTF\\RockPath_Square_Small_1.gltf",
+    "name": "RockPath_Square_Small_1",
+    "triangles": 783,
+    "materials": [
+      {
+        "name": "PathRocks",
+        "texture": 0
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-Nature\\glTF\\RockPath_Square_Small_2.gltf",
+    "name": "RockPath_Square_Small_2",
+    "triangles": 559,
+    "materials": [
+      {
+        "name": "PathRocks",
+        "texture": 0
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-Nature\\glTF\\RockPath_Square_Small_3.gltf",
+    "name": "RockPath_Square_Small_3",
+    "triangles": 568,
+    "materials": [
+      {
+        "name": "PathRocks",
+        "texture": 0
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-Nature\\glTF\\RockPath_Square_Thin.gltf",
+    "name": "RockPath_Square_Thin",
+    "triangles": 1793,
+    "materials": [
+      {
+        "name": "PathRocks",
+        "texture": 0
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-Nature\\glTF\\RockPath_Square_Wide.gltf",
+    "name": "RockPath_Square_Wide",
+    "triangles": 2256,
+    "materials": [
+      {
+        "name": "PathRocks",
+        "texture": 0
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-Nature\\glTF\\Rock_Medium_1.gltf",
+    "name": "Rock_Medium_1",
+    "triangles": 342,
+    "materials": [
+      {
+        "name": "Rocks",
+        "texture": 0
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-Nature\\glTF\\Rock_Medium_2.gltf",
+    "name": "Rock_Medium_2",
+    "triangles": 244,
+    "materials": [
+      {
+        "name": "Rocks",
+        "texture": 0
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-Nature\\glTF\\Rock_Medium_3.gltf",
+    "name": "Rock_Medium_3",
+    "triangles": 522,
+    "materials": [
+      {
+        "name": "Rocks",
+        "texture": 0
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-Nature\\glTF\\TwistedTree_1.gltf",
+    "name": "TwistedTree_1",
+    "triangles": 9564,
+    "materials": [
+      {
+        "name": "Bark_TwistedTree",
+        "texture": 1
+      },
+      {
+        "name": "Leaves_TwistedTree",
+        "alpha": "MASK",
+        "texture": 2
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-Nature\\glTF\\TwistedTree_2.gltf",
+    "name": "TwistedTree_2",
+    "triangles": 9134,
+    "materials": [
+      {
+        "name": "Bark_TwistedTree",
+        "texture": 1
+      },
+      {
+        "name": "Leaves_TwistedTree",
+        "alpha": "MASK",
+        "texture": 2
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-Nature\\glTF\\TwistedTree_3.gltf",
+    "name": "TwistedTree_3",
+    "triangles": 10089,
+    "materials": [
+      {
+        "name": "Bark_TwistedTree",
+        "texture": 1
+      },
+      {
+        "name": "Leaves_TwistedTree",
+        "alpha": "MASK",
+        "texture": 2
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-Nature\\glTF\\TwistedTree_4.gltf",
+    "name": "TwistedTree_4",
+    "triangles": 9600,
+    "materials": [
+      {
+        "name": "Bark_TwistedTree",
+        "texture": 1
+      },
+      {
+        "name": "Leaves_TwistedTree",
+        "alpha": "MASK",
+        "texture": 2
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-Nature\\glTF\\TwistedTree_5.gltf",
+    "name": "TwistedTree_5",
+    "triangles": 10104,
+    "materials": [
+      {
+        "name": "Bark_TwistedTree",
+        "texture": 1
+      },
+      {
+        "name": "Leaves_TwistedTree",
+        "alpha": "MASK",
+        "texture": 2
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-SciFi\\Modular SciFi MegaKit[Standard]\\glTF\\Aliens\\Alien_Cyclop.gltf",
+    "name": "Alien_Cyclop",
+    "triangles": 2084,
+    "materials": [
+      {
+        "name": "M_Alien_Eyes"
+      },
+      {
+        "name": "M_Alien_Body_Blue"
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-SciFi\\Modular SciFi MegaKit[Standard]\\glTF\\Aliens\\Alien_Oculichrysalis.gltf",
+    "name": "Alien_Oculichrysalis",
+    "triangles": 6440,
+    "materials": [
+      {
+        "name": "M_Alien_Orange"
+      },
+      {
+        "name": "M_Alien_Eyes"
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-SciFi\\Modular SciFi MegaKit[Standard]\\glTF\\Aliens\\Alien_Scolitex.gltf",
+    "name": "Alien_Scolitex",
+    "triangles": 11036,
+    "materials": [
+      {
+        "name": "M_Alien_Orange"
+      },
+      {
+        "name": "M_Alien_Cyan"
+      },
+      {
+        "name": "M_Alien_Eyes"
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-SciFi\\Modular SciFi MegaKit[Standard]\\glTF\\Columns\\Column_Astra.gltf",
+    "name": "Column_Astra",
+    "triangles": 143,
+    "materials": [
+      {
+        "name": "MI_Trim_03",
+        "texture": 1
+      },
+      {
+        "name": "MI_Trim_02",
+        "texture": 4
+      },
+      {
+        "name": "MI_Trim_01",
+        "texture": 7
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-SciFi\\Modular SciFi MegaKit[Standard]\\glTF\\Columns\\Column_Hollow.gltf",
+    "name": "Column_Hollow",
+    "triangles": 2848,
+    "materials": [
+      {
+        "name": "MI_Trim_02",
+        "texture": 1
+      },
+      {
+        "name": "MI_Trim_01",
+        "texture": 4
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-SciFi\\Modular SciFi MegaKit[Standard]\\glTF\\Columns\\Column_Large_Straight.gltf",
+    "name": "Column_Large_Straight",
+    "triangles": 924,
+    "materials": [
+      {
+        "name": "MI_Trim_03",
+        "texture": 1
+      },
+      {
+        "name": "MI_Trim_01",
+        "texture": 4
+      },
+      {
+        "name": "MI_Trim_03_Dark",
+        "texture": 7
+      },
+      {
+        "name": "MI_Trim_02",
+        "texture": 10
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-SciFi\\Modular SciFi MegaKit[Standard]\\glTF\\Columns\\Column_MetalSupport.gltf",
+    "name": "Column_MetalSupport",
+    "triangles": 748,
+    "materials": [
+      {
+        "name": "MI_PaddedWall",
+        "texture": 1
+      },
+      {
+        "name": "MI_Trim_02",
+        "texture": 4
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-SciFi\\Modular SciFi MegaKit[Standard]\\glTF\\Columns\\Column_MetalSupport_Curve.gltf",
+    "name": "Column_MetalSupport_Curve",
+    "triangles": 1432,
+    "materials": [
+      {
+        "name": "MI_PaddedWall",
+        "texture": 1
+      },
+      {
+        "name": "MI_Trim_02",
+        "texture": 4
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-SciFi\\Modular SciFi MegaKit[Standard]\\glTF\\Columns\\Column_Pipes.gltf",
+    "name": "Column_Pipes",
+    "triangles": 6480,
+    "materials": [
+      {
+        "name": "MI_Trim_01",
+        "texture": 1
+      },
+      {
+        "name": "MI_Trim_02",
+        "texture": 4
+      },
+      {
+        "name": "MI_PaddedWall",
+        "texture": 7
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-SciFi\\Modular SciFi MegaKit[Standard]\\glTF\\Columns\\Column_Round.gltf",
+    "name": "Column_Round",
+    "triangles": 572,
+    "materials": [
+      {
+        "name": "MI_Trim_01",
+        "texture": 1
+      },
+      {
+        "name": "MI_Trim_02",
+        "texture": 4
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-SciFi\\Modular SciFi MegaKit[Standard]\\glTF\\Columns\\Column_Simple.gltf",
+    "name": "Column_Simple",
+    "triangles": 108,
+    "materials": [
+      {
+        "name": "MI_Trim_01",
+        "texture": 1
+      },
+      {
+        "name": "MI_Trim_02",
+        "texture": 4
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-SciFi\\Modular SciFi MegaKit[Standard]\\glTF\\Decals\\Decal_0.gltf",
+    "name": "Decal_0",
+    "triangles": 2,
+    "materials": [
+      {
+        "name": "M_Decal_White",
+        "alpha": "MASK",
+        "texture": 0
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-SciFi\\Modular SciFi MegaKit[Standard]\\glTF\\Decals\\Decal_1.gltf",
+    "name": "Decal_1",
+    "triangles": 2,
+    "materials": [
+      {
+        "name": "M_Decal_White",
+        "alpha": "MASK",
+        "texture": 0
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-SciFi\\Modular SciFi MegaKit[Standard]\\glTF\\Decals\\Decal_2.gltf",
+    "name": "Decal_2",
+    "triangles": 2,
+    "materials": [
+      {
+        "name": "M_Decal_White",
+        "alpha": "MASK",
+        "texture": 0
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-SciFi\\Modular SciFi MegaKit[Standard]\\glTF\\Decals\\Decal_3.gltf",
+    "name": "Decal_3",
+    "triangles": 2,
+    "materials": [
+      {
+        "name": "M_Decal_White",
+        "alpha": "MASK",
+        "texture": 0
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-SciFi\\Modular SciFi MegaKit[Standard]\\glTF\\Decals\\Decal_4.gltf",
+    "name": "Decal_4",
+    "triangles": 2,
+    "materials": [
+      {
+        "name": "M_Decal_White",
+        "alpha": "MASK",
+        "texture": 0
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-SciFi\\Modular SciFi MegaKit[Standard]\\glTF\\Decals\\Decal_5.gltf",
+    "name": "Decal_5",
+    "triangles": 2,
+    "materials": [
+      {
+        "name": "M_Decal_White",
+        "alpha": "MASK",
+        "texture": 0
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-SciFi\\Modular SciFi MegaKit[Standard]\\glTF\\Decals\\Decal_6.gltf",
+    "name": "Decal_6",
+    "triangles": 2,
+    "materials": [
+      {
+        "name": "M_Decal_White",
+        "alpha": "MASK",
+        "texture": 0
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-SciFi\\Modular SciFi MegaKit[Standard]\\glTF\\Decals\\Decal_7.gltf",
+    "name": "Decal_7",
+    "triangles": 2,
+    "materials": [
+      {
+        "name": "M_Decal_White",
+        "alpha": "MASK",
+        "texture": 0
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-SciFi\\Modular SciFi MegaKit[Standard]\\glTF\\Decals\\Decal_8.gltf",
+    "name": "Decal_8",
+    "triangles": 2,
+    "materials": [
+      {
+        "name": "M_Decal_White",
+        "alpha": "MASK",
+        "texture": 0
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-SciFi\\Modular SciFi MegaKit[Standard]\\glTF\\Decals\\Decal_9.gltf",
+    "name": "Decal_9",
+    "triangles": 2,
+    "materials": [
+      {
+        "name": "M_Decal_White",
+        "alpha": "MASK",
+        "texture": 0
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-SciFi\\Modular SciFi MegaKit[Standard]\\glTF\\Decals\\Decal_A.gltf",
+    "name": "Decal_A",
+    "triangles": 2,
+    "materials": [
+      {
+        "name": "M_Decal_White",
+        "alpha": "MASK",
+        "texture": 0
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-SciFi\\Modular SciFi MegaKit[Standard]\\glTF\\Decals\\Decal_Dashes.gltf",
+    "name": "Decal_Dashes",
+    "triangles": 2,
+    "materials": [
+      {
+        "name": "M_Decal_White",
+        "alpha": "MASK",
+        "texture": 0
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-SciFi\\Modular SciFi MegaKit[Standard]\\glTF\\Decals\\Decal_K.gltf",
+    "name": "Decal_K",
+    "triangles": 2,
+    "materials": [
+      {
+        "name": "M_Decal_White",
+        "alpha": "MASK",
+        "texture": 0
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-SciFi\\Modular SciFi MegaKit[Standard]\\glTF\\Decals\\Decal_Line_90.gltf",
+    "name": "Decal_Line_90",
+    "triangles": 28,
+    "materials": [
+      {
+        "name": "MI_Decal_Line"
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-SciFi\\Modular SciFi MegaKit[Standard]\\glTF\\Decals\\Decal_Line_90_Round.gltf",
+    "name": "Decal_Line_90_Round",
+    "triangles": 32,
+    "materials": [
+      {
+        "name": "MI_Decal_Line"
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-SciFi\\Modular SciFi MegaKit[Standard]\\glTF\\Decals\\Decal_Line_90_Round_Large.gltf",
+    "name": "Decal_Line_90_Round_Large",
+    "triangles": 24,
+    "materials": [
+      {
+        "name": "MI_Decal_Line"
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-SciFi\\Modular SciFi MegaKit[Standard]\\glTF\\Decals\\Decal_Line_Bend1_L.gltf",
+    "name": "Decal_Line_Bend1_L",
+    "triangles": 22,
+    "materials": [
+      {
+        "name": "MI_Decal_Line"
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-SciFi\\Modular SciFi MegaKit[Standard]\\glTF\\Decals\\Decal_Line_Bend1_R.gltf",
+    "name": "Decal_Line_Bend1_R",
+    "triangles": 22,
+    "materials": [
+      {
+        "name": "MI_Decal_Line"
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-SciFi\\Modular SciFi MegaKit[Standard]\\glTF\\Decals\\Decal_Line_Bend2_L.gltf",
+    "name": "Decal_Line_Bend2_L",
+    "triangles": 22,
+    "materials": [
+      {
+        "name": "MI_Decal_Line"
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-SciFi\\Modular SciFi MegaKit[Standard]\\glTF\\Decals\\Decal_Line_Bend2_R.gltf",
+    "name": "Decal_Line_Bend2_R",
+    "triangles": 22,
+    "materials": [
+      {
+        "name": "MI_Decal_Line"
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-SciFi\\Modular SciFi MegaKit[Standard]\\glTF\\Decals\\Decal_Line_Straight.gltf",
+    "name": "Decal_Line_Straight",
+    "triangles": 2,
+    "materials": [
+      {
+        "name": "MI_Decal_Line"
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-SciFi\\Modular SciFi MegaKit[Standard]\\glTF\\Decals\\Decal_Logo.gltf",
+    "name": "Decal_Logo",
+    "triangles": 4,
+    "materials": [
+      {
+        "name": "M_Decal_White",
+        "alpha": "MASK",
+        "texture": 0
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-SciFi\\Modular SciFi MegaKit[Standard]\\glTF\\Decals\\Decal_Logo_Letters.gltf",
+    "name": "Decal_Logo_Letters",
+    "triangles": 2,
+    "materials": [
+      {
+        "name": "M_Decal_White",
+        "alpha": "MASK",
+        "texture": 0
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-SciFi\\Modular SciFi MegaKit[Standard]\\glTF\\Decals\\Decal_Logo_Small.gltf",
+    "name": "Decal_Logo_Small",
+    "triangles": 2,
+    "materials": [
+      {
+        "name": "M_Decal_White",
+        "alpha": "MASK",
+        "texture": 0
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-SciFi\\Modular SciFi MegaKit[Standard]\\glTF\\Decals\\Decal_Sign.gltf",
+    "name": "Decal_Sign",
+    "triangles": 2,
+    "materials": [
+      {
+        "name": "M_Decal_White",
+        "alpha": "MASK",
+        "texture": 0
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-SciFi\\Modular SciFi MegaKit[Standard]\\glTF\\Decals\\Decal_V.gltf",
+    "name": "Decal_V",
+    "triangles": 2,
+    "materials": [
+      {
+        "name": "M_Decal_White",
+        "alpha": "MASK",
+        "texture": 0
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-SciFi\\Modular SciFi MegaKit[Standard]\\glTF\\Decals\\Decal_X.gltf",
+    "name": "Decal_X",
+    "triangles": 2,
+    "materials": [
+      {
+        "name": "M_Decal_White",
+        "alpha": "MASK",
+        "texture": 0
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-SciFi\\Modular SciFi MegaKit[Standard]\\glTF\\Decals\\Decal_XSign.gltf",
+    "name": "Decal_XSign",
+    "triangles": 2,
+    "materials": [
+      {
+        "name": "M_Decal_White",
+        "alpha": "MASK",
+        "texture": 0
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-SciFi\\Modular SciFi MegaKit[Standard]\\glTF\\Decals\\Decal_Z.gltf",
+    "name": "Decal_Z",
+    "triangles": 2,
+    "materials": [
+      {
+        "name": "M_Decal_White",
+        "alpha": "MASK",
+        "texture": 0
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-SciFi\\Modular SciFi MegaKit[Standard]\\glTF\\Platforms\\Door_DarkMetal.gltf",
+    "name": "Door_DarkMetal",
+    "triangles": 24,
+    "materials": [
+      {
+        "name": "MI_Trim_01",
+        "texture": 1
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-SciFi\\Modular SciFi MegaKit[Standard]\\glTF\\Platforms\\Door_Frame_A.gltf",
+    "name": "Door_Frame_A",
+    "triangles": 196,
+    "materials": [
+      {
+        "name": "MI_Trim_01",
+        "texture": 1
+      },
+      {
+        "name": "MI_Trim_02",
+        "texture": 4
+      },
+      {
+        "name": "M_Decal_White",
+        "texture": 6
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-SciFi\\Modular SciFi MegaKit[Standard]\\glTF\\Platforms\\Door_Frame_Square.gltf",
+    "name": "Door_Frame_Square",
+    "triangles": 280,
+    "materials": [
+      {
+        "name": "MI_Trim_01",
+        "texture": 1
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-SciFi\\Modular SciFi MegaKit[Standard]\\glTF\\Platforms\\Door_Frame_SquareTall.gltf",
+    "name": "Door_Frame_SquareTall",
+    "triangles": 272,
+    "materials": [
+      {
+        "name": "MI_Trim_01",
+        "texture": 1
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-SciFi\\Modular SciFi MegaKit[Standard]\\glTF\\Platforms\\Door_Frame_Square_Blocked.gltf",
+    "name": "Door_Frame_Square_Blocked",
+    "triangles": 48,
+    "materials": [
+      {
+        "name": "MI_Trim_01",
+        "texture": 1
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-SciFi\\Modular SciFi MegaKit[Standard]\\glTF\\Platforms\\Door_Metal.gltf",
+    "name": "Door_Metal",
+    "triangles": 16,
+    "materials": [
+      {
+        "name": "MI_Trim_01",
+        "texture": 1
+      },
+      {
+        "name": "MI_Trim_02",
+        "texture": 4
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-SciFi\\Modular SciFi MegaKit[Standard]\\glTF\\Platforms\\Door_Simple.gltf",
+    "name": "Door_Simple",
+    "triangles": 38,
+    "materials": [
+      {
+        "name": "MI_Trim_01",
+        "texture": 1
+      },
+      {
+        "name": "MI_Trim_03",
+        "texture": 4
+      },
+      {
+        "name": "MI_Trim_03_Dark",
+        "texture": 7
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-SciFi\\Modular SciFi MegaKit[Standard]\\glTF\\Platforms\\Platform_3Plates.gltf",
+    "name": "Platform_3Plates",
+    "triangles": 16,
+    "materials": [
+      {
+        "name": "MI_Trim_01",
+        "texture": 1
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-SciFi\\Modular SciFi MegaKit[Standard]\\glTF\\Platforms\\Platform_CenterPlate.gltf",
+    "name": "Platform_CenterPlate",
+    "triangles": 10,
+    "materials": [
+      {
+        "name": "MI_Trim_01",
+        "texture": 1
+      },
+      {
+        "name": "MI_Trim_02",
+        "texture": 4
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-SciFi\\Modular SciFi MegaKit[Standard]\\glTF\\Platforms\\Platform_CenterPlate_Curve.gltf",
+    "name": "Platform_CenterPlate_Curve",
+    "triangles": 216,
+    "materials": [
+      {
+        "name": "MI_Trim_02",
+        "texture": 1
+      },
+      {
+        "name": "MI_Trim_01",
+        "texture": 4
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-SciFi\\Modular SciFi MegaKit[Standard]\\glTF\\Platforms\\Platform_DarkPlates.gltf",
+    "name": "Platform_DarkPlates",
+    "triangles": 16,
+    "materials": [
+      {
+        "name": "MI_Trim_01",
+        "texture": 1
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-SciFi\\Modular SciFi MegaKit[Standard]\\glTF\\Platforms\\Platform_DarkPlates_Curves.gltf",
+    "name": "Platform_DarkPlates_Curves",
+    "triangles": 168,
+    "materials": [
+      {
+        "name": "MI_Trim_01",
+        "texture": 1
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-SciFi\\Modular SciFi MegaKit[Standard]\\glTF\\Platforms\\Platform_Metal.gltf",
+    "name": "Platform_Metal",
+    "triangles": 8,
+    "materials": [
+      {
+        "name": "MI_Trim_02",
+        "texture": 1
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-SciFi\\Modular SciFi MegaKit[Standard]\\glTF\\Platforms\\Platform_Metal2.gltf",
+    "name": "Platform_Metal2",
+    "triangles": 24,
+    "materials": [
+      {
+        "name": "MI_Trim_02",
+        "texture": 1
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-SciFi\\Modular SciFi MegaKit[Standard]\\glTF\\Platforms\\Platform_Metal2_Curve.gltf",
+    "name": "Platform_Metal2_Curve",
+    "triangles": 120,
+    "materials": [
+      {
+        "name": "MI_Trim_02_Floor",
+        "texture": 1
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-SciFi\\Modular SciFi MegaKit[Standard]\\glTF\\Platforms\\Platform_Metal_Curve.gltf",
+    "name": "Platform_Metal_Curve",
+    "triangles": 72,
+    "materials": [
+      {
+        "name": "MI_Trim_02",
+        "texture": 1
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-SciFi\\Modular SciFi MegaKit[Standard]\\glTF\\Platforms\\Platform_Rails_2.gltf",
+    "name": "Platform_Rails_2",
+    "triangles": 1224,
+    "materials": [
+      {
+        "name": "MI_Trim_02_Rails",
+        "texture": 1
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-SciFi\\Modular SciFi MegaKit[Standard]\\glTF\\Platforms\\Platform_Rails_4.gltf",
+    "name": "Platform_Rails_4",
+    "triangles": 1224,
+    "materials": [
+      {
+        "name": "MI_Trim_02_Rails",
+        "texture": 1
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-SciFi\\Modular SciFi MegaKit[Standard]\\glTF\\Platforms\\Platform_Rails_4Wide.gltf",
+    "name": "Platform_Rails_4Wide",
+    "triangles": 1224,
+    "materials": [
+      {
+        "name": "MI_Trim_02_Rails",
+        "texture": 1
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-SciFi\\Modular SciFi MegaKit[Standard]\\glTF\\Platforms\\Platform_Rails_4WideTall.gltf",
+    "name": "Platform_Rails_4WideTall",
+    "triangles": 1224,
+    "materials": [
+      {
+        "name": "MI_Trim_02_Rails",
+        "texture": 1
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-SciFi\\Modular SciFi MegaKit[Standard]\\glTF\\Platforms\\Platform_Ramp_2.gltf",
+    "name": "Platform_Ramp_2",
+    "triangles": 24,
+    "materials": [
+      {
+        "name": "MI_Trim_01_Floor",
+        "texture": 1
+      },
+      {
+        "name": "MI_Trim_02",
+        "texture": 4
+      },
+      {
+        "name": "MI_Decal_Grey",
+        "texture": 6
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-SciFi\\Modular SciFi MegaKit[Standard]\\glTF\\Platforms\\Platform_Ramp_2Short.gltf",
+    "name": "Platform_Ramp_2Short",
+    "triangles": 24,
+    "materials": [
+      {
+        "name": "MI_Trim_01_Floor",
+        "texture": 1
+      },
+      {
+        "name": "MI_Trim_02",
+        "texture": 4
+      },
+      {
+        "name": "MI_Decal_Grey",
+        "texture": 6
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-SciFi\\Modular SciFi MegaKit[Standard]\\glTF\\Platforms\\Platform_Ramp_4.gltf",
+    "name": "Platform_Ramp_4",
+    "triangles": 56,
+    "materials": [
+      {
+        "name": "MI_Trim_01_Floor",
+        "texture": 1
+      },
+      {
+        "name": "MI_Trim_02",
+        "texture": 4
+      },
+      {
+        "name": "MI_Decal_Grey",
+        "texture": 6
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-SciFi\\Modular SciFi MegaKit[Standard]\\glTF\\Platforms\\Platform_Ramp_4Wide.gltf",
+    "name": "Platform_Ramp_4Wide",
+    "triangles": 66,
+    "materials": [
+      {
+        "name": "MI_Trim_02",
+        "texture": 1
+      },
+      {
+        "name": "MI_Trim_01_Floor",
+        "texture": 4
+      },
+      {
+        "name": "MI_Decal_Grey",
+        "texture": 6
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-SciFi\\Modular SciFi MegaKit[Standard]\\glTF\\Platforms\\Platform_Round1.gltf",
+    "name": "Platform_Round1",
+    "triangles": 720,
+    "materials": [
+      {
+        "name": "MI_Trim_02",
+        "texture": 1
+      },
+      {
+        "name": "MI_Trim_01",
+        "texture": 4
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-SciFi\\Modular SciFi MegaKit[Standard]\\glTF\\Platforms\\Platform_Simple.gltf",
+    "name": "Platform_Simple",
+    "triangles": 8,
+    "materials": [
+      {
+        "name": "MI_Trim_03",
+        "texture": 1
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-SciFi\\Modular SciFi MegaKit[Standard]\\glTF\\Platforms\\Platform_Simple2.gltf",
+    "name": "Platform_Simple2",
+    "triangles": 8,
+    "materials": [
+      {
+        "name": "MI_Trim_03",
+        "texture": 1
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-SciFi\\Modular SciFi MegaKit[Standard]\\glTF\\Platforms\\Platform_Simple2_Curve.gltf",
+    "name": "Platform_Simple2_Curve",
+    "triangles": 72,
+    "materials": [
+      {
+        "name": "MI_Trim_03",
+        "texture": 1
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-SciFi\\Modular SciFi MegaKit[Standard]\\glTF\\Platforms\\Platform_Simple_Curve.gltf",
+    "name": "Platform_Simple_Curve",
+    "triangles": 96,
+    "materials": [
+      {
+        "name": "MI_Trim_03",
+        "texture": 1
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-SciFi\\Modular SciFi MegaKit[Standard]\\glTF\\Platforms\\Platform_Squares.gltf",
+    "name": "Platform_Squares",
+    "triangles": 24,
+    "materials": [
+      {
+        "name": "MI_Trim_02_Floor",
+        "texture": 1
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-SciFi\\Modular SciFi MegaKit[Standard]\\glTF\\Platforms\\Platform_Squares_Curve.gltf",
+    "name": "Platform_Squares_Curve",
+    "triangles": 72,
+    "materials": [
+      {
+        "name": "MI_Trim_02_Floor",
+        "texture": 1
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-SciFi\\Modular SciFi MegaKit[Standard]\\glTF\\Platforms\\Platform_Stairs_2.gltf",
+    "name": "Platform_Stairs_2",
+    "triangles": 258,
+    "materials": [
+      {
+        "name": "MI_Trim_01_Stairs",
+        "texture": 1
+      },
+      {
+        "name": "MI_Trim_02",
+        "texture": 4
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-SciFi\\Modular SciFi MegaKit[Standard]\\glTF\\Platforms\\Platform_Stairs_4.gltf",
+    "name": "Platform_Stairs_4",
+    "triangles": 524,
+    "materials": [
+      {
+        "name": "MI_Trim_01_Stairs",
+        "texture": 1
+      },
+      {
+        "name": "MI_Trim_02",
+        "texture": 4
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-SciFi\\Modular SciFi MegaKit[Standard]\\glTF\\Platforms\\Platform_Stairs_4Wide.gltf",
+    "name": "Platform_Stairs_4Wide",
+    "triangles": 526,
+    "materials": [
+      {
+        "name": "MI_Trim_01_Stairs",
+        "texture": 1
+      },
+      {
+        "name": "MI_Trim_02",
+        "texture": 4
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-SciFi\\Modular SciFi MegaKit[Standard]\\glTF\\Platforms\\Platform_Stairs_4WideTall.gltf",
+    "name": "Platform_Stairs_4WideTall",
+    "triangles": 764,
+    "materials": [
+      {
+        "name": "MI_Trim_01_Stairs",
+        "texture": 1
+      },
+      {
+        "name": "MI_Trim_02",
+        "texture": 4
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-SciFi\\Modular SciFi MegaKit[Standard]\\glTF\\Platforms\\Platform_Window_Thin.gltf",
+    "name": "Platform_Window_Thin",
+    "triangles": 460,
+    "materials": [
+      {
+        "name": "M_Glass"
+      },
+      {
+        "name": "MI_Trim_03",
+        "texture": 1
+      },
+      {
+        "name": "MI_Trim_02",
+        "texture": 4
+      },
+      {
+        "name": "MI_Trim_03_Cables",
+        "texture": 7
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-SciFi\\Modular SciFi MegaKit[Standard]\\glTF\\Platforms\\Platform_Window_Wide.gltf",
+    "name": "Platform_Window_Wide",
+    "triangles": 508,
+    "materials": [
+      {
+        "name": "M_Glass"
+      },
+      {
+        "name": "MI_Trim_03",
+        "texture": 1
+      },
+      {
+        "name": "MI_Trim_02",
+        "texture": 4
+      },
+      {
+        "name": "MI_Trim_03_Cables",
+        "texture": 7
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-SciFi\\Modular SciFi MegaKit[Standard]\\glTF\\Platforms\\Platform_X.gltf",
+    "name": "Platform_X",
+    "triangles": 24,
+    "materials": [
+      {
+        "name": "MI_Trim_02",
+        "texture": 1
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-SciFi\\Modular SciFi MegaKit[Standard]\\glTF\\Props\\Prop_AccessPoint.gltf",
+    "name": "Prop_AccessPoint",
+    "triangles": 738,
+    "materials": [
+      {
+        "name": "M_Decal_Screen",
+        "texture": 0
+      },
+      {
+        "name": "MI_Trim_01",
+        "texture": 2
+      },
+      {
+        "name": "M_Black"
+      },
+      {
+        "name": "M_LightFade_Red"
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-SciFi\\Modular SciFi MegaKit[Standard]\\glTF\\Props\\Prop_Barrel_Large.gltf",
+    "name": "Prop_Barrel_Large",
+    "triangles": 502,
+    "materials": [
+      {
+        "name": "MI_Trim_01",
+        "texture": 1
+      },
+      {
+        "name": "MI_Trim_02",
+        "texture": 4
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-SciFi\\Modular SciFi MegaKit[Standard]\\glTF\\Props\\Prop_Cable_1.gltf",
+    "name": "Prop_Cable_1",
+    "triangles": 2632,
+    "materials": [
+      {
+        "name": "MI_Trim_03_Cables",
+        "texture": 1
+      },
+      {
+        "name": "MI_Trim_02",
+        "texture": 4
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-SciFi\\Modular SciFi MegaKit[Standard]\\glTF\\Props\\Prop_Cable_3.gltf",
+    "name": "Prop_Cable_3",
+    "triangles": 5264,
+    "materials": [
+      {
+        "name": "MI_Trim_03_Cables",
+        "texture": 1
+      },
+      {
+        "name": "MI_Trim_02",
+        "texture": 4
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-SciFi\\Modular SciFi MegaKit[Standard]\\glTF\\Props\\Prop_Chest.gltf",
+    "name": "Prop_Chest",
+    "triangles": 324,
+    "materials": [
+      {
+        "name": "MI_Trim_02",
+        "texture": 1
+      },
+      {
+        "name": "MI_Trim_01",
+        "texture": 4
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-SciFi\\Modular SciFi MegaKit[Standard]\\glTF\\Props\\Prop_Clamp.gltf",
+    "name": "Prop_Clamp",
+    "triangles": 433,
+    "materials": [
+      {
+        "name": "MI_Trim_02",
+        "texture": 1
+      },
+      {
+        "name": "MI_Trim_02_Rails",
+        "texture": 4
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-SciFi\\Modular SciFi MegaKit[Standard]\\glTF\\Props\\Prop_Computer.gltf",
+    "name": "Prop_Computer",
+    "triangles": 519,
+    "materials": [
+      {
+        "name": "M_Decal_Screen",
+        "texture": 0
+      },
+      {
+        "name": "MI_Trim_01",
+        "texture": 2
+      },
+      {
+        "name": "M_Black"
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-SciFi\\Modular SciFi MegaKit[Standard]\\glTF\\Props\\Prop_Crate3.gltf",
+    "name": "Prop_Crate3",
+    "triangles": 204,
+    "materials": [
+      {
+        "name": "MI_Trim_02",
+        "texture": 1
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-SciFi\\Modular SciFi MegaKit[Standard]\\glTF\\Props\\Prop_Crate4.gltf",
+    "name": "Prop_Crate4",
+    "triangles": 972,
+    "materials": [
+      {
+        "name": "MI_Trim_02",
+        "texture": 1
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-SciFi\\Modular SciFi MegaKit[Standard]\\glTF\\Props\\Prop_Fan_Small.gltf",
+    "name": "Prop_Fan_Small",
+    "triangles": 434,
+    "materials": [
+      {
+        "name": "MI_Trim_02",
+        "texture": 1
+      },
+      {
+        "name": "MI_Trim_01",
+        "texture": 4
+      },
+      {
+        "name": "M_Black"
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-SciFi\\Modular SciFi MegaKit[Standard]\\glTF\\Props\\Prop_ItemHolder.gltf",
+    "name": "Prop_ItemHolder",
+    "triangles": 198,
+    "materials": [
+      {
+        "name": "M_LightFade_Red"
+      },
+      {
+        "name": "MI_Trim_01",
+        "texture": 1
+      },
+      {
+        "name": "MI_Decal_Red",
+        "texture": 3
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-SciFi\\Modular SciFi MegaKit[Standard]\\glTF\\Props\\Prop_Light_Corner.gltf",
+    "name": "Prop_Light_Corner",
+    "triangles": 1372,
+    "materials": [
+      {
+        "name": "MI_Trim_01",
+        "texture": 1
+      },
+      {
+        "name": "M_Light"
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-SciFi\\Modular SciFi MegaKit[Standard]\\glTF\\Props\\Prop_Light_Floor.gltf",
+    "name": "Prop_Light_Floor",
+    "triangles": 144,
+    "materials": [
+      {
+        "name": "MI_Trim_01",
+        "texture": 1
+      },
+      {
+        "name": "M_Light"
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-SciFi\\Modular SciFi MegaKit[Standard]\\glTF\\Props\\Prop_Light_Small.gltf",
+    "name": "Prop_Light_Small",
+    "triangles": 160,
+    "materials": [
+      {
+        "name": "MI_Trim_01",
+        "texture": 1
+      },
+      {
+        "name": "M_Light"
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-SciFi\\Modular SciFi MegaKit[Standard]\\glTF\\Props\\Prop_Light_Wide.gltf",
+    "name": "Prop_Light_Wide",
+    "triangles": 160,
+    "materials": [
+      {
+        "name": "MI_Trim_01",
+        "texture": 1
+      },
+      {
+        "name": "M_Light"
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-SciFi\\Modular SciFi MegaKit[Standard]\\glTF\\Props\\Prop_PipeHolder.gltf",
+    "name": "Prop_PipeHolder",
+    "triangles": 4390,
+    "materials": [
+      {
+        "name": "MI_PaddedWall",
+        "texture": 1
+      },
+      {
+        "name": "MI_Trim_02",
+        "texture": 4
+      },
+      {
+        "name": "MI_Trim_01",
+        "texture": 7
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-SciFi\\Modular SciFi MegaKit[Standard]\\glTF\\Props\\Prop_Rail_2.gltf",
+    "name": "Prop_Rail_2",
+    "triangles": 920,
+    "materials": [
+      {
+        "name": "MI_Trim_02_Rails",
+        "texture": 1
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-SciFi\\Modular SciFi MegaKit[Standard]\\glTF\\Props\\Prop_Rail_3.gltf",
+    "name": "Prop_Rail_3",
+    "triangles": 1144,
+    "materials": [
+      {
+        "name": "MI_Trim_02_Rails",
+        "texture": 1
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-SciFi\\Modular SciFi MegaKit[Standard]\\glTF\\Props\\Prop_Rail_4.gltf",
+    "name": "Prop_Rail_4",
+    "triangles": 920,
+    "materials": [
+      {
+        "name": "MI_Trim_02_Rails",
+        "texture": 1
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-SciFi\\Modular SciFi MegaKit[Standard]\\glTF\\Props\\Prop_Rail_Incline_Long_L.gltf",
+    "name": "Prop_Rail_Incline_Long_L",
+    "triangles": 612,
+    "materials": [
+      {
+        "name": "MI_Trim_02_Rails",
+        "texture": 1
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-SciFi\\Modular SciFi MegaKit[Standard]\\glTF\\Props\\Prop_Rail_Incline_Long_R.gltf",
+    "name": "Prop_Rail_Incline_Long_R",
+    "triangles": 612,
+    "materials": [
+      {
+        "name": "MI_Trim_02_Rails",
+        "texture": 1
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-SciFi\\Modular SciFi MegaKit[Standard]\\glTF\\Props\\Prop_Rail_Incline_Short_L.gltf",
+    "name": "Prop_Rail_Incline_Short_L",
+    "triangles": 612,
+    "materials": [
+      {
+        "name": "MI_Trim_02_Rails",
+        "texture": 1
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-SciFi\\Modular SciFi MegaKit[Standard]\\glTF\\Props\\Prop_Rail_Incline_Short_R.gltf",
+    "name": "Prop_Rail_Incline_Short_R",
+    "triangles": 612,
+    "materials": [
+      {
+        "name": "MI_Trim_02_Rails",
+        "texture": 1
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-SciFi\\Modular SciFi MegaKit[Standard]\\glTF\\Props\\Prop_Rail_Round_Big.gltf",
+    "name": "Prop_Rail_Round_Big",
+    "triangles": 1872,
+    "materials": [
+      {
+        "name": "MI_Trim_02_Rails",
+        "texture": 1
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-SciFi\\Modular SciFi MegaKit[Standard]\\glTF\\Props\\Prop_Rail_Round_Small.gltf",
+    "name": "Prop_Rail_Round_Small",
+    "triangles": 1592,
+    "materials": [
+      {
+        "name": "MI_Trim_02_Rails",
+        "texture": 1
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-SciFi\\Modular SciFi MegaKit[Standard]\\glTF\\Props\\Prop_Vent_Big.gltf",
+    "name": "Prop_Vent_Big",
+    "triangles": 328,
+    "materials": [
+      {
+        "name": "MI_Trim_01",
+        "texture": 1
+      },
+      {
+        "name": "MI_Trim_02",
+        "texture": 4
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-SciFi\\Modular SciFi MegaKit[Standard]\\glTF\\Props\\Prop_Vent_Small.gltf",
+    "name": "Prop_Vent_Small",
+    "triangles": 210,
+    "materials": [
+      {
+        "name": "MI_Trim_01",
+        "texture": 1
+      },
+      {
+        "name": "MI_Trim_02",
+        "texture": 4
+      },
+      {
+        "name": "M_Black"
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-SciFi\\Modular SciFi MegaKit[Standard]\\glTF\\Props\\Prop_Vent_Wide.gltf",
+    "name": "Prop_Vent_Wide",
+    "triangles": 208,
+    "materials": [
+      {
+        "name": "MI_Trim_01",
+        "texture": 1
+      },
+      {
+        "name": "MI_Trim_02",
+        "texture": 4
+      },
+      {
+        "name": "M_Black"
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-SciFi\\Modular SciFi MegaKit[Standard]\\glTF\\Walls\\BottomMetal_Corner_Round_Inner.gltf",
+    "name": "BottomMetal_Corner_Round_Inner",
+    "triangles": 190,
+    "materials": [
+      {
+        "name": "MI_Trim_02",
+        "texture": 1
+      },
+      {
+        "name": "MI_Trim_01",
+        "texture": 4
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-SciFi\\Modular SciFi MegaKit[Standard]\\glTF\\Walls\\BottomMetal_Corner_Round_Outer.gltf",
+    "name": "BottomMetal_Corner_Round_Outer",
+    "triangles": 224,
+    "materials": [
+      {
+        "name": "MI_Trim_02",
+        "texture": 1
+      },
+      {
+        "name": "MI_Trim_01",
+        "texture": 4
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-SciFi\\Modular SciFi MegaKit[Standard]\\glTF\\Walls\\BottomMetal_Corner_Square_Inner.gltf",
+    "name": "BottomMetal_Corner_Square_Inner",
+    "triangles": 36,
+    "materials": [
+      {
+        "name": "MI_Trim_01",
+        "texture": 1
+      },
+      {
+        "name": "MI_Trim_02",
+        "texture": 4
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-SciFi\\Modular SciFi MegaKit[Standard]\\glTF\\Walls\\BottomMetal_Corner_Square_Outer_1.gltf",
+    "name": "BottomMetal_Corner_Square_Outer_1",
+    "triangles": 60,
+    "materials": [
+      {
+        "name": "MI_Trim_01",
+        "texture": 1
+      },
+      {
+        "name": "MI_Trim_02",
+        "texture": 4
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-SciFi\\Modular SciFi MegaKit[Standard]\\glTF\\Walls\\BottomMetal_Corner_Square_Outer_2.gltf",
+    "name": "BottomMetal_Corner_Square_Outer_2",
+    "triangles": 10,
+    "materials": [
+      {
+        "name": "MI_Trim_01",
+        "texture": 1
+      },
+      {
+        "name": "MI_Trim_02",
+        "texture": 4
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-SciFi\\Modular SciFi MegaKit[Standard]\\glTF\\Walls\\BottomMetal_Straight.gltf",
+    "name": "BottomMetal_Straight",
+    "triangles": 16,
+    "materials": [
+      {
+        "name": "MI_Trim_01",
+        "texture": 1
+      },
+      {
+        "name": "MI_Trim_02",
+        "texture": 4
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-SciFi\\Modular SciFi MegaKit[Standard]\\glTF\\Walls\\BottomSimple_Corner_Round_Inner.gltf",
+    "name": "BottomSimple_Corner_Round_Inner",
+    "triangles": 128,
+    "materials": [
+      {
+        "name": "MI_Trim_01",
+        "texture": 1
+      },
+      {
+        "name": "MI_Trim_03_Dark",
+        "texture": 4
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-SciFi\\Modular SciFi MegaKit[Standard]\\glTF\\Walls\\BottomSimple_Corner_Round_Outer.gltf",
+    "name": "BottomSimple_Corner_Round_Outer",
+    "triangles": 160,
+    "materials": [
+      {
+        "name": "MI_Trim_03_Dark",
+        "texture": 1
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-SciFi\\Modular SciFi MegaKit[Standard]\\glTF\\Walls\\BottomSimple_Corner_Square_Inner.gltf",
+    "name": "BottomSimple_Corner_Square_Inner",
+    "triangles": 36,
+    "materials": [
+      {
+        "name": "MI_Trim_03_Dark",
+        "texture": 1
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-SciFi\\Modular SciFi MegaKit[Standard]\\glTF\\Walls\\BottomSimple_Corner_Square_Outer_1.gltf",
+    "name": "BottomSimple_Corner_Square_Outer_1",
+    "triangles": 60,
+    "materials": [
+      {
+        "name": "MI_Trim_03_Dark",
+        "texture": 1
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-SciFi\\Modular SciFi MegaKit[Standard]\\glTF\\Walls\\BottomSimple_Corner_Square_Outer_2.gltf",
+    "name": "BottomSimple_Corner_Square_Outer_2",
+    "triangles": 10,
+    "materials": [
+      {
+        "name": "MI_Trim_03_Dark",
+        "texture": 1
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-SciFi\\Modular SciFi MegaKit[Standard]\\glTF\\Walls\\BottomSimple_Straight.gltf",
+    "name": "BottomSimple_Straight",
+    "triangles": 16,
+    "materials": [
+      {
+        "name": "MI_Trim_03_Dark",
+        "texture": 1
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-SciFi\\Modular SciFi MegaKit[Standard]\\glTF\\Walls\\ShortWall_AccentStrip_Corner_Inner.gltf",
+    "name": "ShortWall_AccentStrip_Corner_Inner",
+    "triangles": 64,
+    "materials": [
+      {
+        "name": "MI_Trim_01",
+        "texture": 1
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-SciFi\\Modular SciFi MegaKit[Standard]\\glTF\\Walls\\ShortWall_AccentStrip_Corner_Outer.gltf",
+    "name": "ShortWall_AccentStrip_Corner_Outer",
+    "triangles": 64,
+    "materials": [
+      {
+        "name": "MI_Trim_01",
+        "texture": 1
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-SciFi\\Modular SciFi MegaKit[Standard]\\glTF\\Walls\\ShortWall_AccentStrip_Straight.gltf",
+    "name": "ShortWall_AccentStrip_Straight",
+    "triangles": 4,
+    "materials": [
+      {
+        "name": "MI_Trim_01",
+        "texture": 1
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-SciFi\\Modular SciFi MegaKit[Standard]\\glTF\\Walls\\ShortWall_Band2_Corner_Inner.gltf",
+    "name": "ShortWall_Band2_Corner_Inner",
+    "triangles": 36,
+    "materials": [
+      {
+        "name": "MI_Trim_02",
+        "texture": 1
+      },
+      {
+        "name": "M_Decal_White",
+        "texture": 3
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-SciFi\\Modular SciFi MegaKit[Standard]\\glTF\\Walls\\ShortWall_Band2_Corner_Outer.gltf",
+    "name": "ShortWall_Band2_Corner_Outer",
+    "triangles": 36,
+    "materials": [
+      {
+        "name": "MI_Trim_02",
+        "texture": 1
+      },
+      {
+        "name": "M_Decal_White",
+        "texture": 3
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-SciFi\\Modular SciFi MegaKit[Standard]\\glTF\\Walls\\ShortWall_Band2_Straight.gltf",
+    "name": "ShortWall_Band2_Straight",
+    "triangles": 4,
+    "materials": [
+      {
+        "name": "MI_Trim_02",
+        "texture": 1
+      },
+      {
+        "name": "M_Decal_White",
+        "texture": 3
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-SciFi\\Modular SciFi MegaKit[Standard]\\glTF\\Walls\\ShortWall_DarkMetal2_Corner_Inner.gltf",
+    "name": "ShortWall_DarkMetal2_Corner_Inner",
+    "triangles": 32,
+    "materials": [
+      {
+        "name": "MI_Trim_01",
+        "texture": 1
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-SciFi\\Modular SciFi MegaKit[Standard]\\glTF\\Walls\\ShortWall_DarkMetal2_Corner_Outer.gltf",
+    "name": "ShortWall_DarkMetal2_Corner_Outer",
+    "triangles": 32,
+    "materials": [
+      {
+        "name": "MI_Trim_01",
+        "texture": 1
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-SciFi\\Modular SciFi MegaKit[Standard]\\glTF\\Walls\\ShortWall_DarkMetal2_Straight.gltf",
+    "name": "ShortWall_DarkMetal2_Straight",
+    "triangles": 4,
+    "materials": [
+      {
+        "name": "MI_Trim_01",
+        "texture": 1
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-SciFi\\Modular SciFi MegaKit[Standard]\\glTF\\Walls\\ShortWall_DarkPlastic_Corner_Inner.gltf",
+    "name": "ShortWall_DarkPlastic_Corner_Inner",
+    "triangles": 64,
+    "materials": [
+      {
+        "name": "MI_Trim_03_Dark",
+        "texture": 1
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-SciFi\\Modular SciFi MegaKit[Standard]\\glTF\\Walls\\ShortWall_DarkPlastic_Corner_Outer.gltf",
+    "name": "ShortWall_DarkPlastic_Corner_Outer",
+    "triangles": 64,
+    "materials": [
+      {
+        "name": "MI_Trim_03_Dark",
+        "texture": 1
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-SciFi\\Modular SciFi MegaKit[Standard]\\glTF\\Walls\\ShortWall_DarkPlastic_Straight.gltf",
+    "name": "ShortWall_DarkPlastic_Straight",
+    "triangles": 4,
+    "materials": [
+      {
+        "name": "MI_Trim_03_Dark",
+        "texture": 1
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-SciFi\\Modular SciFi MegaKit[Standard]\\glTF\\Walls\\ShortWall_Metal2_Corner_Inner.gltf",
+    "name": "ShortWall_Metal2_Corner_Inner",
+    "triangles": 32,
+    "materials": [
+      {
+        "name": "MI_Trim_01",
+        "texture": 1
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-SciFi\\Modular SciFi MegaKit[Standard]\\glTF\\Walls\\ShortWall_Metal2_Corner_Outer.gltf",
+    "name": "ShortWall_Metal2_Corner_Outer",
+    "triangles": 32,
+    "materials": [
+      {
+        "name": "MI_Trim_01",
+        "texture": 1
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-SciFi\\Modular SciFi MegaKit[Standard]\\glTF\\Walls\\ShortWall_Metal2_Straight.gltf",
+    "name": "ShortWall_Metal2_Straight",
+    "triangles": 4,
+    "materials": [
+      {
+        "name": "MI_Trim_01",
+        "texture": 1
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-SciFi\\Modular SciFi MegaKit[Standard]\\glTF\\Walls\\ShortWall_MetalPlates_Corner_Inner.gltf",
+    "name": "ShortWall_MetalPlates_Corner_Inner",
+    "triangles": 64,
+    "materials": [
+      {
+        "name": "MI_Trim_02",
+        "texture": 1
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-SciFi\\Modular SciFi MegaKit[Standard]\\glTF\\Walls\\ShortWall_MetalPlates_Corner_Outer.gltf",
+    "name": "ShortWall_MetalPlates_Corner_Outer",
+    "triangles": 64,
+    "materials": [
+      {
+        "name": "MI_Trim_02",
+        "texture": 1
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-SciFi\\Modular SciFi MegaKit[Standard]\\glTF\\Walls\\ShortWall_MetalPlates_Straight.gltf",
+    "name": "ShortWall_MetalPlates_Straight",
+    "triangles": 4,
+    "materials": [
+      {
+        "name": "MI_Trim_02",
+        "texture": 1
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-SciFi\\Modular SciFi MegaKit[Standard]\\glTF\\Walls\\ShortWall_Simple1_Corner_Inner.gltf",
+    "name": "ShortWall_Simple1_Corner_Inner",
+    "triangles": 32,
+    "materials": [
+      {
+        "name": "MI_Trim_03",
+        "texture": 1
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-SciFi\\Modular SciFi MegaKit[Standard]\\glTF\\Walls\\ShortWall_Simple1_Corner_Outer.gltf",
+    "name": "ShortWall_Simple1_Corner_Outer",
+    "triangles": 32,
+    "materials": [
+      {
+        "name": "MI_Trim_03",
+        "texture": 1
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-SciFi\\Modular SciFi MegaKit[Standard]\\glTF\\Walls\\ShortWall_Simple1_Straight.gltf",
+    "name": "ShortWall_Simple1_Straight",
+    "triangles": 2,
+    "materials": [
+      {
+        "name": "MI_Trim_03",
+        "texture": 1
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-SciFi\\Modular SciFi MegaKit[Standard]\\glTF\\Walls\\ShortWall_Simple2_Corner_Inner.gltf",
+    "name": "ShortWall_Simple2_Corner_Inner",
+    "triangles": 32,
+    "materials": [
+      {
+        "name": "MI_Trim_02",
+        "texture": 1
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-SciFi\\Modular SciFi MegaKit[Standard]\\glTF\\Walls\\ShortWall_Simple2_Corner_Outer.gltf",
+    "name": "ShortWall_Simple2_Corner_Outer",
+    "triangles": 32,
+    "materials": [
+      {
+        "name": "MI_Trim_02",
+        "texture": 1
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-SciFi\\Modular SciFi MegaKit[Standard]\\glTF\\Walls\\ShortWall_Simple2_Straight.gltf",
+    "name": "ShortWall_Simple2_Straight",
+    "triangles": 2,
+    "materials": [
+      {
+        "name": "MI_Trim_02",
+        "texture": 1
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-SciFi\\Modular SciFi MegaKit[Standard]\\glTF\\Walls\\ShortWall_Triangles_Corner_Inner.gltf",
+    "name": "ShortWall_Triangles_Corner_Inner",
+    "triangles": 64,
+    "materials": [
+      {
+        "name": "MI_Trim_01",
+        "texture": 1
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-SciFi\\Modular SciFi MegaKit[Standard]\\glTF\\Walls\\ShortWall_Triangles_Corner_Outer.gltf",
+    "name": "ShortWall_Triangles_Corner_Outer",
+    "triangles": 64,
+    "materials": [
+      {
+        "name": "MI_Trim_01",
+        "texture": 1
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-SciFi\\Modular SciFi MegaKit[Standard]\\glTF\\Walls\\ShortWall_Triangles_Straight.gltf",
+    "name": "ShortWall_Triangles_Straight",
+    "triangles": 4,
+    "materials": [
+      {
+        "name": "MI_Trim_01",
+        "texture": 1
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-SciFi\\Modular SciFi MegaKit[Standard]\\glTF\\Walls\\ShortWall_WhitePlate2_Corner_Inner.gltf",
+    "name": "ShortWall_WhitePlate2_Corner_Inner",
+    "triangles": 40,
+    "materials": [
+      {
+        "name": "MI_Trim_03",
+        "texture": 1
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-SciFi\\Modular SciFi MegaKit[Standard]\\glTF\\Walls\\ShortWall_WhitePlate2_Corner_Outer.gltf",
+    "name": "ShortWall_WhitePlate2_Corner_Outer",
+    "triangles": 40,
+    "materials": [
+      {
+        "name": "MI_Trim_03",
+        "texture": 1
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-SciFi\\Modular SciFi MegaKit[Standard]\\glTF\\Walls\\ShortWall_WhitePlate2_Straight.gltf",
+    "name": "ShortWall_WhitePlate2_Straight",
+    "triangles": 8,
+    "materials": [
+      {
+        "name": "MI_Trim_03",
+        "texture": 1
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-SciFi\\Modular SciFi MegaKit[Standard]\\glTF\\Walls\\TopAstra_Corner_Round_Inner.gltf",
+    "name": "TopAstra_Corner_Round_Inner",
+    "triangles": 132,
+    "materials": [
+      {
+        "name": "MI_Trim_03",
+        "texture": 1
+      },
+      {
+        "name": "M_Decal_White",
+        "texture": 3
+      },
+      {
+        "name": "MI_Trim_03_Dark",
+        "texture": 5
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-SciFi\\Modular SciFi MegaKit[Standard]\\glTF\\Walls\\TopAstra_Curve_Round_Outer.gltf",
+    "name": "TopAstra_Curve_Round_Outer",
+    "triangles": 132,
+    "materials": [
+      {
+        "name": "MI_Trim_03",
+        "texture": 1
+      },
+      {
+        "name": "M_Decal_White",
+        "texture": 3
+      },
+      {
+        "name": "MI_Trim_03_Dark",
+        "texture": 5
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-SciFi\\Modular SciFi MegaKit[Standard]\\glTF\\Walls\\TopAstra_Straight.gltf",
+    "name": "TopAstra_Straight",
+    "triangles": 66,
+    "materials": [
+      {
+        "name": "MI_Trim_03",
+        "texture": 1
+      },
+      {
+        "name": "M_Decal_White",
+        "texture": 3
+      },
+      {
+        "name": "MI_Trim_03_Dark",
+        "texture": 5
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-SciFi\\Modular SciFi MegaKit[Standard]\\glTF\\Walls\\TopCables_Corner_Round_Inner.gltf",
+    "name": "TopCables_Corner_Round_Inner",
+    "triangles": 3804,
+    "materials": [
+      {
+        "name": "MI_Trim_02",
+        "texture": 1
+      },
+      {
+        "name": "MI_Trim_01",
+        "texture": 4
+      },
+      {
+        "name": "MI_Trim_03_Dark",
+        "texture": 7
+      },
+      {
+        "name": "MI_Trim_03_Cables_Blue",
+        "texture": 10
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-SciFi\\Modular SciFi MegaKit[Standard]\\glTF\\Walls\\TopCables_Corner_Round_Outer.gltf",
+    "name": "TopCables_Corner_Round_Outer",
+    "triangles": 3804,
+    "materials": [
+      {
+        "name": "MI_Trim_02",
+        "texture": 1
+      },
+      {
+        "name": "MI_Trim_01",
+        "texture": 4
+      },
+      {
+        "name": "MI_Trim_03_Dark",
+        "texture": 7
+      },
+      {
+        "name": "MI_Trim_03_Cables_Blue",
+        "texture": 10
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-SciFi\\Modular SciFi MegaKit[Standard]\\glTF\\Walls\\TopCables_Corner_Square_Inner.gltf",
+    "name": "TopCables_Corner_Square_Inner",
+    "triangles": 3780,
+    "materials": [
+      {
+        "name": "MI_Trim_02",
+        "texture": 1
+      },
+      {
+        "name": "MI_Trim_01",
+        "texture": 4
+      },
+      {
+        "name": "MI_Trim_03_Dark",
+        "texture": 7
+      },
+      {
+        "name": "MI_Trim_03_Cables_Blue",
+        "texture": 10
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-SciFi\\Modular SciFi MegaKit[Standard]\\glTF\\Walls\\TopCables_Corner_Square_Outer.gltf",
+    "name": "TopCables_Corner_Square_Outer",
+    "triangles": 3796,
+    "materials": [
+      {
+        "name": "MI_Trim_02",
+        "texture": 1
+      },
+      {
+        "name": "MI_Trim_01",
+        "texture": 4
+      },
+      {
+        "name": "MI_Trim_03_Dark",
+        "texture": 7
+      },
+      {
+        "name": "MI_Trim_03_Cables_Blue",
+        "texture": 10
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-SciFi\\Modular SciFi MegaKit[Standard]\\glTF\\Walls\\TopCables_Straight.gltf",
+    "name": "TopCables_Straight",
+    "triangles": 942,
+    "materials": [
+      {
+        "name": "MI_Trim_02",
+        "texture": 1
+      },
+      {
+        "name": "MI_Trim_01",
+        "texture": 4
+      },
+      {
+        "name": "MI_Trim_03_Dark",
+        "texture": 7
+      },
+      {
+        "name": "MI_Trim_03_Cables_Blue",
+        "texture": 10
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-SciFi\\Modular SciFi MegaKit[Standard]\\glTF\\Walls\\TopCables_Straight_Hanging.gltf",
+    "name": "TopCables_Straight_Hanging",
+    "triangles": 4058,
+    "materials": [
+      {
+        "name": "MI_Trim_02",
+        "texture": 1
+      },
+      {
+        "name": "MI_Trim_01",
+        "texture": 4
+      },
+      {
+        "name": "MI_Trim_03_Dark",
+        "texture": 7
+      },
+      {
+        "name": "MI_Trim_03_Cables_Blue",
+        "texture": 10
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-SciFi\\Modular SciFi MegaKit[Standard]\\glTF\\Walls\\TopPlastic_Corner_Outer.gltf",
+    "name": "TopPlastic_Corner_Outer",
+    "triangles": 114,
+    "materials": [
+      {
+        "name": "MI_Trim_01",
+        "texture": 1
+      },
+      {
+        "name": "MI_Trim_02_Variation",
+        "texture": 4
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-SciFi\\Modular SciFi MegaKit[Standard]\\glTF\\Walls\\TopPlastic_Corner_Round_Inner.gltf",
+    "name": "TopPlastic_Corner_Round_Inner",
+    "triangles": 564,
+    "materials": [
+      {
+        "name": "MI_Trim_02",
+        "texture": 1
+      },
+      {
+        "name": "MI_Trim_01",
+        "texture": 4
+      },
+      {
+        "name": "MI_Trim_02_Variation",
+        "texture": 7
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-SciFi\\Modular SciFi MegaKit[Standard]\\glTF\\Walls\\TopPlastic_Corner_Round_Outer.gltf",
+    "name": "TopPlastic_Corner_Round_Outer",
+    "triangles": 564,
+    "materials": [
+      {
+        "name": "MI_Trim_02",
+        "texture": 1
+      },
+      {
+        "name": "MI_Trim_01",
+        "texture": 4
+      },
+      {
+        "name": "MI_Trim_02_Variation",
+        "texture": 7
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-SciFi\\Modular SciFi MegaKit[Standard]\\glTF\\Walls\\TopPlastic_Straight.gltf",
+    "name": "TopPlastic_Straight",
+    "triangles": 158,
+    "materials": [
+      {
+        "name": "MI_Trim_02",
+        "texture": 1
+      },
+      {
+        "name": "MI_Trim_01",
+        "texture": 4
+      },
+      {
+        "name": "MI_Trim_02_Variation",
+        "texture": 7
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-SciFi\\Modular SciFi MegaKit[Standard]\\glTF\\Walls\\TopSimple_Corner_Round_Inner.gltf",
+    "name": "TopSimple_Corner_Round_Inner",
+    "triangles": 96,
+    "materials": [
+      {
+        "name": "MI_Trim_02",
+        "texture": 1
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-SciFi\\Modular SciFi MegaKit[Standard]\\glTF\\Walls\\TopSimple_Corner_Round_Outer.gltf",
+    "name": "TopSimple_Corner_Round_Outer",
+    "triangles": 96,
+    "materials": [
+      {
+        "name": "MI_Trim_02",
+        "texture": 1
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-SciFi\\Modular SciFi MegaKit[Standard]\\glTF\\Walls\\TopSimple_Straight.gltf",
+    "name": "TopSimple_Straight",
+    "triangles": 6,
+    "materials": [
+      {
+        "name": "MI_Trim_02",
+        "texture": 1
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-SciFi\\Modular SciFi MegaKit[Standard]\\glTF\\Walls\\TopWindow_Corner_Curve_Inner.gltf",
+    "name": "TopWindow_Corner_Curve_Inner",
+    "triangles": 748,
+    "materials": [
+      {
+        "name": "MI_Trim_02",
+        "texture": 1
+      },
+      {
+        "name": "M_Glass"
+      },
+      {
+        "name": "MI_PaddedWall",
+        "texture": 4
+      },
+      {
+        "name": "MI_Trim_02_Variation"
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-SciFi\\Modular SciFi MegaKit[Standard]\\glTF\\Walls\\TopWindow_Corner_Curve_Outer.gltf",
+    "name": "TopWindow_Corner_Curve_Outer",
+    "triangles": 752,
+    "materials": [
+      {
+        "name": "MI_Trim_02",
+        "texture": 1
+      },
+      {
+        "name": "M_Glass"
+      },
+      {
+        "name": "MI_PaddedWall",
+        "texture": 4
+      },
+      {
+        "name": "MI_Trim_02_Variation"
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-SciFi\\Modular SciFi MegaKit[Standard]\\glTF\\Walls\\TopWindow_Straight.gltf",
+    "name": "TopWindow_Straight",
+    "triangles": 375,
+    "materials": [
+      {
+        "name": "MI_Trim_02",
+        "texture": 1
+      },
+      {
+        "name": "M_Glass"
+      },
+      {
+        "name": "MI_PaddedWall",
+        "texture": 4
+      },
+      {
+        "name": "MI_Trim_02_Variation"
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-SciFi\\Modular SciFi MegaKit[Standard]\\glTF\\Walls\\WallAstra_Corner_Round_Inner.gltf",
+    "name": "WallAstra_Corner_Round_Inner",
+    "triangles": 1014,
+    "materials": [
+      {
+        "name": "MI_Trim_03",
+        "texture": 1
+      },
+      {
+        "name": "MI_Trim_02",
+        "texture": 4
+      },
+      {
+        "name": "MI_Trim_01",
+        "texture": 7
+      },
+      {
+        "name": "MI_Decal_Red",
+        "texture": 9
+      },
+      {
+        "name": "MI_Trim_03_Dark",
+        "texture": 11
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-SciFi\\Modular SciFi MegaKit[Standard]\\glTF\\Walls\\WallAstra_Corner_Round_Outer.gltf",
+    "name": "WallAstra_Corner_Round_Outer",
+    "triangles": 1014,
+    "materials": [
+      {
+        "name": "MI_Trim_03",
+        "texture": 1
+      },
+      {
+        "name": "MI_Trim_02",
+        "texture": 4
+      },
+      {
+        "name": "MI_Trim_01",
+        "texture": 7
+      },
+      {
+        "name": "MI_Decal_Red",
+        "texture": 9
+      },
+      {
+        "name": "MI_Trim_03_Dark",
+        "texture": 11
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-SciFi\\Modular SciFi MegaKit[Standard]\\glTF\\Walls\\WallAstra_Corner_Square_Inner.gltf",
+    "name": "WallAstra_Corner_Square_Inner",
+    "triangles": 730,
+    "materials": [
+      {
+        "name": "MI_Trim_03",
+        "texture": 1
+      },
+      {
+        "name": "MI_Trim_02",
+        "texture": 4
+      },
+      {
+        "name": "MI_Trim_01",
+        "texture": 7
+      },
+      {
+        "name": "MI_Decal_Red",
+        "texture": 9
+      },
+      {
+        "name": "MI_Trim_03_Dark",
+        "texture": 11
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-SciFi\\Modular SciFi MegaKit[Standard]\\glTF\\Walls\\WallAstra_Corner_Square_Outer.gltf",
+    "name": "WallAstra_Corner_Square_Outer",
+    "triangles": 686,
+    "materials": [
+      {
+        "name": "MI_Trim_03",
+        "texture": 1
+      },
+      {
+        "name": "MI_Trim_02",
+        "texture": 4
+      },
+      {
+        "name": "MI_Trim_01",
+        "texture": 7
+      },
+      {
+        "name": "MI_Decal_Red",
+        "texture": 9
+      },
+      {
+        "name": "MI_Trim_03_Dark",
+        "texture": 11
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-SciFi\\Modular SciFi MegaKit[Standard]\\glTF\\Walls\\WallAstra_Straight.gltf",
+    "name": "WallAstra_Straight",
+    "triangles": 355,
+    "materials": [
+      {
+        "name": "MI_Trim_03",
+        "texture": 1
+      },
+      {
+        "name": "MI_Trim_02",
+        "texture": 4
+      },
+      {
+        "name": "MI_Trim_01",
+        "texture": 7
+      },
+      {
+        "name": "MI_Decal_Red",
+        "texture": 9
+      },
+      {
+        "name": "MI_Trim_03_Dark",
+        "texture": 11
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-SciFi\\Modular SciFi MegaKit[Standard]\\glTF\\Walls\\WallAstra_Straight_Broken.gltf",
+    "name": "WallAstra_Straight_Broken",
+    "triangles": 5176,
+    "materials": [
+      {
+        "name": "MI_Trim_03",
+        "texture": 1
+      },
+      {
+        "name": "MI_Decal_Red",
+        "texture": 3
+      },
+      {
+        "name": "MI_Trim_03_Dark",
+        "texture": 5
+      },
+      {
+        "name": "MI_Trim_02",
+        "texture": 8
+      },
+      {
+        "name": "MI_Trim_01",
+        "texture": 11
+      },
+      {
+        "name": "MI_Trim_03_Cables",
+        "texture": 14
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-SciFi\\Modular SciFi MegaKit[Standard]\\glTF\\Walls\\WallAstra_Straight_Divided.gltf",
+    "name": "WallAstra_Straight_Divided",
+    "triangles": 328,
+    "materials": [
+      {
+        "name": "MI_Trim_03",
+        "texture": 1
+      },
+      {
+        "name": "MI_Decal_Red",
+        "texture": 3
+      },
+      {
+        "name": "MI_Trim_03_Dark",
+        "texture": 5
+      },
+      {
+        "name": "MI_Trim_02",
+        "texture": 8
+      },
+      {
+        "name": "MI_Trim_01",
+        "texture": 11
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-SciFi\\Modular SciFi MegaKit[Standard]\\glTF\\Walls\\WallAstra_Straight_Flat.gltf",
+    "name": "WallAstra_Straight_Flat",
+    "triangles": 124,
+    "materials": [
+      {
+        "name": "MI_Trim_03",
+        "texture": 1
+      },
+      {
+        "name": "MI_Trim_03_Dark",
+        "texture": 4
+      },
+      {
+        "name": "MI_Trim_02",
+        "texture": 7
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-SciFi\\Modular SciFi MegaKit[Standard]\\glTF\\Walls\\WallAstra_Straight_Flat_Window.gltf",
+    "name": "WallAstra_Straight_Flat_Window",
+    "triangles": 476,
+    "materials": [
+      {
+        "name": "M_Glass"
+      },
+      {
+        "name": "MI_Trim_03",
+        "texture": 1
+      },
+      {
+        "name": "MI_Trim_03_Dark",
+        "texture": 4
+      },
+      {
+        "name": "MI_Trim_02",
+        "texture": 7
+      },
+      {
+        "name": "MI_Trim_03_Cables",
+        "texture": 10
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-SciFi\\Modular SciFi MegaKit[Standard]\\glTF\\Walls\\WallAstra_Straight_Window.gltf",
+    "name": "WallAstra_Straight_Window",
+    "triangles": 488,
+    "materials": [
+      {
+        "name": "M_Glass"
+      },
+      {
+        "name": "MI_Trim_03",
+        "texture": 1
+      },
+      {
+        "name": "MI_Trim_03_Dark",
+        "texture": 4
+      },
+      {
+        "name": "MI_Trim_02",
+        "texture": 7
+      },
+      {
+        "name": "MI_Trim_03_Cables",
+        "texture": 10
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-SciFi\\Modular SciFi MegaKit[Standard]\\glTF\\Walls\\WallBand_Corner_Round_Inner.gltf",
+    "name": "WallBand_Corner_Round_Inner",
+    "triangles": 100,
+    "materials": [
+      {
+        "name": "MI_Trim_02",
+        "texture": 1
+      },
+      {
+        "name": "MI_Trim_01",
+        "texture": 4
+      },
+      {
+        "name": "M_Decal_White",
+        "texture": 6
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-SciFi\\Modular SciFi MegaKit[Standard]\\glTF\\Walls\\WallBand_Corner_Round_Outer.gltf",
+    "name": "WallBand_Corner_Round_Outer",
+    "triangles": 100,
+    "materials": [
+      {
+        "name": "MI_Trim_02",
+        "texture": 1
+      },
+      {
+        "name": "MI_Trim_01",
+        "texture": 4
+      },
+      {
+        "name": "M_Decal_White",
+        "texture": 6
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-SciFi\\Modular SciFi MegaKit[Standard]\\glTF\\Walls\\WallBand_Corner_Square_Inner.gltf",
+    "name": "WallBand_Corner_Square_Inner",
+    "triangles": 20,
+    "materials": [
+      {
+        "name": "MI_Trim_02",
+        "texture": 1
+      },
+      {
+        "name": "MI_Trim_01",
+        "texture": 4
+      },
+      {
+        "name": "M_Decal_White",
+        "texture": 6
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-SciFi\\Modular SciFi MegaKit[Standard]\\glTF\\Walls\\WallBand_Corner_Square_Outer.gltf",
+    "name": "WallBand_Corner_Square_Outer",
+    "triangles": 22,
+    "materials": [
+      {
+        "name": "MI_Trim_02",
+        "texture": 1
+      },
+      {
+        "name": "MI_Trim_01",
+        "texture": 4
+      },
+      {
+        "name": "M_Decal_White",
+        "texture": 6
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-SciFi\\Modular SciFi MegaKit[Standard]\\glTF\\Walls\\WallBand_Straight.gltf",
+    "name": "WallBand_Straight",
+    "triangles": 10,
+    "materials": [
+      {
+        "name": "MI_Trim_02",
+        "texture": 1
+      },
+      {
+        "name": "MI_Trim_01",
+        "texture": 4
+      },
+      {
+        "name": "M_Decal_White",
+        "texture": 6
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-SciFi\\Modular SciFi MegaKit[Standard]\\glTF\\Walls\\WallBand_Straight_Broken.gltf",
+    "name": "WallBand_Straight_Broken",
+    "triangles": 118,
+    "materials": [
+      {
+        "name": "MI_Trim_02",
+        "texture": 1
+      },
+      {
+        "name": "MI_Trim_01",
+        "texture": 4
+      },
+      {
+        "name": "M_Decal_White",
+        "texture": 6
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-SciFi\\Modular SciFi MegaKit[Standard]\\glTF\\Walls\\WallWindow_Cap_A.gltf",
+    "name": "WallWindow_Cap_A",
+    "triangles": 122,
+    "materials": [
+      {
+        "name": "MI_Trim_02",
+        "texture": 1
+      },
+      {
+        "name": "MI_Trim_01",
+        "texture": 4
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-SciFi\\Modular SciFi MegaKit[Standard]\\glTF\\Walls\\WallWindow_Cap_B.gltf",
+    "name": "WallWindow_Cap_B",
+    "triangles": 122,
+    "materials": [
+      {
+        "name": "MI_Trim_02",
+        "texture": 1
+      },
+      {
+        "name": "MI_Trim_01",
+        "texture": 4
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-SciFi\\Modular SciFi MegaKit[Standard]\\glTF\\Walls\\WallWindow_Corner_Round_Inner.gltf",
+    "name": "WallWindow_Corner_Round_Inner",
+    "triangles": 1222,
+    "materials": [
+      {
+        "name": "MI_Trim_02",
+        "texture": 1
+      },
+      {
+        "name": "MI_Trim_01",
+        "texture": 4
+      },
+      {
+        "name": "M_Glass"
+      },
+      {
+        "name": "MI_PaddedWall",
+        "texture": 7
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-SciFi\\Modular SciFi MegaKit[Standard]\\glTF\\Walls\\WallWindow_Corner_Round_Outer.gltf",
+    "name": "WallWindow_Corner_Round_Outer",
+    "triangles": 1187,
+    "materials": [
+      {
+        "name": "MI_Trim_02",
+        "texture": 1
+      },
+      {
+        "name": "MI_Trim_01",
+        "texture": 4
+      },
+      {
+        "name": "M_Glass"
+      },
+      {
+        "name": "MI_PaddedWall",
+        "texture": 7
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-SciFi\\Modular SciFi MegaKit[Standard]\\glTF\\Walls\\WallWindow_Corner_Square_Inner.gltf",
+    "name": "WallWindow_Corner_Square_Inner",
+    "triangles": 916,
+    "materials": [
+      {
+        "name": "MI_Trim_02",
+        "texture": 1
+      },
+      {
+        "name": "MI_Trim_01",
+        "texture": 4
+      },
+      {
+        "name": "M_Glass"
+      },
+      {
+        "name": "MI_PaddedWall",
+        "texture": 7
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-SciFi\\Modular SciFi MegaKit[Standard]\\glTF\\Walls\\WallWindow_Corner_Square_Outer.gltf",
+    "name": "WallWindow_Corner_Square_Outer",
+    "triangles": 780,
+    "materials": [
+      {
+        "name": "MI_Trim_02",
+        "texture": 1
+      },
+      {
+        "name": "MI_Trim_01",
+        "texture": 4
+      },
+      {
+        "name": "M_Glass"
+      },
+      {
+        "name": "MI_PaddedWall",
+        "texture": 7
+      }
+    ]
+  },
+  {
+    "path": "Quaternius-SciFi\\Modular SciFi MegaKit[Standard]\\glTF\\Walls\\WallWindow_Straight.gltf",
+    "name": "WallWindow_Straight",
+    "triangles": 397,
+    "materials": [
+      {
+        "name": "MI_Trim_02",
+        "texture": 1
+      },
+      {
+        "name": "MI_Trim_01",
+        "texture": 4
+      },
+      {
+        "name": "M_Glass"
+      },
+      {
+        "name": "MI_PaddedWall",
+        "texture": 7
+      }
+    ]
+  }
+]

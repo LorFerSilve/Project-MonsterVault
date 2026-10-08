@@ -1,0 +1,5 @@
+{"fields":{"component":"world"},"version":1,"environment":"server","severity":"info","code":"WORLD_SPAWNED","atUnixSeconds":1791327000,"sequence":1}
+{"fields":{"component":"server"},"version":1,"environment":"server","severity":"info","code":"BOOTSTRAP_READY","atUnixSeconds":1791327000,"sequence":2}
+{"fields":{"component":"client"},"version":1,"environment":"client","severity":"info","code":"BOOTSTRAP_READY","atUnixSeconds":1791327000,"sequence":1}
+{"fields":{"component":"profiles","detailCode":"CleanOffline"},"version":1,"environment":"server","severity":"info","code":"PRODUCTION_LOAD_SETTLED","atUnixSeconds":1791327002,"sequence":3}
+{"fields":{"component":"world"},"version":1,"environment":"server","severity":"info","code":"WORLD_SPAWNED","atUnixSeconds":1791327019,"sequence":4}

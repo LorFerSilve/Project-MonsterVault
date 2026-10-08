@@ -1,13 +1,32 @@
 # Golden Slice Visual Bible
 
-> Status: PRE-PRODUCTION BASELINE
+> Status: BASELINE APPLIED TO THE REPRESENTATIVE STUDIO SLICE; BROADER ROLLOUT OPEN
 > Date: 2026-10-06
 > Scope: first Golden Playable Vertical Slice and reusable production-quality visual language
 > Authority: subordinate to the approved GDS, TA contracts, implementation roadmap and Halloween 2026 launch-theme brief
 
+The applied Starter/Home implementation and reusable material/asset/UI/sensory seams are documented in [Golden Slice evidence](GOLDEN_SLICE_EVIDENCE.md). The permanent pine/rock/field-station and ribbed Vault kit now exists in Studio; the removable spectral-harvest layer is inspected ON/OFF. This application does not certify every PQL screen, biome or device.
+
+The [CC0 library refresh](evidence/refresh/README.md) extends this direction with
+leafy canopy/understory and textured modular foundry bays. Pack assets retain the
+central palette, silhouette hierarchy and route negative space. Surface detail
+uses shared <=512px color/alpha atlases where native material alone loses foliage
+silhouettes or authored trim detail; geometry and lighting carry the composition.
+
 ## 1. Product-facing visual thesis
 
-MonsterVault should read as a **stylized arcane-tech creature expedition**.
+MonsterVault should read as a **stylized creature expedition through a reclaimed Energy frontier**.
+
+Owner refinement (2026-10-07): **radioactive + wild nature**. Healthy, lush
+vegetation surrounds old survey structures and weathered machinery; a few
+abandoned relics tell the history. Home's radioactive-vault silhouette comes
+from shielded reactor hardware, faceted armor and controlled green Energy lines.
+It remains a safe, aspirational collection space. Decorative sealed cells/marks
+do not create damage, mutated Species, rewards or private inspection authority.
+Use local pockets of technology and overgrowth rather than a wasteland carpet.
+The shell/rover/ruins are imported, mapped, placed and inspected in Studio/Play; see
+[current applied evidence](evidence/reclaimed/README.md). The larger central court
+and northern reserve retain open creature clearings and grouped lush vegetation.
 
 The permanent visual identity combines:
 
@@ -89,6 +108,9 @@ Existing repository-native material groups remain authoritative where used:
 | SecondaryMetal | 153, 172, 187 | trim, moving mechanical detail, readable edges |
 | PanelPlastic | 19, 25, 33 | dark UI-adjacent panels, machine shells |
 | EnergyGreen | 76, 255, 110 | powered tech / Energy / containment |
+| WeatheredMetal | 88, 110, 101 | reclaimed exterior armor and retired equipment |
+| OxideRust | 130, 74, 44 | restrained wear on abandoned infrastructure |
+| HazardAmber | 224, 184, 67 | geometric containment/warning signs; never rarity |
 | FixtureCreature reference | 77, 205, 255 | current DEV creature reference only |
 
 Recommended permanent environment support palette:

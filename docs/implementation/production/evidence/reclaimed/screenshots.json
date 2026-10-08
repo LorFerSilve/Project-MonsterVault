@@ -1,0 +1,91 @@
+{
+  "date": "2026-10-07",
+  "source": "Actual Roblox Studio MCP screen_capture, Edit",
+  "processing": "None; original native JPEG bytes",
+  "shots": [
+    {
+      "file": "starter_overview.jpg",
+      "camera": [
+        -100,
+        62,
+        66
+      ],
+      "lookAt": [
+        0,
+        0,
+        -59
+      ],
+      "sha256": "87d746b96b6772815266db4c1db33fedf82eee1ccd0559e2cc8ee0889892a3ea"
+    },
+    {
+      "file": "starter_court.jpg",
+      "camera": [
+        -32,
+        7,
+        39
+      ],
+      "lookAt": [
+        0,
+        6,
+        -18
+      ],
+      "sha256": "0d0b43f10220d480fa047c2bab5a3d04e1b709a7072b9aea19db7c529303f1fa"
+    },
+    {
+      "file": "northern_survey.jpg",
+      "camera": [
+        -45,
+        7,
+        -76
+      ],
+      "lookAt": [
+        -15,
+        3,
+        -111
+      ],
+      "sha256": "edd41ab8a610fb1cbade2837643cc750d12fb76a6e646aa99c4450417e32676a"
+    },
+    {
+      "file": "vault_exterior.jpg",
+      "camera": [
+        -76,
+        44,
+        207
+      ],
+      "lookAt": [
+        0,
+        12,
+        144
+      ],
+      "sha256": "d2b5518232a10a63ba100d639ddb986bc9a6d3f1e95575eb455fbb72553e8c4a"
+    },
+    {
+      "file": "vault_entry.jpg",
+      "camera": [
+        -52,
+        10,
+        91
+      ],
+      "lookAt": [
+        0,
+        13,
+        130
+      ],
+      "sha256": "209b1c894891383e531741964597ddb4453ce368d978362467192c80b24c6083"
+    },
+    {
+      "file": "vault_interior.jpg",
+      "camera": [
+        -23,
+        7,
+        120
+      ],
+      "lookAt": [
+        8,
+        7,
+        155
+      ],
+      "sha256": "1f067fd990229508330df1e5c5b9c2238600dc5544d4df3f3c932a8db0e20595"
+    }
+  ]
+}

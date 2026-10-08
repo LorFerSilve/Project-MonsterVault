@@ -1,0 +1,12 @@
+{
+  "license": "CC0-1.0",
+  "author": "Kenney",
+  "images": {
+    "keyboard_e": "rbxassetid://123055941772617",
+    "playstation_button_square": "rbxassetid://129641149173168",
+    "playstation_button_triangle": "rbxassetid://128266037534840",
+    "xbox_button_x": "rbxassetid://104849639550862",
+    "xbox_button_y": "rbxassetid://104884774554690",
+    "panel_header_green": "rbxassetid://128902092981876"
+  }
+}

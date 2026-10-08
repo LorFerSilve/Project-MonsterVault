@@ -1,0 +1,16 @@
+{
+  "clockAfter": 15.5,
+  "gradeAfter": false,
+  "on": {
+    "lights": 3,
+    "meshes": 83,
+    "tags": 0,
+    "scripts": 0,
+    "queryable": 0,
+    "emitters": 1,
+    "colliding": 0,
+    "parts": 138
+  },
+  "allLightingRestored": true,
+  "rootAfter": false
+}

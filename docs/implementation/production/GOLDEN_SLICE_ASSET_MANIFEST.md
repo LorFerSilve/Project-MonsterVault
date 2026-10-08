@@ -1,7 +1,15 @@
 # Golden Slice Asset Manifest
 
-> Status: PRE-PRODUCTION MANIFEST
-> Date: 2026-10-06
+Latest 2026-10-07 state: [reclaimed reserve / radioactive Vault](evidence/reclaimed/README.md).
+ContainmentShell (7,664 triangles), SurveyRover (2,676) and RelayRuins (2,168)
+are **IMPORTED, MAPPED, PLACED AND NATIVE-VALIDATED**. Their editable sources
+and GLBs are reused; all 21 persistent MeshParts are recorded in the native
+manifest. The library has 32 prefabs / 101 MeshParts / 45,531 unique triangles.
+No import or audio upload is pending. Final Golden owner visual acceptance remains
+open. Older counts/classifications below describe historical passes.
+
+> Status: APPLIED GOLDEN KIT + SUPPLEMENTARY RADIOACTIVE KIT
+> Date: 2026-10-07
 > Scope: minimum asset set required to turn the current Starter/Home path into the Golden production reference
 > Rule: repository/runtime contracts define identity; this manifest defines presentation work only
 
@@ -242,3 +250,78 @@ Recommended Golden production order:
 10. screenshot/evidence cleanup.
 
 Do not begin with dozens of decorative pumpkins while permanent geometry is still blockout quality.
+
+## 13. Imported production set — 2026-10-06
+
+The working Golden branch has 14 validated new editable Blender assets, of which 13 are used at runtime. The original Energy Core is reused. All prepared runtime meshes have been imported into Studio, normalized and centrally mapped; no further asset import is pending. See [native import evidence](evidence/golden/launch_import_native.json), [source audit](../../../assets/exported/golden_source_audit.json) and [persistent mesh mapping](../../../assets/exported/golden_asset_manifest.json).
+
+| Asset | Editable source / GLB family | Triangles | Current use / classification |
+| --- | --- | ---: | --- |
+| Mossbud | creatures/golden_mossbud.blend / matching GLB | 4504 | COMPLETE — mapped prefab and permanent world/runtime placement |
+| Prismfin | creatures/golden_prismfin.blend / matching GLB | 2772 | NOT NEEDED IN RUNTIME — offline Rare concept; no authored Rare Species |
+| Helion | creatures/golden_helion.blend / matching GLB | 5700 | COMPLETE — mapped prefab and permanent world/runtime placement |
+| Basalt | environment/golden_basalt.blend / matching GLB | 316 | COMPLETE — mapped prefab and permanent world/runtime placement |
+| Fern | environment/golden_fern.blend / matching GLB | 304 | COMPLETE — mapped prefab and permanent world/runtime placement |
+| Relay | environment/golden_relay.blend / matching GLB | 1996 | COMPLETE — mapped prefab and permanent world/runtime placement |
+| Plinth | vault/golden_plinth.blend / matching GLB | 1380 | COMPLETE — mapped prefab and permanent world/runtime placement |
+| Gate | environment/golden_gate.blend / matching GLB | 1620 | COMPLETE — mapped prefab and permanent world/runtime placement |
+| Accumulator | vault/golden_accumulator.blend / matching GLB | 1208 | COMPLETE — mapped prefab and permanent world/runtime placement |
+| ReservePine | environment/golden_reservepine.blend / matching GLB | 240 | COMPLETE — mapped prefab and permanent world/runtime placement |
+| MossBank | environment/golden_mossbank.blend / matching GLB | 288 | COMPLETE — mapped prefab and permanent world/runtime placement |
+| HarvestPumpkin | seasonal/halloween_2026/golden_harvestpumpkin.blend / matching GLB | 450 | COMPLETE — mapped seasonal template; native toggle validated |
+| HarvestLantern | seasonal/halloween_2026/golden_harvestlantern.blend / matching GLB | 1380 | COMPLETE — mapped seasonal template; native toggle validated |
+| SpectralReliquary | seasonal/halloween_2026/golden_spectralreliquary.blend / matching GLB | 2136 | COMPLETE — mapped seasonal template; native toggle validated |
+
+Combined FBX files are import transport, not the editable asset source. `golden_studio_import.fbx` contains the initial material-group meshes; `golden_launch_import.fbx` contains the five supplementary assets. Native `golden_assets.rbxm`, `golden_world.rbxm` and seasonal `dressing.rbxm` are the Rojo delivery artifacts. Do not re-upload the eleven existing original WAVs; the current IDs are in `GoldenAudio.luau`.
+
+The Common and Legendary source rigs retain `GentleIdle` authoring actions. Runtime presentation currently uses the bounded shared cosmetic controller; Roblox Animator-track import is not claimed. Vault shell, bridge deck, outpost frame, path slabs and energy conduits reuse native parts plus the custom kit.
+
+## 14. CC0 library refresh — 2026-10-06
+
+Fifteen selected Quaternius assets are adapted, imported, mapped and placed. The
+complete downloaded packs are not replicated into runtime. Basalt/Fern/ReservePine
+prefabs remain available for existing/seasonal work; the representative permanent
+composition uses their new library counterparts. Existing creatures and machinery
+are reused. [Native views and reproduction](evidence/refresh/README.md),
+[source/export manifest](../../../assets/exported/refresh/refresh_manifest.json),
+[source audit](evidence/refresh/source_audit.json).
+
+| Runtime key | Triangles | Actual use | Classification |
+| --- | ---: | --- | --- |
+| CanopyOak | 3182 | Starter/Home canopy | COMPLETE, representative native inspection |
+| CanopyPine | 1646 | Starter/Home canopy | COMPLETE, representative native inspection |
+| ReserveBoulder | 342 | grounded cliff/rock shoulders | COMPLETE, representative native inspection |
+| ReserveBoulderWide | 244 | complementary rock masses | COMPLETE, representative native inspection |
+| FernCluster | 288 | route-side understory | COMPLETE, representative native inspection |
+| MeadowGrass | 155 | twelve bounded clusters | COMPLETE, representative native inspection |
+| FlowerPatch | 755 | six route-side patches | COMPLETE, representative native inspection |
+| LeafBush | 900 | understory masses | COMPLETE, representative native inspection |
+| FoundryColumn | 748 | Vault supports/entry | COMPLETE, representative native inspection |
+| FoundryWall | 124 | Vault wall skin | COMPLETE, representative native inspection |
+| FoundryWindow | 476 | Vault/Field Station bays | COMPLETE, representative native inspection |
+| FoundryVent | 208 | Vault return vents | COMPLETE, representative native inspection |
+| ServiceCrate | 972 | Field Station/Vault supplies | COMPLETE, representative native inspection |
+| CableHeader | 942 | rear Vault Energy routing | COMPLETE, representative native inspection |
+| StationTerminal | 519 | Field Station/Collection console dressing | COMPLETE, representative native inspection |
+
+Each key has `assets/blender/refresh/<key>.blend` and
+`assets/exported/refresh/<key>.glb`; combined editable source and FBX are import
+transport. Total unique added geometry: 11,501 triangles, 32 material-group meshes.
+All are static decoration, without collision/query/authority tags or scripts.
+Required high-resolution source inputs remain outside runtime; color/alpha atlases
+are <=512px. Six selected Kenney UI images retain their license/source/export
+mapping; native text/layout/controllers are retained.
+
+Current native delivery: `golden_assets.rbxm` 377,056 bytes and `golden_world.rbxm`
+300,158 bytes. Exact native serialization/readback passed. No import or additional
+audio upload is pending. Broader asset rollout and Golden acceptance remain open.
+
+## 15. Current-map sensory and seasonal continuation — 2026-10-08
+
+[Native harvest evidence](evidence/harvest/README.md) reuses the existing editable
+seasonal and creature kit; no new Blender source, import or audio upload is
+needed. Eight Roblox-native projected accumulator segments extend the existing
+world to 1,012 parts / 651 meshes / 325,963 repeated mesh triangles. Rebuilt
+Halloween dressing is 177 parts / 116 meshes / 29,982 triangles, fully mapped
+and exact native readback. Current-world ON/OFF views and normal capture/claim
+proof are retained; final owner art/device/performance acceptance remains open.

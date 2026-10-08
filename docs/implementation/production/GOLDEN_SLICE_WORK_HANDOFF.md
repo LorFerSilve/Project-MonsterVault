@@ -1,8 +1,63 @@
 # Golden Slice Work Handoff
 
-> Status: READY FOR WORK MODE
+> Status: RESUME IMPLEMENTED GOLDEN BRANCH — MANUAL ACCEPTANCE OPEN
 > Date: 2026-10-06
-> Purpose: give the next high-reasoning Work run an already-resolved production baseline
+> Purpose: preserve the integrated Golden implementation and remaining acceptance work
+
+## Current continuation state — 2026-10-06
+
+The implementation below has advanced: **do not repeat the old preparation/audit sequence**. Start from [current evidence](GOLDEN_SLICE_EVIDENCE.md), [acceptance matrix](GOLDEN_SLICE_ACCEPTANCE_MATRIX.md) and the current branch/PR. The remainder of this handoff preserves the original production brief for reference.
+
+Latest continuation (2026-10-08): [creature/Vault motion and Halloween evidence](evidence/harvest/README.md).
+The existing imported kit is reused; no import/audio upload is pending. Eight
+projected accumulator segments and bounded creature poses pass 11 native
+streaming/reduction/cleanup checks. Halloween now fits the enlarged map, with
+grounded candles, real lantern hangers and a readable northern reliquary.
+Current delivery: 1,012 permanent parts / 651 meshes / 325,963 repeated mesh
+triangles; 177 seasonal parts / 116 meshes / 29,982 triangles. Actual normal
+Play proves +524 Energy, an ordinary 25-Energy capacity upgrade and Secured,
+then fresh Play readback 11/16 and wallet 501. No profile injection or creature
+deletion was used. Reopened StarterBounds was restored to source; 29 authoring,
+111/111 parity, 341 fast and 28 Python pass. Studio ON/OFF p95 is about 68ms;
+render-cadence cause, devices/long-session memory, physical controller menus,
+actual increased platform text and owner art acceptance remain open. Resume
+those on draft PR #76, rather than later IMP-11 backends. Reproduction now adds
+finish_golden_motion.luau after expand_golden_reserve.luau, then rebuilds the
+seasonal template. Studio is left Edit, normal mains enabled, preview OFF and
+HTTP false; user-local files and the recovered bounds note are preserved.
+Fresh-session follow-up with unchanged runtime/settings measures 21.77-23.42ms
+inside/outside the sampling command, 120:120 Heartbeat/RenderStepped. It does
+not establish a fix or the older 68ms cause; 16.67ms/device gates remain open.
+
+Latest owner-feedback pass (2026-10-07): [reclaimed reserve / radioactive Vault evidence](evidence/reclaimed/README.md).
+All three supplementary assets are imported/mapped/placed/native-validated;
+**no import or audio upload is pending**. Reuse their editable sources and native
+IDs. The actual central Field Station is rebuilt, Starter is 176 x 256 and its
+northern forest loop is walked in Play. The Vault exterior now has the Blender
+containment shell, sloped shoulders and reactor/cooling skyline. Current delivery:
+1,004 parts / 651 meshes / 325,963 repeated triangles; 111/111 exact Edit parity;
+339 fast / 28 Python; 14 route legs, six physics checks and 29 authoring cases pass.
+Studio p95 about 18ms exceeds the reference 16.67ms gate. Final owner visual review,
+physical controller menus, increased platform text and real-device performance
+remain open. Resume those and focused sensory/animation refinement on draft PR #76;
+do not restart import/planning or start later IMP-11 backends. Source reproduction
+now ends with expand_golden_reserve.luau after the comfort pass. Older counts below
+are historical. Studio is left Edit; user-local files are preserved.
+
+Latest continuation: [CC0 library refresh](evidence/refresh/README.md), fifteen
+adapted/imported models plus native UI accents. Their sources, exports, persistent
+IDs, before/after views and native world/library readback are committed with this
+phase. No further import is pending. Exact Edit parity is 110/110; 339 fast and
+28 Python still pass. New Studio p95 is about 68ms and its cause remains open.
+Resume the supplementary import and visual/manual/performance acceptance on PR #76.
+
+- `codex/golden-slice` implements 13 new runtime assets plus the reused Energy Core; 14 editable source assets include the offline Rare concept. All prepared imports are mapped and integrated.
+- Permanent Starter/Home world, seasonal template and prefabs are serialized Rojo artifacts. Eleven uploaded original audio IDs are reused; no further upload is pending.
+- Actual native capture/travel/display/claim/Showcase evidence and 15 screenshots are retained. 339/339 fast, 28/28 Python and 109/109 final Edit source parity passed.
+- User is at school and requested that manual questions/tests wait for the next work phase. Physical controller capture/secure passed, touchpad menu entry failed; direct △ entry is implemented but needs physical menu/select/○ retest. Actual platform text preference remained Medium; 1.5x font stress is separate evidence.
+- Six Studio performance views are recorded with rendering headroom, but fresh p95 exceeds the 16.67ms reference target and a 101ms long-session exception remains unexplained. No real-device/scale closure.
+- Leave the PR draft until applicable Golden acceptance is resolved. No later IMP-11 backend work, trading or commerce has started. PQL rollout remains open.
+- Studio is left in Edit with normal scripts enabled, QA store seam/scope/helpers removed and local original assets preserved. Original device is restored. Do not overwrite the user's unrelated `AGENTS.md`, IMP-10 evidence edit, test_crate/test_asset or Energy Core FBX files.
 
 ## 1. Read first
 

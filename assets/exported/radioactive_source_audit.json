@@ -1,0 +1,35 @@
+{
+  "assets": [
+    {
+      "asset": "ContainmentShell",
+      "blend": "assets/blender/environment/golden_containmentshell.blend",
+      "export": "assets/exported/environment/golden_containmentshell.glb",
+      "triangles": 7664,
+      "meshObjects": 142,
+      "animations": 0,
+      "glbBytes": 603008,
+      "runtime": true
+    },
+    {
+      "asset": "SurveyRover",
+      "blend": "assets/blender/environment/golden_surveyrover.blend",
+      "export": "assets/exported/environment/golden_surveyrover.glb",
+      "triangles": 2676,
+      "meshObjects": 31,
+      "animations": 0,
+      "glbBytes": 198692,
+      "runtime": true
+    },
+    {
+      "asset": "RelayRuins",
+      "blend": "assets/blender/environment/golden_relayruins.blend",
+      "export": "assets/exported/environment/golden_relayruins.glb",
+      "triangles": 2168,
+      "meshObjects": 17,
+      "animations": 0,
+      "glbBytes": 145508,
+      "runtime": true
+    }
+  ],
+  "validated": 3
+}

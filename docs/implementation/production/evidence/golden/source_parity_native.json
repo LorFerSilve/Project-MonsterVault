@@ -1,0 +1,11 @@
+{
+  "httpEnabled": false,
+  "clientEnabled": true,
+  "preservedImports": true,
+  "qaScopeRemoved": true,
+  "unequal": [],
+  "scripts": 109,
+  "mode": "Edit",
+  "serverEnabled": true,
+  "preservedOriginals": true
+}

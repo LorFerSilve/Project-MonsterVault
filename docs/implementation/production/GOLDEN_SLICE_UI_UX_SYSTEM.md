@@ -1,9 +1,16 @@
 # Golden Slice UI/UX System
 
-> Status: PRE-PRODUCTION DESIGN SYSTEM
+> Status: REPRESENTATIVE NATIVE FOUNDATION IMPLEMENTED; BROADER ACCEPTANCE OPEN
 > Date: 2026-10-06
 > Authority: presentation implementation baseline only; GDS-14 and TA-12 remain authoritative
 > Goal: replace one-off diagnostic styling with reusable native Roblox UI primitives
+
+`GoldenTheme` implements the representative primitives. The library refresh adds
+native gradient depth, one thin Kenney header accent and binding-specific input
+icons alongside the existing action text. These are decorative resources, not
+input/permission state. [Actual refreshed UI](evidence/refresh/README.md).
+Physical controller menus and actual increased platform text preference remain
+open in the acceptance matrix.
 
 ## 1. UX principles
 
@@ -405,3 +412,15 @@ A primary screen is not production-ready until:
 - color is not the only meaning;
 - Halloween on/off both remain coherent;
 - server Pending/OutcomeUnknown remains honest.
+
+## Applied foundation — 2026-10-06
+
+Owner-feedback extension (2026-10-07): bounded native hover/press/gamepad-focus
+scaling and 0.16s modal entry are integrated. Reduced Motion cancels active scales;
+close/input/focus authority is immediate. Matched successful travel adds an arrival
+cue; no unconfirmed receipt or projection readback becomes a reward celebration.
+[Actual native input evidence](evidence/comfort/feedback_native.json).
+
+Native implementation lives in `GoldenTheme`, `RarityTokens`, `GoldenFeedback`, `GoldenSensory`, `GoldenRuntimeService` and `ShowcaseRuntimeService`, over the existing controller/store commands. Representative HUD, Collection/Vault/Journey, capture/receipt notifications, sensory preferences and Read Only card are integrated. Typography uses Gotham/GothamBold, native auto-height text, scrolling modal content and 48px-or-larger primary touch controls. Larger navigation text gets two rows. Intrinsic rarity has both shape and text; paid/status cosmetics never choose this badge or authority.
+
+See [native evidence](GOLDEN_SLICE_EVIDENCE.md) for phone input, the separate 1.5x text stress and Reduced Motion claim. Actual increased platform text preference and physical controller menu retest remain open; this foundation does not close PQL-3/PQL-8.

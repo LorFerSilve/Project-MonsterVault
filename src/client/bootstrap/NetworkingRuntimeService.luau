@@ -69,6 +69,7 @@ function NetworkingRuntimeService.new(options: {
 	local progressionListener: ((any) -> ())? = nil
 	local partyListener: ((any) -> ())? = nil
 	local showcaseListener: ((any) -> ())? = nil
+	local presentationListener: ((string, any) -> ())? = nil
 
 	local function start()
 		assert(not running, "networking already started")
@@ -105,6 +106,22 @@ function NetworkingRuntimeService.new(options: {
 				end
 				if ok and outcome == "Progression" and progressionListener ~= nil then
 					progressionListener(envelope)
+				end
+				if
+					ok
+					and presentationListener
+					and (
+						outcome == "Applied"
+						or outcome == "Assignments"
+						or outcome == "Progression"
+						or outcome == "Vault"
+						or outcome == "Showcase"
+						or outcome == "Party"
+						or outcome == "Capture"
+						or outcome == "Result"
+					)
+				then
+					pcall(presentationListener, outcome, envelope)
 				end
 				if not ok or outcome == "Invalid" then
 					options.diagnostics.emit(
@@ -171,6 +188,7 @@ function NetworkingRuntimeService.new(options: {
 		progressionListener = nil
 		partyListener = nil
 		showcaseListener = nil
+		presentationListener = nil
 		return {}
 	end
 
@@ -184,6 +202,15 @@ function NetworkingRuntimeService.new(options: {
 		partyStore = partyStore,
 		showcaseStore = showcaseStore,
 		securedCollectionStore = securedCollectionStore,
+		subscribePresentation = function(listener: (string, any) -> ())
+			assert(presentationListener == nil, "presentation observer already bound")
+			presentationListener = listener
+			return function()
+				if presentationListener == listener then
+					presentationListener = nil
+				end
+			end
+		end,
 		subscribeShowcase = function(listener: (any) -> ())
 			assert(showcaseListener == nil, "Showcase listener already bound")
 			showcaseListener = listener

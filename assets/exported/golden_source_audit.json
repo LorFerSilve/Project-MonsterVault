@@ -1,0 +1,145 @@
+{
+  "assets": [
+    {
+      "asset": "Mossbud",
+      "blend": "assets/blender/creatures/golden_mossbud.blend",
+      "export": "assets/exported/creatures/golden_mossbud.glb",
+      "triangles": 4504,
+      "meshObjects": 15,
+      "animations": 1,
+      "glbBytes": 193340,
+      "runtime": true
+    },
+    {
+      "asset": "Prismfin",
+      "blend": "assets/blender/creatures/golden_prismfin.blend",
+      "export": "assets/exported/creatures/golden_prismfin.glb",
+      "triangles": 2772,
+      "meshObjects": 14,
+      "animations": 1,
+      "glbBytes": 129936,
+      "runtime": false
+    },
+    {
+      "asset": "Helion",
+      "blend": "assets/blender/creatures/golden_helion.blend",
+      "export": "assets/exported/creatures/golden_helion.glb",
+      "triangles": 5700,
+      "meshObjects": 23,
+      "animations": 1,
+      "glbBytes": 255120,
+      "runtime": true
+    },
+    {
+      "asset": "Basalt",
+      "blend": "assets/blender/environment/golden_basalt.blend",
+      "export": "assets/exported/environment/golden_basalt.glb",
+      "triangles": 316,
+      "meshObjects": 2,
+      "animations": 0,
+      "glbBytes": 11988,
+      "runtime": true
+    },
+    {
+      "asset": "Fern",
+      "blend": "assets/blender/environment/golden_fern.blend",
+      "export": "assets/exported/environment/golden_fern.glb",
+      "triangles": 304,
+      "meshObjects": 6,
+      "animations": 0,
+      "glbBytes": 15176,
+      "runtime": true
+    },
+    {
+      "asset": "Relay",
+      "blend": "assets/blender/environment/golden_relay.blend",
+      "export": "assets/exported/environment/golden_relay.glb",
+      "triangles": 1996,
+      "meshObjects": 12,
+      "animations": 0,
+      "glbBytes": 103288,
+      "runtime": true
+    },
+    {
+      "asset": "Plinth",
+      "blend": "assets/blender/vault/golden_plinth.blend",
+      "export": "assets/exported/vault/golden_plinth.glb",
+      "triangles": 1380,
+      "meshObjects": 8,
+      "animations": 0,
+      "glbBytes": 86456,
+      "runtime": true
+    },
+    {
+      "asset": "Gate",
+      "blend": "assets/blender/environment/golden_gate.blend",
+      "export": "assets/exported/environment/golden_gate.glb",
+      "triangles": 1620,
+      "meshObjects": 15,
+      "animations": 0,
+      "glbBytes": 118908,
+      "runtime": true
+    },
+    {
+      "asset": "Accumulator",
+      "blend": "assets/blender/vault/golden_accumulator.blend",
+      "export": "assets/exported/vault/golden_accumulator.glb",
+      "triangles": 1208,
+      "meshObjects": 10,
+      "animations": 0,
+      "glbBytes": 86136,
+      "runtime": true
+    },
+    {
+      "asset": "ReservePine",
+      "blend": "assets/blender/environment/golden_reservepine.blend",
+      "export": "assets/exported/environment/golden_reservepine.glb",
+      "triangles": 240,
+      "meshObjects": 4,
+      "animations": 0,
+      "glbBytes": 19900,
+      "runtime": true
+    },
+    {
+      "asset": "MossBank",
+      "blend": "assets/blender/environment/golden_mossbank.blend",
+      "export": "assets/exported/environment/golden_mossbank.glb",
+      "triangles": 288,
+      "meshObjects": 1,
+      "animations": 0,
+      "glbBytes": 23696,
+      "runtime": true
+    },
+    {
+      "asset": "HarvestPumpkin",
+      "blend": "assets/blender/seasonal/halloween_2026/golden_harvestpumpkin.blend",
+      "export": "assets/exported/seasonal/halloween_2026/golden_harvestpumpkin.glb",
+      "triangles": 450,
+      "meshObjects": 5,
+      "animations": 0,
+      "glbBytes": 31648,
+      "runtime": true
+    },
+    {
+      "asset": "HarvestLantern",
+      "blend": "assets/blender/seasonal/halloween_2026/golden_harvestlantern.blend",
+      "export": "assets/exported/seasonal/halloween_2026/golden_harvestlantern.glb",
+      "triangles": 1380,
+      "meshObjects": 8,
+      "animations": 0,
+      "glbBytes": 87992,
+      "runtime": true
+    },
+    {
+      "asset": "SpectralReliquary",
+      "blend": "assets/blender/seasonal/halloween_2026/golden_spectralreliquary.blend",
+      "export": "assets/exported/seasonal/halloween_2026/golden_spectralreliquary.glb",
+      "triangles": 2136,
+      "meshObjects": 12,
+      "animations": 0,
+      "glbBytes": 93188,
+      "runtime": true
+    }
+  ],
+  "validated": 14
+}

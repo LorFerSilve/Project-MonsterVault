@@ -1,0 +1,87 @@
+{
+  "date": "2026-10-08",
+  "baselineCommit": "8cb23df84ac6af2b34f7032834efc7935c2a7516",
+  "branch": "codex/golden-slice",
+  "checks": [
+    {
+      "command": "Focused manifest GoldenPresentation exports via existing tests/run_one.luau --suite fast --id <registered TestId>",
+      "passed": 15,
+      "total": 15
+    },
+    {
+      "command": "lune run tests/runner.luau -- --suite fast",
+      "exitCode": 0,
+      "passed": 341,
+      "total": 341
+    },
+    {
+      "command": "python -B -m unittest discover -s scripts/ci -p 'test_*.py'",
+      "exitCode": 0,
+      "passed": 28,
+      "total": 28
+    },
+    {
+      "command": "python -B scripts/ci/check_dependencies.py",
+      "exitCode": 0
+    },
+    {
+      "command": "python -B scripts/ci/check_integrity.py",
+      "exitCode": 0
+    },
+    {
+      "command": "stylua --check src tests scripts; modified tools/roblox scripts also checked",
+      "exitCode": 0
+    },
+    {
+      "command": "selene src tests scripts",
+      "exitCode": 0,
+      "errors": 0,
+      "warnings": 0
+    },
+    {
+      "command": "rojo build default.project.json; rojo sourcemap default.project.json",
+      "exitCode": 0
+    },
+    {
+      "command": "luau-lsp analyze --platform roblox --settings=luau-lsp.json --sourcemap=<generated sourcemap> src tests scripts",
+      "exitCode": 0,
+      "limitation": "Warnings: no Roblox definitions file provided. Not a clean engine-definition type pass."
+    },
+    {
+      "command": "git diff --check",
+      "exitCode": 0
+    },
+    {
+      "native": "scripts/studio/golden_sensory_checks.luau",
+      "passed": 11,
+      "total": 11,
+      "fixtureClaimAmount": 27,
+      "isolated": true
+    },
+    {
+      "native": "scripts/studio/imp10_authoring_checks.luau",
+      "passed": 29,
+      "total": 29,
+      "groundedRouteSamples": 315,
+      "hazardFreeRouteSamples": 315
+    },
+    {
+      "native": "Final Edit source parity",
+      "passed": 111,
+      "total": 111
+    }
+  ],
+  "remoteCI": {
+    "requiredOnPushedHead": true,
+    "pullRequest": "https://github.com/LorFerSilve/Project-MonsterVault/pull/76",
+    "authoritativeStatus": "See exact current PR head/check run; prior runs do not validate new commits."
+  },
+  "open": [
+    "Owner final art acceptance",
+    "Physical controller menu/select/close",
+    "Actual increased platform text preference",
+    "Render cadence/cost diagnosis and reference devices",
+    "Long-session memory and VS1-19"
+  ],
+  "functionalScope": "Presentation only. Actual DEV Play claim/upgrade/Secured transactions are separately recorded in capture_native.json; native sensory +27 test is a fixture."
+}

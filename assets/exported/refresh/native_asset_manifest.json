@@ -1,0 +1,637 @@
+{
+  "version": 1,
+  "assets": [
+    {
+      "geometrySha256": "72f63ef87e3a2db8efa9d6c0338d919a55c02004bdcee82ba4d41ae62a679047",
+      "meshes": [
+        {
+          "name": "RF_CanopyOak_00_LeafGreen",
+          "size": [
+            9.955718,
+            11.951188,
+            11.443136
+          ],
+          "group": "LeafGreen",
+          "meshId": "rbxassetid://122517098554751",
+          "center": [
+            0,
+            13.024405999999999,
+            0
+          ],
+          "texture": "assets/exported/refresh/textures/Leaves_NormalTree_C_png_LeafGreen.png"
+        },
+        {
+          "name": "RF_CanopyOak_01_BarkWood",
+          "size": [
+            4.886851999999999,
+            15.448092,
+            4.67911
+          ],
+          "group": "BarkWood",
+          "meshId": "rbxassetid://75848584962116",
+          "center": [
+            0.22253900000000004,
+            7.724046,
+            -0.014045000000000085
+          ],
+          "texture": "assets/exported/refresh/textures/Bark_NormalTree_png_BarkWood.png"
+        }
+      ],
+      "key": "CanopyOak",
+      "triangles": 3182
+    },
+    {
+      "geometrySha256": "e948e714e4e55310b543007cf34d2ac5c2baa5f29ec0339347ee46de059b4e83",
+      "meshes": [
+        {
+          "name": "RF_CanopyPine_00_LeafGreen",
+          "size": [
+            16.926466,
+            18.547869000000002,
+            16.404078
+          ],
+          "group": "LeafGreen",
+          "meshId": "rbxassetid://98314111116271",
+          "center": [
+            0,
+            13.7260635,
+            0
+          ],
+          "texture": "assets/exported/refresh/textures/Leaf_Pine_C_png_LeafGreen.png"
+        },
+        {
+          "name": "RF_CanopyPine_01_BarkWood",
+          "size": [
+            2.955924,
+            22.587494,
+            5.204279
+          ],
+          "group": "BarkWood",
+          "meshId": "rbxassetid://118106063525004",
+          "center": [
+            -0.35775,
+            11.293747,
+            0.4069035000000001
+          ],
+          "texture": "assets/exported/refresh/textures/Bark_NormalTree_png_BarkWood.png"
+        }
+      ],
+      "key": "CanopyPine",
+      "triangles": 1646
+    },
+    {
+      "geometrySha256": "b4b0dcc3240665a8848628dac2002a643e4cfadcbf8390a3b5d3b1ceaacd4c41",
+      "meshes": [
+        {
+          "name": "RF_ReserveBoulder_00_MossRock",
+          "size": [
+            10,
+            7.006799,
+            9.268214
+          ],
+          "group": "MossRock",
+          "meshId": "rbxassetid://116078133185025",
+          "center": [
+            0,
+            3.5033995,
+            0
+          ],
+          "texture": "assets/exported/refresh/textures/Rocks_Diffuse_png_MossRock.png"
+        }
+      ],
+      "key": "ReserveBoulder",
+      "triangles": 342
+    },
+    {
+      "geometrySha256": "aac0b06ce128f03079999397e8c9ca5e4bfcedffa36a9f569db992a8741ee78e",
+      "meshes": [
+        {
+          "name": "RF_ReserveBoulderWide_00_MossRock",
+          "size": [
+            9,
+            5.605811,
+            7.318268
+          ],
+          "group": "MossRock",
+          "meshId": "rbxassetid://93023735964097",
+          "center": [
+            0,
+            2.8029055,
+            0
+          ],
+          "texture": "assets/exported/refresh/textures/Rocks_Diffuse_png_MossRock.png"
+        }
+      ],
+      "key": "ReserveBoulderWide",
+      "triangles": 244
+    },
+    {
+      "geometrySha256": "e6094170d4197ad51117747a3770c6353a50b5bfb78fd9c13f338990889a043a",
+      "meshes": [
+        {
+          "name": "RF_FernCluster_00_LeafGreen",
+          "size": [
+            7.401732,
+            2.2,
+            6.944542
+          ],
+          "group": "LeafGreen",
+          "meshId": "rbxassetid://131444476777085",
+          "center": [
+            0,
+            1.1,
+            0
+          ],
+          "texture": "assets/exported/refresh/textures/Leaves_png_LeafGreen.png"
+        }
+      ],
+      "key": "FernCluster",
+      "triangles": 288
+    },
+    {
+      "geometrySha256": "c689c9b523845b042ae8c252547833a6ee27c502aca1ebc7eca957617419463e",
+      "meshes": [
+        {
+          "name": "RF_MeadowGrass_00_LeafGreen",
+          "size": [
+            0.646484,
+            1.35,
+            0.74605
+          ],
+          "group": "LeafGreen",
+          "meshId": "rbxassetid://77396132855889",
+          "center": [
+            0,
+            0.675,
+            0
+          ],
+          "texture": "assets/exported/refresh/textures/Grass_png_LeafGreen.png"
+        }
+      ],
+      "key": "MeadowGrass",
+      "triangles": 155
+    },
+    {
+      "geometrySha256": "c79272bafd5219f1144d6803ac2932717e4ba7becc66b029bf5fc1dcb11f3d7f",
+      "meshes": [
+        {
+          "name": "RF_FlowerPatch_00_CreatureCream",
+          "size": [
+            1.086566,
+            0.41507399999999994,
+            1.1615
+          ],
+          "group": "CreatureCream",
+          "meshId": "rbxassetid://137276691191563",
+          "center": [
+            0,
+            1.2924630000000001,
+            0
+          ],
+          "texture": "assets/exported/refresh/textures/Flowers_png_CreatureCream.png"
+        },
+        {
+          "name": "RF_FlowerPatch_01_LeafGreen",
+          "size": [
+            0.990249,
+            1.32043,
+            0.910504
+          ],
+          "group": "LeafGreen",
+          "meshId": "rbxassetid://86831355077506",
+          "center": [
+            -0.01503850000000001,
+            0.660215,
+            0.06358799999999998
+          ],
+          "texture": "assets/exported/refresh/textures/Leaves_png_LeafGreen.png"
+        }
+      ],
+      "key": "FlowerPatch",
+      "triangles": 755
+    },
+    {
+      "geometrySha256": "f2f440a7bbd79d64b144b511a3a505e4075e8eca1db1aaaab13256514204279e",
+      "meshes": [
+        {
+          "name": "RF_LeafBush_00_LeafGreen",
+          "size": [
+            3.631676,
+            3,
+            3.727068
+          ],
+          "group": "LeafGreen",
+          "meshId": "rbxassetid://112800497908560",
+          "center": [
+            0,
+            1.5,
+            0
+          ],
+          "texture": "assets/exported/refresh/textures/Leaves_TwistedTree_C_png_LeafGreen.png"
+        }
+      ],
+      "key": "LeafBush",
+      "triangles": 900
+    },
+    {
+      "geometrySha256": "c5fd948f573be6035ab3b5eabbd3da930e466c64603cdf32fed08c273557143f",
+      "meshes": [
+        {
+          "name": "RF_FoundryColumn_00_SecondaryMetal",
+          "size": [
+            4.113504,
+            17.200001,
+            0.189238
+          ],
+          "group": "SecondaryMetal",
+          "meshId": "rbxassetid://115787533165370",
+          "center": [
+            0,
+            8.6000005,
+            0
+          ],
+          "texture": "assets/exported/refresh/textures/T_Trim_02_BaseColor_Red_png_SecondaryMetal.png"
+        },
+        {
+          "name": "RF_FoundryColumn_01_PanelPlastic",
+          "size": [
+            4.113504,
+            17.200001,
+            0.189238
+          ],
+          "group": "PanelPlastic",
+          "meshId": "rbxassetid://123967860495175",
+          "center": [
+            0,
+            8.6000005,
+            0
+          ],
+          "texture": "assets/exported/refresh/textures/T_PaddedWall_BaseColor_png_PanelPlastic.png"
+        }
+      ],
+      "key": "FoundryColumn",
+      "triangles": 748
+    },
+    {
+      "geometrySha256": "f79f42df3da6ab76a69ba31e903d865b66e5354bb16d51a037e86089de364ab1",
+      "meshes": [
+        {
+          "name": "RF_FoundryWall_00_SecondaryMetal",
+          "size": [
+            9.599996,
+            0.45518400000000003,
+            0.20696900000000001
+          ],
+          "group": "SecondaryMetal",
+          "meshId": "rbxassetid://89652773711979",
+          "center": [
+            0,
+            6.9724070000000005,
+            -0.016515499999999995
+          ],
+          "texture": "assets/exported/refresh/textures/T_Trim_02_BaseColor_Red_png_SecondaryMetal.png"
+        },
+        {
+          "name": "RF_FoundryWall_01_DarkMetal",
+          "size": [
+            9.6,
+            5.279999,
+            0.24
+          ],
+          "group": "DarkMetal",
+          "meshId": "rbxassetid://114821364298815",
+          "center": [
+            0,
+            4.5599995,
+            0
+          ],
+          "texture": "assets/exported/refresh/textures/T_Trim_03_BaseColor_png_DarkMetal.png"
+        },
+        {
+          "name": "RF_FoundryWall_02_PanelPlastic",
+          "size": [
+            9.599997,
+            1.92,
+            0.24
+          ],
+          "group": "PanelPlastic",
+          "meshId": "rbxassetid://108920740593690",
+          "center": [
+            4.999999996257998e-7,
+            0.96,
+            0
+          ],
+          "texture": "assets/exported/refresh/textures/T_Trim_03_Cables_png_PanelPlastic.png"
+        }
+      ],
+      "key": "FoundryWall",
+      "triangles": 124
+    },
+    {
+      "geometrySha256": "35ad5b963555c22ee16690724b55021d1f750f03e1ac7070e096a1cabe973838",
+      "meshes": [
+        {
+          "name": "RF_FoundryWindow_00_EnergyGreen",
+          "size": [
+            5.4519400000000005,
+            3.478321,
+            0.25654
+          ],
+          "group": "EnergyGreen",
+          "meshId": "rbxassetid://118708322924338",
+          "center": [
+            9.999999999177334e-7,
+            4.4476095,
+            -0.243884
+          ],
+          "texture": "assets/exported/refresh/textures/T_Trim_03_Cables_png_EnergyGreen.png"
+        },
+        {
+          "center": [
+            4.999999998478444e-7,
+            4.4706585,
+            -0.175077
+          ],
+          "group": "RavineWater",
+          "meshId": "rbxassetid://113257653528330",
+          "name": "RF_FoundryWindow_01_RavineWater",
+          "size": [
+            7.703351,
+            3.599617,
+            0.001
+          ]
+        },
+        {
+          "name": "RF_FoundryWindow_02_DarkMetal",
+          "size": [
+            9.6,
+            5.279999,
+            0.334454
+          ],
+          "group": "DarkMetal",
+          "meshId": "rbxassetid://74787316152568",
+          "center": [
+            0,
+            4.5599995,
+            -0.434515
+          ],
+          "texture": "assets/exported/refresh/textures/T_Trim_03_BaseColor_png_DarkMetal.png"
+        },
+        {
+          "name": "RF_FoundryWindow_03_PanelPlastic",
+          "size": [
+            9.599997,
+            1.92,
+            0.24000100000000002
+          ],
+          "group": "PanelPlastic",
+          "meshId": "rbxassetid://137802714476947",
+          "center": [
+            4.999999996257998e-7,
+            0.96,
+            -0.4817415
+          ],
+          "texture": "assets/exported/refresh/textures/T_Trim_03_Cables_png_001_PanelPlastic.png"
+        },
+        {
+          "name": "RF_FoundryWindow_04_SecondaryMetal",
+          "size": [
+            9.599996,
+            4.489155,
+            1.203484
+          ],
+          "group": "SecondaryMetal",
+          "meshId": "rbxassetid://121185564731007",
+          "center": [
+            0,
+            4.9554215,
+            0
+          ],
+          "texture": "assets/exported/refresh/textures/T_Trim_02_BaseColor_Red_png_SecondaryMetal.png"
+        }
+      ],
+      "key": "FoundryWindow",
+      "triangles": 476
+    },
+    {
+      "geometrySha256": "ad5c75355b38d8523fcc50db5314bfa90986496cc714d046c2e3c5c885996b4c",
+      "meshes": [
+        {
+          "center": [
+            0.000006999999999979245,
+            0.26228049999999997,
+            0.027337
+          ],
+          "group": "PanelPlastic",
+          "meshId": "rbxassetid://99418516843800",
+          "name": "RF_FoundryVent_00_PanelPlastic",
+          "size": [
+            2.5355860000000003,
+            0.401065,
+            0.001
+          ]
+        },
+        {
+          "name": "RF_FoundryVent_01_DarkMetal",
+          "size": [
+            3.153568,
+            0.45387,
+            0.076304
+          ],
+          "group": "DarkMetal",
+          "meshId": "rbxassetid://91586285630580",
+          "center": [
+            0.000006999999999979245,
+            0.24417499999999998,
+            0.010985
+          ],
+          "texture": "assets/exported/refresh/textures/T_Trim_01_BaseColor_Red_png_DarkMetal.png"
+        },
+        {
+          "name": "RF_FoundryVent_02_SecondaryMetal",
+          "size": [
+            3.2,
+            0.480384,
+            0.098274
+          ],
+          "group": "SecondaryMetal",
+          "meshId": "rbxassetid://111094056118508",
+          "center": [
+            0,
+            0.240192,
+            0
+          ],
+          "texture": "assets/exported/refresh/textures/T_Trim_02_BaseColor_Red_png_SecondaryMetal.png"
+        }
+      ],
+      "key": "FoundryVent",
+      "triangles": 208
+    },
+    {
+      "geometrySha256": "0817cacaf533aba337522813950b7c951212b766c827b900a67e4f52055b5270",
+      "meshes": [
+        {
+          "name": "RF_ServiceCrate_00_SecondaryMetal",
+          "size": [
+            2.8,
+            2.8,
+            2.8
+          ],
+          "group": "SecondaryMetal",
+          "meshId": "rbxassetid://88156399893015",
+          "center": [
+            0,
+            1.4,
+            0
+          ],
+          "texture": "assets/exported/refresh/textures/T_Trim_02_BaseColor_Red_png_SecondaryMetal.png"
+        }
+      ],
+      "key": "ServiceCrate",
+      "triangles": 972
+    },
+    {
+      "geometrySha256": "177df2f6cd5d6fb887e55f0361678bcaf3639c64f4d1675a7277115ff0b83edd",
+      "meshes": [
+        {
+          "name": "RF_CableHeader_00_EnergyGreen",
+          "size": [
+            8.6251,
+            0.5499450000000001,
+            0.518954
+          ],
+          "group": "EnergyGreen",
+          "meshId": "rbxassetid://78619457162467",
+          "center": [
+            -0.066859,
+            1.3894355,
+            -0.02167300000000001
+          ],
+          "texture": "assets/exported/refresh/textures/T_Trim_03_Cables_png_EnergyGreen.png"
+        },
+        {
+          "name": "RF_CableHeader_01_SecondaryMetal",
+          "size": [
+            9.599998,
+            4.002483,
+            0.902327
+          ],
+          "group": "SecondaryMetal",
+          "meshId": "rbxassetid://112429377244179",
+          "center": [
+            0,
+            2.7987575,
+            -0.009486500000000009
+          ],
+          "texture": "assets/exported/refresh/textures/T_Trim_02_BaseColor_Red_png_SecondaryMetal.png"
+        },
+        {
+          "name": "RF_CableHeader_02_DarkMetal",
+          "size": [
+            9.6,
+            4.799999,
+            0.9213
+          ],
+          "group": "DarkMetal",
+          "meshId": "rbxassetid://97733924454809",
+          "center": [
+            0,
+            2.3999995,
+            0
+          ],
+          "texture": "assets/exported/refresh/textures/T_Trim_01_BaseColor_Red_png_DarkMetal.png"
+        },
+        {
+          "name": "RF_CableHeader_03_PanelPlastic",
+          "size": [
+            5.595115,
+            0.001,
+            0.08198699999999998
+          ],
+          "group": "PanelPlastic",
+          "meshId": "rbxassetid://108488326949750",
+          "center": [
+            -5.00000000069889e-7,
+            0.797516,
+            0.0970645
+          ],
+          "texture": "assets/exported/refresh/textures/T_Trim_03_Cables_png_001_PanelPlastic.png"
+        }
+      ],
+      "key": "CableHeader",
+      "triangles": 942
+    },
+    {
+      "geometrySha256": "a7cca7dab22c409b8fd4fb0463739eb179f292fb65baa6da5500ed9ab25ae3b7",
+      "meshes": [
+        {
+          "center": [
+            0,
+            2.33631,
+            0.0121975
+          ],
+          "group": "PanelPlastic",
+          "meshId": "rbxassetid://85052139167479",
+          "name": "RF_StationTerminal_00_PanelPlastic",
+          "size": [
+            1.138456,
+            0.52738,
+            0.5273810000000001
+          ]
+        },
+        {
+          "name": "RF_StationTerminal_01_CreatureCream",
+          "size": [
+            1.100038,
+            0.5125600000000001,
+            0.5002150000000001
+          ],
+          "group": "CreatureCream",
+          "meshId": "rbxassetid://106076900549800",
+          "center": [
+            0,
+            2.3424829999999996,
+            0.0121975
+          ],
+          "texture": "assets/exported/refresh/textures/T_Decals_png_CreatureCream.png"
+        },
+        {
+          "name": "RF_StationTerminal_02_DarkMetal",
+          "size": [
+            1.213442,
+            2.6,
+            0.918154
+          ],
+          "group": "DarkMetal",
+          "meshId": "rbxassetid://79227807676553",
+          "center": [
+            0,
+            1.3,
+            0
+          ],
+          "texture": "assets/exported/refresh/textures/T_Trim_01_BaseColor_Red_png_DarkMetal.png"
+        }
+      ],
+      "key": "StationTerminal",
+      "triangles": 519
+    }
+  ],
+  "textureIds": {
+    "assets/exported/refresh/textures/Leaf_Pine_C_png_LeafGreen.png": "rbxassetid://102520266221742",
+    "assets/exported/refresh/textures/T_Trim_03_Cables_png_PanelPlastic.png": "rbxassetid://80375287253327",
+    "assets/exported/refresh/textures/T_PaddedWall_BaseColor_png_PanelPlastic.png": "rbxassetid://97225008782154",
+    "assets/exported/refresh/textures/T_Trim_01_BaseColor_Red_png_DarkMetal.png": "rbxassetid://96116913783761",
+    "assets/exported/refresh/textures/T_Trim_02_BaseColor_Red_png_SecondaryMetal.png": "rbxassetid://118253258471296",
+    "assets/exported/refresh/textures/T_Trim_03_Cables_png_001_PanelPlastic.png": "rbxassetid://80375287253327",
+    "assets/exported/refresh/textures/Bark_NormalTree_png_BarkWood.png": "rbxassetid://122918708160745",
+    "assets/exported/refresh/textures/Rocks_Diffuse_png_MossRock.png": "rbxassetid://106503685789789",
+    "assets/exported/refresh/textures/Leaves_TwistedTree_C_png_LeafGreen.png": "rbxassetid://74045434495642",
+    "assets/exported/refresh/textures/Flowers_png_CreatureCream.png": "rbxassetid://95309653946177",
+    "assets/exported/refresh/textures/Leaves_NormalTree_C_png_LeafGreen.png": "rbxassetid://106573024730352",
+    "assets/exported/refresh/textures/Leaves_png_LeafGreen.png": "rbxassetid://88021010395727",
+    "assets/exported/refresh/textures/Grass_png_LeafGreen.png": "rbxassetid://100146533989837",
+    "assets/exported/refresh/textures/T_Trim_03_BaseColor_png_DarkMetal.png": "rbxassetid://108694175695921",
+    "assets/exported/refresh/textures/T_Decals_png_CreatureCream.png": "rbxassetid://110852125001594",
+    "assets/exported/refresh/textures/T_Trim_03_Cables_png_EnergyGreen.png": "rbxassetid://96956458885853"
+  }
+}

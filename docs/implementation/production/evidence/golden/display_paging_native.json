@@ -1,0 +1,30 @@
+{
+  "message": "Select a Stored or Active creature to manage its slots.",
+  "after": {
+    "1": {
+      "rarity": "rarity/common",
+      "id": "creature-4c6004b7-33d6-472a-bf69-a14ba6a8f715-1",
+      "species": "species/fixture-orb",
+      "displaySlotId": "display/1",
+      "name": "OwnedDisplay_creature-4c6004b7-33d6-472a-bf69-a14ba6a8f715-1"
+    }
+  },
+  "row2Visible": true,
+  "before": {
+    "1": {
+      "name": "OwnedDisplay_creature-4c6004b7-33d6-472a-bf69-a14ba6a8f715-1",
+      "attributes": {
+        "PresentedTraitIds": "",
+        "PresentedMutationIds": "",
+        "PresentedDisplaySlotId": "display/1",
+        "GeometrySha256": "df342a45e0ff5dffc97daa62c1e20155af8e6d4d2c28fc83db13462fd05cbd19",
+        "PresentedSpeciesId": "species/fixture-orb",
+        "PresentedCreatureInstanceId": "creature-4c6004b7-33d6-472a-bf69-a14ba6a8f715-1",
+        "PresentedRarityId": "rarity/common",
+        "TriangleCount": 4504
+      },
+      "tags": []
+    }
+  },
+  "row1": "Owned creature\nStored"
+}

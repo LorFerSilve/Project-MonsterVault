@@ -1,0 +1,209 @@
+{
+  "play": {
+    "message": "The server confirmed this creature is saved in your collection.",
+    "heading": "Capture secured",
+    "position": "-0.0001895852037705481, 3.1880252361297607, 9.380359649658203",
+    "toast": "SECURED · Mossbud saved to Collection\nGive it a display or a production assignment in your Vault.",
+    "receipt": [
+      {
+        "revision": 318,
+        "buffer": 18000,
+        "claim": 524,
+        "energy": 526,
+        "expected": 315
+      },
+      {
+        "revision": 318,
+        "buffer": 18000,
+        "claim": 524,
+        "energy": 526,
+        "expected": 315
+      },
+      {
+        "revision": 318,
+        "buffer": 18000,
+        "claim": 524,
+        "energy": 526,
+        "expected": 315
+      },
+      {
+        "revision": 318,
+        "buffer": 18000,
+        "claim": 524,
+        "energy": 526,
+        "expected": 315
+      },
+      {
+        "revision": 318,
+        "buffer": 18000,
+        "claim": 524,
+        "energy": 526,
+        "expected": 315
+      },
+      {
+        "revision": 318,
+        "buffer": 18000,
+        "claim": 524,
+        "energy": 526,
+        "expected": 315
+      },
+      {
+        "revision": 318,
+        "buffer": 18000,
+        "claim": 524,
+        "energy": 526,
+        "expected": 315
+      },
+      {
+        "revision": 318,
+        "buffer": 18000,
+        "claim": 524,
+        "energy": 526,
+        "expected": 315
+      },
+      {
+        "revision": 319,
+        "buffer": 33000,
+        "claim": 524,
+        "energy": 526,
+        "expected": 315
+      },
+      {
+        "revision": 319,
+        "buffer": 33000,
+        "claim": 524,
+        "energy": 526,
+        "expected": 315
+      },
+      {
+        "revision": 319,
+        "buffer": 33000,
+        "claim": 524,
+        "energy": 526,
+        "expected": 315
+      },
+      {
+        "revision": 319,
+        "buffer": 33000,
+        "claim": 524,
+        "energy": 526,
+        "expected": 315
+      },
+      {
+        "revision": 320,
+        "buffer": 33000,
+        "claim": 524,
+        "energy": 501,
+        "expected": 315
+      },
+      {
+        "revision": 320,
+        "buffer": 33000,
+        "claim": 524,
+        "energy": 501,
+        "expected": 315
+      },
+      {
+        "revision": 320,
+        "buffer": 33000,
+        "claim": 524,
+        "energy": 501,
+        "expected": 315
+      },
+      {
+        "revision": 320,
+        "buffer": 33000,
+        "claim": 524,
+        "energy": 501,
+        "expected": 315
+      }
+    ],
+    "states": [
+      {
+        "state": "Claimed",
+        "revision": 6,
+        "id": "creature-5429a7f5-7116-428f-a799-b0c07074a7ea-3",
+        "session": "3bedf408-daa0-41ba-af23-f760129d032f"
+      },
+      {
+        "state": "Claimed",
+        "revision": 6,
+        "id": "creature-5429a7f5-7116-428f-a799-b0c07074a7ea-3",
+        "session": "3bedf408-daa0-41ba-af23-f760129d032f"
+      },
+      {
+        "state": "TransportActive",
+        "revision": 7,
+        "id": "creature-5429a7f5-7116-428f-a799-b0c07074a7ea-3",
+        "session": "3bedf408-daa0-41ba-af23-f760129d032f"
+      },
+      {
+        "state": "TransportActive",
+        "revision": 7,
+        "id": "creature-5429a7f5-7116-428f-a799-b0c07074a7ea-3",
+        "session": "3bedf408-daa0-41ba-af23-f760129d032f"
+      },
+      {
+        "state": "TransportActive",
+        "revision": 7,
+        "id": "creature-5429a7f5-7116-428f-a799-b0c07074a7ea-3",
+        "session": "3bedf408-daa0-41ba-af23-f760129d032f"
+      },
+      {
+        "state": "TransportActive",
+        "revision": 7,
+        "id": "creature-5429a7f5-7116-428f-a799-b0c07074a7ea-3",
+        "session": "3bedf408-daa0-41ba-af23-f760129d032f"
+      },
+      {
+        "state": "TransportActive",
+        "revision": 7,
+        "id": "creature-5429a7f5-7116-428f-a799-b0c07074a7ea-3",
+        "session": "3bedf408-daa0-41ba-af23-f760129d032f"
+      },
+      {
+        "state": "FinalizationPending",
+        "revision": 8,
+        "id": "creature-5429a7f5-7116-428f-a799-b0c07074a7ea-3",
+        "session": "3bedf408-daa0-41ba-af23-f760129d032f"
+      },
+      {
+        "state": "FinalizationPending",
+        "revision": 8,
+        "id": "creature-5429a7f5-7116-428f-a799-b0c07074a7ea-3",
+        "session": "3bedf408-daa0-41ba-af23-f760129d032f"
+      },
+      {
+        "state": "Secured",
+        "revision": 9,
+        "profileRevision": 323,
+        "id": "creature-5429a7f5-7116-428f-a799-b0c07074a7ea-3",
+        "session": "3bedf408-daa0-41ba-af23-f760129d032f"
+      }
+    ]
+  },
+  "readback": {
+    "collection": "Collection 11 / 16   |   Overflow 0",
+    "progression": {
+      "summary": "Collection capacity +6 (tier 1) | Owned\n◆ 501 Energy  ·  16 collection spaces",
+      "message": "Upgrade saved: 25 Energy spent."
+    }
+  },
+  "reaction": {
+    "sourceRootStable": true,
+    "history": [
+      {
+        "revision": 4,
+        "session": "b2e2319e-2454-4954-bad2-63729cef88b4",
+        "id": "creature-5429a7f5-7116-428f-a799-b0c07074a7ea-3"
+      },
+      {
+        "revision": 4,
+        "session": "b2e2319e-2454-4954-bad2-63729cef88b4",
+        "id": "creature-5429a7f5-7116-428f-a799-b0c07074a7ea-3"
+      }
+    ],
+    "maxPitch": 0.10605423152446747,
+    "minPitch": 0.05325986444950104
+  }
+}

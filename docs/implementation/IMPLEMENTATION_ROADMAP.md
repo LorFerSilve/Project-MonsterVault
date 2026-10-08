@@ -1,6 +1,6 @@
 # MonsterVault Implementation Roadmap
 
-> **Status:** IMP-8 COMPLETE with registered deferred validation; IMP-9 COMPLETE; IMP-10 FUNCTIONALLY COMPLETE under AD-260; IMP-11 OPEN with Party, Social Ping, Friendly Challenge and Showcase/Visitor dependencies COMPLETE. Golden Playable Vertical Slice ready to begin on these stable dependencies; **Halloween 2026 is the owner-authorized launch theme**; VS1-19 remains DEFERRED to Scale Readiness
+> **Status:** IMP-8 COMPLETE with registered deferred validation; IMP-9 COMPLETE; IMP-10 FUNCTIONALLY COMPLETE under AD-260; IMP-11 OPEN with Party, Social Ping, Friendly Challenge and Showcase/Visitor dependencies COMPLETE. Golden Playable Vertical Slice IMPLEMENTED IN STUDIO, acceptance still OPEN; **Halloween 2026 is the owner-authorized launch theme**; VS1-19 remains DEFERRED to Scale Readiness
 > **Locked by:** TA-17
 > **Rule:** Dependency-driven; do not skip phases merely because later UI/content is easier to demo.
 
@@ -35,6 +35,33 @@ Current launch priorities are:
 A seasonal deadline never permits bypassing correctness, persistence, safety, accessibility, platform-policy or release gates.
 
 ## Golden Slice pre-production package
+
+Current sensory/seasonal continuation (2026-10-08):
+[bounded creature/Vault feedback and recomposed Halloween dressing](production/evidence/harvest/README.md).
+Existing imported assets are reused. Eight projected accumulator segments,
+stream-in/cleanup handling and bounded creature poses pass 11 native checks;
+the removable layer is grounded around the expanded map and inspected ON/OFF.
+Actual normal Play proves +524 Energy, a 25-Energy capacity upgrade and a new
+Secured creature, then fresh Play readback 11/16. The reopened StarterBounds
+position was restored to its source layout; 29 authoring cases and 111/111
+parity pass. Current counts: 341 fast / 28 Python; world 1,012 parts / 651 meshes.
+Studio p95 is about 68ms with the layer both ON and OFF; cause/device acceptance
+remains open. PR #76 remains draft; final owner art/manual/PQL acceptance and
+later IMP-11 backend gates are not closed. No import or audio upload is pending.
+Fresh-session follow-up with unchanged runtime/settings measures 21.77-23.42ms
+inside/outside the command; 16.67ms/device gates and older 68ms cause remain open.
+
+Current owner-feedback continuation (2026-10-07):
+[larger central reserve and radioactive Vault](production/evidence/reclaimed/README.md).
+The supplementary shell/rover/ruins import is complete and native-validated.
+Starter is now 176 x 256, with a rebuilt 56 x 36 station, 88 x 52 court and
+northern forest loop; the actual Vault has armored walls, a containment portal
+and stepped reactor/cooling skyline. Native 14-leg traversal, six physics checks,
+29 authoring cases and 111/111 parity pass; 339 fast / 28 Python remain green.
+World delivery is 1,004 parts / 651 meshes / 325,963 repeated triangles. Final
+owner visual acceptance remains OPEN. Studio p95 is about 18ms; real-device,
+physical controller/menu and platform text gates remain open. PR #76 stays draft;
+broader PQL and later IMP-11 gates remain separate. No import is pending.
 
 The first production-quality visual pass now has an implementation-facing baseline in [production/](production/README.md). Work should consume that package before creating production assets:
 
@@ -243,7 +270,9 @@ Fourth dependency COMPLETE (2026-10-05): [Showcase/Visitor](IMP11_SHOWCASE_VISIT
 
 Current validation: **32/32 focused Showcase, 326/326 full fast, 29/29 distinct Showcase native, 28/28 Python, 97/97 final Edit source parity**, normal static/build/dependency/integrity/configured analysis. One actual native Player/client plus three explicit adapter peers prove remotes/store/UI, ownership rejection, real profile/session notifications, timer expiry and settled native disconnect/all-zero stop. The 64 current parts and eight Lighting properties are preserved. Completed Party/Ping/Challenge/IMP-10 evidence is unchanged; broader real multiplayer/platform/reconnect and scale/release obligations remain open.
 
-**Golden Playable Vertical Slice / first production-quality visual pass is ready to begin** on the stable world/capture/Collection/Vault/display and four social dependencies, under the existing incremental PQL rule and owner's 2026-10-05 scope. Remaining later IMP-11 co-op/events do not block that representative visual pass. PQL-1/2/3/4/8 and release completion are not claimed; no polished visual system is implemented by this slice.
+**Golden Playable Vertical Slice / first visual production pass is now implemented in Studio, with acceptance still open.** The permanent Starter/Home kit, Common/protected Legendary presentation, native UI, capture/claim feedback, Read Only Showcase and removable Halloween layer are integrated. See [current native evidence](production/GOLDEN_SLICE_EVIDENCE.md), [15-image gallery](production/evidence/golden/README.md) and [acceptance matrix](production/GOLDEN_SLICE_ACCEPTANCE_MATRIX.md). Imports are complete; 339/339 fast, 28/28 Python and 109/109 final Edit source parity passed. Physical controller menus, actual increased platform text preference and reference-device/long-session performance acceptance remain open. Broader PQL-1/2/3/4/8 rollout and release completion are not claimed. Later IMP-11 co-op/events do not block this representative visual work and have not been started.
+
+Latest visual continuation (2026-10-06): [CC0 library refresh](production/evidence/refresh/README.md) integrates fifteen adapted/imported assets in permanent Starter/Home/Vault composition and adds restrained native UI accents. Blender/GLB audits, 58 unchanged gameplay anchors and exact native package readback pass; source parity advances to 110/110. No import is pending. New two-view Studio p95 is about 68ms, so Golden/reference-device performance acceptance remains open. Existing 339 fast / 28 Python regressions remain green locally; normal CI applies to each pushed head. No later IMP-11 backend or commerce dependency is started.
 
 Exact next remaining IMP-11 functional dependency: **TA-10 §8 Shared Objective contribution -> server-observed per-player eligibility -> §9 owning-profile exact-once P2 Collaboration Rewards**. Subsequent event work retains its own gates. IMP-11 remains OPEN; commerce/trading retain their later owners.
 

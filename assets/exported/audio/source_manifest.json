@@ -1,0 +1,90 @@
+[
+  {
+    "key": "UI",
+    "file": "assets/exported/audio/MV_GS_UI.wav",
+    "seconds": 0.13,
+    "loop": false,
+    "sampleRate": 24000,
+    "channels": 1
+  },
+  {
+    "key": "Engage",
+    "file": "assets/exported/audio/MV_GS_Engage.wav",
+    "seconds": 0.48,
+    "loop": false,
+    "sampleRate": 24000,
+    "channels": 1
+  },
+  {
+    "key": "Containment",
+    "file": "assets/exported/audio/MV_GS_Containment.wav",
+    "seconds": 0.62,
+    "loop": false,
+    "sampleRate": 24000,
+    "channels": 1
+  },
+  {
+    "key": "Secured",
+    "file": "assets/exported/audio/MV_GS_Secured.wav",
+    "seconds": 1.24,
+    "loop": false,
+    "sampleRate": 24000,
+    "channels": 1
+  },
+  {
+    "key": "Failure",
+    "file": "assets/exported/audio/MV_GS_Failure.wav",
+    "seconds": 0.52,
+    "loop": false,
+    "sampleRate": 24000,
+    "channels": 1
+  },
+  {
+    "key": "Rare",
+    "file": "assets/exported/audio/MV_GS_Rare.wav",
+    "seconds": 1.4,
+    "loop": false,
+    "sampleRate": 24000,
+    "channels": 1
+  },
+  {
+    "key": "Legendary",
+    "file": "assets/exported/audio/MV_GS_Legendary.wav",
+    "seconds": 1.9,
+    "loop": false,
+    "sampleRate": 24000,
+    "channels": 1
+  },
+  {
+    "key": "Energy",
+    "file": "assets/exported/audio/MV_GS_Energy.wav",
+    "seconds": 1.5,
+    "loop": false,
+    "sampleRate": 24000,
+    "channels": 1
+  },
+  {
+    "key": "Creature",
+    "file": "assets/exported/audio/MV_GS_Creature.wav",
+    "seconds": 0.36,
+    "loop": false,
+    "sampleRate": 24000,
+    "channels": 1
+  },
+  {
+    "key": "Reserve",
+    "file": "assets/exported/audio/MV_GS_Reserve.wav",
+    "seconds": 12,
+    "loop": true,
+    "sampleRate": 24000,
+    "channels": 1
+  },
+  {
+    "key": "Machine",
+    "file": "assets/exported/audio/MV_GS_Machine.wav",
+    "seconds": 8,
+    "loop": true,
+    "sampleRate": 24000,
+    "channels": 1
+  }
+]

@@ -9,6 +9,7 @@ function ProgressionController.new(options: {
 	clock: () -> number,
 	catalog: any?,
 	onChanged: ((any) -> ())?,
+	onPurchaseConfirmed: ((any) -> ())?,
 })
 	local snapshot: any = nil
 	local reviewed: any = nil
@@ -63,6 +64,7 @@ function ProgressionController.new(options: {
 		then
 			return "Stale"
 		end
+		local confirmedPurchase = nil
 		if pending ~= nil then
 			local s = envelope.payload.state
 			if
@@ -70,6 +72,7 @@ function ProgressionController.new(options: {
 				and s.receiptExpectedRevision == pending.expectedRevision
 			then
 				message = string.format("Upgrade saved: %d Energy spent.", s.receiptPriceUnits)
+				confirmedPurchase = s
 			elseif
 				envelope.correlationId == pageRequest
 				and options.gateway.resultFor(pending.requestId)
@@ -87,6 +90,9 @@ function ProgressionController.new(options: {
 			message = "Review the price before confirming."
 		end
 		changed()
+		if confirmedPurchase and options.onPurchaseConfirmed then
+			pcall(options.onPurchaseConfirmed, confirmedPurchase)
+		end
 		return "Applied"
 	end
 	local function navigate(offset: number)

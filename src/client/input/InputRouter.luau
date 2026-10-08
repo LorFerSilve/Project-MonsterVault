@@ -9,6 +9,7 @@ export type Options = {
 	guiService: any,
 	onActivate: () -> (),
 	onInputChanged: ((string) -> ())?,
+	modalOpen: (() -> boolean)?,
 }
 
 local InputRouter = {}
@@ -37,6 +38,7 @@ function InputRouter.new(options: Options)
 			or menuOpen
 			or gui.MenuIsOpen
 			or input:GetFocusedTextBox() ~= nil
+			or (options.modalOpen ~= nil and options.modalOpen())
 	end
 
 	local function physicallyHeld(): boolean

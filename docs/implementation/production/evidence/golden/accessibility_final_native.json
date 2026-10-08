@@ -1,0 +1,54 @@
+{
+  "low": "Effects · LOW",
+  "audio": "Audio · OFF",
+  "reduced": "Reduced Motion · ON",
+  "viewport": [
+    705,
+    338
+  ],
+  "transient": 0,
+  "sounds": [
+    {
+      "volume": 0,
+      "name": "MV_GS_Reserve",
+      "playing": true
+    },
+    {
+      "volume": 0,
+      "name": "MV_GS_Machine",
+      "playing": true
+    },
+    {
+      "volume": 0.10000000149011612,
+      "name": "GoldenCue1",
+      "playing": false
+    },
+    {
+      "volume": 0.10000000149011612,
+      "name": "GoldenCue2",
+      "playing": false
+    },
+    {
+      "volume": 0.10000000149011612,
+      "name": "GoldenCue3",
+      "playing": false
+    },
+    {
+      "volume": 0.10000000149011612,
+      "name": "GoldenCue4",
+      "playing": false
+    },
+    {
+      "volume": 0.10000000149011612,
+      "name": "GoldenCue5",
+      "playing": false
+    },
+    {
+      "volume": 0.10000000149011612,
+      "name": "GoldenCue6",
+      "playing": false
+    }
+  ],
+  "continuousEmitters": 0,
+  "transientMeasurementNote": "Early settings count looked up a missing effects root; transient=0 is not a verified metric. Use reduced_claim_final_native.json for the actual zero-BasePart claim measurement."
+}

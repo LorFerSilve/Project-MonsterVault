@@ -9,6 +9,7 @@ local WorldDefinitions = require(script.Parent.Parent.domains.world.WorldDefinit
 local WorldAuthoringIndex = require(script.Parent.Parent.domains.world.WorldAuthoringIndex)
 local SpawnPlan = require(script.Parent.Parent.domains.world.SpawnPlan)
 local VariantIdentity = require(script.Parent.Parent.domains.capture.VariantIdentity)
+local WorldCreatureVisualFactory = require(script.Parent.WorldCreatureVisualFactory)
 local MaterialPalette =
 	require(game:GetService("ReplicatedStorage").MonsterVault.Shared.config.MaterialPalette)
 
@@ -692,23 +693,8 @@ function WorldRuntimeService.new(
 	end
 
 	local function materialize(projection: any): any
-		local model = Instance.new("Model")
-		model.Name = "FixtureCreature"
-		model.ModelStreamingMode = Enum.ModelStreamingMode.Atomic
-		local body = Instance.new("Part")
-		body.Name = "Body"
-		body.Shape = Enum.PartType.Ball
-		body.Size = Vector3.new(4, 4, 4)
-		body.Position =
-			Vector3.new(projection.position.x, projection.position.y, projection.position.z)
-		body.Anchored = true
-		body.CanCollide = false
-		body.CanTouch = false
-		body.Color = MaterialPalette.FixtureCreature.color
-		body.Material = MaterialPalette.FixtureCreature.material
-		body:SetAttribute("MaterialGroup", "FixtureCreature")
-		body.Parent = model
-		model.PrimaryPart = body
+		local model = WorldCreatureVisualFactory.create(projection)
+		local body = model.PrimaryPart
 		if projection.lifetimeClass == "ProtectedVariant" then
 			-- Persistent diagnostic cue only; native body/material are reused.
 			local cue = Instance.new("BillboardGui")
