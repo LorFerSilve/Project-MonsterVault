@@ -99,6 +99,16 @@ about 18ms. Similar ON/OFF cadence does not establish the cause. The earlier
 and long-term memory stability need investigation. Short samples here use about
 2.84-2.97GB and do not prove memory stability. No TA-14 or VS1-19 closure.
 
+[Fresh-session cadence diagnostic](cadence_diagnostic_native.json), with the
+unchanged shipped head and camera/settings: a callback scheduled after the MCP
+command returned recorded Starter **21.77ms p95** and Vault **23.34ms**. A
+same-session Starter sample inside a pending MCP command was **23.42ms**. All
+three record 120 Heartbeats per 120 RenderStepped events and about 2.71GB.
+This comparison does not establish MCP sampling as the earlier 68ms cause.
+The fresh samples still exceed 16.67ms; the supported low-end 33.33ms target is
+not validated on a low-end device here. No runtime or render-setting performance
+fix is claimed. Temporary callbacks/records were disposed before returning Edit.
+
 ## Native screenshots
 
 Original Studio MCP JPEG bytes, without image edits. [Camera/method record](screenshot_views.json)

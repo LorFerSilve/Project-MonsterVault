@@ -14,6 +14,8 @@ world has 1,012 parts and removable dressing has 177. Normal capture/claim/
 capacity readback and matched ON/OFF views are retained. Studio p95 remains
 about 68ms with either layer setting; final art/manual/device/performance
 acceptance is open. No import/audio upload is pending; PR #76 remains draft.
+Fresh-session follow-up is 21.77-23.42ms with unchanged runtime/settings;
+16.67ms and the older 68ms cause/device/long-session gates remain open.
 
 Earlier continuation (2026-10-07): [larger central reserve / radioactive Vault](evidence/reclaimed/README.md).
 The supplementary three-model import is complete: all 21 persistent mesh groups

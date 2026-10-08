@@ -48,6 +48,8 @@ parity pass. Current counts: 341 fast / 28 Python; world 1,012 parts / 651 meshe
 Studio p95 is about 68ms with the layer both ON and OFF; cause/device acceptance
 remains open. PR #76 remains draft; final owner art/manual/PQL acceptance and
 later IMP-11 backend gates are not closed. No import or audio upload is pending.
+Fresh-session follow-up with unchanged runtime/settings measures 21.77-23.42ms
+inside/outside the command; 16.67ms/device gates and older 68ms cause remain open.
 
 Current owner-feedback continuation (2026-10-07):
 [larger central reserve and radioactive Vault](production/evidence/reclaimed/README.md).

@@ -25,6 +25,9 @@ those on draft PR #76, rather than later IMP-11 backends. Reproduction now adds
 finish_golden_motion.luau after expand_golden_reserve.luau, then rebuilds the
 seasonal template. Studio is left Edit, normal mains enabled, preview OFF and
 HTTP false; user-local files and the recovered bounds note are preserved.
+Fresh-session follow-up with unchanged runtime/settings measures 21.77-23.42ms
+inside/outside the sampling command, 120:120 Heartbeat/RenderStepped. It does
+not establish a fix or the older 68ms cause; 16.67ms/device gates remain open.
 
 Latest owner-feedback pass (2026-10-07): [reclaimed reserve / radioactive Vault evidence](evidence/reclaimed/README.md).
 All three supplementary assets are imported/mapped/placed/native-validated;

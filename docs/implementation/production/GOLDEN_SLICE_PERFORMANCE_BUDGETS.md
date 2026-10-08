@@ -16,6 +16,13 @@ triangles, three non-shadowing lights and one Rate-3 emitter. Eight cached
 accumulator segments reuse the one <=16-record motion owner. Real devices,
 long-session/cadence diagnosis, TA-14 and VS1-19 remain open.
 
+[Follow-up fresh-session diagnostic](evidence/harvest/cadence_diagnostic_native.json):
+Starter/Vault sampled after the MCP command returned have p95 21.77/23.34ms;
+same-session Starter inside a pending command is 23.42ms. All are 120:120
+Heartbeat/RenderStepped with unchanged runtime/settings. This does not prove
+MCP caused the older 68ms cadence or establish a performance fix. Fresh samples
+still exceed 16.67ms; supported-device and long-session gates remain open.
+
 Latest [reclaimed-reserve measurements](evidence/reclaimed/performance_native.json):
 120 frames/view, Starter p95 18.00ms and Vault 18.08ms on this Studio workstation,
 with 222,362/53 and 39,993/48 opaque triangles/draws. Permanent delivery has

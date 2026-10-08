@@ -11,6 +11,8 @@ are retained. Source-backed StarterBounds drift is repaired with its prior
 frame preserved. The new p95 is about 68ms with either seasonal setting;
 cause/device/performance and final owner/manual acceptance remain open.
 Earlier counts, frame samples and images below are historical evidence.
+An unchanged-runtime fresh-session follow-up measures 21.77-23.42ms p95
+inside/outside the command; it does not explain the older 68ms or pass 16.67ms.
 
 Latest owner-feedback revision (2026-10-07):
 [larger central reserve and integrated radioactive Vault](evidence/reclaimed/README.md).

@@ -16,6 +16,9 @@ then fresh Play Collection 11/16. Source-backed StarterBounds drift is repaired;
 about 68ms ON and OFF; cause/devices remain open. GS-01/09/10 still require
 final owner art acceptance, GS-18/19 manual proof and GS-23 performance work.
 No import/upload is pending; PR #76 remains draft.
+Fresh-session follow-up measures 21.77-23.42ms p95 inside/outside the sampling
+command, with unchanged runtime/settings; the older 68ms cause remains open.
+GS-23 still lacks the 16.67ms and supported-device/long-session proof.
 
 Owner-feedback revision (2026-10-07): [larger central reserve / radioactive Vault](evidence/reclaimed/README.md).
 All three supplementary Blender assets are imported/mapped/placed and inspected
@@ -69,7 +72,7 @@ The exact start ordering may follow current runtime travel/onboarding behavior, 
 | GS-20 Reduced Motion | semantic capture/UI/reward feedback survives reduced motion | golden_15; native +311 claim with zero transient parts/audio muted | PASS, manual reduction; platform binding covered by tests |
 | GS-21 Halloween OFF | disabling seasonal layer leaves complete production-quality base | harvest matched four ON/OFF views; grading disposal; earlier Lighting/Atmosphere restoration | PASS, representative layer disposal; owner base art acceptance remains GS-01/09/10 |
 | GS-22 Seasonal isolation | Halloween disable does not break collision/routes/gameplay | harvest/seasonal_native.json: 177 parts, zero colliders/query/tags/scripts; LOW/reduced native disposal | PASS, representative |
-| GS-23 Performance | visual scene stays within working budgets or records measured justified exceptions | harvest/performance_native.json: four 120-frame samples, about 68ms p95 ON/OFF; OFF Heartbeat p95 about 18ms; older exceptions retained | PARTIAL — both frame targets fail; cause/devices/long-term memory investigation open |
+| GS-23 Performance | visual scene stays within working budgets or records measured justified exceptions | harvest/performance_native.json: four 120-frame samples about 68ms ON/OFF; cadence_diagnostic_native.json: fresh 21.77-23.42ms, inside/outside command; older exceptions retained | PARTIAL — 16.67ms fails; older cadence cause/devices/long-term memory investigation open |
 | GS-24 Source completeness | hero 3D assets have editable source + exports + mapping | radioactive_source_audit.json (3/3), reclaimed/radioactive_native_manifest.json (21 meshes), native package roundtrip | PASS, representative sources/exports/persistent mapping |
 | GS-25 Studio validation | no hero asset accepted from Blender-only evidence | six reclaimed native views, actual 14-leg walk / six physics checks / door state | PASS, representative import/placement/appearance/Play evidence; final artistic owner acceptance remains GS-01/09/10 |
 | GS-26 CI/regression | applicable existing automated suite remains green | harvest/validation.json: 341/341 fast, 28/28 Python, static/build locally; prior exact-head CI artifacts retained | PASS locally; each pushed head retains normal CI gate |
